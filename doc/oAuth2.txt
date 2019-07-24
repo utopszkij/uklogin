@@ -1,0 +1,45 @@
+Folyamat
+
+1. call  https://oAutszerver/oauth2/login
+
+		iframe -be hívható.
+		Ha létezik https://myDomain/oauthlogin.css akkor ezt használja.		
+		 		
+		client_id, redirect_uri, state --> viszahivja az app callback url -t
+			url paraméterekben küldi: code, redirect_uri, state 
+			
+			login formot rajzol ki
+			- rejtett mezők: client_id, redirect_uri, state
+			- mezők: user, psw
+			- action: https://oAutszerver/oauth2/login2
+		
+			müködés miután a user kitöltötte a formot:
+			1. törli az elavult "tokens" rekordokat { client_id, code, access_token, user, createtime } 
+			2. client_id alapján olvassa az apps rekordot,
+			3. olvassa a user rekordot			
+			4. kreál véletlen szerű "code" és "access_token" adatokat, új rekordot tárol a "tokens" táblába,
+				(access_token egyedi:  client_id.user_id.random(1000,9999))
+			5. visszahivja az app.callback -ot url code, redirect_uri, state paraméterekkel
+			
+		
+2. call 	https://oAutszerver/oauth2/access_token	
+		   client_id, client_secret, code --> json string {access_token, [error]}
+		   
+			müködés:
+			1. törli az elavult "tokens" rekordokat  
+			2. client_id alapján olvassa az apps rekordot,
+			3. code és client_id alapján olvassa a "token" rekordot
+			4. ellenörzi a clent_secret értékét
+			5.	generálja az output json stringet		
+		
+		
+3. call  https://oAutszerver/oauth2/nick_name
+      
+		$extraHeader = 'Authorization: Bearer '.access_token;
+		--> userNickName		
+			müködés:
+			1. törli az elavult "tokens" rekordokat  
+			2. access_token alapján olvassa a "tokens" rekordot
+			3. generálja az outputot
+			
+		

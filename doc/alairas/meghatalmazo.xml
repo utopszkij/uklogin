@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saml2p:ArtifactResponse xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" ID="AR-01DA3B28-10D1-4783-B684-4B3CEA562A83" InResponseTo="AR-B2B21328-3295-4CAA-9BD3-42F7212800FA" IssueInstant="2019-06-12T14:50:23.425Z" Version="2.0">
+	<saml2p:Status>
+		<saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
+	</saml2p:Status>
+	<saml2p:Response Destination="http://avdh.gov.hu" ID="R-D7B2B7D3-4CF6-473A-A346-BA32675F8F62" InResponseTo="R-3F68F35F-FDD7-42A9-A55F-5BC513C32904" IssueInstant="2019-06-12T14:50:23.425Z" Version="2.0">
+		<saml2p:Issuer xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:assertion">http://hkp-converter.gov.hu</saml2p:Issuer>
+		<saml2p:Status>
+			<saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
+		</saml2p:Status>
+		<saml2p:Assertion xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:assertion" Version="2.0">
+			<saml2p:Issuer>avdh.gov.hu</saml2p:Issuer>
+			<saml2p:Subject>
+				<saml2p:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">tibor.fogler@gmail.com</saml2p:NameID>
+			</saml2p:Subject>
+			<saml2p:AttributeStatement>
+				<saml2p:Attribute Name="http://hkp-converter.gov.hu/fogalmak/TranzakcioKod">
+					<saml2:AttributeValue xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">PyndnXnFjIctF03ipKRwSXOhkimJQ5CV729b1qBwWyXeOKg5SJbUA</saml2:AttributeValue>
+				</saml2p:Attribute>
+				<saml2p:Attribute Name="http://hkp-converter.gov.hu/fogalmak/Minosites">
+					<saml2:AttributeValue xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">11</saml2:AttributeValue>
+				</saml2p:Attribute>
+				<saml2p:Attribute Name="http://hkp-converter.gov.hu/fogalmak/Nev">
+					<saml2:AttributeValue xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:string">FOGLER TIBOR VILMOS</saml2:AttributeValue>
+				</saml2p:Attribute>
+				<saml2p:Attribute Name="http://hkp-converter.gov.hu/fogalmak/AzonositasIdopontja">
+					<saml2:AttributeValue xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xs:dateTime">2019.06.12. 16.55.28</saml2:AttributeValue>
+				</saml2p:Attribute>
+			</saml2p:AttributeStatement>
+		</saml2p:Assertion>
+	</saml2p:Response>
+</saml2p:ArtifactResponse>

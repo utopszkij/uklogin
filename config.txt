@@ -1,0 +1,13 @@
+<?php
+//értelemszerüen modosítsd ezt a fájlt, és nevezd át .config.php -ra   
+error_reporting(E_ALL);
+define('DEFLNG','hu');
+define('TEMPLATE','default');
+define('MYSQLHOST','localhost');
+define('MYSQLUSER','****');
+define('MYSQLPSW','****');
+define('MYSQLDB','uklogin');
+define('MYSQLLOG',false);
+define('MYDOMAIN','http://*********');
+define('MYPATH','***************');
+?>

@@ -1,0 +1,37 @@
+
+membersmodel::__construct
+models/members.php ("1*G
+2
+members.php"3
+
+models/members.php (
+implicit return*Ë
+1
+models/members.php (+)
+
+models/members.php (
+$db"db@
+>
+
+models/members.php (
+%1"db::__construct*
+
+$db³°
+
+models/members.php (
+
+%2*
+
+$db*õò
+ï'
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        '2	statement*
+2B
+membersmodel

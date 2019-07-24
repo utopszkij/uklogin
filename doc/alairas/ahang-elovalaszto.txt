@@ -1,0 +1,76 @@
+
+
+https://niszavdh.gov.hu segitségével aláírt pdf fájl 
+aláírás ellenörzése és az aláíró email címének kinyerése
+
+Az aláirt pdf mellékletként tartalmaz egy igazolas.pdf -et. 
+Ez utobbi pedig ugyancsak mellékletknt egy meghatalamazo.xml -t.
+Ez utobbi pedig az aéáírást lezdeményező user ügyfélkapus email címét.
+
+
+https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR1VTYVoJ3zQhvuEngE9eAHZpMqpOEH3KT1ooROYZLzjPAl3fmF_yDVI5Qs
+forráskód felhasználásával készült.
+
+
+shell_exec php fv-nek engedélyezettnek kell lennie
+
+
+function __($txt) {
+	return $txt;
+}
+/**
+* @param pdf file full path
+* @param userId
+* @return ['result' => 'error'|email, 'message' => '...']
+*/
+function signCheck($filePath, $uid) {
+        $email = '';
+        $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath)));
+        unlink($filePath);
+        $igazolasPWD = escapeshellarg(__DIR__ . DS . 'pdfs' . DS . $uuid);
+		  $xmlArray = [];
+		  $result = ['result' => '', 'message' => ''];
+		  
+        if ($signatureArray[0] == 'File \'' . $filePath . '\' does not contain any signatures') $result = ['result' => 'error', 'message' => __('A dokumentum nincs aláírva')];
+        if ($signatureArray[9] != '  - Signature Validation: Signature is Valid.') $result = ['result' => 'error', 'message' => __('A dokumentum aláírását nem lehetett ellenőrizni')];
+        if ($signatureArray[2] != '  - Signer Certificate Common Name: AVDH Bélyegző') $result = ['result' => 'error', 'message' => __('A dokumentumot nem az AVDH Bélyegzővel írták alá')];
+        if ($signatureArray[10] != '  - Certificate Validation: Certificate is Trusted.') $result = ['result' => 'error', 'message' => __('A dokumentum aláírásának hitelességét nem lehetett ellenőrizni.')];
+
+        
+        // új könyvtárat hoz létre
+        if (!is_dir($igazolasPWD)) {
+	        mkdir($igazoloPWD, 0777);
+	     }   
+        
+        if ($result->result == '') {
+			  // a pdf -ből kibontja az igazolas.pdf mellékeltet az $igazolasPWD alkönyvtárba	
+	        shell_exec('pdfdetach '. escapeshellarg($filePath) . ' -o ' . $igazolasPWD . ' -saveall ');
+	        unlink($igazolasPWD . DS . 'igazolas.pdf');
+	 		  if (!is_file($igazolasPWD . DS . 'igazolas.pdf)) {
+	            $result =  ['result' => 'error', 'message' => __('HIBA: Nincs igazolas.pdf!')];
+			  }	        
+        }
+        
+        if ($result->result == '') {
+	        // a $igazolasPWD könyvtárban lévő igazolas.pdf fájlból kibontja a meghatalmazo.xml -t
+	        shell_exec('pdfdetach ' . $igazolasPWD . DS . 'igazolas.pdf -o ' . $igazolasPWD . ' -saveall ');
+			  if (!is_file($igazolasPWD . DS . 'meghatalmazo.xml)) {
+	            $result =  ['result' => 'error', 'message' => __('HIBA: Nincs meghatalmazo.xml!')];
+			  }	        
+		  }
+
+        if ($result->result == '') {
+			  $xmlArray = simplexml_load_file($igazolasPWD . DS . 'meghatalmazo.xml');o.xml!')];
+	        unlink($igazolasPWD . DS . 'meghatalmazo.xml');
+	        if (isset($xmlArray['saml2p:ArtifactResponse']['saml2p:Response']['saml2p:Assertion']['saml2p:Subject']['saml2p:NameID'])) { 
+	        		$email = $xmlArray['saml2p:ArtifactResponse']['saml2p:Response']['saml2p:Assertion']['saml2p:Subject']['saml2p:NameID'];
+	        }
+	        if (false === strpos($email, '@')) {
+	            $result = ['result' => 'error', 'message' => __('HIBA: Az aláíráshoz nem tartozik ügyfélkapus e-mail cím!')];
+	        } else { 
+	        		$result = ['result' => $email, 'message' => '']; 
+	        }
+		  }
+		          
+        return $result;
+}

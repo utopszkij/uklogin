@@ -1,0 +1,71 @@
+body {font-size:14px; font-family:roman; background-color:white; line-height:120%;
+   width:100%; min-height:400px;}
+div {margin:0px; padding:0px; }  
+.clear {clear:both}
+.nav-item {border-style:solid; border-color:silver; border-width:0px 0px 0px 1px }
+.nav-item:hover {background-color:silver} 
+ 
+#popup {cursor: move; position:fixed; z-index:99; left:50px; top:50px;
+    width:auto; height:auto;
+    background-color:#F0F0F0; color:black; padding:1px; border-style:solid; border-width:1px;}
+#popup .popupCloseDiv {text-align:right; margin:0px; padding:0px;}
+#popup p {padding:20px; margin:20px; text-align:center}
+#popupButtons {padding:10px; text-align:center}  
+  
+#working {position:fixed; z-index:100; left:200px; top:200px;
+    background-image:url('./working.gif'); background-color:silver; border-radius:10px;
+    text-align:center; margin:20px;
+    width:128px; height:128px; font-size:10px; font-weight:bold; color:red; }
+#working span {display:none}   
+  
+#footer {background-color:#b79191; color:white; padding:20px;}  
+
+.carousel-caption {margin-bottom:150px; text-align:center;  
+   background-color:black; opacity:0.5; border-radius:20px;}
+.carousel-caption h5 {background-color:transparent; font-size:44px; font-weight:bolder}  
+.carousel-item .buttons {position:absolute; z-index:10; left:30%; top:20%; height:auto; width:auto}
+.carousel-item .buttons a {background-color:#b4edb1; color:blue; 
+	padding:15px; margin-right:50px; border-radius:10px; font-size:20px;}
+
+.browserPaginator button.paginatorTxt {background-color:transparent; color:black; border-style:none; cursor:default}
+.browserPaginator button.paginatorCurrent {background-color:transparent; color:black;}
+ 
+.table .tr0 {background-color:transparent;}
+.table .tr1 {background-color:#e0e0e0}
+
+#scope {padding:5px}
+form#formApp {padding:5px; margin:5px; border-style:solid; border-width:1px;}
+form#formApp fieldset {padding:5px; margin:5px; border-style:solid; border-width:1px;}
+form#formApp label {width:250px; text-align:left}
+form#formApp var {border-style:solid; border-width:1px; border-color:silver}
+form#formApp input {border-style:solid; border-width:1px; border-color:silver}
+form#formApp textarea {border-style:solid; border-width:1px; border-color:silver}
+form#formApp .error {background-color: #efb6a7}
+   
+/* phone */
+@media (max-width: 576px) { 
+    .browserPaginator .paginatorDesctop {display:none} 
+    .browserPaginator .total {display:block} 
+    .browserPaginator .buttons {display:block; width:100%} 
+	form#formApp label {width:250px; text-align:left}
+}
+
+/* tablet */
+@media (min-width: 577px) and (max-width: 991px) {
+    .browserPaginator button.paginatorDesctop {display:inline} 
+    .browserPaginator .buttons {display:inline-block; width:auto} 
+	form#formApp label {width:250px; text-align:left}
+}
+
+/* desctop */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .browserPaginator button.paginatorDesctop {display:inline} 
+    .browserPaginator .buttons {display:inline-block; width:auto} 
+	form#formApp label {width:250px; text-align:left}
+}
+
+/* extra big */
+@media (min-width: 1200px) {
+    .browserPaginator button.paginatorDesctop {display:inline} 
+    .browserPaginator .buttons {display:inline-block; width:auto} 
+}

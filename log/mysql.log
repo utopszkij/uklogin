@@ -1,0 +1,720 @@
+2019-05-24 06:19:02 CREATE DATABASE IF NOT EXISTS test
+
+2019-05-24 06:19:02 SELECT * FROM users  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 CREATE DATABASE IF NOT EXISTS test
+
+2019-05-24 06:19:02 DROP TABLE IF EXISTS tasks
+
+2019-05-24 06:19:02 DROP TABLE IF EXISTS members
+
+2019-05-24 06:19:02 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:02 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:02 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user1" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "admin" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 INSERT INTO members (`avatar`,`nick`,`admin`,`project_id`) VALUES ("admin","admin","1","testProject")
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user1" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 INSERT INTO members (`avatar`,`nick`,`admin`,`project_id`) VALUES ("user1","user1","0","testProject")
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user2" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 INSERT INTO members (`avatar`,`nick`,`admin`,`project_id`) VALUES ("user2","user2","0","testProject")
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user3" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 INSERT INTO members (`avatar`,`nick`,`admin`,`project_id`) VALUES ("user3","user3","0","testProject")
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject" ORDER BY 1
+
+2019-05-24 06:19:02 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 UPDATE lastupdate SET `time`="1558678742" WHERE 1
+
+2019-05-24 06:19:02 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "admin" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user1" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user3" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 UPDATE members SET `avatar`="user3",`nick`="user2",`admin`="1",`project_id`="testProject" WHERE   `project_id` = "testProject"  AND  `avatar` = "user3"
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject"  AND  `avatar` = "user4" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:02 INSERT INTO members (`avatar`,`nick`,`admin`,`project_id`) VALUES ("user4","user4","0","testProject")
+
+2019-05-24 06:19:02 SELECT * FROM members  WHERE   `project_id` = "testProject" ORDER BY 1
+
+2019-05-24 06:19:02 DELETE FROM members WHERE   `project_id` = "testProject"  AND  `avatar` = "user2"
+
+2019-05-24 06:19:02 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678742" WHERE 1
+
+2019-05-24 06:19:03 CREATE DATABASE IF NOT EXISTS test
+
+2019-05-24 06:19:03 DROP TABLE IF EXISTS tasks
+
+2019-05-24 06:19:03 DROP TABLE IF EXISTS members
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:03 DELETE FROM tasks WHERE   `project_id` = "test"
+
+2019-05-24 06:19:03 INSERT INTO tasks (`id`,`title`,`desc`,`type`,`assign`,`req`,`state`,`project_id`) VALUES ("100","test100","","other","https://www.gravatar.com/avatar/","","canstart","test")
+
+2019-05-24 06:19:03 
+          CREATE TABLE IF NOT EXISTS members (
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                `avatar` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `admin` int(1) NOT NULL DEFAULT 0 COMMENT "1: admin, 0: not admin",
+                `nick` varchar(128) NOT NULL DEFAULT "" COMMENT "nick name",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_avatar` (`avatar`)
+          )
+        
+
+2019-05-24 06:19:03 DELETE FROM members WHERE   `project_id` = "test"
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:03 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:03 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:03 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678743" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 SELECT * FROM members  WHERE   `project_id` = "test" ORDER BY 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 INSERT INTO tasks (`id`,`project_id`,`title`,`desc`,`req`,`assign`,`type`,`state`) VALUES ("200","testProject","","","","https://www.gravatar.com/avatar/","other","waiting")
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 INSERT INTO tasks (`id`,`project_id`,`title`,`desc`,`req`,`assign`,`type`,`state`) VALUES ("200","testProject","","","","https://www.gravatar.com/avatar/","other","waiting")
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE tasks SET `id`="200",`project_id`="testProject",`title`="",`desc`="",`type`="other",`req`="",`assign`="user1",`state`="waiting" WHERE   `project_id` = "testProject"  AND  `id` = "200"
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE tasks SET `id`="200",`project_id`="testProject",`title`="",`desc`="",`type`="other",`req`="",`assign`="https://www.gravatar.com/avatar/",`state`="canverify" WHERE   `project_id` = "testProject"  AND  `id` = "200"
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "200" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE tasks SET `id`="200",`title`="titleUpdated",`desc`="",`type`="bug",`req`="",`assign`="https://www.gravatar.com/avatar/",`state`="waiting",`project_id`="testProject" WHERE   `project_id` = "testProject"  AND  `id` = "200"
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 SELECT * FROM tasks  WHERE   `project_id` = "testProject"  AND  `id` = "210" ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        
+
+2019-05-24 06:19:04 
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        
+
+2019-05-24 06:19:04 DELETE FROM tasks WHERE   `project_id` = "testProject"  AND  `id` = "200"
+
+2019-05-24 06:19:04 SELECT * FROM lastupdate  WHERE 1 ORDER BY 1 LIMIT 0,1
+
+2019-05-24 06:19:04 UPDATE lastupdate SET `time`="1558678744" WHERE 1
+

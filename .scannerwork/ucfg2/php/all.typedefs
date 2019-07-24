@@ -1,0 +1,2976 @@
+≤
+appenditeratoriteratoriterator
+validappenditerator::valid
+nextappenditerator::next4
+getarrayiterator appenditerator::getarrayiterator"
+currentappenditerator::current 
+rewindappenditerator::rewind4
+getiteratorindex appenditerator::getiteratorindex4
+getinneriterator appenditerator::getinneriterator*
+__constructappenditerator::__construct
+keyappenditerator::key 
+appendappenditerator::append·
+argumentcounterror	typeerror(
+__wakeupargumentcounterror::__wakeup(
+gettraceargumentcounterror::gettrace&
+getlineargumentcounterror::getline,
+
+__tostringargumentcounterror::__tostring.
+__constructargumentcounterror::__construct.
+getpreviousargumentcounterror::getprevious,
+
+getmessageargumentcounterror::getmessage8
+gettraceasstring$argumentcounterror::gettraceasstring&
+getfileargumentcounterror::getfile&
+getcodeargumentcounterror::getcodeº
+arithmeticerrorerror%
+__wakeuparithmeticerror::__wakeup%
+gettracearithmeticerror::gettrace#
+getlinearithmeticerror::getline)
+
+__tostringarithmeticerror::__tostring+
+__constructarithmeticerror::__construct+
+getpreviousarithmeticerror::getprevious)
+
+getmessagearithmeticerror::getmessage5
+gettraceasstring!arithmeticerror::gettraceasstring#
+getfilearithmeticerror::getfile#
+getcodearithmeticerror::getcodeÔ
+arrayiterator
+nextarrayiterator::next%
+	offsetgetarrayiterator::offsetget)
+natcasesortarrayiterator::natcasesort#
+getflagsarrayiterator::getflags)
+unserializearrayiterator::unserialize
+countarrayiterator::count+
+getarraycopyarrayiterator::getarraycopy)
+__constructarrayiterator::__construct
+seekarrayiterator::seek%
+	offsetsetarrayiterator::offsetset
+validarrayiterator::valid
+ksortarrayiterator::ksort%
+	serializearrayiterator::serialize!
+currentarrayiterator::current!
+natsortarrayiterator::natsort
+asortarrayiterator::asort
+uksortarrayiterator::uksort
+rewindarrayiterator::rewind)
+offsetunsetarrayiterator::offsetunset
+uasortarrayiterator::uasort+
+offsetexistsarrayiterator::offsetexists#
+setflagsarrayiterator::setflags
+keyarrayiterator::key
+appendarrayiterator::appendÕ
+arrayobject#
+	offsetgetarrayobject::offsetget'
+natcasesortarrayobject::natcasesort!
+getflagsarrayobject::getflags'
+unserializearrayobject::unserialize+
+exchangearrayarrayobject::exchangearray
+countarrayobject::count)
+getarraycopyarrayobject::getarraycopy'
+__constructarrayobject::__construct#
+	offsetsetarrayobject::offsetset
+ksortarrayobject::ksort1
+getiteratorclassarrayobject::getiteratorclass#
+	serializearrayobject::serialize1
+setiteratorclassarrayobject::setiteratorclass
+natsortarrayobject::natsort
+asortarrayobject::asort
+uksortarrayobject::uksort'
+offsetunsetarrayobject::offsetunset
+uasortarrayobject::uasort)
+offsetexistsarrayobject::offsetexists!
+setflagsarrayobject::setflags
+appendarrayobject::append'
+getiteratorarrayobject::getiterator±
+assertionerrorerror$
+__wakeupassertionerror::__wakeup$
+gettraceassertionerror::gettrace"
+getlineassertionerror::getline(
+
+__tostringassertionerror::__tostring*
+__constructassertionerror::__construct*
+getpreviousassertionerror::getprevious(
+
+getmessageassertionerror::getmessage4
+gettraceasstring assertionerror::gettraceasstring"
+getfileassertionerror::getfile"
+getcodeassertionerror::getcode®
+badfunctioncallexceptionlogicexception.
+__wakeup"badfunctioncallexception::__wakeup.
+gettrace"badfunctioncallexception::gettrace,
+getline!badfunctioncallexception::getline2
+
+__tostring$badfunctioncallexception::__tostring4
+__construct%badfunctioncallexception::__construct4
+getprevious%badfunctioncallexception::getprevious2
+
+getmessage$badfunctioncallexception::getmessage>
+gettraceasstring*badfunctioncallexception::gettraceasstring,
+getfile!badfunctioncallexception::getfile,
+getcode!badfunctioncallexception::getcodeú
+badmethodcallexceptionbadfunctioncallexception,
+__wakeup badmethodcallexception::__wakeup,
+gettrace badmethodcallexception::gettrace*
+getlinebadmethodcallexception::getline0
+
+__tostring"badmethodcallexception::__tostring2
+__construct#badmethodcallexception::__construct2
+getprevious#badmethodcallexception::getprevious0
+
+getmessage"badmethodcallexception::getmessage<
+gettraceasstring(badmethodcallexception::gettraceasstring*
+getfilebadmethodcallexception::getfile*
+getcodebadmethodcallexception::getcodeû
+curlfile,
+getpostfilenamecurlfile::getpostfilename$
+getmimetypecurlfile::getmimetype
+__wakeupcurlfile::__wakeup$
+getfilenamecurlfile::getfilename$
+setmimetypecurlfile::setmimetype$
+__constructcurlfile::__construct,
+setpostfilenamecurlfile::setpostfilename¿
+cachingiteratoriteratoriterator
+nextcachingiterator::next'
+	offsetgetcachingiterator::offsetget%
+getflagscachingiterator::getflags
+countcachingiterator::count5
+getinneriterator!cachingiterator::getinneriterator+
+__constructcachingiterator::__construct'
+	offsetsetcachingiterator::offsetset%
+getcachecachingiterator::getcache
+validcachingiterator::valid#
+currentcachingiterator::current!
+rewindcachingiterator::rewind+
+offsetunsetcachingiterator::offsetunset-
+offsetexistscachingiterator::offsetexists%
+setflagscachingiterator::setflags#
+hasnextcachingiterator::hasnext)
+
+__tostringcachingiterator::__tostring
+keycachingiterator::keyå
+callbackfilteriteratorfilteriterator&
+validcallbackfilteriterator::valid$
+nextcallbackfilteriterator::next*
+currentcallbackfilteriterator::current(
+rewindcallbackfilteriterator::rewind<
+getinneriterator(callbackfilteriterator::getinneriterator2
+__construct#callbackfilteriterator::__construct"
+keycallbackfilteriterator::key(
+acceptcallbackfilteriterator::accept£
+closedgeneratorexception	exception.
+__wakeup"closedgeneratorexception::__wakeup.
+gettrace"closedgeneratorexception::gettrace,
+getline!closedgeneratorexception::getline2
+
+__tostring$closedgeneratorexception::__tostring4
+__construct%closedgeneratorexception::__construct4
+getprevious%closedgeneratorexception::getprevious2
+
+getmessage$closedgeneratorexception::getmessage>
+gettraceasstring*closedgeneratorexception::gettraceasstring,
+getfile!closedgeneratorexception::getfile,
+getcode!closedgeneratorexception::getcodey
+closure
+callclosure::call
+bindclosure::bind%
+fromcallableclosure::fromcallable
+bindtoclosure::bindtoö
+domattrdomnode#
+getnodepathdomattr::getnodepath;
+comparedocumentposition domattr::comparedocumentposition#
+appendchilddomattr::appendchild'
+hasattributesdomattr::hasattributes
+c14ndomattr::c14n%
+replacechilddomattr::replacechild%
+lookupprefixdomattr::lookupprefix1
+lookupnamespaceuridomattr::lookupnamespaceuri#
+setuserdatadomattr::setuserdata%
+insertbeforedomattr::insertbefore#
+removechilddomattr::removechild#
+__constructdomattr::__construct1
+isdefaultnamespacedomattr::isdefaultnamespace#
+getuserdatadomattr::getuserdata'
+haschildnodesdomattr::haschildnodes
+	getlinenodomattr::getlineno
+isiddomattr::isid!
+
+issamenodedomattr::issamenode
+	normalizedomattr::normalize!
+
+getfeaturedomattr::getfeature#
+issupporteddomattr::issupported#
+isequalnodedomattr::isequalnode
+c14nfiledomattr::c14nfile
+	clonenodedomattr::clonenodeú
+domcdatasectiondomtext+
+getnodepathdomcdatasection::getnodepathC
+comparedocumentposition(domcdatasection::comparedocumentposition+
+appendchilddomcdatasection::appendchild/
+hasattributesdomcdatasection::hasattributes
+c14ndomcdatasection::c14n-
+replacechilddomcdatasection::replacechild)
+
+appenddatadomcdatasection::appenddata-
+lookupprefixdomcdatasection::lookupprefix9
+lookupnamespaceuri#domcdatasection::lookupnamespaceuri+
+setuserdatadomcdatasection::setuserdata-
+insertbeforedomcdatasection::insertbefore+
+__constructdomcdatasection::__construct5
+replacewholetext!domcdatasection::replacewholetext)
+
+issamenodedomcdatasection::issamenode'
+	normalizedomcdatasection::normalize)
+
+getfeaturedomcdatasection::getfeature+
+issupporteddomcdatasection::issupported+
+isequalnodedomcdatasection::isequalnode'
+	clonenodedomcdatasection::clonenode)
+
+deletedatadomcdatasection::deletedata/
+substringdatadomcdatasection::substringdataI
+iselementcontentwhitespace+domcdatasection::iselementcontentwhitespace+
+removechilddomcdatasection::removechildM
+iswhitespaceinelementcontent-domcdatasection::iswhitespaceinelementcontent9
+isdefaultnamespace#domcdatasection::isdefaultnamespace'
+	splittextdomcdatasection::splittext+
+getuserdatadomcdatasection::getuserdata/
+haschildnodesdomcdatasection::haschildnodes'
+	getlinenodomcdatasection::getlineno+
+replacedatadomcdatasection::replacedata%
+c14nfiledomcdatasection::c14nfile)
+
+insertdatadomcdatasection::insertdataë
+
+domcharacterdatadomnode,
+getnodepathdomcharacterdata::getnodepathD
+comparedocumentposition)domcharacterdata::comparedocumentposition,
+appendchilddomcharacterdata::appendchild0
+hasattributesdomcharacterdata::hasattributes
+c14ndomcharacterdata::c14n.
+replacechilddomcharacterdata::replacechild*
+
+appenddatadomcharacterdata::appenddata.
+lookupprefixdomcharacterdata::lookupprefix:
+lookupnamespaceuri$domcharacterdata::lookupnamespaceuri,
+setuserdatadomcharacterdata::setuserdata.
+insertbeforedomcharacterdata::insertbefore*
+
+issamenodedomcharacterdata::issamenode(
+	normalizedomcharacterdata::normalize*
+
+getfeaturedomcharacterdata::getfeature,
+issupporteddomcharacterdata::issupported,
+isequalnodedomcharacterdata::isequalnode(
+	clonenodedomcharacterdata::clonenode*
+
+deletedatadomcharacterdata::deletedata0
+substringdatadomcharacterdata::substringdata,
+removechilddomcharacterdata::removechild:
+isdefaultnamespace$domcharacterdata::isdefaultnamespace,
+getuserdatadomcharacterdata::getuserdata0
+haschildnodesdomcharacterdata::haschildnodes(
+	getlinenodomcharacterdata::getlineno,
+replacedatadomcharacterdata::replacedata&
+c14nfiledomcharacterdata::c14nfile*
+
+insertdatadomcharacterdata::insertdataö	
+
+domcommentdomcharacterdata&
+getnodepathdomcomment::getnodepath>
+comparedocumentposition#domcomment::comparedocumentposition&
+appendchilddomcomment::appendchild*
+hasattributesdomcomment::hasattributes
+c14ndomcomment::c14n(
+replacechilddomcomment::replacechild$
+
+appenddatadomcomment::appenddata(
+lookupprefixdomcomment::lookupprefix4
+lookupnamespaceuridomcomment::lookupnamespaceuri&
+setuserdatadomcomment::setuserdata(
+insertbeforedomcomment::insertbefore&
+__constructdomcomment::__construct$
+
+issamenodedomcomment::issamenode"
+	normalizedomcomment::normalize$
+
+getfeaturedomcomment::getfeature&
+issupporteddomcomment::issupported&
+isequalnodedomcomment::isequalnode"
+	clonenodedomcomment::clonenode$
+
+deletedatadomcomment::deletedata*
+substringdatadomcomment::substringdata&
+removechilddomcomment::removechild4
+isdefaultnamespacedomcomment::isdefaultnamespace&
+getuserdatadomcomment::getuserdata*
+haschildnodesdomcomment::haschildnodes"
+	getlinenodomcomment::getlineno&
+replacedatadomcomment::replacedata 
+c14nfiledomcomment::c14nfile$
+
+insertdatadomcomment::insertdata®
+domconfiguration.
+getparameterdomconfiguration::getparameter4
+cansetparameter!domconfiguration::cansetparameter.
+setparameterdomconfiguration::setparameter∑
+domdocumentdomnode'
+getnodepathdomdocument::getnodepathG
+createprocessinginstruction(domdocument::createprocessinginstruction'
+appendchilddomdocument::appendchild+
+hasattributesdomdocument::hasattributes-
+getelementbyiddomdocument::getelementbyid3
+normalizedocumentdomdocument::normalizedocument5
+lookupnamespaceuridomdocument::lookupnamespaceuri'
+setuserdatadomdocument::setuserdata'
+__constructdomdocument::__construct+
+createelementdomdocument::createelement)
+loadhtmlfiledomdocument::loadhtmlfile/
+createelementnsdomdocument::createelementns%
+
+issamenodedomdocument::issamenode#
+	normalizedomdocument::normalize-
+schemavalidatedomdocument::schemavalidate)
+savehtmlfiledomdocument::savehtmlfile!
+loadhtmldomdocument::loadhtml#
+	clonenodedomdocument::clonenode%
+
+importnodedomdocument::importnode/
+createattributedomdocument::createattribute5
+createcdatasectiondomdocument::createcdatasection=
+getelementsbytagnamens#domdocument::getelementsbytagnamens'
+removechilddomdocument::removechild5
+isdefaultnamespacedomdocument::isdefaultnamespace%
+
+renamenodedomdocument::renamenode+
+createcommentdomdocument::createcomment9
+getelementsbytagname!domdocument::getelementsbytagname/
+relaxngvalidatedomdocument::relaxngvalidate3
+registernodeclassdomdocument::registernodeclass?
+comparedocumentposition$domdocument::comparedocumentposition;
+createentityreference"domdocument::createentityreference
+c14ndomdocument::c14n)
+replacechilddomdocument::replacechild
+savedomdocument::save)
+lookupprefixdomdocument::lookupprefix)
+insertbeforedomdocument::insertbefore
+loaddomdocument::load=
+createdocumentfragment#domdocument::createdocumentfragment!
+savehtmldomdocument::savehtml%
+
+getfeaturedomdocument::getfeature9
+schemavalidatesource!domdocument::schemavalidatesource'
+issupporteddomdocument::issupported'
+isequalnodedomdocument::isequalnode3
+createattributensdomdocument::createattributens
+savexmldomdocument::savexml#
+	adoptnodedomdocument::adoptnode!
+validatedomdocument::validate
+loadxmldomdocument::loadxml;
+relaxngvalidatesource"domdocument::relaxngvalidatesource!
+xincludedomdocument::xinclude'
+getuserdatadomdocument::getuserdata+
+haschildnodesdomdocument::haschildnodes#
+	getlinenodomdocument::getlineno-
+createtextnodedomdocument::createtextnode!
+c14nfiledomdocument::c14nfile–	
+domdocumentfragmentdomnode/
+getnodepath domdocumentfragment::getnodepathG
+comparedocumentposition,domdocumentfragment::comparedocumentposition/
+appendchild domdocumentfragment::appendchild3
+hasattributes"domdocumentfragment::hasattributes!
+c14ndomdocumentfragment::c14n1
+replacechild!domdocumentfragment::replacechild1
+lookupprefix!domdocumentfragment::lookupprefix=
+lookupnamespaceuri'domdocumentfragment::lookupnamespaceuri/
+setuserdata domdocumentfragment::setuserdata1
+insertbefore!domdocumentfragment::insertbefore/
+removechild domdocumentfragment::removechild/
+__construct domdocumentfragment::__construct=
+isdefaultnamespace'domdocumentfragment::isdefaultnamespace/
+getuserdata domdocumentfragment::getuserdata3
+haschildnodes"domdocumentfragment::haschildnodes+
+	getlinenodomdocumentfragment::getlineno-
+
+issamenodedomdocumentfragment::issamenode+
+	normalizedomdocumentfragment::normalize-
+
+getfeaturedomdocumentfragment::getfeature/
+issupported domdocumentfragment::issupported/
+isequalnode domdocumentfragment::isequalnode)
+c14nfiledomdocumentfragment::c14nfile+
+	clonenodedomdocumentfragment::clonenode+
+	appendxmldomdocumentfragment::appendxmlñ
+domdocumenttypedomnode+
+getnodepathdomdocumenttype::getnodepathC
+comparedocumentposition(domdocumenttype::comparedocumentposition+
+appendchilddomdocumenttype::appendchild/
+hasattributesdomdocumenttype::hasattributes
+c14ndomdocumenttype::c14n-
+replacechilddomdocumenttype::replacechild-
+lookupprefixdomdocumenttype::lookupprefix9
+lookupnamespaceuri#domdocumenttype::lookupnamespaceuri+
+setuserdatadomdocumenttype::setuserdata-
+insertbeforedomdocumenttype::insertbefore+
+removechilddomdocumenttype::removechild9
+isdefaultnamespace#domdocumenttype::isdefaultnamespace+
+getuserdatadomdocumenttype::getuserdata/
+haschildnodesdomdocumenttype::haschildnodes'
+	getlinenodomdocumenttype::getlineno)
+
+issamenodedomdocumenttype::issamenode'
+	normalizedomdocumenttype::normalize)
+
+getfeaturedomdocumenttype::getfeature+
+issupporteddomdocumenttype::issupported+
+isequalnodedomdocumenttype::isequalnode%
+c14nfiledomdocumenttype::c14nfile'
+	clonenodedomdocumenttype::clonenode
+domdomerrorÕ
+
+domelementdomnode&
+getnodepathdomelement::getnodepath>
+comparedocumentposition#domelement::comparedocumentposition0
+setidattributensdomelement::setidattributens(
+getattributedomelement::getattribute&
+appendchilddomelement::appendchild*
+hasattributesdomelement::hasattributes
+c14ndomelement::c14n(
+replacechilddomelement::replacechild(
+lookupprefixdomelement::lookupprefix4
+lookupnamespaceuridomelement::lookupnamespaceuri&
+setuserdatadomelement::setuserdata6
+removeattributenodedomelement::removeattributenode(
+insertbeforedomelement::insertbefore&
+__constructdomelement::__construct4
+setattributenodensdomelement::setattributenodens,
+hasattributensdomelement::hasattributens$
+
+issamenodedomelement::issamenode2
+removeattributensdomelement::removeattributens"
+	normalizedomelement::normalize$
+
+getfeaturedomelement::getfeature&
+issupporteddomelement::issupported&
+isequalnodedomelement::isequalnode(
+hasattributedomelement::hasattribute"
+	clonenodedomelement::clonenode0
+getattributenodedomelement::getattributenode,
+setattributensdomelement::setattributens<
+getelementsbytagnamens"domelement::getelementsbytagnamens,
+setidattributedomelement::setidattribute.
+removeattributedomelement::removeattribute&
+removechilddomelement::removechild(
+setattributedomelement::setattribute4
+isdefaultnamespacedomelement::isdefaultnamespace&
+getuserdatadomelement::getuserdata4
+setidattributenodedomelement::setidattributenode*
+haschildnodesdomelement::haschildnodes"
+	getlinenodomelement::getlineno4
+getattributenodensdomelement::getattributenodens 
+c14nfiledomelement::c14nfile8
+getelementsbytagname domelement::getelementsbytagname0
+setattributenodedomelement::setattributenode,
+getattributensdomelement::getattributenså
+	domentitydomnode%
+getnodepathdomentity::getnodepath=
+comparedocumentposition"domentity::comparedocumentposition%
+appendchilddomentity::appendchild)
+hasattributesdomentity::hasattributes
+c14ndomentity::c14n'
+replacechilddomentity::replacechild'
+lookupprefixdomentity::lookupprefix3
+lookupnamespaceuridomentity::lookupnamespaceuri%
+setuserdatadomentity::setuserdata'
+insertbeforedomentity::insertbefore%
+removechilddomentity::removechild3
+isdefaultnamespacedomentity::isdefaultnamespace%
+getuserdatadomentity::getuserdata)
+haschildnodesdomentity::haschildnodes!
+	getlinenodomentity::getlineno#
+
+issamenodedomentity::issamenode!
+	normalizedomentity::normalize#
+
+getfeaturedomentity::getfeature%
+issupporteddomentity::issupported%
+isequalnodedomentity::isequalnode
+c14nfiledomentity::c14nfile!
+	clonenodedomentity::clonenodeã	
+domentityreferencedomnode.
+getnodepathdomentityreference::getnodepathF
+comparedocumentposition+domentityreference::comparedocumentposition.
+appendchilddomentityreference::appendchild2
+hasattributes!domentityreference::hasattributes 
+c14ndomentityreference::c14n0
+replacechild domentityreference::replacechild0
+lookupprefix domentityreference::lookupprefix<
+lookupnamespaceuri&domentityreference::lookupnamespaceuri.
+setuserdatadomentityreference::setuserdata0
+insertbefore domentityreference::insertbefore.
+removechilddomentityreference::removechild.
+__constructdomentityreference::__construct<
+isdefaultnamespace&domentityreference::isdefaultnamespace.
+getuserdatadomentityreference::getuserdata2
+haschildnodes!domentityreference::haschildnodes*
+	getlinenodomentityreference::getlineno,
+
+issamenodedomentityreference::issamenode*
+	normalizedomentityreference::normalize,
+
+getfeaturedomentityreference::getfeature.
+issupporteddomentityreference::issupported.
+isequalnodedomentityreference::isequalnode(
+c14nfiledomentityreference::c14nfile*
+	clonenodedomentityreference::clonenode>
+domerrorhandler+
+handleerrordomerrorhandler::handleerrorü
+domexception	exception"
+__wakeupdomexception::__wakeup"
+gettracedomexception::gettrace 
+getlinedomexception::getline&
+
+__tostringdomexception::__tostring(
+__constructdomexception::__construct(
+getpreviousdomexception::getprevious&
+
+getmessagedomexception::getmessage2
+gettraceasstringdomexception::gettraceasstring 
+getfiledomexception::getfile 
+getcodedomexception::getcodeﬂ
+domimplementation+
+
+hasfeaturedomimplementation::hasfeature+
+
+getfeaturedomimplementation::getfeature3
+createdocument!domimplementation::createdocument;
+createdocumenttype%domimplementation::createdocumenttype<
+domimplementationlist#
+itemdomimplementationlist::item©
+domimplementationsourceG
+getdomimplementations.domimplementationsource::getdomimplementationsE
+getdomimplementation-domimplementationsource::getdomimplementation
+
+domlocator_
+domnamelist
+getnamedomnamelist::getname/
+getnamespaceuridomnamelist::getnamespaceuri
+domnamespacenode‚
+domnamednodemap
+itemdomnamednodemap::item-
+setnameditemdomnamednodemap::setnameditem1
+getnameditemnsdomnamednodemap::getnameditemns7
+removenameditemns"domnamednodemap::removenameditemns1
+setnameditemnsdomnamednodemap::setnameditemns-
+getnameditemdomnamednodemap::getnameditem3
+removenameditem domnamednodemap::removenameditem’
+domnode#
+getnodepathdomnode::getnodepath;
+comparedocumentposition domnode::comparedocumentposition#
+appendchilddomnode::appendchild'
+hasattributesdomnode::hasattributes
+c14ndomnode::c14n%
+replacechilddomnode::replacechild%
+lookupprefixdomnode::lookupprefix1
+lookupnamespaceuridomnode::lookupnamespaceuri#
+setuserdatadomnode::setuserdata%
+insertbeforedomnode::insertbefore#
+removechilddomnode::removechild1
+isdefaultnamespacedomnode::isdefaultnamespace#
+getuserdatadomnode::getuserdata'
+haschildnodesdomnode::haschildnodes
+	getlinenodomnode::getlineno!
+
+issamenodedomnode::issamenode
+	normalizedomnode::normalize!
+
+getfeaturedomnode::getfeature#
+issupporteddomnode::issupported#
+isequalnodedomnode::isequalnode
+c14nfiledomnode::c14nfile
+	clonenodedomnode::clonenode(
+domnodelist
+itemdomnodelist::item∫
+domnotationdomnode'
+getnodepathdomnotation::getnodepath?
+comparedocumentposition$domnotation::comparedocumentposition'
+appendchilddomnotation::appendchild+
+hasattributesdomnotation::hasattributes
+c14ndomnotation::c14n)
+replacechilddomnotation::replacechild)
+lookupprefixdomnotation::lookupprefix5
+lookupnamespaceuridomnotation::lookupnamespaceuri'
+setuserdatadomnotation::setuserdata)
+insertbeforedomnotation::insertbefore'
+removechilddomnotation::removechild5
+isdefaultnamespacedomnotation::isdefaultnamespace'
+getuserdatadomnotation::getuserdata+
+haschildnodesdomnotation::haschildnodes#
+	getlinenodomnotation::getlineno%
+
+issamenodedomnotation::issamenode#
+	normalizedomnotation::normalize%
+
+getfeaturedomnotation::getfeature'
+issupporteddomnotation::issupported'
+isequalnodedomnotation::isequalnode!
+c14nfiledomnotation::c14nfile#
+	clonenodedomnotation::clonenodeõ
+
+domprocessinginstructiondomnode4
+getnodepath%domprocessinginstruction::getnodepathL
+comparedocumentposition1domprocessinginstruction::comparedocumentposition4
+appendchild%domprocessinginstruction::appendchild8
+hasattributes'domprocessinginstruction::hasattributes&
+c14ndomprocessinginstruction::c14n6
+replacechild&domprocessinginstruction::replacechild6
+lookupprefix&domprocessinginstruction::lookupprefixB
+lookupnamespaceuri,domprocessinginstruction::lookupnamespaceuri4
+setuserdata%domprocessinginstruction::setuserdata6
+insertbefore&domprocessinginstruction::insertbefore4
+removechild%domprocessinginstruction::removechild4
+__construct%domprocessinginstruction::__constructB
+isdefaultnamespace,domprocessinginstruction::isdefaultnamespace4
+getuserdata%domprocessinginstruction::getuserdata8
+haschildnodes'domprocessinginstruction::haschildnodes0
+	getlineno#domprocessinginstruction::getlineno2
+
+issamenode$domprocessinginstruction::issamenode0
+	normalize#domprocessinginstruction::normalize2
+
+getfeature$domprocessinginstruction::getfeature4
+issupported%domprocessinginstruction::issupported4
+isequalnode%domprocessinginstruction::isequalnode.
+c14nfile"domprocessinginstruction::c14nfile0
+	clonenode#domprocessinginstruction::clonenodeo
+domstringextend-
+findoffset32domstringextend::findoffset32-
+findoffset16domstringextend::findoffset16,
+domstringlist
+itemdomstringlist::itemù
+
+domtextdomcharacterdata#
+getnodepathdomtext::getnodepath;
+comparedocumentposition domtext::comparedocumentposition#
+appendchilddomtext::appendchild'
+hasattributesdomtext::hasattributes
+c14ndomtext::c14n%
+replacechilddomtext::replacechild!
+
+appenddatadomtext::appenddata%
+lookupprefixdomtext::lookupprefix1
+lookupnamespaceuridomtext::lookupnamespaceuri#
+setuserdatadomtext::setuserdata%
+insertbeforedomtext::insertbefore#
+__constructdomtext::__construct-
+replacewholetextdomtext::replacewholetext!
+
+issamenodedomtext::issamenode
+	normalizedomtext::normalize!
+
+getfeaturedomtext::getfeature#
+issupporteddomtext::issupported#
+isequalnodedomtext::isequalnode
+	clonenodedomtext::clonenode!
+
+deletedatadomtext::deletedata'
+substringdatadomtext::substringdataA
+iselementcontentwhitespace#domtext::iselementcontentwhitespace#
+removechilddomtext::removechildE
+iswhitespaceinelementcontent%domtext::iswhitespaceinelementcontent1
+isdefaultnamespacedomtext::isdefaultnamespace
+	splittextdomtext::splittext#
+getuserdatadomtext::getuserdata'
+haschildnodesdomtext::haschildnodes
+	getlinenodomtext::getlineno#
+replacedatadomtext::replacedata
+c14nfiledomtext::c14nfile!
+
+insertdatadomtext::insertdata
+domtypeinfo:
+domuserdatahandler$
+handledomuserdatahandler::handle‘
+domxpath6
+registerphpfunctionsdomxpath::registerphpfunctions0
+registernamespacedomxpath::registernamespace
+querydomxpath::query$
+__constructdomxpath::__construct
+evaluatedomxpath::evaluate‚
+dateinterval"
+__wakeupdateinterval::__wakeup
+formatdateinterval::format(
+__set_statedateinterval::__set_state:
+createfromdatestring"dateinterval::createfromdatestring(
+__constructdateinterval::__construct˛
+
+dateperiod(
+getstartdatedateperiod::getstartdate.
+getdateintervaldateperiod::getdateinterval 
+__wakeupdateperiod::__wakeup&
+__set_statedateperiod::__set_state$
+
+getenddatedateperiod::getenddate&
+__constructdateperiod::__constructÍ
+datetime 
+	getoffsetdatetime::getoffset
+adddatetime::add
+subdatetime::sub&
+gettimestampdatetime::gettimestamp
+__wakeupdatetime::__wakeup
+setdatedatetime::setdate
+formatdatetime::format
+diffdatetime::diff$
+settimezonedatetime::settimezone&
+settimestampdatetime::settimestamp$
+__constructdatetime::__construct"
+
+setisodatedatetime::setisodate
+settimedatetime::settime$
+gettimezonedatetime::gettimezone
+modifydatetime::modify$
+__set_statedatetime::__set_state.
+createfromformatdatetime::createfromformat(
+getlasterrorsdatetime::getlasterrors–
+datetimeimmutable)
+	getoffsetdatetimeimmutable::getoffset
+adddatetimeimmutable::add
+subdatetimeimmutable::sub/
+gettimestampdatetimeimmutable::gettimestamp'
+__wakeupdatetimeimmutable::__wakeup%
+setdatedatetimeimmutable::setdate#
+formatdatetimeimmutable::format
+diffdatetimeimmutable::diff-
+settimezonedatetimeimmutable::settimezone/
+settimestampdatetimeimmutable::settimestamp-
+__constructdatetimeimmutable::__construct+
+
+setisodatedatetimeimmutable::setisodate%
+settimedatetimeimmutable::settime-
+gettimezonedatetimeimmutable::gettimezone#
+modifydatetimeimmutable::modify9
+createfrommutable$datetimeimmutable::createfrommutable-
+__set_statedatetimeimmutable::__set_state7
+createfromformat#datetimeimmutable::createfromformat1
+getlasterrors datetimeimmutable::getlasterrorsê
+datetimezone$
+	getoffsetdatetimezone::getoffset 
+getnamedatetimezone::getname(
+getlocationdatetimezone::getlocation.
+gettransitionsdatetimezone::gettransitions"
+__wakeupdatetimezone::__wakeup(
+__set_statedatetimezone::__set_state0
+listidentifiersdatetimezone::listidentifiers(
+__constructdatetimezone::__construct4
+listabbreviationsdatetimezone::listabbreviations\
+	directory
+readdirectory::read
+rewinddirectory::rewind
+closedirectory::close∑
+directoryiteratorsplfileinfo
+nextdirectoryiterator::next%
+gettypedirectoryiterator::gettype%
+getsizedirectoryiterator::getsize/
+setinfoclassdirectoryiterator::setinfoclass+
+
+iswritabledirectoryiterator::iswritable/
+isexecutabledirectoryiterator::isexecutable-
+__constructdirectoryiterator::__construct
+seekdirectoryiterator::seek'
+getinodedirectoryiterator::getinode!
+validdirectoryiterator::valid#
+islinkdirectoryiterator::islink'
+getctimedirectoryiterator::getctime/
+getextensiondirectoryiterator::getextension%
+currentdirectoryiterator::current/
+setfileclassdirectoryiterator::setfileclass1
+_bad_state_ex directoryiterator::_bad_state_ex#
+isfiledirectoryiterator::isfile'
+getpermsdirectoryiterator::getperms1
+getlinktarget directoryiterator::getlinktarget-
+getpathnamedirectoryiterator::getpathname-
+getbasenamedirectoryiterator::getbasename
+keydirectoryiterator::key!
+isdirdirectoryiterator::isdir-
+getrealpathdirectoryiterator::getrealpath!
+isdotdirectoryiterator::isdot'
+getgroupdirectoryiterator::getgroup%
+getpathdirectoryiterator::getpath'
+getownerdirectoryiterator::getowner-
+getfilenamedirectoryiterator::getfilename'
+getmtimedirectoryiterator::getmtime-
+getfileinfodirectoryiterator::getfileinfo#
+rewinddirectoryiterator::rewind-
+getpathinfodirectoryiterator::getpathinfo'
+openfiledirectoryiterator::openfile'
+getatimedirectoryiterator::getatime+
+
+isreadabledirectoryiterator::isreadable+
+
+__tostringdirectoryiterator::__tostringÚ
+divisionbyzeroerrorarithmeticerror)
+__wakeupdivisionbyzeroerror::__wakeup)
+gettracedivisionbyzeroerror::gettrace'
+getlinedivisionbyzeroerror::getline-
+
+__tostringdivisionbyzeroerror::__tostring/
+__construct divisionbyzeroerror::__construct/
+getprevious divisionbyzeroerror::getprevious-
+
+getmessagedivisionbyzeroerror::getmessage9
+gettraceasstring%divisionbyzeroerror::gettraceasstring'
+getfiledivisionbyzeroerror::getfile'
+getcodedivisionbyzeroerror::getcode≈
+domainexceptionlogicexception%
+__wakeupdomainexception::__wakeup%
+gettracedomainexception::gettrace#
+getlinedomainexception::getline)
+
+__tostringdomainexception::__tostring+
+__constructdomainexception::__construct+
+getpreviousdomainexception::getprevious)
+
+getmessagedomainexception::getmessage5
+gettraceasstring!domainexception::gettraceasstring#
+getfiledomainexception::getfile#
+getcodedomainexception::getcode™
+emptyiterator
+validemptyiterator::valid
+nextemptyiterator::next!
+currentemptyiterator::current
+rewindemptyiterator::rewind
+keyemptyiterator::key«
+error
+__wakeuperror::__wakeup
+gettraceerror::gettrace
+getlineerror::getline
+
+__tostringerror::__tostring!
+__constructerror::__construct!
+getpreviouserror::getprevious
+
+getmessageerror::getmessage+
+gettraceasstringerror::gettraceasstring
+getfileerror::getfile
+getcodeerror::getcode·
+errorexception	exception$
+__wakeuperrorexception::__wakeup$
+gettraceerrorexception::gettrace"
+getlineerrorexception::getline(
+
+__tostringerrorexception::__tostring*
+__constructerrorexception::__construct*
+getpreviouserrorexception::getprevious(
+
+getmessageerrorexception::getmessage4
+gettraceasstring errorexception::gettraceasstring*
+getseverityerrorexception::getseverity"
+getfileerrorexception::getfile"
+getcodeerrorexception::getcodeÛ
+	exception
+__wakeupexception::__wakeup
+gettraceexception::gettrace
+getlineexception::getline#
+
+__tostringexception::__tostring%
+__constructexception::__construct%
+getpreviousexception::getprevious#
+
+getmessageexception::getmessage/
+gettraceasstringexception::gettraceasstring
+getfileexception::getfile
+getcodeexception::getcode∑
+filesystemiteratordirectoryiterator 
+nextfilesystemiterator::next(
+getflagsfilesystemiterator::getflags&
+gettypefilesystemiterator::gettype&
+getsizefilesystemiterator::getsize0
+setinfoclass filesystemiterator::setinfoclass,
+
+iswritablefilesystemiterator::iswritable0
+isexecutable filesystemiterator::isexecutable.
+__constructfilesystemiterator::__construct 
+seekfilesystemiterator::seek(
+getinodefilesystemiterator::getinode"
+validfilesystemiterator::valid$
+islinkfilesystemiterator::islink(
+getctimefilesystemiterator::getctime0
+getextension filesystemiterator::getextension&
+currentfilesystemiterator::current0
+setfileclass filesystemiterator::setfileclass2
+_bad_state_ex!filesystemiterator::_bad_state_ex$
+isfilefilesystemiterator::isfile(
+getpermsfilesystemiterator::getperms2
+getlinktarget!filesystemiterator::getlinktarget.
+getpathnamefilesystemiterator::getpathname(
+setflagsfilesystemiterator::setflags.
+getbasenamefilesystemiterator::getbasename
+keyfilesystemiterator::key"
+isdirfilesystemiterator::isdir.
+getrealpathfilesystemiterator::getrealpath"
+isdotfilesystemiterator::isdot(
+getgroupfilesystemiterator::getgroup&
+getpathfilesystemiterator::getpath(
+getownerfilesystemiterator::getowner.
+getfilenamefilesystemiterator::getfilename(
+getmtimefilesystemiterator::getmtime.
+getfileinfofilesystemiterator::getfileinfo$
+rewindfilesystemiterator::rewind.
+getpathinfofilesystemiterator::getpathinfo(
+openfilefilesystemiterator::openfile(
+getatimefilesystemiterator::getatime,
+
+isreadablefilesystemiterator::isreadable,
+
+__tostringfilesystemiterator::__tostring∆
+filteriteratoriteratoriterator
+validfilteriterator::valid
+nextfilteriterator::next"
+currentfilteriterator::current 
+rewindfilteriterator::rewind4
+getinneriterator filteriterator::getinneriterator*
+__constructfilteriterator::__construct
+keyfilteriterator::key 
+acceptfilteriterator::acceptä
+	generator
+validgenerator::valid
+nextgenerator::next
+currentgenerator::current
+rewindgenerator::rewind
+throwgenerator::throw!
+	getreturngenerator::getreturn
+__wakeupgenerator::__wakeup
+sendgenerator::send
+keygenerator::keyÊ
+globiteratorfilesystemiterator
+nextglobiterator::next"
+getflagsglobiterator::getflags 
+gettypeglobiterator::gettype 
+getsizeglobiterator::getsize*
+setinfoclassglobiterator::setinfoclass&
+
+iswritableglobiterator::iswritable*
+isexecutableglobiterator::isexecutable(
+__constructglobiterator::__construct
+seekglobiterator::seek"
+getinodeglobiterator::getinode
+validglobiterator::valid
+islinkglobiterator::islink"
+getctimeglobiterator::getctime*
+getextensionglobiterator::getextension 
+currentglobiterator::current*
+setfileclassglobiterator::setfileclass,
+_bad_state_exglobiterator::_bad_state_ex
+isfileglobiterator::isfile"
+getpermsglobiterator::getperms,
+getlinktargetglobiterator::getlinktarget(
+getpathnameglobiterator::getpathname"
+setflagsglobiterator::setflags(
+getbasenameglobiterator::getbasename
+keyglobiterator::key
+isdirglobiterator::isdir(
+getrealpathglobiterator::getrealpath
+isdotglobiterator::isdot"
+getgroupglobiterator::getgroup
+countglobiterator::count 
+getpathglobiterator::getpath"
+getownerglobiterator::getowner(
+getfilenameglobiterator::getfilename"
+getmtimeglobiterator::getmtime(
+getfileinfoglobiterator::getfileinfo
+rewindglobiterator::rewind(
+getpathinfoglobiterator::getpathinfo"
+openfileglobiterator::openfile"
+getatimeglobiterator::getatime&
+
+isreadableglobiterator::isreadable&
+
+__tostringglobiterator::__tostring¥
+infiniteiteratoriteratoriterator 
+validinfiniteiterator::valid
+nextinfiniteiterator::next$
+currentinfiniteiterator::current"
+rewindinfiniteiterator::rewind6
+getinneriterator"infiniteiterator::getinneriterator,
+__constructinfiniteiterator::__construct
+keyinfiniteiterator::key®
+invalidargumentexceptionlogicexception.
+__wakeup"invalidargumentexception::__wakeup.
+gettrace"invalidargumentexception::gettrace,
+getline!invalidargumentexception::getline2
+
+__tostring$invalidargumentexception::__tostring4
+__construct%invalidargumentexception::__construct4
+getprevious%invalidargumentexception::getprevious2
+
+getmessage$invalidargumentexception::getmessage>
+gettraceasstring*invalidargumentexception::gettraceasstring,
+getfile!invalidargumentexception::getfile,
+getcode!invalidargumentexception::getcode¢
+iteratoriterator 
+validiteratoriterator::valid
+nextiteratoriterator::next$
+currentiteratoriterator::current"
+rewinditeratoriterator::rewind6
+getinneriterator"iteratoriterator::getinneriterator,
+__constructiteratoriterator::__construct
+keyiteratoriterator::key≈
+lengthexceptionlogicexception%
+__wakeuplengthexception::__wakeup%
+gettracelengthexception::gettrace#
+getlinelengthexception::getline)
+
+__tostringlengthexception::__tostring+
+__constructlengthexception::__construct+
+getpreviouslengthexception::getprevious)
+
+getmessagelengthexception::getmessage5
+gettraceasstring!lengthexception::gettraceasstring#
+getfilelengthexception::getfile#
+getcodelengthexception::getcode
+libxmlerror‰
+limititeratoriteratoriterator
+validlimititerator::valid
+nextlimititerator::next!
+currentlimititerator::current
+rewindlimititerator::rewind3
+getinneriteratorlimititerator::getinneriterator)
+__constructlimititerator::__construct
+seeklimititerator::seek)
+getpositionlimititerator::getposition
+keylimititerator::keyµ
+logicexception	exception$
+__wakeuplogicexception::__wakeup$
+gettracelogicexception::gettrace"
+getlinelogicexception::getline(
+
+__tostringlogicexception::__tostring*
+__constructlogicexception::__construct*
+getpreviouslogicexception::getprevious(
+
+getmessagelogicexception::getmessage4
+gettraceasstring logicexception::gettraceasstring"
+getfilelogicexception::getfile"
+getcodelogicexception::getcodeé
+multipleiterator 
+validmultipleiterator::valid
+nextmultipleiterator::next2
+countiterators multipleiterator::countiterators&
+getflagsmultipleiterator::getflags6
+containsiterator"multipleiterator::containsiterator$
+currentmultipleiterator::current"
+rewindmultipleiterator::rewind&
+setflagsmultipleiterator::setflags2
+detachiterator multipleiterator::detachiterator,
+__constructmultipleiterator::__construct2
+attachiterator multipleiterator::attachiterator
+keymultipleiterator::key¥
+norewinditeratoriteratoriterator 
+validnorewinditerator::valid
+nextnorewinditerator::next$
+currentnorewinditerator::current"
+rewindnorewinditerator::rewind6
+getinneriterator"norewinditerator::getinneriterator,
+__constructnorewinditerator::__construct
+keynorewinditerator::key˛
+outofboundsexceptionruntimeexception*
+__wakeupoutofboundsexception::__wakeup*
+gettraceoutofboundsexception::gettrace(
+getlineoutofboundsexception::getline.
+
+__tostring outofboundsexception::__tostring0
+__construct!outofboundsexception::__construct0
+getprevious!outofboundsexception::getprevious.
+
+getmessage outofboundsexception::getmessage:
+gettraceasstring&outofboundsexception::gettraceasstring(
+getfileoutofboundsexception::getfile(
+getcodeoutofboundsexception::getcodeÒ
+outofrangeexceptionlogicexception)
+__wakeupoutofrangeexception::__wakeup)
+gettraceoutofrangeexception::gettrace'
+getlineoutofrangeexception::getline-
+
+__tostringoutofrangeexception::__tostring/
+__construct outofrangeexception::__construct/
+getprevious outofrangeexception::getprevious-
+
+getmessageoutofrangeexception::getmessage9
+gettraceasstring%outofrangeexception::gettraceasstring'
+getfileoutofrangeexception::getfile'
+getcodeoutofrangeexception::getcode›
+overflowexceptionruntimeexception'
+__wakeupoverflowexception::__wakeup'
+gettraceoverflowexception::gettrace%
+getlineoverflowexception::getline+
+
+__tostringoverflowexception::__tostring-
+__constructoverflowexception::__construct-
+getpreviousoverflowexception::getprevious+
+
+getmessageoverflowexception::getmessage7
+gettraceasstring#overflowexception::gettraceasstring%
+getfileoverflowexception::getfile%
+getcodeoverflowexception::getcodeÜ
+pdo
+rollbackpdo::rollback
+preparepdo::prepare)
+begintransactionpdo::begintransaction!
+getattributepdo::getattribute
+__sleeppdo::__sleep
+__wakeuppdo::__wakeup
+query
+pdo::query
+commitpdo::commit#
+intransactionpdo::intransaction!
+setattributepdo::setattribute
+__constructpdo::__construct!
+lastinsertidpdo::lastinsertid
+quote
+pdo::quote
+	errorinfopdo::errorinfo/
+getavailabledriverspdo::getavailabledrivers
+exec	pdo::exec
+	errorcodepdo::errorcode¶
+pdoexceptionruntimeexception"
+__wakeuppdoexception::__wakeup"
+gettracepdoexception::gettrace 
+getlinepdoexception::getline&
+
+__tostringpdoexception::__tostring(
+__constructpdoexception::__construct(
+getpreviouspdoexception::getprevious&
+
+getmessagepdoexception::getmessage2
+gettraceasstringpdoexception::gettraceasstring 
+getfilepdoexception::getfile 
+getcodepdoexception::getcode
+pdorow–
+pdostatement(
+fetchobjectpdostatement::fetchobject*
+setfetchmodepdostatement::setfetchmode0
+debugdumpparamspdostatement::debugdumpparams"
+rowcountpdostatement::rowcount*
+getattributepdostatement::getattribute"
+fetchallpdostatement::fetchall 
+__sleeppdostatement::__sleep(
+closecursorpdostatement::closecursor(
+fetchcolumnpdostatement::fetchcolumn"
+__wakeuppdostatement::__wakeup$
+	bindparampdostatement::bindparam,
+getcolumnmetapdostatement::getcolumnmeta*
+setattributepdostatement::setattribute(
+columncountpdostatement::columncount 
+executepdostatement::execute&
+
+bindcolumnpdostatement::bindcolumn&
+
+nextrowsetpdostatement::nextrowset
+fetchpdostatement::fetch$
+	bindvaluepdostatement::bindvalue$
+	errorinfopdostatement::errorinfo$
+	errorcodepdostatement::errorcode•
+parentiteratorrecursivefilteriterator
+validparentiterator::valid
+nextparentiterator::next"
+currentparentiterator::current 
+rewindparentiterator::rewind4
+getinneriterator parentiterator::getinneriterator*
+__constructparentiterator::__construct*
+haschildrenparentiterator::haschildren
+keyparentiterator::key*
+getchildrenparentiterator::getchildren 
+acceptparentiterator::acceptÖ
+
+parseerrorerror 
+__wakeupparseerror::__wakeup 
+gettraceparseerror::gettrace
+getlineparseerror::getline$
+
+__tostringparseerror::__tostring&
+__constructparseerror::__construct&
+getpreviousparseerror::getprevious$
+
+getmessageparseerror::getmessage0
+gettraceasstringparseerror::gettraceasstring
+getfileparseerror::getfile
+getcodeparseerror::getcodeÿ
+pharrecursivedirectoryiterator,
+buildfromiteratorphar::buildfromiterator
+loadpharphar::loadphar
+gettypephar::gettype
+webpharphar::webphar"
+setinfoclassphar::setinfoclass
+
+iswritablephar::iswritable$
+addfromstringphar::addfromstring 
+__constructphar::__construct
+
+getsubpathphar::getsubpath
+getinodephar::getinode$
+unlinkarchivephar::unlinkarchive
+addfilephar::addfile
+islinkphar::islink
+getctimephar::getctime
+
+decompressphar::decompress
+
+mungserverphar::mungserver$
+_bad_state_exphar::_bad_state_ex0
+isvalidpharfilenamephar::isvalidpharfilename
+isfilephar::isfile
+getstubphar::getstub$
+getlinktargetphar::getlinktarget&
+startbufferingphar::startbuffering&
+setdefaultstubphar::setdefaultstub 
+getpathnamephar::getpathname
+isdotphar::isdot
+compressphar::compress 
+getmetadataphar::getmetadata
+getgroupphar::getgroup
+countphar::count
+getownerphar::getowner$
+compressfilesphar::compressfiles
+mountphar::mount$
+stopbufferingphar::stopbuffering
+
+__destructphar::__destruct
+getmtimephar::getmtime 
+getfileinfophar::getfileinfo 
+getpathinfophar::getpathinfo.
+buildfromdirectoryphar::buildfromdirectory
+openfilephar::openfile 
+offsetunsetphar::offsetunset
+
+isreadablephar::isreadable"
+iscompressedphar::iscompressed"
+isfileformatphar::isfileformat 
+getchildrenphar::getchildren$
+converttodataphar::converttodata
+next
+phar::next
+	offsetgetphar::offsetget
+getflagsphar::getflags
+getsizephar::getsize,
+createdefaultstubphar::createdefaultstub(
+decompressfilesphar::decompressfiles 
+cancompressphar::cancompress
+canwritephar::canwrite"
+isexecutablephar::isexecutable
+
+getversionphar::getversion
+seek
+phar::seek
+	offsetsetphar::offsetset 
+isbufferingphar::isbuffering
+deletephar::delete
+setstubphar::setstub
+validphar::valid
+runningphar::running 
+getmodifiedphar::getmodified
+getaliasphar::getalias&
+getsubpathnamephar::getsubpathname"
+getextensionphar::getextension
+	extracttophar::extractto4
+setsignaturealgorithmphar::setsignaturealgorithm
+currentphar::current"
+setfileclassphar::setfileclass
+setaliasphar::setalias
+getpermsphar::getperms"
+offsetexistsphar::offsetexists"
+getsignaturephar::getsignature
+setflagsphar::setflags
+copy
+phar::copy 
+getbasenamephar::getbasename
+key	phar::key
+isdirphar::isdir 
+getrealpathphar::getrealpath 
+delmetadataphar::delmetadata0
+converttoexecutablephar::converttoexecutable6
+getsupportedsignaturesphar::getsupportedsignatures
+mappharphar::mapphar
+getpathphar::getpath 
+getfilenamephar::getfilename
+
+apiversionphar::apiversion 
+addemptydirphar::addemptydir 
+hasmetadataphar::hasmetadata8
+getsupportedcompressionphar::getsupportedcompression 
+setmetadataphar::setmetadata
+rewindphar::rewind.
+interceptfilefuncsphar::interceptfilefuncs
+getatimephar::getatime
+
+__tostringphar::__tostring 
+haschildrenphar::haschildren‹
+phardatarecursivedirectoryiterator0
+buildfromiteratorphardata::buildfromiterator
+loadpharphardata::loadphar
+gettypephardata::gettype
+webpharphardata::webphar&
+setinfoclassphardata::setinfoclass"
+
+iswritablephardata::iswritable(
+addfromstringphardata::addfromstring$
+__constructphardata::__construct"
+
+getsubpathphardata::getsubpath
+getinodephardata::getinode(
+unlinkarchivephardata::unlinkarchive
+addfilephardata::addfile
+islinkphardata::islink
+getctimephardata::getctime"
+
+decompressphardata::decompress"
+
+mungserverphardata::mungserver(
+_bad_state_exphardata::_bad_state_ex4
+isvalidpharfilenamephardata::isvalidpharfilename
+isfilephardata::isfile
+getstubphardata::getstub(
+getlinktargetphardata::getlinktarget*
+startbufferingphardata::startbuffering*
+setdefaultstubphardata::setdefaultstub$
+getpathnamephardata::getpathname
+isdotphardata::isdot
+compressphardata::compress$
+getmetadataphardata::getmetadata
+getgroupphardata::getgroup
+countphardata::count
+getownerphardata::getowner(
+compressfilesphardata::compressfiles
+mountphardata::mount(
+stopbufferingphardata::stopbuffering"
+
+__destructphardata::__destruct
+getmtimephardata::getmtime$
+getfileinfophardata::getfileinfo$
+getpathinfophardata::getpathinfo2
+buildfromdirectoryphardata::buildfromdirectory
+openfilephardata::openfile$
+offsetunsetphardata::offsetunset"
+
+isreadablephardata::isreadable&
+iscompressedphardata::iscompressed&
+isfileformatphardata::isfileformat$
+getchildrenphardata::getchildren(
+converttodataphardata::converttodata
+nextphardata::next 
+	offsetgetphardata::offsetget
+getflagsphardata::getflags
+getsizephardata::getsize0
+createdefaultstubphardata::createdefaultstub,
+decompressfilesphardata::decompressfiles$
+cancompressphardata::cancompress
+canwritephardata::canwrite&
+isexecutablephardata::isexecutable"
+
+getversionphardata::getversion
+seekphardata::seek 
+	offsetsetphardata::offsetset$
+isbufferingphardata::isbuffering
+deletephardata::delete
+setstubphardata::setstub
+validphardata::valid
+runningphardata::running$
+getmodifiedphardata::getmodified
+getaliasphardata::getalias*
+getsubpathnamephardata::getsubpathname&
+getextensionphardata::getextension 
+	extracttophardata::extractto8
+setsignaturealgorithmphardata::setsignaturealgorithm
+currentphardata::current&
+setfileclassphardata::setfileclass
+setaliasphardata::setalias
+getpermsphardata::getperms&
+offsetexistsphardata::offsetexists&
+getsignaturephardata::getsignature
+setflagsphardata::setflags
+copyphardata::copy$
+getbasenamephardata::getbasename
+keyphardata::key
+isdirphardata::isdir$
+getrealpathphardata::getrealpath$
+delmetadataphardata::delmetadata4
+converttoexecutablephardata::converttoexecutable:
+getsupportedsignatures phardata::getsupportedsignatures
+mappharphardata::mapphar
+getpathphardata::getpath$
+getfilenamephardata::getfilename"
+
+apiversionphardata::apiversion$
+addemptydirphardata::addemptydir$
+hasmetadataphardata::hasmetadata<
+getsupportedcompression!phardata::getsupportedcompression$
+setmetadataphardata::setmetadata
+rewindphardata::rewind2
+interceptfilefuncsphardata::interceptfilefuncs
+getatimephardata::getatime"
+
+__tostringphardata::__tostring$
+haschildrenphardata::haschildren™
+pharexception	exception#
+__wakeuppharexception::__wakeup#
+gettracepharexception::gettrace!
+getlinepharexception::getline'
+
+__tostringpharexception::__tostring)
+__constructpharexception::__construct)
+getpreviouspharexception::getprevious'
+
+getmessagepharexception::getmessage3
+gettraceasstringpharexception::gettraceasstring!
+getfilepharexception::getfile!
+getcodepharexception::getcodeÈ
+pharfileinfosplfileinfo 
+gettypepharfileinfo::gettype 
+getsizepharfileinfo::getsize*
+setinfoclasspharfileinfo::setinfoclass&
+
+iswritablepharfileinfo::iswritable*
+isexecutablepharfileinfo::isexecutable(
+__constructpharfileinfo::__construct"
+getinodepharfileinfo::getinode
+islinkpharfileinfo::islink"
+getctimepharfileinfo::getctime*
+getextensionpharfileinfo::getextension*
+getpharflagspharfileinfo::getpharflags*
+setfileclasspharfileinfo::setfileclass&
+
+decompresspharfileinfo::decompress"
+getcrc32pharfileinfo::getcrc32,
+_bad_state_expharfileinfo::_bad_state_ex
+isfilepharfileinfo::isfile"
+getpermspharfileinfo::getperms,
+getlinktargetpharfileinfo::getlinktarget(
+getpathnamepharfileinfo::getpathname
+chmodpharfileinfo::chmod(
+getbasenamepharfileinfo::getbasename
+isdirpharfileinfo::isdir(
+getrealpathpharfileinfo::getrealpath(
+delmetadatapharfileinfo::delmetadata"
+compresspharfileinfo::compress(
+getmetadatapharfileinfo::getmetadata"
+getgrouppharfileinfo::getgroup&
+
+getcontentpharfileinfo::getcontent 
+getpathpharfileinfo::getpath"
+getownerpharfileinfo::getowner(
+getfilenamepharfileinfo::getfilename(
+hasmetadatapharfileinfo::hasmetadata&
+
+__destructpharfileinfo::__destruct*
+iscrccheckedpharfileinfo::iscrcchecked"
+getmtimepharfileinfo::getmtime(
+getfileinfopharfileinfo::getfileinfo(
+setmetadatapharfileinfo::setmetadata(
+getpathinfopharfileinfo::getpathinfo"
+openfilepharfileinfo::openfile"
+getatimepharfileinfo::getatime&
+
+isreadablepharfileinfo::isreadable4
+getcompressedsizepharfileinfo::getcompressedsize*
+iscompressedpharfileinfo::iscompressed&
+
+__tostringpharfileinfo::__tostringº
+rangeexceptionruntimeexception$
+__wakeuprangeexception::__wakeup$
+gettracerangeexception::gettrace"
+getlinerangeexception::getline(
+
+__tostringrangeexception::__tostring*
+__constructrangeexception::__construct*
+getpreviousrangeexception::getprevious(
+
+getmessagerangeexception::getmessage4
+gettraceasstring rangeexception::gettraceasstring"
+getfilerangeexception::getfile"
+getcoderangeexception::getcode«	
+recursivearrayiteratorarrayiterator$
+nextrecursivearrayiterator::next.
+	offsetget!recursivearrayiterator::offsetget2
+natcasesort#recursivearrayiterator::natcasesort,
+getflags recursivearrayiterator::getflags2
+unserialize#recursivearrayiterator::unserialize2
+__construct#recursivearrayiterator::__construct$
+seekrecursivearrayiterator::seek.
+	offsetset!recursivearrayiterator::offsetset&
+validrecursivearrayiterator::valid&
+ksortrecursivearrayiterator::ksort*
+currentrecursivearrayiterator::current(
+uasortrecursivearrayiterator::uasort4
+offsetexists$recursivearrayiterator::offsetexists,
+setflags recursivearrayiterator::setflags"
+keyrecursivearrayiterator::key&
+countrecursivearrayiterator::count4
+getarraycopy$recursivearrayiterator::getarraycopy.
+	serialize!recursivearrayiterator::serialize*
+natsortrecursivearrayiterator::natsort&
+asortrecursivearrayiterator::asort(
+uksortrecursivearrayiterator::uksort(
+rewindrecursivearrayiterator::rewind2
+offsetunset#recursivearrayiterator::offsetunset2
+haschildren#recursivearrayiterator::haschildren(
+appendrecursivearrayiterator::append2
+getchildren#recursivearrayiterator::getchildrenÕ
+recursivecachingiteratorcachingiterator&
+nextrecursivecachingiterator::next0
+	offsetget#recursivecachingiterator::offsetget.
+getflags"recursivecachingiterator::getflags(
+countrecursivecachingiterator::count>
+getinneriterator*recursivecachingiterator::getinneriterator4
+__construct%recursivecachingiterator::__construct0
+	offsetset#recursivecachingiterator::offsetset.
+getcache"recursivecachingiterator::getcache(
+validrecursivecachingiterator::valid,
+current!recursivecachingiterator::current*
+rewind recursivecachingiterator::rewind4
+offsetunset%recursivecachingiterator::offsetunset6
+offsetexists&recursivecachingiterator::offsetexists.
+setflags"recursivecachingiterator::setflags,
+hasnext!recursivecachingiterator::hasnext2
+
+__tostring$recursivecachingiterator::__tostring4
+haschildren%recursivecachingiterator::haschildren$
+keyrecursivecachingiterator::key4
+getchildren%recursivecachingiterator::getchildrenﬂ
+recursivecallbackfilteriteratorcallbackfilteriterator/
+valid&recursivecallbackfilteriterator::valid-
+next%recursivecallbackfilteriterator::next3
+current(recursivecallbackfilteriterator::current1
+rewind'recursivecallbackfilteriterator::rewindE
+getinneriterator1recursivecallbackfilteriterator::getinneriterator;
+__construct,recursivecallbackfilteriterator::__construct;
+haschildren,recursivecallbackfilteriterator::haschildren+
+key$recursivecallbackfilteriterator::key;
+getchildren,recursivecallbackfilteriterator::getchildren1
+accept'recursivecallbackfilteriterator::accept‹
+recursivedirectoryiteratorfilesystemiterator(
+next recursivedirectoryiterator::next0
+getflags$recursivedirectoryiterator::getflags.
+gettype#recursivedirectoryiterator::gettype.
+getsize#recursivedirectoryiterator::getsize8
+setinfoclass(recursivedirectoryiterator::setinfoclass4
+
+iswritable&recursivedirectoryiterator::iswritable8
+isexecutable(recursivedirectoryiterator::isexecutable6
+__construct'recursivedirectoryiterator::__construct(
+seek recursivedirectoryiterator::seek4
+
+getsubpath&recursivedirectoryiterator::getsubpath0
+getinode$recursivedirectoryiterator::getinode*
+valid!recursivedirectoryiterator::valid,
+islink"recursivedirectoryiterator::islink0
+getctime$recursivedirectoryiterator::getctime<
+getsubpathname*recursivedirectoryiterator::getsubpathname8
+getextension(recursivedirectoryiterator::getextension.
+current#recursivedirectoryiterator::current8
+setfileclass(recursivedirectoryiterator::setfileclass:
+_bad_state_ex)recursivedirectoryiterator::_bad_state_ex,
+isfile"recursivedirectoryiterator::isfile0
+getperms$recursivedirectoryiterator::getperms:
+getlinktarget)recursivedirectoryiterator::getlinktarget6
+getpathname'recursivedirectoryiterator::getpathname0
+setflags$recursivedirectoryiterator::setflags6
+getbasename'recursivedirectoryiterator::getbasename&
+keyrecursivedirectoryiterator::key*
+isdir!recursivedirectoryiterator::isdir6
+getrealpath'recursivedirectoryiterator::getrealpath*
+isdot!recursivedirectoryiterator::isdot0
+getgroup$recursivedirectoryiterator::getgroup.
+getpath#recursivedirectoryiterator::getpath0
+getowner$recursivedirectoryiterator::getowner6
+getfilename'recursivedirectoryiterator::getfilename0
+getmtime$recursivedirectoryiterator::getmtime6
+getfileinfo'recursivedirectoryiterator::getfileinfo,
+rewind"recursivedirectoryiterator::rewind6
+getpathinfo'recursivedirectoryiterator::getpathinfo0
+openfile$recursivedirectoryiterator::openfile0
+getatime$recursivedirectoryiterator::getatime4
+
+isreadable&recursivedirectoryiterator::isreadable4
+
+__tostring&recursivedirectoryiterator::__tostring6
+haschildren'recursivedirectoryiterator::haschildren6
+getchildren'recursivedirectoryiterator::getchildrenˇ
+recursivefilteriteratorfilteriterator'
+validrecursivefilteriterator::valid%
+nextrecursivefilteriterator::next+
+current recursivefilteriterator::current)
+rewindrecursivefilteriterator::rewind=
+getinneriterator)recursivefilteriterator::getinneriterator3
+__construct$recursivefilteriterator::__construct3
+haschildren$recursivefilteriterator::haschildren#
+keyrecursivefilteriterator::key3
+getchildren$recursivefilteriterator::getchildren)
+acceptrecursivefilteriterator::accept„
+recursiveiteratoriterator'
+nextrecursiveiteratoriterator::next5
+getmaxdepth&recursiveiteratoriterator::getmaxdepth;
+beginiteration)recursiveiteratoriterator::beginiteration?
+getinneriterator+recursiveiteratoriterator::getinneriterator5
+setmaxdepth&recursiveiteratoriterator::setmaxdepth5
+__construct&recursiveiteratoriterator::__construct)
+valid recursiveiteratoriterator::valid;
+getsubiterator)recursiveiteratoriterator::getsubiterator=
+callgetchildren*recursiveiteratoriterator::callgetchildren7
+enditeration'recursiveiteratoriterator::enditeration-
+current"recursiveiteratoriterator::current+
+rewind!recursiveiteratoriterator::rewind5
+nextelement&recursiveiteratoriterator::nextelement5
+endchildren&recursiveiteratoriterator::endchildren=
+callhaschildren*recursiveiteratoriterator::callhaschildren/
+getdepth#recursiveiteratoriterator::getdepth9
+beginchildren(recursiveiteratoriterator::beginchildren%
+keyrecursiveiteratoriterator::key¡
+recursiveregexiteratorregexiterator$
+nextrecursiveregexiterator::next,
+getflags recursiveregexiterator::getflags,
+getregex recursiveregexiterator::getregex*
+getmoderecursiveregexiterator::getmode<
+getinneriterator(recursiveregexiterator::getinneriterator2
+__construct#recursiveregexiterator::__construct4
+setpregflags$recursiveregexiterator::setpregflags(
+acceptrecursiveregexiterator::accept&
+validrecursiveregexiterator::valid*
+currentrecursiveregexiterator::current(
+rewindrecursiveregexiterator::rewind4
+getpregflags$recursiveregexiterator::getpregflags,
+setflags recursiveregexiterator::setflags2
+haschildren#recursiveregexiterator::haschildren*
+setmoderecursiveregexiterator::setmode"
+keyrecursiveregexiterator::key2
+getchildren#recursiveregexiterator::getchildrenß	
+recursivetreeiteratorrecursiveiteratoriterator#
+nextrecursivetreeiterator::next/
+
+setpostfix!recursivetreeiterator::setpostfix1
+getmaxdepth"recursivetreeiterator::getmaxdepth7
+beginiteration%recursivetreeiterator::beginiteration;
+getinneriterator'recursivetreeiterator::getinneriterator1
+setmaxdepth"recursivetreeiterator::setmaxdepth1
+__construct"recursivetreeiterator::__construct-
+	getprefix recursivetreeiterator::getprefix%
+validrecursivetreeiterator::valid7
+getsubiterator%recursivetreeiterator::getsubiterator9
+callgetchildren&recursivetreeiterator::callgetchildren3
+enditeration#recursivetreeiterator::enditeration)
+currentrecursivetreeiterator::current'
+rewindrecursivetreeiterator::rewind1
+nextelement"recursivetreeiterator::nextelement1
+endchildren"recursivetreeiterator::endchildren5
+setprefixpart$recursivetreeiterator::setprefixpart9
+callhaschildren&recursivetreeiterator::callhaschildren/
+
+getpostfix!recursivetreeiterator::getpostfix+
+getdepthrecursivetreeiterator::getdepth5
+beginchildren$recursivetreeiterator::beginchildren!
+keyrecursivetreeiterator::key+
+getentryrecursivetreeiterator::getentry\
+
+reflection0
+getmodifiernamesreflection::getmodifiernames
+exportreflection::exportç
+reflectionclass?
+getreflectionconstant&reflectionclass::getreflectionconstant+
+__constructreflectionclass::__construct+
+isinterfacereflectionclass::isinterface+
+newinstancereflectionclass::newinstance=
+getdefaultproperties%reflectionclass::getdefaultproperties)
+
+getmethodsreflectionclass::getmethods/
+getinterfacesreflectionclass::getinterfaces+
+hasconstantreflectionclass::hasconstant!
+exportreflectionclass::export/
+isuserdefinedreflectionclass::isuserdefined+
+haspropertyreflectionclass::hasproperty+
+innamespacereflectionclass::innamespace'
+	hasmethodreflectionclass::hasmethodA
+getstaticpropertyvalue'reflectionclass::getstaticpropertyvalue3
+newinstanceargs reflectionclass::newinstanceargsA
+getreflectionconstants'reflectionclass::getreflectionconstants1
+isinstantiablereflectionclass::isinstantiable7
+getinterfacenames"reflectionclass::getinterfacenames/
+getpropertiesreflectionclass::getproperties5
+getnamespacename!reflectionclass::getnamespacename/
+isiterateablereflectionclass::isiterateable)
+
+isinternalreflectionclass::isinternal-
+issubclassofreflectionclass::issubclassof+
+iscloneablereflectionclass::iscloneable)
+
+isinstancereflectionclass::isinstance/
+gettraitnamesreflectionclass::gettraitnames-
+getmodifiersreflectionclass::getmodifiers5
+getextensionname!reflectionclass::getextensionname'
+	getmethodreflectionclass::getmethod-
+getextensionreflectionclass::getextension-
+getshortnamereflectionclass::getshortname-
+getstartlinereflectionclass::getstartline1
+getconstructorreflectionclass::getconstructor+
+isanonymousreflectionclass::isanonymous1
+getparentclassreflectionclass::getparentclass+
+getconstantreflectionclass::getconstant'
+	gettraitsreflectionclass::gettraits+
+getpropertyreflectionclass::getproperty#
+istraitreflectionclass::istrait+
+getfilenamereflectionclass::getfilename)
+
+isabstractreflectionclass::isabstract)
+
+getendlinereflectionclass::getendline3
+gettraitaliases reflectionclass::gettraitaliases#
+getnamereflectionclass::getnameO
+newinstancewithoutconstructor.reflectionclass::newinstancewithoutconstructor#
+isfinalreflectionclass::isfinal-
+getconstantsreflectionclass::getconstants/
+getdoccommentreflectionclass::getdoccommentA
+setstaticpropertyvalue'reflectionclass::setstaticpropertyvalue)
+
+__tostringreflectionclass::__tostring;
+implementsinterface$reflectionclass::implementsinterface;
+getstaticproperties$reflectionclass::getstaticpropertiesŒ
+reflectionclassconstant/
+	isprivate"reflectionclassconstant::isprivate+
+getname reflectionclassconstant::getname3
+isprotected$reflectionclassconstant::isprotected?
+getdeclaringclass*reflectionclassconstant::getdeclaringclass-
+ispublic!reflectionclassconstant::ispublic-
+getvalue!reflectionclassconstant::getvalue7
+getdoccomment&reflectionclassconstant::getdoccomment1
+
+__tostring#reflectionclassconstant::__tostring3
+__construct$reflectionclassconstant::__construct5
+getmodifiers%reflectionclassconstant::getmodifiers)
+exportreflectionclassconstant::exportÏ
+reflectionexception	exception)
+__wakeupreflectionexception::__wakeup)
+gettracereflectionexception::gettrace'
+getlinereflectionexception::getline-
+
+__tostringreflectionexception::__tostring/
+__construct reflectionexception::__construct/
+getprevious reflectionexception::getprevious-
+
+getmessagereflectionexception::getmessage9
+gettraceasstring%reflectionexception::gettraceasstring'
+getfilereflectionexception::getfile'
+getcodereflectionexception::getcode≥
+reflectionextension1
+ispersistent!reflectionextension::ispersistent-
+
+getclassesreflectionextension::getclasses3
+getclassnames"reflectionextension::getclassnames-
+
+getversionreflectionextension::getversion/
+__construct reflectionextension::__construct'
+getnamereflectionextension::getname3
+getinientries"reflectionextension::getinientries7
+getdependencies$reflectionextension::getdependencies1
+getconstants!reflectionextension::getconstants-
+
+__tostringreflectionextension::__tostring/
+istemporary reflectionextension::istemporary%
+exportreflectionextension::export!
+inforeflectionextension::info1
+getfunctions!reflectionextension::getfunctionsö
+reflectionfunctionreflectionfunctionabstract2
+getparameters!reflectionfunction::getparameters8
+returnsreference$reflectionfunction::returnsreference$
+invokereflectionfunction::invoke.
+isgeneratorreflectionfunction::isgenerator.
+__constructreflectionfunction::__construct2
+hasreturntype!reflectionfunction::hasreturntype*
+	isclosurereflectionfunction::isclosure8
+getextensionname$reflectionfunction::getextensionname0
+isdeprecated reflectionfunction::isdeprecated0
+getextension reflectionfunction::getextension0
+getshortname reflectionfunction::getshortname0
+getstartline reflectionfunction::getstartline$
+exportreflectionfunction::export,
+
+getclosurereflectionfunction::getclosure2
+isuserdefined!reflectionfunction::isuserdefinedR
+getnumberofrequiredparameters1reflectionfunction::getnumberofrequiredparameters,
+
+isdisabledreflectionfunction::isdisabled.
+innamespacereflectionfunction::innamespace.
+getfilenamereflectionfunction::getfilename,
+
+isvariadicreflectionfunction::isvariadic,
+
+getendlinereflectionfunction::getendline,
+
+invokeargsreflectionfunction::invokeargs&
+getnamereflectionfunction::getname4
+getclosurethis"reflectionfunction::getclosurethis2
+getreturntype!reflectionfunction::getreturntype8
+getnamespacename$reflectionfunction::getnamespacename2
+getdoccomment!reflectionfunction::getdoccomment,
+
+isinternalreflectionfunction::isinternalB
+getnumberofparameters)reflectionfunction::getnumberofparameters,
+
+__tostringreflectionfunction::__tostring<
+getstaticvariables&reflectionfunction::getstaticvariables@
+getclosurescopeclass(reflectionfunction::getclosurescopeclass˛
+reflectionfunctionabstract:
+getparameters)reflectionfunctionabstract::getparameters@
+returnsreference,reflectionfunctionabstract::returnsreference6
+isgenerator'reflectionfunctionabstract::isgenerator:
+hasreturntype)reflectionfunctionabstract::hasreturntype2
+	isclosure%reflectionfunctionabstract::isclosure@
+getextensionname,reflectionfunctionabstract::getextensionname8
+isdeprecated(reflectionfunctionabstract::isdeprecated8
+getextension(reflectionfunctionabstract::getextension8
+getshortname(reflectionfunctionabstract::getshortname8
+getstartline(reflectionfunctionabstract::getstartline,
+export"reflectionfunctionabstract::export:
+isuserdefined)reflectionfunctionabstract::isuserdefinedZ
+getnumberofrequiredparameters9reflectionfunctionabstract::getnumberofrequiredparameters6
+innamespace'reflectionfunctionabstract::innamespace6
+getfilename'reflectionfunctionabstract::getfilename4
+
+isvariadic&reflectionfunctionabstract::isvariadic4
+
+getendline&reflectionfunctionabstract::getendline.
+getname#reflectionfunctionabstract::getname<
+getclosurethis*reflectionfunctionabstract::getclosurethis:
+getreturntype)reflectionfunctionabstract::getreturntype@
+getnamespacename,reflectionfunctionabstract::getnamespacename:
+getdoccomment)reflectionfunctionabstract::getdoccomment4
+
+isinternal&reflectionfunctionabstract::isinternalJ
+getnumberofparameters1reflectionfunctionabstract::getnumberofparameters4
+
+__tostring&reflectionfunctionabstract::__tostringD
+getstaticvariables.reflectionfunctionabstract::getstaticvariablesH
+getclosurescopeclass0reflectionfunctionabstract::getclosurescopeclassÜ
+reflectiongenerator'
+getthisreflectiongenerator::getthis/
+getfunction reflectiongenerator::getfunctionC
+getexecutinggenerator*reflectiongenerator::getexecutinggenerator)
+gettracereflectiongenerator::gettrace9
+getexecutingline%reflectiongenerator::getexecutingline/
+__construct reflectiongenerator::__construct9
+getexecutingfile%reflectiongenerator::getexecutingfile‘
+reflectionmethodreflectionfunctionabstract,
+isprotectedreflectionmethod::isprotected.
+getprototypereflectionmethod::getprototype0
+getparametersreflectionmethod::getparameters6
+returnsreference"reflectionmethod::returnsreference.
+isdestructorreflectionmethod::isdestructor"
+invokereflectionmethod::invoke,
+isgeneratorreflectionmethod::isgenerator,
+__constructreflectionmethod::__construct&
+isstaticreflectionmethod::isstatic0
+isconstructorreflectionmethod::isconstructor0
+hasreturntypereflectionmethod::hasreturntype.
+getmodifiersreflectionmethod::getmodifiers(
+	isclosurereflectionmethod::isclosure6
+getextensionname"reflectionmethod::getextensionname.
+isdeprecatedreflectionmethod::isdeprecated.
+getextensionreflectionmethod::getextension0
+setaccessiblereflectionmethod::setaccessible.
+getshortnamereflectionmethod::getshortname8
+getdeclaringclass#reflectionmethod::getdeclaringclass&
+ispublicreflectionmethod::ispublic.
+getstartlinereflectionmethod::getstartline"
+exportreflectionmethod::export*
+
+getclosurereflectionmethod::getclosure0
+isuserdefinedreflectionmethod::isuserdefined(
+	isprivatereflectionmethod::isprivateP
+getnumberofrequiredparameters/reflectionmethod::getnumberofrequiredparameters,
+innamespacereflectionmethod::innamespace,
+getfilenamereflectionmethod::getfilename*
+
+isvariadicreflectionmethod::isvariadic*
+
+isabstractreflectionmethod::isabstract*
+
+getendlinereflectionmethod::getendline*
+
+invokeargsreflectionmethod::invokeargs$
+getnamereflectionmethod::getname2
+getclosurethis reflectionmethod::getclosurethis0
+getreturntypereflectionmethod::getreturntype$
+isfinalreflectionmethod::isfinal6
+getnamespacename"reflectionmethod::getnamespacename0
+getdoccommentreflectionmethod::getdoccomment*
+
+isinternalreflectionmethod::isinternal@
+getnumberofparameters'reflectionmethod::getnumberofparameters*
+
+__tostringreflectionmethod::__tostring:
+getstaticvariables$reflectionmethod::getstaticvariables>
+getclosurescopeclass&reflectionmethod::getclosurescopeclassŸ
+reflectionnamedtypereflectiontype'
+getnamereflectionnamedtype::getname+
+	isbuiltinreflectionnamedtype::isbuiltin-
+
+__tostringreflectionnamedtype::__tostring-
+
+allowsnullreflectionnamedtype::allowsnull”
+reflectionobjectreflectionclass@
+getreflectionconstant'reflectionobject::getreflectionconstant,
+__constructreflectionobject::__construct,
+isinterfacereflectionobject::isinterface,
+newinstancereflectionobject::newinstance>
+getdefaultproperties&reflectionobject::getdefaultproperties*
+
+getmethodsreflectionobject::getmethods0
+getinterfacesreflectionobject::getinterfaces,
+hasconstantreflectionobject::hasconstant"
+exportreflectionobject::export0
+isuserdefinedreflectionobject::isuserdefined,
+haspropertyreflectionobject::hasproperty,
+innamespacereflectionobject::innamespace(
+	hasmethodreflectionobject::hasmethodB
+getstaticpropertyvalue(reflectionobject::getstaticpropertyvalue4
+newinstanceargs!reflectionobject::newinstanceargsB
+getreflectionconstants(reflectionobject::getreflectionconstants2
+isinstantiable reflectionobject::isinstantiable8
+getinterfacenames#reflectionobject::getinterfacenames0
+getpropertiesreflectionobject::getproperties6
+getnamespacename"reflectionobject::getnamespacename0
+isiterateablereflectionobject::isiterateable*
+
+isinternalreflectionobject::isinternal.
+issubclassofreflectionobject::issubclassof,
+iscloneablereflectionobject::iscloneable*
+
+isinstancereflectionobject::isinstance0
+gettraitnamesreflectionobject::gettraitnames.
+getmodifiersreflectionobject::getmodifiers6
+getextensionname"reflectionobject::getextensionname(
+	getmethodreflectionobject::getmethod.
+getextensionreflectionobject::getextension.
+getshortnamereflectionobject::getshortname.
+getstartlinereflectionobject::getstartline2
+getconstructor reflectionobject::getconstructor,
+isanonymousreflectionobject::isanonymous2
+getparentclass reflectionobject::getparentclass,
+getconstantreflectionobject::getconstant(
+	gettraitsreflectionobject::gettraits,
+getpropertyreflectionobject::getproperty$
+istraitreflectionobject::istrait,
+getfilenamereflectionobject::getfilename*
+
+isabstractreflectionobject::isabstract*
+
+getendlinereflectionobject::getendline4
+gettraitaliases!reflectionobject::gettraitaliases$
+getnamereflectionobject::getnameP
+newinstancewithoutconstructor/reflectionobject::newinstancewithoutconstructor$
+isfinalreflectionobject::isfinal.
+getconstantsreflectionobject::getconstants0
+getdoccommentreflectionobject::getdoccommentB
+setstaticpropertyvalue(reflectionobject::setstaticpropertyvalue*
+
+__tostringreflectionobject::__tostring<
+implementsinterface%reflectionobject::implementsinterface<
+getstaticproperties%reflectionobject::getstaticpropertiesÚ
+reflectionparameter'
+gettypereflectionparameter::gettype)
+getclassreflectionparameter::getclass7
+getdefaultvalue$reflectionparameter::getdefaultvalue-
+
+isvariadicreflectionparameter::isvariadic/
+__construct reflectionparameter::__construct-
+
+isoptionalreflectionparameter::isoptional'
+hastypereflectionparameter::hastype/
+getposition reflectionparameter::getposition-
+
+allowsnullreflectionparameter::allowsnull'
+getnamereflectionparameter::getnameO
+getdefaultvalueconstantname0reflectionparameter::getdefaultvalueconstantname;
+getdeclaringclass&reflectionparameter::getdeclaringclassG
+isdefaultvalueavailable,reflectionparameter::isdefaultvalueavailable'
+isarrayreflectionparameter::isarray=
+canbepassedbyvalue'reflectionparameter::canbepassedbyvalue-
+
+iscallablereflectionparameter::iscallable-
+
+__tostringreflectionparameter::__tostring?
+ispassedbyreference(reflectionparameter::ispassedbyreference%
+exportreflectionparameter::exportE
+isdefaultvalueconstant+reflectionparameter::isdefaultvalueconstantA
+getdeclaringfunction)reflectionparameter::getdeclaringfunction∆
+reflectionproperty*
+	isprivatereflectionproperty::isprivate.
+isprotectedreflectionproperty::isprotected.
+__constructreflectionproperty::__construct(
+isstaticreflectionproperty::isstatic0
+getmodifiers reflectionproperty::getmodifiers&
+getnamereflectionproperty::getname2
+setaccessible!reflectionproperty::setaccessible(
+setvaluereflectionproperty::setvalue:
+getdeclaringclass%reflectionproperty::getdeclaringclass(
+ispublicreflectionproperty::ispublic(
+getvaluereflectionproperty::getvalue2
+getdoccomment!reflectionproperty::getdoccomment*
+	isdefaultreflectionproperty::isdefault,
+
+__tostringreflectionproperty::__tostring$
+exportreflectionproperty::exportå
+reflectiontype&
+	isbuiltinreflectiontype::isbuiltin(
+
+__tostringreflectiontype::__tostring(
+
+allowsnullreflectiontype::allowsnullü
+reflectionzendextension+
+getname reflectionzendextension::getname)
+geturlreflectionzendextension::geturl5
+getcopyright%reflectionzendextension::getcopyright1
+
+getversion#reflectionzendextension::getversion1
+
+__tostring#reflectionzendextension::__tostring3
+__construct$reflectionzendextension::__construct)
+exportreflectionzendextension::export/
+	getauthor"reflectionzendextension::getauthor 
+regexiteratorfilteriterator
+nextregexiterator::next#
+getflagsregexiterator::getflags#
+getregexregexiterator::getregex!
+getmoderegexiterator::getmode3
+getinneriteratorregexiterator::getinneriterator)
+__constructregexiterator::__construct+
+setpregflagsregexiterator::setpregflags
+acceptregexiterator::accept
+validregexiterator::valid!
+currentregexiterator::current
+rewindregexiterator::rewind+
+getpregflagsregexiterator::getpregflags#
+setflagsregexiterator::setflags!
+setmoderegexiterator::setmode
+keyregexiterator::keyÀ
+runtimeexception	exception&
+__wakeupruntimeexception::__wakeup&
+gettraceruntimeexception::gettrace$
+getlineruntimeexception::getline*
+
+__tostringruntimeexception::__tostring,
+__constructruntimeexception::__construct,
+getpreviousruntimeexception::getprevious*
+
+getmessageruntimeexception::getmessage6
+gettraceasstring"runtimeexception::gettraceasstring$
+getfileruntimeexception::getfile$
+getcoderuntimeexception::getcodeÍ
+snmp
+set	snmp::set
+geterrnosnmp::geterrno
+geterrorsnmp::geterror
+get	snmp::get 
+setsecuritysnmp::setsecurity
+getnextsnmp::getnext 
+__constructsnmp::__construct
+closesnmp::close
+walk
+snmp::walk±
+snmpexceptionruntimeexception#
+__wakeupsnmpexception::__wakeup#
+gettracesnmpexception::gettrace!
+getlinesnmpexception::getline'
+
+__tostringsnmpexception::__tostring)
+__constructsnmpexception::__construct)
+getprevioussnmpexception::getprevious'
+
+getmessagesnmpexception::getmessage3
+gettraceasstringsnmpexception::gettraceasstring!
+getfilesnmpexception::getfile!
+getcodesnmpexception::getcodeœ
+sqlite3
+preparesqlite3::prepare+
+createcollationsqlite3::createcollation#
+querysinglesqlite3::querysingle)
+createfunctionsqlite3::createfunction
+querysqlite3::query%
+escapestringsqlite3::escapestring
+changessqlite3::changes+
+createaggregatesqlite3::createaggregate#
+__constructsqlite3::__construct
+versionsqlite3::version#
+busytimeoutsqlite3::busytimeout
+openblobsqlite3::openblob'
+lasterrorcodesqlite3::lasterrorcode'
+loadextensionsqlite3::loadextension-
+enableexceptionssqlite3::enableexceptions
+closesqlite3::close
+opensqlite3::open+
+lastinsertrowidsqlite3::lastinsertrowid
+execsqlite3::exec%
+lasterrormsgsqlite3::lasterrormsg˜
+sqlite3result'
+
+numcolumnssqlite3result::numcolumns'
+
+fetcharraysqlite3result::fetcharray
+resetsqlite3result::reset#
+finalizesqlite3result::finalize'
+
+columnnamesqlite3result::columnname'
+
+columntypesqlite3result::columntypeô
+sqlite3stmt!
+readonlysqlite3stmt::readonly
+clearsqlite3stmt::clear#
+	bindvaluesqlite3stmt::bindvalue#
+	bindparamsqlite3stmt::bindparam
+resetsqlite3stmt::reset%
+
+paramcountsqlite3stmt::paramcount
+executesqlite3stmt::execute
+closesqlite3stmt::closeÙ
+sessionhandler
+readsessionhandler::read"
+destroysessionhandler::destroy(
+
+create_sidsessionhandler::create_sid
+gcsessionhandler::gc
+writesessionhandler::write
+closesessionhandler::close
+opensessionhandler::open¯
+simplexmlelement.
+addattributesimplexmlelement::addattribute 
+countsimplexmlelement::count 
+asxmlsimplexmlelement::asxml,
+__constructsimplexmlelement::__construct$
+getnamesimplexmlelement::getname 
+xpathsimplexmlelement::xpath&
+addchildsimplexmlelement::addchild6
+getdocnamespaces"simplexmlelement::getdocnamespaces&
+childrensimplexmlelement::children0
+getnamespacessimplexmlelement::getnamespacesB
+registerxpathnamespace(simplexmlelement::registerxpathnamespace*
+
+attributessimplexmlelement::attributes$
+savexmlsimplexmlelement::savexml*
+
+__tostringsimplexmlelement::__tostring¶
+simplexmliteratorsimplexmlelement
+nextsimplexmliterator::next/
+addattributesimplexmliterator::addattribute!
+countsimplexmliterator::count!
+asxmlsimplexmliterator::asxml-
+__constructsimplexmliterator::__construct!
+validsimplexmliterator::valid%
+getnamesimplexmliterator::getname!
+xpathsimplexmliterator::xpath%
+currentsimplexmliterator::current'
+addchildsimplexmliterator::addchild#
+rewindsimplexmliterator::rewind7
+getdocnamespaces#simplexmliterator::getdocnamespaces'
+childrensimplexmliterator::children1
+getnamespaces simplexmliterator::getnamespacesC
+registerxpathnamespace)simplexmliterator::registerxpathnamespace+
+
+attributessimplexmliterator::attributes%
+savexmlsimplexmliterator::savexml+
+
+__tostringsimplexmliterator::__tostring-
+haschildrensimplexmliterator::haschildren
+keysimplexmliterator::key-
+getchildrensimplexmliterator::getchildrenä
+
+soapclient&
+__setcookiesoapclient::__setcookie$
+
+__gettypessoapclient::__gettypes,
+__getfunctionssoapclient::__getfunctions*
+__setlocationsoapclient::__setlocation&
+__dorequestsoapclient::__dorequest>
+__getlastrequestheaders#soapclient::__getlastrequestheaders2
+__getlastresponsesoapclient::__getlastresponse0
+__setsoapheaderssoapclient::__setsoapheaders$
+
+__soapcallsoapclient::__soapcall(
+__getcookiessoapclient::__getcookies
+__callsoapclient::__call@
+__getlastresponseheaders$soapclient::__getlastresponseheaders0
+__getlastrequestsoapclient::__getlastrequest$
+
+soapclientsoapclient::soapclient°
+	soapfault	exception!
+	soapfaultsoapfault::soapfault
+__wakeupsoapfault::__wakeup
+gettracesoapfault::gettrace
+getlinesoapfault::getline#
+
+__tostringsoapfault::__tostring%
+__constructsoapfault::__construct%
+getprevioussoapfault::getprevious#
+
+getmessagesoapfault::getmessage/
+gettraceasstringsoapfault::gettraceasstring
+getfilesoapfault::getfile
+getcodesoapfault::getcode2
+
+soapheader$
+
+soapheadersoapheader::soapheader.
+	soapparam!
+	soapparamsoapparam::soapparamﬁ
+
+soapserver 
+setclasssoapserver::setclass*
+addsoapheadersoapserver::addsoapheader,
+setpersistencesoapserver::setpersistence$
+
+soapserversoapserver::soapserver"
+	setobjectsoapserver::setobject
+faultsoapserver::fault
+handlesoapserver::handle&
+addfunctionsoapserver::addfunction(
+getfunctionssoapserver::getfunctions&
+soapvar
+soapvarsoapvar::soapvar»
+spldoublylinkedlist!
+nextspldoublylinkedlist::next
+addspldoublylinkedlist::add+
+	offsetgetspldoublylinkedlist::offsetget/
+unserialize spldoublylinkedlist::unserialize%
+bottomspldoublylinkedlist::bottom#
+shiftspldoublylinkedlist::shift!
+prevspldoublylinkedlist::prev7
+getiteratormode$spldoublylinkedlist::getiteratormode#
+countspldoublylinkedlist::count+
+	offsetsetspldoublylinkedlist::offsetset'
+isemptyspldoublylinkedlist::isempty!
+pushspldoublylinkedlist::push#
+validspldoublylinkedlist::valid
+popspldoublylinkedlist::pop+
+	serializespldoublylinkedlist::serialize'
+currentspldoublylinkedlist::current
+topspldoublylinkedlist::top%
+rewindspldoublylinkedlist::rewind/
+offsetunset spldoublylinkedlist::offsetunset1
+offsetexists!spldoublylinkedlist::offsetexists'
+unshiftspldoublylinkedlist::unshift7
+setiteratormode$spldoublylinkedlist::setiteratormode
+keyspldoublylinkedlist::key˝
+splfileinfo
+gettypesplfileinfo::gettype
+getsizesplfileinfo::getsize)
+setinfoclasssplfileinfo::setinfoclass%
+
+iswritablesplfileinfo::iswritable)
+isexecutablesplfileinfo::isexecutable'
+__constructsplfileinfo::__construct!
+getinodesplfileinfo::getinode
+islinksplfileinfo::islink!
+getctimesplfileinfo::getctime)
+getextensionsplfileinfo::getextension)
+setfileclasssplfileinfo::setfileclass+
+_bad_state_exsplfileinfo::_bad_state_ex
+isfilesplfileinfo::isfile!
+getpermssplfileinfo::getperms+
+getlinktargetsplfileinfo::getlinktarget'
+getpathnamesplfileinfo::getpathname'
+getbasenamesplfileinfo::getbasename
+isdirsplfileinfo::isdir'
+getrealpathsplfileinfo::getrealpath!
+getgroupsplfileinfo::getgroup
+getpathsplfileinfo::getpath!
+getownersplfileinfo::getowner'
+getfilenamesplfileinfo::getfilename!
+getmtimesplfileinfo::getmtime'
+getfileinfosplfileinfo::getfileinfo'
+getpathinfosplfileinfo::getpathinfo!
+openfilesplfileinfo::openfile!
+getatimesplfileinfo::getatime%
+
+isreadablesplfileinfo::isreadable%
+
+__tostringsplfileinfo::__tostringô
+splfileobjectsplfileinfo
+fflushsplfileobject::fflush!
+gettypesplfileobject::gettype+
+setinfoclasssplfileobject::setinfoclass'
+
+iswritablesplfileobject::iswritable)
+__constructsplfileobject::__construct
+fseeksplfileobject::fseek#
+getinodesplfileobject::getinode
+fgetssplfileobject::fgets
+islinksplfileobject::islink#
+getctimesplfileobject::getctime!
+fgetcsvsplfileobject::fgetcsv-
+_bad_state_exsplfileobject::_bad_state_ex
+isfilesplfileobject::isfile-
+getlinktargetsplfileobject::getlinktarget)
+getpathnamesplfileobject::getpathname/
+getcurrentlinesplfileobject::getcurrentline#
+getgroupsplfileobject::getgroup#
+getownersplfileobject::getowner-
+getmaxlinelensplfileobject::getmaxlinelen
+freadsplfileobject::fread#
+getmtimesplfileobject::getmtime)
+getfileinfosplfileobject::getfileinfo)
+getpathinfosplfileobject::getpathinfo#
+openfilesplfileobject::openfile'
+
+isreadablesplfileobject::isreadable)
+getchildrensplfileobject::getchildren-
+setcsvcontrolsplfileobject::setcsvcontrol
+nextsplfileobject::next-
+setmaxlinelensplfileobject::setmaxlinelen#
+getflagssplfileobject::getflags
+flocksplfileobject::flock!
+getsizesplfileobject::getsize
+ftellsplfileobject::ftell+
+isexecutablesplfileobject::isexecutable
+seeksplfileobject::seek
+validsplfileobject::valid+
+getextensionsplfileobject::getextension!
+currentsplfileobject::current+
+setfileclasssplfileobject::setfileclass#
+getpermssplfileobject::getperms#
+setflagssplfileobject::setflags)
+getbasenamesplfileobject::getbasename
+keysplfileobject::key
+isdirsplfileobject::isdir)
+getrealpathsplfileobject::getrealpath%
+	fpassthrusplfileobject::fpassthru!
+getpathsplfileobject::getpath)
+getfilenamesplfileobject::getfilename
+fwritesplfileobject::fwrite
+fstatsplfileobject::fstat
+fscanfsplfileobject::fscanf
+rewindsplfileobject::rewind#
+getatimesplfileobject::getatime-
+getcsvcontrolsplfileobject::getcsvcontrol
+fgetsssplfileobject::fgetss%
+	ftruncatesplfileobject::ftruncate'
+
+__tostringsplfileobject::__tostring!
+fputcsvsplfileobject::fputcsv)
+haschildrensplfileobject::haschildren
+eofsplfileobject::eof
+fgetcsplfileobject::fgetcœ
+splfixedarray
+nextsplfixedarray::next%
+	offsetgetsplfixedarray::offsetget!
+getsizesplfixedarray::getsize%
+	fromarraysplfixedarray::fromarray#
+__wakeupsplfixedarray::__wakeup
+countsplfixedarray::count)
+__constructsplfixedarray::__construct%
+	offsetsetsplfixedarray::offsetset
+validsplfixedarray::valid!
+currentsplfixedarray::current
+rewindsplfixedarray::rewind)
+offsetunsetsplfixedarray::offsetunset!
+toarraysplfixedarray::toarray+
+offsetexistssplfixedarray::offsetexists!
+setsizesplfixedarray::setsize
+keysplfixedarray::keyÁ
+splheap
+validsplheap::valid
+nextsplheap::next
+currentsplheap::current
+extractsplheap::extract
+topsplheap::top
+rewindsplheap::rewind7
+recoverfromcorruptionsplheap::recoverfromcorruption
+countsplheap::count
+insertsplheap::insert#
+iscorruptedsplheap::iscorrupted
+isemptysplheap::isempty
+keysplheap::keyó
+
+splmaxheapsplheap
+validsplmaxheap::valid
+nextsplmaxheap::next
+currentsplmaxheap::current
+extractsplmaxheap::extract
+topsplmaxheap::top
+rewindsplmaxheap::rewind:
+recoverfromcorruption!splmaxheap::recoverfromcorruption
+countsplmaxheap::count
+insertsplmaxheap::insert&
+iscorruptedsplmaxheap::iscorrupted
+isemptysplmaxheap::isempty
+keysplmaxheap::keyó
+
+splminheapsplheap
+validsplminheap::valid
+nextsplminheap::next
+currentsplminheap::current
+extractsplminheap::extract
+topsplminheap::top
+rewindsplminheap::rewind:
+recoverfromcorruption!splminheap::recoverfromcorruption
+countsplminheap::count
+insertsplminheap::insert&
+iscorruptedsplminheap::iscorrupted
+isemptysplminheap::isempty
+keysplminheap::keyŒ
+splobjectstorage
+nextsplobjectstorage::next(
+	offsetgetsplobjectstorage::offsetget,
+unserializesplobjectstorage::unserialize 
+countsplobjectstorage::count$
+setinfosplobjectstorage::setinfo$
+gethashsplobjectstorage::gethash$
+getinfosplobjectstorage::getinfo4
+removeallexcept!splobjectstorage::removeallexcept(
+	offsetsetsplobjectstorage::offsetset 
+validsplobjectstorage::valid(
+	serializesplobjectstorage::serialize(
+	removeallsplobjectstorage::removeall$
+currentsplobjectstorage::current&
+containssplobjectstorage::contains"
+rewindsplobjectstorage::rewind,
+offsetunsetsplobjectstorage::offsetunset"
+addallsplobjectstorage::addall.
+offsetexistssplobjectstorage::offsetexists"
+detachsplobjectstorage::detach"
+attachsplobjectstorage::attach
+keysplobjectstorage::keyÓ
+splpriorityqueue
+nextsplpriorityqueue::next$
+comparesplpriorityqueue::compare@
+recoverfromcorruption'splpriorityqueue::recoverfromcorruption 
+countsplpriorityqueue::count"
+insertsplpriorityqueue::insert$
+isemptysplpriorityqueue::isempty 
+validsplpriorityqueue::valid4
+getextractflags!splpriorityqueue::getextractflags$
+currentsplpriorityqueue::current$
+extractsplpriorityqueue::extract
+topsplpriorityqueue::top"
+rewindsplpriorityqueue::rewind,
+iscorruptedsplpriorityqueue::iscorrupted
+keysplpriorityqueue::key4
+setextractflags!splpriorityqueue::setextractflagsë
+splqueuespldoublylinkedlist
+nextsplqueue::next
+addsplqueue::add 
+	offsetgetsplqueue::offsetget$
+unserializesplqueue::unserialize
+bottomsplqueue::bottom
+shiftsplqueue::shift
+prevsplqueue::prev,
+getiteratormodesplqueue::getiteratormode
+dequeuesplqueue::dequeue
+countsplqueue::count 
+	offsetsetsplqueue::offsetset
+isemptysplqueue::isempty
+pushsplqueue::push
+validsplqueue::valid
+popsplqueue::pop 
+	serializesplqueue::serialize
+enqueuesplqueue::enqueue
+currentsplqueue::current
+topsplqueue::top
+rewindsplqueue::rewind$
+offsetunsetsplqueue::offsetunset&
+offsetexistssplqueue::offsetexists
+unshiftsplqueue::unshift,
+setiteratormodesplqueue::setiteratormode
+keysplqueue::key’
+splstackspldoublylinkedlist
+nextsplstack::next
+addsplstack::add 
+	offsetgetsplstack::offsetget$
+unserializesplstack::unserialize
+bottomsplstack::bottom
+shiftsplstack::shift
+prevsplstack::prev,
+getiteratormodesplstack::getiteratormode
+countsplstack::count 
+	offsetsetsplstack::offsetset
+isemptysplstack::isempty
+pushsplstack::push
+validsplstack::valid
+popsplstack::pop 
+	serializesplstack::serialize
+currentsplstack::current
+topsplstack::top
+rewindsplstack::rewind$
+offsetunsetsplstack::offsetunset&
+offsetexistssplstack::offsetexists
+unshiftsplstack::unshift,
+setiteratormodesplstack::setiteratormode
+keysplstack::keyì
+spltempfileobjectsplfileobject#
+fflushspltempfileobject::fflush%
+gettypespltempfileobject::gettype/
+setinfoclassspltempfileobject::setinfoclass+
+
+iswritablespltempfileobject::iswritable-
+__constructspltempfileobject::__construct!
+fseekspltempfileobject::fseek'
+getinodespltempfileobject::getinode!
+fgetsspltempfileobject::fgets#
+islinkspltempfileobject::islink'
+getctimespltempfileobject::getctime%
+fgetcsvspltempfileobject::fgetcsv1
+_bad_state_ex spltempfileobject::_bad_state_ex#
+isfilespltempfileobject::isfile1
+getlinktarget spltempfileobject::getlinktarget-
+getpathnamespltempfileobject::getpathname3
+getcurrentline!spltempfileobject::getcurrentline'
+getgroupspltempfileobject::getgroup'
+getownerspltempfileobject::getowner1
+getmaxlinelen spltempfileobject::getmaxlinelen!
+freadspltempfileobject::fread'
+getmtimespltempfileobject::getmtime-
+getfileinfospltempfileobject::getfileinfo-
+getpathinfospltempfileobject::getpathinfo'
+openfilespltempfileobject::openfile+
+
+isreadablespltempfileobject::isreadable-
+getchildrenspltempfileobject::getchildren1
+setcsvcontrol spltempfileobject::setcsvcontrol
+nextspltempfileobject::next1
+setmaxlinelen spltempfileobject::setmaxlinelen'
+getflagsspltempfileobject::getflags!
+flockspltempfileobject::flock%
+getsizespltempfileobject::getsize!
+ftellspltempfileobject::ftell/
+isexecutablespltempfileobject::isexecutable
+seekspltempfileobject::seek!
+validspltempfileobject::valid/
+getextensionspltempfileobject::getextension%
+currentspltempfileobject::current/
+setfileclassspltempfileobject::setfileclass'
+getpermsspltempfileobject::getperms'
+setflagsspltempfileobject::setflags-
+getbasenamespltempfileobject::getbasename
+keyspltempfileobject::key!
+isdirspltempfileobject::isdir-
+getrealpathspltempfileobject::getrealpath)
+	fpassthruspltempfileobject::fpassthru%
+getpathspltempfileobject::getpath-
+getfilenamespltempfileobject::getfilename#
+fwritespltempfileobject::fwrite!
+fstatspltempfileobject::fstat#
+fscanfspltempfileobject::fscanf#
+rewindspltempfileobject::rewind'
+getatimespltempfileobject::getatime1
+getcsvcontrol spltempfileobject::getcsvcontrol#
+fgetssspltempfileobject::fgetss)
+	ftruncatespltempfileobject::ftruncate+
+
+__tostringspltempfileobject::__tostring%
+fputcsvspltempfileobject::fputcsv-
+haschildrenspltempfileobject::haschildren
+eofspltempfileobject::eof!
+fgetcspltempfileobject::fgetc˙
+	typeerrorerror
+__wakeuptypeerror::__wakeup
+gettracetypeerror::gettrace
+getlinetypeerror::getline#
+
+__tostringtypeerror::__tostring%
+__constructtypeerror::__construct%
+getprevioustypeerror::getprevious#
+
+getmessagetypeerror::getmessage/
+gettraceasstringtypeerror::gettraceasstring
+getfiletypeerror::getfile
+getcodetypeerror::getcodeË
+underflowexceptionruntimeexception(
+__wakeupunderflowexception::__wakeup(
+gettraceunderflowexception::gettrace&
+getlineunderflowexception::getline,
+
+__tostringunderflowexception::__tostring.
+__constructunderflowexception::__construct.
+getpreviousunderflowexception::getprevious,
+
+getmessageunderflowexception::getmessage8
+gettraceasstring$underflowexception::gettraceasstring&
+getfileunderflowexception::getfile&
+getcodeunderflowexception::getcode™
+unexpectedvalueexceptionruntimeexception.
+__wakeup"unexpectedvalueexception::__wakeup.
+gettrace"unexpectedvalueexception::gettrace,
+getline!unexpectedvalueexception::getline2
+
+__tostring$unexpectedvalueexception::__tostring4
+__construct%unexpectedvalueexception::__construct4
+getprevious%unexpectedvalueexception::getprevious2
+
+getmessage$unexpectedvalueexception::getmessage>
+gettraceasstring*unexpectedvalueexception::gettraceasstring,
+getfile!unexpectedvalueexception::getfile,
+getcode!unexpectedvalueexception::getcodeî
+	xmlreader
+nextxmlreader::next-
+movetoattributexmlreader::movetoattribute
+readxmlreader::read'
+getattributexmlreader::getattribute/
+setrelaxngschemaxmlreader::setrelaxngschema'
+readouterxmlxmlreader::readouterxml
+isvalidxmlreader::isvalid!
+	setschemaxmlreader::setschema)
+movetoelementxmlreader::movetoelement#
+
+readstringxmlreader::readstring7
+movetofirstattributexmlreader::movetofirstattribute1
+movetoattributenoxmlreader::movetoattributeno
+expandxmlreader::expand+
+getattributenoxmlreader::getattributeno-
+lookupnamespacexmlreader::lookupnamespace1
+movetoattributensxmlreader::movetoattributens
+xmlxmlreader::xml1
+setparserpropertyxmlreader::setparserproperty5
+movetonextattributexmlreader::movetonextattribute1
+getparserpropertyxmlreader::getparserproperty
+closexmlreader::close
+openxmlreader::open;
+setrelaxngschemasource!xmlreader::setrelaxngschemasource'
+readinnerxmlxmlreader::readinnerxml+
+getattributensxmlreader::getattributensÉ
+	xmlwriter+
+writedtdentityxmlwriter::writedtdentity'
+outputmemoryxmlwriter::outputmemory+
+writeelementnsxmlwriter::writeelementns-
+writedtdelementxmlwriter::writedtdelement#
+
+openmemoryxmlwriter::openmemory#
+
+startcdataxmlwriter::startcdata#
+
+writecdataxmlwriter::writecdata+
+startattributexmlwriter::startattribute
+startdtdxmlwriter::startdtd)
+enddtdattlistxmlwriter::enddtdattlist
+enddtdxmlwriter::enddtd
+writepixmlwriter::writepi-
+startdtdattlistxmlwriter::startdtdattlist'
+startcommentxmlwriter::startcomment
+flushxmlwriter::flush/
+writeattributensxmlwriter::writeattributens
+endpixmlwriter::endpi
+openurixmlwriter::openuri%
+enddocumentxmlwriter::enddocument
+writerawxmlwriter::writeraw#
+
+endcommentxmlwriter::endcomment
+endcdataxmlwriter::endcdata+
+startelementnsxmlwriter::startelementns
+textxmlwriter::text!
+	setindentxmlwriter::setindent
+writedtdxmlwriter::writedtd/
+startattributensxmlwriter::startattributens)
+enddtdelementxmlwriter::enddtdelement'
+enddtdentityxmlwriter::enddtdentity'
+writecommentxmlwriter::writecomment+
+startdtdentityxmlwriter::startdtdentity)
+startdocumentxmlwriter::startdocument+
+writeattributexmlwriter::writeattribute-
+writedtdattlistxmlwriter::writedtdattlist
+startpixmlwriter::startpi'
+endattributexmlwriter::endattribute-
+setindentstringxmlwriter::setindentstring-
+startdtdelementxmlwriter::startdtdelement+
+fullendelementxmlwriter::fullendelement#
+
+endelementxmlwriter::endelement'
+writeelementxmlwriter::writeelement'
+startelementxmlwriter::startelementÎ
+xsltprocessor3
+importstylesheetxsltprocessor::importstylesheet3
+setsecurityprefsxsltprocessor::setsecurityprefs;
+registerphpfunctions#xsltprocessor::registerphpfunctions+
+setprofilingxsltprocessor::setprofiling1
+hasexsltsupportxsltprocessor::hasexsltsupport+
+getparameterxsltprocessor::getparameter+
+setparameterxsltprocessor::setparameter/
+transformtourixsltprocessor::transformtouri1
+removeparameterxsltprocessor::removeparameter3
+getsecurityprefsxsltprocessor::getsecurityprefs/
+transformtoxmlxsltprocessor::transformtoxml/
+transformtodocxsltprocessor::transformtodocÙ
+
+ziparchive6
+setcompressionindexziparchive::setcompressionindex(
+getnameindexziparchive::getnameindexB
+getexternalattributesname%ziparchive::getexternalattributesname2
+getarchivecommentziparchive::getarchivecomment(
+getfromindexziparchive::getfromindex*
+addfromstringziparchive::addfromstring 
+statnameziparchive::statname*
+unchangeindexziparchive::unchangeindexB
+setexternalattributesname%ziparchive::setexternalattributesname
+addglobziparchive::addglob,
+getcommentnameziparchive::getcommentname.
+getstatusstringziparchive::getstatusstring$
+
+deletenameziparchive::deletename
+addfileziparchive::addfile&
+getfromnameziparchive::getfromname"
+	statindexziparchive::statindex"
+	getstreamziparchive::getstream"
+	extracttoziparchive::extractto$
+
+addpatternziparchive::addpattern.
+setcommentindexziparchive::setcommentindex2
+setarchivecommentziparchive::setarchivecomment
+closeziparchive::close&
+unchangeallziparchive::unchangeallD
+setexternalattributesindex&ziparchive::setexternalattributesindex&
+addemptydirziparchive::addemptydir&
+deleteindexziparchive::deleteindexD
+getexternalattributesindex&ziparchive::getexternalattributesindex.
+unchangearchiveziparchive::unchangearchive$
+
+locatenameziparchive::locatename&
+renameindexziparchive::renameindex4
+setcompressionnameziparchive::setcompressionname.
+getcommentindexziparchive::getcommentindex,
+setcommentnameziparchive::setcommentname(
+unchangenameziparchive::unchangename&
+setpasswordziparchive::setpassword$
+
+renamenameziparchive::renamename
+openziparchive::open
+__php_incomplete_classk
+finfo
+filefinfo::file
+	set_flagsfinfo::set_flags
+finfofinfo::finfo
+bufferfinfo::bufferÃ
+mysqli0
+real_escape_stringmysqli::real_escape_string
+preparemysqli::prepare
+set_optmysqli::set_opt$
+real_connectmysqli::real_connect
+pingmysqli::ping
+commitmysqli::commit,
+reap_async_querymysqli::reap_async_query
+pollmysqli::poll
+	stmt_initmysqli::stmt_init"
+__constructmysqli::__construct*
+get_client_infomysqli::get_client_info"
+multi_querymysqli::multi_query 
+
+autocommitmysqli::autocommit
+	savepointmysqli::savepoint 
+
+real_querymysqli::real_query0
+character_set_namemysqli::character_set_name*
+get_server_infomysqli::get_server_info
+optionsmysqli::options
+	select_dbmysqli::select_db"
+change_usermysqli::change_user
+closemysqli::close
+connectmysqli::connect&
+escape_stringmysqli::escape_string
+rollbackmysqli::rollback
+initmysqli::init
+statmysqli::stat
+debugmysqli::debug.
+begin_transactionmysqli::begin_transaction
+ssl_setmysqli::ssl_set
+querymysqli::query
+refreshmysqli::refresh.
+release_savepointmysqli::release_savepoint
+killmysqli::kill$
+store_resultmysqli::store_result$
+get_warningsmysqli::get_warnings"
+next_resultmysqli::next_result4
+get_connection_statsmysqli::get_connection_stats 
+
+use_resultmysqli::use_result$
+more_resultsmysqli::more_results"
+thread_safemysqli::thread_safe"
+set_charsetmysqli::set_charset*
+dump_debug_infomysqli::dump_debug_info"
+get_charsetmysqli::get_charset
+mysqli_driver”
+mysqli_result)
+__constructmysqli_result::__construct+
+fetch_fieldsmysqli_result::fetch_fields+
+fetch_objectmysqli_result::fetch_object)
+fetch_assocmysqli_result::fetch_assoc%
+	fetch_rowmysqli_result::fetch_row)
+fetch_arraymysqli_result::fetch_array7
+fetch_field_direct!mysqli_result::fetch_field_direct)
+free_resultmysqli_result::free_result)
+fetch_fieldmysqli_result::fetch_field%
+	data_seekmysqli_result::data_seek
+freemysqli_result::free'
+
+field_seekmysqli_result::field_seek
+closemysqli_result::close%
+	fetch_allmysqli_result::fetch_all˛
+mysqli_sql_exceptionruntimeexception*
+__wakeupmysqli_sql_exception::__wakeup*
+gettracemysqli_sql_exception::gettrace(
+getlinemysqli_sql_exception::getline.
+
+__tostring mysqli_sql_exception::__tostring0
+__construct!mysqli_sql_exception::__construct0
+getprevious!mysqli_sql_exception::getprevious.
+
+getmessage mysqli_sql_exception::getmessage:
+gettraceasstring&mysqli_sql_exception::gettraceasstring(
+getfilemysqli_sql_exception::getfile(
+getcodemysqli_sql_exception::getcodeá
+mysqli_stmt
+preparemysqli_stmt::prepare!
+attr_getmysqli_stmt::attr_get/
+result_metadatamysqli_stmt::result_metadata-
+send_long_datamysqli_stmt::send_long_data'
+__constructmysqli_stmt::__construct
+executemysqli_stmt::execute)
+store_resultmysqli_stmt::store_result)
+get_warningsmysqli_stmt::get_warnings'
+next_resultmysqli_stmt::next_result%
+
+get_resultmysqli_stmt::get_result)
+more_resultsmysqli_stmt::more_results'
+free_resultmysqli_stmt::free_result
+fetchmysqli_stmt::fetch!
+num_rowsmysqli_stmt::num_rows%
+
+bind_parammysqli_stmt::bind_param
+resetmysqli_stmt::reset'
+bind_resultmysqli_stmt::bind_result#
+	data_seekmysqli_stmt::data_seek
+closemysqli_stmt::close!
+attr_setmysqli_stmt::attr_set.
+mysqli_warning
+nextmysqli_warning::nextÄ
+php_user_filter!
+filterphp_user_filter::filter#
+onclosephp_user_filter::onclose%
+oncreatephp_user_filter::oncreate
+
+stdclassú
+tidy"
+repairstringtidy::repairstring
+
+gethtmlvertidy::gethtmlver
+
+getreleasetidy::getrelease
+	getoptdoctidy::getoptdoc
+	getstatustidy::getstatus 
+parsestringtidy::parsestring
+	getconfigtidy::getconfig
+	parsefiletidy::parsefile
+body
+tidy::body 
+__constructtidy::__construct
+isxhtmltidy::isxhtml 
+cleanrepairtidy::cleanrepair
+isxmltidy::isxml
+head
+tidy::head
+getopttidy::getopt
+root
+tidy::root
+diagnosetidy::diagnose
+html
+tidy::html
+
+repairfiletidy::repairfile¢
+tidynode
+istexttidynode::istext
+isphptidynode::isphp$
+hassiblingstidynode::hassiblings
+isjstetidynode::isjste
+ishtmltidynode::ishtml
+isasptidynode::isasp 
+	iscommenttidynode::iscomment$
+haschildrentidynode::haschildren 
+	getparenttidynode::getparent
+yii
+appyii::appi
+yii1.1\capplication-
+
+getrequestyii1.1\capplication::getrequest#
+getdbyii1.1\capplication::getdbL
+yii1.1\cdbconnection4
+createcommand#yii1.1\cdbconnection::createcommand¿
+yii1.1\cdbcommand%
+settextyii1.1\cdbcommand::settext'
+andwhereyii1.1\cdbcommand::andwhere#
+havingyii1.1\cdbcommand::having)
+	rightjoinyii1.1\cdbcommand::rightjoin'
+leftjoinyii1.1\cdbcommand::leftjoin1
+getconnection yii1.1\cdbcommand::getconnection!
+resetyii1.1\cdbcommand::reset!
+whereyii1.1\cdbcommand::where!
+unionyii1.1\cdbcommand::union
+joinyii1.1\cdbcommand::join%
+orwhereyii1.1\cdbcommand::orwhereD
+jfactory
+getdbojfactory::getdbo
+getuserjfactory::getuserb
+joomla\cms\factory$
+getdbojoomla\cms\factory::getdbo&
+getuserjoomla\cms\factory::getuserH
+joomla3\jdatabasedriver-
+getquery!joomla3\jdatabasedriver::getquery^
+joomla\input\inputH
+getinputforrequestmethod,joomla\input\input::getinputforrequestmethod:
+defaultcontroller%
+defaultdefaultcontroller::default:
+examplecontroller%
+exampleexamplecontroller::example¨
+memberscontroller3
+saveallmembers!memberscontroller::saveallmembers/
+memberupdatememberscontroller::memberupdate1
+sethtmlheader memberscontroller::sethtmlheader¶
+taskscontroller)
+
+taskinserttaskscontroller::taskinsert
+savetaskscontroller::save
+showtaskscontroller::show)
+
+taskupdatetaskscontroller::taskupdate#
+refreshtaskscontroller::refresh/
+sethtmlheadertaskscontroller::sethtmlheader)
+
+taskdeletetaskscontroller::taskdelete0
+examplemodel 
+getdataexamplemodel::getdata»
+membersmodel.
+saveallmembersmembersmodel::saveallmembers:
+deleteinvalidmembers"membersmodel::deleteinvalidmembers>
+saveallmembersfromjson$membersmodel::saveallmembersfromjson,
+setlastupdatemembersmodel::setlastupdate4
+updatememberadminmembersmodel::updatememberadmin(
+__constructmembersmodel::__construct
+taskÑ
+
+tasksmodel
+deltasktasksmodel::deltask$
+
+updatetasktasksmodel::updatetask6
+savealltaskfromjsontasksmodel::savealltaskfromjson"
+	nochangedtasksmodel::nochanged0
+contentnotchangetasksmodel::contentnotchange
+savetasksmodel::save6
+selftaskstatechangetasksmodel::selftaskstatechange$
+
+pickuptasktasksmodel::pickuptask 
+gettaskstasksmodel::gettasks
+refreshtasksmodel::refresh>
+accesrightnewtaskupdate#tasksmodel::accesrightnewtaskupdate8
+publicenablednewtask tasksmodel::publicenablednewtask 
+findtasktasksmodel::findtask&
+__constructtasksmodel::__construct(
+loadoldtaskstasksmodel::loadoldtasks*
+dodeletedtasktasksmodel::dodeletedtask 
+ismembertasksmodel::ismember
+newtasktasksmodel::newtask*
+setlastupdatetasksmodel::setlastupdate.
+checktaskactiontasksmodel::checktaskaction0
+savechecknoadmintasksmodel::savechecknoadmin.
+exampleview
+exampleexampleview::example$
+	tasksview
+showtasksview::show

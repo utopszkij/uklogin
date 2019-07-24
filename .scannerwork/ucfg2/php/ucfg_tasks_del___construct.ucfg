@@ -1,0 +1,54 @@
+
+tasksmodel::__construct
+models/tasks.php ("1*C
+2
+	tasks.php"1
+
+models/tasks.php, ,(
+implicit return*Ì	
+1
+models/tasks.php ()'
+
+models/tasks.php (
+$db"db>
+<
+
+models/tasks.php (
+%1"db::__construct*
+
+$db’
+
+models/tasks.php %(
+
+%2*
+
+$db*ÖÓ
+Ð'
+        CREATE TABLE IF NOT EXISTS tasks (
+                `id` int(11) unsigned NOT NULL,
+                `title` varchar(128) NOT NULL DEFAULT "" COMMENT "task shoer title",
+                `desc` text NOT NULL COMMENT "task description",
+                `req` varchar(128) NOT NULL DEFAULT "" COMMENT "list of taskIDs",
+                `assign` varchar(128) NOT NULL DEFAULT "" COMMENT "user avatar url",
+                `type` varchar(16) NOT NULL DEFAULT "" COMMENT "bug|question|suggest|other",
+                `state` varchar(16) NOT NULL DEFAULT "waiting" COMMENT "waiting|atstart|inworking|...",
+                `project_id` varchar(128) NOT NULL DEFAULT "" COMMENT "project id ",
+                KEY `idx_project` (`project_id`),
+                KEY `idx_type` (`type`),
+                KEY `idx_assign` (`assign`)
+          )
+        '2	statement¥¢
+
+models/tasks.php& *(
+
+%3*
+
+$db*jh
+f'
+        CREATE TABLE IF NOT EXISTS lastupdate (
+                `time` int(11)
+          )
+        '2	statement*
+2B
+
+tasksmodel

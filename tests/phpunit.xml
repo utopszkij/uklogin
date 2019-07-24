@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="phpunit.xsd">
+    
+	 <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../models</directory>
+            <directory suffix=".php">../views</directory>
+            <directory suffix=".php">../controllers</directory>
+        </whitelist>
+    </filter>    
+    
+	<logging>
+	  <log type="coverage-clover" target="../tests/coverage-reports/phpunit-clover.xml"/>
+	  <log type="junit" target="../tests/coverage-reports/phpunit-junit.xml"/>
+	</logging>  
+	  
+</phpunit>
