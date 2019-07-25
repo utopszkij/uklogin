@@ -8,14 +8,20 @@ class AppregistView  extends CommonView  {
 	*/
 	public function form($p) {
 	    echo htmlHead();
-        ?>	
+	    
+	    ?>
         <body ng-app="app">
-         <?php $this->echoNavbar($p); ?>
+	    <?php $this->echoNavbar($p); ?>
         <div ng-controller="ctrl" id="scope" style="display:none" class="appRegist">
             <?php if ($p->client_id == '') : ?>
                 <h2><?php echo txt('NEWAPP'); ?></h2>
             <?php else : ?>
-                <h2>client_id:&nbsp;<?php echo $p->client_id; ?></h2>
+            	<p style="text-align:right">
+            		<button type="button" id="logout">
+            			<em class="fa fa-sign-out"></em><?php echo txt('LOGOUT') ?>
+            		</button>
+            	</p> 
+            	<h2>client_id:&nbsp;<?php echo $p->client_id; ?></h2>
                 <h3>client_secret:&nbsp;<?php echo $p->client_secret; ?></h2>
             <?php endif; ?>
             <div class="alert alert-warning" role="alert">
@@ -41,7 +47,7 @@ class AppregistView  extends CommonView  {
     			<input type="hidden" name="client_id" id="client_id" value="{{client_id}}" />
     			<?php if ($p->client_id != '') : ?>
                 <fieldset class="userActivation">
-                	<h2><?php echo txt('USERACTIVATION'); ?></h2>
+                	<legend><?php echo txt('USERACTIVATION'); ?></legend>
                 	<p>
                 		<label><?php echo txt('USER'); ?></label>
                 		<input type="text" name="user" id="user" value="" size="32" />
@@ -50,7 +56,7 @@ class AppregistView  extends CommonView  {
                 </fieldset>
     			<?php endif; ?>
     			<fieldset class="appDatas">
-    				<h2><?php echo txt('LBL_APPDATAS'); ?></h2>
+    				<legend><?php echo txt('LBL_APPDATAS'); ?></legend>
     				<p>
     					<label><?php echo txt('LBL_TITLE'); ?></label>
     					<input type="text" name="name" id="name"value="{{name}}" size="100" class="appName" />
@@ -76,7 +82,7 @@ class AppregistView  extends CommonView  {
     				</p>
     			</fieldset>
     			<fieldset class="appAdmin">
-    				<h2><?php echo txt('LBL_APPADMIN'); ?></h2>
+    				<legend><?php echo txt('LBL_APPADMIN'); ?></legend>
     				<p>
     					<label><?php echo txt('LBL_ADMIN'); ?></label>
     					<input type="text" name="admin" id="admin" value="{{admin}}" size="32" 
@@ -112,14 +118,19 @@ class AppregistView  extends CommonView  {
     			</p>
     			<p class="formButtons">
     				<button type="button" id="formAppOk" class="btn btn-primary">
+    					<em class="fa fa-check-square"></em>
     					<?php echo txt('OK'); ?></button>&nbsp;
     				<button type="button" id="formAppOk" class="btn btn-secondary" 
     					onclick="location='<?php  echo MYDOMAIN; ?>';">
+    					<em class="fa fa-arrow-left"></em>
     					<?php echo txt('CANCEL'); ?></button>&nbsp;
     					
     				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    				<?php if ($p->client_id != '') : ?>
     				<button type="button" id="formAppRemove" class="btn btn-danger">
+    					<em class="fa fa-ban"></em>
     					<?php echo txt('APPREMOVE'); ?></button>&nbsp;
+    				<?php endif; ?>	
     			</p>
     		</form>
         	<?php echo htmlPopup(); ?>
@@ -130,6 +141,46 @@ class AppregistView  extends CommonView  {
         </body>
         </html>
         <?php 		
+	}
+	
+	/**
+	 * echo succes message after add new app
+	 * @param object $res {client_id, client_secret
+	 * @return void;}
+	 */
+	public function successMsg($res) {
+	    echo htmlHead();
+	    ?>
+        <body ng-app="app">
+	    <?php $this->echoNavbar($res); ?>
+	    <div class="savedMsg">
+	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
+	    	<p>Client_id: <?php echo $res->client_id; ?></p>
+	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
+	    </div>
+		<?php $this->echoFooter(); ?>
+        </body>
+        </html>
+	    <?php 
+	}
+	
+	/**
+	 * echo fatal error in app save
+	 * @return void
+	 */
+	public function errorMsg() {
+	    echo htmlHead();
+	    $p = new stdClass();
+	    ?>
+        <body ng-app="app">
+	    <?php $this->echoNavbar($p); ?>
+	    <div class="savedMsg">
+	    <h2 class="alert alert-danger">appregist Fatal error in save</h2>
+	    </div>
+		<?php $this->echoFooter(); ?>
+        </body>
+        </html>
+        <?php 
 	}
 }
 ?>

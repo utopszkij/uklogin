@@ -4,7 +4,6 @@ div {margin:0px; padding:0px; }
 .clear {clear:both}
 .nav-item {border-style:solid; border-color:silver; border-width:0px 0px 0px 1px }
 .nav-item:hover {background-color:silver} 
- 
 #popup {cursor: move; position:fixed; z-index:99; left:50px; top:50px;
     width:auto; height:auto;
     background-color:#F0F0F0; color:black; padding:1px; border-style:solid; border-width:1px;}
@@ -41,6 +40,8 @@ form#formApp var {border-style:solid; border-width:1px; border-color:silver}
 form#formApp input {border-style:solid; border-width:1px; border-color:silver}
 form#formApp textarea {border-style:solid; border-width:1px; border-color:silver}
 form#formApp .error {background-color: #efb6a7}
+form#formApp legend {display:inline-block; width:auto;} 
+.savedMsg {min-height: 70%; height:70%; padding:20px;}
    
 /* phone */
 @media (max-width: 576px) { 

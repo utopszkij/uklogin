@@ -6,6 +6,7 @@ DEFINE('NO','Nem');
 DEFINE('CANCEL','Mégsem');
 DEFINE('CLOSE','Bezár');
 DEFINE('TITLE','Cím');
+DEFINE('LOGOUT','Kijelentkezés');
 DEFINE('DESC','Leírás');
 DEFINE('STATE','státusz');
 DEFINE('ADMIN','adminisztrátor');
@@ -45,6 +46,7 @@ DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
 DEFINE('USER','Nick név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
+DEFINE('APPSAVED','Applikáció tárolva');
 // apps check
 DEFINE('ERROR_DOMAIN_EMPTY','Domain nevet meg kell adni');
 DEFINE('ERROR_DOMAIN_INVALID','Domain név nem megfelelő');

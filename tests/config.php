@@ -8,6 +8,8 @@ if (file_exists('../index.php')) {
 } else {
 	define('MYSQLPSW','');
 }	
+define('MYDOMAIN','');
+define('MYPATH','');
 define('MYSQLDB','test');
 define('MYSQLLOG',false);
 define('REFRESHMIN',2);

@@ -2887,11 +2887,11 @@ repairfiletidy::repairfile¢
 haschildrentidynode::haschildren 
 	getparenttidynode::getparent
 yii
-appyii::appi
+appyii::appv
 yii1.1\capplication-
 
 getrequestyii1.1\capplication::getrequest#
-getdbyii1.1\capplication::getdbL
+getdbyii1.1\capplication::getdb"request"dbL
 yii1.1\cdbconnection4
 createcommand#yii1.1\cdbconnection::createcommandÀ
 yii1.1\cdbcommand%
@@ -2905,72 +2905,600 @@ getrequestyii1.1\capplication::getrequest#
 whereyii1.1\cdbcommand::where!
 unionyii1.1\cdbcommand::union
 joinyii1.1\cdbcommand::join%
-orwhereyii1.1\cdbcommand::orwhereD
+orwhereyii1.1\cdbcommand::orwherep
 jfactory
 getdbojfactory::getdbo
-getuserjfactory::getuserb
+getuserjfactory::getuser*
+getapplicationjfactory::getapplication˜
 joomla\cms\factory$
 getdbojoomla\cms\factory::getdbo&
-getuserjoomla\cms\factory::getuserH
+getuserjoomla\cms\factory::getuser4
+getapplication"joomla\cms\factory::getapplication.
+%joomla\cms\application\cmsapplication"inputH
 joomla3\jdatabasedriver-
 getquery!joomla3\jdatabasedriver::getquery^
 joomla\input\inputH
-getinputforrequestmethod,joomla\input\input::getinputforrequestmethod:
+getinputforrequestmethod,joomla\input\input::getinputforrequestmethodà	
+joomla3\jdatabasequery(
+selectjoomla3\jdatabasequery::select.
+	rightjoin!joomla3\jdatabasequery::rightjoin,
+leftjoin joomla3\jdatabasequery::leftjoin*
+columnsjoomla3\jdatabasequery::columns(
+valuesjoomla3\jdatabasequery::values:
+selectrownumber'joomla3\jdatabasequery::selectrownumber(
+updatejoomla3\jdatabasequery::update(
+insertjoomla3\jdatabasequery::insert(
+deletejoomla3\jdatabasequery::delete,
+andwhere joomla3\jdatabasequery::andwhere.
+	innerjoin!joomla3\jdatabasequery::innerjoin&
+wherejoomla3\jdatabasequery::where$
+fromjoomla3\jdatabasequery::from$
+joinjoomla3\jdatabasequery::join2
+extendwhere#joomla3\jdatabasequery::extendwhere.
+	outerjoin!joomla3\jdatabasequery::outerjoin&
+orderjoomla3\jdatabasequery::order&
+groupjoomla3\jdatabasequery::group,
+unionall joomla3\jdatabasequery::unionall"
+setjoomla3\jdatabasequery::set(
+havingjoomla3\jdatabasequery::having&
+clearjoomla3\jdatabasequery::clear&
+unionjoomla3\jdatabasequery::union$
+calljoomla3\jdatabasequery::call6
+uniondistinct%joomla3\jdatabasequery::uniondistinct,
+setquery joomla3\jdatabasequery::setquery*
+orwherejoomla3\jdatabasequery::orwhere$
+execjoomla3\jdatabasequery::execa
+cake\controller\controller0
+redirect$cake\controller\controller::redirect"request"response«
+(symfony\component\httpfoundation\requestP
+createfromglobals;symfony\component\httpfoundation\request::createfromglobals:
+create0symfony\component\httpfoundation\request::create@
+	duplicate3symfony\component\httpfoundation\request::duplicate"request"server"headers"query"files"cookiesë
+-symfony\component\httpfoundation\requeststack9
+pop2symfony\component\httpfoundation\requeststack::popS
+getmasterrequest?symfony\component\httpfoundation\requeststack::getmasterrequestS
+getparentrequest?symfony\component\httpfoundation\requeststack::getparentrequestU
+getcurrentrequest@symfony\component\httpfoundation\requeststack::getcurrentrequestÀ
+(symfony\component\routing\requestcontextD
+fromrequest5symfony\component\routing\requestcontext::fromrequestN
+fromrequeststack:symfony\component\routing\requestcontext::fromrequeststackÔ
+4symfony\bundle\frameworkbundle\controller\controllerJ
+redirect>symfony\bundle\frameworkbundle\controller\controller::redirectP
+getdoctrineAsymfony\bundle\frameworkbundle\controller\controller::getdoctrineì
+<symfony\bundle\frameworkbundle\controller\abstractcontrollerR
+redirectFsymfony\bundle\frameworkbundle\controller\abstractcontroller::redirectX
+getdoctrineIsymfony\bundle\frameworkbundle\controller\abstractcontroller::getdoctrine¶
+'doctrine\bundle\doctrinebundle\registryM
+getentitymanager9doctrine\bundle\doctrinebundle\registry::getentitymanager]
+getentitymanagerforclassAdoctrine\bundle\doctrinebundle\registry::getentitymanagerforclassQ
+getmanagerforclass;doctrine\bundle\doctrinebundle\registry::getmanagerforclassG
+getconnection6doctrine\bundle\doctrinebundle\registry::getconnectionA
+
+getmanager3doctrine\bundle\doctrinebundle\registry::getmanagerZ
+doctrine\dbal\drivermanager;
+getconnection*doctrine\dbal\drivermanager::getconnectiond
+ doctrine\dbal\query\querybuilder@
+getconnection/doctrine\dbal\query\querybuilder::getconnection¤
+doctrine\orm\entitymanager:
+getrepository)doctrine\orm\entitymanager::getrepositoryN
+ createnamednativequery3doctrine\orm\entitymanager:: createnamednativequery:
+getconnection)doctrine\orm\entitymanager::getconnection@
+createnamedquery,doctrine\orm\entitymanager::createnamedquery@
+createconnection,doctrine\orm\entitymanager::createconnection,
+create"doctrine\orm\entitymanager::createD
+ createnativequery.doctrine\orm\entitymanager:: createnativequeryD
+createquerybuilder.doctrine\orm\entitymanager::createquerybuilderH
+getexpressionbuilder0doctrine\orm\entitymanager::getexpressionbuilder6
+createquery'doctrine\orm\entitymanager::createqueryþ
+doctrine\orm\entityrepositoryO
+createnamednativequery5doctrine\orm\entityrepository::createnamednativequeryC
+createnamedquery/doctrine\orm\entityrepository::createnamedqueryG
+createquerybuilder1doctrine\orm\entityrepository::createquerybuilder^
+doctrine\dbal\connectionB
+createquerybuilder,doctrine\dbal\connection::createquerybuilderì
+ doctrine\dbal\query\querybuilder2
+select(doctrine\dbal\query\querybuilder::select8
+	rightjoin+doctrine\dbal\query\querybuilder::rightjoin6
+leftjoin*doctrine\dbal\query\querybuilder::leftjoin2
+values(doctrine\dbal\query\querybuilder::values2
+insert(doctrine\dbal\query\querybuilder::insert2
+update(doctrine\dbal\query\querybuilder::update@
+setmaxresults/doctrine\dbal\query\querybuilder::setmaxresults>
+setparameter.doctrine\dbal\query\querybuilder::setparameter8
+	addselect+doctrine\dbal\query\querybuilder::addselectD
+resetqueryparts1doctrine\dbal\query\querybuilder::resetqueryparts2
+delete(doctrine\dbal\query\querybuilder::delete6
+andwhere*doctrine\dbal\query\querybuilder::andwhereB
+resetquerypart0doctrine\dbal\query\querybuilder::resetquerypart8
+	innerjoin+doctrine\dbal\query\querybuilder::innerjoin6
+setvalue*doctrine\dbal\query\querybuilder::setvalue:
+
+addgroupby,doctrine\dbal\query\querybuilder::addgroupby8
+	andhaving+doctrine\dbal\query\querybuilder::andhaving.
+expr&doctrine\dbal\query\querybuilder::expr0
+where'doctrine\dbal\query\querybuilder::where.
+from&doctrine\dbal\query\querybuilder::from.
+join&doctrine\dbal\query\querybuilder::join,
+add%doctrine\dbal\query\querybuilder::add2
+having(doctrine\dbal\query\querybuilder::having,
+set%doctrine\dbal\query\querybuilder::set6
+orhaving*doctrine\dbal\query\querybuilder::orhaving@
+setparameters/doctrine\dbal\query\querybuilder::setparameters4
+orderby)doctrine\dbal\query\querybuilder::orderby4
+groupby)doctrine\dbal\query\querybuilder::groupby:
+
+addorderby,doctrine\dbal\query\querybuilder::addorderbyB
+setfirstresult0doctrine\dbal\query\querybuilder::setfirstresult4
+orwhere)doctrine\dbal\query\querybuilder::orwhereÃ
+doctrine\orm\querybuilder+
+select!doctrine\orm\querybuilder::select7
+resetdqlpart'doctrine\orm\querybuilder::resetdqlpart/
+leftjoin#doctrine\orm\querybuilder::leftjoin/
+distinct#doctrine\orm\querybuilder::distinct+
+update!doctrine\orm\querybuilder::update9
+setmaxresults(doctrine\orm\querybuilder::setmaxresults7
+setparameter'doctrine\orm\querybuilder::setparameter1
+	addselect$doctrine\orm\querybuilder::addselect+
+delete!doctrine\orm\querybuilder::delete/
+andwhere#doctrine\orm\querybuilder::andwhere1
+	innerjoin$doctrine\orm\querybuilder::innerjoin5
+setlifetime&doctrine\orm\querybuilder::setlifetime?
+getentitymanager+doctrine\orm\querybuilder::getentitymanager3
+
+addgroupby%doctrine\orm\querybuilder::addgroupby1
+	andhaving$doctrine\orm\querybuilder::andhaving7
+setcachemode'doctrine\orm\querybuilder::setcachemode'
+exprdoctrine\orm\querybuilder::expr)
+where doctrine\orm\querybuilder::where'
+fromdoctrine\orm\querybuilder::from'
+joindoctrine\orm\querybuilder::join%
+adddoctrine\orm\querybuilder::add+
+having!doctrine\orm\querybuilder::having%
+setdoctrine\orm\querybuilder::set/
+orhaving#doctrine\orm\querybuilder::orhaving9
+setparameters(doctrine\orm\querybuilder::setparameters-
+orderby"doctrine\orm\querybuilder::orderby-
+groupby"doctrine\orm\querybuilder::groupby7
+setcacheable'doctrine\orm\querybuilder::setcacheable;
+setcacheregion)doctrine\orm\querybuilder::setcacheregion3
+
+addorderby%doctrine\orm\querybuilder::addorderby;
+setfirstresult)doctrine\orm\querybuilder::setfirstresult-
+indexby"doctrine\orm\querybuilder::indexby-
+orwhere"doctrine\orm\querybuilder::orwhere/
+getquery#doctrine\orm\querybuilder::getqueryZ
+doctrine\orm\nativequery>
+getentitymanager*doctrine\orm\nativequery::getentitymanagerŒ
+doctrine\orm\query.
+setlockmodedoctrine\orm\query::setlockmodeB
+setquerycachelifetime)doctrine\orm\query::setquerycachelifetime0
+setfetchmode doctrine\orm\query::setfetchmode4
+useresultcache"doctrine\orm\query::useresultcache2
+setparameters!doctrine\orm\query::setparameters2
+setmaxresults!doctrine\orm\query::setmaxresults0
+setparameter doctrine\orm\query::setparameter0
+setcacheable doctrine\orm\query::setcacheable&
+sethintdoctrine\orm\query::sethint:
+expireresultcache%doctrine\orm\query::expireresultcache4
+setcacheregion"doctrine\orm\query::setcacheregion2
+usequerycache!doctrine\orm\query::usequerycache.
+setlifetimedoctrine\orm\query::setlifetime8
+setresultcacheid$doctrine\orm\query::setresultcacheid8
+expirequerycache$doctrine\orm\query::expirequerycache8
+sethydrationmode$doctrine\orm\query::sethydrationmode>
+setresultsetmapping'doctrine\orm\query::setresultsetmapping>
+setquerycachedriver'doctrine\orm\query::setquerycachedriverD
+setresultcachelifetime*doctrine\orm\query::setresultcachelifetimeB
+setresultcacheprofile)doctrine\orm\query::setresultcacheprofile@
+setresultcachedriver(doctrine\orm\query::setresultcachedriverH
+sethydrationcacheprofile,doctrine\orm\query::sethydrationcacheprofile0
+setcachemode doctrine\orm\query::setcachemode4
+setfirstresult"doctrine\orm\query::setfirstresult$
+setdqldoctrine\orm\query::setdqlò
+doctrine\orm\nativequery6
+setfetchmode&doctrine\orm\nativequery::setfetchmode:
+useresultcache(doctrine\orm\nativequery::useresultcache8
+setparameters'doctrine\orm\nativequery::setparameters6
+setparameter&doctrine\orm\nativequery::setparameter*
+setsql doctrine\orm\nativequery::setsql6
+setcacheable&doctrine\orm\nativequery::setcacheable,
+sethint!doctrine\orm\nativequery::sethint@
+expireresultcache+doctrine\orm\nativequery::expireresultcache:
+setcacheregion(doctrine\orm\nativequery::setcacheregion4
+setlifetime%doctrine\orm\nativequery::setlifetime>
+setresultcacheid*doctrine\orm\nativequery::setresultcacheid>
+sethydrationmode*doctrine\orm\nativequery::sethydrationmodeD
+setresultsetmapping-doctrine\orm\nativequery::setresultsetmappingJ
+setresultcachelifetime0doctrine\orm\nativequery::setresultcachelifetimeH
+setresultcacheprofile/doctrine\orm\nativequery::setresultcacheprofileF
+setresultcachedriver.doctrine\orm\nativequery::setresultcachedriverN
+sethydrationcacheprofile2doctrine\orm\nativequery::sethydrationcacheprofile6
+setcachemode&doctrine\orm\nativequery::setcachemode^
+illuminate\routing\routerA
+getcurrentrequest,illuminate\routing\router::getcurrentrequest®
+ illuminate\support\facades\route@
+getfacaderoot/illuminate\support\facades\route::getfacaderootH
+getcurrentrequest3illuminate\support\facades\route::getcurrentrequest×
+illuminate\http\request+
+setjson illuminate\http\request::setjson1
+
+createfrom#illuminate\http\request::createfrom-
+instance!illuminate\http\request::instance;
+setuserresolver(illuminate\http\request::setuserresolver?
+createfromglobals*illuminate\http\request::createfromglobals=
+setrouteresolver)illuminate\http\request::setrouteresolver'
+mergeilluminate\http\request::merge+
+replace illuminate\http\request::replace)
+createilluminate\http\request::create+
+capture illuminate\http\request::capture%
+jsonilluminate\http\request::json/
+	duplicate"illuminate\http\request::duplicate9
+createfrombase'illuminate\http\request::createfrombase"request"server"headers"query"files"cookies„
+"illuminate\support\facades\request<
+
+createfrom.illuminate\support\facades\request::createfrom8
+instance,illuminate\support\facades\request::instanceF
+setuserresolver3illuminate\support\facades\request::setuserresolverJ
+createfromglobals5illuminate\support\facades\request::createfromglobalsH
+setrouteresolver4illuminate\support\facades\request::setrouteresolverB
+getfacaderoot1illuminate\support\facades\request::getfacaderoot6
+replace+illuminate\support\facades\request::replace6
+capture+illuminate\support\facades\request::capture:
+	duplicate-illuminate\support\facades\request::duplicateD
+createfrombase2illuminate\support\facades\request::createfrombase6
+setjson+illuminate\support\facades\request::setjson2
+merge)illuminate\support\facades\request::merge4
+create*illuminate\support\facades\request::create0
+json(illuminate\support\facades\request::jsonæ
+ illuminate\support\facades\input:
+
+createfrom,illuminate\support\facades\input::createfrom6
+instance*illuminate\support\facades\input::instanceD
+setuserresolver1illuminate\support\facades\input::setuserresolverH
+createfromglobals3illuminate\support\facades\input::createfromglobalsF
+setrouteresolver2illuminate\support\facades\input::setrouteresolver@
+getfacaderoot/illuminate\support\facades\input::getfacaderoot4
+replace)illuminate\support\facades\input::replace4
+capture)illuminate\support\facades\input::capture8
+	duplicate+illuminate\support\facades\input::duplicateB
+createfrombase0illuminate\support\facades\input::createfrombase4
+setjson)illuminate\support\facades\input::setjson0
+merge'illuminate\support\facades\input::merge2
+create(illuminate\support\facades\input::create.
+json&illuminate\support\facades\input::json^
+ illuminate\http\redirectresponse:
+
+getrequest,illuminate\http\redirectresponse::getrequest\
+illuminate\routing\urlgenerator9
+
+getrequest+illuminate\routing\urlgenerator::getrequestH
+illuminate\auth\guard/
+
+getrequest!illuminate\auth\guard::getrequestb
+illuminate\routing\redirectorA
+geturlgenerator.illuminate\routing\redirector::geturlgenerator
+illuminate\auth\authmanager+
+guard"illuminate\auth\authmanager::guard5
+
+getrequest'illuminate\auth\authmanager::getrequestÎ
+illuminate\support\facades\auth/
+guard&illuminate\support\facades\auth::guard?
+getfacaderoot.illuminate\support\facades\auth::getfacaderoot9
+
+getrequest+illuminate\support\facades\auth::getrequestj
+#illuminate\support\facades\responseC
+getfacaderoot2illuminate\support\facades\response::getfacaderootj
+#illuminate\support\facades\redirectC
+getfacaderoot2illuminate\support\facades\redirect::getfacaderootš
+illuminate\support\facades\url>
+getfacaderoot-illuminate\support\facades\url::getfacaderoot8
+
+getrequest*illuminate\support\facades\url::getrequest¬
+illuminate\support\facades\dbC
+setpostprocessor/illuminate\support\facades\db::setpostprocessor-
+query$illuminate\support\facades\db::query7
+
+setreadpdo)illuminate\support\facades\db::setreadpdo=
+getfacaderoot,illuminate\support\facades\db::getfacaderootA
+setdatabasename.illuminate\support\facades\db::setdatabasenameG
+seteventdispatcher1illuminate\support\facades\db::seteventdispatcher/
+getpdo%illuminate\support\facades\db::getpdo5
+	reconnect(illuminate\support\facades\db::reconnectA
+setquerygrammar.illuminate\support\facades\db::setquerygrammarC
+setschemagrammar/illuminate\support\facades\db::setschemagrammar7
+
+getreadpdo)illuminate\support\facades\db::getreadpdoM
+getdoctrineconnection4illuminate\support\facades\db::getdoctrineconnectionA
+getpdoforselect.illuminate\support\facades\db::getpdoforselect/
+setpdo%illuminate\support\facades\db::setpdo7
+
+connection)illuminate\support\facades\db::connection?
+settableprefix-illuminate\support\facades\db::settableprefix-
+table$illuminate\support\facades\db::tableÓ
+#illuminate\database\databasemanagerI
+setpostprocessor5illuminate\database\databasemanager::setpostprocessor3
+query*illuminate\database\databasemanager::query=
+
+setreadpdo/illuminate\database\databasemanager::setreadpdoG
+setdatabasename4illuminate\database\databasemanager::setdatabasenameM
+seteventdispatcher7illuminate\database\databasemanager::seteventdispatcher5
+getpdo+illuminate\database\databasemanager::getpdo;
+	reconnect.illuminate\database\databasemanager::reconnectG
+setquerygrammar4illuminate\database\databasemanager::setquerygrammarI
+setschemagrammar5illuminate\database\databasemanager::setschemagrammar=
+
+getreadpdo/illuminate\database\databasemanager::getreadpdoS
+getdoctrineconnection:illuminate\database\databasemanager::getdoctrineconnectionG
+getpdoforselect4illuminate\database\databasemanager::getpdoforselect5
+setpdo+illuminate\database\databasemanager::setpdo=
+
+connection/illuminate\database\databasemanager::connectionE
+settableprefix3illuminate\database\databasemanager::settableprefix3
+table*illuminate\database\databasemanager::tableÎ
+illuminate\database\connectionD
+setpostprocessor0illuminate\database\connection::setpostprocessor@
+setreconnector.illuminate\database\connection::setreconnector.
+query%illuminate\database\connection::query8
+
+setreadpdo*illuminate\database\connection::setreadpdoB
+setdatabasename/illuminate\database\connection::setdatabasenameH
+seteventdispatcher2illuminate\database\connection::seteventdispatcher0
+getpdo&illuminate\database\connection::getpdoB
+setquerygrammar/illuminate\database\connection::setquerygrammarD
+setschemagrammar0illuminate\database\connection::setschemagrammar8
+
+getreadpdo*illuminate\database\connection::getreadpdoN
+getdoctrineconnection5illuminate\database\connection::getdoctrineconnectionB
+getpdoforselect/illuminate\database\connection::getpdoforselect0
+setpdo&illuminate\database\connection::setpdo@
+settableprefix.illuminate\database\connection::settableprefix.
+table%illuminate\database\connection::tablej
+&illuminate\database\connectionresolver@
+
+connection2illuminate\database\connectionresolver::connection—5
+!illuminate\database\query\builder3
+select)illuminate\database\query\builder::select9
+	addselect,illuminate\database\query\builder::addselect/
+when'illuminate\database\query\builder::when5
+wherein*illuminate\database\query\builder::whereinE
+wherejsonlength2illuminate\database\query\builder::wherejsonlengthA
+orwhereexists0illuminate\database\query\builder::orwhereexists?
+orwherenotin/illuminate\database\query\builder::orwherenotin9
+	selectraw,illuminate\database\query\builder::selectraw/
+lock'illuminate\database\query\builder::lock/
+join'illuminate\database\query\builder::join7
+unionall+illuminate\database\query\builder::unionall;
+
+wheremonth-illuminate\database\query\builder::wheremonth3
+having)illuminate\database\query\builder::having=
+orwherenull.illuminate\database\query\builder::orwherenull=
+wherenested.illuminate\database\query\builder::wherenested9
+	joinwhere,illuminate\database\query\builder::joinwhereM
+orwherejsoncontains6illuminate\database\query\builder::orwherejsoncontains5
+orderby*illuminate\database\query\builder::orderby=
+forsubquery.illuminate\database\query\builder::forsubqueryG
+orwhererowvalues3illuminate\database\query\builder::orwhererowvalues=
+setbindings.illuminate\database\query\builder::setbindingsI
+orwherejsonlength4illuminate\database\query\builder::orwherejsonlengthC
+whererowvalues1illuminate\database\query\builder::whererowvalues=
+usewritepdo.illuminate\database\query\builder::usewritepdoG
+orwherenotexists3illuminate\database\query\builder::orwherenotexists9
+	orwherein,illuminate\database\query\builder::orwherein7
+newquery+illuminate\database\query\builder::newquery9
+	crossjoin,illuminate\database\query\builder::crossjoin?
+rightjoinsub/illuminate\database\query\builder::rightjoinsub=
+orderbydesc.illuminate\database\query\builder::orderbydescC
+orwherenotnull1illuminate\database\query\builder::orwherenotnull/
+skip'illuminate\database\query\builder::skip9
+	havingraw,illuminate\database\query\builder::havingrawA
+leftjoinwhere0illuminate\database\query\builder::leftjoinwhereA
+orwherecolumn0illuminate\database\query\builder::orwherecolumnC
+wherenotexists1illuminate\database\query\builder::wherenotexistsI
+whereintegerinraw4illuminate\database\query\builder::whereintegerinraw3
+unless)illuminate\database\query\builder::unless7
+whereday+illuminate\database\query\builder::whereday;
+
+wherenotin-illuminate\database\query\builder::wherenotin9
+	wheretime,illuminate\database\query\builder::wheretimeI
+adddatebasedwhere4illuminate\database\query\builder::adddatebasedwhere1
+where(illuminate\database\query\builder::where?
+setaggregate/illuminate\database\query\builder::setaggregate3
+latest)illuminate\database\query\builder::latestC
+fornestedwhere1illuminate\database\query\builder::fornestedwhere=
+whereexists.illuminate\database\query\builder::whereexistsC
+rightjoinwhere1illuminate\database\query\builder::rightjoinwhereA
+inrandomorder0illuminate\database\query\builder::inrandomorderA
+havingbetween0illuminate\database\query\builder::havingbetween1
+union(illuminate\database\query\builder::union5
+groupby*illuminate\database\query\builder::groupby=
+orwhereyear.illuminate\database\query\builder::orwhereyear;
+
+orwhereday-illuminate\database\query\builder::orwhereday5
+joinsub*illuminate\database\query\builder::joinsub9
+	wheredate,illuminate\database\query\builder::wheredateS
+wherejsondoesntcontain9illuminate\database\query\builder::wherejsondoesntcontain3
+oldest)illuminate\database\query\builder::oldestC
+forpageafterid1illuminate\database\query\builder::forpageafterid5
+forpage*illuminate\database\query\builder::forpage9
+	selectsub,illuminate\database\query\builder::selectsub=
+wherecolumn.illuminate\database\query\builder::wherecolumn9
+	wherenull,illuminate\database\query\builder::wherenullE
+wherenotbetween2illuminate\database\query\builder::wherenotbetweenA
+getconnection0illuminate\database\query\builder::getconnectionA
+mergebindings0illuminate\database\query\builder::mergebindingsO
+whereintegernotinraw7illuminate\database\query\builder::whereintegernotinrawW
+orwherejsondoesntcontain;illuminate\database\query\builder::orwherejsondoesntcontain;
+
+orwhereraw-illuminate\database\query\builder::orwhereraw=
+leftjoinsub.illuminate\database\query\builder::leftjoinsub/
+find'illuminate\database\query\builder::find1
+limit(illuminate\database\query\builder::limitI
+wherejsoncontains4illuminate\database\query\builder::wherejsoncontains/
+from'illuminate\database\query\builder::from?
+wherebetween/illuminate\database\query\builder::wherebetween;
+
+sharedlock-illuminate\database\query\builder::sharedlock;
+
+orderbyraw-illuminate\database\query\builder::orderbyraw-
+tap&illuminate\database\query\builder::tap3
+offset)illuminate\database\query\builder::offset?
+orwheremonth/illuminate\database\query\builder::orwheremonth?
+wherenotnull/illuminate\database\query\builder::wherenotnullI
+orwherenotbetween4illuminate\database\query\builder::orwherenotbetween5
+fromraw*illuminate\database\query\builder::fromraw/
+take'illuminate\database\query\builder::takeM
+addnestedwherequery6illuminate\database\query\builder::addnestedwherequery?
+clonewithout/illuminate\database\query\builder::clonewithout9
+	rightjoin,illuminate\database\query\builder::rightjoin5
+fromsub*illuminate\database\query\builder::fromsub7
+leftjoin+illuminate\database\query\builder::leftjoin7
+distinct+illuminate\database\query\builder::distinct9
+	whereyear,illuminate\database\query\builder::whereyear=
+orwheredate.illuminate\database\query\builder::orwheredate;
+
+addbinding-illuminate\database\query\builder::addbinding;
+
+whereinsub-illuminate\database\query\builder::whereinsubA
+lockforupdate0illuminate\database\query\builder::lockforupdateO
+clonewithoutbindings7illuminate\database\query\builder::clonewithoutbindingsM
+addwhereexistsquery6illuminate\database\query\builder::addwhereexistsqueryG
+addarrayofwheres3illuminate\database\query\builder::addarrayofwheres7
+whereraw+illuminate\database\query\builder::whereraw7
+orhaving+illuminate\database\query\builder::orhaving=
+orhavingraw.illuminate\database\query\builder::orhavingrawO
+whereinexistingquery7illuminate\database\query\builder::whereinexistingqueryE
+forpagebeforeid2illuminate\database\query\builder::forpagebeforeid7
+wheresub+illuminate\database\query\builder::wheresub=
+orwheretime.illuminate\database\query\builder::orwheretimeC
+orwherebetween1illuminate\database\query\builder::orwherebetween?
+dynamicwhere/illuminate\database\query\builder::dynamicwhere5
+orwhere*illuminate\database\query\builder::orwhereø
+#illuminate\database\capsule\managerM
+getdatabasemanager7illuminate\database\capsule\manager::getdatabasemanagerC
+getconnection2illuminate\database\capsule\manager::getconnection=
+
+connection/illuminate\database\capsule\manager::connectionà
+"illuminate\database\eloquent\modelR
+getconnectionresolver9illuminate\database\eloquent\model::getconnectionresolverB
+getconnection1illuminate\database\eloquent\model::getconnection<
+
+setkeytype.illuminate\database\eloquent\model::setkeytype>
+newinstance/illuminate\database\eloquent\model::newinstance8
+settable,illuminate\database\eloquent\model::settableR
+newquerywithoutscopes9illuminate\database\eloquent\model::newquerywithoutscopes0
+load(illuminate\database\eloquent\model::loadB
+setconnection1illuminate\database\eloquent\model::setconnectionF
+setincrementing3illuminate\database\eloquent\model::setincrementing<
+
+setperpage.illuminate\database\eloquent\model::setperpageJ
+resolveconnection5illuminate\database\eloquent\model::resolveconnection,
+on&illuminate\database\eloquent\model::on:
+	loadcount-illuminate\database\eloquent\model::loadcount.
+all'illuminate\database\eloquent\model::all:
+	replicate-illuminate\database\eloquent\model::replicateD
+newfrombuilder2illuminate\database\eloquent\model::newfrombuilder2
+query)illuminate\database\eloquent\model::query6
+refresh+illuminate\database\eloquent\model::refresh0
+fill(illuminate\database\eloquent\model::fillL
+neweloquentbuilder6illuminate\database\eloquent\model::neweloquentbuilderP
+registerglobalscopes8illuminate\database\eloquent\model::registerglobalscopes0
+with(illuminate\database\eloquent\model::with:
+	forcefill-illuminate\database\eloquent\model::forcefill`
+newquerywithoutrelationships@illuminate\database\eloquent\model::newquerywithoutrelationships>
+loadmissing/illuminate\database\eloquent\model::loadmissingB
+newmodelquery1illuminate\database\eloquent\model::newmodelqueryT
+newqueryforrestoration:illuminate\database\eloquent\model::newqueryforrestoration2
+fresh)illuminate\database\eloquent\model::freshN
+resolveroutebinding7illuminate\database\eloquent\model::resolveroutebinding<
+
+setkeyname.illuminate\database\eloquent\model::setkeyname8
+newquery,illuminate\database\eloquent\model::newqueryN
+setkeysforsavequery7illuminate\database\eloquent\model::setkeysforsavequery 
+$illuminate\database\eloquent\builderH
+wheredoesnthave5illuminate\database\eloquent\builder::wheredoesnthave4
+orhas+illuminate\database\eloquent\builder::orhas:
+getmodel.illuminate\database\eloquent\builder::getmodel<
+	findornew/illuminate\database\eloquent\builder::findornewB
+ordoesnthave2illuminate\database\eloquent\builder::ordoesnthave8
+without-illuminate\database\eloquent\builder::without>
+
+doesnthave0illuminate\database\eloquent\builder::doesnthave:
+wherehas.illuminate\database\eloquent\builder::wherehas2
+find*illuminate\database\eloquent\builder::find<
+	hasnested/illuminate\database\eloquent\builder::hasnested0
+get)illuminate\database\eloquent\builder::getP
+newbasequerybuilder9illuminate\database\eloquent\builder::newbasequerybuilder6
+create,illuminate\database\eloquent\builder::create4
+where+illuminate\database\eloquent\builder::where0
+has)illuminate\database\eloquent\builder::has:
+wherekey.illuminate\database\eloquent\builder::wherekey2
+make*illuminate\database\eloquent\builder::make>
+
+findorfail0illuminate\database\eloquent\builder::findorfail6
+latest,illuminate\database\eloquent\builder::latestD
+seteagerloads3illuminate\database\eloquent\builder::seteagerloadsH
+withglobalscope5illuminate\database\eloquent\builder::withglobalscope>
+
+orwherehas0illuminate\database\eloquent\builder::orwherehas@
+applyscopes1illuminate\database\eloquent\builder::applyscopes@
+firstorfail1illuminate\database\eloquent\builder::firstorfailN
+withoutglobalscope8illuminate\database\eloquent\builder::withoutglobalscope:
+setmodel.illuminate\database\eloquent\builder::setmodel@
+wherekeynot1illuminate\database\eloquent\builder::wherekeynot>
+
+firstornew0illuminate\database\eloquent\builder::firstornew@
+forcecreate1illuminate\database\eloquent\builder::forcecreate@
+addhaswhere1illuminate\database\eloquent\builder::addhaswhereL
+onwriteconnection7illuminate\database\eloquent\builder::onwriteconnectionL
+orwheredoesnthave7illuminate\database\eloquent\builder::orwheredoesnthaveP
+withoutglobalscopes9illuminate\database\eloquent\builder::withoutglobalscopes6
+tobase,illuminate\database\eloquent\builder::tobase2
+with*illuminate\database\eloquent\builder::withJ
+newmodelinstance6illuminate\database\eloquent\builder::newmodelinstance6
+oldest,illuminate\database\eloquent\builder::oldestR
+mergeconstraintsfrom:illuminate\database\eloquent\builder::mergeconstraintsfrom8
+firstor-illuminate\database\eloquent\builder::firstorD
+firstorcreate3illuminate\database\eloquent\builder::firstorcreateF
+updateorcreate4illuminate\database\eloquent\builder::updateorcreate:
+setquery.illuminate\database\eloquent\builder::setquery6
+scopes,illuminate\database\eloquent\builder::scopes<
+	getmodels/illuminate\database\eloquent\builder::getmodels8
+orwhere-illuminate\database\eloquent\builder::orwhere:
+getquery.illuminate\database\eloquent\builder::getquery€
+appregistcontroller
+addappregistcontroller::add!
+saveappregistcontroller::save%
+removeappregistcontroller::removeX
+
+commonview$
+
+echonavbarcommonview::echonavbar$
+
+echofootercommonview::echofooter8
+
+readmeview
+commonview
+displayreadmeview::displayÐ
+appregistmodel,
+checknoemptyappregistmodel::checknoempty
+saveappregistmodel::save(
+
+adjustdataappregistmodel::adjustdata
+checkappregistmodel::check"
+getdataappregistmodel::getdata*
+__constructappregistmodel::__construct 
+removeappregistmodel::remove6
+updateafterinsert!appregistmodel::updateafterinsert†
+appregistview
+commonview
+formappregistview::form'
+
+successmsgappregistview::successmsg#
+errormsgappregistview::errormsg:
 defaultcontroller%
-defaultdefaultcontroller::default:
-examplecontroller%
-exampleexamplecontroller::example¬
-memberscontroller3
-saveallmembers!memberscontroller::saveallmembers/
-memberupdatememberscontroller::memberupdate1
-sethtmlheader memberscontroller::sethtmlheader¦
-taskscontroller)
-
-taskinserttaskscontroller::taskinsert
-savetaskscontroller::save
-showtaskscontroller::show)
-
-taskupdatetaskscontroller::taskupdate#
-refreshtaskscontroller::refresh/
-sethtmlheadertaskscontroller::sethtmlheader)
-
-taskdeletetaskscontroller::taskdelete0
-examplemodel 
-getdataexamplemodel::getdataÈ
-membersmodel.
-saveallmembersmembersmodel::saveallmembers:
-deleteinvalidmembers"membersmodel::deleteinvalidmembers>
-saveallmembersfromjson$membersmodel::saveallmembersfromjson,
-setlastupdatemembersmodel::setlastupdate4
-updatememberadminmembersmodel::updatememberadmin(
-__constructmembersmodel::__construct
-task„
-
-tasksmodel
-deltasktasksmodel::deltask$
-
-updatetasktasksmodel::updatetask6
-savealltaskfromjsontasksmodel::savealltaskfromjson"
-	nochangedtasksmodel::nochanged0
-contentnotchangetasksmodel::contentnotchange
-savetasksmodel::save6
-selftaskstatechangetasksmodel::selftaskstatechange$
-
-pickuptasktasksmodel::pickuptask 
-gettaskstasksmodel::gettasks
-refreshtasksmodel::refresh>
-accesrightnewtaskupdate#tasksmodel::accesrightnewtaskupdate8
-publicenablednewtask tasksmodel::publicenablednewtask 
-findtasktasksmodel::findtask&
-__constructtasksmodel::__construct(
-loadoldtaskstasksmodel::loadoldtasks*
-dodeletedtasktasksmodel::dodeletedtask 
-ismembertasksmodel::ismember
-newtasktasksmodel::newtask*
-setlastupdatetasksmodel::setlastupdate.
-checktaskactiontasksmodel::checktaskaction0
-savechecknoadmintasksmodel::savechecknoadmin.
-exampleview
-exampleexampleview::example$
-	tasksview
-showtasksview::show
+defaultdefaultcontroller::default2
+readmecontroller
+showreadmecontroller::show>
+frontpageview
+commonview!
+displayfrontpageview::display
