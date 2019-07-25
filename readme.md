@@ -1,5 +1,8 @@
 # e-demokrácia web applikációkból hívható - ügyfélkapu aláíráson alapuló - login modul
 
+## Kontribútoroknak
+A fejlesztésében közreműködni kívánóknak szóló információk a [ebben a leírásban](/readmeForProgrammer.md) találhatók.
+
 ## Áttekintés
 
 Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az ** oAuth2 ** szabvány szerint. 
@@ -34,6 +37,8 @@ Fogler Tibor (Utopszkij)
 tibor.fogler@gmail.com 
 
 https://github.com/utopszkij
+
+
 
 ## Működés
 

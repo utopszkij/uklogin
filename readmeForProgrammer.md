@@ -2,6 +2,27 @@
 Ez a keretrendszer kliens-szerver projektek MVC ajánlás szerinti fejlesztésére szolgál. Tartalmaz unittest eszközöket, és dokumentáló eszközöket is.
 A teszteléshez nodejs rendszer és jónéhány nodejs modul is szükséges (ezeket is tartalmazza ez a repo).
 
+## Telepítés lokális fejlesztéshez kontribútoroknak
+
+### Telepítés és futtatás
+Készíts egy *fork*-ot a github-os projektről a saját github fiókodra, és onnan *clone*-ozd a kódot.
+```
+git clone https://github.com/<yourguthubuser>/uklogin.git
+```
+Szerkeszd a [config.txt](/config.txt) fájt, add meg a gépeden futó mysql szerver elérését és mentsd el `.config.php` néven.
+
+Futtasd a főkönyvtár index.php fájlját, mondjuk így:
+```
+php -S localhost:8000
+```
+Ezután a böngészőben navigálj a [http://localhost:8000](http://localhost:8000) címre.
+
+### Kontribúció
+
+Ha fejlesztesz valamit, nyiss egy új branch-et, arra commit-olj, majd push-old a saját github repo-dba. Innen tudsz merge request-et nyitni az eredeti repo master branch-ére.
+
+
+
 ## Általános müködési elv
 
 - A web böngészők az app.php -t vagy az index.php -t hívják (az index.php is az app.php -t aktivizálja),
