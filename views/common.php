@@ -16,19 +16,19 @@ class CommonView {
 			    <ul class="navbar-nav">
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>">
-			        	<i class="fa fa-home"></i>&nbsp;<?php echo txt('HOME'); ?><span class="sr-only">(current)</span></a>
+			        	<em class="fa fa-home"></em>&nbsp;<?php echo txt('HOME'); ?><span class="sr-only">(current)</span></a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/readme/show">
-			        	<i class="fa fa-info"></i>&nbsp;<?php echo txt('READMY'); ?></a>
+			        	<em class="fa fa-info"></em>&nbsp;<?php echo txt('READMY'); ?></a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/add">
-			        	<i class="fa fa-plus"></i>&nbsp;<?php echo txt('NEWAPP'); ?></a>
+			        	<em class="fa fa-plus"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/adminlogin">
-			        	<i class="fa fa-key"></i>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
+			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
 			      </li>
 			    </ul>
 			  </div>
@@ -45,15 +45,15 @@ class CommonView {
       	<div id="footer">  
       	<p>
 			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/impresszum/show">
-				<i class="fa fa-pencil"></i>&nbsp;<?php echo txt('IMPRESSUM'); ?></a>&nbsp;&nbsp;&nbsp;      
+				<em class="fa fa-pencil"></em>&nbsp;<?php echo txt('IMPRESSUM'); ?></a>&nbsp;&nbsp;&nbsp;      
 			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show">
-				<i class="fa fa-lock"></i>&nbsp;<?php echo txt('DATAPROCESS'); ?></a>&nbsp;&nbsp;&nbsp;      
+				<em class="fa fa-lock"></em>&nbsp;<?php echo txt('DATAPROCESS'); ?></a>&nbsp;&nbsp;&nbsp;      
 			<a href="http://gnu.hu/gplv3.html">
-				<i class="fa fa-copyright"></i>&nbsp;<?php echo txt('LICENCE'); ?>: GNU/GPL</a>&nbsp;&nbsp;&nbsp;      
+				<em class="fa fa-copyright"></em>&nbsp;<?php echo txt('LICENCE'); ?>: GNU/GPL</a>&nbsp;&nbsp;&nbsp;      
 			<a href="https://github.com/utopszkij/uklogin">
-				<i class="fa fa-github"></i>&nbsp;<?php echo txt('SOURCE'); ?></a>&nbsp;&nbsp;&nbsp;   
+				<em class="fa fa-github"></em>&nbsp;<?php echo txt('SOURCE'); ?></a>&nbsp;&nbsp;&nbsp;   
 			<a href="mailto:tibor.fogler@gmail.com">
-				<i class="fa fa-bug"></i>&nbsp;<?php echo txt('BUGMSG'); ?></a>&nbsp;&nbsp;&nbsp;   
+				<em class="fa fa-bug"></em>&nbsp;<?php echo txt('BUGMSG'); ?></a>&nbsp;&nbsp;&nbsp;   
       	</p>   
 		<p><?php echo txt('SWRESOURCE'); ?>:			
 				<a href="https://www.php.net/manual/en/index.php">php</a>&nbsp;

@@ -4,7 +4,6 @@ class AppregistController {
 	    $request->set('sessionid','0');
 		$request->set('lng','hu');
 		$request->sessionSet('csrtoken', random_int(10000,99999));
-		$model = getModel('appregist');
 		$view = getView('appregist');
 		$data = new stdClass(); //  $data = $model->getData(....);
 		$data->option = $request->input('option','default');
@@ -25,7 +24,6 @@ class AppregistController {
 		$data->adminLoginEnabled = $request->input('adminLoginEnabled','1');
 		$data->csrtoken = $request->sessionGet('csrtoken',0);
 		$view->form($data);
-		
 	}
 	
 	/**
@@ -39,23 +37,36 @@ class AppregistController {
 	        echo '<p>Invalid CSR token</p>'; exit;
 	    }
 	    // csrtoken ok
-	    echo '<p>Save app</p>'; return;
 	    
 	    $model = getModel('appregist');
 	    $view = getView('appregist');
 	    // $data kialakitása a $request -ből
-	    // ....
-	    
+        $data = new stdClass();
+        $data->id = 0;
+        $data->name = $request->input('name','');
+        $data->client_id = '';
+        $data->client_secret = '';
+        $data->domain = $request->input('domain','');
+        $data->callback = $request->input('callback','');
+        $data->css = $request->input('css','');
+        $data->falseLoginLimit = $request->input('falseLoginLimit',5);
+        $data->admin  = $request->input('admin','');
+        $data->psw1  = $request->input('psw1','');
+        $data->adminFalseLoginLimit  = $request->input('adminFalseLoginLimit',5);
+        $data->adminLoginEnabled = 1;
+        $data->dataProcessAccept = $request->input('dataProcessAccept',0);
+        $data->cookieProcessAccept = $request->input('cookieProcessAccept',0);
+        
 	    $msg = $model->check($data);
 	    if (count($msg) == 0) {
-	        $res = $modal->save($data);
-	        if ($token != 'ERROR') {
+	        $res = $model->save($data);
+	        if (!isset($res->error)) {
 	            $view->successMsg($res);
 	        } else {
 	            $view->errorMsg();
 	        }
 	    } else {
-	        $request->msg = $msg;
+	        $request->set('msg',$msg);
 	        $this->add($request); 
 	    }
 	}
@@ -71,7 +82,7 @@ class AppregistController {
 	        echo '<p>Invalid CSR token</p>'; exit;
 	    }
 	    // csrtoken ok
-	    echo '<p>Remove app</p>'; return;
+	    echo '<p>Remove app</p>'; 
 	}
 }
 ?>
