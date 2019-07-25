@@ -3,6 +3,15 @@
 ## Kontribútoroknak
 A fejlesztésében közreműködni kívánóknak szóló információk a [ebben a leírásban](/readmeForProgrammer.md) találhatók.
 
+## Készültség
+
+Fejlesztés alatt kb 5% készültség
+
+## Élő demó:
+
+https://szeszt.tk/uklogin
+
+
 ## Áttekintés
 
 Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az ** oAuth2 ** szabvány szerint. 
@@ -20,7 +29,7 @@ https://niszavdh.gov.hu
 
 ## Programnyelvek
 
- PHP, MYSQL, JQUERY, bootstrap
+ PHP(7.1+), Javascript, MYSQL, JQUERY, bootstrap
  
 A program Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.
  
@@ -37,8 +46,6 @@ Fogler Tibor (Utopszkij)
 tibor.fogler@gmail.com 
 
 https://github.com/utopszkij
-
-
 
 ## Működés
 
@@ -190,4 +197,47 @@ A code és az access_token csak 1 percig van tárolva, ezután automatikusan tö
 
 - ** ip
 - ** errorCount
+
+### Tesztelés
+```
+cd repoRoot
+./tools/test.sh
+```
+
+## Dokumentálás
+```
+cd repoRoot
+./tools/documentor.sh
+```
+
+## kód minőség ellenörzés
+```
+cd repoRoot
+./tools/sonar.sh
+```
+Utolsó teszt eredménye:
+
+https://sonarcloud.io/dashboard?id=utopszkij-uklogin
+
+
+## Telepítés web szerverre
+
+Létrehozandő MYSQL adatbázis: ** uklogin ** (utf8, magyar rendezéssel)
+
+Telepítendő  könyvtárak:
+- controllers
+- core
+- images
+- js
+- langs
+- log (legyen irható a web szerver számára!)
+- models
+- templates
+- views
+
+Telepítendő fájlok
+- index.php
+- .config.php  (átnevezve és értelemszerüen javítva a config.txt -ből)
+- .htaccess (a htaccess.txt átnevezve)
+
 
