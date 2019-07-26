@@ -14,7 +14,7 @@ https://szeszt.tk/uklogin
 
 ## Áttekintés
 
-Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az ** oAuth2 ** szabvány szerint. 
+Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az **oAuth2** szabvány szerint. 
 A rendszer biztosítja, hogy egy személy egy alkalmazásba csak egyszer regisztrálhat.
 Természetesen egy ügyfélkapú loginnal több alkalmazásba is lehet regisztrálni. 
 
@@ -163,33 +163,33 @@ Az azonos IP címről érkező 10 egymást követő hibás hívás után az IP c
 ## SQL táblák
 
 ### "apps" tábla
-- ** id ** automatikusan képzett sorszám
-- ** name ** applikáció neve
-- ** domain ** applikációt futtató domain
-- ** client_id ** (automatikusan képzett véletlenszerű string)
-- ** client_secret ** (automatikusan képzett véletlenszerű string)
-- ** callback ** sikeres login utáni visszahívandó url
-- ** falseLoginLimit ** sikertelen user login limit
-- ** cssurl ** css file url (lehet üres is)
-- ** admin ** applikáció adminisztrátor username
-- ** pswHash **  applikáció adminisztrátor jelszó "hash"
-- ** email ** applikáció adminisztrátor email
-- ** falseAdminLoginLimit **  sikertelen admin login limit
-- ** errorCounter ** Hibás admin login kisérlet számláló
-- ** enabled ** admin login engedélyezett?
+- **id** automatikusan képzett sorszám
+- **name** applikáció neve
+- **domain** applikációt futtató domain
+- **client_id** (automatikusan képzett véletlenszerű string)
+- **client_secret** (automatikusan képzett véletlenszerű string)
+- **callback** sikeres login utáni visszahívandó url
+- **falseLoginLimit** sikertelen user login limit
+- **cssurl** css file url (lehet üres is)
+- **admin** applikáció adminisztrátor username
+- **pswHash**  applikáció adminisztrátor jelszó "hash"
+- **email** applikáció adminisztrátor email
+- **falseAdminLoginLimit**  sikertelen admin login limit
+- **errorCounter** Hibás admin login kisérlet számláló
+- **enabled** admin login engedélyezett?
 
 ### "users" tábla
 
-- ** id ** automatikusan generált sorszám
-- ** client_id ** melyik applikációba regisztrált
-- ** user ** nick név
-- ** pswhash ** jelszó hash
-- ** emailHash ** ügyfélkapuban megadott email címének hash kódja
-- ** errorCounter ** hibás login kisérlet számláló
-- ** enabled ** login engedélyezett?
-- ** code ** automatikusan generált véletlenszerű egyedi string ( hex(id - random()) )
-- ** access_token ** automatikusan generált véletlenszerű, egyedi string ( hex(id - random()) )
-- ** created ** code + access_token létrehozás időpontja
+- **id** automatikusan generált sorszám
+- **client_id** melyik applikációba regisztrált
+- **user** nick név
+- **pswhash** jelszó hash
+- **emailHash** ügyfélkapuban megadott email címének hash kódja
+- **errorCounter** hibás login kisérlet számláló
+- **enabled** login engedélyezett?
+- **code** automatikusan generált véletlenszerű egyedi string ( hex(id - random()) )
+- **access_token** automatikusan generált véletlenszerű, egyedi string ( hex(id - random()) )
+- **created** code + access_token létrehozás időpontja
 
 A code és az access_token csak 1 percig van tárolva, ezután automatikusan törlődnek. Ugyancsak törlődnek  miután "fel lettek használva"  "userinfo" vagy "access_token" kérés kiszolgálására.
 

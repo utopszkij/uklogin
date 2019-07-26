@@ -192,6 +192,47 @@ class AppregistView  extends CommonView  {
         </html>
         <?php 
 	}
+	/**
+	 * echo not found error
+	 * @param string $msg
+	 * @return void
+	 */
+	public function notFoundMsg($msgs) {
+	    echo htmlHead();
+	    $p = new stdClass();
+	    ?>
+        <body ng-app="app">
+	    <?php $this->echoNavbar($p); ?>
+	    <div class="errorMsg">
+	    <h2 class="alert alert-danger"><?php echo txt($msg); ?></h2>
+	    </div>
+		<?php $this->echoFooter(); ?>
+        </body>
+        </html>
+        <?php 
+	}
+	
+	/**
+	 * echo not found error
+	 * @param string $msg
+	 * @return void
+	 */
+	public function removedMsg($rec) {
+	    echo htmlHead();
+	    $p = new stdClass();
+	    ?>
+        <body ng-app="app">
+	    <?php $this->echoNavbar($p); ?>
+	    <div class="successMsg">
+	    <h2 class="alert alert-success"><?php echo txt('APPREMOVED'); ?></h2>
+	    <p><?php echo $rec->name; ?></p>
+	    </div>
+		<?php $this->echoFooter(); ?>
+        </body>
+        </html>
+        <?php 
+	}
+	
 	
 	public function adminLoginForm($p) {
 	    echo htmlHead();

@@ -36,7 +36,7 @@ class CommonView {
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			</nav>   
-			<p style="background-color:red; color:white">Ez a rendszer jelenleg fejlesztés alatt áll. Még nem használható! Készültség:1%</p>     
+			<p style="background-color:red; color:white">Ez a rendszer jelenleg fejlesztés alatt áll. Még nem használható! Készültség:5%</p>     
 		<?php       
      } // echoNavbar
         

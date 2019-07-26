@@ -19,5 +19,4 @@ before_script:
   
 script:
  - ./tools/test.sh 
- - ./tools/sonar.sh
  

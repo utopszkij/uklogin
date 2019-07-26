@@ -91,7 +91,7 @@ class appregistControllerTest extends TestCase
             $this->request->set('psw','123456');
         }
         $res = $this->controller->doadminlogin($this->request);
-        $this->expectOutputRegex('/CLIENT_ID/');
+        $this->expectOutputRegex('/formApp/');
     }
     
     public function test_doadminlogin_INVALID_PSW() {
@@ -142,7 +142,28 @@ class appregistControllerTest extends TestCase
         $this->expectOutputRegex('/INVALID_LOGIN/');
     }
     
+    public function test_appremove_OK() {
+        $this->request = new Request();
+        $this->request->set('123','1');
+        $this->request->sessionSet('csrtoken','123');
+        $table = new Table('apps');
+        $table->where(['domain','=','https://balmix.hu']);
+        $rec = $table->first();
+        if ($rec) {
+            $this->request->set('client_id',$rec->client_id);
+        }
+        $this->controller->appremove($this->request);
+        $this->expectOutputRegex('/APPREMOVED/');
+    }
     
+    public function test_appremove_NOTFOUND() {
+        $this->request = new Request();
+        $this->request->set('123','1');
+        $this->request->sessionSet('csrtoken','123');
+        $this->request->set('client_id','nincsilyen');
+        $this->controller->appremove($this->request);
+        $this->expectOutputRegex('/ERROR_NOTFOUND/');
+    }
     
     public function test_end() {
         $db = new DB();

@@ -3,5 +3,5 @@ projectKey=utopszkij-uklogin
 serverUrl=https://sonarcloud.io
 serverVersion=8.0.0.102
 dashboardUrl=https://sonarcloud.io/dashboard?id=utopszkij-uklogin
-ceTaskId=AWwqN_8-HONzCDf8Z1_c
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWwqN_8-HONzCDf8Z1_c
+ceTaskId=AWwuaBlxFIRqRDDZav0J
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWwuaBlxFIRqRDDZav0J
