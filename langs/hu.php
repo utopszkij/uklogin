@@ -48,6 +48,7 @@ DEFINE('USER','Nick név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
 DEFINE('APPSAVED','Applikáció tárolva');
+DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('PSW','Jelszó');
 DEFINE('CLIENT_ID','Client_id');
@@ -68,6 +69,7 @@ DEFINE('ERROR_PSW_NOTEQUAL','A két jelszó nem azonos');
 DEFINE('ERROR_UKLOGIN_HTML_NOT_EXISTS','uklog.html nem található a megadott domainen');
 DEFINE('ERROR_DATA_ACCEP_REQUEST','Adat kezelés elfogadása szükséges');
 DEFINE('ERROR_COOKIE_ACCEP_REQUEST','Cookie kezelés elfogadása szükséges');
+DEFINE('ERROR_NOTFOUND','Nincs ilyen');
 // login
 DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
 DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');

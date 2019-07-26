@@ -52,6 +52,21 @@ class AppregistModel {
     }
     
     /**
+     * url létezik?
+     * @param string $url
+     * @return bool
+     */
+    protected function url_exists(string $url): bool {
+        $file_headers = @get_headers($url);
+        if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+            $exists = false;
+        } else {
+            $exists = true;
+        }
+        return $exists;
+    }
+    
+    /**
      * check record before save
      * az ellenörzések többsége kliens oldalon js -ben is megtörtént
      * - új felvitelnél domain még nem létezik ? (csak szerver oldali ellenörzés)
@@ -91,9 +106,13 @@ class AppregistModel {
         if ($data->domain == 'https://test.hu') {
             $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
         } else if (($data->domain != 'https://valami.hu') && ($data->domain != '')) {
-            try {
-                $lines = file($data->domain.'/uklogin.html');
-            } catch (Exception $e) {
+            if ($this->url_exists($data->domain.'/uklogin.html')) {
+                try {
+                    $lines = file($data->domain.'/uklogin.html');
+                } catch (Exception $e) {
+                    $lines = false;
+                }
+            } else {
                 $lines = false;
             }
             if ($lines) {
@@ -174,6 +193,8 @@ class AppregistModel {
          $data->id = $id;
          $data->client_id = ''.random_int(1000000, 9999999).$id;
          $data->client_secret = ''.random_int(100000000, 999999999).$id;
+         $table = new Table('apps');
+         $table->where(['id','=',$id]);
          $table->update($data);
          $s = $table->getErrorMsg();
          if ($s != '') {
@@ -238,8 +259,7 @@ class AppregistModel {
      */
     public function remove(string $client_id): string {
         $msg = '';
-        $db = new DB();
-        $table = $db->table('apps');
+        $table = new Table('apps');
         $table->where(['client_id','=',$client_id]);
         $res = $table->first();
         if ($res) {

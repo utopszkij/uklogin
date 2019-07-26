@@ -214,7 +214,42 @@ class AppregistController {
 	}
 	
 	public function appremove($request) {
-	    echo 'app remove '.JSON_encode($request->input('client_id','?'));
+	    // check csrtoken
+	    $csrtoken = $request->sessionGet('csrtoken',0);
+	    if ($request->input($csrtoken,'0') != 1) {
+	        echo '<p>Invalid CSR token</p>';
+	        exit;
+	    }
+	    
+	    $hackModel = getModel('hack');
+	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
+	        echo '<p>Disabled IP '.$_SERVER['REMOTE_ADDR'].'</p>';
+	        exit;
+	    }
+	    
+	    // csrtoken ok, ip enabled
+	    // hacker hibaszámláló nullázása
+	    $hackModel->ipEnable($_SERVER['REMOTE_ADDR']);
+	    
+	    $error = false;
+	    $msg = '';
+	    $model = getModel('appregist');
+	    $view = getView('appregist');
+	    $rec = $model->getData($request->input('client_id',''));
+	    if ($rec) {
+	        $msg = $model->remove($rec->client_id);
+	        if ($msg == '') {
+	            $view->removedMsg($rec);
+	        } else {
+	            ?>
+	        	$view->notFoundMsg($msg);
+	        	<?php
+	        }
+	    } else {
+	        ?>
+	        $view->notFoundMsg('ERROR_NOTFOUND');
+	        <?php
+	    }
 	}
 }
 ?>

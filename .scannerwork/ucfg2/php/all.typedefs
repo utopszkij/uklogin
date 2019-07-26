@@ -3489,8 +3489,10 @@ commonview
 checkenabledhackmodel::checkenabled#
 
 ipadderrorhackmodel::ipadderror%
-__constructhackmodel::__constructò
-appregistmodel,
+__constructhackmodel::__constructœ
+appregistmodel(
+
+url_existsappregistmodel::url_exists,
 checknoemptyappregistmodel::checknoempty
 saveappregistmodel::save 
 updateappregistmodel::update(
@@ -3500,13 +3502,16 @@ adjustdataappregistmodel::adjustdata
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
-updateafterinsert!appregistmodel::updateafterinsert·
+updateafterinsert!appregistmodel::updateafterinsert‹
 appregistview
-commonview
+commonview'
+
+removedmsgappregistview::removedmsg
 formappregistview::form/
 adminloginformappregistview::adminloginform'
 
-successmsgappregistview::successmsg#
+successmsgappregistview::successmsg)
+notfoundmsgappregistview::notfoundmsg#
 errormsgappregistview::errormsg:
 defaultcontroller%
 defaultdefaultcontroller::default2

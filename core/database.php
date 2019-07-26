@@ -131,10 +131,10 @@ class DB {
    protected $inTransaction = false;
     
    function __construct() {
-    	global $mysqli;
-        $this->mysqli = $mysqli;
-        $this->errorMsg = '';
-        $this->errorNum = 0;
+       global $mysqli;
+       $this->mysqli = $mysqli;
+       $this->errorMsg = '';
+       $this->errorNum = 0;
    }
    
 	/**
@@ -298,7 +298,12 @@ class DB {
      * @return string
      */
 	public function getErrorMsg() : string {
-		return $this->errorMsg;
+	    if ($this->errorMsg != '') {
+		  $result = $this->errorMsg.' sql:'.$this->getQuery();
+	    } else {
+	      $result = '';  
+	    }
+	    return $result;
 	}
 	
 	/**
@@ -345,7 +350,7 @@ class DB {
     * @return Table
     */
 	public static function table(string $fromStr, string $alias = '', string $columns = '*') {
-		$result = new Table();
+		$result = new Table($fromStr);
 		$result->setFromStr($fromStr, $alias, $columns);
 		return $result;	
 	}  
@@ -454,11 +459,21 @@ class Table extends DB {
      * @param string $columns
      * @return Table
      */
-	public function setFromStr(string $fromStr, string $alias, string $columns) {
-		$this->fromStr = $fromStr;
+	public function setFromStr(string $fromStr, string $alias = '', string $columns = '*') {
+	    $this->fromStr = $fromStr;
+	    $this->alias = $alias;
+	    $this->columns = $columns;
 		return $this;	
 	}
 
+	function __construct($tableName) {
+	    global $mysqli;
+	    $this->mysqli = $mysqli;
+	    $this->errorMsg = '';
+	    $this->errorNum = 0;
+	    $this->setFromStr($tableName);
+	}
+	
 	/**
 	 * load record set
 	 * @return arrayOfRecordObject

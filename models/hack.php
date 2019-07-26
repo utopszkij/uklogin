@@ -18,7 +18,7 @@ class HackModel {
         $rec = $table->first();
         $result = true;
         if ($rec) {
-            if ($rec->errorCount > 10) {
+            if ($rec->errorcount > 10) {
                 $result = false;
             }
         }

@@ -47,6 +47,7 @@ form#formAdminLogin {padding:25px; margin:5px; min-height:400px}
 form#formAdminLogin label {width:150px; text-align:right}
 form#formAdminLogin input {border-style:solid; border-width:1px; border-color:silver}
    
+.successMsg {height:400px; padding:20px; }   
 /* phone */
 @media (max-width: 576px) { 
     .browserPaginator .paginatorDesctop {display:none} 
