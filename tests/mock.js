@@ -6,7 +6,9 @@ exports.init = function(window) {
 	document.documentElement = {};
 	document.documentElement.scrollTop = 0;
 	global.postResult = {};
-	global.alert = function(str) {};
+	global.alertTxt = ''; 
+	global.submitFormId = '';
+	global.alert = function(str) { global.alertTxt = str};
 	global.confirm = function(str,yesfun, nofun) { yesfun(); };
 	global.post = function(url, postData, successFun, failFun) {
 		if (global.postResult.length > 0) {
@@ -16,6 +18,7 @@ exports.init = function(window) {
 			successFun({});
 		}	
 	}	
+	global.submit = function(formId) { global.submitFormId = formId; };
 	global.working = function(show) {};
 };
 

@@ -6,6 +6,8 @@ DEFINE('NO','Nem');
 DEFINE('CANCEL','Mégsem');
 DEFINE('CLOSE','Bezár');
 DEFINE('TITLE','Cím');
+DEFINE('LOGIN','Bejelentkezés');
+DEFINE('LOGOUT','Kijelentkezés');
 DEFINE('DESC','Leírás');
 DEFINE('STATE','státusz');
 DEFINE('ADMIN','adminisztrátor');
@@ -45,6 +47,11 @@ DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
 DEFINE('USER','Nick név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
+DEFINE('APPSAVED','Applikáció tárolva');
+DEFINE('ADMIN_NICK','Admin név');
+DEFINE('PSW','Jelszó');
+DEFINE('CLIENT_ID','Client_id');
+DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');
 // apps check
 DEFINE('ERROR_DOMAIN_EMPTY','Domain nevet meg kell adni');
 DEFINE('ERROR_DOMAIN_INVALID','Domain név nem megfelelő');
@@ -61,4 +68,7 @@ DEFINE('ERROR_PSW_NOTEQUAL','A két jelszó nem azonos');
 DEFINE('ERROR_UKLOGIN_HTML_NOT_EXISTS','uklog.html nem található a megadott domainen');
 DEFINE('ERROR_DATA_ACCEP_REQUEST','Adat kezelés elfogadása szükséges');
 DEFINE('ERROR_COOKIE_ACCEP_REQUEST','Cookie kezelés elfogadása szükséges');
-?>
+// login
+DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
+DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');
+DEFINE('ADMIN_LOGIN_DISABLED','Admin belépés letiltva');

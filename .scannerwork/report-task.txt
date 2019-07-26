@@ -1,7 +1,7 @@
 organization=utopszkij-github
-projectKey=utopszkij-projectmanager
+projectKey=utopszkij-uklogin
 serverUrl=https://sonarcloud.io
-serverVersion=7.8.0.25269
-dashboardUrl=https://sonarcloud.io/dashboard?id=utopszkij-projectmanager
-ceTaskId=AWsDN2K8EKlamx8hMDsG
-ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWsDN2K8EKlamx8hMDsG
+serverVersion=8.0.0.102
+dashboardUrl=https://sonarcloud.io/dashboard?id=utopszkij-uklogin
+ceTaskId=AWwqN_8-HONzCDf8Z1_c
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AWwqN_8-HONzCDf8Z1_c
