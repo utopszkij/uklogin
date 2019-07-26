@@ -1,0 +1,46 @@
+
+appregistmodel::__construct4
+*/var/www/html/uklogin/models/appregist.php ("1*a
+2
+appregist.php"K
+4
+*/var/www/html/uklogin/models/appregist.php# #(
+implicit return*æ
+
+14
+*/var/www/html/uklogin/models/appregist.php (CA
+4
+*/var/www/html/uklogin/models/appregist.php (
+$db"dbX
+V
+4
+*/var/www/html/uklogin/models/appregist.php (
+%1"db::__construct*
+
+$dbﬁ€
+4
+*/var/www/html/uklogin/models/appregist.php "(
+%2*
+
+$db*çä
+á'
+        CREATE TABLE IF NOT EXISTS `apps` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+            `client_id` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+            `client_secret` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+            `domain` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+            `callback` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+            `css` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
+            `falseLoginLimit` int(11) NOT NULL,
+            `admin` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
+            `pswhash` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
+            `adminFalseLoginLimit` int(11) NOT NULL,
+            `adminLoginEnabled` tinyint(1) NOT NULL,
+            PRIMARY KEY (`id`),
+            KEY `app_idx_client_id` (`client_id`),
+            KEY `app_idx_domain` (`domain`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci
+            '2exec*
+2B
+appregistmodel

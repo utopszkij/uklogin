@@ -1,14 +1,7 @@
+ErrorDocument 404 app.php
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-    RewriteEngine On
-    
-    RewriteCond %{REQUEST_URI} !^/app\.php
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ app.php [L]
-    
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ app.php [L]
+   RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ ./index.php?path=$1 [NC,L,QSA]
 </IfModule>

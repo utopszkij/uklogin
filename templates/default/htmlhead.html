@@ -81,4 +81,7 @@
             $.post(url, postData, successFun);
         }
     }
+    global.submit = function(formId) {
+		$('#'+formId).submit();    
+    }
     </script>

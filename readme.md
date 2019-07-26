@@ -240,4 +240,3 @@ Telepítendő fájlok
 - .config.php  (átnevezve és értelemszerüen javítva a config.txt -ből)
 - .htaccess (a htaccess.txt átnevezve)
 
-

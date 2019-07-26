@@ -328,8 +328,14 @@ function htmlPopup(): string {
     <div id="popup" style="display:none">
         <p class="alert alert-danger"></p>
         <div id="popupButtons">
-            <button type="button" id="popupYes">'.txt('YES').'</button>
-			<button type="button" id="popupNo">'.txt('NO').'</button>
+            <button type="button" id="popupYes" class="btn btn-primary">
+                <em class="fa fa-check"></em>
+                '.txt('YES').'
+            </button>
+			<button type="button" id="popupNo" class="btn btn-danger">
+                <em class="fa fa-ban"></em>
+                '.txt('NO').'
+            </button>
 			<button type="button" id="popupClose">'.txt('CLOSE').'</button>
 		</div>
     </div>

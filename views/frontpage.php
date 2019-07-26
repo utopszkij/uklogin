@@ -23,10 +23,10 @@ class FrontpageView  extends CommonView  {
 			    <div class="carousel-item active">
 			      <img class="d-block w-100" src="./templates/default/cover_1.jpg" alt="First slide">
 			      <div class="buttons">
-			      	<a href="<?php echo MYDOMAIN; ?>/opt/appregist/add">
-			      		<i class="fa fa-plus-circle"></i>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
-			      	<a href="<?php echo MYDOMAIN; ?>/opt/readme/show">
-			      		<i class="fa fa-info-circle"></i>&nbsp;<?php echo DESC; ?></a>
+			      	<a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
+			      		<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	<a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
+			      		<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
 			      </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo APPTITLE; ?></h5>
@@ -36,10 +36,10 @@ class FrontpageView  extends CommonView  {
 			    <div class="carousel-item">
 			      <img class="d-block w-100" src="./templates/default/cover_2.jpg" alt="Second slide">
 			        <div class="buttons">
-			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add">
-			      	  	<i class="fa fa-plus-circle"></i>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
-			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show">
-			      	  	<i class="fa fa-info-circle"></i>&nbsp;<?php echo DESC; ?></a>
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo APPTITLE; ?></h5>
@@ -49,10 +49,10 @@ class FrontpageView  extends CommonView  {
 			    <div class="carousel-item">
 			      <img class="d-block w-100" src="./templates/default/cover_4.jpg" alt="Third slide">
 			        <div class="buttons">
-			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add">
-			      	  	<i class="fa fa-plus-circle"></i>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
-			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show">
-			      	  	<i class="fa fa-info-circle"></i>&nbsp;<?php echo DESC; ?></a>
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo APPTITLE; ?></h5>
