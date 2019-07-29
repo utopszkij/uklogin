@@ -314,9 +314,20 @@ function txt(string $s): string {
  * must use htmlPopup() in HTML body tag    
  * @return string
  */
-function htmlHead(): string {
+function htmlHead($data = ''): string {
 	$lines = file('./templates/'.TEMPLATE.'/htmlhead.html');
-	return str_replace('{{MYDOMAIN}}',MYDOMAIN,implode("\n",$lines));
+	$s = implode("\n",$lines);
+	if (is_object($data)) {
+	    if ((isset($data->extraCss)) && ($data->extraCss != '')) {
+	        $extraCss = '<link rel="stylesheet" href="'.$data->extraCss.'">';
+	    } else {
+	        $extraCss = '<!-- extraCss -->';
+	    }
+	} else {
+	    $extraCss = '<!-- extraCss -->';
+	}
+	$s = str_replace('{{EXTRACSS}}',$extraCss,$s);
+	return str_replace('{{MYDOMAIN}}',MYDOMAIN,$s);
 }
 
 /**
@@ -341,5 +352,25 @@ function htmlPopup(): string {
     </div>
     <div id="working"><span>'.txt('WORKING').'...</span></div>
 	';    
+}
+
+/**
+ * move uploaded file to target
+ * @param string $postName
+ * @param string $target
+ * @return string - fileName in target or '';
+ */
+function getUploadedFile(string $postName, string $target): string {
+    if (isset($_FILES[$postName])) {
+        $fileName = $_FILES[$postName]['name'];
+        if (move_uploaded_file($_FILES[$postName]["tmp_name"], $target.'/'.$fileName)) {
+            $result = $fileName;
+        } else {
+            $result = '';
+        }
+    } else {
+        $ressult = '';
+    }
+    return $result;
 }
 ?>

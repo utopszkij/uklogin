@@ -114,10 +114,14 @@ class AppregistView  extends CommonView  {
     			<p>
     				<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
     				<?php echo txt('DATAPROCESS');  ?></a>&nbsp;
-    				<var><input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1"  /></var>
-    				<?php echo txt('DATAPROCESSACCEPT'); ?>&nbsp;&nbsp;
-    				<var><input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" /></var>
-    				<?php echo txt('COOKIEPROCESSACCEPT'); ?>
+    				<div style="display:inline-block; width:auto">
+    					<var><input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1"  /></var>
+    					<?php echo txt('DATAPROCESSACCEPT'); ?>&nbsp;&nbsp;
+    				</div>
+    				<div style="display:inline-block; width:auto">
+	    				<var><input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" /></var>
+    					<?php echo txt('COOKIEPROCESSACCEPT'); ?>
+    				</div>	
     			</p>
     			<?php else :?>
     			<p style="display:none">

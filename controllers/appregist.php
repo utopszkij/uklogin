@@ -223,7 +223,7 @@ class AppregistController {
 	    
 	    $hackModel = getModel('hack');
 	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
-	        echo '<p>Disabled IP '.$_SERVER['REMOTE_ADDR'].'</p>';
+	        echo '<p>Disabled IP ';
 	        exit;
 	    }
 	    

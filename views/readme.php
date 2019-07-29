@@ -166,14 +166,14 @@ class ReadmeView  extends CommonView  {
   <p>
    Miután a user megadja usernevét és jelszavát a program ellenőrzi azokat, sikeres login esetén
    <br/>
-   meghívja az app adatokban beállított callback url -t, GET paraméterként küldve: “code”, “state”, “redirect_uri”.
+   meghívja az app adatokban beállított callback url -t, GET vagy POST paraméterként küldve: “code”, “state”, “redirect_uri”.
   </p>
   <p>
    Ezután hívni kell a
    <a href="https://szeszt.tk/uklogin/oath2/access_token">
     https://szeszt.tk/uklogin/oath2/access_token
    </a>
-   url-t, GET paraméterként küldve a “client_id”, “client_secret” és “code” adatokat. Válaszként egy json stringet kapunk:
+   url-t, GET vagy POST paraméterként küldve a “client_id”, “client_secret” és “code” adatokat. Válaszként egy json stringet kapunk:
    <br/>
    {“access_token”:”xxxxxx”} vagy {“access_token”:”“, “error”:”hibaüzenet”}
   </p>
@@ -182,7 +182,7 @@ class ReadmeView  extends CommonView  {
    <a href="https://szeszt.tk/uklogin/oath2/userinfo">
     https://szeszt.tk/uklogin/oath2/userinfo
    </a>
-   címet, GET paraméterként a
+   címet, GET vagy POST paraméterként a
    <br/>
    “access_token” értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az “error” stringet.
   </p>
@@ -217,8 +217,6 @@ class ReadmeView  extends CommonView  {
    A rendszer ellenőrzi:
    <br/>
    - a feltöltött pdf alá van írva és sértetlen?
-   <br/>
-   - a feltöltött pdf tartalma az a client_id amibe regisztrálunk?
    <br/>
    - az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
    <br/>

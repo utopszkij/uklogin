@@ -3464,32 +3464,24 @@ firstornew0illuminate\database\eloquent\builder::firstornew@
 scopes,illuminate\database\eloquent\builder::scopes<
 	getmodels/illuminate\database\eloquent\builder::getmodels8
 orwhere-illuminate\database\eloquent\builder::orwhere:
-getquery.illuminate\database\eloquent\builder::getquery¶
-appregistcontroller
-addappregistcontroller::add%
-logoutappregistcontroller::logout-
-
-adminloginappregistcontroller::adminlogin+
-	appremoveappregistcontroller::appremove1
-doadminlogin!appregistcontroller::doadminlogin!
-saveappregistcontroller::save%
-removeappregistcontroller::removeX
+getquery.illuminate\database\eloquent\builder::getqueryX
 
 commonview$
 
 echonavbarcommonview::echonavbar$
 
-echofootercommonview::echofooter8
+echofootercommonview::echofooterÇ
+oauth2model
+adduseroauth2model::adduser3
+getuserbysignhashoauth2model::getuserbysignhash!
+strtohexoauth2model::strtohex+
+getuserbynickoauth2model::getuserbynick%
 
-readmeview
-commonview
-displayreadmeview::display¡
-	hackmodel
-ipenablehackmodel::ipenable'
-checkenabledhackmodel::checkenabled#
+deleteuseroauth2model::deleteuser
+checkoauth2model::check'
+__constructoauth2model::__construct%
 
-ipadderrorhackmodel::ipadderror%
-__constructhackmodel::__constructœ
+updateuseroauth2model::updateuserœ
 appregistmodel(
 
 url_existsappregistmodel::url_exists,
@@ -3502,7 +3494,42 @@ adjustdataappregistmodel::adjustdata
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
-updateafterinsert!appregistmodel::updateafterinsert‹
+updateafterinsert!appregistmodel::updateafterinsertÚ
+oauth2controller&
+doregistoauth2controller::doregist*
+
+registformoauth2controller::registform
+pdfoauth2controller::pdf,
+getsignhashoauth2controller::getsignhash:
+checksignhashexist$oauth2controller::checksignhashexist<
+processuploadedfile%oauth2controller::processuploadedfile,
+registform2oauth2controller::registform2:
+defaultcontroller%
+defaultdefaultcontroller::default2
+readmecontroller
+showreadmecontroller::show>
+frontpageview
+commonview!
+displayfrontpageview::display¶
+appregistcontroller
+addappregistcontroller::add%
+logoutappregistcontroller::logout-
+
+adminloginappregistcontroller::adminlogin+
+	appremoveappregistcontroller::appremove1
+doadminlogin!appregistcontroller::doadminlogin!
+saveappregistcontroller::save%
+removeappregistcontroller::remove8
+
+readmeview
+commonview
+displayreadmeview::display¡
+	hackmodel
+ipenablehackmodel::ipenable'
+checkenabledhackmodel::checkenabled#
+
+ipadderrorhackmodel::ipadderror%
+__constructhackmodel::__construct‹
 appregistview
 commonview'
 
@@ -3512,11 +3539,12 @@ removedmsgappregistview::removedmsg
 
 successmsgappregistview::successmsg)
 notfoundmsgappregistview::notfoundmsg#
-errormsgappregistview::errormsg:
-defaultcontroller%
-defaultdefaultcontroller::default2
-readmecontroller
-showreadmecontroller::show>
-frontpageview
-commonview!
-displayfrontpageview::display
+errormsgappregistview::errormsg°
+
+oauth2view
+commonview&
+registform1oauth2view::registform1$
+
+successmsgoauth2view::successmsg&
+registform2oauth2view::registform2 
+errormsgoauth2view::errormsg
