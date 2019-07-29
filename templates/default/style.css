@@ -1,9 +1,12 @@
 body {font-size:14px; font-family:roman; background-color:white; line-height:120%;
-   width:100%; min-height:400px;}
+   width:100%; max-width:100%; min-height:400px;}
 div {margin:0px; padding:0px; }  
 .clear {clear:both}
 .nav-item {border-style:solid; border-color:silver; border-width:0px 0px 0px 1px }
 .nav-item:hover {background-color:silver} 
+input {max-width:80%}
+
+
 #popup {cursor: move; position:fixed; z-index:99; left:50px; top:50px;
     width:auto; height:auto;
     background-color:#F0F0F0; color:black; padding:1px; border-style:solid; border-width:1px;}
@@ -47,6 +50,10 @@ form#formAdminLogin {padding:25px; margin:5px; min-height:400px}
 form#formAdminLogin label {width:150px; text-align:right}
 form#formAdminLogin input {border-style:solid; border-width:1px; border-color:silver}
    
+#registForm1 {padding:10px; height:auto}
+#registForm2 {padding:10px; height:auto}
+#registForm2 label {width:150px; text-align:left}
+   
 .successMsg {height:400px; padding:20px; }   
 /* phone */
 @media (max-width: 576px) { 
@@ -54,6 +61,9 @@ form#formAdminLogin input {border-style:solid; border-width:1px; border-color:si
     .browserPaginator .total {display:block} 
     .browserPaginator .buttons {display:block; width:100%} 
 	form#formApp label {width:250px; text-align:left}
+	.carousel-inner .buttons {display:none}
+	form#formApp label {display:block; width:auto; text-align:left}
+	form#formAdminLogin label {display:block; width:auto; text-align:left}
 }
 
 /* tablet */
@@ -61,6 +71,9 @@ form#formAdminLogin input {border-style:solid; border-width:1px; border-color:si
     .browserPaginator button.paginatorDesctop {display:inline} 
     .browserPaginator .buttons {display:inline-block; width:auto} 
 	form#formApp label {width:250px; text-align:left}
+	.carousel-inner .buttons {display:none}
+	form#formApp label {display:block;width:auto; text-align:left}
+	form#formAdminLogin label {display:block; width:auto; text-align:left}
 }
 
 /* desctop */

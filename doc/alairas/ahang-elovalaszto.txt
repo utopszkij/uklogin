@@ -5,7 +5,7 @@ aláírás ellenörzése és az aláíró email címének kinyerése
 
 Az aláirt pdf mellékletként tartalmaz egy igazolas.pdf -et. 
 Ez utobbi pedig ugyancsak mellékletknt egy meghatalamazo.xml -t.
-Ez utobbi pedig az aéáírást lezdeményező user ügyfélkapus email címét.
+Ez utobbi pedig az aláírást kezdeményező user ügyfélkapus email címét.
 
 
 https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR1VTYVoJ3zQhvuEngE9eAHZpMqpOEH3KT1ooROYZLzjPAl3fmF_yDVI5Qs
@@ -20,13 +20,12 @@ function __($txt) {
 }
 /**
 * @param pdf file full path
-* @param userId
+* @param userId -- talán a session ID is megfele ide
 * @return ['result' => 'error'|email, 'message' => '...']
 */
 function signCheck($filePath, $uid) {
         $email = '';
         $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath)));
-        unlink($filePath);
         $igazolasPWD = escapeshellarg(__DIR__ . DS . 'pdfs' . DS . $uuid);
 		  $xmlArray = [];
 		  $result = ['result' => '', 'message' => ''];
@@ -54,13 +53,14 @@ function signCheck($filePath, $uid) {
         if ($result->result == '') {
 	        // a $igazolasPWD könyvtárban lévő igazolas.pdf fájlból kibontja a meghatalmazo.xml -t
 	        shell_exec('pdfdetach ' . $igazolasPWD . DS . 'igazolas.pdf -o ' . $igazolasPWD . ' -saveall ');
+	        unlink($igazolasPWD . DS . 'igazolas.pdf');
 			  if (!is_file($igazolasPWD . DS . 'meghatalmazo.xml)) {
 	            $result =  ['result' => 'error', 'message' => __('HIBA: Nincs meghatalmazo.xml!')];
 			  }	        
 		  }
 
         if ($result->result == '') {
-			  $xmlArray = simplexml_load_file($igazolasPWD . DS . 'meghatalmazo.xml');o.xml!')];
+			  $xmlArray = simplexml_load_file($igazolasPWD . DS . 'meghatalmazo.xml');
 	        unlink($igazolasPWD . DS . 'meghatalmazo.xml');
 	        if (isset($xmlArray['saml2p:ArtifactResponse']['saml2p:Response']['saml2p:Assertion']['saml2p:Subject']['saml2p:NameID'])) { 
 	        		$email = $xmlArray['saml2p:ArtifactResponse']['saml2p:Response']['saml2p:Assertion']['saml2p:Subject']['saml2p:NameID'];
@@ -70,7 +70,13 @@ function signCheck($filePath, $uid) {
 	        } else { 
 	        		$result = ['result' => $email, 'message' => '']; 
 	        }
+	        
 		  }
-		          
+
+        // $igalolasPWD könyvtár törlése
+	        
+        // feltöltött pdf törlése
+        unlink($filePath);
+	          
         return $result;
 }

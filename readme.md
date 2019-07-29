@@ -5,7 +5,7 @@ A fejlesztésében közreműködni kívánóknak szóló információk a [ebben 
 
 ## Készültség
 
-Fejlesztés alatt kb 5% készültség
+Fejlesztés alatt kb 10% készültség
 
 ## Élő demó:
 
@@ -88,12 +88,12 @@ A login képernyőn a szokásos kiegészitő elemek is szerepelnek:
 - cokkie kezelés elfogadtatása
 
 Miután a user megadja usernevét és jelszavát a program ellenőrzi azokat, sikeres login esetén
-meghívja az app adatokban beállított callback url -t, GET paraméterként küldve: "code", "state", "redirect_uri".
+meghívja az app adatokban beállított callback url -t, GET vagy POST paraméterként küldve: "code", "state", "redirect_uri".
 
-Ezután hívni kell a https://szeszt.tk/uklogin/oath2/access_token url-t, GET paraméterként küldve a "client_id", "client_secret" és "code" adatokat. Válaszként egy json stringet kapunk:
+Ezután hívni kell a https://szeszt.tk/uklogin/oath2/access_token url-t, GET vayg POST paraméterként küldve a "client_id", "client_secret" és "code" adatokat. Válaszként egy json stringet kapunk:
 {"access_token":"xxxxxx"} vagy {"access_token":"", "error":"hibaüzenet"}
 
-Következő lépésként hívni kell a https://szeszt.tk/uklogin/oath2/userinfo címet, GET paraméterként a
+Következő lépésként hívni kell a https://szeszt.tk/uklogin/oath2/userinfo címet, GET vagy POST paraméterként a
 "access_token" értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az "error" stringet.
 
 Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a login képernyő. az app -nál megadott számú sikertelen kisérlet után a fiók blokkolásra kerül, ez a user ebbe az applikációba a továbbiakban nem tud belépni. A blokkolt fiókokat az applikáció adminisztrátor tudja újra aktivizálni.
@@ -114,14 +114,8 @@ Mindezt részletes help segíti.
 
 A rendszer ellenőrzi:
 - a feltöltött pdf alá van írva és sértetlen?
-- a feltöltött pdf tartalma az a client_id amibe regisztrálunk?
 - az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
 - a választott nicknév egyedi az adott applikációban?
-
-Hiba esetén hibaüzenet és a hiba jellegétől függően vagy
-- a nicknév/jelszó megadó képernyő jelenik meg (nick név már létezik vagy formailag hibás nicknév/jelszó) vagy 
-- a regsiztrálás kezdő képernyője jelenik meg (pdf aláírás hiba, pdf tartalom hiba) vagy 
-- a login képernyő jelenik meg (ezzel az ügyfélkapu belépéssel már történt regisztráció ebbe az applikációba).
 
 ### Elfelejtett jelszó kezelés folyamata
 
@@ -133,10 +127,9 @@ A teljes regisztrációt kell a usernek megismételnie, azzal az egy különbsé
 #### Az app adminisztrátorokkal kapcsolatban a rendszer a következő adatokat tárolja:
 - nicknév
 - jelszó hash
-- email
 - kezelt app adatai
 
-Mint látható az adminisztrátor valós személyt azonosító adat (név, lakcím, okmány azonosító) nincs tárolva. Mivel az email cím személyes adat, egyes értelmezések szerint ez így is a GDPR hatálya alá tartozik. Tehát erre vonatkozó tájékoztatás jelenik meg, és az admin -nak ezt el kell fogadnia. Lehetősége van a tárolt adatait lekérdezni, és azokat törölni is - ez utóbbi egyúttal az applikáció törlését is jelenti.
+Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
 
 #### a "normál" felhasználókkal kapcsolatban tárolt adatok ("users" tábla):
 - nick név
@@ -145,6 +138,8 @@ Mint látható az adminisztrátor valós személyt azonosító adat (név, lakc�
 - ügyfélkapunál megadott email hash
 
 Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
+
+Megjegyzés: A feldolgozás során - technikai okokból - néhány másodpercig a rendszer tárolja az aláírt pdf fájlt és  az abban lévő csatolmányokat. Ezek tartalmazzák az aláíró személy nevét és az ügyfélkapuban használt email címét valamint az aláírás időpontját. Ezen adatok közül a rendszer kizárólag az ügyfélkapus email cím sha256 algoritmussal képzett hash kódját használja és tárolja adatbázisában. Az aláírt pdf fájlt és csatolmányait az ügyfélkapus email cím kinyerése és hashalése után azonnal törli, magát az email címet nem tárolja.
 
 #### cookie kezelés
 A működéshez egy darab un. "munkamenet cookie" használata szükséges, erről tájékoztatás jelenik meg és a felhasználónak ezt el kell fogadnia.
@@ -222,7 +217,14 @@ https://sonarcloud.io/dashboard?id=utopszkij-uklogin
 
 ## Telepítés web szerverre
 
+### Rendszer igény:
+PHP 7.1+  shell_exec funkciónak engedélyezve kell lennie
+MYSQL 5.7+
+web server (.htaccess értelmezéssel)
+commandshell: pdfsig, pdfdetach
+
 Létrehozandő MYSQL adatbázis: ** uklogin ** (utf8, magyar rendezéssel)
+
 
 Telepítendő  könyvtárak:
 - controllers

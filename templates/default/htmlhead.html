@@ -5,10 +5,9 @@
     <meta charset="utf-8">
     <meta name="title" content="Ügyfélkapus login rendszer">
     <meta name="description" content="web szolgáltatás e-demokrácia programok számára. Regisztráció ügyfélkapus aláírás segitségével.">
-    <meta name="viewport" content="width=1240px, initial-scale=1">
+    <meta name="viewport" content="width=auto, initial-scale=1">
     <title>uklogin</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="./templates/default/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
@@ -26,8 +25,8 @@
 	 <!-- font -->
 	 <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
  	 <!-- main css -->
- 	 <link rel="stylesheet" href="<?php echo JURI::base(); ?>templates/utopszkij/css/template.css">
-    
+     <link rel="stylesheet" href="./templates/default/style.css">
+     {{EXTRACSS}}
     <script type="text/javascript">
     var global = {};
     global.alert = function(str) {
