@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1564399363">
-  <project timestamp="1564399363">
+<coverage generated="1564401445">
+  <project timestamp="1564401445">
     <file name="/var/www/html/uklogin/controllers/appregist.php">
       <class name="AppregistController" namespace="global">
         <metrics complexity="26" methods="7" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="155" coveredstatements="134" elements="162" coveredelements="136"/>

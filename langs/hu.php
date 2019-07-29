@@ -77,6 +77,7 @@ DEFINE('APPSAVED','Applikáció tárolva<br />A client_id és Client_secret adat
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('PSW','Jelszó');
+DEFINE('USER_SAVED','Felhasználói fiók létrehozva');
 DEFINE('CLIENT_ID','Client_id');
 DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');
 // apps check
@@ -89,6 +90,8 @@ DEFINE('ERROR_CALLBACK_INVALID','Visszahívási URL nem megfelelő');
 DEFINE('ERROR_CALLBACK_NOT_IN_DOMAIN','Visszahívási URL nem a megadott domainben van');
 DEFINE('ERROR_CSS_INVALID','CSS URL nem megfelelő');
 DEFINE('ERROR_ADMIN_EMPTY','Adminisztrátor belépési nevet meg kell adni');
+DEFINE('ERROR_NICK_EMPTY','Bejelentkezési nevet meg kell adni');
+DEFINE('ERROR_NICK_EXISTS','Ezzel a bejelentkezési névvel már regisztráltak!');
 DEFINE('ERROR_PSW_EMPTY','Jelszavat meg kell adni');
 DEFINE('ERROR_PSW_INVALID','A jelszó túl rövid (min.6 karakter kell)');
 DEFINE('ERROR_PSW_NOTEQUAL','A két jelszó nem azonos');
@@ -103,3 +106,4 @@ DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapú aláírással már regisz
 DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
 DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');
 DEFINE('ADMIN_LOGIN_DISABLED','Admin belépés letiltva');
+DEFINE('USER_LOGIN_DISABLED','Belépés letiltva');
