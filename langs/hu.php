@@ -102,7 +102,7 @@ DEFINE('ERROR_NOTFOUND','Nincs ilyen');
 DEFINE('ERROR_PDF_NOT_UPLOADED','Nincs aláírt fájl feltöltve');
 DEFINE('ERROR_PDF_SIGN_ERROR','A pdf nincs aláírva, vagy az aláírás nem  megfelelő');
 DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapú aláírással már regisztráltak!');
-// login
+//  login
 DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
 DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');
 DEFINE('ADMIN_LOGIN_DISABLED','Admin belépés letiltva');
