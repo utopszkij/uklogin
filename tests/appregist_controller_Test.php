@@ -36,7 +36,7 @@ class appregistControllerTest extends TestCase
     public function test_save_domainEmpty() {
         // a balmix.hu -n van uklogin.html
         $this->request = new Request();
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('client_id','');
         $this->request->set('domain','');
@@ -55,7 +55,7 @@ class appregistControllerTest extends TestCase
     public function test_save_ok() {
         // a balmix.hu -n van uklogin.html
         $this->request = new Request();
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('client_id','');
         $this->request->set('domain','https://balmix.hu');
@@ -81,7 +81,7 @@ class appregistControllerTest extends TestCase
     public function test_doadminlogin_OK() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
         $table->where(['domain','=','https://balmix.hu']);
         $rec = $table->first();
@@ -97,7 +97,7 @@ class appregistControllerTest extends TestCase
     public function test_doadminlogin_INVALID_PSW() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
         $table->where(['domain','=','https://balmix.hu']);
         $rec = $table->first();
@@ -113,7 +113,7 @@ class appregistControllerTest extends TestCase
     public function test_doadminlogin_INVALID_NICK() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
         $table->where(['domain','=','https://balmix.hu']);
         $rec = $table->first();
@@ -129,7 +129,7 @@ class appregistControllerTest extends TestCase
     public function test_doadminlogin_INVALID_CLINET_ID() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
         $table->where(['domain','=','https://balmix.hu']);
         $rec = $table->first();
@@ -145,7 +145,7 @@ class appregistControllerTest extends TestCase
     public function test_appremove_OK() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
         $table->where(['domain','=','https://balmix.hu']);
         $rec = $table->first();
@@ -159,7 +159,7 @@ class appregistControllerTest extends TestCase
     public function test_appremove_NOTFOUND() {
         $this->request = new Request();
         $this->request->set('123','1');
-        $this->request->sessionSet('csrtoken','123');
+        $this->request->sessionSet('csrToken','123');
         $this->request->set('client_id','nincsilyen');
         $this->controller->appremove($this->request);
         $this->expectOutputRegex('/ERROR_NOTFOUND/');

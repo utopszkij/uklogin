@@ -14,4 +14,5 @@ define('MYSQLDB','test');
 define('MYSQLLOG',true);
 define('REFRESHMIN',2);
 define('REFRESHMAX',10);
+define('CODE_EXPIRE',120);
 ?>

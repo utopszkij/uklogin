@@ -5,7 +5,7 @@ A fejlesztésében közreműködni kívánóknak szóló információk a [ebben 
 
 ## Készültség
 
-Fejlesztés alatt kb 10% készültség
+Fejlesztés alatt kb 20% készültség
 
 ## Élő demó:
 
@@ -59,7 +59,6 @@ Az applikációt web felületen lehet regisztrálni. A megadandó adatok:
 - css file url (lehet üres is)
 - applikáció adminisztrátor username
 - applikáció adminisztrátor jelszó (kétszer kell beirni)
-- applikáció adminisztrátor email
 - sikertelen admin login limit
 
 A képernyőn van adatkezelés elfogadtatás és cookie engedélyeztetés is.
@@ -94,7 +93,8 @@ Ezután hívni kell a https://szeszt.tk/uklogin/oath2/access_token url-t, GET va
 {"access_token":"xxxxxx"} vagy {"access_token":"", "error":"hibaüzenet"}
 
 Következő lépésként hívni kell a https://szeszt.tk/uklogin/oath2/userinfo címet, GET vagy POST paraméterként a
-"access_token" értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az "error" stringet.
+"access_token" értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az "error" stringet:
+{"nick":"xxxx"} vagy {"error":"not found"}
 
 Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a login képernyő. az app -nál megadott számú sikertelen kisérlet után a fiók blokkolásra kerül, ez a user ebbe az applikációba a továbbiakban nem tud belépni. A blokkolt fiókokat az applikáció adminisztrátor tudja újra aktivizálni.
 
@@ -148,12 +148,6 @@ A működéshez egy darab un. "munkamenet cookie" használata szükséges, errő
 
 ### user login brute force támadás
 Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.
-
-### oAuth access_token hívás brute force támadás
-Az azonos IP címről érkező 10 egymást követő hibás hívás után az IP cím blokkolásra kerül. Ezt az "ügyfélkapus-login" rendszer főadminisztrátora tudja feloldani.
-
-### oAuth userinfo hívás brute force támadás
-Az azonos IP címről érkező 10 egymást követő hibás hívás után az IP cím blokkolásra kerül. Ezt az "ügyfélkapus-login" rendszer főadminisztrátora tudja feloldani.
 
 ## SQL táblák
 

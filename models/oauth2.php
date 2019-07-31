@@ -22,9 +22,9 @@ class Oauth2Model {
             ');
         
         // clear old code and access_token
-        $w = date('Y-m-d H:i:s', (time() - 120));
+        $w = date('Y-m-d H:i:s', (time() - CODE_EXPIRE));
         $db->exec('UPDATE users
-        SET code="", access_token=""
+        SET code="", access_token="", codetime=""
         WHERE codetime < "'.$w.'"');
     }
     
@@ -78,6 +78,46 @@ class Oauth2Model {
         }
     }
     
+    /**
+     * get user data by code
+     * @param string $client_id
+     * @return object|false
+     */
+    public function getUserByCode(string $code) {
+        $db = new DB();
+        $table = $db->table('users');
+        $table->where(['code','=',$code]);
+        $rec = $table->first();
+        if ($rec) {
+            $rec->code = '';
+            $table->update($rec);
+            return $rec;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * get user data by access_tokern
+     * @param string $access_token
+     * @return object|false
+     */
+    public function getUserByAccess_token(string $access_token) {
+        $db = new DB();
+        $table = $db->table('users');
+        $table->where(['access_token','=',$access_token]);
+        $rec = $table->first();
+        if ($rec) {
+            $rec->code = '';
+            $rec->access_token = '';
+            $rec->codetime = '';
+            $table->update($rec);
+            return $rec;
+        } else {
+            return false;
+        }
+    }
+    
     public function check($rec): array {
         $result = [];
         if ($rec->nick == '') {
@@ -118,7 +158,15 @@ class Oauth2Model {
     }
     
     public function updateUser($rec): array {
-        return ['nincs kész'];
+        $table = new Table('users');
+        $table->where(['id','=',$rec->id]);
+        $table->update($rec);
+        $msg = $table->getErrorMsg();
+        $msgs = [];
+        if ($msg != '') {
+            $msgs[] = $msg;
+        }
+        return $msgs;;
     }
     
     public function deleteUser($rec): array {

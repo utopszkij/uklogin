@@ -44,7 +44,7 @@ class AppregistView  extends CommonView  {
     			method="post" target="_self">
     			<input type="hidden" name="option" value="appregist" />
     			<input type="hidden" name="task" id="task" value="save" />
-    			<input type="hidden" name="{{csrtoken}}" value="1" />
+    			<input type="hidden" name="{{csrToken}}" value="1" />
     			<input type="hidden" name="client_id" id="client_id" value="{{client_id}}" />
     			<input type="hidden" name="client_secret" id="client_secret" value="{{client_secret}}" />
     			<input type="hidden" name="id" id="id" value="{{id}}" />
@@ -170,6 +170,7 @@ class AppregistView  extends CommonView  {
 	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
 	    	<p>Client_id: <?php echo $res->client_id; ?></p>
 	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
+	    	<p><?php echo txt('ADMININFO'); ?></p>
 	    </div>
 		<?php $this->echoFooter(); ?>
         </body>
@@ -263,7 +264,7 @@ class AppregistView  extends CommonView  {
     			 action="<?php echo txt('MYDOMAIN'); ?>/index.php" method="post" target="_self">
     			<input type="hidden" name="option" value="appregist" />
     			<input type="hidden" name="task" value="doadminlogin" />
-    			<input type="hidden" name="{{csrtoken}}" value="1" />
+    			<input type="hidden" name="{{csrToken}}" value="1" />
                 <p>
                 		<label><?php echo txt('CLIENT_ID'); ?></label>
                 		<input type="text" name="client_id" id="client_id" value="" size="32" />

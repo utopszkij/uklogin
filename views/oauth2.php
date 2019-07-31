@@ -87,8 +87,6 @@ class Oauth2View  extends CommonView  {
 				</p>
 				<p>
 					<button type="submit" class="btn btn-primary"><?php echo txt('NEXTSTEP'); ?></button>
-					&nbsp;
-					<button type="button" class="btn btn-secondary" id="btnCancel"><?php echo txt('CANCEL'); ?></button>
 				</p>
 			</form>		    
 	    </div>
@@ -145,8 +143,60 @@ class Oauth2View  extends CommonView  {
 				</p>
 				<p>
 					<button type="submit" class="btn btn-primary"><?php echo txt('OK'); ?></button>
-					&nbsp;
-					<button type="button" class="btn btn-secondary" id="btnCancel"><?php echo txt('CANCEL'); ?></button>
+				</p>
+			</form>		    
+	    </div>
+		</body>
+        </html>
+        <?php 
+	}
+	
+	public function loginform($data) {
+	    echo htmlHead($data);
+	    ?>
+        <body ng-app="app">
+	    <div id="loginForm">
+		    <h2><?php echo $data->appName; ?></h2>
+		    <?php if (count($data->msgs) > 0) : ?>
+		    	<p class="alert alert-danger">
+		    	<?php
+		    	foreach($data->msgs as $msg) {
+		    	    echo $msg.'<br />';
+		    	}
+		    	?>
+		    	</p>
+		    <?php endif; ?>
+			<form name="formLogin" id="formLogin" 
+				action="<?php echo MYDOMAIN; ?>/index.php" method="post" 
+				target="_self">
+				<input type="hidden" name="option" id="option" value="oauth2" />
+				<input type="hidden" name="task" id="task" value="dologin" />
+				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
+				<p>
+					<label><?php echo txt('USER'); ?></label>
+					<input type="text" name="nick" value="<?php echo $data->nick; ?>"
+					   value="<?php $data->nick ?>?>" />
+				</p>
+				<p>
+					<label><?php echo txt('LBL_PSW3'); ?></label>
+					<input type="password" name="psw1" value="" />
+				</p>
+				<p>
+					<button type="submit" class="btn btn-primary"><?php echo txt('LOGIN'); ?></button>
+				</p>
+				<p>
+				<a href="" onclick="$('#option').val('userregist'); $('#task').val('forgetpsw'); $('#formLogin').submit();">
+					<?php echo txt('FORGET_PSW');  ?>
+				</a><br />
+				<a href="" onclick="$('#option').val('userregist');  $('#task').val('changepsw'); $('#formLogin').submit();">
+					<?php echo txt('CHANGE_PSW');  ?>
+				</a><br />
+				<a href="" onclick="$('#option').val('userregist');  $('#task').val('mydata'); $('#formLogin').submit();">
+					<?php echo txt('MY_DATA');  ?>
+				</a><br />
+				<a href=""  onclick="$('#option').val('userregist');  $('#task').val('deleteaccount'); $('#formLogin').submit();">
+					<?php echo txt('DELETE_ACCOUNT');  ?>
+				</a><br />
 				</p>
 			</form>		    
 	    </div>
