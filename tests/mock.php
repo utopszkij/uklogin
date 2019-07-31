@@ -76,4 +76,16 @@ function getUploadedFile(string $postName, string $targetDir): string {
     return $result;
 }
 
+function createCsrToken($request, $data) {
+    $request->sessionSet('csrToken','testCsrToken');
+    $data->csrToken = 'testCsrToken';
+}
+
+function checkCsrToken($request) {
+    if ($request->input($request->sessionget('csrToken')) != 1) {
+        echo '<p>invalid csr token</p>'.JSON_encode($request);
+        exit();
+    }
+}
+
 ?>

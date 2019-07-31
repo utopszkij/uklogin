@@ -10,4 +10,5 @@ define('MYSQLDB','uklogin');
 define('MYSQLLOG',false);
 define('MYDOMAIN','http://*********');
 define('MYPATH','***************');
+define('CODE_EXPIRE',120); // code és access_token lejárati idő másodpercben
 ?>

@@ -48,7 +48,6 @@ while ($i < count($w)) {
     }
 }
 
-
 $request = new Request();
 foreach ($_POST as $name => $value) {
 	$request->set($name,$value);

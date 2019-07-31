@@ -110,8 +110,6 @@ class ReadmeView  extends CommonView  {
    <br/>
    - applikáció adminisztrátor jelszó (kétszer kell beirni)
    <br/>
-   - applikáció adminisztrátor email
-   <br/>
    - sikertelen admin login limit
   </p>
   <p>
@@ -184,7 +182,8 @@ class ReadmeView  extends CommonView  {
    </a>
    címet, GET vagy POST paraméterként a
    <br/>
-   “access_token” értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az “error” stringet.
+   “access_token” értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az “error” stringet:
+   {"nick":"xxxx"} vagy {"error":"not found"}
   </p>
   <p>
    Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a login képernyő. az app -nál megadott számú sikertelen kisérlet után a fiók blokkolásra kerül, ez a user ebbe az applikációba a továbbiakban nem tud belépni. A blokkolt fiókokat az applikáció adminisztrátor tudja újra aktivizálni.
@@ -291,13 +290,7 @@ class ReadmeView  extends CommonView  {
 	<h3>user login brute force támadás</h3>
 	<p>Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.</p>
 
-	<h3>oAuth access_token hívás brute force támadás</h3>
-	<p>Az azonos IP címről érkező 10 egymást követő hibás hívás után az IP cím blokkolásra kerül. Ezt az "ügyfélkapus-login" rendszer főadminisztrátora tudja feloldani.</p>
-
-	<h3>oAuth userinfo hívás brute force támadás</h3>
-	<p>Az azonos IP címről érkező 10 egymást követő hibás hívás után az IP cím blokkolásra kerül. Ezt az "ügyfélkapus-login" rendszer főadminisztrátora tudja feloldani.</p>
-        	
-         </div><!-- #scope -->
+	     </div><!-- #scope -->
 		   <?php $this->echoFooter(); ?>
          <?php loadJavaScriptAngular('frontpage',$p); ?>
         </body>

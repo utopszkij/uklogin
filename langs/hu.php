@@ -70,12 +70,14 @@ DEFINE('DATAPROCESSACCEPT','Adat kezelés elfogadása');
 DEFINE('COOKIEPROCESSACCEPT','Munkamenet cookie engedélyezése');
 DEFINE('SECRETINFO','Annak igazolására, hogy az app. regisztrálását az adott rendszer rendszergazdája végzi, a megadott domainre, a fő könyvtárba fel kellett töltenie egy <strong>"uklogin.html</strong> fájlt, aminek tartalma egyetlen sor: <strong>uklogin</strong>.');
 DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
-DEFINE('USER','Nick név');
+DEFINE('USER','Bejelentkezési név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
 DEFINE('APPSAVED','Applikáció tárolva<br />A client_id és Client_secret adatot jegyezze fel és gondosan örizze meg! Szükség lesz rá a továbbiakban.');
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
+DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
+ adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához és adminisztrálásához szükség lesz rájuk.')
 DEFINE('PSW','Jelszó');
 DEFINE('USER_SAVED','Felhasználói fiók létrehozva');
 DEFINE('CLIENT_ID','Client_id');
@@ -106,4 +108,9 @@ DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapú aláírással már regisz
 DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
 DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');
 DEFINE('ADMIN_LOGIN_DISABLED','Admin belépés letiltva');
+DEFINE('LOGIN_DISABLED','Ez a fiók zárolva van');
 DEFINE('USER_LOGIN_DISABLED','Belépés letiltva');
+DEFINE('FORGET_PSW','Elfelejtettem a jelszavam');
+DEFINE('CHANGE_PSW','Megváltoztatom a jelszavam');
+DEFINE('MY_DATA','Tárolt adataim lekérdezése');
+DEFINE('DELETE_ACCOUNT','Fiókom (tárolt adataim) törlése');

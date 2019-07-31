@@ -2,7 +2,7 @@
 class Oauth2Controller {
     
     /**
-     * user egist első képernyő (pdf letöltési link, aláirt pdf feltöltési form, help)
+     * user regist első képernyő (pdf letöltési link, aláirt pdf feltöltési form, help)
      * client_id tárolása sessionba
      * app->css -t használja
      * @param Request $request - client_id
@@ -15,13 +15,12 @@ class Oauth2Controller {
         $client_id = $request->input('client_id','?');
         $app = $appModel->getData($client_id);
         if ($app) {
+            $data = new stdClass();
             // create csrr token
-            $request->sessionSet('csrToken', random_int(1000000,9999999));
+            createCsrToken($request, $data);
             // save client_id a sessionba
             $request->sessionSet('client_id', $client_id);
             // képernyő kirajzolás
-            $data = new stdClass();
-            $data->csrToken = $request->sessionGet('csrToken','');
             $data->client_id = $client_id;
             $data->appName = $app->name;
             $data->extraCss = $app->css;
@@ -130,7 +129,7 @@ class Oauth2Controller {
 	}
 	
 	/**
-	 * get signHash from upladed signed_pdf file
+	 * signHash kinyerése a feltöltött aláírt pdf fájlból
 	 * @param Request $request {signed_pdf}
 	 * @param string $tmpDir
 	 * @return object {error, signHash}
@@ -186,10 +185,7 @@ class Oauth2Controller {
 	    $view = getView('oauth2');
 	    
 	    // csrttoken ellnörzés
-	    if ($request->input( $request->sessionGet('csrToken',''),'') != 1) {
-	        echo '<p>invalid csr token</p>';
-	        exit();
-	    }
+	    checkCsrToken($request);
 	    
 	    // client_id sessionból
 	    $client_id = $request->sessionGet('client_id','');
@@ -241,13 +237,12 @@ class Oauth2Controller {
 	    }
 	    
 	    if ($res->error == '') {
+	        $data = new stdClass();
+	        createCsrToken($request, $data);
 	        $request->sessionSet('signHash', $res->signHash);
-	        $request->sessionSet('csrToken', random_int(1000000,9999999));
 	        $request->sessionSet('client_id', $client_id);
 	        // képernyő kirajzolás
-	        $data = new stdClass();
 	        $data->msgs = [];
-	        $data->csrToken = $request->sessionGet('csrToken','');
 	        $data->appName = $app->name;
 	        $data->extraCss = $app->css;
 	        $data->nick = '';
@@ -271,11 +266,8 @@ class Oauth2Controller {
 	    $view = getView('oauth2');
 	    
 	    // csrttoken ellnörzés
-	    if ($request->input( $request->sessionGet('csrToken',''),'') != 1) {
-	        echo '<p>invalid csr token</p>';
-	        exit();
-	    }
-	    
+	    checkCsrToken($request);
+	    	    
 	    // client_id és signHash sessionból
 	    $client_id = $request->sessionGet('client_id','');
 	    $signHash = $request->sessionGet('signHash','');
@@ -285,8 +277,8 @@ class Oauth2Controller {
 	    }
 	    
 	    $app = $appModel->getData($client_id);
-	    // kitöltés ellenörzések
 	    $data = new stdClass();
+	    // kitöltés ellenörzések
 	    $data->client_id = $client_id;
 	    $data->signHash = $signHash;
 	    $data->nick = $request->input('nick','');
@@ -294,10 +286,9 @@ class Oauth2Controller {
 	    $data->psw2 = $request->input('psw2','');
 	    $msgs = $model->check($data);
 	    if (count($msgs) > 0) {
+	        createCsrToken($request, $data);
 	        $request->sessionSet('signHash', $data->signHash);
-	        $request->sessionSet('csrToken', random_int(1000000,9999999));
 	        $request->sessionSet('client_id', $data->client_id);
-	        $data->csrToken = $request->sessionGet('csrToken','');
 	        $data->appName = $app->name;
 	        $data->extraCss = $app->css;
 	        $data->msgs = $msgs;
@@ -317,17 +308,211 @@ class Oauth2Controller {
 	       if (count($msgs) == 0) {
 	           $view->successMsg(['USER_SAVED']);
 	       } else {
+	           createCsrToken($request, $data);
 	           $request->sessionSet('signHash', $data->signHash);
-	           $request->sessionSet('csrToken', random_int(1000000,9999999));
 	           $request->sessionSet('client_id', $data->client_id);
-	           $data->csrToken = $request->sessionGet('csrToken','');
 	           $data->appName = $app->name;
 	           $data->extraCss = $app->css;
 	           $data->msgs = $msgs;
 	           $data->title = 'LBL_REGISTFORM2';
+	           $data->psw1 = '';
+	           $data->psw2 = '';
 	           $view->registForm2($data);
 	       }
 	    }
 	}
+	
+	/**
+	 * echo loginform
+	 * @param Request $request - client_id és más paraméterek is jöhetnek, ezeket sessionba tárolja
+	 * @return void
+	 */
+	public function loginform($request) {
+	    $appModel = getModel('appregist');
+	    $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
+	    $view = getView('oauth2');
+	    $client_id = $request->input('client_id','');
+	    $app = $appModel->getData($client_id);
+	    if ($app) {
+	        $data = new stdClass();
+	        createCsrToken($request, $data);
+	        $request->sessionSet('client_id', $client_id);
+	        
+	        // egyébb érkező paraméterek tárolása
+	        $extraParams = [];
+	        foreach ($_GET as $fn => $fv) {
+	            if ($fn != 'client_id') {
+	                $extraParams[$fn] = $fv;
+	            }
+	        }
+	        foreach ($_POST as $gn => $fv) {
+	            if ($fn != 'client_id') {
+	                $extraParams[$fn] = $fv;
+	            }
+	        }
+            $request->sessionSet('extraParams',$extraParams);
+	        
+	        $data->appName = $app->name;
+	        $data->extraCss = $app->css;
+	        $data->nick = '';
+	        $data->psw1 = '';
+	        $data->msgs = [];
+	        $view->loginform($data);
+	    } else {
+	        $view->errorMsg(['ERROR_NOTFOUND']);
+	    }
+	}
+	
+	/**
+	 * Login képernyő ujboli kirajzolás hiba esetén
+	 * @param Request $request
+	 * @param View $view
+	 * @param App $app
+	 * @param array $msgs
+	 * @return void
+	 */
+	protected function recallLoginForm(&$request, &$view, &$app, $msgs) {
+	    $data = new stdClass();
+	    createCsrToken($request, $data);
+	    $data->appName = $app->name;
+	    $data->extraCss = $app->css;
+	    $data->nick = $request->input('','');
+	    $data->psw1 = '';
+	    $data->msgs = $msgs;
+	    $view->loginform($data);
+	}
+	
+	/**
+	 * login képernyő feldolgozása
+	 * sessionban érkezik a client_id
+	 * @param Request $request csrToken, nick, psw1
+	 * @return string -- for unittest: return code
+	 */
+	public function dologin($request): string {
+	    
+	    checkCsrToken($request);
+	    
+	    $appModel = getModel('appregist');
+	    $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
+	    $view = getView('oauth2');
+	    $client_id = $request->sessionGet('client_id','');
+	    $nick = $request->input('nick','');
+	    $psw = $request->input('psw1','');
+	    $user = $model->getUserByNick($client_id, $nick);
+	    $app = $appModel->getData($client_id);
+	    if ($app == '') {
+	        // nem jó client_id van a sessionban!
+	        echo '<p class="alert alert-danger">Invalid client_id</p>'; exit();
+	    }
+	    
+	    if ($user) {
+	        // letiltott user
+	        if ($user->enabled == 0) {
+	            // login képernyő visszahívása
+	            $request->sessionSet('client_id', $client_id);
+	            $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', 0] );
+	        } else if ($user->pswhash == hash('sha256', $psw, false)) {
+    	        // sikeres login, code és accessToken generálás, callback visszahívás
+    	        $user->code = md5(random_int(1000000, 5999999)).$user->id;
+    	        $user->access_token = md5(random_int(6000000, 9999999)).$user->id;
+    	        $user->codetime = date('Y-m-d H:i:s');
+    	        $model->updateUser($user);
+    	        $url = $app->callback;
+    	        if (strpos($url, '?') > 0) {
+    	            $url .= '&';
+    	        } else {
+    	            $url .= '?';
+    	        }
+    	        $url .= 'code='.$user->code;
+    	        
+    	        // extra paraméterek feldolgozása
+    	        $extraParams = $request->sessionGet('extraParams',[]);
+    	        if (count($extraParams) > 0) {
+    	            foreach ($extraParams as $fn => $fv) {
+    	                if (strpos($url, '?') > 0) {
+    	                    $url .= '&';
+    	                } else {
+    	                    $url .= '?';
+    	                }
+    	                $url .= $fn.'='.$fv;
+    	            }
+    	         }
+    	         if (!headers_sent()) {
+    	           header('Location:'.$url.'", true, 301');
+    	         } else {
+    	            echo 'headers sent. Not redirect '.$url; 
+    	            return $user->code;
+    	         }
+	        } else {
+	            // jelszó hiba
+	            $user->errorcount++;
+	            if ($user->errorcount >= $app->falseLoginLimit) {
+	                $user->enabled = 0;
+	            }
+	            $tryCount = $app->falseLoginLimit - $user->errorcount;
+	            $model->updateUser($user);
+	            // login képernyő visszahívása
+	            $request->sessionSet('client_id', $client_id);
+	            $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	        }
+	    } else {
+	        // nick név hiba
+	        $tryCount = 10;
+	        // login képernyő visszahívása
+	        $request->sessionSet('client_id', $client_id);
+	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	    }
+	    return '';
+	}
+	
+	/**
+	 * oAuth2 backend function  
+	 * echo  {"access_token":"xxxxx"} vagy {"error":"xxxxxx"}
+	 * @param Request $request code, client_id, client_secret
+	 * @return string access_token  -- only for unittest
+	 */
+	public function access_token($request) {
+	    $code = $request->input('code');
+	    $client_id = $request->input('client_id');
+	    $client_secret = $request->input('client_secret');
+	    $appModel = getModel('appregist');
+	    $model = getModel('oauth2'); 
+	    $user = $model->getUserByCode($code);
+	    $app = $appModel->getData($client_id);
+	    
+	    $access_token = '';
+	    if (($app) && ($user)) {
+	        if (($app->client_secret == $client_secret) && 
+	            ($user->enabled == 1) &&
+	            ($user->client_id == $app->client_id)) {
+	            $access_token = $user->access_token;    
+                echo '{"access_token":"'.$user->access_token.'"}';	            
+	        } else {
+	            echo '{"error":"client_secret invalid"}';
+	        }
+	    } else {
+	        echo '{"error":"client_id or code invalid"}';
+	    }
+	    return $access_token;
+	}
+	
+	/**
+	 * oAuth2 backend function 
+	 * echo {"nickname":"..."} vagy {"error":"not found"}
+	 * @param Request $request   access_token
+	 * @return void
+	 */
+	public function userinfo($request) {
+        $access_token = $request->input('access_token');
+        $model = getModel('oauth2'); 
+        $rec = $model->getUserByAccess_token($access_token);
+        
+        if ($rec) {
+            echo '{"nick":"'.$rec->nick.'"}';
+        } else {
+            echo '{"error":"not found"}';
+        }
+	}
+	
 }
 ?>

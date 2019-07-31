@@ -53,6 +53,10 @@ form#formAdminLogin input {border-style:solid; border-width:1px; border-color:si
 #registForm1 {padding:10px; height:auto}
 #registForm2 {padding:10px; height:auto}
 #registForm2 label {width:150px; text-align:left}
+
+#loginForm {padding:10px; height:auto}
+#loginForm {padding:10px; height:auto}
+#loginForm label {width:150px; text-align:left}
    
 .successMsg {height:400px; padding:20px; }   
 /* phone */

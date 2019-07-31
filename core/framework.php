@@ -373,4 +373,28 @@ function getUploadedFile(string $postName, string $target): string {
     }
     return $result;
 }
+
+/**
+ * Create new csrToken tárol sessionba és $data -ba 
+ * @param Request $request
+ * @param object $data
+ * @return void
+ */
+function createCsrToken($request, &$data) {
+    $request->sessionSet('csrToken', md5(random_int(1000000,9999999)));
+    $data->csrToken = $request->sessionGet('csrToken','');
+}
+
+/**
+ * $request -ben érkező csrToken ellenörzése
+ * @param Request $request
+ * @return void
+ */
+function checkCsrToken($request) {
+    if ($request->input($request->sessionGet('csrToken')) != 1) {
+        echo '<p>invalid csr token</p> csrToken='.$request->sessionGet('csrToken').
+        ' inputban='.$request->input($request->sessionGet('csrToken'),'?');
+        exit();
+    }
+}
 ?>

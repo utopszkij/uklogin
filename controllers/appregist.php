@@ -3,9 +3,9 @@ class AppregistController {
 	public function add($request) {
 	    $request->set('sessionid','0');
 		$request->set('lng','hu');
-		$request->sessionSet('csrtoken', random_int(1000000,9999999));
-		$view = getView('appregist');
 		$data = new stdClass(); //  $data = $model->getData(....);
+		createCsrToken($request, $data);
+		$view = getView('appregist');
 		$data->option = $request->input('option','default');
 		// hibás kitöltés utáni visszahivásnál érkezhetnek form adatok is.
 		$data->msg = $request->input('msg','');
@@ -24,7 +24,6 @@ class AppregistController {
 		$data->admin = $request->input('admin','');
 		$data->adminFalseLoginLimit = $request->input('adminFalseLoginLimit','5');
 		$data->adminLoginEnabled = $request->input('adminLoginEnabled','1');
-		$data->csrtoken = $request->sessionGet('csrtoken',0);
 		$view->form($data);
 	}
 	
@@ -34,16 +33,13 @@ class AppregistController {
 	 */
 	public function save($request) {
 	    // check csrtoken
-	    $csrtoken = $request->sessionGet('csrtoken',0);
-	    if ($request->input($csrtoken,'0') != 1) {
-	        echo '<p>Invalid CSR token</p>'; exit;
-	    }
-	    // csrtoken ok
+	    checkCsrToken($request);
 	    
+	    // csrtoken ok
 	    $model = getModel('appregist');
 	    $view = getView('appregist');
 	    // $data kialakitása a $request -ből
-        $data = new stdClass();
+        $data = new stdClass(); //  $data = $model->getData(....);
         $data->id = $request->input('id','');
         $data->name = $request->input('name','');
         $data->client_id = $request->input('client_id','');
@@ -79,10 +75,8 @@ class AppregistController {
 	 */
 	public function remove($request) {
 	    // check csrtoken
-	    $csrtoken = $request->sessionGet('csrtoken',0);
-	    if ($request->input($csrtoken,'0') != 1) {
-	        echo '<p>Invalid CSR token</p>'; exit;
-	    }
+	    checkCsrToken($request);
+	    
 	    // csrtoken ok
 	    echo '<p>Remove app</p>'; 
 	}
@@ -92,11 +86,11 @@ class AppregistController {
 	 * @return void
 	 */ 
 	public function adminlogin($request) {
-	    $request->sessionSet('csrtoken', random_int(1000000,9999999));
+	    $p = new stdClass(); //  $data = $model->getData(....);
+	    createCsrToken($request, $p);
 	    $view = getView('appregist');
 	    $p = new stdClass();
 	    $p->msg = $request->input('msg','');
-	    $p->csrtoken = $request->sessionGet('csrtoken',0);
 	    $view->adminLoginForm($p); 
 	}
 	
@@ -107,11 +101,8 @@ class AppregistController {
 	 */
 	public function doadminlogin(&$request) {
 	    // check csrtoken
+	    checkCsrToken($request);
 	    $csrtoken = $request->sessionGet('csrtoken',0);
-	    if ($request->input($csrtoken,'0') != 1) {
-	        echo '<p>Invalid CSR token</p>'; 
-	        exit;
-	    }
 	    
 	    $hackModel = getModel('hack');
 	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
@@ -137,8 +128,9 @@ class AppregistController {
 	                $request->sessionSet('errorCount', 0);
 	                
 	                // app képernyő megjelenítése
-	                $request->sessionSet('csrtoken', random_int(1000000,9999999));
 	                $data = new stdClass(); 
+	                createCsrToken($request, $data);
+	                
 	                $data->option = $request->input('option','default');
 	                $data->msg = $request->input('msg','');
 	                $data->client_id = $rec->client_id;
@@ -156,7 +148,6 @@ class AppregistController {
 	                $data->admin = $rec->admin;
 	                $data->adminFalseLoginLimit = $rec->adminFalseLoginLimit;
 	                $data->adminLoginEnabled = $rec->adminLoginEnabled;
-	                $data->csrtoken = $request->sessionGet('csrtoken',0);
 	                $view->form($data);
 	        } else {
                 $error = true;
@@ -215,11 +206,7 @@ class AppregistController {
 	
 	public function appremove($request) {
 	    // check csrtoken
-	    $csrtoken = $request->sessionGet('csrtoken',0);
-	    if ($request->input($csrtoken,'0') != 1) {
-	        echo '<p>Invalid CSR token</p>';
-	        exit;
-	    }
+	    checkCsrToken($request);
 	    
 	    $hackModel = getModel('hack');
 	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
@@ -231,7 +218,6 @@ class AppregistController {
 	    // hacker hibaszámláló nullázása
 	    $hackModel->ipEnable($_SERVER['REMOTE_ADDR']);
 	    
-	    $error = false;
 	    $msg = '';
 	    $model = getModel('appregist');
 	    $view = getView('appregist');
@@ -251,5 +237,46 @@ class AppregistController {
 	        <?php
 	    }
 	}
+	
+	/**
+	 * user jelszó vátoztsatás
+	 * sessionban érkezik a client_id
+	 * @param Request $request - csrToken, nick, psw1
+	 */
+	public function changepsw($request) {
+	    echo 'nincs kész';
+	    
+	}
+	
+	/**
+	 * user tárolt adatainak lekérdezése
+	 * sessionban érkezik a client_id
+	 * @param Request $request - csrToken, nick, psw1
+	 */
+	public function mydata($request) {
+	    echo 'nincs kész';
+	    
+	}
+	
+	/**
+	 * user fiók törlése
+	 * sessionban érkezik a client_id
+	 * @param Request $request - csrToken, nick, psw1
+	 */
+	public function deleteaccount($request) {
+	    echo 'nincs kész';
+	    
+	}
+
+	/**
+	 * user fiók elfelejtett jelszó
+	 * sessionban érkezik a client_id
+	 * @param Request $request - csrToken, nick
+	 */
+	public function forgetpsw($request) {
+	    echo 'nincs kész';
+	    
+	}
+	
 }
 ?>
