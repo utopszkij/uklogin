@@ -70,7 +70,7 @@ class oauth2ControllerTest extends TestCase
     }
     
     public function test_registform2_OK() {
-        $this->request->sessionSet('client_id','123');
+        $this->request->sessionSet('client_id','503206214');
         $this->request->sessionSet('csrToken','abc');
         $this->request->set('abc',1);
         $this->controller->registform2($this->request);

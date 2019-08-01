@@ -77,7 +77,8 @@ DEFINE('APPSAVED','Applikáció tárolva<br />A client_id és Client_secret adat
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
- adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához és adminisztrálásához szükség lesz rájuk.')
+ adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához 
+ és adminisztrálásához szükség lesz rájuk.');
 DEFINE('PSW','Jelszó');
 DEFINE('USER_SAVED','Felhasználói fiók létrehozva');
 DEFINE('CLIENT_ID','Client_id');

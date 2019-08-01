@@ -214,6 +214,8 @@ class ReadmeView  extends CommonView  {
   </ol>
   <p>
    A rendszer ellenőrzi:
+   <br />
+   - a feltöltött pdf a megfelelő client_id -t tartalmazza?
    <br/>
    - a feltöltött pdf alá van írva és sértetlen?
    <br/>
@@ -248,9 +250,6 @@ class ReadmeView  extends CommonView  {
    </li>
    <li>
     jelszó hash
-   </li>
-   <li>
-    email
    </li>
    <li>
     kezelt app adatai
