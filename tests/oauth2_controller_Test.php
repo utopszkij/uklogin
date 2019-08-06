@@ -34,6 +34,12 @@ class oauth2ControllerTest extends TestCase
         $this->assertEquals('',$db->getErrorMsg());
     }
     
+    public function pdf_syntax_only() {
+        $this->request->set('client_id','nincsilyen');
+        $this->controller->pdf($this->request);
+        $this->assertEquals(1,1);
+    }
+    
     public function test_registform_notfound() {
         $this->request->set('client_id','nincsilyen');
         $this->controller->registform($this->request);

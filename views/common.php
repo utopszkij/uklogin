@@ -30,13 +30,17 @@ class CommonView {
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/adminlogin">
 			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
 			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/example.php">
+			        	<em class="fa fa-compass"></em>&nbsp;<?php echo txt('EXAMPLE'); ?></a>
+			      </li>
 			    </ul>
 			  </div>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			</nav>   
-			<p style="background-color:red; color:white">Ez a rendszer jelenleg fejlesztés alatt áll. Még nem használható! Készültség:20%</p>     
+			<p style="background-color:red; color:white">Ez a rendszer jelenleg fejlesztés alatt áll. Még nem használható! Készültség:30%</p>     
 		<?php       
      } // echoNavbar
         
@@ -64,6 +68,7 @@ class CommonView {
 				<a href="https://angularjs.org/">AngularJs</a>&nbsp;
 				<a href="https://www.fpdf.org">fpdf</a>&nbsp;
 				<a href="https://github.com/smalot/pdfparser">pdf parser</a>&nbsp;
+				<a href="https://mupdf.com">mupdf</a>&nbsp;
 		</p>
 		<p><?php echo txt('SWFORKINFO'); ?>&nbsp;
 	    	<a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA">lásd itt</a></p>

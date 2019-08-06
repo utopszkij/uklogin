@@ -1,9 +1,83 @@
-szűz ubuntura
+18.04 LTS (64 bit) ubuntura
+===========================
 
 apt-get update
+
+sudo apt-get install nano
+
+sudo apt-get install mc
+
+pdf kezelő eszközök
+-------------------
+
 install poppler-utils
-apt-get install mysql-server mysql-client libmysqlclient-dev
-apt-get install apache2 apache2-doc apache2-utils libexpat1 ssl-cert
-apt-get install php
----- konfigurálások az etc -ben
-service apache2 start
+
+LAMP telepítése
+---------------
+
+sudo apt install tasksel
+
+sudo tasksel install lamp-server
+
+sudo nano etc/apache2/mods-enabled/dir.conf -ben index.php előre helyezése 
+
+sudo service apache2 start
+
+SSL telepítése
+--------------
+(előtte már domaint kellet rá irányitani)
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+sudo apt-get install certbot python-certbot-apache
+-- kérdez email cimet, domain nevet, adatkezelés elfogadást
+-- az /etc/letsescrypt -ben vannak a dolgai
+
+FTP szerver telepítése
+----------------------
+
+sudo apt-get install vsftpd
+sudo service vsftpd start  (az ftp klienssben sftp -t kell beállítani)
+--- /etc/vsftp.conf -ban vannak a dolgai
+
+phpmyadmin telepítése
+---------------------
+
+sudo apt install phpmyadmin php-mbstring php-gettext
+
+-- létrehoz egy phpmyadmin mysql usert és kéri ennek jelszavát.-- 
+
+
+sudo service apache2 restart
+sudo service vsftpd restart
+
+
+Sajnos a pdfsig jelenleg nem müködik (jelzett bug a github -on).
+-------------------------------------
+Alternativák:
+1. mutols 
+			
+			openSSL tlepítés
+			----------------
+			
+			sudo apt-get install openssl
+			apt-cache search libssl | grep SSL
+			
+			mutools telepitése forrásból
+			----------------------------
+			
+			forrás könyvtár  feltöltés (doc almappában benne van)
+			cd forrás könyvtár
+			make HAVE_X11=no HAVE_GLUT=no prefix=/usr/local install
+			
+			ha ez nem megy akkor prefix=~ ez utobbi esetben /root/bin mutool -al futtatható
+			
+			- sajnos a teszt szerveren OPNSSL hibával ez sem müködik
+			
+2.pdf-parser.py csinál valamit, kifejti az aláírást hexa formába obj 17 0  /sig résznél
+  --- de ennek ellenörzése azt hiszem túl nagy falat lenne....
+
+

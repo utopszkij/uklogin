@@ -5,7 +5,7 @@ A fejlesztésében közreműködni kívánóknak szóló információk a [ebben 
 
 ## Készültség
 
-Fejlesztés alatt kb 20% készültség
+Fejlesztés alatt kb 30% készültség
 
 ## Élő demó:
 
@@ -73,7 +73,7 @@ Az app adatok módosításához, törléséhez természetesen az admin login sz�
 
 ### login folyamat a felhasználó web applikációban:
 ```
-<iframe ..... src="https://szeszt.tk/uklogin/oath2/loginform/client_id/<client_id>" />
+<iframe ..... src="<ukLoginDomain>/oath2/loginform/client_id/<client_id>" />
 ```
 Opcionálisan /redirect_uri/<url> és /state/xxxxx is megadható. A redirect_uri -csak az app adatoknál megadott domain-en lehet (urlencoded formában), a state tetszőleges kiegészítő infot tartalmazhat. 
 
@@ -100,7 +100,7 @@ Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a logi
 
 ### Regisztráció hívása a felhasználó web applikációban
 ```
-<iframe ..... src="https://szeszt.tk/uklogin/oauth2/registform/client_id/<client_id>" />
+<iframe ..... src="<ukLoginDomain>/oauth2/registform/client_id/<client_id>" />
 ```
 Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Sikertelen esetén hibaüzenet és újból a regisztrálás kezdő képernyője.
 

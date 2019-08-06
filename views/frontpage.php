@@ -59,7 +59,23 @@ class FrontpageView  extends CommonView  {
 			   	 	<p><?php echo APPINFO; ?></p>
 				   </div>
 			    </div>
+			    
+			    <div class="carousel-item">
+			      <img class="d-block w-100" src="./templates/default/logo.jpg" alt="Foorth slide">
+			        <div class="buttons">
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
+			        </div>
+			       <div class="carousel-caption d-none d-md-block">
+				   	<h5><?php echo APPTITLE; ?></h5>
+			   	 	<p><?php echo APPINFO; ?></p>
+				   </div>
+			    </div>
+			    
 			  </div>
+			  
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			    <span class="sr-only"><?php echo PRIOR; ?>Elöző</span>

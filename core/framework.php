@@ -380,7 +380,7 @@ function getUploadedFile(string $postName, string $target): string {
  * @param object $data
  * @return void
  */
-function createCsrToken($request, &$data) {
+function createCsrToken(&$request, &$data) {
     $request->sessionSet('csrToken', md5(random_int(1000000,9999999)));
     $data->csrToken = $request->sessionGet('csrToken','');
 }
@@ -390,10 +390,10 @@ function createCsrToken($request, &$data) {
  * @param Request $request
  * @return void
  */
-function checkCsrToken($request) {
+function checkCsrToken(&$request) {
     if ($request->input($request->sessionGet('csrToken')) != 1) {
-        echo '<p>invalid csr token</p> csrToken='.$request->sessionGet('csrToken').
-        ' inputban='.$request->input($request->sessionGet('csrToken'),'?');
+        echo '<p>invalid csr token</p> sessionban csrToken='.$request->sessionGet('csrToken','?').
+        ' inputban='.$request->input($request->sessionGet('csrToken'),'??');
         exit();
     }
 }

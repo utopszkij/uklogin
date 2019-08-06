@@ -13,7 +13,6 @@ class Oauth2Controller {
      */
     public function registform($request) {
         $appModel = getModel('appregist');
-        $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
         $view = getView('oauth2');
         $client_id = $request->input('client_id','?');
         $app = $appModel->getData($client_id);
@@ -42,7 +41,7 @@ class Oauth2Controller {
 	 */
 	public function pdf($request) {
 	    $client_id = $request->input('client_id','?');
-	    require('./core/fpdf/fpdf.php');
+	    require('./vendor/fpdf/fpdf.php');
 	    
 	    $pdf = new FPDF();
 	    $pdf->AddPage();
@@ -52,11 +51,100 @@ class Oauth2Controller {
 	}
 	
 	/**
+	 * parse pdf file
+	 * @param string $filePtah
+	 * @param string $client_id
+	 * @param object $res {error, ...}
+	 */
+	protected function parsePdf(string $filePath, string $client_id, &$res) {
+	    $parser = new \Smalot\PdfParser\Parser();
+	    $pdf    = $parser->parseFile($filePath);
+	    $text = $pdf->getText();
+	    if ($text != 'client_id='.$client_id) {
+	        $res->error = 'ERROR_PDF_SIGN_ERROR'; // nem megfelelő a txt tartalom
+	    }
+	}
+	
+	/**
+	 * check pdf signature, ha a pdfsig hivás sikertelen, de
+	 * tartalmazza az aláírásra utaló stringeket akkor a teljes pdf tartalmonból
+	 * sha256 has-t képez és beteszi a $res->pdfHash -be.
+	 * @param string $filePath
+	 * @param Res $res {error:"xxxxxx" | error:"", signHash:"" }
+	 */
+	protected function checkPdfSig(string $filePath, &$res) {
+	    $check1 = false;
+	    $check2 = false;
+	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
+	    $signatureArray[] = '';
+    	if ((strpos($signatureArray[0],'default Firefox Folder') > 0) ||
+    	    ($signatureArray[0] == 'sh: pdfsig: command not found')) {
+    	        // karakteres keresés a pdf tartalomban
+    	        $buffer = '';
+    	        $pdfContent = '';
+    	        $handle = fopen($filePath, 'r');
+    	        while (($buffer = fgets($handle)) !== false) {
+    	            $pdfContent .= $buffer;
+    	            if (strpos($buffer, 'adbe.pkcs7.detached') !== false) {
+    	                $check1 = true;
+    	            }
+    	            if (strpos($buffer, 'NISZ Nemzeti Infokommun') !== false) {
+    	                $check2 = true;
+    	            }
+    	        }
+    	        if ($check1 && $check2) {
+    	            $res->error = ''; 
+    	            $res->pdfHash = hash('sha256', $pdfContent, false);
+    	        } else {
+    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; 
+    	        }
+    	} else {
+    	        if (in_array('File \'' . $filePath . '\' does not contain any signatures' , $signatureArray)) {
+    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // nincs aláírva
+    	        }
+    	        if (!in_array('  - Signature Validation: Signature is Valid.' , $signatureArray)) {
+    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // aláírás nem valid
+    	        }
+    	        if (!in_array('  - Signer Certificate Common Name: AVDH Bélyegző' , $signatureArray)) {
+    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // nem AVDH aláírás
+    	        }
+    	}
+    }
+    
+    /**
+     * extract igazolas.xml a meghatamazo.pdf -ből
+     * @param string $filePath
+     * @param string $igazolasPWD
+     * @param Res $res {error:"xxxxxx" | error:"", ........}
+     */
+    protected function extractIgazolasFromPdf(string $filePath, string $igazolasPWD, &$res) {
+        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/igazolas.pdf '.escapeshellarg($filePath));
+        unlink($filePath);
+        if (!is_file($igazolasPWD.'/igazolas.pdf')) {
+            // nem sikerült igazolas.pdf -et kibontani
+            $res->error = 'ERROR_PDF_SIGN_ERROR';
+        }
+    }
+    
+    /**
+     * extract meghatalmazo.xml az igazolas.pdf -ből 
+     * @param string $igazolasPWD
+     * @param Res $res {error:"xxxxxx" | error:"", ........}
+     */
+    protected function extractMeghatalmazoFromIgazolas(string $igazolasPWD, &$res) {
+        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/meghatalmazo.xml '.escapeshellarg($igazolasPWD.'/igazolas.pdf'));
+        unlink($igazolasPWD.'/igazolas.pdf');
+        if (!is_file($igazolasPWD.'/meghatalmazo.xml')) {
+            $res->error =  'ERROR_PDF_SIGN_ERROR';
+        }
+    }
+    
+	/**
 	 * feltöltött $tmpdir/signed.pdf feldolgozása 
 	 * @param string $tmpDir
 	 * @param string $filename
 	 * @param string $client_id
-	 * @return object {error, signHash}
+	 * @return object {error:"" | error:"xxxxxx", signHash:"xxxxx"}
 	 */
 	protected function processUploadedFile(string $tmpDir, string $fileName,  string $client_id) {
 	    $res = new stdClass();
@@ -64,74 +152,24 @@ class Oauth2Controller {
 	    $res->signHash = '';
 	    $igazolasPWD = $tmpDir;
 	    $filePath = $tmpDir.'/'.$fileName;
-	    $xmlArray = [];
-	    $pdfContent = '';
-	    $pdfsigFalse = false; // ha nem sikerüét futtani a pdfsig -et akkor tuue.
 	    
-	    // aláirás ellenörzés. 
-	    // Ha a pdfsig -es lekérdezés nem sikerül akkor 
-	    // egyszerüsitett ellenörzést végez: megnézi van-e benne 'adbe.pkcs7.detached' string.
+	    // pdf tartalom ellenörzése Smalot parserrel
+	    $this->parsePdf($filePath, $client_id, $res);
 	    
-	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
-	    $signatureArray[] = ''; // hogy biztos legyen 1. indexü elem
-	    if (($signatureArray[1] == 'Segmentation fault') ||
-	        ($signatureArray[0] == 'sh: pdfsig: command not found')) {
-	            // egyszerüsitett ellenörzés: ha van benne adbe.pkcs7.detached akkor aláírtnak tekintem,
-	        $res->error = 'ERROR_PDF_SIGN_ERROR';
-	        $handle = fopen($filePath, 'r');
-	        while (($buffer = fgets($handle)) !== false) {
-	           $pdfContent .= $buffer;
-	            if (strpos($buffer, 'adbe.pkcs7.detached') !== false) {
-	              $res->error = ''; // valószinüleg alá van irva, de nem biztos, hogy sértetlen.
-	           }
-	        }
-	        $pdfSigFalse = true;
-	    } else {
-	        if (in_array('File \'' . $filePath . '\' does not contain any signatures' , $signatureArray)) {
-	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-	        }
-	        if (!in_array('  - Signature Validation: Signature is Valid.' , $signatureArray)) {
-	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-	        }
-	        if (!in_array('  - Signer Certificate Common Name: AVDH Bélyegző' , $signatureArray)) {
-	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-	        }
-	    }
-
-	    // pdf txt tartalom ellenörzése
-	    
-	    $parser = new \Smalot\PdfParser\Parser();
-	    $pdf    = $parser->parseFile($filePath);
-	    $text = $pdf->getText();
-	    if ($text != 'client_id='.$client_id) {
-	        $res->error = 'ERROR_PDF_SIGN_ERROR '.$text;
-	    }
+	    // aláirás ellenörzés pdfsig segitségével. 
+	    $this->checkPdfSig($filePath, $res);
 	    
 	    if ($res->error == '') {
-	        // a pdf -ből kibontja az igazolas.pdf mellékeltet az $igazolasPWD alkönyvtárba
-	        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/igazolas.pdf '.escapeshellarg($filePath));
-	        unlink($filePath);
-	        if (!is_file($igazolasPWD.'/igazolas.pdf')) {
-	            // nem sikerült igazolas.pdf -et kibontani
-	            if (($pdfSigFalse) && ($res->error == '')) {
-	                // a pdfSig sem volt futtatható akkor - jobb hijján - elfogadjuk
-	                // ilyenkor az egész pdf fájlból képezzük a signHash értéket.
-	                $res->signHash = hash('sha256', $pdfContent ,false);
-	                return $res;
-	            } else {
-	                // a pdfsig futtatható valt akkor ez umbuldált pdf fájl, nem fogadjuk el.
-    	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-	            }
-			}
+	        $this->extractIgazolasFromPdf($filePath, $igazolasPWD, $res);
         }
 	            
         if ($res->error == '') {
-	        // a $igazolasPWD könyvtárban lévő igazolas.pdf fájlból kibontja a meghatalmazo.xml -t
-            shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/meghatalmazo.xml '.escapeshellarg($igazolasPWD.'/igazolas.pdf'));
-            unlink($igazolasPWD.'/igazolas.pdf');
-            if (!is_file($igazolasPWD.'/meghatalmazo.xml')) {
-			      $res->error =  'ERROR_PDF_SIGN_ERROR';
-	        }
+            $this->extractMeghatalmazoFromIgazolas($igazolasPWD, $res);
+	    }
+	    
+	    if (($res->error != '') && (isset($res->pdfHash))) {
+	        $res->error = '';
+	        $res->signHash = $res->pdfHash;
 	    }
 	    
 	    if ($res->error == '') {
@@ -197,6 +235,32 @@ class Oauth2Controller {
 	    return $res;
 	}
 	
+	/**
+	 * könyvtár teljes tartalmának törlése
+	 * @param string $tmpDir
+	 */
+	protected function clearFolder(string $tmpDir) {
+    	if (is_dir($tmpDir)) {
+    	    $files = glob($tmpDir.'/*'); // get all file names
+    	    foreach ($files as $file) { // iterate files
+    	        if (is_file($file)) {
+    	            unlink($file); // delete file
+    	        }
+    	    }
+    	}
+	}
+		
+	/**
+	 * munkakönyvtár létrehozása sessin ID -t használva
+	 */
+	protected function createWorkDir() {
+    	$sessionId = session_id();
+    	$tmpDir = 'work/tmp'.$sessionId;
+    	if (!is_dir($tmpDir)) {
+    	    mkdir($tmpDir, 0777);
+    	}
+    	return $tmpDir;
+	}
 	
 	/**
 	 * user egist második képernyő (aláirt pdf feltöltés feldolgozása, nick/psw1/psw2 form)
@@ -207,36 +271,29 @@ class Oauth2Controller {
 	 */
 	public function registform2($request) {
 	    $appModel = getModel('appregist');
-	    $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
+	    $model = getModel('oauth2'); // szükség van rá, ez kreál szükség esetén táblát.
 	    $view = getView('oauth2');
-	    
-	    // csrttoken ellnörzés
-	    checkCsrToken($request);
-	    
-	    // client_id sessionból
 	    $client_id = $request->sessionGet('client_id','');
 	    $app = $appModel->getData($client_id);
-	    if ($app == false) {
+	    if (!$app) {
 	        $app = new stdClass();
 	        $app->name = 'testApp';
 	        $app->css = '';
 	    }
+	    
+	    // csrttoken ellnörzés
+	    checkCsrToken($request);
+	    
 	    // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
-	    $sessionId = session_id();
-	    $tmpDir = 'work/tmp'.$sessionId;
-	    if (!is_dir($tmpDir)) {
-	        mkdir($tmpDir, 0777);
-	    }
+        $tmpDir = $this->createWorkDir();
+	    
 	    // biztos ami biztos...
-	    $files = glob($tmpDir.'/*'); // get all file names
-	    foreach ($files as $file) { // iterate files
-	        if (is_file($file))
-	            unlink($file); // delete file
-	    }
+	    $this->clearFolder($tmpDir);
 	    
 	    // uploaded file feldolgozása
 	    // aláírás ellenörzés, $signHash kinyerése
 	    $res = $this->getSignHash($request, $tmpDir);
+
 	    if ($res->error != '') {
 	        // $res->error formája ERRORTOKEN(num)
 	        $w = explode('(',$res->error);
@@ -255,23 +312,16 @@ class Oauth2Controller {
 	        }
 	    }
 
-	    // munkakönyvtár teljes törlése
-	    if (is_dir($tmpDir)) {
-	        $files = glob($tmpDir.'/*'); // get all file names
-	        foreach ($files as $file) { // iterate files
-	            if (is_file($file)) {
-	                unlink($file); // delete file
-	            }
-	        }
-	        rmdir($tmpDir);
-	    }
-	    
+	    // munkakönyvtár és tartalmának teljes törlése
+	    $this->clearFolder($tmpDir);
+	    rmdir($tmpDir);
+	    	    
 	    if ($res->error == '') {
+	        // echo ouput form
 	        $data = new stdClass();
 	        createCsrToken($request, $data);
 	        $request->sessionSet('signHash', $res->signHash);
 	        $request->sessionSet('client_id', $client_id);
-	        // képernyő kirajzolás
 	        $data->msgs = [];
 	        $data->appName = $app->name;
 	        $data->extraCss = $app->css;
@@ -304,6 +354,20 @@ class Oauth2Controller {
 	    if ($signHash == '') {
 	        echo '<p>invalid signHash</p>';
 	        exit();
+	    }
+	    
+	    // adat és cookie kezelés elfogadva?
+	    if (($request->input('dataProcessAccept',0) != 1) ||
+	        ($request->input('cookieProcessAccept',0) != 1)) {
+	            createCsrToken($request, $data);
+	            $request->sessionSet('signHash', $data->signHash);
+	            $request->sessionSet('client_id', $data->client_id);
+	            $data->appName = $app->name;
+	            $data->extraCss = $app->css;
+	            $data->msgs = ['ERROR_DATA_ACCEP_REQUEST','ERROR_COOKIE_ACCEP_REQUEST'];
+	            $data->title = 'LBL_REGISTFORM2';
+	            $view->registForm2($data);
+	            return;
 	    }
 	    
 	    $app = $appModel->getData($client_id);
@@ -359,7 +423,6 @@ class Oauth2Controller {
 	 */
 	public function loginform($request) {
 	    $appModel = getModel('appregist');
-	    $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
 	    $view = getView('oauth2');
 	    $client_id = $request->input('client_id','');
 	    $app = $appModel->getData($client_id);
@@ -375,7 +438,7 @@ class Oauth2Controller {
 	                $extraParams[$fn] = $fv;
 	            }
 	        }
-	        foreach ($_POST as $gn => $fv) {
+	        foreach ($_POST as $fn => $fv) {
 	            if ($fn != 'client_id') {
 	                $extraParams[$fn] = $fv;
 	            }
@@ -383,6 +446,7 @@ class Oauth2Controller {
             $request->sessionSet('extraParams',$extraParams);
 	        
 	        $data->appName = $app->name;
+	        $data->client_id = $app->client_id;
 	        $data->extraCss = $app->css;
 	        $data->nick = '';
 	        $data->psw1 = '';
@@ -411,6 +475,40 @@ class Oauth2Controller {
 	    $data->msgs = $msgs;
 	    $view->loginform($data);
 	}
+
+	/**
+	 * callback url kialakitása
+	 * @param App $app
+	 * @param User $user
+	 * @param Request $request
+	 * @return string
+	 */
+	protected function getCallbackUrl($app, $user, $request): string {
+    	$url = $app->callback;
+    	if (strpos($url, '?') > 0) {
+    	    $url .= '&';
+    	} else {
+    	    $url .= '?';
+    	}
+    	$url .= 'code='.$user->code;
+    	// extra paraméterek feldolgozása
+    	$extraParams = $request->sessionGet('extraParams',[]);
+    	if (count($extraParams) > 0) {
+    	    foreach ($extraParams as $fn => $fv) {
+    	        if (strpos($url, '?') > 0) {
+    	            $url .= '&';
+    	        } else {
+    	            $url .= '?';
+    	        }
+    	        if (($fn != 'task') && ($fn != 'client_id') && 
+    	            ($fn != 'css') && ($fn != 'path') && ($fn != 'option')) {
+    	           $url .= $fn.'='.$fv;
+    	        }
+    	    }
+    	}
+	    return $url;
+	}
+	
 	
 	/**
 	 * login képernyő feldolgozása
@@ -436,58 +534,45 @@ class Oauth2Controller {
 	    }
 	    
 	    if ($user) {
-	        // letiltott user
 	        if ($user->enabled == 0) {
-	            // login képernyő visszahívása
+	            // letiltott user, login képernyő visszahívása
 	            $request->sessionSet('client_id', $client_id);
-	            $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', 0] );
+	            $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
 	        } else if ($user->pswhash == hash('sha256', $psw, false)) {
     	        // sikeres login, code és accessToken generálás, callback visszahívás
     	        $user->code = md5(random_int(1000000, 5999999)).$user->id;
     	        $user->access_token = md5(random_int(6000000, 9999999)).$user->id;
     	        $user->codetime = date('Y-m-d H:i:s');
+    	        $user->errorcount = 0;
+    	        $user->blocktime = '';
     	        $model->updateUser($user);
-    	        $url = $app->callback;
-    	        if (strpos($url, '?') > 0) {
-    	            $url .= '&';
-    	        } else {
-    	            $url .= '?';
-    	        }
-    	        $url .= 'code='.$user->code;
     	        
-    	        // extra paraméterek feldolgozása
-    	        $extraParams = $request->sessionGet('extraParams',[]);
-    	        if (count($extraParams) > 0) {
-    	            foreach ($extraParams as $fn => $fv) {
-    	                if (strpos($url, '?') > 0) {
-    	                    $url .= '&';
-    	                } else {
-    	                    $url .= '?';
-    	                }
-    	                $url .= $fn.'='.$fv;
-    	            }
-    	         }
-    	         if (!headers_sent()) {
+    	        $url = $this->getCallbackUrl($app, $user, $request);
+    	        if (!headers_sent()) {
     	           header('Location:'.$url.'", true, 301');
-    	         } else {
+    	        } else {
     	            echo 'headers sent. Not redirect '.$url; 
     	            return $user->code;
-    	         }
+    	        }
 	        } else {
 	            // jelszó hiba
 	            $user->errorcount++;
 	            if ($user->errorcount >= $app->falseLoginLimit) {
 	                $user->enabled = 0;
+	                $user->blocktime = date('Y-m-d H:i:s');
 	            }
 	            $tryCount = $app->falseLoginLimit - $user->errorcount;
 	            $model->updateUser($user);
-	            // login képernyő visszahívása
 	            $request->sessionSet('client_id', $client_id);
-	            $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	            if ($user->enabled == 1) {
+	               $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	            } else {
+	               $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
+	            }
 	        }
 	    } else {
 	        // nick név hiba
-	        $tryCount = 10;
+	        $tryCount = $app->falseLoginLimit;
 	        // login képernyő visszahívása
 	        $request->sessionSet('client_id', $client_id);
 	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
@@ -508,13 +593,24 @@ class Oauth2Controller {
 	    $appModel = getModel('appregist');
 	    $model = getModel('oauth2'); 
 	    $user = $model->getUserByCode($code);
+	    
+	    header('Content-Type: application/json');
+	    if ($user == false) {
+	        echo '{"error":"user not found code='.$code.'"}'; exit();
+	    }
+	    
 	    $app = $appModel->getData($client_id);
+	    
+	    if ($app == false) {
+	        echo '{"error":"app not found client_id='.$client_id.'"}'; exit();
+	    }
 	    
 	    $access_token = '';
 	    if (($app) && ($user)) {
 	        if (($app->client_secret == $client_secret) && 
 	            ($user->enabled == 1) &&
-	            ($user->client_id == $app->client_id)) {
+	            ($user->client_id == $app->client_id)
+	           ) {
 	            $access_token = $user->access_token;    
                 echo '{"access_token":"'.$user->access_token.'"}';	            
 	        } else {
@@ -537,6 +633,7 @@ class Oauth2Controller {
         $model = getModel('oauth2'); 
         $rec = $model->getUserByAccess_token($access_token);
         
+        header('Content-Type: application/json');
         if ($rec) {
             echo '{"nick":"'.$rec->nick.'"}';
         } else {

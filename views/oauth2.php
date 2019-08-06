@@ -9,7 +9,6 @@ class Oauth2View  extends CommonView  {
      */
     public function successMsg($msgs) {
         echo htmlHead();
-        $p = new stdClass();
         ?>
         <body ng-app="app">
 	    <div class="successMsg">
@@ -33,7 +32,6 @@ class Oauth2View  extends CommonView  {
 	 */
 	public function errorMsg(array $msgs, string $backLink='', string $backStr='') {
 	    echo htmlHead();
-	    $p = new stdClass();
 	    ?>
         <body ng-app="app">
 	    <div class="errorMsg">
@@ -141,6 +139,19 @@ class Oauth2View  extends CommonView  {
 					<label><?php echo txt('LBL_PSW4'); ?></label>
 					<input type="password" name="psw2" value="<?php echo $data->psw2; ?>" />
 				</p>
+    			<p>
+    				<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
+    				<?php echo txt('DATAPROCESS');  ?></a>&nbsp;
+    				<div style="display:inline-block; width:auto">
+    					<var><input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1"  /></var>
+    					<?php echo txt('DATAPROCESSACCEPT'); ?>&nbsp;&nbsp;
+    				</div>
+    				<div style="display:inline-block; width:auto">
+	    				<var><input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" /></var>
+    					<?php echo txt('COOKIEPROCESSACCEPT'); ?>
+    				</div>	
+    			</p>
+				
 				<p>
 					<button type="submit" class="btn btn-primary"><?php echo txt('OK'); ?></button>
 				</p>
@@ -161,7 +172,7 @@ class Oauth2View  extends CommonView  {
 		    	<p class="alert alert-danger">
 		    	<?php
 		    	foreach($data->msgs as $msg) {
-		    	    echo $msg.'<br />';
+		    	    echo txt($msg).'<br />';
 		    	}
 		    	?>
 		    	</p>
@@ -185,16 +196,20 @@ class Oauth2View  extends CommonView  {
 					<button type="submit" class="btn btn-primary"><?php echo txt('LOGIN'); ?></button>
 				</p>
 				<p>
-				<a href="" onclick="$('#option').val('userregist'); $('#task').val('forgetpsw'); $('#formLogin').submit();">
+				<a href="<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/<?php echo $data->client_id; ?>"
+					target="_self">
+					<?php echo txt('NOTMYACCOUNT');  ?>
+				</a><br />
+				<a href="" target="_self" onclick="$('#option').val('userregist'); $('#task').val('forgetpsw'); $('#formLogin').submit();">
 					<?php echo txt('FORGET_PSW');  ?>
 				</a><br />
-				<a href="" onclick="$('#option').val('userregist');  $('#task').val('changepsw'); $('#formLogin').submit();">
+				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('changepsw'); $('#formLogin').submit();">
 					<?php echo txt('CHANGE_PSW');  ?>
 				</a><br />
-				<a href="" onclick="$('#option').val('userregist');  $('#task').val('mydata'); $('#formLogin').submit();">
+				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('mydata'); $('#formLogin').submit();">
 					<?php echo txt('MY_DATA');  ?>
 				</a><br />
-				<a href=""  onclick="$('#option').val('userregist');  $('#task').val('deleteaccount'); $('#formLogin').submit();">
+				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('deleteaccount'); $('#formLogin').submit();">
 					<?php echo txt('DELETE_ACCOUNT');  ?>
 				</a><br />
 				</p>
