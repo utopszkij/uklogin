@@ -1,0 +1,9 @@
+szűz ubuntura
+
+apt-get update
+install poppler-utils
+apt-get install mysql-server mysql-client libmysqlclient-dev
+apt-get install apache2 apache2-doc apache2-utils libexpat1 ssl-cert
+apt-get install php
+---- konfigurálások az etc -ben
+service apache2 start

@@ -1,4 +1,7 @@
 <?php
+
+include 'vendor/autoload.php';
+
 class Oauth2Controller {
     
     /**
@@ -52,15 +55,18 @@ class Oauth2Controller {
 	 * feltöltött $tmpdir/signed.pdf feldolgozása 
 	 * @param string $tmpDir
 	 * @param string $filename
+	 * @param string $client_id
 	 * @return object {error, signHash}
 	 */
-	protected function processUploadedFile(string $tmpDir, string $fileName) {
+	protected function processUploadedFile(string $tmpDir, string $fileName,  string $client_id) {
 	    $res = new stdClass();
 	    $res->error = '';
 	    $res->signHash = '';
 	    $igazolasPWD = $tmpDir;
 	    $filePath = $tmpDir.'/'.$fileName;
 	    $xmlArray = [];
+	    $pdfContent = '';
+	    $pdfsigFalse = false; // ha nem sikerüét futtani a pdfsig -et akkor tuue.
 	    
 	    // aláirás ellenörzés. 
 	    // Ha a pdfsig -es lekérdezés nem sikerül akkor 
@@ -70,15 +76,16 @@ class Oauth2Controller {
 	    $signatureArray[] = ''; // hogy biztos legyen 1. indexü elem
 	    if (($signatureArray[1] == 'Segmentation fault') ||
 	        ($signatureArray[0] == 'sh: pdfsig: command not found')) {
-	        // egszerüsitett ellenörzés
+	            // egyszerüsitett ellenörzés: ha van benne adbe.pkcs7.detached akkor aláírtnak tekintem,
 	        $res->error = 'ERROR_PDF_SIGN_ERROR';
 	        $handle = fopen($filePath, 'r');
 	        while (($buffer = fgets($handle)) !== false) {
-	           if (strpos($buffer, 'adbe.pkcs7.detached') !== false) {
+	           $pdfContent .= $buffer;
+	            if (strpos($buffer, 'adbe.pkcs7.detached') !== false) {
 	              $res->error = ''; // valószinüleg alá van irva, de nem biztos, hogy sértetlen.
-	              break;
 	           }
 	        }
+	        $pdfSigFalse = true;
 	    } else {
 	        if (in_array('File \'' . $filePath . '\' does not contain any signatures' , $signatureArray)) {
 	            $res->error = 'ERROR_PDF_SIGN_ERROR';
@@ -91,12 +98,30 @@ class Oauth2Controller {
 	        }
 	    }
 
+	    // pdf txt tartalom ellenörzése
+	    
+	    $parser = new \Smalot\PdfParser\Parser();
+	    $pdf    = $parser->parseFile($filePath);
+	    $text = $pdf->getText();
+	    if ($text != 'client_id='.$client_id) {
+	        $res->error = 'ERROR_PDF_SIGN_ERROR '.$text;
+	    }
+	    
 	    if ($res->error == '') {
 	        // a pdf -ből kibontja az igazolas.pdf mellékeltet az $igazolasPWD alkönyvtárba
 	        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/igazolas.pdf '.escapeshellarg($filePath));
 	        unlink($filePath);
 	        if (!is_file($igazolasPWD.'/igazolas.pdf')) {
-	            $res->error = 'ERROR_PDF_SIGN_ERROR'; 
+	            // nem sikerült igazolas.pdf -et kibontani
+	            if (($pdfSigFalse) && ($res->error == '')) {
+	                // a pdfSig sem volt futtatható akkor - jobb hijján - elfogadjuk
+	                // ilyenkor az egész pdf fájlból képezzük a signHash értéket.
+	                $res->signHash = hash('sha256', $pdfContent ,false);
+	                return $res;
+	            } else {
+	                // a pdfsig futtatható valt akkor ez umbuldált pdf fájl, nem fogadjuk el.
+    	            $res->error = 'ERROR_PDF_SIGN_ERROR';
+	            }
 			}
         }
 	            
@@ -130,6 +155,7 @@ class Oauth2Controller {
 	
 	/**
 	 * signHash kinyerése a feltöltött aláírt pdf fájlból
+	 * sessionban érkezik a client_id
 	 * @param Request $request {signed_pdf}
 	 * @param string $tmpDir
 	 * @return object {error, signHash}
@@ -143,7 +169,7 @@ class Oauth2Controller {
 	    } else {
     	    $fileName = getUploadedFile('signed_pdf', $tmpDir);
     	    if ($fileName != '') {
-    	        $res = $this->processUploadedFile($tmpDir, $fileName);
+    	        $res = $this->processUploadedFile($tmpDir, $fileName, $request->sessionGet('client_id'));
     	    } else {
     	        $res->error = 'ERROR_PDF_NOT_UPLOADED';
     	    }
@@ -190,7 +216,11 @@ class Oauth2Controller {
 	    // client_id sessionból
 	    $client_id = $request->sessionGet('client_id','');
 	    $app = $appModel->getData($client_id);
-	    
+	    if ($app == false) {
+	        $app = new stdClass();
+	        $app->name = 'testApp';
+	        $app->css = '';
+	    }
 	    // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
 	    $sessionId = session_id();
 	    $tmpDir = 'work/tmp'.$sessionId;

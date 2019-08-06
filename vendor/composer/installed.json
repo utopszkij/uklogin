@@ -123,30 +123,30 @@
     },
     {
         "name": "composer/ca-bundle",
-        "version": "1.1.4",
-        "version_normalized": "1.1.4.0",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/composer/ca-bundle.git",
-            "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
+            "reference": "33810d865dd06a674130fceb729b2f279dc79e8c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
-            "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
+            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/33810d865dd06a674130fceb729b2f279dc79e8c",
+            "reference": "33810d865dd06a674130fceb729b2f279dc79e8c",
             "shasum": ""
         },
         "require": {
             "ext-openssl": "*",
             "ext-pcre": "*",
-            "php": "^5.3.2 || ^7.0"
+            "php": "^5.3.2 || ^7.0 || ^8.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5",
+            "phpunit/phpunit": "^4.8.35 || ^5.7 || 6.5 - 8",
             "psr/log": "^1.0",
             "symfony/process": "^2.5 || ^3.0 || ^4.0"
         },
-        "time": "2019-01-28T09:30:10+00:00",
+        "time": "2019-07-31T08:13:16+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -342,30 +342,32 @@
     },
     {
         "name": "doctrine/lexer",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/doctrine/lexer.git",
-            "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8"
+            "reference": "e17f069ede36f7534b95adec71910ed1b49c74ea"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/doctrine/lexer/zipball/1febd6c3ef84253d7c815bed85fc622ad207a9f8",
-            "reference": "1febd6c3ef84253d7c815bed85fc622ad207a9f8",
+            "url": "https://api.github.com/repos/doctrine/lexer/zipball/e17f069ede36f7534b95adec71910ed1b49c74ea",
+            "reference": "e17f069ede36f7534b95adec71910ed1b49c74ea",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.2"
+            "php": "^7.2"
         },
         "require-dev": {
-            "phpunit/phpunit": "^4.5"
+            "doctrine/coding-standard": "^6.0",
+            "phpstan/phpstan": "^0.11.8",
+            "phpunit/phpunit": "^8.2"
         },
-        "time": "2019-06-08T11:03:04+00:00",
+        "time": "2019-07-30T19:33:28+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "1.0.x-dev"
+                "dev-master": "1.1.x-dev"
             }
         },
         "installation-source": "dist",
@@ -380,12 +382,12 @@
         ],
         "authors": [
             {
-                "name": "Roman Borschel",
-                "email": "roman@code-factory.org"
-            },
-            {
                 "name": "Guilherme Blanco",
                 "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
             },
             {
                 "name": "Johannes Schmitt",
@@ -1581,6 +1583,58 @@
         ]
     },
     {
+        "name": "smalot/pdfparser",
+        "version": "v0.14.0",
+        "version_normalized": "0.14.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/smalot/pdfparser.git",
+            "reference": "ec72a99028ba5e21a0acad92047b85e128cbf81f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/smalot/pdfparser/zipball/ec72a99028ba5e21a0acad92047b85e128cbf81f",
+            "reference": "ec72a99028ba5e21a0acad92047b85e128cbf81f",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "ext-zlib": "*",
+            "php": ">=5.3.0",
+            "tecnickcom/tcpdf": "~6.0"
+        },
+        "require-dev": {
+            "atoum/atoum": "^2.8 | ^3.0"
+        },
+        "time": "2019-01-23T09:14:37+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Smalot\\PdfParser\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Sebastien MALOT",
+                "email": "sebastien@malot.fr"
+            }
+        ],
+        "description": "Pdf parser library. Can read and extract information from pdf file.",
+        "homepage": "http://www.pdfparser.org",
+        "keywords": [
+            "extract",
+            "parse",
+            "parser",
+            "pdf",
+            "text"
+        ]
+    },
+    {
         "name": "symfony/config",
         "version": "v2.8.50",
         "version_normalized": "2.8.50.0",
@@ -2289,6 +2343,70 @@
         ],
         "description": "Symfony Validator Component",
         "homepage": "https://symfony.com"
+    },
+    {
+        "name": "tecnickcom/tcpdf",
+        "version": "6.2.26",
+        "version_normalized": "6.2.26.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tecnickcom/TCPDF.git",
+            "reference": "367241059ca166e3a76490f4448c284e0a161f15"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/367241059ca166e3a76490f4448c284e0a161f15",
+            "reference": "367241059ca166e3a76490f4448c284e0a161f15",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2018-10-16T17:24:05+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "config",
+                "include",
+                "tcpdf.php",
+                "tcpdf_parser.php",
+                "tcpdf_import.php",
+                "tcpdf_barcodes_1d.php",
+                "tcpdf_barcodes_2d.php",
+                "include/tcpdf_colors.php",
+                "include/tcpdf_filters.php",
+                "include/tcpdf_font_data.php",
+                "include/tcpdf_fonts.php",
+                "include/tcpdf_images.php",
+                "include/tcpdf_static.php",
+                "include/barcodes/datamatrix.php",
+                "include/barcodes/pdf417.php",
+                "include/barcodes/qrcode.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "Nicola Asuni",
+                "email": "info@tecnick.com",
+                "role": "lead"
+            }
+        ],
+        "description": "TCPDF is a PHP class for generating PDF documents and barcodes.",
+        "homepage": "http://www.tcpdf.org/",
+        "keywords": [
+            "PDFD32000-2008",
+            "TCPDF",
+            "barcodes",
+            "datamatrix",
+            "pdf",
+            "pdf417",
+            "qrcode"
+        ]
     },
     {
         "name": "twig/twig",

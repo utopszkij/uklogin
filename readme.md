@@ -113,6 +113,7 @@ Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Siker
 Mindezt részletes help segíti.
 
 A rendszer ellenőrzi:
+- a feltöltött pdf -ben a megfelelő client_id szerepel?
 - a feltöltött pdf alá van írva és sértetlen?
 - az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
 - a választott nicknév egyedi az adott applikációban?
@@ -212,12 +213,13 @@ https://sonarcloud.io/dashboard?id=utopszkij-uklogin
 ## Telepítés web szerverre
 
 ### Rendszer igény:
-PHP 7.1+  shell_exec funkciónak engedélyezve kell lennie
-MYSQL 5.7+
-web server (.htaccess értelmezéssel)
-commandshell: pdfsig, pdfdetach
 
-Létrehozandő MYSQL adatbázis: ** uklogin ** (utf8, magyar rendezéssel)
+- PHP 7.1+  shell_exec funkciónak engedélyezve kell lennie
+- MYSQL 5.7+
+- web server (.htaccess értelmezéssel)
+- https tanusitvány
+- php shell_exec -al hívhatóan  pdfsig, pdfdetach parancsok
+- Létrehozandő MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
 
 
 Telepítendő  könyvtárak:
@@ -229,10 +231,12 @@ Telepítendő  könyvtárak:
 - log (legyen irható a web szerver számára!)
 - models
 - templates
+- vendor
 - views
+- work (legyen irható a web szerver számára!)
 
 Telepítendő fájlok
 - index.php
-- .config.php  (átnevezve és értelemszerüen javítva a config.txt -ből)
+- .config.php  (config.txt átnevezve és értelemszerüen javítva)
 - .htaccess (a htaccess.txt átnevezve)
 
