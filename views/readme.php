@@ -136,7 +136,7 @@ class ReadmeView  extends CommonView  {
   <h3 id="login-folyamat-a-felhasznalo-web-applikacioban">
    login folyamat a felhasználó web applikációban:
   </h3>
-  <pre><code>&lt;iframe ..... src="https://szeszt.tk/uklogin/oath2/loginform/client_id/&lt;client_id&gt;" /&gt;
+  <pre><code>&lt;iframe ..... src="<?php echo MYDOMAIN; ?>/oath2/loginform/client_id/&lt;client_id&gt;" /&gt;
 </code></pre>
   <p>
    Opcionálisan /redirect_uri/
@@ -168,18 +168,13 @@ class ReadmeView  extends CommonView  {
   </p>
   <p>
    Ezután hívni kell a
-   <a href="https://szeszt.tk/uklogin/oath2/access_token">
-    https://szeszt.tk/uklogin/oath2/access_token
-   </a>
-   url-t, GET vagy POST paraméterként küldve a “client_id”, “client_secret” és “code” adatokat. Válaszként egy json stringet kapunk:
+   "<?php echo MYDOMAIN; ?>/oath2/access_token" url-t, GET vagy POST paraméterként küldve a “client_id”, “client_secret” és “code” adatokat. Válaszként egy json stringet kapunk:
    <br/>
    {“access_token”:”xxxxxx”} vagy {“access_token”:”“, “error”:”hibaüzenet”}
   </p>
   <p>
    Következő lépésként hívni kell a
-   <a href="https://szeszt.tk/uklogin/oath2/userinfo">
-    https://szeszt.tk/uklogin/oath2/userinfo
-   </a>
+   "<?php echo MYDOMAIN; ?>/oath2/userinfo"
    címet, GET vagy POST paraméterként a
    <br/>
    “access_token” értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az “error” stringet:
@@ -191,7 +186,7 @@ class ReadmeView  extends CommonView  {
   <h3 id="regisztracio-hivasa-a-felhasznalo-web-applikacioban">
    Regisztráció hívása a felhasználó web applikációban
   </h3>
-  <pre><code>&lt;iframe ..... src="https://szeszt.tk/uklogin/oauth2/registform/client_id/&lt;client_id&gt;" /&gt;
+  <pre><code>&lt;iframe ..... src="<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/&lt;client_id&gt;" /&gt;
 </code></pre>
   <p>
    Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Sikertelen esetén hibaüzenet és újból a regisztrálás kezdő képernyője.

@@ -3470,18 +3470,20 @@ commonview$
 
 echonavbarcommonview::echonavbar$
 
-echofootercommonview::echofooterÇ
+echofootercommonview::echofooter±
 oauth2model
 adduseroauth2model::adduser3
 getuserbysignhashoauth2model::getuserbysignhash!
 strtohexoauth2model::strtohex+
+getuserbycodeoauth2model::getuserbycode+
 getuserbynickoauth2model::getuserbynick%
 
 deleteuseroauth2model::deleteuser
 checkoauth2model::check'
 __constructoauth2model::__construct%
 
-updateuseroauth2model::updateuserœ
+updateuseroauth2model::updateuser;
+getuserbyaccess_token"oauth2model::getuserbyaccess_tokenœ
 appregistmodel(
 
 url_existsappregistmodel::url_exists,
@@ -3494,31 +3496,49 @@ adjustdataappregistmodel::adjustdata
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
-updateafterinsert!appregistmodel::updateafterinsertÚ
-oauth2controller&
-doregistoauth2controller::doregist*
+updateafterinsert!appregistmodel::updateafterinsert¼
+oauth2controller$
+dologinoauth2controller::dologin,
+checkpdfsigoauth2controller::checkpdfsig(
+	loginformoauth2controller::loginform2
+getcallbackurl oauth2controller::getcallbackurl4
+recallloginform!oauth2controller::recallloginform.
+access_tokenoauth2controller::access_token&
+doregistoauth2controller::doregistB
+extractigazolasfrompdf(oauth2controller::extractigazolasfrompdf*
 
-registformoauth2controller::registform
-pdfoauth2controller::pdf,
+registformoauth2controller::registformT
+extractmeghatalmazofromigazolas1oauth2controller::extractmeghatalmazofromigazolas&
+parsepdfoauth2controller::parsepdf
+pdfoauth2controller::pdf0
+createworkdiroauth2controller::createworkdir,
 getsignhashoauth2controller::getsignhash:
-checksignhashexist$oauth2controller::checksignhashexist<
+checksignhashexist$oauth2controller::checksignhashexist,
+clearfolderoauth2controller::clearfolder<
 processuploadedfile%oauth2controller::processuploadedfile,
-registform2oauth2controller::registform2:
+registform2oauth2controller::registform2&
+userinfooauth2controller::userinfo:
 defaultcontroller%
 defaultdefaultcontroller::default2
 readmecontroller
 showreadmecontroller::show>
 frontpageview
 commonview!
-displayfrontpageview::display¶
+displayfrontpageview::displayÚ
 appregistcontroller
-addappregistcontroller::add%
+addappregistcontroller::add+
+	forgetpswappregistcontroller::forgetpsw%
 logoutappregistcontroller::logout-
 
 adminloginappregistcontroller::adminlogin+
 	appremoveappregistcontroller::appremove1
-doadminlogin!appregistcontroller::doadminlogin!
-saveappregistcontroller::save%
+doadminlogin!appregistcontroller::doadminlogin3
+deleteaccount"appregistcontroller::deleteaccount7
+adminloginerror$appregistcontroller::adminloginerror3
+echoadminform"appregistcontroller::echoadminform!
+saveappregistcontroller::save+
+	changepswappregistcontroller::changepsw%
+mydataappregistcontroller::mydata%
 removeappregistcontroller::remove8
 
 readmeview
@@ -3539,11 +3559,12 @@ removedmsgappregistview::removedmsg
 
 successmsgappregistview::successmsg)
 notfoundmsgappregistview::notfoundmsg#
-errormsgappregistview::errormsg°
+errormsgappregistview::errormsgÔ
 
 oauth2view
 commonview&
-registform1oauth2view::registform1$
+registform1oauth2view::registform1"
+	loginformoauth2view::loginform$
 
 successmsgoauth2view::successmsg&
 registform2oauth2view::registform2 

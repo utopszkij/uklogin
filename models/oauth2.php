@@ -15,6 +15,7 @@ class Oauth2Model {
             `code` varchar(256),
             `access_token` varchar(256),
             `codetime` varchar(32),
+            `blocktime` varchar(32),
             PRIMARY KEY (`id`),
             KEY `users_nick` (`client_id`, `nick`),
             KEY `users_sign` (`client_id` ,`signhash`)
@@ -26,6 +27,13 @@ class Oauth2Model {
         $db->exec('UPDATE users
         SET code="", access_token="", codetime=""
         WHERE codetime < "'.$w.'"');
+        
+        // több mint 10 órája blokkolt userek feloldása
+        $w = date('Y-m-d H:i:s', (time() - 36000));
+        $db->exec('UPDATE users
+        SET enabled=1, blocktime""
+        WHERE blocktime < "'.$w.'"');
+        
     }
     
     /**
@@ -145,6 +153,8 @@ class Oauth2Model {
     }
     
     public function addUser($rec): array {
+        $rec->blocktime = '';
+        $rec->codetime = '';
         $table = new Table('users');
         $table->insert($rec);
         $errorMsg = $table->getErrorMsg(); 
@@ -166,7 +176,7 @@ class Oauth2Model {
         if ($msg != '') {
             $msgs[] = $msg;
         }
-        return $msgs;;
+        return $msgs;
     }
     
     public function deleteUser($rec): array {

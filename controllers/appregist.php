@@ -3,7 +3,7 @@ class AppregistController {
 	public function add($request) {
 	    $request->set('sessionid','0');
 		$request->set('lng','hu');
-		$data = new stdClass(); //  $data = $model->getData(....);
+		$data = new stdClass(); 
 		createCsrToken($request, $data);
 		$view = getView('appregist');
 		$data->option = $request->input('option','default');
@@ -39,7 +39,7 @@ class AppregistController {
 	    $model = getModel('appregist');
 	    $view = getView('appregist');
 	    // $data kialakitása a $request -ből
-        $data = new stdClass(); //  $data = $model->getData(....);
+        $data = new stdClass(); 
         $data->id = $request->input('id','');
         $data->name = $request->input('name','');
         $data->client_id = $request->input('client_id','');
@@ -86,12 +86,61 @@ class AppregistController {
 	 * @return void
 	 */ 
 	public function adminlogin($request) {
-	    $p = new stdClass(); //  $data = $model->getData(....);
+	    $p = new stdClass(); 
 	    createCsrToken($request, $p);
 	    $view = getView('appregist');
-	    $p = new stdClass();
 	    $p->msg = $request->input('msg','');
 	    $view->adminLoginForm($p); 
+	}
+	
+	protected function echoAdminForm(&$data, $request, $rec, $view) {
+    	$data->option = $request->input('option','default');
+    	$data->msg = $request->input('msg','');
+    	$data->client_id = $rec->client_id;
+    	$data->client_secret= $rec->client_secret;
+    	$data->id= $rec->id;
+    	$data->name = $rec->name;
+    	$data->domain = $rec->domain;
+    	$data->css = $rec->css;
+    	$data->callback = $rec->callback;
+    	$data->falseLoginLimit = $rec->falseLoginLimit;
+    	$data->hackLimit = 10;
+    	$data->psw1 = '';
+    	$data->psw2 = '';
+    	$data->oldpsw = '';
+    	$data->admin = $rec->admin;
+    	$data->adminFalseLoginLimit = $rec->adminFalseLoginLimit;
+    	$data->adminLoginEnabled = $rec->adminLoginEnabled;
+    	$view->form($data);
+	}
+	
+	/**
+	 * admin login error kezelése
+	 * @param App $rec
+	 * @param Request $request
+	 * @param Model $model
+	 * @return string|string[]
+	 */
+	protected function adminLoginError($rec, $request, $model) {
+    	// hibaszámláló növelése, szükség esetén letiltás
+    	if ($rec) {
+    	    $adminFalseLoginLimit = $rec->adminFalseLoginLimit;
+    	} else {
+    	    $adminFalseLoginLimit = 10;
+    	}
+    	$errorCount = $request->sessionGet('errorCount',0);
+    	$errorCount++;
+    	$request->sessionSet('errorCount',$errorCount);
+    	if (($errorCount > $adminFalseLoginLimit) && ($rec)) {
+    	    $rec->adminLoginEnabled = 0;
+    	    $model->update($rec);
+    	}
+    	if ($errorCount > $adminFalseLoginLimit) {
+    	    $msg = 'ADMIN_LOGIN_DISABLED';
+    	} else {
+    	    $msg = ['INVALID_LOGIN',($adminFalseLoginLimit - $errorCount)];
+    	}
+    	return $msg;
 	}
 	
 	/**
@@ -102,11 +151,10 @@ class AppregistController {
 	public function doadminlogin(&$request) {
 	    // check csrtoken
 	    checkCsrToken($request);
-	    $csrtoken = $request->sessionGet('csrtoken',0);
 	    
 	    $hackModel = getModel('hack');
 	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
-	        echo '<p>Disabled IP '.$_SERVER['REMOTE_ADDR'].'</p>';
+	        echo '<p>Disabled IP </p>';
 	        exit;
 	    }
 	    
@@ -127,28 +175,10 @@ class AppregistController {
 	                // login hibaszámláló nullázása
 	                $request->sessionSet('errorCount', 0);
 	                
-	                // app képernyő megjelenítése
+	                // app adat képernyő megjelenítése
 	                $data = new stdClass(); 
 	                createCsrToken($request, $data);
-	                
-	                $data->option = $request->input('option','default');
-	                $data->msg = $request->input('msg','');
-	                $data->client_id = $rec->client_id;
-	                $data->client_secret= $rec->client_secret;
-	                $data->id= $rec->id;
-	                $data->name = $rec->name;
-	                $data->domain = $rec->domain;
-	                $data->css = $rec->css;
-	                $data->callback = $rec->callback;
-	                $data->falseLoginLimit = $rec->falseLoginLimit;
-	                $data->hackLimit = 10;
-	                $data->psw1 = '';
-	                $data->psw2 = '';
-	                $data->oldpsw = '';
-	                $data->admin = $rec->admin;
-	                $data->adminFalseLoginLimit = $rec->adminFalseLoginLimit;
-	                $data->adminLoginEnabled = $rec->adminLoginEnabled;
-	                $view->form($data);
+	                $this->echoAdminForm($data, $request, $rec, $view);
 	        } else {
                 $error = true;
 	        }
@@ -158,38 +188,7 @@ class AppregistController {
 	    if ($error) {
 	        // hacker számláló növelése, szükség esetén letiltás
 	        $hackModel->ipAddError($_SERVER['REMOTE_ADDR']);
-	        
-	        if ($rec) {
-	            
-	            // hibaszámláló növelése, szükség esetén letiltás
-	            $adminFalseLoginLimit = $rec->adminFalseLoginLimit;
-	            $errorCount = $request->sessionGet('errorCount',0);
-	            $errorCount++;
-	            $request->sessionSet('errorCount',$errorCount);
-	            if ($errorCount > $adminFalseLoginLimit) {
-	                $rec->adminLoginEnabled = 0;
-	                $model->update($rec);
-	            }
-	            
-	            if ($rec->adminLoginEnabled != 1) {
-	                $msg = 'ADMIN_LOGIN_DISABLED';
-	            } else {
-	                $msg = ['INVALID_LOGIN',($adminFalseLoginLimit - $errorCount)];
-	            }
-	        } else {
-	            // hibaszámláló növelése, szükség esetén letiltás
-	            $adminFalseLoginLimit = 10;
-	            $errorCount = $request->sessionGet('errorCount',0);
-	            $errorCount++;
-	            $request->sessionSet('errorCount',$errorCount);
-	            if ($errorCount > $adminFalseLoginLimit) {
-	                $msg = 'ADMIN_LOGIN_DISABLED';
-	            } else {
-	                $msg = ['INVALID_LOGIN',($adminFalseLoginLimit - $errorCount)];
-	            }
-	            
-	        }
-	        
+	        $msg = $this->adminLoginError($rec, $request, $model);
 	        $request->set('msg',$msg);
             $this->adminlogin($request);	        
 	    } // van error

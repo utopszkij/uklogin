@@ -73,7 +73,7 @@ DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
 DEFINE('USER','Bejelentkezési név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
-DEFINE('APPSAVED','Applikáció tárolva<br />A client_id és Client_secret adatot jegyezze fel és gondosan örizze meg! Szükség lesz rá a továbbiakban.');
+DEFINE('APPSAVED','Applikáció tárolva');
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
@@ -114,4 +114,6 @@ DEFINE('USER_LOGIN_DISABLED','Belépés letiltva');
 DEFINE('FORGET_PSW','Elfelejtettem a jelszavam');
 DEFINE('CHANGE_PSW','Megváltoztatom a jelszavam');
 DEFINE('MY_DATA','Tárolt adataim lekérdezése');
+DEFINE('NOTMYACCOUNT','Még nincs fiókom, regisztrálok');
 DEFINE('DELETE_ACCOUNT','Fiókom (tárolt adataim) törlése');
+DEFINE('EXAMPLE','Példa applikáció');

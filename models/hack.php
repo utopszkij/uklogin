@@ -43,7 +43,7 @@ class HackModel {
     public function ipEnable(string $ip) {
         $table = new Table('hacks');
         $table->where(['ip','=',$ip]);
-        $rec = $table->delete();
+        $table->delete();
     }
     
 } // class
