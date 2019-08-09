@@ -41,6 +41,9 @@ DEFINE('LBL_PSW1','Adminisztrátor jelszó<br />(min. 6 karakter)');
 DEFINE('LBL_PSW2','Adminisztrátor jelszó ismét');
 DEFINE('LBL_PSW3','Jelszó<br />(min. 6 karakter)');
 DEFINE('LBL_PSW4','Jelszó ismét');
+DEFINE('LBL_NEW_PSW','Új jelszó<br />(min. 6 karakter)');
+DEFINE('LBL_NEW_PSW2','Új jelszó ismét');
+
 DEFINE('LBL_FALSEADMINLOGINLIMIT','Hibás admin bejelentkezési limit');
 
 DEFINE('LBL_REGISTFORM1','Regisztráció 1. képernyő');
@@ -80,9 +83,11 @@ DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secr
  adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához 
  és adminisztrálásához szükség lesz rájuk.');
 DEFINE('PSW','Jelszó');
-DEFINE('USER_SAVED','Felhasználói fiók létrehozva');
+DEFINE('USER_SAVED','Felhasználói fiók tárolva');
+DEFINE('USER_DELETED','Felhasználói fiók törölve');
 DEFINE('CLIENT_ID','Client_id');
 DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');
+DEFINE('SURE_DELETE_ACCOUNT','Bitos törölni akarja ezt a fiokot? (Törlés után minden ezzel a fiokkal kapcsolatos adatot törlünk a rendszerből. Nem fog tudni bejelentkezni, de szükség esetén újra regisztrálhatja magát.)');
 // apps check
 DEFINE('ERROR_DOMAIN_EMPTY','Domain nevet meg kell adni');
 DEFINE('ERROR_DOMAIN_INVALID','Domain név nem megfelelő');

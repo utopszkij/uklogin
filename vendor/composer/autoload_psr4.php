@@ -43,4 +43,6 @@ return array(
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib/Doctrine/Common/Annotations'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
+    'Com\\Tecnick\\Pdf\\Parser\\' => array($vendorDir . '/tecnickcom/tc-lib-pdf-parser/src'),
+    'Com\\Tecnick\\Pdf\\Filter\\' => array($vendorDir . '/tecnickcom/tc-lib-pdf-filter/src'),
 );

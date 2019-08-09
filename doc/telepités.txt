@@ -50,13 +50,35 @@ sudo apt install phpmyadmin php-mbstring php-gettext
 
 -- létrehoz egy phpmyadmin mysql usert és kéri ennek jelszavát.-- 
 
+.htaccess használat engedélyezése
+---------------------------------
+/etc/apache2/apache2.conf -ban:
+
+<Directory /var/www/>
+	Options Indexes FollowSymLinks
+	AllowOverride All
+	Require all granted
+</Directory>
 
 sudo service apache2 restart
 sudo service vsftpd restart
 
+uklogin afatbázis létrehozása phpmyadmin -al
+--------------------------------------------
+
+program feltöltése
+------------------
+(zip - unzip)
+htaccess.txt -> .htaccess
+config.txt --> .config.php
+
+konfigurálás
+------------
+.config.php javitása
+
 
 Sajnos a pdfsig jelenleg nem müködik (jelzett bug a github -on).
--------------------------------------
+----------------------------------------------------------------
 Alternativák:
 1. mutols 
 			

@@ -82,6 +82,8 @@ class ComposerStaticInit22dbd86f527d3802159bca3ea738e481
         'C' => 
         array (
             'Composer\\CaBundle\\' => 18,
+            'Com\\Tecnick\\Pdf\\Parser\\' => 23,
+            'Com\\Tecnick\\Pdf\\Filter\\' => 23,
         ),
     );
 
@@ -233,6 +235,14 @@ class ComposerStaticInit22dbd86f527d3802159bca3ea738e481
         'Composer\\CaBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
+        'Com\\Tecnick\\Pdf\\Parser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-pdf-parser/src',
+        ),
+        'Com\\Tecnick\\Pdf\\Filter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tecnickcom/tc-lib-pdf-filter/src',
         ),
     );
 

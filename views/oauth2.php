@@ -122,21 +122,27 @@ class Oauth2View  extends CommonView  {
 				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
 				<p>
 					<label><?php echo txt('USER'); ?></label>
-					<?php if ($data->nick == '') : ?>
-					<input type="text" name="nick" value="<?php echo $data->nick; ?>"
-					   value="<?php $data->nick ?>?>" />
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
+					<input type="text" name="nick" value="" />
 					<?php else : ?>
-					<input type="hidden" name="nick" value="<?php echo $data->nick; ?>"
-					   value="<?php $data->nick ?>?>" />
+					<input type="hidden" name="nick" value="<?php echo $data->nick; ?>"  />
 					<var><?php echo $data->nick;  ?></var>
 					<?php endif; ?>   
 				</p>
 				<p>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
 					<label><?php echo txt('LBL_PSW3'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW'); ?></label>
+					<?php endif; ?>
 					<input type="password" name="psw1" value="<?php echo $data->psw1; ?>" />
 				</p>
 				<p>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
 					<label><?php echo txt('LBL_PSW4'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW2'); ?></label>
+					<?php endif; ?>
 					<input type="password" name="psw2" value="<?php echo $data->psw2; ?>" />
 				</p>
     			<p>
@@ -200,21 +206,30 @@ class Oauth2View  extends CommonView  {
 					target="_self">
 					<?php echo txt('NOTMYACCOUNT');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist'); $('#task').val('forgetpsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('forgetpsw'); $('#formLogin').submit();">
 					<?php echo txt('FORGET_PSW');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('changepsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('changepsw'); $('#formLogin').submit();">
 					<?php echo txt('CHANGE_PSW');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('mydata'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('mydata'); $('#formLogin').submit();">
 					<?php echo txt('MY_DATA');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('deleteaccount'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="delAccountClick()">
 					<?php echo txt('DELETE_ACCOUNT');  ?>
 				</a><br />
 				</p>
 			</form>		    
 	    </div>
+	    
+	    <script type="text/javascript">
+            function delAccountClick() {
+                if (confirm('<?php echo txt('SURE_DELETE_ACCOUNT'); ?>')) {
+                    $('#task').val('deleteaccount'); 
+                    $('#formLogin').submit();
+                }
+            }
+        </script>
 		</body>
         </html>
         <?php 
