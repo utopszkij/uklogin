@@ -637,7 +637,9 @@ class Oauth2Controller {
 	    if ($forgetPswNick != '') {
 	        $data->nick = $forgetPswNick;
 	    }
-	    $request->sessionset('nick',$data->forgetPswNick);
+	    if (isset($data->forgetPswNick)) {
+	       $request->sessionset('nick',$data->forgetPswNick);
+	    }
 	    $msgs = $model->check($data);
 	    if (count($msgs) > 0) {
 	        $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
@@ -769,7 +771,7 @@ class Oauth2Controller {
 	public function dologin($request): string {
 
 	    checkCsrToken($request);
-
+	    
 	    $appModel = getModel('appregist');
 	    $model = getModel('oauth2'); // szükség van rá, ez kreál táblát.
 	    $view = getView('oauth2');
@@ -895,5 +897,27 @@ class Oauth2Controller {
         }
 	}
 
+	/**
+	 * user blokkolás feloldása
+	 * @param object $request   - csrtoken, nick, client_id
+	 */
+	public function useractival($request) {
+	    checkCsrToken($request);
+	    $client_id = $request->input('client_id','');
+	    $nick = $request->input('nick','');
+	    $appModel = getModel('appregist');
+	    $model = getModel('oauth2'); 
+	    $user = $model->getUserByNick($client_id, $nick);
+	    if ($user) {
+	        $user->enabled = 1;
+	        $user->blocktime = '';
+	        $user->errorcount = 0;
+	        $model->updateUser($user);
+	        echo '<div class="alert alert-success">User activated</div>';
+	    } else {
+	        echo '<div class="alert alert-danger">User not found</div>';
+	    }
+	}
+	
 }
 ?>

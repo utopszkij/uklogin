@@ -101,6 +101,8 @@ if ($task == 'home') {
 	   #sourceTitle {position:fixed; z-index:98; top:250px; left:100px; color:white;}
 	   #source {position:fixed; z-index:98; top:290px; left:50px;}
 	   #logo {width:100%}
+	   .demoInfo {position:absolute; z-index:60; top:300px; left:100px; width:600px; height:auto;
+	       background-color:silver; padding:10px;  opacity:0.5; color:black;}
 	 </style>
 	 
   </head>
@@ -133,6 +135,11 @@ if ($task == 'home') {
   			<div style="text-align:center">
   				<img src="<?php echo MYDOMAIN; ?>/templates/default/logo.jpg" id="logo" />
   			</div>
+  			<!--   div class="demoInfo">
+  				Ez egy demó program. Bérelt, megisztott tárhelyen fut ahol technikai okokból az aláírás ellenörzés nem teljes. 
+  				Itt egy ügyfélkapús aláírással többször is lehet regisztrálni. Éles használat esetén külön álló szerverre kell telepiteni, 
+  				ahol a teljeskörű aláírás ellenörzés és ennek segitségével a dupla regisztrálás kiszűrése megvalósítható.
+  			</div -->
   			<div id="popup">
   				<div id="popupHeader">
   				 <em class="fa fa-close" style="cursor:pointer" title="close"  
