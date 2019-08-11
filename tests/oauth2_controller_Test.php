@@ -298,13 +298,42 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/nick/');
     }
     
+    public function test_useractival_notfound() {
+        $this->request->sessionSet('csrToken','t1234567');
+        $this->request->set('t1234567','1');
+        $this->request->set('client_id','123');
+        $this->request->set('nick','nincsilyen');
+        $this->controller->useractival($this->request);
+        $this->expectOutputRegex('/NOT_FOUND/');
+    }
+    
+    public function test_useractival_ok() {
+        $this->request->sessionSet('csrToken','t1234567');
+        $this->request->set('t1234567','1');
+        $this->request->set('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->controller->useractival($this->request);
+        $this->expectOutputRegex('/ACTIVATED/');
+    }
+    
     public function test_deleteaccount_ok() {
         $this->request->sessionSet('client_id','123');
+        $this->request->set('t1234567','1');
         $this->request->set('nick','testelek');
         $this->request->set('psw1','123456');
         $this->request->set('psw2','123456');
-        $this->controller->changepsw($this->request);
-        $this->expectOutputRegex('/"USER_DELETED"/');
+        $this->controller->deleteaccount($this->request);
+        $this->expectOutputRegex('/USER_DELETED/');
+    }
+    
+    public function test_deleteaccount_notfound() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('t1234567','1');
+        $this->request->set('nick','nincsilyen');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->deleteaccount($this->request);
+        $this->expectOutputRegex('/ERROR_NOTFOUND/');
     }
     
     public function test_end() {

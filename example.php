@@ -135,11 +135,6 @@ if ($task == 'home') {
   			<div style="text-align:center">
   				<img src="<?php echo MYDOMAIN; ?>/templates/default/logo.jpg" id="logo" />
   			</div>
-  			<!--   div class="demoInfo">
-  				Ez egy demó program. Bérelt, megisztott tárhelyen fut ahol technikai okokból az aláírás ellenörzés nem teljes. 
-  				Itt egy ügyfélkapús aláírással többször is lehet regisztrálni. Éles használat esetén külön álló szerverre kell telepiteni, 
-  				ahol a teljeskörű aláírás ellenörzés és ennek segitségével a dupla regisztrálás kiszűrése megvalósítható.
-  			</div -->
   			<div id="popup">
   				<div id="popupHeader">
   				 <em class="fa fa-close" style="cursor:pointer" title="close"  

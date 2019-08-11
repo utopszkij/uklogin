@@ -84,7 +84,13 @@ class FrontpageView  extends CommonView  {
 			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 			    <span class="sr-only"><?php echo NEXT; ?></span>
 			  </a>
-			</div><!-- carousel -->        
+			</div><!-- carousel -->     
+			<div style="position:fixed; z-index:66; top:200px; right:50px; width:500px; background-color:black; color:white; padding:10px; border-radius:10px">
+  				Ez egy demó program. Bérelt, megisztott tárhelyen fut ahol technikai okokból az aláírás ellenörzés nem teljes. 
+  				Itt egy ügyfélkapús aláírással többször is lehet regisztrálni. Éles használat esetén külön álló szerverre kell telepiteni, 
+  				ahol a teljeskörű aláírás ellenörzés és ennek segitségével a dupla regisztrálás kiszűrése megvalósítható.
+  			</div>
+			   
         	<?php echo htmlPopup(); ?>
           </div><!-- #scope -->
 		  <?php $this->echoFooter(); ?>

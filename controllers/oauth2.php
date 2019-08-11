@@ -211,7 +211,7 @@ class Oauth2Controller {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
 	            $request->sessionSet('client_id', $client_id);
 	            $model->deleteUser($user);
-                $this->recallLoginForm($request, $view, $app, ['USER_DELETED'] );
+                $view->successMsg(['USER_DELETED']);
 	        } else {
 	            // jelszó hiba
 	            $user->errorcount++;
@@ -613,6 +613,11 @@ class Oauth2Controller {
 	        $data = new stdClass();
 	    } else {
 	        $data = $model->getUserByNick($client_id, $forgetPswNick);
+	        if ($data) {
+	            $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick,
+	                ['NOT_FOUND']);
+	            return;
+	        }
 	    }
 	    
 	    // adat és cookie kezelés elfogadva?
@@ -621,7 +626,7 @@ class Oauth2Controller {
 	            $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick,
 	                ['ERROR_DATA_ACCEP_REQUEST','ERROR_COOKIE_ACCEP_REQUEST']);
 	            return;
-	    }
+	        }
 
 	    $app = $appModel->getData($client_id);
 	    
@@ -653,7 +658,7 @@ class Oauth2Controller {
 	       unset($data->psw1);
 	       unset($data->psw2);
 	       unset($data->msgs);
-	       if ($data->forgetPswNick == '') {
+	       if ((!isset($data->forgetPswNick)) || ($data->forgetPswNick == '')) {
 	           unset($data->forgetPswNick);
 	           $msgs = $model->addUser($data);
 	       } else {
@@ -885,6 +890,7 @@ class Oauth2Controller {
 	public function userinfo($request) {
         $access_token = $request->input('access_token');
         $model = getModel('oauth2');
+        $view = getView('oauth2');
         $rec = $model->getUserByAccess_token($access_token);
 
         if (!headers_sent()) {
@@ -893,7 +899,7 @@ class Oauth2Controller {
         if ($rec) {
             echo '{"nick":"'.$rec->nick.'"}';
         } else {
-            echo '{"error":"not found"}';
+            $view->errorMsg(['NOT_FOUND']);
         }
 	}
 
@@ -906,16 +912,17 @@ class Oauth2Controller {
 	    $client_id = $request->input('client_id','');
 	    $nick = $request->input('nick','');
 	    $appModel = getModel('appregist');
-	    $model = getModel('oauth2'); 
+	    $model = getModel('oauth2');
+	    $view = getView('oauth2');
 	    $user = $model->getUserByNick($client_id, $nick);
 	    if ($user) {
 	        $user->enabled = 1;
 	        $user->blocktime = '';
 	        $user->errorcount = 0;
 	        $model->updateUser($user);
-	        echo '<div class="alert alert-success">User activated</div>';
+	        $view->successMsg(['USER_ACTIVATED']);
 	    } else {
-	        echo '<div class="alert alert-danger">User not found</div>';
+	        $view->errorMsg(['NOT_FOUND']);
 	    }
 	}
 	
