@@ -277,7 +277,7 @@ class Oauth2Controller {
 	    $check2 = false;
 	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
 	    $signatureArray[] = '';
-    	if ((strpos($signatureArray[0],'default Firefox Folder') > 0) ||
+    	if ((strpos($signatureArray[1],'Segmentation fault') > 0) ||
     	    ($signatureArray[0] == 'sh: pdfsig: command not found')) {
     	        // karakteres keresés a pdf tartalomban
     	        $buffer = '';

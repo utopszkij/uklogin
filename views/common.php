@@ -68,7 +68,7 @@ class CommonView {
 				<a href="https://angularjs.org/">AngularJs</a>&nbsp;
 				<a href="https://www.fpdf.org">fpdf</a>&nbsp;
 				<a href="https://github.com/smalot/pdfparser">pdf parser</a>&nbsp;
-				<a href="https://mupdf.com">mupdf</a>&nbsp;
+				phpunit&nbsp;mocha&nbsp;sonar-cloud&nbsp;
 		</p>
 		<p><?php echo txt('SWFORKINFO'); ?>&nbsp;
 	    	<a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA">lásd itt</a></p>

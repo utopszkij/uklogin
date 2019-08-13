@@ -58,6 +58,7 @@ form#formAdminLogin input {border-style:solid; border-width:1px; border-color:si
 #loginForm {padding:10px; height:auto}
 #loginForm label {width:150px; text-align:left}
    
+.info {background-color:silver; color:black; padding:10px; text-align:center;}   
 .successMsg {height:400px; padding:20px; }   
 /* phone */
 @media (max-width: 576px) { 

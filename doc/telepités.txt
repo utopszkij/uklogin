@@ -103,3 +103,26 @@ Alternativák:
   --- de ennek ellenörzése azt hiszem túl nagy falat lenne....
 
 
+upgrade Ubunto 19.04 -re:
+==========================
+https://www.linuxbabe.com/ubuntu/upgrade-ubuntu-18-04-18-10-to-ubuntu-19-04
+
+Ebben talán telepíthető a poppler-utils újabb verziója .....
+
+
+ClientAliveInterval 60
+sudo systemctl restart ssh
+sudo apt update && sudo apt dist-upgrade
+sudo apt install update-manager-core
+sudo nano /etc/update-manager/release-upgrades
+     At the bottom of this file, change the value of Prompt from lts to normal.
+
+     Prompt=normal
+do-release-upgrade
+
+.......... több kérdés....... a végén reboot -ot csinál
+
+verzió ellenörzés:
+
+lsb_release -a 
+    
