@@ -8,8 +8,17 @@
  * (az app regisztrálásakor megadott callback URL: <MYDOMAIN>/example.php?task=code
  */
 session_start();
-define('MYDOMAIN','https://uklogin.tk');
-define('UKLOGINDOMAIN','https://uklogin.tk/oauth2');
+
+// lokális teszt vagy éles szerver?.
+if ($_SERVER['SERVER_NAME'] == 'robitc') {
+	// lokális teszt
+	define('MYDOMAIN','http://robitc/uklogin');
+	define('UKLOGINDOMAIN','http://robitc/uklogin/oauth2');
+} else {
+	// éles szerver
+	define('MYDOMAIN','https://uklogin.tk');
+	define('UKLOGINDOMAIN','https://uklogin.tk/oauth2');
+}
 define('CLIENTID','0000000000');
 define('CLIENTSECRET','0000000000');
 
@@ -45,10 +54,9 @@ if ($task == 'code') {
             // iframe -ben fut a program! JS: parent.document.location="xxxx" használható.
             $session['userNick'] = $result->nick;
             ?>
-    		<script type="text/javascript">
-				window.parent.logged('<?php echo $result->nick; ?>');
-    		</script>
-    		</body>
+            <h2>"<?php echo $result->nick?>"&nbsp;sikeresen bejelentkezett.</h2>
+            <h1 style="text-align:center">:)</h1>
+            </body>
     		</html>
     		<?php
         } else {
