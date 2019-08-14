@@ -101,6 +101,8 @@ if ($task == 'home') {
 	   #sourceTitle {position:fixed; z-index:98; top:250px; left:100px; color:white;}
 	   #source {position:fixed; z-index:98; top:290px; left:50px;}
 	   #logo {width:100%}
+	   .demoInfo {position:absolute; z-index:60; top:300px; left:100px; width:600px; height:auto;
+	       background-color:silver; padding:10px;  opacity:0.5; color:black;}
 	 </style>
 	 
   </head>

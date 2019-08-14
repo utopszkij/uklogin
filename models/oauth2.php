@@ -17,25 +17,25 @@ class Oauth2Model {
             `codetime` varchar(32),
             `blocktime` varchar(32),
             PRIMARY KEY (`id`),
-            KEY `users_nick` (`client_id`, `nick`),
-            KEY `users_sign` (`client_id` ,`signhash`)
+            KEY `users_nick` (`client_id`(250), `nick`(100)),
+            KEY `users_sign` (`client_id`(250) ,`signhash`(250))
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci
             ');
-        
+
         // clear old code and access_token
         $w = date('Y-m-d H:i:s', (time() - CODE_EXPIRE));
         $db->exec('UPDATE users
         SET code="", access_token="", codetime=""
         WHERE codetime < "'.$w.'"');
-        
+
         // több mint 10 órája blokkolt userek feloldása
         $w = date('Y-m-d H:i:s', (time() - 36000));
         $db->exec('UPDATE users
         SET enabled=1, blocktime""
         WHERE blocktime < "'.$w.'"');
-        
+
     }
-    
+
     /**
      * covert str to hex format
      * @param string $string
@@ -67,7 +67,7 @@ class Oauth2Model {
             return false;
         }
     }
-    
+
     /**
      * get user data by client_id and signhash
      * @param string $client_id
@@ -85,7 +85,7 @@ class Oauth2Model {
             return false;
         }
     }
-    
+
     /**
      * get user data by code
      * @param string $client_id
@@ -104,7 +104,7 @@ class Oauth2Model {
             return false;
         }
     }
-    
+
     /**
      * get user data by access_tokern
      * @param string $access_token
@@ -125,7 +125,7 @@ class Oauth2Model {
             return false;
         }
     }
-    
+
     public function check($rec): array {
         $result = [];
         if ($rec->nick == '') {
@@ -141,23 +141,25 @@ class Oauth2Model {
                 $result[] = 'ERROR_PSW_NOTEQUAL';
             }
         }
-        $rec2 = $this->getUserByNick($rec->client_id, $rec->nick);
-        if ($rec2) {
-            $result[] = 'ERROR_NICK_EXISTS';
-        }
-        $rec2 = $this->getUserBySignHash($rec->client_id, $rec->signHash);
-        if ($rec2) {
-            $result[] = 'ERROR_SIGN_EXISTS';
+        if (!isset($rec->forgetPswNick)) {
+            $rec2 = $this->getUserByNick($rec->client_id, $rec->nick);
+            if ($rec2) {
+                $result[] = 'ERROR_NICK_EXISTS';
+            }
+            $rec2 = $this->getUserBySignHash($rec->client_id, $rec->signHash);
+            if ($rec2) {
+                $result[] = 'ERROR_SIGN_EXISTS';
+            }
         }
         return $result;
     }
-    
+
     public function addUser($rec): array {
         $rec->blocktime = '';
         $rec->codetime = '';
         $table = new Table('users');
         $table->insert($rec);
-        $errorMsg = $table->getErrorMsg(); 
+        $errorMsg = $table->getErrorMsg();
         if ($errorMsg == '') {
             $result = [];
         } else {
@@ -166,7 +168,7 @@ class Oauth2Model {
         }
         return $result;
     }
-    
+
     public function updateUser($rec): array {
         $table = new Table('users');
         $table->where(['id','=',$rec->id]);
@@ -178,11 +180,19 @@ class Oauth2Model {
         }
         return $msgs;
     }
-    
+
     public function deleteUser($rec): array {
-        return ['nincs kész'];
+        $table = new Table('users');
+        $table->where(['id','=',$rec->id]);
+        $table->delete();
+        $msg = $table->getErrorMsg();
+        $msgs = [];
+        if ($msg != '') {
+            $msgs[] = $msg;
+        }
+        return $msgs;
     }
-    
-   
+
+
 } // class
 ?>

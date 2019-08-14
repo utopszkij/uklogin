@@ -87,6 +87,8 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','');
         $this->request->set('psw1','');
@@ -99,6 +101,8 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','testelek');
         $this->request->set('psw1','');
@@ -111,6 +115,8 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','testelek');
         $this->request->set('psw1','12');
@@ -123,6 +129,8 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','testelek');
         $this->request->set('psw1','123456');
@@ -142,6 +150,10 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->sessionSet('nick','');
+        
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','user1');
         $this->request->set('psw1','123456');
@@ -161,6 +173,9 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign');
+        $this->request->sessionSet('nick','');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','user3');
         $this->request->set('psw1','123456');
@@ -173,6 +188,8 @@ class oauth2ControllerTest extends TestCase
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('signHash','testSign2');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
         $this->request->set('abc',1);
         $this->request->set('nick','testelek');
         $this->request->set('psw1','123456');
@@ -180,7 +197,32 @@ class oauth2ControllerTest extends TestCase
         $this->controller->doregist($this->request);
         $this->expectOutputRegex('/USER_SAVED/');
     }
-
+    
+    public function test_forgetpsw_ok() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->controller->forgetpsw($this->request);
+        $this->expectOutputRegex('/LBL_SIGNEDPDF/');
+    }
+    
+    public function test_changepsw_ok() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->changepsw($this->request);
+        $this->expectOutputRegex('/LBL_NEW_PSW/');
+    }
+    
+    public function test_mydata_ok() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->changepsw($this->request);
+        $this->expectOutputRegex('/"testelek"/');
+    }
+    
     public function test_loginform_falsclient_id() {
         $this->request->sessionSet('client_id','nincsilyen');
         $this->controller->loginform($this->request);
@@ -256,6 +298,43 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/nick/');
     }
     
+    public function test_useractival_notfound() {
+        $this->request->sessionSet('csrToken','t1234567');
+        $this->request->set('t1234567','1');
+        $this->request->set('client_id','123');
+        $this->request->set('nick','nincsilyen');
+        $this->controller->useractival($this->request);
+        $this->expectOutputRegex('/NOT_FOUND/');
+    }
+    
+    public function test_useractival_ok() {
+        $this->request->sessionSet('csrToken','t1234567');
+        $this->request->set('t1234567','1');
+        $this->request->set('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->controller->useractival($this->request);
+        $this->expectOutputRegex('/ACTIVATED/');
+    }
+    
+    public function test_deleteaccount_ok() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('t1234567','1');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->deleteaccount($this->request);
+        $this->expectOutputRegex('/USER_DELETED/');
+    }
+    
+    public function test_deleteaccount_notfound() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('t1234567','1');
+        $this->request->set('nick','nincsilyen');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->deleteaccount($this->request);
+        $this->expectOutputRegex('/ERROR_NOTFOUND/');
+    }
     
     public function test_end() {
         $db = new DB();

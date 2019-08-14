@@ -93,7 +93,9 @@
 			}
 	  });
 	  $('#userActOk').click(function() {
-		  global.alert('Nincs kész');
+		  	$('#option').val('oauth2');
+		  	$('#task').val('useractival');
+			global.submit('formApp');
 	  });
 	  $('#formAppCancel').click(function() {
 		  window.location = "./index.php";

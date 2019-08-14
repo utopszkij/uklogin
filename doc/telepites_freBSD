@@ -1,0 +1,27 @@
+pkg install mc
+
+pkg install apache24
+sysrc apache24_enable=yes
+service apache24 start
+service apache24 status
+
+pkg install mysql56-server
+sysrc mysql_enable=yes
+service mysql-server start
+service apache24 status
+mysql_secure_installation
+
+pkg install php72 php72-mysqli mod_php72 php72-mbstring php72-zlib php72-curl php72-gd php72-json
+cp /usr/local/etc/php.ini{-production} /usr/local/etc/php.ini
+
+Edit
+/usr/local/etc/apache24/Includes/php.conf
+<IfModule dir_module>
+    DirectoryIndex index.php index.html
+    <FilesMatch "\.php$">
+        SetHandler application/x-httpd-php
+    </FilesMatch>
+    <FilesMatch "\.phps$">
+        SetHandler application/x-httpd-php-source
+    </FilesMatch>
+</IfModule>

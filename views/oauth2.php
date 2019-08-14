@@ -11,7 +11,7 @@ class Oauth2View  extends CommonView  {
         echo htmlHead();
         ?>
         <body ng-app="app">
-	    <div class="successMsg">
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="successMsg">
 	    <h2 class="alert alert-success">
 			<?php 
 			foreach ($msgs as $msg) {
@@ -21,6 +21,8 @@ class Oauth2View  extends CommonView  {
 	    </h2>
 	    </div>
         </body>
+        <?php echo htmlPopup(); ?>
+        <?php loadJavaScriptAngular('oauth2',new stdClass()); ?>
         </html>
         <?php 
 	}
@@ -34,7 +36,7 @@ class Oauth2View  extends CommonView  {
 	    echo htmlHead();
 	    ?>
         <body ng-app="app">
-	    <div class="errorMsg">
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
 	    <h2 class="alert alert-danger">
 			<?php 
 			foreach ($msgs as $msg) {
@@ -46,6 +48,8 @@ class Oauth2View  extends CommonView  {
 	    <?php if ($backLink != '') : ?>
 	    <p><a href="<?php echo $backLink; ?>" target="_self"><?php echo txt($backStr); ?></a>
 	    <?php endif; ?>
+        <?php echo htmlPopup(); ?>
+        <?php loadJavaScriptAngular('oauth2', new stdClass()); ?>
         </body>
         </html>
         <?php 
@@ -60,7 +64,7 @@ class Oauth2View  extends CommonView  {
 	    echo htmlHead($data);
 	    ?>
         <body ng-app="app">
-	    <div id="registForm1">
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="registForm1">
 		    <h2><?php echo $data->appName; ?></h2>
 		    <h3><?php echo txt($data->title); ?></h3>
 		    <p><?php echo txt('LBL_REGISTFORM1_HELP1'); ?></p>
@@ -88,6 +92,8 @@ class Oauth2View  extends CommonView  {
 				</p>
 			</form>		    
 	    </div>
+        <?php echo htmlPopup(); ?>
+        <?php loadJavaScriptAngular('oauth2',$data); ?>
 		</body>
         </html>
         <?php 
@@ -102,7 +108,8 @@ class Oauth2View  extends CommonView  {
 	    echo htmlHead($data);
 	    ?>
         <body ng-app="app">
-	    <div id="registForm2">
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="registForm2">
+	    
 		    <h2><?php echo $data->appName; ?></h2>
 		    <h3><?php echo txt($data->title); ?></h3>
 		    <?php if (count($data->msgs) > 0) : ?>
@@ -122,21 +129,27 @@ class Oauth2View  extends CommonView  {
 				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
 				<p>
 					<label><?php echo txt('USER'); ?></label>
-					<?php if ($data->nick == '') : ?>
-					<input type="text" name="nick" value="<?php echo $data->nick; ?>"
-					   value="<?php $data->nick ?>?>" />
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
+					<input type="text" name="nick" id="nick" value="" />
 					<?php else : ?>
-					<input type="hidden" name="nick" value="<?php echo $data->nick; ?>"
-					   value="<?php $data->nick ?>?>" />
+					<input type="hidden" name="nick" value="<?php echo $data->nick; ?>"  />
 					<var><?php echo $data->nick;  ?></var>
 					<?php endif; ?>   
 				</p>
 				<p>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
 					<label><?php echo txt('LBL_PSW3'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW'); ?></label>
+					<?php endif; ?>
 					<input type="password" name="psw1" value="<?php echo $data->psw1; ?>" />
 				</p>
 				<p>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
 					<label><?php echo txt('LBL_PSW4'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW2'); ?></label>
+					<?php endif; ?>
 					<input type="password" name="psw2" value="<?php echo $data->psw2; ?>" />
 				</p>
     			<p>
@@ -157,6 +170,8 @@ class Oauth2View  extends CommonView  {
 				</p>
 			</form>		    
 	    </div>
+        <?php echo htmlPopup(); ?>
+        <?php loadJavaScriptAngular('oauth2',$data); ?>
 		</body>
         </html>
         <?php 
@@ -166,7 +181,7 @@ class Oauth2View  extends CommonView  {
 	    echo htmlHead($data);
 	    ?>
         <body ng-app="app">
-	    <div id="loginForm">
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="loginForm">
 		    <h2><?php echo $data->appName; ?></h2>
 		    <?php if (count($data->msgs) > 0) : ?>
 		    	<p class="alert alert-danger">
@@ -185,7 +200,7 @@ class Oauth2View  extends CommonView  {
 				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
 				<p>
 					<label><?php echo txt('USER'); ?></label>
-					<input type="text" name="nick" value="<?php echo $data->nick; ?>"
+					<input type="text" name="nick" id="nick" value="<?php echo $data->nick; ?>"
 					   value="<?php $data->nick ?>?>" />
 				</p>
 				<p>
@@ -200,21 +215,31 @@ class Oauth2View  extends CommonView  {
 					target="_self">
 					<?php echo txt('NOTMYACCOUNT');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist'); $('#task').val('forgetpsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('forgetpsw'); $('#formLogin').submit();">
 					<?php echo txt('FORGET_PSW');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('changepsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('changepsw'); $('#formLogin').submit();">
 					<?php echo txt('CHANGE_PSW');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('mydata'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="$('#task').val('mydata'); $('#formLogin').submit();">
 					<?php echo txt('MY_DATA');  ?>
 				</a><br />
-				<a href="" target="_self" onclick="$('#option').val('userregist');  $('#task').val('deleteaccount'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="delAccountClick()">
 					<?php echo txt('DELETE_ACCOUNT');  ?>
 				</a><br />
 				</p>
 			</form>		    
 	    </div>
+        <?php echo htmlPopup(); ?>
+        <?php loadJavaScriptAngular('oauth2',$data); ?>
+	    <script type="text/javascript">
+            function delAccountClick() {
+                if (confirm('<?php echo txt('SURE_DELETE_ACCOUNT'); ?>')) {
+                    $('#task').val('deleteaccount'); 
+                    $('#formLogin').submit();
+                }
+            }
+        </script>
 		</body>
         </html>
         <?php 

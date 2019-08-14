@@ -42,7 +42,7 @@ class AppregistView  extends CommonView  {
             <?php endif; ?>
     		<form id="formApp" name="formApp" action="<?php echo txt('MYDOMAIN'); ?>/index.php" 
     			method="post" target="_self">
-    			<input type="hidden" name="option" value="appregist" />
+    			<input type="hidden" name="option" id="option" value="appregist" />
     			<input type="hidden" name="task" id="task" value="save" />
     			<input type="hidden" name="{{csrToken}}" value="1" />
     			<input type="hidden" name="client_id" id="client_id" value="{{client_id}}" />
@@ -53,7 +53,7 @@ class AppregistView  extends CommonView  {
                 	<legend><?php echo txt('USERACTIVATION'); ?></legend>
                 	<p>
                 		<label><?php echo txt('USER'); ?></label>
-                		<input type="text" name="user" id="user" value="" size="32" />
+                		<input type="text" name="nick" id="nick" value="" size="32" />
                 		<button type="button" id="userActOk" class="btn btn-secondary"><?php echo txt('USRACTOK'); ?></button>
                 	</p>
                 </fieldset>
