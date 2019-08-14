@@ -34,11 +34,11 @@ class ImpresszumView  extends CommonView  {
           	</p>
           	<p>Licensz: GNU/GPL</p>
           	<p>
-          	A sziftvert mindenki saját felelőségére használhatja, a szoftver használata során az esetleges szoftver hibák által
-          	okozott esetleges károkért a fejlsztő semminemű felelőséget nem vállal, még akkor sem ha a hibáról tudomása lehetett.
+          	A szoftvert mindenki saját felelőségére használhatja, a szoftver használata során az esetleges szoftver hibák által
+          	okozott esetleges károkért a fejlesztő semminemű felelőséget nem vállal, még akkor sem ha a hibáról tudomása lehetett.
           	</p>
           	<p>
-          	A szofver üzemeltetése teljes egészében adományokból van finanszirozva. Ha adományok nem érkeznek, akkor
+          	A szoftver üzemeltetése teljes egészében adományokból van finanszírozva. Ha adományok nem érkeznek, akkor
           	sajnos anyagi lehetőségek hiányában a rendszer üzemeltetése leáll. :(
           	</p>
           	<p style="text-align:center">

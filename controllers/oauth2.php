@@ -545,10 +545,12 @@ class Oauth2Controller {
 	        $data->nick = $request->input('nick','');
 	        if ($forgetPswNick != '') {
 	            $data->nick = $forgetPswNick;
+	            $data->title = 'FORGET_PSW';
+	        } else {
+	            $data->title = 'LBL_REGISTFORM2';
 	        }
 	        $data->psw1 = '';
 	        $data->psw2 = '';
-	        $data->title = 'FORGET_PSW';
 	        $view->registForm2($data);
 	    }
 	}

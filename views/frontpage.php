@@ -95,8 +95,8 @@ class FrontpageView  extends CommonView  {
   				?>
   				<p>
   				Ez egy minden párttól, szervezettől független civil kezdeményezés. Teljes egészében magán emberek
-  				adományaiból müködik. A rendszert üzemeltető szerver jelenleg 2019.szeptember 31. -ig van kiifizetve.
-  				Amennyiben módja van rá, kérjük támogassa a rendszer müködését.
+  				adományaiból működik. A rendszert üzemeltető szerver jelenleg 2019.szeptember 31. -ig van kiifizetve.
+  				Amennyiben módja van rá, kérjük támogassa a rendszer működését.
   				</p>
   				<p>
   				  <a href="<?php echo MYDOMAIN; ?>/opt/adomany/show" 
