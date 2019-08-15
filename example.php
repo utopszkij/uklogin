@@ -105,9 +105,9 @@ if ($task == 'home') {
            #scope {padding:5px}
     	   .main {padding:20px;}
     	   #popup {position:absolute; z-index:99; display:none;
-    	     top:130px; left:15px; width:510px; max-width:510px; height:810px;
+    	     top:130px; left:15px; width:510px; max-width:510px; height:800px;
     	     background-color:white; margin:10px; border-style:solid; border-width:2px; border-color:black;}
-    	   #popup iframe {border-style:none; width:500px; height:800px}
+    	   #popup iframe {border-style:none; width:500px; height:770px}
     	   #popupHeader {text-align:right;}
     	   #events {border-style:none}
     	   #sourceTitle {position:absolute; z-index:98; top:360px; left:100px; color:white;}
