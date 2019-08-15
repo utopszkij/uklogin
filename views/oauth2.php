@@ -64,7 +64,7 @@ class Oauth2View  extends CommonView  {
 	    echo htmlHead($data);
 	    ?>
         <body ng-app="app">
-	    <div ng-controller="ctrl" id="scope" style="display:none" class="registForm1">
+	    <div ng-controller="ctrl" id="scope" style="display:none;" class="registForm1">
 		    <h2><?php echo $data->appName; ?></h2>
 		    <h3><?php echo txt($data->title); ?></h3>
 		    <p><?php echo txt('LBL_REGISTFORM1_HELP1'); ?></p>
@@ -90,7 +90,7 @@ class Oauth2View  extends CommonView  {
 				<p>
 					<button type="submit" class="btn btn-primary"><?php echo txt('NEXTSTEP'); ?></button>
 				</p>
-			</form>		    
+			</form>
 	    </div>
         <?php echo htmlPopup(); ?>
         <?php loadJavaScriptAngular('oauth2',$data); ?>

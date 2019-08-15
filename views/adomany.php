@@ -21,14 +21,14 @@ class AdomanyView  extends CommonView  {
             <h2>Adományozás</h2>
           	<h3>Tájékoztatás</h3>
           	<p>A szoftver teljes egészében önkéntes munkával, grátisz lett kifejlesztve.
-          	A rendszer üzemeltetése is ilyen formában van megoldva. Viszont a müködéshez szükséges 
-          	VPS szerver pénzbe kerül. Jelenleg az a Forpsi-cloud small szervert,ingyenes domaint 
-          	és inygenes https tanusitványt használunk.
+          	A rendszergazdai munka is ilyen formában van megoldva. Viszont a működéshez szükséges 
+          	VPS szerver pénzbe kerül. Jelenleg a Forpsi-cloud small szervert,ingyenes domaint 
+          	és ingyenes https tanusítványt használunk.
           	Az adományokat kizárólag a szerver bérlés finanszirozására használjuk fel.
           	Ha komolyabb érdeklődés lesz a rendszer használatára akkor domain név és minősített https
           	tanusitvány beszerzése és fentartása is szükséges lehet.</p>
-          	<p>Minden adományt - akár 1000 Ft -ot is - hálássan köszönünk. Az adományok beérkezéséről és
-          	felhasználásáról lentebb részletes elszámolást teszünk közz.</p>
+          	<p>Minden adományt - akár 1000 Ft -ot is - hálásan köszönünk. Az adományok beérkezéséről és
+          	felhasználásáról lentebb részletes elszámolást teszünk közzé.</p>
           	<p>Ha azt kivánja, hogy neve vagy szervezete szerepeljen az elszámolásban akkor azt az utalás
           	közleményében jelezze! Ha a közleményben erről nem rendelkezik az adományt névtelenül
           	szerepeltetjük az elszámolásban.</p>
@@ -38,28 +38,25 @@ class AdomanyView  extends CommonView  {
           	
           	<p>Ethereum tárca: 0xb7233a1474eb3f0359b01A83e57C636DE78C09Da</p>
           	
-          	<h3>Elszámolás</h3>
-          	<table class="table">
-          		<thead class="thead-dark">
-          			<tr><th>Dátum</th>
-          			    <th>Összeg (HUF)</th>
-          			    <th>Leírás</th>
-          			</tr>
-          		</thead>
-          		<tboy>
-          			<tr>
-          				<td>2019.08.02</td>
-          				<td alight="right">+1500</td>
-          				<td>Adomány  Fogler Tibor</td>
-          			</tr>
-          			<tr>
-          				<td>2019.08.02</td>
-          				<td alight="right">-1500</td>
-          				<td>Forpsi VPS egyenleg feltöltés</td>
-          			</tr>
-          		</tboy>
-          	</table>
-	      </div><!-- #scope -->
+          	
+          	<iframe style="width:600px; height:600px"
+          	 src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRjHIFVnLDw03ykdEEr72iIot5ONW_8rqkebk1Yz1vM0y-jr6p50SwNkVKrYFkH58YrVwseJf3qfl3t/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+          	
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	<p>&nbsp;</p>
+          	</div><!-- #scope -->
 		  <?php $this->echoFooter(); ?>
         </body>
         </html>

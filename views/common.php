@@ -40,7 +40,7 @@ class CommonView {
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			</nav>   
-			<p style="background-color:red; color:white">Ez a rendszer jelenleg fejlesztés alatt áll. Még nem használható! ß teszt készültség:80%</p>     
+			<p style="background-color:red; color:white">Ez a rendszer jelenleg ß teszt állapotban használható.</p>     
 		<?php       
      } // echoNavbar
         
@@ -52,7 +52,7 @@ class CommonView {
 				<em class="fa fa-pencil"></em>&nbsp;<?php echo txt('IMPRESSUM'); ?></a>&nbsp;&nbsp;&nbsp;      
 			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show">
 				<em class="fa fa-lock"></em>&nbsp;<?php echo txt('DATAPROCESS'); ?></a>&nbsp;&nbsp;&nbsp;      
-			<a href="http://gnu.hu/gplv3.html">
+			<a href="https://gnu.hu/gplv3.html">
 				<em class="fa fa-copyright"></em>&nbsp;<?php echo txt('LICENCE'); ?>: GNU/GPL</a>&nbsp;&nbsp;&nbsp;      
 			<a href="https://github.com/utopszkij/uklogin">
 				<em class="fa fa-github"></em>&nbsp;<?php echo txt('SOURCE'); ?></a>&nbsp;&nbsp;&nbsp;   
@@ -73,11 +73,6 @@ class CommonView {
 		<p><?php echo txt('SWFORKINFO'); ?>&nbsp;
 	    	<a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA">lásd itt</a></p>
 		</div>
-		<p>screen width:
-		<script type="text/javascript">
-			document.write(screen.width);
-		</script>
-		</p>
         <?php 		
 	}
 }

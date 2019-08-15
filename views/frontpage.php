@@ -84,19 +84,24 @@ class FrontpageView  extends CommonView  {
 			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 			    <span class="sr-only"><?php echo NEXT; ?></span>
 			  </a>
-			</div><!-- carousel -->     
+			</div><!-- carousel -->   
+			<div class="counters">
+				<div class="appCount">
+					<em class="fa fa-cog"></em><br />
+					Regisztrált applikációk száma:
+					<var><?php echo $p->appCount; ?></var>
+				</div>
+				<div class="userCount">
+					<em class="fa fa-user"></em><br />
+					Regisztrált felhasználói fiókok száma:
+					<var><?php echo $p->userCount; ?></var>
+				</div>
+			</div>  
 			<div class="info">
-			    <?php
-			    /*
-  				Ez egy demó program. Bérelt, megisztott tárhelyen fut ahol technikai okokból az aláírás ellenörzés nem teljes. 
-  				Itt egy ügyfélkapús aláírással többször is lehet regisztrálni. Éles használat esetén külön álló szerverre kell telepiteni, 
-  				ahol a teljeskörű aláírás ellenörzés és ennek segitségével a dupla regisztrálás kiszűrése megvalósítható.
-  				*/
-  				?>
   				<p>
   				Ez egy minden párttól, szervezettől független civil kezdeményezés. Teljes egészében magán emberek
-  				adományaiból müködik. A rendszert üzemeltető szerver jelenleg 2019.szeptember 31. -ig van kiifizetve.
-  				Amennyiben módja van rá, kérjük támogassa a rendszer müködését.
+  				adományaiból működik. A rendszert üzemeltető szerver jelenleg 2019.szeptember 31. -ig van kiifizetve.
+  				Amennyiben módja van rá, kérjük támogassa a rendszer működését.
   				</p>
   				<p>
   				  <a href="<?php echo MYDOMAIN; ?>/opt/adomany/show" 

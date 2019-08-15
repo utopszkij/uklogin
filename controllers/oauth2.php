@@ -275,9 +275,9 @@ class Oauth2Controller {
 	protected function checkPdfSig(string $filePath, &$res) {
 	    $check1 = false;
 	    $check2 = false;
-	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
 	    $signatureArray[] = '';
-    	if ((strpos($signatureArray[1],'Segmentation fault') > 0) ||
+	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
+	    if ((strpos($signatureArray[1],'Segmentation fault') >= 0) ||
     	    ($signatureArray[0] == 'sh: pdfsig: command not found')) {
     	        // karakteres keresés a pdf tartalomban
     	        $buffer = '';
@@ -545,10 +545,12 @@ class Oauth2Controller {
 	        $data->nick = $request->input('nick','');
 	        if ($forgetPswNick != '') {
 	            $data->nick = $forgetPswNick;
+	            $data->title = 'FORGET_PSW';
+	        } else {
+	            $data->title = 'LBL_REGISTFORM2';
 	        }
 	        $data->psw1 = '';
 	        $data->psw2 = '';
-	        $data->title = 'FORGET_PSW';
 	        $view->registForm2($data);
 	    }
 	}
@@ -608,12 +610,11 @@ class Oauth2Controller {
 	        echo '<p>invalid signHash</p>';
 	        exit();
 	    }
-
 	    if ($forgetPswNick == '') {
 	        $data = new stdClass();
 	    } else {
 	        $data = $model->getUserByNick($client_id, $forgetPswNick);
-	        if ($data) {
+	        if (!$data) {
 	            $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick,
 	                ['NOT_FOUND']);
 	            return;

@@ -140,7 +140,7 @@ function getView(string $viewName) {
 
 class Request {
 	public $params = array();
-	protected $sessions;
+	protected $sessions = array();
 	
 	/**
 	 * get item from $this->params

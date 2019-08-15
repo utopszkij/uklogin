@@ -5,12 +5,11 @@ A fejlesztésében közreműködni kívánóknak szóló információk a [ebben 
 
 ## Készültség
 
-Fejlesztés alatt kb 30% készültség
+ß teszt
 
-## Élő demó:
+## ß teszt:
 
-https://szeszt.tk/uklogin
-
+https://uklogin.tk
 
 ## Áttekintés
 
