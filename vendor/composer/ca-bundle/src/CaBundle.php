@@ -77,12 +77,6 @@ class CaBundle
         // This mimics how OpenSSL uses the SSL_CERT_FILE env variable.
         $caBundlePaths[] = getenv('SSL_CERT_DIR');
 
-        if (function_exists('openssl_get_cert_locations')) {
-            $locations = openssl_get_cert_locations();
-            $caBundlePaths[] = $locations['default_cert_file'];
-            $caBundlePaths[] = $locations['default_cert_dir'];
-        }
-
         $caBundlePaths[] = ini_get('openssl.cafile');
         $caBundlePaths[] = ini_get('openssl.capath');
 
@@ -311,6 +305,6 @@ EOT;
 
     private static function caDirUsable($certDir)
     {
-        return $certDir && @is_dir($certDir) && @is_readable($certDir);
+        return $certDir && @is_dir($certDir) && @is_readable($certDir) && glob($certDir . '/*');
     }
 }

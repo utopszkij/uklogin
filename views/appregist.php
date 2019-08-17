@@ -189,27 +189,9 @@ class AppregistView  extends CommonView  {
         <body ng-app="app">
 	    <?php $this->echoNavbar($p); ?>
 	    <div class="errorMsg">
-	    <h2 class="alert alert-danger">appregist Fatal error in save</h2>
-	    <p><?php echo JSON_encode($res->error); ?></p>
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 
-	}
-	/**
-	 * echo not found error
-	 * @param string $msg
-	 * @return void
-	 */
-	public function notFoundMsg($msgs) {
-	    echo htmlHead();
-	    $p = new stdClass();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($p); ?>
-	    <div class="errorMsg">
-	    <h2 class="alert alert-danger"><?php echo txt($msg); ?></h2>
+	    <h2 class="alert alert-danger">
+	    	<?php echo JSON_encode($res->error); ?>
+	    </h2>
 	    </div>
 		<?php $this->echoFooter(); ?>
         </body>

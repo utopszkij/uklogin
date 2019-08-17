@@ -1,11 +1,12 @@
 <?php
 /*
  * Példa program az uklogin használatára
- * URL elérése: <MYDOMAIN>/example.php
+ * Az app regisztrálásakor megadott callback URL: <MYDOMAIN>/example.php?task=code)
+ * Az app client_id="000000000" client_secret="0000000000"
+ * 
  * Hivásai:
  * 1. paraméter nélkül: képernyő kirajzolás
  * 2. task=code&code=xxxxxx  az uklogin hivta vissza, ilyenkor iframe -ben fut
- * (az app regisztrálásakor megadott callback URL: <MYDOMAIN>/example.php?task=code
  */
 session_start();
 
@@ -22,7 +23,6 @@ if ($_SERVER['SERVER_NAME'] == 'robitc') {
 define('CLIENTID','0000000000');
 define('CLIENTSECRET','0000000000');
 
-
 if (isset($_GET['task'])) {
     $task = $_GET['task'];
 } else {
@@ -30,7 +30,13 @@ if (isset($_GET['task'])) {
 }
 
 if ($task == 'code') {
-    // oauth2 hivta vissza, ilyenkor az iframe -ben fut
+    // oauth2 hivta vissza, ilyenkor iframe -ben fut
+    $code = $_GET['code'];
+    if (isset($_GET['state'])) {
+        $state = $_GET['state'];
+    } else {
+        $state = '';
+    }
     echo '<!doctype html>
         <html>
         <head>
@@ -39,7 +45,6 @@ if ($task == 'code') {
         <body>
         ';
     // access_token kérése
-    $code = $_GET['code'];
     $url = UKLOGINDOMAIN.'/access_token/client_id/'.CLIENTID.'/client_secret/'.CLIENTSECRET.'/code/'.$code;
     $result = JSON_decode(implode("\n", file($url)));
     if ((!isset($result->error)) && (isset($result->access_token))) {
@@ -49,10 +54,17 @@ if ($task == 'code') {
         $url = UKLOGINDOMAIN.'/userinfo/access_token/'.$access_token;
         $result = JSON_decode(implode("\n", file($url)));
         if ($result->nick != 'error') {
+            
             // Userinfo sikeresen lekérve. A user sikeresen bejelentkezett.
-            // Ha másik oldalt kell behivni akkor vegyük figyelembe, hogy most az
-            // iframe -ben fut a program! JS: parent.document.location="xxxx" használható.
             $session['userNick'] = $result->nick;
+            //
+            // Gyakran a "state" paraméter urlencoded url-t tartalmaz amit sikeres login 
+            // utám hívni kell, ez esetben pld:
+            // echo '
+            // <script type="txt/javascript>
+            //   parent.document="'.urldecode($state).'";
+            // </script>
+            // ';
             ?>
             <h2>"<?php echo $result->nick?>"&nbsp;sikeresen bejelentkezett.</h2>
             <h1 style="text-align:center">:)</h1>
@@ -202,20 +214,16 @@ if ($task == 'home') {
 			$('#linkRegist').click(function() {
 				$('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/<?php echo CLIENTID; ?>");
 				$('#popup').show();
-				return false;
+				return false; // ne hajsa végre a href linket
 			});
 			$('#linkLogin').click(function() {
 				$('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/oauth2/loginform/client_id/<?php echo CLIENTID; ?>");
+				// gyakran /state/urldecoded(url) formában a sikeres login aután
+				// aktivizálandó url -t is meg adunk.
 				$('#popup').show();
-				return false;
+				return false; // ne hajsa végre a href linket
 			});
 		});
-		function logged(nick) {
-            // a valós applikációkban ilyenkor gyakran JS koddal behiv egy másik oldalt, itt most csak
-            // bezárja a popup -ot, és üzenetet ir ki.
-			$('#popup').hide();
-			alert(nick+' bejelentkezett.');
-		}
   	</script>
 
   </body>

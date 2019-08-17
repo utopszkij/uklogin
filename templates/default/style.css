@@ -15,7 +15,7 @@ input {max-width:80%}
 #popup p {padding:20px; margin:20px; text-align:center}
 #popupButtons {padding:10px; text-align:center}  
   
-#working {position:fixed; z-index:100; left:200px; top:200px;
+#working {position:fixed; z-index:100; left:200px; top:200px; display:none;
     background-image:url('./working.gif'); background-color:silver; border-radius:10px;
     text-align:center; margin:20px;
     width:128px; height:128px; font-size:10px; font-weight:bold; color:red; }

@@ -3470,20 +3470,9 @@ commonview$
 
 echonavbarcommonview::echonavbar$
 
-echofootercommonview::echofooter±
-oauth2model
-adduseroauth2model::adduser3
-getuserbysignhashoauth2model::getuserbysignhash!
-strtohexoauth2model::strtohex+
-getuserbycodeoauth2model::getuserbycode+
-getuserbynickoauth2model::getuserbynick%
-
-deleteuseroauth2model::deleteuser
-checkoauth2model::check'
-__constructoauth2model::__construct%
-
-updateuseroauth2model::updateuser;
-getuserbyaccess_token"oauth2model::getuserbyaccess_tokenœ
+echofootercommonview::echofooter:
+impresszumcontroller"
+showimpresszumcontroller::showœ
 appregistmodel(
 
 url_existsappregistmodel::url_exists,
@@ -3496,60 +3485,48 @@ adjustdataappregistmodel::adjustdata
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
-updateafterinsert!appregistmodel::updateafterinsert¼
+updateafterinsert!appregistmodel::updateafterinsert:
+examplecontroller%
+exampleexamplecontroller::example¢
+
 oauth2controller$
 dologinoauth2controller::dologin,
-checkpdfsigoauth2controller::checkpdfsig(
-	loginformoauth2controller::loginform2
-getcallbackurl oauth2controller::getcallbackurl4
-recallloginform!oauth2controller::recallloginform.
-access_tokenoauth2controller::access_token&
-doregistoauth2controller::doregistB
-extractigazolasfrompdf(oauth2controller::extractigazolasfrompdf*
+checkpdfsigoauth2controller::checkpdfsig0
+deleteaccountoauth2controller::deleteaccount*
 
-registformoauth2controller::registformT
+getappuseroauth2controller::getappuser4
+recallloginform!oauth2controller::recallloginform"
+mydataoauth2controller::mydata&
+doregistoauth2controller::doregistB
+extractigazolasfrompdf(oauth2controller::extractigazolasfrompdfT
 extractmeghatalmazofromigazolas1oauth2controller::extractmeghatalmazofromigazolas&
-parsepdfoauth2controller::parsepdf
-pdfoauth2controller::pdf0
-createworkdiroauth2controller::createworkdir,
-getsignhashoauth2controller::getsignhash:
+parsepdfoauth2controller::parsepdf:
 checksignhashexist$oauth2controller::checksignhashexist,
 clearfolderoauth2controller::clearfolder<
-processuploadedfile%oauth2controller::processuploadedfile,
+processuploadedfile%oauth2controller::processuploadedfile(
+	changepswoauth2controller::changepsw,
 registform2oauth2controller::registform2&
-userinfooauth2controller::userinfo:
-defaultcontroller%
-defaultdefaultcontroller::default2
+userinfooauth2controller::userinfo(
+	loginformoauth2controller::loginform2
+getcallbackurl oauth2controller::getcallbackurl.
+access_tokenoauth2controller::access_token&
+pswerroroauth2controller::pswerror*
+
+registformoauth2controller::registform(
+	forgetpswoauth2controller::forgetpsw
+pdfoauth2controller::pdf8
+recallregistform2#oauth2controller::recallregistform2,
+useractivaloauth2controller::useractival0
+createworkdiroauth2controller::createworkdir,
+getsignhashoauth2controller::getsignhash2
 readmecontroller
 showreadmecontroller::show>
 frontpageview
 commonview!
-displayfrontpageview::displayÚ
-appregistcontroller
-addappregistcontroller::add+
-	forgetpswappregistcontroller::forgetpsw%
-logoutappregistcontroller::logout-
-
-adminloginappregistcontroller::adminlogin+
-	appremoveappregistcontroller::appremove1
-doadminlogin!appregistcontroller::doadminlogin3
-deleteaccount"appregistcontroller::deleteaccount7
-adminloginerror$appregistcontroller::adminloginerror3
-echoadminform"appregistcontroller::echoadminform!
-saveappregistcontroller::save+
-	changepswappregistcontroller::changepsw%
-mydataappregistcontroller::mydata%
-removeappregistcontroller::remove8
-
-readmeview
-commonview
-displayreadmeview::display¡
-	hackmodel
-ipenablehackmodel::ipenable'
-checkenabledhackmodel::checkenabled#
-
-ipadderrorhackmodel::ipadderror%
-__constructhackmodel::__construct‹
+displayfrontpageview::displayj
+frontpagemodel,
+getusercountfrontpagemodel::getusercount*
+getappcountfrontpagemodel::getappcountà
 appregistview
 commonview'
 
@@ -3557,9 +3534,62 @@ removedmsgappregistview::removedmsg
 formappregistview::form/
 adminloginformappregistview::adminloginform'
 
-successmsgappregistview::successmsg)
-notfoundmsgappregistview::notfoundmsg#
-errormsgappregistview::errormsgÔ
+successmsgappregistview::successmsg#
+errormsgappregistview::errormsg0
+browsermodel 
+getdatabrowsermodel::getdataB
+adatkezelesview
+commonview#
+displayadatkezelesview::display±
+oauth2model
+adduseroauth2model::adduser3
+getuserbysignhashoauth2model::getuserbysignhash!
+strtohexoauth2model::strtohex+
+getuserbycodeoauth2model::getuserbycode+
+getuserbynickoauth2model::getuserbynick%
+
+deleteuseroauth2model::deleteuser
+checkoauth2model::check'
+__constructoauth2model::__construct%
+
+updateuseroauth2model::updateuser;
+getuserbyaccess_token"oauth2model::getuserbyaccess_token@
+impresszumview
+commonview"
+displayimpresszumview::display:
+browsercontroller%
+browserbrowsercontroller::browser:
+adomanyview
+commonview
+displayadomanyview::display4
+adomanycontroller
+showadomanycontroller::show:
+defaultcontroller%
+defaultdefaultcontroller::defaultý
+appregistcontroller
+addappregistcontroller::add%
+logoutappregistcontroller::logout-
+
+adminloginappregistcontroller::adminlogin+
+	appremoveappregistcontroller::appremove1
+doadminlogin!appregistcontroller::doadminlogin7
+adminloginerror$appregistcontroller::adminloginerror3
+echoadminform"appregistcontroller::echoadminform!
+saveappregistcontroller::save8
+
+readmeview
+commonview
+displayreadmeview::display0
+examplemodel 
+getdataexamplemodel::getdata<
+adatkezelescontroller#
+showadatkezelescontroller::show¡
+	hackmodel
+ipenablehackmodel::ipenable'
+checkenabledhackmodel::checkenabled#
+
+ipadderrorhackmodel::ipadderror%
+__constructhackmodel::__constructÔ
 
 oauth2view
 commonview&

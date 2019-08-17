@@ -68,6 +68,7 @@
 					$('input#psw1').addClass('error');
 				}
 			}
+			
 			if (($('input#psw1').val() != '') && ($('input#psw1').val().length < 6)) {
 				msg += $scope.txt('ERROR_PSW_INVALID')+'<br />';
 				$('input#psw1').addClass('error');

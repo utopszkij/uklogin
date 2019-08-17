@@ -70,18 +70,6 @@ class AppregistController {
 	}
 	
 	/**
-	 * remove app record from database
-	 * @param object $request
-	 */
-	public function remove($request) {
-	    // check csrtoken
-	    checkCsrToken($request);
-	    
-	    // csrtoken ok
-	    echo '<p>Remove app</p>'; 
-	}
-	
-	/**
 	 * adminisztrátor login képernyő megjelenítése
 	 * @return void
 	 */ 
@@ -227,54 +215,14 @@ class AppregistController {
 	            $view->removedMsg($rec);
 	        } else {
 	            ?>
-	        	$view->notFoundMsg($msg);
+	        	$view->errorMsg($msg);
 	        	<?php
 	        }
 	    } else {
 	        ?>
-	        $view->notFoundMsg('ERROR_NOTFOUND');
+	        $view->errorMsg('ERROR_NOTFOUND');
 	        <?php
 	    }
-	}
-	
-	/**
-	 * user jelszó vátoztsatás
-	 * sessionban érkezik a client_id
-	 * @param Request $request - csrToken, nick, psw1
-	 */
-	public function changepsw($request) {
-	    echo 'nincs kész';
-	    
-	}
-	
-	/**
-	 * user tárolt adatainak lekérdezése
-	 * sessionban érkezik a client_id
-	 * @param Request $request - csrToken, nick, psw1
-	 */
-	public function mydata($request) {
-	    echo 'nincs kész';
-	    
-	}
-	
-	/**
-	 * user fiók törlése
-	 * sessionban érkezik a client_id
-	 * @param Request $request - csrToken, nick, psw1
-	 */
-	public function deleteaccount($request) {
-	    echo 'nincs kész';
-	    
-	}
-
-	/**
-	 * user fiók elfelejtett jelszó
-	 * sessionban érkezik a client_id
-	 * @param Request $request - csrToken, nick
-	 */
-	public function forgetpsw($request) {
-	    echo 'nincs kész';
-	    
 	}
 	
 }

@@ -22,7 +22,7 @@ DEFINE('LICENCE','Licensz');
 DEFINE('SOURCE','Forrás program');
 DEFINE('BUGMSG','Programhiba jelzése');
 DEFINE('SWRESOURCE','Felhasznált szoftver elemek');
-DEFINE('SWFORKINFO','A program Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.');
+DEFINE('SWFORKINFO','A program az <a href="https://ahang.hu">"aHang"</a> és Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.');
 DEFINE('APPTITLE','Regisztrálás, bejelentkezés ügyfélkapus aláírás segítségével');
 DEFINE('APPINFO','e-demokrácia<br />web-es szolgáltatás');
 DEFINE('NEXT','következő');

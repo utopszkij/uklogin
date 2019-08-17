@@ -142,7 +142,7 @@ class Oauth2View  extends CommonView  {
 					<?php else : ?>
 					<label><?php echo txt('LBL_NEW_PSW'); ?></label>
 					<?php endif; ?>
-					<input type="password" name="psw1" value="<?php echo $data->psw1; ?>" />
+					<input type="password" name="psw1" id="psw1" value="<?php echo $data->psw1; ?>" />
 				</p>
 				<p>
 					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
@@ -150,7 +150,7 @@ class Oauth2View  extends CommonView  {
 					<?php else : ?>
 					<label><?php echo txt('LBL_NEW_PSW2'); ?></label>
 					<?php endif; ?>
-					<input type="password" name="psw2" value="<?php echo $data->psw2; ?>" />
+					<input type="password" name="psw2" id="psw2" value="<?php echo $data->psw2; ?>" />
 				</p>
     			<p>
     				<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
@@ -166,7 +166,7 @@ class Oauth2View  extends CommonView  {
     			</p>
 				
 				<p>
-					<button type="submit" class="btn btn-primary"><?php echo txt('OK'); ?></button>
+					<button type="button" id="formRegist2Ok" class="btn btn-primary"><?php echo txt('OK'); ?></button>
 				</p>
 			</form>		    
 	    </div>
@@ -205,10 +205,10 @@ class Oauth2View  extends CommonView  {
 				</p>
 				<p>
 					<label><?php echo txt('LBL_PSW3'); ?></label>
-					<input type="password" name="psw1" value="" />
+					<input type="password" name="psw1" id="psw1" value="" />
 				</p>
 				<p>
-					<button type="submit" class="btn btn-primary"><?php echo txt('LOGIN'); ?></button>
+					<button type="button" id="formLoginOk" class="btn btn-primary"><?php echo txt('LOGIN'); ?></button>
 				</p>
 				<p>
 				<a href="<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/<?php echo $data->client_id; ?>"

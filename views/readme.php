@@ -56,15 +56,6 @@ class ReadmeView  extends CommonView  {
   <p>
    PHP, MYSQL, JQUERY, bootstrap
   </p>
-  <p>
-   A program Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.
-  </p>
-  <p>
-   Lásd:
-   <a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA">
-    https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA
-   </a>
-  </p>
   <h2 id="licensz">
    Licensz
   </h2>
@@ -139,9 +130,9 @@ class ReadmeView  extends CommonView  {
   <pre><code>&lt;iframe ..... src="<?php echo MYDOMAIN; ?>/oath2/loginform/client_id/&lt;client_id&gt;" /&gt;
 </code></pre>
   <p>
-   Opcionálisan /redirect_uri/
+   Opcionálisan 
    <url>
-    és /state/xxxxx is megadható. A redirect_uri -csak az app adatoknál megadott domain-en lehet (urlencoded formában), a state tetszőleges kiegészítő infot tartalmazhat.
+    /state/xxxxx is megadható. A state tetszőleges kiegészítő infot tartalmazhat.
    </url>
   </p>
   <p>
@@ -156,15 +147,11 @@ class ReadmeView  extends CommonView  {
    - fiók törlése
    <br/>
    - tárolt adataim lekérdezése
-   <br/>
-   - adatkezelési tájékoztató
-   <br/>
-   - cokkie kezelés elfogadtatása
   </p>
   <p>
    Miután a user megadja usernevét és jelszavát a program ellenőrzi azokat, sikeres login esetén
    <br/>
-   meghívja az app adatokban beállított callback url -t, GET vagy POST paraméterként küldve: “code”, “state”, “redirect_uri”.
+   meghívja az app adatokban beállított callback url -t, GET paraméterként küldve: “code”, “state”. 
   </p>
   <p>
    Ezután hívni kell a
@@ -281,7 +268,6 @@ class ReadmeView  extends CommonView  {
   
   	<h2>Brute force támadás elleni védekezés</h2>
 
-	<h3>user login brute force támadás</h3>
 	<p>Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.</p>
 
 	     </div><!-- #scope -->
