@@ -205,6 +205,48 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/LBL_SIGNEDPDF/');
     }
     
+    public function test_forgetpsw_nick_empty() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','');
+        $this->controller->forgetpsw($this->request);
+        $this->expectOutputRegex('/ERROR_NICK_EMPTY/');
+    }
+    
+    public function test_forgetpsw_app_notfoundy() {
+        $this->request->sessionSet('client_id','nincsilyen');
+        $this->request->set('nick','testelek');
+        $this->controller->forgetpsw($this->request);
+        $this->expectOutputRegex('/ERROR_NOTFOUND/');
+    }
+    
+    public function test_changepsw_nick_empty() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->changepsw($this->request);
+        $this->expectOutputRegex('/ERROR_NICK_EMPTY/');
+    }
+    
+    public function test_changepsw_psw_empty() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','');
+        $this->request->set('psw2','123456');
+        $this->controller->changepsw($this->request);
+        $this->expectOutputRegex('/ERROR_PSW_EMPTY/');
+    }
+    
+    
+    public function test_changepsw_psw_error() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','nemjo');
+        $this->request->set('psw2','123456');
+        $this->controller->changepsw($this->request);
+        $this->expectOutputRegex('/INVALID_LOGIN/');
+    }
+    
     public function test_changepsw_ok() {
         $this->request->sessionSet('client_id','123');
         $this->request->set('nick','testelek');
@@ -219,7 +261,7 @@ class oauth2ControllerTest extends TestCase
         $this->request->set('nick','testelek');
         $this->request->set('psw1','123456');
         $this->request->set('psw2','123456');
-        $this->controller->changepsw($this->request);
+        $this->controller->mydata($this->request);
         $this->expectOutputRegex('/"testelek"/');
     }
     
@@ -250,6 +292,16 @@ class oauth2ControllerTest extends TestCase
         $this->request->set('abc',1);
         $this->request->set('nick','testelek');
         $this->request->set('psw','nemjo');
+        $this->controller->dologin($this->request);
+        $this->expectOutputRegex('/INVALID_LOGIN/');
+    }
+    
+    public function test_dologin_invalidPsw2() {
+        $this->request->sessionSet('csrToken','abc');
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('abc',1);
+        $this->request->set('nick','testelek');
+        $this->request->set('psw','');
         $this->controller->dologin($this->request);
         $this->expectOutputRegex('/INVALID_LOGIN/');
     }
@@ -316,6 +368,32 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/ACTIVATED/');
     }
     
+    
+    public function test_mydata_ok2() {
+        $this->request->sessionSet('client_id','123');
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->mydata($this->request);
+        $this->expectOutputRegex('/"testelek"/');
+    }
+        
+    public function test_doRegist_forgetPsw() {
+        
+        $this->request->sessionSet('csrToken','abc');
+        $this->request->sessionSet('client_id','123');
+        $this->request->sessionSet('nick','testelek');
+        $this->request->sessionSet('signHash','testSign2');
+        $this->request->set('abc',1);
+        $this->request->set('nick','testelek');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
+        $this->controller->doRegist($this->request);
+        $this->expectOutputRegex('/SAVED/');
+    }
+        
     public function test_deleteaccount_ok() {
         $this->request->sessionSet('client_id','123');
         $this->request->set('t1234567','1');
@@ -334,6 +412,23 @@ class oauth2ControllerTest extends TestCase
         $this->request->set('psw2','123456');
         $this->controller->deleteaccount($this->request);
         $this->expectOutputRegex('/ERROR_NOTFOUND/');
+    }
+    
+    public function test_pdf() {
+        $this->request->sessionSet('client_id','123');
+        $this->controller->pdf($this->request);
+        $this->assertEquals('',''); // csak szintaktikai teszt
+    }
+    
+    public function test_getCallbackUrl() {
+        $this->request->sessionSet('client_id','123');
+        $app = new stdClass();
+        $app->callback='https://test.hu';
+        $user = new stdClass();
+        $user->code = '12345';
+        $this->request->sessionSet('extraParams',["p1" => "v1"]);
+        $res = $this->controller->getCallbackUrl($app, $user, $this->request);
+        $this->assertEquals('https://test.hu?code=12345&p1=v1',$res); 
     }
     
     public function test_end() {

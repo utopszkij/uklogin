@@ -39,7 +39,7 @@ class AdomanyView  extends CommonView  {
           	<p>Ethereum tárca: 0xb7233a1474eb3f0359b01A83e57C636DE78C09Da</p>
           	
           	
-          	<iframe style="width:600px; height:600px"
+          	<iframe style="width:600px; height:600px" title="elszamolas"
           	 src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRjHIFVnLDw03ykdEEr72iIot5ONW_8rqkebk1Yz1vM0y-jr6p50SwNkVKrYFkH58YrVwseJf3qfl3t/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
           	
           	<p>&nbsp;</p>

@@ -73,28 +73,66 @@ class Oauth2Controller {
 	}
 	
 	/**
+	 * get $app és $user or result errorMsg
+	 * @param object $app
+	 * @param object $user
+	 * @param object $userModel 
+	 * @param string $client_id
+	 * @param string $nick
+	 * @param string $psw
+	 * @return string
+	 */
+	protected function getAppUser(&$app, &$user, &$userModel,
+	    string $client_id, string $nick, string $psw): string {
+	    $result = '';
+	    $appModel = getModel('appregist');
+	    if ($nick == '') {
+	        $result = 'ERROR_NICK_EMPTY';
+	    } else if ($psw == '') {
+	        $result = 'ERROR_PSW_EMPTY';
+	    } else {
+	       $app = $appModel->getData($client_id);
+	       $user = $userModel->getUserByNick($client_id, $nick);
+	    }
+	    return $result;
+	}
+
+	
+	protected function pswError(&$app, &$model, &$view, &$request, &$user) {
+	    $user->errorcount++;
+	    if ($user->errorcount >= $app->falseLoginLimit) {
+	        $user->enabled = 0;
+	        $user->blocktime = date('Y-m-d H:i:s');
+	    }
+	    $client_id = $app->client_id;
+	    $tryCount = $app->falseLoginLimit - $user->errorcount;
+	    $model->updateUser($user);
+	    $request->sessionSet('client_id', $client_id);
+	    if ($user->enabled == 1) {
+	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	    } else {
+	        $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
+	    }
+	}
+	
+	
+	/**
 	 * jelszó változtatás
 	 * sessionban érkezik a client_id
 	 * @param unknown $request - nick, psw1, csrtoken
 	 */
 	public function changepsw($request) {
-	    $appModel = getModel('appregist');
 	    $model = getModel('oauth2');
 	    $view = getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
-	    if ($nick == '') {
-	        $view->errorMsg(['ERROR_NICK_EMPTY']);
-	        return;
-	    }
-	    if ($psw == '') {
-	        $view->errorMsg(['ERROR_PSW_EMPTY']);
-	        return;
-	    }
 	    
-	    $app = $appModel->getData($client_id);
-	    $user = $model->getUserByNick($client_id, $nick);
+	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
+	    if ($msg != '') {
+	        $view->errorMsg([$msg]);
+	        return;
+	    }
 	    if (($app) && ($user) && ($user->enabled == 1)) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
     	        $data = new stdClass();
@@ -117,19 +155,7 @@ class Oauth2Controller {
     	        $view->registForm2($data);
 	        } else {
 	            // jelszó hiba
-	            $user->errorcount++;
-	            if ($user->errorcount >= $app->falseLoginLimit) {
-	                $user->enabled = 0;
-	                $user->blocktime = date('Y-m-d H:i:s');
-	            }
-	            $tryCount = $app->falseLoginLimit - $user->errorcount;
-	            $model->updateUser($user);
-	            $request->sessionSet('client_id', $client_id);
-	            if ($user->enabled == 1) {
-	                $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
-	            } else {
-	                $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
-	            }
+	            $this->pswError($app, $model, $view, $request, $user);
 	        }
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
@@ -143,41 +169,26 @@ class Oauth2Controller {
 	 * @param object $request - nick, psw1, csrtoken
 	 */
 	public function mydata($request) {
-	    $appModel = getModel('appregist');
 	    $model = getModel('oauth2');
 	    $view = getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
-	    if ($nick == '') {
-	        $view->errorMsg(['ERROR_NICK_EMPTY']);
-	        return;
-	    }
-	    if ($psw == '') {
-	        $view->errorMsg(['ERROR_PSW_EMPTY']);
+	    $app = false;
+	    $user = false;
+	    
+	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
+	    if ($msg != '') {
+	        $view->errorMsg([$msg]);
 	        return;
 	    }
 	    
-	    $app = $appModel->getData($client_id);
-	    $user = $model->getUserByNick($client_id, $nick);
 	    if (($app) && ($user)) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
 	            echo JSON_encode($user,JSON_PRETTY_PRINT);
 	        } else {
 	            // jelszó hiba
-	            $user->errorcount++;
-	            if ($user->errorcount >= $app->falseLoginLimit) {
-	                $user->enabled = 0;
-	                $user->blocktime = date('Y-m-d H:i:s');
-	            }
-	            $tryCount = $app->falseLoginLimit - $user->errorcount;
-	            $model->updateUser($user);
-	            $request->sessionSet('client_id', $client_id);
-	            if ($user->enabled == 1) {
-	                $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
-	            } else {
-	                $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
-	            }
+	            $this->pswError($app, $model, $view, $request, $user);
 	        }
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
@@ -190,23 +201,20 @@ class Oauth2Controller {
 	 * @param object $request - nick, psw1, csrtoken
 	 */
 	public function deleteaccount($request) {
-	    $appModel = getModel('appregist');
 	    $model = getModel('oauth2');
 	    $view = getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
-	    if ($nick == '') {
-	        $view->errorMsg(['ERROR_NICK_EMPTY']);
-	        return;
-	    }
-	    if ($psw == '') {
-	        $view->errorMsg(['ERROR_PSW_EMPTY']);
+	    $app = false;
+	    $user = false;
+	    
+	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
+	    if ($msg != '') {
+	        $view->errorMsg([$msg]);
 	        return;
 	    }
 	    
-	    $app = $appModel->getData($client_id);
-	    $user = $model->getUserByNick($client_id, $nick);
 	    if (($app) && ($user)) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
 	            $request->sessionSet('client_id', $client_id);
@@ -214,19 +222,7 @@ class Oauth2Controller {
                 $view->successMsg(['USER_DELETED']);
 	        } else {
 	            // jelszó hiba
-	            $user->errorcount++;
-	            if ($user->errorcount >= $app->falseLoginLimit) {
-	                $user->enabled = 0;
-	                $user->blocktime = date('Y-m-d H:i:s');
-	            }
-	            $tryCount = $app->falseLoginLimit - $user->errorcount;
-	            $model->updateUser($user);
-	            $request->sessionSet('client_id', $client_id);
-	            if ($user->enabled == 1) {
-	                $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
-	            } else {
-	                $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
-	            }
+	            $this->pswError($app, $model, $view, $request, $user);
 	        }
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
@@ -742,7 +738,7 @@ class Oauth2Controller {
 	 * @param Request $request
 	 * @return string
 	 */
-	protected function getCallbackUrl($app, $user, $request): string {
+	public function getCallbackUrl($app, $user, $request): string {
     	$url = $app->callback;
     	if (strpos($url, '?') > 0) {
     	    $url .= '&';

@@ -24,39 +24,39 @@ class FrontpageView  extends CommonView  {
 			      <img class="d-block w-100" src="./templates/default/cover_1.jpg" alt="First slide">
 			      <div class="buttons">
 			      	<a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      		<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      		<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
 			      	<a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      		<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
+			      		<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
 			      </div>
 			       <div class="carousel-caption d-none d-md-block">
-				   	<h5><?php echo APPTITLE; ?></h5>
-			   	 	<p><?php echo APPINFO; ?></p>
+				   	<h5><?php echo txt('APPTITLE'); ?></h5>
+			   	 	<p><?php echo txt('APPINFO'); ?></p>
 				   </div>
 			    </div>
 			    <div class="carousel-item">
 			      <img class="d-block w-100" src="./templates/default/cover_2.jpg" alt="Second slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
-				   	<h5><?php echo APPTITLE; ?></h5>
-			   	 	<p><?php echo APPINFO; ?></p>
+				   	<h5><?php echo txt('APPTITLE'); ?></h5>
+			   	 	<p><?php echo txt('APPINFO'); ?></p>
 				   </div>
 			    </div>
 			    <div class="carousel-item">
 			      <img class="d-block w-100" src="./templates/default/cover_4.jpg" alt="Third slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
-				   	<h5><?php echo APPTITLE; ?></h5>
-			   	 	<p><?php echo APPINFO; ?></p>
+				   	<h5><?php echo txt('APPTITLE'); ?></h5>
+			   	 	<p><?php echo txt('APPINFO'); ?></p>
 				   </div>
 			    </div>
 			    
@@ -64,13 +64,13 @@ class FrontpageView  extends CommonView  {
 			      <img class="d-block w-100" src="./templates/default/logo.jpg" alt="Foorth slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo NEWAPP; ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo DESC; ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
-				   	<h5><?php echo APPTITLE; ?></h5>
-			   	 	<p><?php echo APPINFO; ?></p>
+				   	<h5><?php echo txt('APPTITLE'); ?></h5>
+			   	 	<p><?php echo txt('APPINFO'); ?></p>
 				   </div>
 			    </div>
 			    
@@ -78,11 +78,11 @@ class FrontpageView  extends CommonView  {
 			  
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only"><?php echo PRIOR; ?>Elöző</span>
+			    <span class="sr-only"><?php echo txt('PRIOR'); ?>Elöző</span>
 			  </a>
 			  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
 			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only"><?php echo NEXT; ?></span>
+			    <span class="sr-only"><?php echo txt('NEXT'); ?></span>
 			  </a>
 			</div><!-- carousel -->   
 			<div class="counters">

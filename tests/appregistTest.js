@@ -55,11 +55,60 @@ describe('appregistTest.js', function() {
 		assert.ok(res == false);
 	}); 
 
-	it('formAppOKClick_NOTOK', function() {
+	it('formAppOKClick_NOTOK1', function() {
 		$('#formAppOk').click();
 		assert.ok(global.alertTxt != '???');
 	}); 
 
+	it('formAppOKClick_NOTOK_invalidurls', function() {
+		$('#domain').val('https:*\|//balmix.hu');
+		$('#callback').val('https:*\|balmix.hu/logged');
+		$('#css').val('https://balmix.hu/style.css');
+		$('#formAppOk').click();
+		assert.ok(global.alertTxt != '???');
+	}); 
+
+	it('formAppOKClick_NOTOK_notindomain', function() {
+		$('#domain').val('https://balmix.hu');
+		$('#callback').val('https://mashol.hu/logged');
+		$('#css').val('https://mashol.hu/style.css');
+		$('#formAppOk').click();
+		assert.ok(global.alertTxt != '???');
+	}); 
+
+	it('formAppOKClick_pswempty', function() {
+		$('#client_id').val('');
+		$('#name').val('test');
+		$('#domain').val('https://balmix.hu');
+		$('#callback').val('https://balmix.hu/logged');
+		$('#css').val('https://balmix.hu/style.css');
+		$('#admin').val('admin');
+		$('#psw1').val('');
+		$('#psw2').val('');
+		$('#dataProcessAccept').attr('checked','checked');
+		$('#cookieProcessAccept').attr('checked','checked');
+		global.alertTxt = '';
+		$('#formAppOk').click();
+		assert.ok(global.alertTxt != '');
+	}); 
+
+
+	it('formAppOKClick_pswsNotequals', function() {
+		$('#client_id').val('');
+		$('#name').val('test');
+		$('#domain').val('https://balmix.hu');
+		$('#callback').val('https://balmix.hu/logged');
+		$('#css').val('https://balmix.hu/style.css');
+		$('#admin').val('admin');
+		$('#psw1').val('123456');
+		$('#psw2').val('1234567');
+		$('#dataProcessAccept').attr('checked','checked');
+		$('#cookieProcessAccept').attr('checked','checked');
+		global.alertTxt = '';
+		$('#formAppOk').click();
+		assert.ok(global.alertTxt != '');
+	}); 
+	
 	it('formAppOKClick_OK', function() {
 		$('#client_id').val('');
 		$('#name').val('test');
@@ -88,6 +137,28 @@ describe('appregistTest.js', function() {
 		assert.ok(global.alertTxt == '');
 	});
 	
+	it('UserActOkClick', function() {
+		global.alertTxt = '';
+		$('#userActOk').click();
+		assert.ok(global.alertTxt == '');
+	});
+
+	it('formAppCancelClick', function() {
+		global.alertTxt = '';
+		$('#formAppcancel').click();
+		assert.ok(global.alertTxt == '');
+	});
 	
+	it('logoutkClick', function() {
+		global.alertTxt = '';
+		$('#logut').click();
+		assert.ok(global.alertTxt == '');
+	});
+	
+	it('formAppremoveClick', function() {
+		global.alertTxt = '';
+		$('#formAppremove').click();
+		assert.ok(true); // csak szintaxis ellenörzés
+	});
 	
 });

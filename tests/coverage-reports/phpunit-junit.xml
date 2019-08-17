@@ -1,72 +1,938 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="tests" tests="61" assertions="61" errors="0" failures="0" skipped="0" time="5.007940">
-    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="1.761092">
-      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="29" assertions="1" time="0.044647"/>
-      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="36" assertions="1" time="0.046125"/>
-      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="55" assertions="1" time="1.342877"/>
-      <testcase name="test_adminlogin" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="74" assertions="1" time="0.000761"/>
-      <testcase name="test_doadminlogin_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="81" assertions="1" time="0.090906"/>
-      <testcase name="test_doadminlogin_INVALID_PSW" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="97" assertions="1" time="0.039739"/>
-      <testcase name="test_doadminlogin_INVALID_NICK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="113" assertions="1" time="0.040484"/>
-      <testcase name="test_doadminlogin_INVALID_CLINET_ID" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="129" assertions="1" time="0.047859"/>
-      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="145" assertions="1" time="0.104699"/>
-      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="159" assertions="1" time="0.002281"/>
-      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="168" assertions="1" time="0.000715"/>
+  <testsuite name="tests" tests="81" assertions="81" errors="0" failures="0" skipped="0" time="3.468899">
+    <testsuite name="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.006328">
+      <testcase name="test_start" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="28" assertions="1" time="0.005627"/>
+      <testcase name="test_show" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="35" assertions="1" time="0.000701">
+        <system-out>	
+        &lt;body ng-app="app"&gt;
+          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+			  MAINMENU&amp;nbsp;
+			  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+			    &lt;ul class="navbar-nav"&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN"&gt;
+			        	&lt;em class="fa fa-home"&gt;&lt;/em&gt;&amp;nbsp;HOME&lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/readme/show"&gt;
+			        	&lt;em class="fa fa-info"&gt;&lt;/em&gt;&amp;nbsp;READMY&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/add"&gt;
+			        	&lt;em class="fa fa-plus"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/adminlogin"&gt;
+			        	&lt;em class="fa fa-key"&gt;&lt;/em&gt;&amp;nbsp;ADMINLOGIN&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/example.php"&gt;
+			        	&lt;em class="fa fa-compass"&gt;&lt;/em&gt;&amp;nbsp;EXAMPLE&lt;/a&gt;
+			      &lt;/li&gt;
+			    &lt;/ul&gt;
+			  &lt;/div&gt;
+			  &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+			    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+			  &lt;/button&gt;
+			&lt;/nav&gt;   
+			&lt;p style="background-color:red; color:white"&gt;Ez a rendszer jelenleg ß teszt állapotban használható.&lt;/p&gt;     
+		          &lt;div ng-controller="ctrl" id="scope" style="display:block; padding:20px;"&gt;
+            &lt;h2&gt;Adatkezelési leírás&lt;/h2&gt;
+            &lt;p&gt;Jelen leírás az ügyfélkapu segítségével történő felhasználó regisztrációt és
+            bejelentkezést kezelő web szolgáltatás adatkezeléséről szól. Az ezt használó 
+            egyes applikációk adatkezelési leírását az adott applikációban találhatja meg!&lt;/p&gt;
+            &lt;p&gt;&lt;strong&gt;Ez a szoftver személyes adatokat tartósan nem kezel és tárol.
+            Ezért a GDPR rá nem vonatkozik.&lt;/strong&gt;&lt;/p&gt;
+
+            &lt;h3&gt;Cookie használat&lt;/h3&gt;
+            &lt;p&gt;A szoftver működésének testreszabásához, az egyes működési munkamenetek 
+            szervezéséhez egy daram un "munkamenet cookie"-t használ amit a felhasználó
+            gépén tárol. Ez a cookie személyes adatokat nem tartalmaz, tartalmából 
+            mindössze annyit lehet megállapítani, hogy a felhasználó használja/használta
+            ezt a rendszert.&lt;/p&gt;
+
+            &lt;h3&gt;Kezelt adatok az applikációk felhasználóival kapcsolatban&lt;/h3&gt;
+            &lt;ul&gt;
+            &lt;li&gt;Választott bejelentkezési név (nick név)&lt;/li&gt;
+            &lt;li&gt;Jelszó sha256 hash kódja&lt;/li&gt;
+            &lt;li&gt;Használt applikáció azonosítója&lt;/li&gt;
+            &lt;li&gt;Az ügyfélkapus bejelentkezésnél megadott e-mail cím sha256 hash kódja&lt;/li&gt;
+            &lt;li&gt;Bejelentkezés engedélyezve/letiltva&lt;/li&gt;
+            &lt;li&gt;Hibás bejelentkezési kisérlet számláló&lt;/li&gt;
+            &lt;li&gt;code - az oAuth2 eljárás során használt ideiglenes, egyszer használható technikai azonosító&lt;/li&gt;
+            &lt;li&gt;access_token - az oAuth2 eljárás során használt ideiglenes, egyszer használható technikai azonosító&lt;/li&gt;
+            &lt;li&gt;Fiók blokkolás időpontja&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;p&gt;Megjegyzések: Egy felhasználónak - amennyiben több applikációt is használ - több ilyen adat készlete is lehet.
+            Az "sha256 hash" egy algoritmikusan képzett karakter sorozat. Ebből nem állapítható meg az eredeti jelszó illetve 
+            e-mail cím, de alkalmas a bejelentkezésnél a jelszó ellenörzésre, illetve annak
+            megakadályozására, hogy egy ember többször regisztráljon ugyanabba az applikációba.
+            &lt;/p&gt;
+            &lt;p&gt;
+            A felhasználó sikeres bejelentkezés után json formátumban megtekintheti/letöltheti a róla az adott applikációval kapcsolatban
+            tárolt adatokat. Továbbá lehetősége van adatainak (és ezzel bejelentkezési lehetőségének) törlésére is. 	
+            &lt;/p&gt; 
+            &lt;p&gt;A regisztrációs folyamat során fel kell tölteni egy a https://niszavdh.gov.hu segítségével aláírt 
+            hitelesített pdf dokumentumot. Ez a dokumentum tartalmazza a felhasználó teljes nevét és az ügyfélkapuhoz megadott
+            e-mail címét. Ezeket az adatokat (technikai okokból) a program csak néhány másodpercig tárolja és kezeli ezután
+            törli őket. Tartósan csak a fentebb felsorolt adatokat tárolja&lt;/p&gt;
+
+            &lt;h3&gt;Kezelt / tárolt adatok az applikációkkal és az applikáció adminisztrátorokkal kapcsolatban&lt;/h3&gt;
+            &lt;ul&gt;
+            &lt;li&gt;Applikáció neve&lt;/li&gt;
+            &lt;li&gt;Applikáció domain&lt;/li&gt;
+            &lt;li&gt;Sikeres login esetén visszahívandó URL&lt;/li&gt;
+            &lt;li&gt;client_id&lt;/li&gt;
+            &lt;li&gt;client_secret&lt;/li&gt;
+            &lt;li&gt;login és regist képernyő testreszabásához css file URL&lt;/li&gt;
+            &lt;li&gt;Hibás user bejelentkezési kisérlet limit&lt;/li&gt;
+            &lt;li&gt;Admin bejelentkezési név (nick név)&lt;/li&gt;
+            &lt;li&gt;Jelszó sha256 hash kódja&lt;/li&gt;
+            &lt;li&gt;Hibás admin bejelentkezési kisérlet limit&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;p&gt;Megjegyzések: Egy embernek - amennyiben több applikációt is menedzsel - több ilyen adat készlete is lehet.
+            Az "sha256 hash" egy algoritmikusan képzett karakter sorozat. Ebből nem állapítható meg az eredeti jelszó  
+            ,de alkalmas a bejelentkezésnél a jelszó ellenörzésre.
+            &lt;/p&gt;
+            &lt;p&gt;Az adminisztrátor sikeres bejelentkezése után a megjelenő képernyőn láthatja
+            ezeket a tárolt adatokat, lehetőségük van az adatok törlésére is (ezzel az adott
+            applikáció nem tudja a továbbiakban használni ezt a rendszert)&lt;/p&gt;
+            
+            &lt;h3&gt;Adatkezelési nyilatkozat&lt;/h3&gt;
+            &lt;p&gt;A rendszer üzemeltetői minden tőlük telhetőt megtesznek a tárolt adatok biztonságos, védett tárolása
+            és kezelése érdekében. Mindent megtesznek annak érdekében, hogy az adatok illetéktelen kezekbe
+            ne kerülhessenek.&lt;/p&gt;
+            &lt;p&gt;A tárolt adatokat harmadik félnek csak abban az esetben adja át, ha erre őket törvény kötelezi.&lt;/p&gt;
+            &lt;p&gt;Adatkezelő: Fogler Tibor Adatok technikai tárolása, szerver üzemeltető: Forpsi.hu&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+            &lt;p&gt;&amp;nbsp;&lt;/p&gt;
+	      &lt;/div&gt;&lt;!-- #scope --&gt;
+		        	&lt;div id="footer"&gt;  
+      	&lt;p&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+      	&lt;/p&gt;   
+		&lt;p&gt;SWRESOURCE:			
+				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
+				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+		&lt;/p&gt;
+		&lt;p&gt;SWFORKINFO&amp;nbsp;
+	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;lásd itt&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+                &lt;/body&gt;
+        &lt;/html&gt;
+        </system-out>
+      </testcase>
     </testsuite>
-    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="23" assertions="23" errors="0" failures="0" skipped="0" time="1.723256">
-      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.000764"/>
-      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.016752"/>
-      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="50" assertions="1" time="0.001389"/>
-      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="65" assertions="1" time="0.002347"/>
-      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="80" assertions="1" time="0.001185"/>
-      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="95" assertions="1" time="0.000969"/>
-      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="110" assertions="1" time="0.000926"/>
-      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="125" assertions="1" time="0.000967"/>
-      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="142" assertions="1" time="0.000968"/>
-      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="157" assertions="1" time="0.000951"/>
-      <testcase name="test_check_psw_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="172" assertions="1" time="0.000966"/>
-      <testcase name="test_check_psw_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="187" assertions="1" time="0.000977"/>
-      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="202" assertions="1" time="0.855937"/>
-      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="217" assertions="1" time="0.154281"/>
-      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="233" assertions="1" time="0.149826"/>
-      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="249" assertions="1" time="0.109939"/>
-      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="265" assertions="1" time="0.207650"/>
-      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="285" assertions="1" time="0.002425"/>
-      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="303" assertions="1" time="0.175034"/>
-      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="322" assertions="1" time="0.001287"/>
-      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="340" assertions="1" time="0.001666"/>
-      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="348" assertions="1" time="0.034825"/>
-      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="356" assertions="1" time="0.001225"/>
+    <testsuite name="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001435">
+      <testcase name="test_start" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="28" assertions="1" time="0.000754"/>
+      <testcase name="test_show" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="35" assertions="1" time="0.000681">
+        <system-out>	
+        &lt;body ng-app="app"&gt;
+          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+			  MAINMENU&amp;nbsp;
+			  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+			    &lt;ul class="navbar-nav"&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN"&gt;
+			        	&lt;em class="fa fa-home"&gt;&lt;/em&gt;&amp;nbsp;HOME&lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/readme/show"&gt;
+			        	&lt;em class="fa fa-info"&gt;&lt;/em&gt;&amp;nbsp;READMY&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/add"&gt;
+			        	&lt;em class="fa fa-plus"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/adminlogin"&gt;
+			        	&lt;em class="fa fa-key"&gt;&lt;/em&gt;&amp;nbsp;ADMINLOGIN&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/example.php"&gt;
+			        	&lt;em class="fa fa-compass"&gt;&lt;/em&gt;&amp;nbsp;EXAMPLE&lt;/a&gt;
+			      &lt;/li&gt;
+			    &lt;/ul&gt;
+			  &lt;/div&gt;
+			  &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+			    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+			  &lt;/button&gt;
+			&lt;/nav&gt;   
+			&lt;p style="background-color:red; color:white"&gt;Ez a rendszer jelenleg ß teszt állapotban használható.&lt;/p&gt;     
+		          &lt;div ng-controller="ctrl" id="scope" style="display:block; padding:20px;"&gt;
+            &lt;h2&gt;Adományozás&lt;/h2&gt;
+          	&lt;h3&gt;Tájékoztatás&lt;/h3&gt;
+          	&lt;p&gt;A szoftver teljes egészében önkéntes munkával, grátisz lett kifejlesztve.
+          	A rendszergazdai munka is ilyen formában van megoldva. Viszont a működéshez szükséges 
+          	VPS szerver pénzbe kerül. Jelenleg a Forpsi-cloud small szervert,ingyenes domaint 
+          	és ingyenes https tanusítványt használunk.
+          	Az adományokat kizárólag a szerver bérlés finanszirozására használjuk fel.
+          	Ha komolyabb érdeklődés lesz a rendszer használatára akkor domain név és minősített https
+          	tanusitvány beszerzése és fentartása is szükséges lehet.&lt;/p&gt;
+          	&lt;p&gt;Minden adományt - akár 1000 Ft -ot is - hálásan köszönünk. Az adományok beérkezéséről és
+          	felhasználásáról lentebb részletes elszámolást teszünk közzé.&lt;/p&gt;
+          	&lt;p&gt;Ha azt kivánja, hogy neve vagy szervezete szerepeljen az elszámolásban akkor azt az utalás
+          	közleményében jelezze! Ha a közleményben erről nem rendelkezik az adományt névtelenül
+          	szerepeltetjük az elszámolásban.&lt;/p&gt;
+          	
+          	&lt;p&gt;Bankszámla: 11600006-00000000-23190212&lt;/p&gt;
+          	&lt;p&gt;IBAN: HU75 1160 0006 0000 0000 2319 0212&lt;/p&gt;
+          	
+          	&lt;p&gt;Ethereum tárca: 0xb7233a1474eb3f0359b01A83e57C636DE78C09Da&lt;/p&gt;
+          	
+          	
+          	&lt;iframe style="width:600px; height:600px" title="elszamolas"
+          	 src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRjHIFVnLDw03ykdEEr72iIot5ONW_8rqkebk1Yz1vM0y-jr6p50SwNkVKrYFkH58YrVwseJf3qfl3t/pubhtml?gid=0&amp;amp;single=true&amp;amp;widget=true&amp;amp;headers=false"&gt;&lt;/iframe&gt;
+          	
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+          	&lt;/div&gt;&lt;!-- #scope --&gt;
+		        	&lt;div id="footer"&gt;  
+      	&lt;p&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+      	&lt;/p&gt;   
+		&lt;p&gt;SWRESOURCE:			
+				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
+				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+		&lt;/p&gt;
+		&lt;p&gt;SWFORKINFO&amp;nbsp;
+	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;lásd itt&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+                &lt;/body&gt;
+        &lt;/html&gt;
+        </system-out>
+      </testcase>
     </testsuite>
-    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="27" assertions="27" errors="0" failures="0" skipped="0" time="1.523592">
-      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.001640"/>
-      <testcase name="test_registform_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="43" assertions="1" time="0.001750"/>
-      <testcase name="test_registform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="49" assertions="1" time="0.030531"/>
-      <testcase name="test_registform2_PDFNOTUPLOADED" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="69" assertions="1" time="0.055308"/>
-      <testcase name="test_registform2_OK" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="78" assertions="1" time="0.620113"/>
-      <testcase name="test_doregist_nickempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="86" assertions="1" time="0.004531"/>
-      <testcase name="test_doregist_pswempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="100" assertions="1" time="0.003565"/>
-      <testcase name="test_doregist_pswinvalid" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="114" assertions="1" time="0.003055"/>
-      <testcase name="test_doregist_2pswnotequeals" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="128" assertions="1" time="0.003009"/>
-      <testcase name="test_doregist_nickexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="142" assertions="1" time="0.035723"/>
-      <testcase name="test_doregist_signexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="165" assertions="1" time="0.042121"/>
-      <testcase name="test_doregist_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="187" assertions="1" time="0.032785"/>
-      <testcase name="test_forgetpsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="201" assertions="1" time="0.002741"/>
-      <testcase name="test_changepsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="208" assertions="1" time="0.037822"/>
-      <testcase name="test_mydata_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="217" assertions="1" time="0.040806"/>
-      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="226" assertions="1" time="0.004082"/>
-      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="232" assertions="1" time="0.001352"/>
-      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="238" assertions="1" time="0.037302"/>
-      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="247" assertions="1" time="0.071581"/>
-      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="257" assertions="1" time="0.071053"/>
-      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="267" assertions="1" time="0.100461"/>
-      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="295" assertions="1" time="0.036849"/>
-      <testcase name="test_useractival_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="301" assertions="1" time="0.033149"/>
-      <testcase name="test_useractival_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="310" assertions="1" time="0.070895"/>
-      <testcase name="test_deleteaccount_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="319" assertions="1" time="0.072144"/>
-      <testcase name="test_deleteaccount_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="329" assertions="1" time="0.040785"/>
-      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="339" assertions="1" time="0.068439"/>
+    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="0.537267">
+      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="29" assertions="1" time="0.000698"/>
+      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="36" assertions="1" time="0.002673"/>
+      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="55" assertions="1" time="0.246627"/>
+      <testcase name="test_adminlogin" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="74" assertions="1" time="0.001658"/>
+      <testcase name="test_doadminlogin_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="81" assertions="1" time="0.062972"/>
+      <testcase name="test_doadminlogin_INVALID_PSW" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="97" assertions="1" time="0.031208"/>
+      <testcase name="test_doadminlogin_INVALID_NICK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="113" assertions="1" time="0.040021"/>
+      <testcase name="test_doadminlogin_INVALID_CLINET_ID" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="129" assertions="1" time="0.040126"/>
+      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="145" assertions="1" time="0.106394"/>
+      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="159" assertions="1" time="0.003496"/>
+      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="168" assertions="1" time="0.001394"/>
+    </testsuite>
+    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="23" assertions="23" errors="0" failures="0" skipped="0" time="0.737988">
+      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.000749"/>
+      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.001827"/>
+      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="50" assertions="1" time="0.001163"/>
+      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="65" assertions="1" time="0.001075"/>
+      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="80" assertions="1" time="0.001094"/>
+      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="95" assertions="1" time="0.000956"/>
+      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="110" assertions="1" time="0.000993"/>
+      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="125" assertions="1" time="0.001134"/>
+      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="142" assertions="1" time="0.001527"/>
+      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="157" assertions="1" time="0.003272"/>
+      <testcase name="test_check_psw_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="172" assertions="1" time="0.001152"/>
+      <testcase name="test_check_psw_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="187" assertions="1" time="0.001541"/>
+      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="202" assertions="1" time="0.056475"/>
+      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="217" assertions="1" time="0.090071"/>
+      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="233" assertions="1" time="0.095453"/>
+      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="249" assertions="1" time="0.084873"/>
+      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="265" assertions="1" time="0.198431"/>
+      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="285" assertions="1" time="0.001905"/>
+      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="303" assertions="1" time="0.128887"/>
+      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="322" assertions="1" time="0.000708"/>
+      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="340" assertions="1" time="0.000997"/>
+      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="348" assertions="1" time="0.062940"/>
+      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="356" assertions="1" time="0.000766"/>
+    </testsuite>
+    <testsuite name="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001954">
+      <testcase name="test_start" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="28" assertions="1" time="0.000684"/>
+      <testcase name="test_default" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="35" assertions="1" time="0.001270">
+        <system-out>	
+        &lt;body ng-app="app"&gt;
+         			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+			  MAINMENU&amp;nbsp;
+			  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+			    &lt;ul class="navbar-nav"&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN"&gt;
+			        	&lt;em class="fa fa-home"&gt;&lt;/em&gt;&amp;nbsp;HOME&lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/readme/show"&gt;
+			        	&lt;em class="fa fa-info"&gt;&lt;/em&gt;&amp;nbsp;READMY&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/add"&gt;
+			        	&lt;em class="fa fa-plus"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/adminlogin"&gt;
+			        	&lt;em class="fa fa-key"&gt;&lt;/em&gt;&amp;nbsp;ADMINLOGIN&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/example.php"&gt;
+			        	&lt;em class="fa fa-compass"&gt;&lt;/em&gt;&amp;nbsp;EXAMPLE&lt;/a&gt;
+			      &lt;/li&gt;
+			    &lt;/ul&gt;
+			  &lt;/div&gt;
+			  &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+			    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+			  &lt;/button&gt;
+			&lt;/nav&gt;   
+			&lt;p style="background-color:red; color:white"&gt;Ez a rendszer jelenleg ß teszt állapotban használható.&lt;/p&gt;     
+		         &lt;div ng-controller="ctrl" id="scope" style="display:none"&gt;
+			&lt;div id="carouselExampleControls" class="carousel slide" data-ride="carousel"&gt;
+			  &lt;div class="carousel-inner"&gt;
+			    &lt;div class="carousel-item active"&gt;
+			      &lt;img class="d-block w-100" src="./templates/default/cover_1.jpg" alt="First slide"&gt;
+			      &lt;div class="buttons"&gt;
+			      	&lt;a href="/opt/appregist/add" target="_self"&gt;
+			      		&lt;em class="fa fa-plus-circle"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;&amp;nbsp;
+			      	&lt;a href="/opt/readme/show" target="_self"&gt;
+			      		&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt;&amp;nbsp;DESC&lt;/a&gt;
+			      &lt;/div&gt;
+			       &lt;div class="carousel-caption d-none d-md-block"&gt;
+				   	&lt;h5&gt;APPTITLE&lt;/h5&gt;
+			   	 	&lt;p&gt;APPINFO&lt;/p&gt;
+				   &lt;/div&gt;
+			    &lt;/div&gt;
+			    &lt;div class="carousel-item"&gt;
+			      &lt;img class="d-block w-100" src="./templates/default/cover_2.jpg" alt="Second slide"&gt;
+			        &lt;div class="buttons"&gt;
+			      	  &lt;a href="/opt/appregist/add" target="_self"&gt;
+			      	  	&lt;em class="fa fa-plus-circle"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;&amp;nbsp;
+			      	  &lt;a href="/opt/readme/show" target="_self"&gt;
+			      	  	&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt;&amp;nbsp;DESC&lt;/a&gt;
+			        &lt;/div&gt;
+			       &lt;div class="carousel-caption d-none d-md-block"&gt;
+				   	&lt;h5&gt;APPTITLE&lt;/h5&gt;
+			   	 	&lt;p&gt;APPINFO&lt;/p&gt;
+				   &lt;/div&gt;
+			    &lt;/div&gt;
+			    &lt;div class="carousel-item"&gt;
+			      &lt;img class="d-block w-100" src="./templates/default/cover_4.jpg" alt="Third slide"&gt;
+			        &lt;div class="buttons"&gt;
+			      	  &lt;a href="/opt/appregist/add" target="_self"&gt;
+			      	  	&lt;em class="fa fa-plus-circle"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;&amp;nbsp;
+			      	  &lt;a href="/opt/readme/show" target="_self"&gt;
+			      	  	&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt;&amp;nbsp;DESC&lt;/a&gt;
+			        &lt;/div&gt;
+			       &lt;div class="carousel-caption d-none d-md-block"&gt;
+				   	&lt;h5&gt;APPTITLE&lt;/h5&gt;
+			   	 	&lt;p&gt;APPINFO&lt;/p&gt;
+				   &lt;/div&gt;
+			    &lt;/div&gt;
+			    
+			    &lt;div class="carousel-item"&gt;
+			      &lt;img class="d-block w-100" src="./templates/default/logo.jpg" alt="Foorth slide"&gt;
+			        &lt;div class="buttons"&gt;
+			      	  &lt;a href="/opt/appregist/add" target="_self"&gt;
+			      	  	&lt;em class="fa fa-plus-circle"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;&amp;nbsp;
+			      	  &lt;a href="/opt/readme/show" target="_self"&gt;
+			      	  	&lt;em class="fa fa-info-circle"&gt;&lt;/em&gt;&amp;nbsp;DESC&lt;/a&gt;
+			        &lt;/div&gt;
+			       &lt;div class="carousel-caption d-none d-md-block"&gt;
+				   	&lt;h5&gt;APPTITLE&lt;/h5&gt;
+			   	 	&lt;p&gt;APPINFO&lt;/p&gt;
+				   &lt;/div&gt;
+			    &lt;/div&gt;
+			    
+			  &lt;/div&gt;
+			  
+			  &lt;a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"&gt;
+			    &lt;span class="carousel-control-prev-icon" aria-hidden="true"&gt;&lt;/span&gt;
+			    &lt;span class="sr-only"&gt;PRIORElöző&lt;/span&gt;
+			  &lt;/a&gt;
+			  &lt;a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"&gt;
+			    &lt;span class="carousel-control-next-icon" aria-hidden="true"&gt;&lt;/span&gt;
+			    &lt;span class="sr-only"&gt;NEXT&lt;/span&gt;
+			  &lt;/a&gt;
+			&lt;/div&gt;&lt;!-- carousel --&gt;   
+			&lt;div class="counters"&gt;
+				&lt;div class="appCount"&gt;
+					&lt;em class="fa fa-cog"&gt;&lt;/em&gt;&lt;br /&gt;
+					Regisztrált applikációk száma:
+					&lt;var&gt;0&lt;/var&gt;
+				&lt;/div&gt;
+				&lt;div class="userCount"&gt;
+					&lt;em class="fa fa-user"&gt;&lt;/em&gt;&lt;br /&gt;
+					Regisztrált felhasználói fiókok száma:
+					&lt;var&gt;0&lt;/var&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;  
+			&lt;div class="info"&gt;
+  				&lt;p&gt;
+  				Ez egy minden párttól, szervezettől független civil kezdeményezés. Teljes egészében magán emberek
+  				adományaiból működik. A rendszert üzemeltető szerver jelenleg 2019.szeptember 31. -ig van kiifizetve.
+  				Amennyiben módja van rá, kérjük támogassa a rendszer működését.
+  				&lt;/p&gt;
+  				&lt;p&gt;
+  				  &lt;a href="/opt/adomany/show" 
+  				     style="background-color:blue; color:white; padding:10px; border-radius:5px;"&gt;
+  					Támogatás
+  				  &lt;/a&gt;
+  				&lt;/p&gt;
+  			&lt;/div&gt;
+			   
+        	          &lt;/div&gt;&lt;!-- #scope --&gt;
+		        	&lt;div id="footer"&gt;  
+      	&lt;p&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+      	&lt;/p&gt;   
+		&lt;p&gt;SWRESOURCE:			
+				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
+				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+		&lt;/p&gt;
+		&lt;p&gt;SWFORKINFO&amp;nbsp;
+	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;lásd itt&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+                            
+                  &lt;/body&gt;
+        &lt;/html&gt;
+        </system-out>
+      </testcase>
+    </testsuite>
+    <testsuite name="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.002598">
+      <testcase name="test_start" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="28" assertions="1" time="0.001307"/>
+      <testcase name="test_show" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="35" assertions="1" time="0.001291">
+        <system-out>	
+        &lt;body ng-app="app"&gt;
+          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+			  MAINMENU&amp;nbsp;
+			  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+			    &lt;ul class="navbar-nav"&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN"&gt;
+			        	&lt;em class="fa fa-home"&gt;&lt;/em&gt;&amp;nbsp;HOME&lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/readme/show"&gt;
+			        	&lt;em class="fa fa-info"&gt;&lt;/em&gt;&amp;nbsp;READMY&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/add"&gt;
+			        	&lt;em class="fa fa-plus"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/adminlogin"&gt;
+			        	&lt;em class="fa fa-key"&gt;&lt;/em&gt;&amp;nbsp;ADMINLOGIN&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/example.php"&gt;
+			        	&lt;em class="fa fa-compass"&gt;&lt;/em&gt;&amp;nbsp;EXAMPLE&lt;/a&gt;
+			      &lt;/li&gt;
+			    &lt;/ul&gt;
+			  &lt;/div&gt;
+			  &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+			    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+			  &lt;/button&gt;
+			&lt;/nav&gt;   
+			&lt;p style="background-color:red; color:white"&gt;Ez a rendszer jelenleg ß teszt állapotban használható.&lt;/p&gt;     
+		          &lt;div ng-controller="ctrl" id="scope" style="display:block; padding:20px;"&gt;
+          	&lt;h2&gt;Impresszum&lt;/h2&gt;
+          	&lt;p&gt;A szoftver teljes egészében önkéntes munkával, grátisz lett kifejlesztve.
+          	A rendszer üzemeltetése is ilyen formában van megoldva.
+          	&lt;/p&gt;
+          	&lt;p&gt;
+          	A szoftver az 
+          	&lt;a href="https://www.facebook.com/groups/edemomakers/"&gt;
+          		informatikusok az e-demokráciáért
+          	&lt;/a&gt; facebbok csoport támogatásával Fogler Tibor fejlesztette ki és üzemelteti.
+          	&lt;/p&gt;
+          	&lt;p&gt;e-mail: tibor.fogler@gmail.com&lt;/p&gt;
+          	&lt;p&gt;web: &lt;a href="https://github.com/utopszkij"&gt;github.com/utopszkij&lt;/a&gt;&lt;br /&gt;
+          	&lt;a href="https://www.facebook.com/utopszkij.almodozo"&gt;facebook.com/utopszkij.almodozo&lt;/a&gt;
+          	&lt;/p&gt;
+          	&lt;p&gt;Licensz: GNU/GPL&lt;/p&gt;
+          	&lt;p&gt;
+          	A szoftvert mindenki saját felelőségére használhatja, a szoftver használata során az esetleges szoftver hibák által
+          	okozott esetleges károkért a fejlesztő semminemű felelőséget nem vállal, még akkor sem ha a hibáról tudomása lehetett.
+          	&lt;/p&gt;
+          	&lt;p&gt;
+          	A szoftver üzemeltetése teljes egészében adományokból van finanszírozva. Ha adományok nem érkeznek, akkor
+          	sajnos anyagi lehetőségek hiányában a rendszer üzemeltetése leáll. :(
+          	&lt;/p&gt;
+          	&lt;p style="text-align:center"&gt;
+          		&lt;a href="index.php/opt/adomany/show"&gt;Adományozás&lt;/a&gt;
+          	&lt;/p&gt;
+	      &lt;/div&gt;&lt;!-- #scope --&gt;
+		        	&lt;div id="footer"&gt;  
+      	&lt;p&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+      	&lt;/p&gt;   
+		&lt;p&gt;SWRESOURCE:			
+				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
+				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+		&lt;/p&gt;
+		&lt;p&gt;SWFORKINFO&amp;nbsp;
+	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;lásd itt&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+                &lt;/body&gt;
+        &lt;/html&gt;
+        </system-out>
+      </testcase>
+    </testsuite>
+    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="37" assertions="37" errors="0" failures="0" skipped="0" time="2.177081">
+      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.001317"/>
+      <testcase name="test_registform_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="43" assertions="1" time="0.002069"/>
+      <testcase name="test_registform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="49" assertions="1" time="0.043433"/>
+      <testcase name="test_registform2_PDFNOTUPLOADED" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="69" assertions="1" time="0.002012"/>
+      <testcase name="test_registform2_OK" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="78" assertions="1" time="0.270577"/>
+      <testcase name="test_doregist_nickempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="86" assertions="1" time="0.003601"/>
+      <testcase name="test_doregist_pswempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="100" assertions="1" time="0.003657"/>
+      <testcase name="test_doregist_pswinvalid" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="114" assertions="1" time="0.003346"/>
+      <testcase name="test_doregist_2pswnotequeals" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="128" assertions="1" time="0.002810"/>
+      <testcase name="test_doregist_nickexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="142" assertions="1" time="0.042632"/>
+      <testcase name="test_doregist_signexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="165" assertions="1" time="0.077941"/>
+      <testcase name="test_doregist_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="187" assertions="1" time="0.050629"/>
+      <testcase name="test_forgetpsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="201" assertions="1" time="0.004664"/>
+      <testcase name="test_forgetpsw_nick_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="208" assertions="1" time="0.001201"/>
+      <testcase name="test_forgetpsw_app_notfoundy" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="215" assertions="1" time="0.001792"/>
+      <testcase name="test_changepsw_nick_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="222" assertions="1" time="0.074490"/>
+      <testcase name="test_changepsw_psw_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="231" assertions="1" time="0.066469"/>
+      <testcase name="test_changepsw_psw_error" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="241" assertions="1" time="0.116383"/>
+      <testcase name="test_changepsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="250" assertions="1" time="0.066650"/>
+      <testcase name="test_mydata_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="259" assertions="1" time="0.051000"/>
+      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="268" assertions="1" time="0.003478"/>
+      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="274" assertions="1" time="0.002063"/>
+      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="280" assertions="1" time="0.057601"/>
+      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="289" assertions="1" time="0.126536"/>
+      <testcase name="test_dologin_invalidPsw2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="299" assertions="1" time="0.132071"/>
+      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="309" assertions="1" time="0.115985"/>
+      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="319" assertions="1" time="0.185245"/>
+      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="347" assertions="1" time="0.062749"/>
+      <testcase name="test_useractival_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="353" assertions="1" time="0.067633"/>
+      <testcase name="test_useractival_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="362" assertions="1" time="0.121541"/>
+      <testcase name="test_mydata_ok2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="372" assertions="1" time="0.056114"/>
+      <testcase name="test_doRegist_forgetPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="381" assertions="1" time="0.130789"/>
+      <testcase name="test_deleteaccount_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="397" assertions="1" time="0.116081"/>
+      <testcase name="test_deleteaccount_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="407" assertions="1" time="0.044949"/>
+      <testcase name="test_pdf" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="417" assertions="1" time="0.006072">
+        <system-out>%PDF-1.3
+3 0 obj
+&lt;&lt;/Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/Contents 4 0 R&gt;&gt;
+endobj
+4 0 obj
+&lt;&lt;/Filter /FlateDecode /Length 71&gt;&gt;
+stream
+x�3R��2�35W(�r
+Q�w3T04�30PISp&#13;	�Z*�[����(h$�d���g���k*�d��</system-out>
+      </testcase>
+      <testcase name="test_getCallbackUrl" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="423" assertions="1" time="0.000753"/>
+      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="434" assertions="1" time="0.060748"/>
+    </testsuite>
+    <testsuite name="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.004248">
+      <testcase name="test_start" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="28" assertions="1" time="0.002101"/>
+      <testcase name="test_show" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="35" assertions="1" time="0.002147">
+        <system-out>	
+        &lt;body ng-app="app"&gt;
+         			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
+			  MAINMENU&amp;nbsp;
+			  &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+			    &lt;ul class="navbar-nav"&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN"&gt;
+			        	&lt;em class="fa fa-home"&gt;&lt;/em&gt;&amp;nbsp;HOME&lt;span class="sr-only"&gt;(current)&lt;/span&gt;&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/readme/show"&gt;
+			        	&lt;em class="fa fa-info"&gt;&lt;/em&gt;&amp;nbsp;READMY&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/add"&gt;
+			        	&lt;em class="fa fa-plus"&gt;&lt;/em&gt;&amp;nbsp;NEWAPP&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/opt/appregist/adminlogin"&gt;
+			        	&lt;em class="fa fa-key"&gt;&lt;/em&gt;&amp;nbsp;ADMINLOGIN&lt;/a&gt;
+			      &lt;/li&gt;
+			      &lt;li class="nav-item"&gt;
+			        &lt;a class="nav-link" target="_self" href="MYDOMAIN/example.php"&gt;
+			        	&lt;em class="fa fa-compass"&gt;&lt;/em&gt;&amp;nbsp;EXAMPLE&lt;/a&gt;
+			      &lt;/li&gt;
+			    &lt;/ul&gt;
+			  &lt;/div&gt;
+			  &lt;button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"&gt;
+			    &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+			  &lt;/button&gt;
+			&lt;/nav&gt;   
+			&lt;p style="background-color:red; color:white"&gt;Ez a rendszer jelenleg ß teszt állapotban használható.&lt;/p&gt;     
+		         &lt;div ng-controller="ctrl" id="scope" style="display:none; padding:20px;"&gt;
+				      	
+  &lt;h1 id="e-demokracia-web-applikaciokbol-hivhato-ugyfelkapu-alairason-alapulo-login-modul"&gt;
+   e-demokrácia web applikációkból hívható - ügyfélkapu aláíráson alapuló - login modul
+  &lt;/h1&gt;
+  &lt;h2 id="attekintes"&gt;
+   Áttekintés
+  &lt;/h2&gt;
+  &lt;p&gt;
+   Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az
+   &lt;strong&gt;
+    oAuth2
+   &lt;/strong&gt;
+   szabvány szerint.
+   &lt;br/&gt;
+   A rendszer biztosítja, hogy egy személy egy alkalmazásba csak egyszer regisztrálhat.
+   &lt;br/&gt;
+   Természetesen egy ügyfélkapú loginnal több alkalmazásba is lehet regisztrálni.
+  &lt;/p&gt;
+  &lt;p&gt;
+   A hívó web program iframe -be hívhatja be a regisztráló képernyőt vagy a login képernyőt. Szükség esetén css fájl segítségével az iframe -ben megjelenő formok megjelenését módosíthatja.
+  &lt;/p&gt;
+  &lt;p&gt;
+   Az applikáció adminisztrátora az erre a célra szolgáló web felületen tudja az applikációt regisztrálni a rendszerbe.
+  &lt;/p&gt;
+  &lt;p&gt;
+   A regisztrációs folyamatban használt aláírás szolgáltató:
+  &lt;/p&gt;
+  &lt;p&gt;
+   &lt;a href="https://niszavdh.gov.hu"&gt;
+    https://niszavdh.gov.hu
+   &lt;/a&gt;
+  &lt;/p&gt;
+  &lt;h2 id="programnyelvek"&gt;
+   Programnyelvek
+  &lt;/h2&gt;
+  &lt;p&gt;
+   PHP, MYSQL, JQUERY, bootstrap
+  &lt;/p&gt;
+  &lt;h2 id="licensz"&gt;
+   Licensz
+  &lt;/h2&gt;
+  &lt;p&gt;
+   GNU/GPL
+  &lt;/p&gt;
+  &lt;h2 id="programozo"&gt;
+   Programozó
+  &lt;/h2&gt;
+  &lt;p&gt;
+   Fogler Tibor (Utopszkij)
+  &lt;/p&gt;
+  &lt;p&gt;
+   &lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+    tibor.fogler@gmail.com
+   &lt;/a&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+   &lt;a href="https://github.com/utopszkij"&gt;
+    https://github.com/utopszkij
+   &lt;/a&gt;
+  &lt;/p&gt;
+  &lt;h2 id="mukodes"&gt;
+   Működés
+  &lt;/h2&gt;
+  &lt;h3 id="az-applikacio-regisztralas"&gt;
+   Új applikáció regisztrálás
+  &lt;/h3&gt;
+  &lt;p&gt;
+   Az applikációt web felületen lehet regisztrálni. A megadandó adatok:
+   &lt;br/&gt;
+   - applikáció neve
+   &lt;br/&gt;
+   - applikációt futtató domain
+   &lt;br/&gt;
+   - sikeres login utáni visszahívandó url
+   &lt;br/&gt;
+   - sikertelen user login limit
+   &lt;br/&gt;
+   - css file url (lehet üres is)
+   &lt;br/&gt;
+   - applikáció adminisztrátor username
+   &lt;br/&gt;
+   - applikáció adminisztrátor jelszó (kétszer kell beirni)
+   &lt;br/&gt;
+   - sikertelen admin login limit
+  &lt;/p&gt;
+  &lt;p&gt;
+   A képernyőn van adatkezelés elfogadtatás és cookie engedélyeztetés is.
+  &lt;/p&gt;
+  &lt;p&gt;Annak igazolására, hogy az app. regisztrálását az adott rendszer rendszergazdája végzi, a megadott domainre fel kell tölteni egy 
+  "uklogin.html" fájlt, aminek tartalma egyetlen sor: "uklogin". &lt;/p&gt;
+  &lt;p&gt;
+   A sikeres app regisztrálás után a képernyőn megjelenik a
+   &lt;strong&gt;
+    client_id
+   &lt;/strong&gt;
+   és
+   &lt;strong&gt;
+    client_secret
+   &lt;/strong&gt;
+   adat. Ezeket gondosan meg kell örizni az app adminisztrálásához és a login/regist rendszer használatához szükség van rájuk.
+  &lt;/p&gt;
+  &lt;p&gt;
+   Ezen adatok egy része az adminisztrátor által később is  módosítható, az app admin ugyancsak kezdeményezheti az app és saját adatainak együttes törlését is.
+   &lt;br/&gt;
+   Az app adatok módosításához, törléséhez természetesen az admin login szükséges. Ha itt a megadott limitet túllépő sikertelen login kisérlet történik akkor az app admin login blokkolásra kerül, ezt ennek az “ügyfélkapus-login” rendszernek az “főadminisztrátora” tudja feloldani.
+  &lt;/p&gt;
+  &lt;h3 id="login-folyamat-a-felhasznalo-web-applikacioban"&gt;
+   login folyamat a felhasználó web applikációban:
+  &lt;/h3&gt;
+  &lt;pre&gt;&lt;code&gt;&amp;lt;iframe ..... src="/oath2/loginform/client_id/&amp;lt;client_id&amp;gt;" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;p&gt;
+   Opcionálisan 
+   &lt;url&gt;
+    /state/xxxxx is megadható. A state tetszőleges kiegészítő infot tartalmazhat.
+   &lt;/url&gt;
+  &lt;/p&gt;
+  &lt;p&gt;
+   Az iframe -ben egy szokásos login képernyő jelenik meg (nicknév és jelszó megadása).
+   &lt;br/&gt;
+   A login képernyőn a szokásos kiegészitő elemek is szerepelnek:
+   &lt;br/&gt;
+   - elfelejtett jelszó
+   &lt;br/&gt;
+   - még nincs fiókom, regisztrálok
+   &lt;br/&gt;
+   - fiók törlése
+   &lt;br/&gt;
+   - tárolt adataim lekérdezése
+  &lt;/p&gt;
+  &lt;p&gt;
+   Miután a user megadja usernevét és jelszavát a program ellenőrzi azokat, sikeres login esetén
+   &lt;br/&gt;
+   meghívja az app adatokban beállított callback url -t, GET paraméterként küldve: “code”, “state”. 
+  &lt;/p&gt;
+  &lt;p&gt;
+   Ezután hívni kell a
+   "/oath2/access_token" url-t, GET vagy POST paraméterként küldve a “client_id”, “client_secret” és “code” adatokat. Válaszként egy json stringet kapunk:
+   &lt;br/&gt;
+   {“access_token”:”xxxxxx”} vagy {“access_token”:”“, “error”:”hibaüzenet”}
+  &lt;/p&gt;
+  &lt;p&gt;
+   Következő lépésként hívni kell a
+   "/oath2/userinfo"
+   címet, GET vagy POST paraméterként a
+   &lt;br/&gt;
+   “access_token” értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az “error” stringet:
+   {"nick":"xxxx"} vagy {"error":"not found"}
+  &lt;/p&gt;
+  &lt;p&gt;
+   Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a login képernyő. az app -nál megadott számú sikertelen kisérlet után a fiók blokkolásra kerül, ez a user ebbe az applikációba a továbbiakban nem tud belépni. A blokkolt fiókokat az applikáció adminisztrátor tudja újra aktivizálni.
+  &lt;/p&gt;
+  &lt;h3 id="regisztracio-hivasa-a-felhasznalo-web-applikacioban"&gt;
+   Regisztráció hívása a felhasználó web applikációban
+  &lt;/h3&gt;
+  &lt;pre&gt;&lt;code&gt;&amp;lt;iframe ..... src="/oauth2/registform/client_id/&amp;lt;client_id&amp;gt;" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;p&gt;
+   Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Sikertelen esetén hibaüzenet és újból a regisztrálás kezdő képernyője.
+  &lt;/p&gt;
+  &lt;h3 id="regisztracio-folyamata"&gt;
+   Regisztráció folyamata
+  &lt;/h3&gt;
+  &lt;ol&gt;
+   &lt;li&gt;
+    A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál). Ez a képernyő tartalmazza az adatkezelési tájékoztatót és a cookie használat engedélyeztetést is.
+   &lt;/li&gt;
+   &lt;li&gt;
+    A user a letöltött pdf -et az ügyfélkapus ingyenes aláírás rendszerrel aláírja, és az aláírt pdf -et is letölti saját gépére.
+   &lt;/li&gt;
+   &lt;li&gt;
+    az aláírt pdf -et feltölti ebbe az applikációba, az ezután megjelenő képernyőn usernevet és jelszót választ magának.
+    &lt;br/&gt;
+    Mindezt részletes help segíti.
+   &lt;/li&gt;
+  &lt;/ol&gt;
+  &lt;p&gt;
+   A rendszer ellenőrzi:
+   &lt;br /&gt;
+   - a feltöltött pdf a megfelelő client_id -t tartalmazza?
+   &lt;br/&gt;
+   - a feltöltött pdf alá van írva és sértetlen?
+   &lt;br/&gt;
+   - az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
+   &lt;br/&gt;
+   - a választott nicknév egyedi az adott applikációban?
+  &lt;/p&gt;
+  &lt;p&gt;
+   Hiba esetén hibaüzenet és a hiba jellegétől függően vagy
+   &lt;br/&gt;
+   - a nicknév/jelszó megadó képernyő jelenik meg (nick név már létezik vagy formailag hibás nicknév/jelszó) vagy
+   &lt;br/&gt;
+   - a regsiztrálás kezdő képernyője jelenik meg (pdf aláírás hiba, pdf tartalom hiba) vagy
+   &lt;br/&gt;
+   - a login képernyő jelenik meg (ezzel az ügyfélkapu belépéssel már történt regisztráció ebbe az applikációba).
+  &lt;/p&gt;
+  &lt;h3 id="elfelejtett-jelszo-kezeles-folyamata"&gt;
+   Elfelejtett jelszó kezelés folyamata
+  &lt;/h3&gt;
+  &lt;p&gt;
+   A teljes regisztrációt kell a usernek megismételnie, azzal az egy különbséggel, hogy most nicknevet nem választhat, hanem a korábban használt marad meg. A rendszer ellenőrzi, hogy ugyanaz az ügyfélkapus aláírás szerepel-e a pdf -en mint ami korábban volt.
+  &lt;/p&gt;
+  &lt;h3 id="gdpr-megfeleles"&gt;
+   GDPR megfelelés
+  &lt;/h3&gt;
+  &lt;h4 id="az-app-adminisztratorokkal-kapcsolatban-a-rendszer-a-kovetkezo-adatokat-tarolja"&gt;
+   Az app adminisztrátorokkal kapcsolatban a rendszer a következő adatokat tárolja:
+  &lt;/h4&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    nicknév
+   &lt;/li&gt;
+   &lt;li&gt;
+    jelszó hash
+   &lt;/li&gt;
+   &lt;li&gt;
+    kezelt app adatai
+    &lt;br/&gt;
+    Mint látható az adminisztrátor valós személyéhez köthető adat (név, lakcím, okmány azonosító) nincs tárolva. Mivel az email cím személyes adat, egyes értelmezések szerint ez így is a GDPR hatálya alá tartozik. Tehát erre vonatkozó tájékoztatás jelenik meg, és az admin -nak ezt el kell fogadnia. Lehetősége van a tárolt adatait lekérdezni, és azokat törölni is - ez utóbbi egyúttal az applikáció törlését is jelenti.
+   &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h4 id="a-normal-felhasznalokkal-kapcsolatban-tarolt-adatok-users-tabla"&gt;
+   a “normál” felhasználókkal kapcsolatban tárolt adatok (“users” tábla):
+  &lt;/h4&gt;
+  &lt;ul&gt;
+   &lt;li&gt;
+    nick név
+   &lt;/li&gt;
+   &lt;li&gt;
+    jelszó hash
+   &lt;/li&gt;
+   &lt;li&gt;
+    melyik applikációba regisztrált
+   &lt;/li&gt;
+   &lt;li&gt;
+    ügyfélkapunál megadott email hash
+   &lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p&gt;
+   Itt személyi adat nincs, tehát ez nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
+  &lt;/p&gt;
+  &lt;h4 id="cookie-kezeles"&gt;
+   cookie kezelés
+  &lt;/h4&gt;
+  &lt;p&gt;
+   A működéshez egy darab un. “munkamenet cookie” használata szükséges, erről tájékoztatás jelenik meg és a felhasználónak ezt el kell fogadnia.
+  &lt;/p&gt;
+  
+  	&lt;h2&gt;Brute force támadás elleni védekezés&lt;/h2&gt;
+
+	&lt;p&gt;Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.&lt;/p&gt;
+
+	     &lt;/div&gt;&lt;!-- #scope --&gt;
+		         	&lt;div id="footer"&gt;  
+      	&lt;p&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
+			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
+      	&lt;/p&gt;   
+		&lt;p&gt;SWRESOURCE:			
+				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
+				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+		&lt;/p&gt;
+		&lt;p&gt;SWFORKINFO&amp;nbsp;
+	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;lásd itt&lt;/a&gt;&lt;/p&gt;
+		&lt;/div&gt;
+                         &lt;/body&gt;
+        &lt;/html&gt;
+        </system-out>
+      </testcase>
     </testsuite>
   </testsuite>
 </testsuites>
