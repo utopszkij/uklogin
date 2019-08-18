@@ -183,8 +183,8 @@ class ReadmeView  extends CommonView  {
   </h3>
   <ol>
    <li>
-    A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál). Ez a képernyő tartalmazza az adatkezelési tájékoztatót és a cookie használat engedélyeztetést is.
-   </li>
+    A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál). 
+    /li>
    <li>
     A user a letöltött pdf -et az ügyfélkapus ingyenes aláírás rendszerrel aláírja, és az aláírt pdf -et is letölti saját gépére.
    </li>
@@ -206,13 +206,7 @@ class ReadmeView  extends CommonView  {
    - a választott nicknév egyedi az adott applikációban?
   </p>
   <p>
-   Hiba esetén hibaüzenet és a hiba jellegétől függően vagy
-   <br/>
-   - a nicknév/jelszó megadó képernyő jelenik meg (nick név már létezik vagy formailag hibás nicknév/jelszó) vagy
-   <br/>
-   - a regsiztrálás kezdő képernyője jelenik meg (pdf aláírás hiba, pdf tartalom hiba) vagy
-   <br/>
-   - a login képernyő jelenik meg (ezzel az ügyfélkapu belépéssel már történt regisztráció ebbe az applikációba).
+   Hiba esetén hibaüzenet jelenik meg.
   </p>
   <h3 id="elfelejtett-jelszo-kezeles-folyamata">
    Elfelejtett jelszó kezelés folyamata
@@ -236,7 +230,8 @@ class ReadmeView  extends CommonView  {
    <li>
     kezelt app adatai
     <br/>
-    Mint látható az adminisztrátor valós személyéhez köthető adat (név, lakcím, okmány azonosító) nincs tárolva. Mivel az email cím személyes adat, egyes értelmezések szerint ez így is a GDPR hatálya alá tartozik. Tehát erre vonatkozó tájékoztatás jelenik meg, és az admin -nak ezt el kell fogadnia. Lehetősége van a tárolt adatait lekérdezni, és azokat törölni is - ez utóbbi egyúttal az applikáció törlését is jelenti.
+    Mint látható az adminisztrátor valós személyéhez köthető adat (név, lakcím, okmány azonosító) nincs tárolva. 
+    Tehát ez nem tartozik a GDPR hatálya alá. Erre vonatkozó tájékoztatás jelenik meg, és az admin -nak ezt el kell fogadnia. Lehetősége van a tárolt adatait lekérdezni, és azokat törölni is - ez utóbbi egyúttal az applikáció törlését is jelenti.
    </li>
   </ul>
   <h4 id="a-normal-felhasznalokkal-kapcsolatban-tarolt-adatok-users-tabla">
@@ -257,7 +252,7 @@ class ReadmeView  extends CommonView  {
    </li>
   </ul>
   <p>
-   Itt személyi adat nincs, tehát ez nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
+   Itt személyi adat nincs, tehát ez nem tartozik a GDPR hatálya alá, erről tájékoztatást írunk ki.
   </p>
   <h4 id="cookie-kezeles">
    cookie kezelés
