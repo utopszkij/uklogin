@@ -132,7 +132,7 @@ class ReadmeView  extends CommonView  {
   <p>
    Opcionálisan 
    <url>
-    /state/xxxxx is megadható. A state tetszőleges kiegészítő infot tartalmazhat.
+    /?state=xxxxx is megadható. A state tetszőleges kiegészítő infot tartalmazhat.
    </url>
   </p>
   <p>

@@ -29,6 +29,7 @@ class Oauth2Controller {
             $data->extraCss = $app->css;
             $data->nick = $request->input('nick','');
             $data->title = 'LBL_REGISTFORM1';
+            $data->adminNick = $request->sessionget('adminNick','');
             $view->registForm1($data);
         } else {
             $view->errorMsg(['ERROR_NOTFOUND']);
@@ -66,6 +67,7 @@ class Oauth2Controller {
 	        $data->extraCss = $app->css;
 	        $data->nick = $nick;
 	        $data->title = 'FORGET_PSW';
+	        $data->adminNick = $request->sessionget('adminNick','');
 	        $view->registForm1($data);
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
@@ -152,6 +154,7 @@ class Oauth2Controller {
     	        $data->msgs = [];
     	        $data->psw1 = '';
     	        $data->psw2 = '';
+    	        $data->adminNick = $request->sessionget('adminNick','');
     	        $view->registForm2($data);
 	        } else {
 	            // jelszó hiba
@@ -547,6 +550,7 @@ class Oauth2Controller {
 	        }
 	        $data->psw1 = '';
 	        $data->psw2 = '';
+	        $data->adminNick = $request->sessionget('adminNick','');
 	        $view->registForm2($data);
 	    }
 	}
@@ -578,6 +582,7 @@ class Oauth2Controller {
     	    $data->nick = $forgetPswNick;
     	    $data->title = 'FORGET_PSW';
     	}
+    	$data->adminNick = $request->sessionget('adminNick','');
     	$view->registForm2($data);
 	}
 	
@@ -663,7 +668,19 @@ class Oauth2Controller {
 	           $msgs = $model->updateUser($data);
 	       }
 	       if (count($msgs) == 0) {
-	           $view->successMsg(['USER_SAVED']);
+	           // login form megjelenítése
+	           $request->sessionSet('extraParams',[]);
+	           $request->sessionSet('client_id',$client_id);
+	           $data = new stdClass();
+	           createCsrToken($request, $data);
+	           $data->msgs = ['USER_SAVED'];
+	           $data->client_id = $client_id;
+	           $data->appName = $app->name;
+	           $data->extraCss = $app->css;
+	           $data->nick = '';
+	           $data->psw1 = '';
+	           $data->adminNick = $request->sessionget('adminNick','');
+	           $view->loginform($data);
 	       } else {
 	           $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
 	       }
@@ -676,12 +693,14 @@ class Oauth2Controller {
 	 * @return void
 	 */
 	public function loginform($request) {
+	    $request->sessionSet('nick','');
 	    $appModel = getModel('appregist');
 	    $view = getView('oauth2');
 	    $client_id = $request->input('client_id','');
 	    $app = $appModel->getData($client_id);
 	    if ($app) {
 	        $data = new stdClass();
+	        $data->adminNick = $request->sessionget('adminNick','');
 	        createCsrToken($request, $data);
 	        $request->sessionSet('client_id', $client_id);
 
@@ -697,14 +716,15 @@ class Oauth2Controller {
 	                $extraParams[$fn] = $fv;
 	            }
 	        }
-            $request->sessionSet('extraParams',$extraParams);
-
+	        $request->sessionSet('extraParams',$extraParams);
+	        
 	        $data->appName = $app->name;
 	        $data->client_id = $app->client_id;
 	        $data->extraCss = $app->css;
 	        $data->nick = '';
 	        $data->psw1 = '';
 	        $data->msgs = [];
+	        $data->adminNick = $request->sessionget('adminNick','');
 	        $view->loginform($data);
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
@@ -728,6 +748,7 @@ class Oauth2Controller {
 	    $data->psw1 = '';
 	    $data->client_id = $app->client_id;
 	    $data->msgs = $msgs;
+	    $data->adminNick = $request->sessionget('adminNick','');
 	    $view->loginform($data);
 	}
 

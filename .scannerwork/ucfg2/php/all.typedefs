@@ -3472,8 +3472,9 @@ echonavbarcommonview::echonavbar$
 
 echofootercommonview::echofooter:
 impresszumcontroller"
-showimpresszumcontroller::showœ
-appregistmodel(
+showimpresszumcontroller::showÎ
+appregistmodel0
+getappsbyadminappregistmodel::getappsbyadmin(
 
 url_existsappregistmodel::url_exists,
 checknoemptyappregistmodel::checknoempty
@@ -3526,13 +3527,16 @@ commonview!
 displayfrontpageview::displayj
 frontpagemodel,
 getusercountfrontpagemodel::getusercount*
-getappcountfrontpagemodel::getappcountà
+getappcountfrontpagemodel::getappcountr
+logincontroller!
+logoutlogincontroller::logout
+codelogincontroller::code
+formlogincontroller::form¯
 appregistview
 commonview'
 
 removedmsgappregistview::removedmsg
-formappregistview::form/
-adminloginformappregistview::adminloginform'
+formappregistview::form'
 
 successmsgappregistview::successmsg#
 errormsgappregistview::errormsg0
@@ -3540,7 +3544,10 @@ successmsgappregistview::successmsg#
 getdatabrowsermodel::getdataB
 adatkezelesview
 commonview#
-displayadatkezelesview::display±
+displayadatkezelesview::display:
+	loginview
+commonview!
+	loginformloginview::loginform±
 oauth2model
 adduseroauth2model::adduser3
 getuserbysignhashoauth2model::getuserbysignhash!
@@ -3565,7 +3572,7 @@ commonview
 adomanycontroller
 showadomanycontroller::show:
 defaultcontroller%
-defaultdefaultcontroller::defaultý
+defaultdefaultcontroller::defaultª
 appregistcontroller
 addappregistcontroller::add%
 logoutappregistcontroller::logout-
@@ -3574,7 +3581,8 @@ adminloginappregistcontroller::adminlogin+
 	appremoveappregistcontroller::appremove1
 doadminlogin!appregistcontroller::doadminlogin7
 adminloginerror$appregistcontroller::adminloginerror3
-echoadminform"appregistcontroller::echoadminform!
+echoadminform"appregistcontroller::echoadminform+
+	adminformappregistcontroller::adminform!
 saveappregistcontroller::save8
 
 readmeview

@@ -10,6 +10,7 @@ class DefaultController {
 		$data->option = $request->input('option','default');
 		$data->appCount = $model->getAppCount();
 		$data->userCount = $model->getUserCount();
+		$data->adminNick = $request->sessionget('adminNick','');
 		if ($request->sessionGet('user','') != '') {
 		    $data->user = $request->sessionGet('user','');
 		}

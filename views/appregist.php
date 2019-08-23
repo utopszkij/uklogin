@@ -21,7 +21,20 @@ class AppregistView  extends CommonView  {
             			<em class="fa fa-sign-out"></em><?php echo txt('LOGOUT') ?>
             		</button>
             	</p> 
-            	<h2>client_id:&nbsp;<?php echo $p->client_id; ?></h2>
+            	<p id="pAppsSelect">
+            	<?php echo txt('LBL_TITLE')?>:&nbsp;<select id="appsSelect">
+            	<?php 
+            	foreach ($p->apps as $app) {
+            	    if ($app->client_id == $p->client_id) {
+            	        echo '<option selected="selected" value="'.$app->client_id.'">'.$app->name.'</option>';
+            	    } else {
+            	        echo '<option value="'.$app->client_id.'">'.$app->name.'</option>';
+            	    }
+            	}
+            	?>
+            	</select>
+            	</p>
+                <h3>client_id:&nbsp;<?php echo $p->client_id; ?></h2>
                 <h3>client_secret:&nbsp;<?php echo $p->client_secret; ?></h2>
             <?php endif; ?>
             <div class="alert alert-warning" role="alert">
@@ -88,26 +101,9 @@ class AppregistView  extends CommonView  {
     				<legend><?php echo txt('LBL_APPADMIN'); ?></legend>
     				<p>
     					<label><?php echo txt('LBL_ADMIN'); ?></label>
-    					<input type="text" name="admin" id="admin" value="{{admin}}" size="32" 
+    					<input type="hidden" name="admin" id="admin" value="{{admin}}" size="32" 
     						class="appAdmin" />
-    				</p>
-    				<p>
-    					<label><?php echo txt('LBL_PSW1'); ?></label>
-    					<input type="password" name="psw1" id="psw1" value="{{psw1}}" size="32" 
-    						class="appPsw" />
-    				</p>
-    				<p>
-    					<label><?php echo txt('LBL_PSW2'); ?></label>
-    					<input type="password" name="psw2" id="psw2" value="{{psw2}}" size="32" 
-    						class="appPsw" />
-    				</p>
-    				<?php if ($p->client_id != '') : ?>
-    				<p><?php echo txt('PSWCHGINFO'); ?></p>
-    				<?php endif; ?>
-    				<p>
-    					<label><?php echo txt('LBL_FALSEADMINLOGINLIMIT'); ?></label>
-    					<input type="number" min="1" max="10" name="adminFalseLoginLimit" value="{{adminFalseLoginLimit}}" size="10" 
-    						class="appFalseAdminLoginLimit" />
+    					<var>{{admin}}</var>	
     				</p>
     			</fieldset>
    				<?php if ($p->client_id == '') : ?>
@@ -166,7 +162,7 @@ class AppregistView  extends CommonView  {
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($res); ?>
-	    <div class="savedMsg">
+	    <div class="savedMsg" id="scope">
 	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
 	    	<p>Client_id: <?php echo $res->client_id; ?></p>
 	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
@@ -187,11 +183,21 @@ class AppregistView  extends CommonView  {
 	    $p = new stdClass();
 	    ?>
         <body ng-app="app">
-	    <?php $this->echoNavbar($p); ?>
-	    <div class="errorMsg">
+	    <?php $this->echoNavbar($res); ?>
+	    <div class="errorMsg" id="scope">
+	    <br /><br /><br />
 	    <h2 class="alert alert-danger">
-	    	<?php echo JSON_encode($res->error); ?>
+	    	<?php
+	    	if (is_array($res->error)) {
+	    	    foreach ($res->error as $error) {
+	    	        echo txt($error).'<br />';
+	    	    }
+	    	} else {
+	    	    echo txt($res->error);
+	    	}
+	    	?>
 	    </h2>
+	    <br /><br /><br />
 	    </div>
 		<?php $this->echoFooter(); ?>
         </body>
@@ -206,11 +212,10 @@ class AppregistView  extends CommonView  {
 	 */
 	public function removedMsg($rec) {
 	    echo htmlHead();
-	    $p = new stdClass();
 	    ?>
         <body ng-app="app">
-	    <?php $this->echoNavbar($p); ?>
-	    <div class="successMsg">
+	    <?php $this->echoNavbar($rec); ?>
+	    <div class="successMsg" id="scope">
 	    <h2 class="alert alert-success"><?php echo txt('APPREMOVED'); ?></h2>
 	    <p><?php echo $rec->name; ?></p>
 	    </div>
@@ -220,7 +225,7 @@ class AppregistView  extends CommonView  {
         <?php 
 	}
 	
-	
+	/*
 	public function adminLoginForm($p) {
 	    echo htmlHead();
 	    
@@ -278,6 +283,6 @@ class AppregistView  extends CommonView  {
         </html>
         <?php 		
 	}
-	
+	*/
 }
 ?>

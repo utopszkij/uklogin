@@ -1,6 +1,16 @@
 <IfModule mod_rewrite.c>
-   RewriteEngine on
+    RewriteEngine on
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)$ ./index.php?path=$1 [NC,L,QSA]
+
+    RewriteCond %{HTTP_HOST} ^uklogin_domain [NC]
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://uklogin_domain/$1 [R=301,L]
+
+    RewriteCond %{HTTP_HOST} ^www\.uklogin_domain [NC]
+    RewriteCond %{SERVER_PORT} 80
+    RewriteRule ^(.*)$ https://uklogin_domain/$1 [R=301,L]
+
+
 </IfModule>

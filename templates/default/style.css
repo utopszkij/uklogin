@@ -1,11 +1,12 @@
 body {font-size:14px; font-family:roman; background-color:white; line-height:120%;
    min-height:400px;}
-#scope {padding:5px}   
+#scope {padding:5px; min-height:600px}   
 div {margin:0px; padding:0px; }  
 .clear {clear:both}
 .nav-item {border-style:solid; border-color:silver; border-width:0px 0px 0px 1px }
 .nav-item:hover {background-color:silver} 
 input {max-width:80%}
+#loggedUser {display:block; background-color:#b79191; margin:0px; font-wight:bold}
 
 
 #popup {cursor: move; position:fixed; z-index:99; left:50px; top:50px;
@@ -45,6 +46,7 @@ input {max-width:80%}
 .table .tr1 {background-color:#e0e0e0}
 
 #scope {padding:5px}
+#pAppsSelect {font-size:22px; font-weight:bold;}
 form#formApp {padding:5px; margin:5px; border-style:solid; border-width:1px;}
 form#formApp fieldset {padding:5px; margin:5px; border-style:solid; border-width:1px;}
 form#formApp label {width:250px; text-align:left}
