@@ -62,22 +62,6 @@
 				msg += $scope.txt('ERROR_ADMIN_EMPTY')+'<br />';
 				$('input#admin').addClass('error');
 			}
-			if ($('input#client_id').val() == '') {
-				if ($('input#psw1').val() == '') {
-					msg += $scope.txt('ERROR_PSW_EMPTY')+'<br />';
-					$('input#psw1').addClass('error');
-				}
-			}
-			
-			if (($('input#psw1').val() != '') && ($('input#psw1').val().length < 6)) {
-				msg += $scope.txt('ERROR_PSW_INVALID')+'<br />';
-				$('input#psw1').addClass('error');
-			}
-			if ($('input#psw1').val() != $('input#psw2').val()) {
-				msg += $scope.txt('ERROR_PSW_NOTEQUAL')+'<br />';
-				$('input#psw1').addClass('error');
-				$('input#psw2').addClass('error');
-			}
 			if ($('input#dataProcessAccept').is(':checked') == false) {
 				msg += $scope.txt('ERROR_DATA_ACCEP_REQUEST')+'<br />';
 				$('input#dataProcessAccept').addClass('error');
@@ -117,6 +101,10 @@
 			    $('#task').val('appremove');
 				global.submit('formApp');
 		  });
+	  });
+	  $('#appsSelect').change(function() {
+		 var client_id = $('#appsSelect').val();
+	  	 window.location = "./index.php?option=appregist&task=adminform&client_id="+client_id; 
 	  });
 	  
 	  $('#scope').show();

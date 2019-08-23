@@ -124,5 +124,12 @@ do-release-upgrade
 
 verzió ellenörzés:
 
+
+mail server telepités
+=====================
+
+https://www.linuxbabe.com/mail-server/ubuntu-18-04-iredmail-email-server
+
+
 lsb_release -a 
     

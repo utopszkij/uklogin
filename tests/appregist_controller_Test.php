@@ -33,9 +33,17 @@ class appregistControllerTest extends TestCase
         $this->assertEquals('',$db->getErrorMsg());
     }
     
+    public function add_adminNotLogged() {
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','');
+        $this->controller->add($this->request);
+        $this->expectOutputRegex('/iframe/');
+    }
+    
     public function test_save_domainEmpty() {
         // a balmix.hu -n van uklogin.html
         $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
         $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('client_id','');
@@ -43,18 +51,16 @@ class appregistControllerTest extends TestCase
         $this->request->set('name','balmix');
         $this->request->set('callback','https://balmix.hu/opt/home/logged');
         $this->request->set('css','https://balmix.hu/uklogin.css');
-        $this->request->set('admin','admin');
-        $this->request->set('psw1','123456');
-        $this->request->set('psw2','123456');
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
-        $res = $this->controller->save($this->request);
+        $this->controller->save($this->request);
         $this->expectOutputRegex('/ERROR_DOMAIN_INVALID/');
     }
     
-    public function test_save_ok() {
-        // a balmix.hu -n van uklogin.html
+     public function test_save_ok() {
         $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
+        // a balmix.hu -n van uklogin.html
         $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('client_id','');
@@ -62,88 +68,57 @@ class appregistControllerTest extends TestCase
         $this->request->set('name','balmix');
         $this->request->set('callback','https://balmix.hu/opt/home/logged');
         $this->request->set('css','https://balmix.hu/uklogin.css');
-        $this->request->set('admin','admin');
-        $this->request->set('psw1','123456');
-        $this->request->set('psw2','123456');
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
-        $res = $this->controller->save($this->request);
+        $this->controller->save($this->request);
         $this->expectOutputRegex('/Client_id/');
+    }
+    
+    public function test_adminform_found() {
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
+        $this->controller->adminform($this->request);
+        $this->expectOutputRegex('/LBL_TITLE/');
+    }
+    
+    public function test_adminform_noneInApps() {
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
+        $this->request->set('client_id','11');
+        $this->controller->adminform($this->request);
+        $this->expectOutputRegex('/FATAL_ERROR/');
+    }
+        
+    public function test_adminform_manyApps() {
+        $db = new DB();
+        $table = new Table('apps');
+        $app = $table->first();
+        $client_id = $app->client_id;
+        $admin = $app->admin;
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick',$admin);
+        $this->request->set('client_id',$client_id);
+        $this->controller->adminform($this->request);
+        $this->expectOutputRegex('/LBL_TITLE/');
+    }
+        
+    public function test_adminform_adminNotLogged() {
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','');
+        $this->controller->adminform($this->request);
+        $this->expectOutputRegex('/FATAL_ERROR/');
     }
     
     public function test_adminlogin() {
         $this->request = new Request();
-        $res = $this->controller->adminlogin($this->request);
-        $this->expectOutputRegex('/ADMIN_NICK/');
-        
+        $this->request->sessionSet('adminNick','admin');
+        $this->controller->adminlogin($this->request);
+        $this->expectOutputRegex('/LBL_TITLE/');
     }
     
-    public function test_doadminlogin_OK() {
+     public function test_appremove_OK() {
         $this->request = new Request();
-        $this->request->set('123','1');
-        $this->request->sessionSet('csrToken','123');
-        $table = new Table('apps');
-        $table->where(['domain','=','https://balmix.hu']);
-        $rec = $table->first();
-        if ($rec) {
-            $this->request->set('client_id',$rec->client_id);
-            $this->request->set('nick','admin');
-            $this->request->set('psw','123456');
-        }
-        $res = $this->controller->doadminlogin($this->request);
-        $this->expectOutputRegex('/formApp/');
-    }
-    
-    public function test_doadminlogin_INVALID_PSW() {
-        $this->request = new Request();
-        $this->request->set('123','1');
-        $this->request->sessionSet('csrToken','123');
-        $table = new Table('apps');
-        $table->where(['domain','=','https://balmix.hu']);
-        $rec = $table->first();
-        if ($rec) {
-            $this->request->set('client_id',$rec->client_id);
-            $this->request->set('nick','admin');
-            $this->request->set('psw','abcd123456');
-        }
-        $res = $this->controller->doadminlogin($this->request);
-        $this->expectOutputRegex('/INVALID_LOGIN/');
-    }
-    
-    public function test_doadminlogin_INVALID_NICK() {
-        $this->request = new Request();
-        $this->request->set('123','1');
-        $this->request->sessionSet('csrToken','123');
-        $table = new Table('apps');
-        $table->where(['domain','=','https://balmix.hu']);
-        $rec = $table->first();
-        if ($rec) {
-            $this->request->set('client_id',$rec->client_id);
-            $this->request->set('nick','nemjo');
-            $this->request->set('psw','123456');
-        }
-        $res = $this->controller->doadminlogin($this->request);
-        $this->expectOutputRegex('/INVALID_LOGIN/');
-    }
-    
-    public function test_doadminlogin_INVALID_CLINET_ID() {
-        $this->request = new Request();
-        $this->request->set('123','1');
-        $this->request->sessionSet('csrToken','123');
-        $table = new Table('apps');
-        $table->where(['domain','=','https://balmix.hu']);
-        $rec = $table->first();
-        if ($rec) {
-            $this->request->set('client_id','nemjo');
-            $this->request->set('nick','admin');
-            $this->request->set('psw','abcd123456');
-        }
-        $res = $this->controller->doadminlogin($this->request);
-        $this->expectOutputRegex('/INVALID_LOGIN/');
-    }
-    
-    public function test_appremove_OK() {
-        $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
         $this->request->set('123','1');
         $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
@@ -158,11 +133,19 @@ class appregistControllerTest extends TestCase
     
     public function test_appremove_NOTFOUND() {
         $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
         $this->request->set('123','1');
         $this->request->sessionSet('csrToken','123');
         $this->request->set('client_id','nincsilyen');
         $this->controller->appremove($this->request);
         $this->expectOutputRegex('/ERROR_NOTFOUND/');
+    }
+    
+    public function test_adminform_notfound() {
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
+        $this->controller->adminform($this->request);
+        $this->expectOutputRegex('/ERROR_APP_NOTFOUND/');
     }
     
     public function test_end() {
@@ -171,5 +154,6 @@ class appregistControllerTest extends TestCase
         $db->statement('DELETE FROM apps');
         $this->assertEquals('','');
     }
+    
 }
 

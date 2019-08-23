@@ -74,7 +74,7 @@ Az app adatok módosításához, törléséhez természetesen az admin login sz�
 ```
 <iframe ..... src="<ukLoginDomain>/oath2/loginform/client_id/<client_id>" />
 ```
-Opcionálisan  /state/xxxxx is megadható. a state tetszőleges kiegészítő infot tartalmazhat. 
+Opcionálisan  /?state=xxxxx is megadható. a state tetszőleges kiegészítő infot tartalmazhat. 
 
 Az iframe -ben egy szokásos login képernyő jelenik meg (nicknév és jelszó megadása). 
 A login képernyőn a szokásos kiegészitő elemek is szerepelnek:

@@ -18,7 +18,7 @@ function String2Hex($string){
     return $hex;
 }
 
-	// echo phpinfo();	
+   echo phpinfo();	
 	
    $filePath = './avdhA3-18840f38-7adf-4f8a-a8b2-c3e307d63b48.pdf';		    
    $filePath = './signed.pdf';		    

@@ -8,6 +8,7 @@ DEFINE('CLOSE','Bezár');
 DEFINE('TITLE','Cím');
 DEFINE('LOGIN','Bejelentkezés');
 DEFINE('LOGOUT','Kijelentkezés');
+DEFINE('MYAPPS','Applikációim');
 DEFINE('DESC','Leírás');
 DEFINE('STATE','státusz');
 DEFINE('ADMIN','adminisztrátor');
@@ -76,14 +77,14 @@ DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
 DEFINE('USER','Bejelentkezési név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
-DEFINE('APPSAVED','Applikáció tárolva');
+DEFINE('APPSAVED','Applikáció adatai tárolva');
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
  adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához 
  és adminisztrálásához szükség lesz rájuk.');
 DEFINE('PSW','Jelszó');
-DEFINE('USER_SAVED','Felhasználói fiók tárolva');
+DEFINE('USER_SAVED','Felhasználói fiók adati tárolva');
 DEFINE('USER_DELETED','Felhasználói fiók törölve');
 DEFINE('CLIENT_ID','Client_id');
 DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');
@@ -103,10 +104,11 @@ DEFINE('ERROR_NICK_EXISTS','Ezzel a bejelentkezési névvel már regisztráltak!
 DEFINE('ERROR_PSW_EMPTY','Jelszavat meg kell adni');
 DEFINE('ERROR_PSW_INVALID','A jelszó túl rövid (min.6 karakter kell)');
 DEFINE('ERROR_PSW_NOTEQUAL','A két jelszó nem azonos');
-DEFINE('ERROR_UKLOGIN_HTML_NOT_EXISTS','uklog.html nem található a megadott domainen');
+DEFINE('ERROR_UKLOGIN_HTML_NOT_EXISTS','uklogin.html nem található a megadott domainen');
 DEFINE('ERROR_DATA_ACCEP_REQUEST','Adat kezelés elfogadása szükséges');
 DEFINE('ERROR_COOKIE_ACCEP_REQUEST','Cookie kezelés elfogadása szükséges');
 DEFINE('ERROR_NOTFOUND','Nincs ilyen');
+DEFINE('ERROR_APP_NOTFOUND','Nincs applikáció ehhez a bejelentkezéshez');
 DEFINE('ERROR_PDF_NOT_UPLOADED','Nincs aláírt fájl feltöltve');
 DEFINE('ERROR_PDF_SIGN_ERROR','A pdf nincs aláírva, vagy az aláírás nem  megfelelő');
 DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapú aláírással már regisztráltak!');

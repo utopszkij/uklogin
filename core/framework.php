@@ -397,4 +397,19 @@ function checkCsrToken(&$request) {
         exit();
     }
 }
+
+/**
+ * echo statikus page
+ * @param object $request
+ * @param string $viewName
+ */
+function docPage($request, string $viewName) {
+    $request->set('sessionid','0');
+    $request->set('lng','hu');
+    $view = getView($viewName);
+    $data = new stdClass();
+    $data->option = $request->input('option','default');
+    $data->adminNick = $request->sessionGet('adminNick','');
+    $view->display($data);
+}
 ?>

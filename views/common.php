@@ -2,7 +2,7 @@
 class CommonView {
 	/**
 	* echo html page
-	* @param object $p
+	* @param object $p - adminNick
 	* @return void
 	*/
 	public function echoNavbar($p) {
@@ -26,10 +26,21 @@ class CommonView {
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/add">
 			        	<em class="fa fa-plus"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>
 			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/adminlogin">
-			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
-			      </li>
+			      <?php if ($p->adminNick == '') :?>
+    			      <li class="nav-item">
+    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/form">
+    			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
+    			      </li>
+			      <?php else : ?>
+    			      <li class="nav-item">
+    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/form">
+    			        	<em class="fa fa-cog"></em>&nbsp;<?php echo txt('MYAPPS'); ?></a>
+    			      </li>
+    			      <li class="nav-item">
+    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/logout">
+    			        	<em class="fa fa-sign-out"></em>&nbsp;<?php echo txt('LOGOUT'); ?></a>
+    			      </li>
+			      <?php endif; ?>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/example.php">
 			        	<em class="fa fa-compass"></em>&nbsp;<?php echo txt('EXAMPLE'); ?></a>
@@ -40,6 +51,7 @@ class CommonView {
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			</nav>   
+			<p id="loggedUser"><?php echo $p->adminNick; ?></p>
 			<p style="background-color:red; color:white">Ez a rendszer jelenleg ß teszt állapotban használható.</p>     
 		<?php       
      } // echoNavbar

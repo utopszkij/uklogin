@@ -46,7 +46,7 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/ERROR_NOTFOUND/');
     }
     
-    public function test_registform_ok() {
+     public function test_registform_ok() {
         $table = new table('apps');
         $rec = new stdClass();
         $rec->client_id = '123';
@@ -57,16 +57,13 @@ class oauth2ControllerTest extends TestCase
         $rec->css = '';
         $rec->falseLoginLimit = '10';
         $rec->admin = 'admin';
-        $rec->pswhash = '12345678';
-        $rec->adminfalseLoginLimit = '10';
-        $rec->adminLoginEnabled = 1;
         $table->insert($rec);
         $this->request->set('client_id','123');
         $this->controller->registform($this->request);
         $this->expectOutputRegex('/LBL_SIGNEDPDF/');
     }
     
-    public function test_registform2_PDFNOTUPLOADED() {
+     public function test_registform2_PDFNOTUPLOADED() {
         $this->request->sessionSet('client_id','123');
         $this->request->sessionSet('csrToken','abc');
         $this->request->set('abc',1);

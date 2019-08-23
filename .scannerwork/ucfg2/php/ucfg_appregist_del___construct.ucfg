@@ -4,9 +4,8 @@
 2
 appregist.php"K
 4
-*/var/www/html/uklogin/models/appregist.php# #(
-implicit return*æ
-
+*/var/www/html/uklogin/models/appregist.php   (
+implicit return*ç	
 14
 */var/www/html/uklogin/models/appregist.php (CA
 4
@@ -17,13 +16,13 @@ V
 */var/www/html/uklogin/models/appregist.php (
 %1"db::__construct*
 
-$dbﬁ€
+$db≠™
 4
-*/var/www/html/uklogin/models/appregist.php "(
+*/var/www/html/uklogin/models/appregist.php (
 %2*
 
-$db*çä
-á'
+$db*‹Ÿ
+÷'
         CREATE TABLE IF NOT EXISTS `apps` (
             `id` int(11) NOT NULL AUTO_INCREMENT,
             `name` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
@@ -34,9 +33,6 @@ V
             `css` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
             `falseLoginLimit` int(11) NOT NULL,
             `admin` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
-            `pswhash` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
-            `adminFalseLoginLimit` int(11) NOT NULL,
-            `adminLoginEnabled` tinyint(1) NOT NULL,
             PRIMARY KEY (`id`),
             KEY `app_idx_client_id` (`client_id`),
             KEY `app_idx_domain` (`domain`)
