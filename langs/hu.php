@@ -77,14 +77,14 @@ DEFINE('USERACTIVATION','Letiltott user fiók aktiválása');
 DEFINE('USER','Bejelentkezési név');
 DEFINE('USRACTOK','Aktivál');
 DEFINE('PSWCHGINFO','A két jelszó mezőt csak akkor töltse ki, ha változtatni akarja!');
-DEFINE('APPSAVED','Applikáció tárolva');
+DEFINE('APPSAVED','Applikáció adatai tárolva');
 DEFINE('APPREMOVED','Applikáció és admin adatok törölve');
 DEFINE('ADMIN_NICK','Admin név');
 DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
  adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához 
  és adminisztrálásához szükség lesz rájuk.');
 DEFINE('PSW','Jelszó');
-DEFINE('USER_SAVED','Felhasználói fiók tárolva');
+DEFINE('USER_SAVED','Felhasználói fiók adati tárolva');
 DEFINE('USER_DELETED','Felhasználói fiók törölve');
 DEFINE('CLIENT_ID','Client_id');
 DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');

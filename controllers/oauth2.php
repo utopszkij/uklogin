@@ -668,19 +668,8 @@ class Oauth2Controller {
 	           $msgs = $model->updateUser($data);
 	       }
 	       if (count($msgs) == 0) {
-	           // login form megjelenítése
-	           $request->sessionSet('extraParams',[]);
-	           $request->sessionSet('client_id',$client_id);
-	           $data = new stdClass();
-	           createCsrToken($request, $data);
-	           $data->msgs = ['USER_SAVED'];
-	           $data->client_id = $client_id;
-	           $data->appName = $app->name;
-	           $data->extraCss = $app->css;
-	           $data->nick = '';
-	           $data->psw1 = '';
-	           $data->adminNick = $request->sessionget('adminNick','');
-	           $view->loginform($data);
+	           // sikeresn tárolva
+	           $view->successMsg(['USER_SAVED']);
 	       } else {
 	           $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
 	       }

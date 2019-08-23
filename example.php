@@ -29,6 +29,24 @@ if (isset($_GET['task'])) {
     $task = 'home';
 }
 
+/**
+ adat lekérés távoli url -ről curl POST -al
+ * @param string $url
+ * @param array $fields
+ * @return string
+ */
+function getFromUrl(string $url, array $fields = []): string {
+    $fields_string = '';
+    $ch = curl_init();
+    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+    rtrim($fields_string, '&');
+    curl_setopt($ch,CURLOPT_URL, $url);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch,CURLOPT_POST, count($fields));
+    curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+    return curl_exec($ch);
+}
+
 if ($task == 'code') {
     // oauth2 hivta vissza, ilyenkor iframe -ben fut
     $code = $_GET['code'];
@@ -45,14 +63,16 @@ if ($task == 'code') {
         <body>
         ';
     // access_token kérése
-    $url = UKLOGINDOMAIN.'/access_token/client_id/'.CLIENTID.'/client_secret/'.CLIENTSECRET.'/code/'.$code;
-    $result = JSON_decode(implode("\n", file($url)));
+    $url = UKLOGINDOMAIN.'/access_token/';
+    $fields = ["client_id" => CLIENTID, "client_secret" => CLIENTSECRET, "code" => $code];
+    $result = JSON_decode(getFromUrl($url,$fields));
     if ((!isset($result->error)) && (isset($result->access_token))) {
 
         // access_token sikeresen lekérve. Userinfo kérése
         $access_token = $result->access_token;
-        $url = UKLOGINDOMAIN.'/userinfo/access_token/'.$access_token;
-        $result = JSON_decode(implode("\n", file($url)));
+        $url = UKLOGINDOMAIN.'/userinfo/';
+        $fields = ["access_token" => $access_token];
+        $result = JSON_decode(getFromUrl($url, $fields));
         if ($result->nick != 'error') {
             
             // Userinfo sikeresen lekérve. A user sikeresen bejelentkezett.
@@ -62,7 +82,7 @@ if ($task == 'code') {
             // utám hívni kell, ez esetben pld:
             // echo '
             // <script type="txt/javascript>
-            //   parent.document="'.urldecode($state).'";
+            //   parent.document.location="'.urldecode($state).'";
             // </script>
             // ';
             ?>
