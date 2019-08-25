@@ -1,0 +1,103 @@
+
+(userregistcontroller::checksignhashexist<
+0/var/www/html/uklogin/controllers/userregist.php³ ³(#"1*ƒ
+2<
+0/var/www/html/uklogin/controllers/userregist.php»	 »(/v
+t
+<
+0/var/www/html/uklogin/controllers/userregist.php»	 »(.
+
+$res"
+error"__id*
+'ERROR_PDF_SIGN_EXISTS'a
+_
+<
+0/var/www/html/uklogin/controllers/userregist.php¼ ¼(!
+%4"__id**
+
+$user"
+nick`
+^
+<
+0/var/www/html/uklogin/controllers/userregist.php¼	 ¼(!
+
+$res"
+nick"__id*
+
+%4*
+3*‹
+3<
+0/var/www/html/uklogin/controllers/userregist.php¾ ¾("H
+<
+0/var/www/html/uklogin/controllers/userregist.php¾ ¾(
+
+$res*í
+1<
+0/var/www/html/uklogin/controllers/userregist.php´ ´(RP
+<
+0/var/www/html/uklogin/controllers/userregist.php´ ´(
+$res"stdclassg
+e
+<
+0/var/www/html/uklogin/controllers/userregist.php´ ´(
+%1"stdclass::__construct*
+
+$resa
+_
+<
+0/var/www/html/uklogin/controllers/userregist.phpµ µ(
+
+$res"
+error"__id*
+''k
+i
+<
+0/var/www/html/uklogin/controllers/userregist.php¶ ¶(
+
+$res"
+
+signHash"__id*
+
+	$signHash`
+^
+<
+0/var/www/html/uklogin/controllers/userregist.php· ·(
+
+$res"
+nick"__id*
+''xv
+<
+0/var/www/html/uklogin/controllers/userregist.php¸ ¸('
+%2*
+userregistcontroller*
+
+'oauth2'2getmodelX
+V
+<
+0/var/www/html/uklogin/controllers/userregist.php¸ ¸('
+$model"__id*
+
+%2…‚
+<
+0/var/www/html/uklogin/controllers/userregist.php¹ ¹(=
+%3*
+
+
+$model*
+
+
+$client_id*
+
+	$signHash2getuserbysignhashW
+U
+<
+0/var/www/html/uklogin/controllers/userregist.php¹ ¹(=
+$user"__id*
+
+%3*
+2
+3:
+
+$client_id:
+	$signHashB
+userregistcontroller

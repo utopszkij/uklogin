@@ -11,4 +11,8 @@ define('MYSQLLOG',false);
 define('MYDOMAIN','http://*********');
 define('MYPATH','***************');
 define('CODE_EXPIRE',120); // code és access_token lejárati idő másodpercben
+define('GITHUB_REPO','uklogin');
+define('GITHUB_USER','****');
+define('GITHUB_PSW','****');
+
 ?>

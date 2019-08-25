@@ -1,142 +1,218 @@
 <?php
-/*
+/**
+ * MVC adbsztarkt osztályok, http GET/POST és session kezelő osztály,
+ * álltalános célú segéd rutinok
+ */
 
-./controllers/ctrlname.php
-class ctrlnameController { 
-	public function taskname($request) { 
-   	    $model = getModel(ctrlnameModel);
-   	    $view = getView(ctrlnameView);
-   	    $view->tmplname( {"data1":"value", ...} );
-    } 	
-}   
-
-./models/modelname.php
-class modelnameModel {
-
+class Model {
+    
 }
 
-./views/viewname.php
-class viewnameView {
-	public funtion tmplname($params) {
-		echo ..... $params->parName......	
-		loadJavascript($jsfileName,$params);
-	}
-}   
-*/
-
-/**
- * echo javascript code, inject params
- * @param string $jsName javascript file full path
- * @param array $params  {"name":value, ....}
- * @return void
- */
-function loadJavaScript(string $jsName, $params) {
-	echo "\n".'<script type="text/javascript">'."\n";
-	echo '// params from controller'."\n";
-	foreach ($params as $fn => $fv) {
-		if ($fn != '') {
-			if (is_array($fv)) {
-				echo "var $fn = ".JSON_encode($fv).";\n";
-			} else if (is_object($fv)) {
-				echo "var $fn = ".JSON_encode($fv).";\n";
-			} else if (is_string($fv)) {
-				$fv = str_replace("'", "\\'", $fv);
-				$fv = str_replace("\n", "\\n", $fv);
-				$fv = str_replace("\r", "\\r", $fv);
-				$fv = str_replace("\t", "\\t", $fv);
-				echo "var $fn = '$fv';\n";
-			}	else {
-				echo "var $fn = $fv;\n";
-			}
-		}
-	}
-	echo 'var sid = "'.session_id().'";'."\n";
-	include_once './js/'.$jsName.'.js';
-	echo '$("#working").hide()'."\n";
-	echo "\n".'</script>'."\n";
-}
-
-/**
- * echo javascript code, inject params and language constanses
- * must in html:  <body ng-app="app">
- *                  <div ng-controller="ctrl">
- *                      ....
- *                      <?php loadJavaSciptAngular('jsName', $params); ?>
- *                  </div>
- *                </body>  
- * @param string $jsName javascript file full path
- * @param array $params  {"name":value, ....}
- * @return void
- */
-function loadJavaScriptAngular(string $jsName, $params) {
-    ?>
-    <script src="https://code.angularjs.org/1.7.8/angular.js"></script>
-    <script type="text/javascript">
-    angular.module("app", []).controller("ctrl", function($scope) {
-        <?php 
-        $languages = get_defined_constants(true);
-        echo '$scope.LNG = [];'."\n";
-        foreach ($languages['user'] as $fn => $fv) {
-            if (substr($fn,0,5) != 'MYSQL') {
-                echo '$scope.LNG["'.$fn.'"] = '.JSON_encode($fv).';'."\n";
-            }
-        }
-        echo '$scope.txt = function(token) {
-            if ($scope.LNG[token] == undefined) {
-                return token;
-            } else {
-                return $scope.LNG[token];
-            }
-        };
-        ';
-        foreach ($params as $fn => $fv) {
-            if ($fn != '') {
-                if (is_array($fv)) {
-                    echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
-                } else if (is_object($fv)) {
-                    echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
-                } else if (is_string($fv)) {
-                    $fv = str_replace("'", "\\'", $fv);
-                    $fv = str_replace("\n", "\\n", $fv);
-                    $fv = str_replace("\r", "\\r", $fv);
-                    $fv = str_replace("\t", "\\t", $fv);
-                    echo '$scope.'."$fn = '$fv';\n";
-                }	else {
-                    echo '$scope.'."$fn = $fv;\n";
+class View {
+    /**
+     * echo javascript code, inject params
+     * @param string $jsName javascript file full path
+     * @param array $params  {"name":value, ....}
+     * @return void
+     */
+    protected function loadJavaScript(string $jsName, $params) {
+    	echo "\n".'<script type="text/javascript">'."\n";
+    	echo '// params from controller'."\n";
+    	foreach ($params as $fn => $fv) {
+    		if ($fn != '') {
+    			if (is_array($fv)) {
+    				echo "var $fn = ".JSON_encode($fv).";\n";
+    			} else if (is_object($fv)) {
+    				echo "var $fn = ".JSON_encode($fv).";\n";
+    			} else if (is_string($fv)) {
+    				$fv = str_replace("'", "\\'", $fv);
+    				$fv = str_replace("\n", "\\n", $fv);
+    				$fv = str_replace("\r", "\\r", $fv);
+    				$fv = str_replace("\t", "\\t", $fv);
+    				echo "var $fn = '$fv';\n";
+    			}	else {
+    				echo "var $fn = $fv;\n";
+    			}
+    		}
+    	}
+    	echo 'var sid = "'.session_id().'";'."\n";
+    	include_once './js/'.$jsName.'.js';
+    	echo '$("#working").hide()'."\n";
+    	echo "\n".'</script>'."\n";
+    }
+    
+    /**
+     * echo javascript code, inject params and language constanses
+     * must in html:  <body ng-app="app">
+     *                  <div ng-controller="ctrl">
+     *                      ....
+     *                      <?php loadJavaSciptAngular('jsName', $params); ?>
+     *                  </div>
+     *                </body>  
+     * @param string $jsName javascript file full path
+     * @param array $params  {"name":value, ....}
+     * @return void
+     */
+    protected function loadJavaScriptAngular(string $jsName, $params) {
+        ?>
+        <script src="https://code.angularjs.org/1.7.8/angular.js"></script>
+        <script type="text/javascript">
+        angular.module("app", []).controller("ctrl", function($scope) {
+            <?php 
+            $languages = get_defined_constants(true);
+            echo '$scope.LNG = [];'."\n";
+            foreach ($languages['user'] as $fn => $fv) {
+                if (substr($fn,0,5) != 'MYSQL') {
+                    echo '$scope.LNG["'.$fn.'"] = '.JSON_encode($fv).';'."\n";
                 }
             }
+            echo '$scope.txt = function(token) {
+                if ($scope.LNG[token] == undefined) {
+                    return token;
+                } else {
+                    return $scope.LNG[token];
+                }
+            };
+            ';
+            foreach ($params as $fn => $fv) {
+                if ($fn != '') {
+                    if (is_array($fv)) {
+                        echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
+                    } else if (is_object($fv)) {
+                        echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
+                    } else if (is_string($fv)) {
+                        $fv = str_replace("'", "\\'", $fv);
+                        $fv = str_replace("\n", "\\n", $fv);
+                        $fv = str_replace("\r", "\\r", $fv);
+                        $fv = str_replace("\t", "\\t", $fv);
+                        echo '$scope.'."$fn = '$fv';\n";
+                    }	else {
+                        echo '$scope.'."$fn = $fv;\n";
+                    }
+                }
+            }
+            echo '$scope.sid = "'.session_id().'";'."\n";
+            include_once './js/'.$jsName.'.js';
+            ?>
+            $("#scope").show();
+            $("#working").hide();
+        }); // controller function
+        </script>
+        <?php
+    }
+    
+    /**
+     * return hTML head
+     *    include javascript global.alert, global.confirm, global.post, globa.working functions
+     * must use htmlPopup() in HTML body tag
+     * @return void
+     */
+    protected function echoHtmlHead($data = '') {
+        $lines = file('./templates/'.TEMPLATE.'/htmlhead.html');
+        $s = implode("\n",$lines);
+        if (is_object($data)) {
+            if ((isset($data->extraCss)) && ($data->extraCss != '')) {
+                $extraCss = '<link rel="stylesheet" href="'.$data->extraCss.'">';
+            } else {
+                $extraCss = '<!-- extraCss -->';
+            }
+        } else {
+            $extraCss = '<!-- extraCss -->';
         }
-        echo '$scope.sid = "'.session_id().'";'."\n";
-        include_once './js/'.$jsName.'.js';
-        ?>
-        $("#scope").show();
-        $("#working").hide();
-    }); // controller function
-    </script>
-    <?php
-}
+        $s = str_replace('{{EXTRACSS}}',$extraCss,$s);
+        echo str_replace('{{MYDOMAIN}}',MYDOMAIN,$s);
+    }
+    
+    /**
+     * echo popup html code (use this HTML global.alert, global.confirm functions in htmlHead)
+     * @return void
+     */
+    function echoHtmlPopup() {
+        echo '
+        <div id="popup" style="display:none">
+            <p class="alert alert-danger"></p>
+            <div id="popupButtons">
+                <button type="button" id="popupYes" class="btn btn-primary">
+                    <em class="fa fa-check"></em>
+                    '.txt('YES').'
+                </button>
+    			<button type="button" id="popupNo" class="btn btn-danger">
+                    <em class="fa fa-ban"></em>
+                    '.txt('NO').'
+                </button>
+    			<button type="button" id="popupClose">'.txt('CLOSE').'</button>
+    		</div>
+        </div>
+        <div id="working"><span>'.txt('WORKING').'...</span></div>
+    	';
+    }
+    
+} // class View
 
-/**
- * create new model object from "./models/modelname.php"
- * @param string $modelName
- * @return Model
- */
-function getModel(string $modelName) {
-	include_once './models/'.$modelName.'.php';
-	$className = ucfirst($modelName).'Model';
-	return new $className ();
-}
+class Controller {
+    
+    /**
+     * create new model object from "./models/modelname.php"
+     * @param string $modelName
+     * @return Model
+     */
+    protected function getModel(string $modelName) {
+        include_once './models/'.$modelName.'.php';
+        $className = ucfirst($modelName).'Model';
+        return new $className ();
+    }
+    
+    /**
+     * cretae new view object from "./views/viewName.php"
+     * @param string $viewName
+     * @return View
+     */
+    protected function getView(string $viewName) {
+        include_once './views/'.$viewName.'.php';
+        $className = ucfirst($viewName).'View';
+        return new $className ();
+    }
+    
+    /**
+     * Create new csrToken tárol sessionba és $data -ba
+     * @param Request $request
+     * @param object $data
+     * @return void
+     */
+    protected function createCsrToken(&$request, &$data) {
+        $request->sessionSet('csrToken', md5(random_int(1000000,9999999)));
+        $data->csrToken = $request->sessionGet('csrToken','');
+    }
+    
+    /**
+     * $request -ben érkező csrToken ellenörzése
+     * @param Request $request
+     * @return void
+     */
+    protected function checkCsrToken(&$request) {
+        if ($request->input($request->sessionGet('csrToken')) != 1) {
+            echo '<p>invalid csr token</p> sessionban csrToken='.$request->sessionGet('csrToken','?').
+            ' inputban='.$request->input($request->sessionGet('csrToken'),'??').' '-__FILE__;
+            exit();
+        }
+    }
+    /**
+     * echo statikus page
+     * @param object $request
+     * @param string $viewName
+     */
+    protected function docPage($request, string $viewName) {
+        $request->set('sessionid','0');
+        $request->set('lng','hu');
+        $view = $this->getView($viewName);
+        $data = new stdClass();
+        $data->option = $request->input('option','default');
+        $data->adminNick = $request->sessionGet('adminNick','');
+        $view->display($data);
+    }
+    
+} // class Controller
 
-/**
- * cretae new view object from "./views/viewName.php"
- * @param string $viewName
- * @return View
- */
-function getView(string $viewName) {
-	include_once './views/'.$viewName.'.php';
-	$className = ucfirst($viewName).'View';
-	return new $className ();
-}
 
 class Request {
 	public $params = array();
@@ -309,52 +385,6 @@ function txt(string $s): string {
 }
 
 /**
- * return hTML head 
- *    include javascript global.alert, global.confirm, global.post, globa.working functions
- * must use htmlPopup() in HTML body tag    
- * @return string
- */
-function htmlHead($data = ''): string {
-	$lines = file('./templates/'.TEMPLATE.'/htmlhead.html');
-	$s = implode("\n",$lines);
-	if (is_object($data)) {
-	    if ((isset($data->extraCss)) && ($data->extraCss != '')) {
-	        $extraCss = '<link rel="stylesheet" href="'.$data->extraCss.'">';
-	    } else {
-	        $extraCss = '<!-- extraCss -->';
-	    }
-	} else {
-	    $extraCss = '<!-- extraCss -->';
-	}
-	$s = str_replace('{{EXTRACSS}}',$extraCss,$s);
-	return str_replace('{{MYDOMAIN}}',MYDOMAIN,$s);
-}
-
-/**
- * retrun popup html code (use this HTML global.alert, global.confirm functions in htmlHead)
- * @return string
- */
-function htmlPopup(): string {
-   return '
-    <div id="popup" style="display:none">
-        <p class="alert alert-danger"></p>
-        <div id="popupButtons">
-            <button type="button" id="popupYes" class="btn btn-primary">
-                <em class="fa fa-check"></em>
-                '.txt('YES').'
-            </button>
-			<button type="button" id="popupNo" class="btn btn-danger">
-                <em class="fa fa-ban"></em>
-                '.txt('NO').'
-            </button>
-			<button type="button" id="popupClose">'.txt('CLOSE').'</button>
-		</div>
-    </div>
-    <div id="working"><span>'.txt('WORKING').'...</span></div>
-	';    
-}
-
-/**
  * move uploaded file to target
  * @param string $postName
  * @param string $target
@@ -374,42 +404,4 @@ function getUploadedFile(string $postName, string $target): string {
     return $result;
 }
 
-/**
- * Create new csrToken tárol sessionba és $data -ba 
- * @param Request $request
- * @param object $data
- * @return void
- */
-function createCsrToken(&$request, &$data) {
-    $request->sessionSet('csrToken', md5(random_int(1000000,9999999)));
-    $data->csrToken = $request->sessionGet('csrToken','');
-}
-
-/**
- * $request -ben érkező csrToken ellenörzése
- * @param Request $request
- * @return void
- */
-function checkCsrToken(&$request) {
-    if ($request->input($request->sessionGet('csrToken')) != 1) {
-        echo '<p>invalid csr token</p> sessionban csrToken='.$request->sessionGet('csrToken','?').
-        ' inputban='.$request->input($request->sessionGet('csrToken'),'??');
-        exit();
-    }
-}
-
-/**
- * echo statikus page
- * @param object $request
- * @param string $viewName
- */
-function docPage($request, string $viewName) {
-    $request->set('sessionid','0');
-    $request->set('lng','hu');
-    $view = getView($viewName);
-    $data = new stdClass();
-    $data->option = $request->input('option','default');
-    $data->adminNick = $request->sessionGet('adminNick','');
-    $view->display($data);
-}
 ?>

@@ -78,7 +78,7 @@
 			}
 	  });
 	  $('#userActOk').click(function() {
-		  	$('#option').val('oauth2');
+		  	$('#option').val('userregist');
 		  	$('#task').val('useractival');
 			global.submit('formApp');
 	  });

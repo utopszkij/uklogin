@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 global $REQUEST;
+include_once './tests/mock.php';
 include_once './tests/config.php';
 include_once './core/database.php';
 include_once './controllers/adatkezeles.php';
-include_once './tests/mock.php';
 
 use PHPUnit\Framework\TestCase;
 

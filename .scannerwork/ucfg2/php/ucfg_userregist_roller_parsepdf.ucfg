@@ -1,0 +1,68 @@
+
+userregistcontroller::parsepdf<
+0/var/www/html/uklogin/controllers/userregist.php ("1*½
+2<
+0/var/www/html/uklogin/controllers/userregist.php’	 ’(.u
+s
+<
+0/var/www/html/uklogin/controllers/userregist.php’	 ’(-
+
+$res"
+error"__id*
+'ERROR_PDF_SIGN_ERROR'*
+3*j
+3
+userregist.php"S
+<
+0/var/www/html/uklogin/controllers/userregist.php” ”(
+implicit return*™
+1<
+0/var/www/html/uklogin/controllers/userregist.phpŽ Ž(.db
+<
+0/var/www/html/uklogin/controllers/userregist.phpŽ Ž(-	
+$parser"smalot\pdfparser\parsery
+w
+<
+0/var/www/html/uklogin/controllers/userregist.phpŽ Ž(-
+%1"$smalot\pdfparser\parser::__construct*
+	
+$parsermk
+<
+0/var/www/html/uklogin/controllers/userregist.php (,
+%2*
+	
+$parser*
+
+	$filePath2	parsefileV
+T
+<
+0/var/www/html/uklogin/controllers/userregist.php (,
+$pdf"__id*
+
+%2YW
+<
+0/var/www/html/uklogin/controllers/userregist.php (
+%3*
+
+$pdf2gettextW
+U
+<
+0/var/www/html/uklogin/controllers/userregist.php (
+$text"__id*
+
+%3r
+p
+<
+0/var/www/html/uklogin/controllers/userregist.php‘ ‘()
+%4"__concat*
+'client_id='*
+
+
+$client_id*
+2
+3:
+	$filePath:
+
+$client_id:
+$resB
+userregistcontroller

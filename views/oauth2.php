@@ -8,7 +8,7 @@ class Oauth2View  extends CommonView  {
      * @return void;}
      */
     public function successMsg($msgs) {
-        echo htmlHead();
+        $this->echoHtmlHead();
         ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="successMsg">
@@ -21,8 +21,8 @@ class Oauth2View  extends CommonView  {
 	    </h2>
 	    </div>
         </body>
-        <?php echo htmlPopup(); ?>
-        <?php loadJavaScriptAngular('oauth2',new stdClass()); ?>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2',new stdClass()); ?>
         </html>
         <?php 
 	}
@@ -33,7 +33,7 @@ class Oauth2View  extends CommonView  {
 	 * @return void
 	 */
 	public function errorMsg(array $msgs, string $backLink='', string $backStr='') {
-	    echo htmlHead();
+	    $this->echohtmlHead();
 	    ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
@@ -48,8 +48,8 @@ class Oauth2View  extends CommonView  {
 	    <?php if ($backLink != '') : ?>
 	    <p><a href="<?php echo $backLink; ?>" target="_self"><?php echo txt($backStr); ?></a>
 	    <?php endif; ?>
-        <?php echo htmlPopup(); ?>
-        <?php loadJavaScriptAngular('oauth2', new stdClass()); ?>
+        <?php $this->echohtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2', new stdClass()); ?>
         </body>
         </html>
         <?php 
@@ -61,7 +61,7 @@ class Oauth2View  extends CommonView  {
 	 * @return void;}
 	 */
 	public function registForm1($data) {
-	    echo htmlHead($data);
+	    $this->echoHtmlHead($data);
 	    ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none;" class="registForm1">
@@ -92,8 +92,8 @@ class Oauth2View  extends CommonView  {
 				</p>
 			</form>
 	    </div>
-        <?php echo htmlPopup(); ?>
-        <?php loadJavaScriptAngular('oauth2',$data); ?>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2',$data); ?>
 		</body>
         </html>
         <?php 
@@ -105,7 +105,7 @@ class Oauth2View  extends CommonView  {
 	 * @return void;}
 	 */
 	public function registForm2($data) {
-	    echo htmlHead($data);
+	    $this->echoHtmlHead($data);
 	    ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="registForm2">
@@ -170,15 +170,15 @@ class Oauth2View  extends CommonView  {
 				</p>
 			</form>		    
 	    </div>
-        <?php echo htmlPopup(); ?>
-        <?php loadJavaScriptAngular('oauth2',$data); ?>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2',$data); ?>
 		</body>
         </html>
         <?php 
 	}
 	
 	public function loginform($data) {
-	    echo htmlHead($data);
+	    $this->echoHtmlHead($data);
 	    ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="loginForm">
@@ -211,17 +211,17 @@ class Oauth2View  extends CommonView  {
 					<button type="button" id="formLoginOk" class="btn btn-primary"><?php echo txt('LOGIN'); ?></button>
 				</p>
 				<p>
-				<a href="<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/<?php echo $data->client_id; ?>"
+				<a href="<?php echo MYDOMAIN; ?>/opt/userregist/registform/client_id/<?php echo $data->client_id; ?>"
 					target="_self">
 					<?php echo txt('NOTMYACCOUNT');  ?>
 				</a><br />
-				<a style="cursor:pointer" onclick="$('#task').val('forgetpsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="forgetpswClick()">
 					<?php echo txt('FORGET_PSW');  ?>
 				</a><br />
-				<a style="cursor:pointer" onclick="$('#task').val('changepsw'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="changepswClick()">
 					<?php echo txt('CHANGE_PSW');  ?>
 				</a><br />
-				<a style="cursor:pointer" onclick="$('#task').val('mydata'); $('#formLogin').submit();">
+				<a style="cursor:pointer" onclick="mydataClick()">
 					<?php echo txt('MY_DATA');  ?>
 				</a><br />
 				<a style="cursor:pointer" onclick="delAccountClick()">
@@ -230,15 +230,32 @@ class Oauth2View  extends CommonView  {
 				</p>
 			</form>		    
 	    </div>
-        <?php echo htmlPopup(); ?>
-        <?php loadJavaScriptAngular('oauth2',$data); ?>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2',$data); ?>
 	    <script type="text/javascript">
-            function delAccountClick() {
-                if (confirm('<?php echo txt('SURE_DELETE_ACCOUNT'); ?>')) {
-                    $('#task').val('deleteaccount'); 
-                    $('#formLogin').submit();
-                }
+	    
+        function delAccountClick() {
+            if (confirm('<?php echo txt('SURE_DELETE_ACCOUNT'); ?>')) {
+                $('#option').val('userregist')
+                $('#task').val('deleteaccount'); 
+                $('#formLogin').submit();
             }
+        }
+        function mydataClick() {
+            $('#option').val('userregist')
+            $('#task').val('mydata'); 
+            $('#formLogin').submit();
+        }
+        function changepswClick() {
+            $('#option').val('userregist')
+            $('#task').val('changepsw'); 
+            $('#formLogin').submit();
+        }
+        function forgetpswClick() {
+            $('#option').val('userregist')
+            $('#task').val('forgetpsw'); 
+            $('#formLogin').submit();
+        }
         </script>
 		</body>
         </html>

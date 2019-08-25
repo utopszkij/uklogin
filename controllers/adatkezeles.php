@@ -1,7 +1,7 @@
 <?php
-class AdatkezelesController {
+class AdatkezelesController extends Controller {
 	public function show($request) {
-	    docPage($request, 'adatkezeles');
+	    $this->docPage($request, 'adatkezeles');
 	}
 }
 ?>

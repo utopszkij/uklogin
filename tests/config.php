@@ -15,4 +15,8 @@ define('MYSQLLOG',true);
 define('REFRESHMIN',2);
 define('REFRESHMAX',10);
 define('CODE_EXPIRE',120);
+
+define('GITHUB_REPO','');
+define('GITHUB_USER','');
+define('GITHUB_PSW','');
 ?>

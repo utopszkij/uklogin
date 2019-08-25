@@ -2,7 +2,7 @@
 include 'vendor/autoload.php';
 
 
-class LoginController {
+class LoginController extends Controller {
     /**
      * szolgáltatás hívása ; login form kirajzolása iframe -be
      * @param object $request 
@@ -10,7 +10,7 @@ class LoginController {
      */
     public function form($request) {
         if ($request->sessionGet('adminNick') == '') {
-            $view = getView('login');
+            $view = $this->getView('login');
             $p = new stdClass();
             $p->client_id = 12;
             $p->state = $request->input('state', MYDOMAIN.'/opt/appregist/adminform');
@@ -38,7 +38,7 @@ class LoginController {
         $fields_string = '';
         $ch = curl_init();
         foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-        rtrim($fields_string, '&');
+        $fields_string = rtrim($fields_string, '&');
         curl_setopt($ch,CURLOPT_URL, $url);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch,CURLOPT_POST, count($fields));

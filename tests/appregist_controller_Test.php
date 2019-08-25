@@ -20,10 +20,9 @@ class appregistControllerTest extends TestCase
     function __construct() {
         global $REQUEST;
         parent::__construct();
-        $this->controller = new appregistController();
+        $this->controller = new AppregistController();
         $this->request = new Request();
         $REQUEST = $this->request;
-        
     }
     
     public function test_start() {
@@ -33,7 +32,7 @@ class appregistControllerTest extends TestCase
         $this->assertEquals('',$db->getErrorMsg());
     }
     
-    public function add_adminNotLogged() {
+    public function test_add_adminNotLogged() {
         $this->request = new Request();
         $this->request->sessionSet('adminNick','');
         $this->controller->add($this->request);
@@ -109,13 +108,6 @@ class appregistControllerTest extends TestCase
         $this->expectOutputRegex('/FATAL_ERROR/');
     }
     
-    public function test_adminlogin() {
-        $this->request = new Request();
-        $this->request->sessionSet('adminNick','admin');
-        $this->controller->adminlogin($this->request);
-        $this->expectOutputRegex('/LBL_TITLE/');
-    }
-    
      public function test_appremove_OK() {
         $this->request = new Request();
         $this->request->sessionSet('adminNick','admin');
@@ -154,6 +146,5 @@ class appregistControllerTest extends TestCase
         $db->statement('DELETE FROM apps');
         $this->assertEquals('','');
     }
-    
 }
 

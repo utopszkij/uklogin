@@ -1,7 +1,7 @@
 <?php
-class ReadmeController {
+class ReadmeController extends Controller {
 	public function show($request) {
-	    docPage($request,  'readme');
+	    $this->docPage($request,  'readme');
 	}
 }
 ?>

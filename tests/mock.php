@@ -1,4 +1,55 @@
 <?php
+class View {
+    protected function loadJavaScript($jsName, $params) {
+    }
+    
+    protected function loadJavaScriptAngular($jsName, $params) {
+    }
+    
+    protected function echoHtmlHead() {
+    }
+    
+    protected function echoHtmlPopup() {
+    }
+    
+}
+
+class Controller {
+    protected function getModel($modelName) {
+        include_once './models/'.$modelName.'.php';
+        $modelClassName = $modelName.'Model';
+        return new $modelClassName ();
+    }
+    
+    protected function getView($viewName) {
+        include_once './views/'.$viewName.'.php';
+        $viewClassName = $viewName.'View';
+        return new $viewClassName ();
+    }
+    
+    protected function createCsrToken($request, $data) {
+        $request->sessionSet('csrToken','testCsrToken');
+        $data->csrToken = 'testCsrToken';
+    }
+    
+    protected function checkCsrToken($request) {
+        if ($request->input($request->sessionget('csrToken')) != 1) {
+            echo '<p>invalid csr token</p>'.JSON_encode($request);
+            exit();
+        }
+    }
+
+    protected function docPage($request, string $viewName) {
+        $request->set('sessionid','0');
+        $request->set('lng','hu');
+        $view = $this->getView($viewName);
+        $data = new stdClass();
+        $data->option = $request->input('option','default');
+        $data->adminNick = $request->sessionGet('adminNick','');
+        $view->display($data);
+    }
+} // class Controller
+
 class Request {
     protected $sessions;
     function __construct() {
@@ -25,36 +76,10 @@ class Request {
     }
 }
 
-function getModel($modelName) {
-    include_once './models/'.$modelName.'.php';
-    $modelClassName = $modelName.'Model';
-    return new $modelClassName ();
-}
-
-function getView($viewName) {
-    include_once './views/'.$viewName.'.php';
-    $viewClassName = $viewName.'View';
-    return new $viewClassName ();
-}
-
-function loadJavaScript($jsName, $params) {
-    return '';
-}
-
-function loadJavaScriptAngular($jsName, $params) {
-    return '';
-}
-
 function txt($s) {
     return $s;
 }
 
-function htmlHead() {
-    return '';
-}
-function htmlPopup() {
-    return '';
-}
 /**
  * A "tests" könyvtárból másol a terget -be
  * postname -től függetlenül mindig ugyanazt a file-t.
@@ -74,28 +99,6 @@ function getUploadedFile(string $postName, string $targetDir): string {
         $result = '';
     }
     return $result;
-}
-
-function createCsrToken($request, $data) {
-    $request->sessionSet('csrToken','testCsrToken');
-    $data->csrToken = 'testCsrToken';
-}
-
-function checkCsrToken($request) {
-    if ($request->input($request->sessionget('csrToken')) != 1) {
-        echo '<p>invalid csr token</p>'.JSON_encode($request);
-        exit();
-    }
-}
-
-function docPage($request, string $viewName) {
-    $request->set('sessionid','0');
-    $request->set('lng','hu');
-    $view = getView($viewName);
-    $data = new stdClass();
-    $data->option = $request->input('option','default');
-    $data->adminNick = $request->sessionGet('adminNick','');
-    $view->display($data);
 }
 
 ?>

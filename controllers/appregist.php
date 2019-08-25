@@ -1,26 +1,26 @@
 <?php
 include_once './controllers/login.php';
-class AppregistController {
+class AppregistController extends Controller {
 	/**
 	 * új app felvivő képernyő kirajzolása
 	 * sessionban jöhet adminNick
 	 * @param object $request
 	 */
     public function add($request) {
-	    $request->set('sessionid','0');
+        $request->set('sessionid','0');
 		$request->set('lng','hu');
 		
 		// ha a sessionban nincs adminNick akkor az admin nincs bejelentkezve,
 		// bejelentkezési popup kirajzolása
-		if ($request->sessionGet('adminNick') == '') {
+        if ($request->sessionGet('adminNick') == '') {
             $request->set('state', MYDOMAIN.'/opt/appregist/add');
             $loginController = new LoginController();
             $loginController->form($request);
             return;
 		}
 		$data = new stdClass(); 
-		createCsrToken($request, $data);
-		$view = getView('appregist');
+		$this->createCsrToken($request, $data);
+		$view = $this->getView('appregist');
 		$data->option = $request->input('option','default');
 		// hibás kitöltés utáni visszahivásnál érkezhetnek form adatok is.
 		$data->msg = $request->input('msg','');
@@ -51,11 +51,11 @@ class AppregistController {
 	 */
 	public function save($request) {
 	    // check csrtoken
-	    checkCsrToken($request);
+	    $this->checkCsrToken($request);
 	    
 	    // csrtoken ok
-	    $model = getModel('appregist');
-	    $view = getView('appregist');
+	    $model = $this->getModel('appregist');
+	    $view = $this->getView('appregist');
 	    // $data kialakitása a $request -ből
         $data = new stdClass(); 
         $data->id = $request->input('id','');
@@ -85,20 +85,6 @@ class AppregistController {
 	    }
 	}
 	
-	/**
-	 * adminisztrátor login képernyő megjelenítése
-	 * @return void
-	 */ 
-	public function adminlogin($request) {
-	    $p = new stdClass(); 
-	    createCsrToken($request, $p);
-	    $view = getView('appregist');
-	    $p->msg = $request->input('msg','');
-	    $p->state = MYDOMAIN.'/opt/appregist/adminform';
-	    $p->adminNick = $request->sessionGet('adminNick','');
-	    $view->adminLoginForm($p); 
-	}
-	
 	protected function echoAdminForm(&$data, $request, $rec, $view) {
 	    $data->option = $request->input('option','default');
     	$data->msg = $request->input('msg','');
@@ -122,8 +108,8 @@ class AppregistController {
 	 * @param object $request
 	 */
 	public function adminform($request) {
-	    $model = getModel('appregist');
-	    $view = getView('appregist');
+	    $model = $this->getModel('appregist');
+	    $view = $this->getView('appregist');
 	    $adminNick = $request->sessionGet('adminNick');
         $request->sessionSet('adminNick',$adminNick);
 	    if ($adminNick == '') {
@@ -135,7 +121,7 @@ class AppregistController {
 	    $request->set('sessionid','0');
 	    $request->set('lng','hu');
 	    $data = new stdClass();
-	    createCsrToken($request, $data);
+	    $this->createCsrToken($request, $data);
 	    
 	    // adminNick összes app rekordjának beolvasása
 	    $data->apps = $model->getAppsByAdmin($adminNick);
@@ -173,87 +159,6 @@ class AppregistController {
 	    }
 	}
 	
-	/**
-	 * admin login error kezelése
-	 * @param App $rec
-	 * @param object $request
-	 * @param object $model
-	 * @return string|string[]
-	 */
-	protected function adminLoginError($rec, $request, $model) {
-    	// hibaszámláló növelése, szükség esetén letiltás
-    	if ($rec) {
-    	    $adminFalseLoginLimit = $rec->adminFalseLoginLimit;
-    	} else {
-    	    $adminFalseLoginLimit = 10;
-    	}
-    	$errorCount = $request->sessionGet('errorCount',0);
-    	$errorCount++;
-    	$request->sessionSet('errorCount',$errorCount);
-    	if (($errorCount > $adminFalseLoginLimit) && ($rec)) {
-    	    $rec->adminLoginEnabled = 0;
-    	    $model->update($rec);
-    	}
-    	if ($errorCount > $adminFalseLoginLimit) {
-    	    $msg = 'ADMIN_LOGIN_DISABLED';
-    	} else {
-    	    $msg = ['INVALID_LOGIN',($adminFalseLoginLimit - $errorCount)];
-    	}
-    	return $msg;
-	}
-	
-	/**
-	 * Adminisztrátor login végrehajtása
-	 * @param object $request
-	 * @return void
-	 */
-	public function doadminlogin(&$request) {
-	    // check csrtoken
-	    checkCsrToken($request);
-	    
-	    $hackModel = getModel('hack');
-	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
-	        echo '<p>Disabled IP </p>';
-	        exit;
-	    }
-	    
-	    // csrtoken ok, ip enabled
-	    $error = false;
-	    $msg = '';
-	    $model = getModel('appregist');
-	    $view = getView('appregist');
-	    $rec = $model->getData($request->input('client_id',''));
-	    if ($rec) {
-	        if (($rec->pswhash == hash('sha256', $request->input('psw',''), false)) &&
-	            ($rec->admin == $request->input('nick')) &&
-	            ($rec->adminLoginEnabled == 1)
-	            ) {
-	                // hacker hibaszámláló nullázása
-	                $hackModel->ipEnable($_SERVER['REMOTE_ADDR']);
-	                
-	                // login hibaszámláló nullázása
-	                $request->sessionSet('errorCount', 0);
-	                
-	                // app adat képernyő megjelenítése
-	                $data = new stdClass(); 
-	                $data->adminNick = $request->sessionget('adminNick','');
-	                createCsrToken($request, $data);
-	                $this->echoAdminForm($data, $request, $rec, $view);
-	        } else {
-                $error = true;
-	        }
-	    } else {
-	        $error = true;
-	    }
-	    if ($error) {
-	        // hacker számláló növelése, szükség esetén letiltás
-	        $hackModel->ipAddError($_SERVER['REMOTE_ADDR']);
-	        $msg = $this->adminLoginError($rec, $request, $model);
-	        $request->set('msg',$msg);
-            $this->adminlogin($request);	        
-	    } // van error
-	} // doadminlogin
-	
 	public function logout($request) {
 	    $request->sessionSet('csrtoken',random_int(1000000,9999999));
 	    $request->sessionSet('adminNick','');
@@ -266,9 +171,9 @@ class AppregistController {
 	
 	public function appremove($request) {
 	    // check csrtoken
-	    checkCsrToken($request);
+	    $this->checkCsrToken($request);
 	    
-	    $hackModel = getModel('hack');
+	    $hackModel = $this->getModel('hack');
 	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
 	        echo '<p>Disabled IP ';
 	        exit;
@@ -279,8 +184,8 @@ class AppregistController {
 	    $hackModel->ipEnable($_SERVER['REMOTE_ADDR']);
 	    
 	    $msg = '';
-	    $model = getModel('appregist');
-	    $view = getView('appregist');
+	    $model = $this->getModel('appregist');
+	    $view = $this->getView('appregist');
 	    $rec = $model->getData($request->input('client_id',''));
 	    if ($rec) {
 	        $msg = $model->remove($rec->client_id);

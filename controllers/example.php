@@ -1,5 +1,5 @@
 <?php
-class ExampleController {
+class ExampleController extends Controller {
     /**
      * example task
      * @param Request $request
@@ -10,8 +10,8 @@ class ExampleController {
         $param1 = $request->input('param1','param1');
 	    
         // get Model, Viewer, 
-	    $model = getModel('example');
-	    $view = getView('example');
+        $model = $this->getModel('example');
+        $view = $this->getView('example');
 	    
 	    // task process 
 	    $data = $model->getData($param1);

@@ -1,0 +1,136 @@
+
+%userregistcontroller::recallloginform<
+0/var/www/html/uklogin/controllers/userregist.phpÑ Ñ(#"1*j
+2
+userregist.php"S
+<
+0/var/www/html/uklogin/controllers/userregist.phpÜ Ü(
+implicit return*Ö
+1<
+0/var/www/html/uklogin/controllers/userregist.phpÒ Ò(SQ
+<
+0/var/www/html/uklogin/controllers/userregist.phpÒ Ò(
+$data"stdclassh
+f
+<
+0/var/www/html/uklogin/controllers/userregist.phpÒ Ò(
+%1"stdclass::__construct*	
+
+$dataŠ‡
+<
+0/var/www/html/uklogin/controllers/userregist.phpÓ Ó(+
+%2*
+userregistcontroller*
+
+
+$request*	
+
+$data2createcsrtoken`
+^
+<
+0/var/www/html/uklogin/controllers/userregist.phpÔ Ô( 
+%3"__id**
+
+$app"
+named
+b
+<
+0/var/www/html/uklogin/controllers/userregist.phpÔ Ô( 
+
+$data"	
+appName"__id*
+
+%3_
+]
+<
+0/var/www/html/uklogin/controllers/userregist.phpÕ Õ( 
+%4"__id**
+
+$app"
+csse
+c
+<
+0/var/www/html/uklogin/controllers/userregist.phpÕ Õ( 
+
+$data"
+
+extraCss"__id*
+
+%4ki
+<
+0/var/www/html/uklogin/controllers/userregist.phpÖ Ö()
+%5*
+
+
+$request*
+''*
+''2inputa
+_
+<
+0/var/www/html/uklogin/controllers/userregist.phpÖ Ö()
+
+$data"
+nick"__id*
+
+%5a
+_
+<
+0/var/www/html/uklogin/controllers/userregist.php× ×(
+
+$data"
+psw1"__id*
+''e
+c
+<
+0/var/www/html/uklogin/controllers/userregist.phpØ Ø('
+%6"__id**
+
+$app"
+	client_idf
+d
+<
+0/var/www/html/uklogin/controllers/userregist.phpØ Ø('
+
+$data"
+	client_id"__id*
+
+%6d
+b
+<
+0/var/www/html/uklogin/controllers/userregist.phpÙ Ù(
+
+$data"
+msgs"__id*	
+
+$msgsyw
+<
+0/var/www/html/uklogin/controllers/userregist.phpÚ Ú(<
+%7*
+
+
+$request*
+'adminNick'*
+''2
+sessiongetf
+d
+<
+0/var/www/html/uklogin/controllers/userregist.phpÚ Ú(<
+
+$data"
+	adminNick"__id*
+
+%7ge
+<
+0/var/www/html/uklogin/controllers/userregist.phpÛ Û(
+%8*	
+
+$view*	
+
+$data2	loginform*
+2:
+
+$request:
+$view:
+$app:
+$msgsB
+userregistcontroller
