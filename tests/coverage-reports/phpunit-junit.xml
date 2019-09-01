@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="tests" tests="90" assertions="90" errors="0" failures="0" skipped="0" time="2.672532">
-    <testsuite name="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.006543">
-      <testcase name="test_start" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="28" assertions="1" time="0.005813"/>
-      <testcase name="test_show" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="35" assertions="1" time="0.000730">
+  <testsuite name="tests" tests="90" assertions="90" errors="0" failures="0" skipped="0" time="5.244699">
+    <testsuite name="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.048006">
+      <testcase name="test_start" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="28" assertions="1" time="0.046831"/>
+      <testcase name="test_show" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="35" assertions="1" time="0.001175">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -158,9 +158,9 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001548">
-      <testcase name="test_start" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="28" assertions="1" time="0.000751"/>
-      <testcase name="test_show" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="35" assertions="1" time="0.000797">
+    <testsuite name="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001414">
+      <testcase name="test_start" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="28" assertions="1" time="0.000733"/>
+      <testcase name="test_show" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="35" assertions="1" time="0.000681">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -270,46 +270,46 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="12" assertions="12" errors="0" failures="0" skipped="0" time="0.353990">
-      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="28" assertions="1" time="0.000721"/>
-      <testcase name="test_add_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="35" assertions="1" time="0.001522"/>
-      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="42" assertions="1" time="0.004485"/>
-      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="59" assertions="1" time="0.245101"/>
-      <testcase name="test_adminform_found" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="76" assertions="1" time="0.004380"/>
-      <testcase name="test_adminform_noneInApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="83" assertions="1" time="0.003257"/>
-      <testcase name="test_adminform_manyApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="91" assertions="1" time="0.002143"/>
-      <testcase name="test_adminform_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="104" assertions="1" time="0.001646"/>
-      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="111" assertions="1" time="0.037661"/>
-      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="126" assertions="1" time="0.009778"/>
-      <testcase name="test_adminform_notfound" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="136" assertions="1" time="0.002480"/>
-      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="143" assertions="1" time="0.040816"/>
+    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="12" assertions="12" errors="0" failures="0" skipped="0" time="0.786741">
+      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="28" assertions="1" time="0.000677"/>
+      <testcase name="test_add_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="35" assertions="1" time="0.001663"/>
+      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="42" assertions="1" time="0.211393"/>
+      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="59" assertions="1" time="0.447164"/>
+      <testcase name="test_adminform_found" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="76" assertions="1" time="0.007307"/>
+      <testcase name="test_adminform_noneInApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="83" assertions="1" time="0.001805"/>
+      <testcase name="test_adminform_manyApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="91" assertions="1" time="0.002089"/>
+      <testcase name="test_adminform_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="104" assertions="1" time="0.001581"/>
+      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="111" assertions="1" time="0.068951"/>
+      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="126" assertions="1" time="0.007784"/>
+      <testcase name="test_adminform_notfound" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="136" assertions="1" time="0.002077"/>
+      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="143" assertions="1" time="0.034250"/>
     </testsuite>
-    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="21" assertions="21" errors="0" failures="0" skipped="0" time="0.647031">
-      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.002378"/>
-      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.003496"/>
-      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="49" assertions="1" time="0.001157"/>
-      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="63" assertions="1" time="0.001021"/>
-      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="77" assertions="1" time="0.001012"/>
-      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="91" assertions="1" time="0.000995"/>
-      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="105" assertions="1" time="0.001041"/>
-      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="119" assertions="1" time="0.000986"/>
-      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="135" assertions="1" time="0.001034"/>
-      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="149" assertions="1" time="0.000954"/>
-      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="163" assertions="1" time="0.067851"/>
-      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="177" assertions="1" time="0.089506"/>
-      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="192" assertions="1" time="0.075414"/>
-      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="207" assertions="1" time="0.089843"/>
-      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="222" assertions="1" time="0.155515"/>
-      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="240" assertions="1" time="0.001242"/>
-      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="256" assertions="1" time="0.113490"/>
-      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="273" assertions="1" time="0.000750"/>
-      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="289" assertions="1" time="0.001012"/>
-      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="297" assertions="1" time="0.037501"/>
-      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="305" assertions="1" time="0.000833"/>
+    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="21" assertions="21" errors="0" failures="0" skipped="0" time="1.041135">
+      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.001401"/>
+      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.014071"/>
+      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="49" assertions="1" time="0.001449"/>
+      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="63" assertions="1" time="0.001688"/>
+      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="77" assertions="1" time="0.001543"/>
+      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="91" assertions="1" time="0.001536"/>
+      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="105" assertions="1" time="0.001116"/>
+      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="119" assertions="1" time="0.000959"/>
+      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="135" assertions="1" time="0.000981"/>
+      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="149" assertions="1" time="0.001021"/>
+      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="163" assertions="1" time="0.105802"/>
+      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="177" assertions="1" time="0.077072"/>
+      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="192" assertions="1" time="0.074607"/>
+      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="207" assertions="1" time="0.090101"/>
+      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="222" assertions="1" time="0.155467"/>
+      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="240" assertions="1" time="0.002804"/>
+      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="256" assertions="1" time="0.151796"/>
+      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="274" assertions="1" time="0.000750"/>
+      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="290" assertions="1" time="0.000997"/>
+      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="298" assertions="1" time="0.353255"/>
+      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="306" assertions="1" time="0.002719"/>
     </testsuite>
-    <testsuite name="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.002143">
-      <testcase name="test_start" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="28" assertions="1" time="0.000764"/>
-      <testcase name="test_default" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="35" assertions="1" time="0.001379">
+    <testsuite name="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.093202">
+      <testcase name="test_start" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="28" assertions="1" time="0.001756"/>
+      <testcase name="test_default" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="35" assertions="1" time="0.091446">
         <system-out>	
         &lt;body ng-app="app"&gt;
          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -474,9 +474,9 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001540">
-      <testcase name="test_start" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="28" assertions="1" time="0.000742"/>
-      <testcase name="test_show" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="35" assertions="1" time="0.000798">
+    <testsuite name="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001419">
+      <testcase name="test_start" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="28" assertions="1" time="0.000731"/>
+      <testcase name="test_show" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="35" assertions="1" time="0.000688">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -574,34 +574,34 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.004942">
-      <testcase name="test_start" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="28" assertions="1" time="0.000854"/>
-      <testcase name="test_form" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="35" assertions="1" time="0.000917"/>
-      <testcase name="test_send_error" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="40" assertions="1" time="0.001353"/>
-      <testcase name="test_send_ok" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="47" assertions="1" time="0.001818"/>
+    <testsuite name="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.004886">
+      <testcase name="test_start" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="28" assertions="1" time="0.000698"/>
+      <testcase name="test_form" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="35" assertions="1" time="0.001297"/>
+      <testcase name="test_send_error" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="40" assertions="1" time="0.001522"/>
+      <testcase name="test_send_ok" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="49" assertions="1" time="0.001369"/>
     </testsuite>
-    <testsuite name="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.002604">
-      <testcase name="test_start" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="28" assertions="1" time="0.000788"/>
-      <testcase name="test_form" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="35" assertions="1" time="0.000697"/>
-      <testcase name="test_code" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="42" assertions="1" time="0.000591"/>
-      <testcase name="test_loogout" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="48" assertions="1" time="0.000528"/>
+    <testsuite name="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.158266">
+      <testcase name="test_start" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="28" assertions="1" time="0.152747"/>
+      <testcase name="test_form" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="46" assertions="1" time="0.002132"/>
+      <testcase name="test_code" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="53" assertions="1" time="0.001737"/>
+      <testcase name="test_loogout" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="59" assertions="1" time="0.001650"/>
     </testsuite>
-    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="0.585296">
-      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.083694"/>
-      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="47" assertions="1" time="0.001690"/>
-      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="53" assertions="1" time="0.001698"/>
-      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="59" assertions="1" time="0.037307"/>
-      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="68" assertions="1" time="0.064627"/>
-      <testcase name="test_dologin_invalidPsw2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="78" assertions="1" time="0.066855"/>
-      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="88" assertions="1" time="0.071828"/>
-      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="98" assertions="1" time="0.131265"/>
-      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="126" assertions="1" time="0.046851"/>
-      <testcase name="test_getCallbackUrl" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="132" assertions="1" time="0.001580"/>
-      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="143" assertions="1" time="0.077901"/>
+    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="0.599133">
+      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.067755"/>
+      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="47" assertions="1" time="0.003955"/>
+      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="53" assertions="1" time="0.002098"/>
+      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="59" assertions="1" time="0.048255"/>
+      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="68" assertions="1" time="0.072936"/>
+      <testcase name="test_dologin_invalidPsw2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="78" assertions="1" time="0.071754"/>
+      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="88" assertions="1" time="0.071723"/>
+      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="98" assertions="1" time="0.131955"/>
+      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="126" assertions="1" time="0.062908"/>
+      <testcase name="test_getCallbackUrl" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="132" assertions="1" time="0.000618"/>
+      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="143" assertions="1" time="0.065176"/>
     </testsuite>
-    <testsuite name="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.003380">
-      <testcase name="test_start" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="28" assertions="1" time="0.001637"/>
-      <testcase name="test_show" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="35" assertions="1" time="0.001743">
+    <testsuite name="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.004771">
+      <testcase name="test_start" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="28" assertions="1" time="0.002325"/>
+      <testcase name="test_show" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="35" assertions="1" time="0.002446">
         <system-out>	
         &lt;body ng-app="app"&gt;
          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -920,34 +920,34 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" tests="28" assertions="28" errors="0" failures="0" skipped="0" time="1.063514">
-      <testcase name="test_start" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="30" assertions="1" time="0.001170"/>
-      <testcase name="test_registform_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="43" assertions="1" time="0.063305"/>
-      <testcase name="test_registform_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="49" assertions="1" time="0.033453"/>
-      <testcase name="test_registform2_PDFNOTUPLOADED" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="66" assertions="1" time="0.002617"/>
-      <testcase name="test_registform2_OK" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="75" assertions="1" time="0.262829"/>
-      <testcase name="test_doregist_nickempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="83" assertions="1" time="0.004549"/>
-      <testcase name="test_doregist_pswempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="97" assertions="1" time="0.003663"/>
-      <testcase name="test_doregist_pswinvalid" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="111" assertions="1" time="0.003327"/>
-      <testcase name="test_doregist_2pswnotequeals" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="125" assertions="1" time="0.003171"/>
-      <testcase name="test_doregist_nickexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="139" assertions="1" time="0.037090"/>
-      <testcase name="test_doregist_signexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="162" assertions="1" time="0.033888"/>
-      <testcase name="test_doregist_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="184" assertions="1" time="0.036554"/>
-      <testcase name="test_forgetpsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="198" assertions="1" time="0.001882"/>
-      <testcase name="test_forgetpsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="205" assertions="1" time="0.001097"/>
-      <testcase name="test_forgetpsw_app_notfoundy" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="212" assertions="1" time="0.001425"/>
-      <testcase name="test_changepsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="219" assertions="1" time="0.033644"/>
-      <testcase name="test_changepsw_psw_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="228" assertions="1" time="0.033836"/>
-      <testcase name="test_changepsw_psw_error" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="238" assertions="1" time="0.070616"/>
-      <testcase name="test_changepsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="247" assertions="1" time="0.034288"/>
-      <testcase name="test_mydata_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="256" assertions="1" time="0.031974"/>
-      <testcase name="test_useractival_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="265" assertions="1" time="0.031427"/>
-      <testcase name="test_useractival_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="274" assertions="1" time="0.065005"/>
-      <testcase name="test_mydata_ok2" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="284" assertions="1" time="0.034085"/>
-      <testcase name="test_doRegist_forgetPsw" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="293" assertions="1" time="0.064015"/>
-      <testcase name="test_deleteaccount_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="309" assertions="1" time="0.066370"/>
-      <testcase name="test_deleteaccount_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="319" assertions="1" time="0.004085"/>
-      <testcase name="test_pdf" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="329" assertions="1" time="0.005762">
+    <testsuite name="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" tests="28" assertions="28" errors="0" failures="0" skipped="0" time="2.505726">
+      <testcase name="test_start" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="30" assertions="1" time="0.000710"/>
+      <testcase name="test_registform_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="43" assertions="1" time="0.066611"/>
+      <testcase name="test_registform_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="49" assertions="1" time="0.040446"/>
+      <testcase name="test_registform2_PDFNOTUPLOADED" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="66" assertions="1" time="0.025171"/>
+      <testcase name="test_registform2_OK" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="75" assertions="1" time="1.060863"/>
+      <testcase name="test_doregist_nickempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="83" assertions="1" time="0.003195"/>
+      <testcase name="test_doregist_pswempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="97" assertions="1" time="0.003582"/>
+      <testcase name="test_doregist_pswinvalid" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="111" assertions="1" time="0.003132"/>
+      <testcase name="test_doregist_2pswnotequeals" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="125" assertions="1" time="0.002964"/>
+      <testcase name="test_doregist_nickexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="139" assertions="1" time="0.072570"/>
+      <testcase name="test_doregist_signexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="162" assertions="1" time="0.069608"/>
+      <testcase name="test_doregist_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="184" assertions="1" time="0.066414"/>
+      <testcase name="test_forgetpsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="198" assertions="1" time="0.001681"/>
+      <testcase name="test_forgetpsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="205" assertions="1" time="0.001104"/>
+      <testcase name="test_forgetpsw_app_notfoundy" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="212" assertions="1" time="0.001506"/>
+      <testcase name="test_changepsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="219" assertions="1" time="0.067909"/>
+      <testcase name="test_changepsw_psw_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="228" assertions="1" time="0.074105"/>
+      <testcase name="test_changepsw_psw_error" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="238" assertions="1" time="0.149896"/>
+      <testcase name="test_changepsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="247" assertions="1" time="0.078086"/>
+      <testcase name="test_mydata_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="256" assertions="1" time="0.081240"/>
+      <testcase name="test_useractival_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="265" assertions="1" time="0.067750"/>
+      <testcase name="test_useractival_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="274" assertions="1" time="0.156509"/>
+      <testcase name="test_mydata_ok2" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="284" assertions="1" time="0.042419"/>
+      <testcase name="test_doRegist_forgetPsw" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="293" assertions="1" time="0.106499"/>
+      <testcase name="test_deleteaccount_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="309" assertions="1" time="0.107218"/>
+      <testcase name="test_deleteaccount_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="319" assertions="1" time="0.002480"/>
+      <testcase name="test_pdf" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="329" assertions="1" time="0.063120">
         <system-out>%PDF-1.3
 3 0 obj
 &lt;&lt;/Type /Page
@@ -961,7 +961,7 @@ stream
 xú3R‚2–35W(Ár
 Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
       </testcase>
-      <testcase name="test_end" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="335" assertions="1" time="0.098388"/>
+      <testcase name="test_end" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="335" assertions="1" time="0.088938"/>
     </testsuite>
   </testsuite>
 </testsuites>

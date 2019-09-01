@@ -12,6 +12,11 @@ class HackModel {
             ');
     }
     
+    /**
+     * ellenörzi, hogy az adott IP engedélyezett-e?
+     * @param string $ip
+     * @return bool
+     */
     public function checkEnabled(string $ip): bool {
         $table = new Table('hacks');
         $table->where(['ip','=',$ip]);
@@ -25,6 +30,10 @@ class HackModel {
         return $result;
     }
     
+    /**
+     * az adott IP hibaszámláló növelése
+     * @param string $ip
+     */
     public function ipAddError(string $ip) {
         $table = new Table('hacks');
         $table->where(['ip','=',$ip]);
@@ -40,6 +49,10 @@ class HackModel {
         }
     }
     
+    /**
+     * az adott IP engedélyezése
+     * @param string $ip
+     */
     public function ipEnable(string $ip) {
         $table = new Table('hacks');
         $table->where(['ip','=',$ip]);

@@ -4,11 +4,30 @@
  * álltalános célú segéd rutinok
  */
 
-class Model {
+interface ModelObject {
     
 }
 
-class View {
+interface ViewObject {
+    public function echoHtmlPopup();
+} 
+
+interface ControllerObject {
+}
+
+interface  RequestObject {
+    public function input(string $name, $default = '');
+    public function set(string $name, $value);
+    public function sessionGet(string $name, $default='');
+    public function sessionSet(string $name, $value);
+    public function session_count(): int;
+}
+
+class Model implements ModelObject {
+    
+}
+
+class View implements ViewObject {
     /**
      * echo javascript code, inject params
      * @param string $jsName javascript file full path
@@ -97,7 +116,8 @@ class View {
             $("#scope").show();
             $("#working").hide();
         }); // controller function
-        </script>
+        </script>    
+        
         <?php
     }
     
@@ -127,7 +147,7 @@ class View {
      * echo popup html code (use this HTML global.alert, global.confirm functions in htmlHead)
      * @return void
      */
-    function echoHtmlPopup() {
+    public function echoHtmlPopup() {
         echo '
         <div id="popup" style="display:none">
             <p class="alert alert-danger"></p>
@@ -149,7 +169,7 @@ class View {
     
 } // class View
 
-class Controller {
+class Controller  implements ControllerObject {
     
     /**
      * create new model object from "./models/modelname.php"
@@ -214,7 +234,7 @@ class Controller {
 } // class Controller
 
 
-class Request {
+class Request implements RequestObject {
 	public $params = array();
 	protected $sessions = array();
 	

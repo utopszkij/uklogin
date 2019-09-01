@@ -36,5 +36,6 @@ class impresszumControllerTest extends TestCase
         $msg = $this->controller->show($this->request);
         $this->assertEquals(true,true); // csak szintaxis ellenörzés
     }
+    
 }
 

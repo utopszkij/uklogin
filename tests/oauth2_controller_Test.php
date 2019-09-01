@@ -50,13 +50,13 @@ class oauth2ControllerTest extends TestCase
         $this->expectOutputRegex('/ERROR_NOTFOUND/');
     }
     
-    public function test_loginform_ok() {
+     public function test_loginform_ok() {
         $this->request->set('client_id','123');
         $this->controller->loginform($this->request);
         $this->expectOutputRegex('/USER/');
     }
     
-    public function test_dologin_invalidNick() {
+     public function test_dologin_invalidNick() {
         $this->request->sessionSet('csrToken','abc');
         $this->request->sessionSet('client_id','123');
         $this->request->set('abc',1);
@@ -131,9 +131,9 @@ class oauth2ControllerTest extends TestCase
     
     public function test_getCallbackUrl() {
         $this->request->sessionSet('client_id','123');
-        $app = new stdClass();
+        $app = new AppRecord();
         $app->callback='https://test.hu';
-        $user = new stdClass();
+        $user = new UserRecord();
         $user->code = '12345';
         $this->request->sessionSet('extraParams',["p1" => "v1"]);
         $res = $this->controller->getCallbackUrl($app, $user, $this->request);

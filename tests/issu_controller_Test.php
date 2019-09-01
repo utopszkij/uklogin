@@ -24,7 +24,7 @@ class IssuControllerTest extends TestCase
         $REQUEST = $this->request;
         
     }
-    
+
     public function test_start() {
         // create and init test database
         $db = new DB();
@@ -38,6 +38,8 @@ class IssuControllerTest extends TestCase
     }
     
     public function test_send_error() {
+        $this->request->sessionset('csrToken','123');
+        $this->request->set('123','1');
         $this->request->set('body','');
         $this->request->set('title','');
         $msg = $this->controller->send($this->request);
@@ -45,10 +47,13 @@ class IssuControllerTest extends TestCase
     }
     
     public function test_send_ok() {
+        $this->request->sessionset('csrToken','123');
+        $this->request->set('123','1');
         $this->request->set('body','issu_title');
         $this->request->set('title','issu_body');
         $msg = $this->controller->send($this->request);
         $this->expectOutputRegex('/ISSU_SAVED/');
     }
+    
 }
 

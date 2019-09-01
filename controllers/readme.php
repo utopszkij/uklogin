@@ -1,6 +1,6 @@
 <?php
 class ReadmeController extends Controller {
-	public function show($request) {
+    public function show(RequestObject $request) {
 	    $this->docPage($request,  'readme');
 	}
 }

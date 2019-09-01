@@ -5,7 +5,7 @@ class ExampleController extends Controller {
      * @param Request $request
      *  - string param1 
      */
-    public function example($request) {
+    public function example(RequestObject $request) {
 	    // get params from $request
         $param1 = $request->input('param1','param1');
 	    

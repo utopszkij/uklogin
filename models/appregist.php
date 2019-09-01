@@ -1,6 +1,17 @@
 <?php
+class AppRecord {
+    public $id;
+    public $name;
+    public $client_id;
+    public $client_secret;
+    public $domain;
+    public $callback;
+    public $css;
+    public $falseLoginLimit;
+    public $admin;
+}
 
-function strToHex($string){
+function strToHex(string $string): string {
     $hex = '';
     for ($i=0; $i<strlen($string); $i++){
         $ord = ord($string[$i]);
@@ -10,7 +21,7 @@ function strToHex($string){
     return strToUpper($hex);
 }
 
-class AppregistModel {
+class AppregistModel extends Model {
     function __construct() {
         $db = new DB();
         // ha még nincs tábl létrehozzuk
@@ -50,20 +61,37 @@ class AppregistModel {
     }
     
     /**
+     * konvert object into Apprecord
+     * @param unknown $obj
+     * @return AppRecord
+     */
+    protected function convert($obj): AppRecord {
+        $result = new AppRecord();
+        foreach ($result as $fn => $fv) {
+            if (isset($obj->$fn)) {
+                $result->$fn = $obj->$fn;
+            }
+        }
+        return $result;
+    }
+    
+    /**
      * get data by client_id
      * @param string $client_id
-     * @return object|false
+     * @return AppRecord   - hiba esetén $result->error = true
      */
-    public function getData(string $client_id) {
+    public function getData(string $client_id): AppRecord {
         $db = new DB();
         $table = $db->table('apps');
         $table->where(['client_id','=',$client_id]);
         $res = $table->first();
         if ($res) {
-            return $res;
+            $result = $this->convert($res);
         } else {
-            return false;
+            $result = new AppRecord();
+            $result->error = true;
         }
+        return $result;
     }
     
     /**
@@ -91,7 +119,7 @@ class AppregistModel {
      * @param object $data "apps" rekord
      * @return array of errorMsgstrings or []
      */
-    public function check($data): array {
+    public function check(AppRecord $data): array {
         $msg = [];
         $db = new DB();
         $table = $db->table('apps');
@@ -148,7 +176,7 @@ class AppregistModel {
      * @param object data
      * @return void
      */
-     protected function checkNoEmpty(array &$msg, $data)   {
+     protected function checkNoEmpty(array &$msg, AppRecord $data)   {
         if ($data->domain == '') {
             $msg[] = 'ERROR_DOMAIN_EMPTY';
         }
@@ -176,7 +204,7 @@ class AppregistModel {
       * adjust $data before save it
       * @param object $data
       */
-     protected function adjustData(&$data) {
+     protected function adjustData(AppRecord &$data) {
          unset($data->dataProcessAccept);
          unset($data->cookieProcessAccept);
          if (!is_numeric($data->falseLoginLimit)) {
@@ -191,7 +219,7 @@ class AppregistModel {
       * @param array $msg
       * @return void
       */
-     protected function updateAfterInsert(&$data, &$table, array &$msg) {
+     protected function updateAfterInsert(AppRecord &$data, &$table, array &$msg) {
          $id = $table->getInsertedId();
          $data->id = $id;
          $data->client_id = ''.random_int(1000000, 9999999).$id;
@@ -215,7 +243,7 @@ class AppregistModel {
      *    - client_secret,pswhash,adminLoginEnabled 
      * @return object  {"client_id", "application_secret"} or {"error":[...]}
      */
-    public function save($data) {
+    public function save(AppRecord $data) {
         $db = new DB();
         $table = $db->table('apps');
         $msg = $this->check($data);
@@ -279,7 +307,7 @@ class AppregistModel {
      * @param object $rec
      * @return void
      */
-    public function update($rec) {
+    public function update(AppRecord $rec) {
         $db = new DB();
         $table = $db->table('apps');
         $table->where(['client_id','=',$rec->client_id]);
@@ -295,7 +323,8 @@ class AppregistModel {
         $db = new DB();
         $table = $db->table('apps');
         $table->where(['admin','=',$admin]);
-        return $table->get();
+        $result = $table->get();
+        return $result;
     }
     
 } // class

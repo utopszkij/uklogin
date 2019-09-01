@@ -2,7 +2,10 @@
 
 class Oauth2Controller extends Controller {
 	
-	protected function pswError(&$app, &$model, &$view, &$request, &$user) {
+    protected function pswError(AppRecord &$app, 
+        ModelObject &$model, 
+        ViewObject &$view, 
+        RequestObject &$request, &$user) {
 	    $user->errorcount++;
 	    if ($user->errorcount >= $app->falseLoginLimit) {
 	        $user->enabled = 0;
@@ -24,13 +27,13 @@ class Oauth2Controller extends Controller {
 	 * @param Request $request - client_id és más paraméterek is jöhetnek, ezeket sessionba tárolja
 	 * @return void
 	 */
-	public function loginform($request) {
+	public function loginform(RequestObject $request) {
 	    $request->sessionSet('nick','');
 	    $appModel = $this->getModel('appregist');
 	    $view = $this->getView('oauth2');
 	    $client_id = $request->input('client_id','');
 	    $app = $appModel->getData($client_id);
-	    if ($app) {
+	    if (!isset($app->error)) {
 	        $data = new stdClass();
 	        $data->adminNick = $request->sessionget('adminNick','');
 	        $this->createCsrToken($request, $data);
@@ -66,12 +69,13 @@ class Oauth2Controller extends Controller {
 	/**
 	 * Login képernyő ujboli kirajzolás hiba esetén
 	 * @param Request $request
-	 * @param View $view
-	 * @param App $app
+	 * @param ViewObject $view
+	 * @param AppRecord $app
 	 * @param array $msgs
 	 * @return void
 	 */
-	protected function recallLoginForm(&$request, &$view, &$app, $msgs) {
+	protected function recallLoginForm(RequestObject &$request, 
+	    ViewObject &$view, &$app, array $msgs) {
 	    $data = new stdClass();
 	    $this->createCsrToken($request, $data);
 	    $data->appName = $app->name;
@@ -86,12 +90,14 @@ class Oauth2Controller extends Controller {
 
 	/**
 	 * callback url kialakitása
-	 * @param App $app
-	 * @param User $user
+	 * @param AppRecord $app
+	 * @param UserRecord $user
 	 * @param Request $request
 	 * @return string
 	 */
-	public function getCallbackUrl($app, $user, $request): string {
+	public function getCallbackUrl(AppRecord $app, 
+	    UserRecord $user, 
+	    RequestObject $request): string {
     	$url = $app->callback;
     	if (strpos($url, '?') > 0) {
     	    $url .= '&';
@@ -123,24 +129,25 @@ class Oauth2Controller extends Controller {
 	 * @param Request $request csrToken, nick, psw1
 	 * @return string -- for unittest: return code
 	 */
-	public function dologin($request): string {
+	public function dologin(RequestObject $request): string {
 
 	    $this->checkCsrToken($request);
 	    
 	    $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('oauth2'); // szükség van rá, ez kreál táblát.
+	    $model = $this->getModel('users'); // szükség van rá, ez kreál táblát.
 	    $view = $this->getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
 	    $user = $model->getUserByNick($client_id, $nick);
 	    $app = $appModel->getData($client_id);
-	    if ($app == '') {
+	    if (isset($app->error)) {
 	        // nem jó client_id van a sessionban!
-	        echo '<p class="alert alert-danger">Invalid client_id</p>'; exit();
+	        echo '<p class="alert alert-danger">Invalid client_id</p>'; 
+	        exit();
 	    }
 
-	    if ($user) {
+	    if (!isset($user->error)) {
 	        if ($user->enabled == 0) {
 	            // letiltott user, login képernyő visszahívása
 	            $request->sessionSet('client_id', $client_id);
@@ -193,29 +200,29 @@ class Oauth2Controller extends Controller {
 	 * @param Request $request code, client_id, client_secret
 	 * @return string access_token  -- only for unittest
 	 */
-	public function access_token($request) {
+	public function access_token(RequestObject $request) {
 	    $code = $request->input('code');
 	    $client_id = $request->input('client_id');
 	    $client_secret = $request->input('client_secret');
 	    $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('oauth2');
+	    $model = $this->getModel('users');
 	    $user = $model->getUserByCode($code);
 
 	    if (!headers_sent()) {
 	        header('Content-Type: application/json');
 	    }
-	    if ($user == false) {
+	    if (isset($user->error)) {
 	        echo '{"error":"user not found code='.$code.'"}'; exit();
 	    }
 
 	    $app = $appModel->getData($client_id);
 
-	    if ($app == false) {
+	    if (isset($app->error)) {
 	        echo '{"error":"app not found client_id='.$client_id.'"}'; exit();
 	    }
 
 	    $access_token = '';
-	    if (($app) && ($user)) {
+	    if ((!isset($app->error)) && (!isset($user->error))) {
 	        if (($app->client_secret == $client_secret) &&
 	            ($user->enabled == 1) &&
 	            ($user->client_id == $app->client_id)
@@ -237,16 +244,16 @@ class Oauth2Controller extends Controller {
 	 * @param Request $request   access_token
 	 * @return void
 	 */
-	public function userinfo($request) {
+	public function userinfo(RequestObject $request) {
         $access_token = $request->input('access_token');
-        $model = $this->getModel('oauth2');
+        $model = $this->getModel('users');
         $view = $this->getView('oauth2');
         $rec = $model->getUserByAccess_token($access_token);
 
         if (!headers_sent()) {
             header('Content-Type: application/json');
         }
-        if ($rec) {
+        if (!isset($rec->error)) {
             echo '{"nick":"'.$rec->nick.'"}';
         } else {
             $view->errorMsg(['NOT_FOUND']);

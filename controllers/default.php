@@ -1,6 +1,6 @@
 <?php
 class DefaultController extends Controller {
-	public function default($request) {
+	public function default(RequestObject $request) {
       // echo frontpage
 	    $request->set('sessionid','0');
 		$request->set('lng','hu');

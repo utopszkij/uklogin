@@ -1,12 +1,20 @@
 <?php
 require_once('./vendor/github-client/client/GitHubClient.php');
+
+class IssuRecord {
+    public $title;
+    public $body;
+    public $sender;
+    public $email;
+}
+
 class IssuModel {
     /**
      * issu adatok ellenörzése tárolás előtt
-     * @param object $data {title, body, sender, email}
+     * @param IssuRecord $data {title, body, sender, email}
      * @return array hibaüzenetek vagy []
      */
-    public function check($data): array {
+    public function check(IssuRecord $data): array {
         $msgs = [];
         if ($data->title == '') {
             $msgs[] = 'ERROR_ISSU_TITLE_EMPTY';
@@ -19,10 +27,10 @@ class IssuModel {
     
     /**
      * issu adatok küldése a github -ba
-     * @param object $data {title, body, sender, email}
+     * @param IssuRecord $data {title, body, sender, email}
      * @return array hibaüzenetek vagy []
      */
-    public function send($data): array {
+    public function send(IssuRecord $data): array {
         $data->body .= "\n\n".$data->sender."\n".$data->email;
         $client = new GitHubClient();
         if (GITHUB_USER != '') {

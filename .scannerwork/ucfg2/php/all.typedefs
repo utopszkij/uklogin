@@ -3499,8 +3499,9 @@ echonavbarcommonview::echonavbar$
 echofootercommonview::echofooterF
 impresszumcontroller
 controller"
-showimpresszumcontroller::showÎ
-appregistmodel0
+showimpresszumcontroller::show^
+	apprecord"css"domain"name"callback"admin"id"client_secret"	client_id"falseloginlimitù
+appregistmodelmodel0
 getappsbyadminappregistmodel::getappsbyadmin(
 
 url_existsappregistmodel::url_exists,
@@ -3510,6 +3511,7 @@ url_existsappregistmodel::url_exists,
 
 adjustdataappregistmodel::adjustdata
 checkappregistmodel::check"
+convertappregistmodel::convert"
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
@@ -3558,39 +3560,33 @@ successmsgappregistview::successmsg#
 getdatabrowsermodel::getdataB
 adatkezelesview
 commonview#
-displayadatkezelesview::display:
+displayadatkezelesview::displayr
+
+userrecord"nick"access_token"code"	blocktime"pswhash"codetime"id"
+errorcount"signhash"	client_id"enabledÆ
+
+usersmodel
+adduserusersmodel::adduser2
+getuserbysignhashusersmodel::getuserbysignhash 
+strtohexusersmodel::strtohex*
+getuserbycodeusersmodel::getuserbycode*
+getuserbynickusersmodel::getuserbynick$
+
+deleteuserusersmodel::deleteuser
+checkusersmodel::check
+convertusersmodel::convert&
+__constructusersmodel::__construct$
+
+updateuserusersmodel::updateuser:
+getuserbyaccess_token!usersmodel::getuserbyaccess_token:
 	loginview
 commonview!
-	loginformloginview::loginform±
-oauth2model
-adduseroauth2model::adduser3
-getuserbysignhashoauth2model::getuserbysignhash!
-strtohexoauth2model::strtohex+
-getuserbycodeoauth2model::getuserbycode+
-getuserbynickoauth2model::getuserbynick%
+	loginformloginview::loginform(
 
-deleteuseroauth2model::deleteuser
-checkoauth2model::check'
-__constructoauth2model::__construct%
-
-updateuseroauth2model::updateuser;
-getuserbyaccess_token"oauth2model::getuserbyaccess_token?
+issurecord"sender"title"body"email?
 	issumodel
 checkissumodel::check
-sendissumodel::sendÝ
-userregistmodel#
-adduseruserregistmodel::adduser7
-getuserbysignhash"userregistmodel::getuserbysignhash%
-strtohexuserregistmodel::strtohex/
-getuserbycodeuserregistmodel::getuserbycode/
-getuserbynickuserregistmodel::getuserbynick)
-
-deleteuseruserregistmodel::deleteuser
-checkuserregistmodel::check+
-__constructuserregistmodel::__construct)
-
-updateuseruserregistmodel::updateuser?
-getuserbyaccess_token&userregistmodel::getuserbyaccess_token@
+sendissumodel::send@
 impresszumview
 commonview"
 displayimpresszumview::displayÄ

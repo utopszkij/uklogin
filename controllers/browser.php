@@ -5,7 +5,7 @@ class BrowserController extends Controller {
      * @param Request $request
      *  - string param1 
      */
-    public function browser($request) {
+    public function browser(RequestObject $request) {
 	    // get params from $request
         $param1 = $request->input('param1','param1');
 	    

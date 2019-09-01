@@ -1,6 +1,6 @@
 <?php
 class ImpresszumController extends Controller {
-	public function show($request) {
+	public function show(RequestObject $request) {
 	    $this->docPage($request,  'impresszum');
 	}
 }

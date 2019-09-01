@@ -2,25 +2,25 @@
  userregistcontroller::getappuser:
 0/var/www/html/uklogin/controllers/userregist.phpW W("1*­
 2:
-0/var/www/html/uklogin/controllers/userregist.php\	 \(&g
+0/var/www/html/uklogin/controllers/userregist.php^	 ^(&g
 e
 :
-0/var/www/html/uklogin/controllers/userregist.php\	 \(%	
+0/var/www/html/uklogin/controllers/userregist.php^	 ^(%	
 $result"__id*
 'ERROR_NICK_EMPTY'*
 6*¬
 4:
-0/var/www/html/uklogin/controllers/userregist.php^	 ^(%f
+0/var/www/html/uklogin/controllers/userregist.php`	 `(%f
 d
 :
-0/var/www/html/uklogin/controllers/userregist.php^	 ^($	
+0/var/www/html/uklogin/controllers/userregist.php`	 `($	
 $result"__id*
 'ERROR_PSW_EMPTY'*
 6*ß
 5:
-0/var/www/html/uklogin/controllers/userregist.php` `(.lj
+0/var/www/html/uklogin/controllers/userregist.phpb b(.lj
 :
-0/var/www/html/uklogin/controllers/userregist.php` `(-
+0/var/www/html/uklogin/controllers/userregist.phpb b(-
 %2*
 
 	$appModel*
@@ -29,12 +29,12 @@ d
 $client_id2getdataT
 R
 :
-0/var/www/html/uklogin/controllers/userregist.php` `(-
+0/var/www/html/uklogin/controllers/userregist.phpb b(-
 $app"__id*
 
 %2~|
 :
-0/var/www/html/uklogin/controllers/userregist.phpa a(<
+0/var/www/html/uklogin/controllers/userregist.phpc c(<
 %3*
 
 
@@ -46,32 +46,32 @@ $client_id*
 $nick2getuserbynickU
 S
 :
-0/var/www/html/uklogin/controllers/userregist.phpa a(<
+0/var/www/html/uklogin/controllers/userregist.phpc c(<
 $user"__id*
 
 %3*
 6*Š
 6:
-0/var/www/html/uklogin/controllers/userregist.phpc c("I
+0/var/www/html/uklogin/controllers/userregist.phpe e("I
 :
-0/var/www/html/uklogin/controllers/userregist.phpc c(
+0/var/www/html/uklogin/controllers/userregist.phpe e(
 	
 $result*ù
 1:
-0/var/www/html/uklogin/controllers/userregist.phpY Y(W
+0/var/www/html/uklogin/controllers/userregist.php[ [(W
 U
 :
-0/var/www/html/uklogin/controllers/userregist.phpY Y(	
+0/var/www/html/uklogin/controllers/userregist.php[ [(	
 $result"__id*
 ''yw
 :
-0/var/www/html/uklogin/controllers/userregist.phpZ Z(-
+0/var/www/html/uklogin/controllers/userregist.php\ \(-
 %1*
 userregistcontroller*
 'appregist'2getmodelY
 W
 :
-0/var/www/html/uklogin/controllers/userregist.phpZ Z(-
+0/var/www/html/uklogin/controllers/userregist.php\ \(-
 	$appModel"__id*
 
 %1*	

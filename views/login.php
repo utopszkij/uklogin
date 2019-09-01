@@ -22,7 +22,7 @@ class LoginView  extends CommonView  {
 		    	</p> 
 	            <iframe title="login" src="<?php echo MYDOMAIN; ?>/oauth2/loginform/client_id/12/?state=<?php echo urlencode($p->state); ?>" 
     	        style="width:490px; height:800px;" ></iframe> 
-			</div>div>
+			</div>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>

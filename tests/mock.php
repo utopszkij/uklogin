@@ -1,9 +1,30 @@
 <?php
-class View {
-    protected function loadJavaScript($jsName, $params) {
+interface ModelObject {
+    
+}
+
+interface ViewObject {
+}
+
+interface ControllerObject {
+}
+
+interface  RequestObject {
+    public function input(string $name, $default = '');
+    public function set(string $name, $value);
+    public function sessionGet(string $name, $default='');
+    public function sessionSet(string $name, $value);
+    public function session_init(string $sessionId);
+    public function session_save(string $sessionId);
+    public function session_count(): int;
+}
+
+
+class View implements ViewObject {
+    protected function loadJavaScript(string $jsName, object $params) {
     }
     
-    protected function loadJavaScriptAngular($jsName, $params) {
+    protected function loadJavaScriptAngular(string $jsName, object $params) {
     }
     
     protected function echoHtmlHead() {
@@ -14,32 +35,36 @@ class View {
     
 }
 
-class Controller {
-    protected function getModel($modelName) {
+class Model implements ModelObject {
+    
+}
+
+class Controller implements ControllerObject {
+    protected function getModel(string $modelName)  {
         include_once './models/'.$modelName.'.php';
         $modelClassName = $modelName.'Model';
         return new $modelClassName ();
     }
     
-    protected function getView($viewName) {
+    protected function getView(string $viewName) {
         include_once './views/'.$viewName.'.php';
         $viewClassName = $viewName.'View';
         return new $viewClassName ();
     }
     
-    protected function createCsrToken($request, $data) {
+    protected function createCsrToken(RequestObject $request, object $data) {
         $request->sessionSet('csrToken','testCsrToken');
         $data->csrToken = 'testCsrToken';
     }
     
-    protected function checkCsrToken($request) {
+    protected function checkCsrToken(RequestObject $request) {
         if ($request->input($request->sessionget('csrToken')) != 1) {
             echo '<p>invalid csr token</p>'.JSON_encode($request);
             exit();
         }
     }
 
-    protected function docPage($request, string $viewName) {
+    protected function docPage(RequestObject $request, string $viewName) {
         $request->set('sessionid','0');
         $request->set('lng','hu');
         $view = $this->getView($viewName);
@@ -50,33 +75,38 @@ class Controller {
     }
 } // class Controller
 
-class Request {
+class Request implements RequestObject {
     protected $sessions;
     function __construct() {
         $this->sessions = new stdClass();
     }
-    public function set($name, $value) {
+    public function set(string $name, $value) {
         $this->$name = $value;
     }
-    public function input($name, $def='') {
+    public function input(string $name, $def='') {
         $result = $def;
         if (isset($this->$name)) $result = $this->$name;
         return $result;
     }
-    public function sessionSet($name,$value) {
+    public function sessionSet(string $name,$value) {
         $this->sessions->$name = $value;
     }
-    public function sessionGet($name, $def = '') {
+    public function sessionGet(string $name, $def = '') {
         $result = $def;
         if (isset($this->sessions->$name)) $result = $this->sessions->$name;
         return $result;
     }
-    public function session_count() {
+    public function session_count(): int {
         return 1;
+    }
+    public function session_init(string $sessionId): int {
+        $this->sessions = new stdClass();
+    }
+    public function session_save(string $sessionId) {
     }
 }
 
-function txt($s) {
+function txt(string $s): string {
     return $s;
 }
 

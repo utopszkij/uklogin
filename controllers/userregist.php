@@ -11,13 +11,13 @@ class UserregistController extends Controller {
      * @param Request $request - client_id
      * @return void
      */
-    public function registform($request) {
+    public function registform(RequestObject $request) {
         $appModel = $this->getModel('appregist');
         $view = $this->getView('userregist');
         $client_id = $request->input('client_id','?');
         $app = $appModel->getData($client_id);
         $request->sessionSet('nick','');
-        if ($app) {
+        if (!isset($app->error)) {
             $data = new stdClass();
             // create csrr token
             $this->createCsrToken($request, $data);
@@ -43,7 +43,7 @@ class UserregistController extends Controller {
 	 * @param Request $request - nick
 	 * @return void
 	 */
-	public function forgetpsw($request) {
+	public function forgetpsw(RequestObject $request) {
 	    $appModel = $this->getModel('appregist');
 	    $view = $this->getView('userregist');
 	    $client_id = $request->sessionGet('client_id','?');
@@ -53,7 +53,7 @@ class UserregistController extends Controller {
 	        return;
 	    }
 	    $app = $appModel->getData($client_id);
-	    if ($app) {
+	    if (!isset($app->error)) {
 	        $data = new stdClass();
 	        // create csrr token
 	        $this->createCsrToken($request, $data);
@@ -84,7 +84,9 @@ class UserregistController extends Controller {
 	 * @param string $psw
 	 * @return string
 	 */
-	protected function getAppUser(&$app, &$user, &$userModel,
+	protected function getAppUser(AppRecord &$app, 
+	    UserRecord &$user, 
+	    &$userModel,
 	    string $client_id, string $nick, string $psw): string {
 	    $result = '';
 	    $appModel = $this->getModel('appregist');
@@ -103,7 +105,7 @@ class UserregistController extends Controller {
 	 * login képernyő újra hívása jelszó hiba esetén
 	 * hibás bejelentkezés számláló modosítása, szükség esetén fiók letiltása
 	 * @param object $app
-	 * @param userregistModel $model
+	 * @param UsersModel $model
 	 * @param oauth2View $view
 	 * @param object $request
 	 * @param object $user
@@ -129,22 +131,24 @@ class UserregistController extends Controller {
 	/**
 	 * jelszó változtatás
 	 * sessionban érkezik a client_id
-	 * @param unknown $request - nick, psw1, csrtoken
+	 * @param RequestObject $request - nick, psw1, csrtoken
 	 */
-	public function changepsw($request) {
-	    $model = $this->getModel('userregist');
+	public function changepsw(RequestObject $request) {
+	    $model = $this->getModel('users');
 	    $view = $this->getView('userregist');
 	    $loginView = $this->getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
+	    $app = new AppRecord();
+	    $user = new UserRecord();
 	    
 	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
 	    if ($msg != '') {
 	        $view->errorMsg([$msg]);
 	        return;
 	    }
-	    if (($app) && ($user) && ($user->enabled == 1)) {
+	    if ((!isset($app->error)) && (!isset($user->error)) && ($user->enabled == 1)) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
     	        $data = new stdClass();
     	        // create csrr token
@@ -180,15 +184,15 @@ class UserregistController extends Controller {
 	 * sessionban érkezik a client_id
 	 * @param object $request - nick, psw1, csrtoken
 	 */
-	public function mydata($request) {
-	    $model = $this->getModel('userregist');
+	public function mydata(RequestObject $request) {
+	    $model = $this->getModel('users');
 	    $view = $this->getView('userregist');
 	    $loginView = $this->getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
-	    $app = false;
-	    $user = false;
+	    $app = new AppRecord();
+	    $user = new UserRecord();
 	    
 	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
 	    if ($msg != '') {
@@ -196,7 +200,7 @@ class UserregistController extends Controller {
 	        return;
 	    }
 	    
-	    if (($app) && ($user)) {
+	    if ((!isset($app->error)) && (!isset($user->error))) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
 	            echo JSON_encode($user,JSON_PRETTY_PRINT);
 	        } else {
@@ -213,15 +217,15 @@ class UserregistController extends Controller {
 	 * sessionban érkezik a client_id
 	 * @param object $request - nick, psw1, csrtoken
 	 */
-	public function deleteaccount($request) {
-	    $model = $this->getModel('userregist');
+	public function deleteaccount(RequestObject $request) {
+	    $model = $this->getModel('users');
 	    $view = $this->getView('userregist');
 	    $loginView = $this->getView('oauth2');
 	    $client_id = $request->sessionGet('client_id','?');
 	    $nick = $request->input('nick','');
 	    $psw = $request->input('psw1','');
-	    $app = false;
-	    $user = false;
+	    $app = new AppRecord();
+	    $user = new UserRecord();
 	    
 	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
 	    if ($msg != '') {
@@ -229,7 +233,7 @@ class UserregistController extends Controller {
 	        return;
 	    }
 	    
-	    if (($app) && ($user)) {
+	    if ((!isset($app->error)) && (!isset($user->error))) {
 	        if ($user->pswhash == hash('sha256', $psw, false)) {
 	            $request->sessionSet('client_id', $client_id);
 	            $model->deleteUser($user);
@@ -249,7 +253,7 @@ class UserregistController extends Controller {
 	 * @param Request $request {client_id}
      * @return void
 	 */
-	public function pdf($request) {
+	public function pdf(RequestObject $request) {
 	    $client_id = $request->input('client_id','?');
 	    require('./vendor/fpdf/fpdf.php');
 
@@ -280,12 +284,12 @@ class UserregistController extends Controller {
 	 * tartalmazza az aláírásra utaló stringeket akkor a teljes pdf tartalmonból
 	 * sha256 has-t képez és beteszi a $res->pdfHash -be.
 	 * @param string $filePath
-	 * @param Res $res {error:"xxxxxx" | error:"", signHash:"" }
+	 * @param object $res {error:"xxxxxx" | error:"", signHash:"" }
 	 */
 	protected function checkPdfSig(string $filePath, &$res) {
 	    $check1 = false;
 	    $check2 = false;
-	    $signatureArray[] = '';
+	    $signatureArray = [];
 	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
 	    if ((strpos($signatureArray[1],'Segmentation fault') >= 0) ||
     	    ($signatureArray[0] == 'sh: pdfsig: command not found')) {
@@ -325,7 +329,7 @@ class UserregistController extends Controller {
      * extract igazolas.xml a meghatamazo.pdf -ből
      * @param string $filePath
      * @param string $igazolasPWD
-     * @param Res $res {error:"xxxxxx" | error:"", ........}
+     * @param object $res {error:"xxxxxx" | error:"", ........}
      */
     protected function extractIgazolasFromPdf(string $filePath, string $igazolasPWD, &$res) {
         shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/igazolas.pdf '.escapeshellarg($filePath));
@@ -339,7 +343,7 @@ class UserregistController extends Controller {
     /**
      * extract meghatalmazo.xml az igazolas.pdf -ből
      * @param string $igazolasPWD
-     * @param Res $res {error:"xxxxxx" | error:"", ........}
+     * @param object $res {error:"xxxxxx" | error:"", ........}
      */
     protected function extractMeghatalmazoFromIgazolas(string $igazolasPWD, &$res) {
         shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/meghatalmazo.xml '.escapeshellarg($igazolasPWD.'/igazolas.pdf'));
@@ -409,7 +413,7 @@ class UserregistController extends Controller {
 	 * @param string $tmpDir
 	 * @return object {error, signHash}
 	 */
-	public function getSignHash($request, string $tmpDir) {
+	public function getSignHash(RequestObject $request, string $tmpDir) {
 	    $res = new stdClass();
 	    $res->error = '';
 	    $res->signHash = '';
@@ -437,9 +441,9 @@ class UserregistController extends Controller {
 	    $res->error = '';
 	    $res->signHash = $signHash;
 	    $res->nick = '';
-	    $model = $this->getModel('oauth2');
+	    $model = $this->getModel('users');
 	    $user = $model->getUserBySignHash($client_id, $signHash);
-	    if ($user) {
+	    if (!isset($user->error)) {
 	        $res->error = 'ERROR_PDF_SIGN_EXISTS';
 	        $res->nick = $user->nick;
 	    }
@@ -482,9 +486,9 @@ class UserregistController extends Controller {
 	 * @param Request $request - signed_pdf, cssrtoken, nick
      * @return void
 	 */
-	public function registform2($request) {
+	public function registform2(RequestObject $request) {
 	    $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('userregist'); // szükség van rá, ez kreál szükség esetén táblát.
+	    $model = $this->getModel('users'); // szükség van rá, ez kreál szükség esetén táblát.
 	    $view = $this->getView('userregist');
 	    $client_id = $request->sessionGet('client_id','');
 	    $nick = $request->input('nick','');
@@ -494,8 +498,8 @@ class UserregistController extends Controller {
 	        $nick = $forgetPswNick;
 	    }
 	    $app = $appModel->getData($client_id);
-	    if (!$app) {
-	        $app = new stdClass();
+	    if (isset($app->error)) {
+	        $app = new AppRecord();
 	        $app->name = 'testApp';
 	        $app->css = '';
 	    }
@@ -568,14 +572,15 @@ class UserregistController extends Controller {
 
 	/**
 	 * registForm2 visszahívbása hibaüzenetekkel
-	 * @param object $request
-	 * @param object $view
-	 * @param object $data
-	 * @param object $app
+	 * @param RequestObject $request
+	 * @param ViewObject $view
+	 * @param UserRecord $data
+	 * @param Apprecord $app
 	 * @param string $forgetPswNick
 	 * @param array $msgs
 	 */
-	protected function recallRegistForm2(&$request, &$view, &$data, $app, string $forgetPswNick, array $msgs) {
+	protected function recallRegistForm2(RequestObject &$request, 
+	    ViewObject &$view, UserRecord &$data, AppRecord $app, string $forgetPswNick, array $msgs) {
     	$this->createCsrToken($request, $data);
     	if (isset($data->signHash)) {
     	    $request->sessionSet('signHash', $data->signHash);
@@ -603,9 +608,9 @@ class UserregistController extends Controller {
 	 * @param Request $request - nick, psw1, psw2, csrToken
      * @return void
 	 */
-	public function doregist($request) {
+	public function doregist(RequestObject $request) {
 	    $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('userregist'); // szükség van rá, ez kreál táblát.
+	    $model = $this->getModel('users'); // szükség van rá, ez kreál táblát.
 	    $view = $this->getView('userregist');
 
 	    // csrttoken ellnörzés
@@ -623,10 +628,10 @@ class UserregistController extends Controller {
 	        exit();
 	    }
 	    if ($forgetPswNick == '') {
-	        $data = new stdClass();
+	        $data = new UserRecord();
 	    } else {
 	        $data = $model->getUserByNick($client_id, $forgetPswNick);
-	        if (!$data) {
+	        if (isset($data->error)) {
 	            $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick,
 	                ['NOT_FOUND']);
 	            return;
@@ -641,19 +646,18 @@ class UserregistController extends Controller {
 	            return;
 	        }
 
-	    $app = $appModel->getData($client_id);
-	    
 	    // kitöltés ellenörzések
 	    $data->client_id = $client_id;
-	    $data->signHash = $signHash;
+
+//	    $data->signHash = $signHash;
+	    $data->signhash = $signHash;
+	    
 	    $data->nick = $request->input('nick','');
 	    $data->psw1 = $request->input('psw1','');
 	    $data->psw2 = $request->input('psw2','');
 	    if ($forgetPswNick != '') {
 	       $data->forgetPswNick = $forgetPswNick;
-	    }
-	    if ($forgetPswNick != '') {
-	        $data->nick = $forgetPswNick;
+	       $data->nick = $forgetPswNick;
 	    }
 	    if (isset($data->forgetPswNick)) {
 	       $request->sessionset('nick',$data->forgetPswNick);
@@ -673,13 +677,14 @@ class UserregistController extends Controller {
 	       unset($data->msgs);
 	       if ((!isset($data->forgetPswNick)) || ($data->forgetPswNick == '')) {
 	           unset($data->forgetPswNick);
+	           $data->id = 0;
 	           $msgs = $model->addUser($data);
 	       } else {
 	           unset($data->forgetPswNick);
 	           $msgs = $model->updateUser($data);
 	       }
 	       if (count($msgs) == 0) {
-	           // sikeresn tárolva
+	           // sikeresen tárolva
 	           $view->successMsg(['USER_SAVED']);
 	       } else {
 	           $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
@@ -691,15 +696,14 @@ class UserregistController extends Controller {
 	 * user blokkolás feloldása
 	 * @param object $request   - csrtoken, nick, client_id
 	 */
-	public function useractival($request) {
+	public function useractival(RequestObject $request) {
 	    $this->checkCsrToken($request);
 	    $client_id = $request->input('client_id','');
 	    $nick = $request->input('nick','');
-	    $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('userregist');
+	    $model = $this->getModel('users');
 	    $view = $this->getView('userregist');
 	    $user = $model->getUserByNick($client_id, $nick);
-	    if ($user) {
+	    if (!isset($user->error)) {
 	        $user->enabled = 1;
 	        $user->blocktime = '';
 	        $user->errorcount = 0;
@@ -713,12 +717,13 @@ class UserregistController extends Controller {
 	/**
 	 * Login képernyő ujboli kirajzolás hiba esetén
 	 * @param Request $request
-	 * @param View $view
-	 * @param App $app
+	 * @param ViewObject $view
+	 * @param AppRecord $app
 	 * @param array $msgs
 	 * @return void
 	 */
-	protected function recallLoginForm(&$request, &$view, &$app, $msgs) {
+	protected function recallLoginForm(RequestObject &$request, 
+	    ViewObject &$view, AppRecord &$app, $msgs) {
 	    $data = new stdClass();
 	    $this->createCsrToken($request, $data);
 	    $data->appName = $app->name;

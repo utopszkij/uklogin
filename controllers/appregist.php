@@ -6,7 +6,7 @@ class AppregistController extends Controller {
 	 * sessionban jöhet adminNick
 	 * @param object $request
 	 */
-    public function add($request) {
+    public function add(RequestObject $request) {
         $request->set('sessionid','0');
 		$request->set('lng','hu');
 		
@@ -49,7 +49,7 @@ class AppregistController extends Controller {
 	 * sessinban van az adminNick
 	 * @param object $request form fields
 	 */
-	public function save($request) {
+	public function save(RequestObject $request) {
 	    // check csrtoken
 	    $this->checkCsrToken($request);
 	    
@@ -57,8 +57,9 @@ class AppregistController extends Controller {
 	    $model = $this->getModel('appregist');
 	    $view = $this->getView('appregist');
 	    // $data kialakitása a $request -ből
-        $data = new stdClass(); 
-        $data->id = $request->input('id','');
+	    // $data = new stdClass();
+	    $data = new AppRecord();
+	    $data->id = $request->input('id','');
         $data->name = $request->input('name','');
         $data->client_id = $request->input('client_id','');
         $data->client_secret = $request->input('client_secret','');
@@ -85,7 +86,7 @@ class AppregistController extends Controller {
 	    }
 	}
 	
-	protected function echoAdminForm(&$data, $request, $rec, $view) {
+	protected function echoAdminForm(&$data, RequestObject $request, $rec, ViewObject $view) {
 	    $data->option = $request->input('option','default');
     	$data->msg = $request->input('msg','');
     	$data->client_id = $rec->client_id;
@@ -107,7 +108,7 @@ class AppregistController extends Controller {
 	 * sessionban érkezik az adminNick, request-ben érkezhet client_id
 	 * @param object $request
 	 */
-	public function adminform($request) {
+	public function adminform(RequestObject $request) {
 	    $model = $this->getModel('appregist');
 	    $view = $this->getView('appregist');
 	    $adminNick = $request->sessionGet('adminNick');
@@ -159,7 +160,7 @@ class AppregistController extends Controller {
 	    }
 	}
 	
-	public function logout($request) {
+	public function logout(RequestObject $request) {
 	    $request->sessionSet('csrtoken',random_int(1000000,9999999));
 	    $request->sessionSet('adminNick','');
 	    ?>
@@ -169,7 +170,7 @@ class AppregistController extends Controller {
 	    <?php
 	}
 	
-	public function appremove($request) {
+	public function appremove(RequestObject $request) {
 	    // check csrtoken
 	    $this->checkCsrToken($request);
 	    
@@ -187,7 +188,7 @@ class AppregistController extends Controller {
 	    $model = $this->getModel('appregist');
 	    $view = $this->getView('appregist');
 	    $rec = $model->getData($request->input('client_id',''));
-	    if ($rec) {
+	    if (!isset($rec->error)) {
 	        $msg = $model->remove($rec->client_id);
 	        if ($msg == '') {
 	            $rec->adminNick = $request->sessionGet('adminNick');
@@ -198,7 +199,7 @@ class AppregistController extends Controller {
 	        	$view->errorMsg($rec);
 	        }
 	    } else {
-	        $rec = new stdClass();
+	        $rec = new AppRecord();
             $rec->adminNick = $request->sessionget('adminNick');
 			$rec->error = 'ERROR_NOTFOUND';	            
 	        $view->errorMsg($rec);

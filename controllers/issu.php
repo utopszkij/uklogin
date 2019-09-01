@@ -6,7 +6,7 @@ class IssuController extends Controller {
      * @param object $request - title, body, sender, email
      * @return void
      */
-    public function form($request) {
+    public function form(RequestObject $request) {
         $view = $this->getView('issu');
         $data = new stdClass();
         $data->msgs = [];
@@ -22,10 +22,10 @@ class IssuController extends Controller {
      * @param object $request - title, body, sender, email
      * @retiurn void
      */
-    public function send($request) {
+    public function send(RequestObject $request) {
         $model = $this->getModel('issu');
         $view = $this->getView('issu');
-        $data = new stdClass();
+        $data = new IssuRecord();
         $data->msgs = [];
         $data->title = $request->input('title');
         $data->body = $request->input('body');

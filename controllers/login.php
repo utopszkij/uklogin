@@ -8,7 +8,7 @@ class LoginController extends Controller {
      * @param object $request 
      * @return void
      */
-    public function form($request) {
+    public function form(RequestObject $request) {
         if ($request->sessionGet('adminNick') == '') {
             $view = $this->getView('login');
             $p = new stdClass();
@@ -52,7 +52,7 @@ class LoginController extends Controller {
      * @param object $request - code
      * @retrun void
      */
-    public function code($request) {
+    public function code(RequestObject $request) {
         $code = $request->input('code');
         $state = urldecode($request->input('state',MYDOMAIN));
 
@@ -95,7 +95,7 @@ class LoginController extends Controller {
         }
     }
     
-    public function logout($request) {
+    public function logout(RequestObject $request) {
         $request->sessionSet('adminNick','');
         $request->sessionSet('csrToken','');
         if (!headers_sent()) {
