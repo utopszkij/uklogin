@@ -44,11 +44,12 @@ class CommonView extends View {
 	    $this->echohtmlHead();
 	    ?>
         <body ng-app="app">
-        <?php if ($navbar) : ?>
-        	$p = new stdClass();
-        	$p->adminNick = '';
-        	$this->echoNavbar($p);
-        <?php endif; ?>
+        <?php if ($navbar) {
+        	       $p = new stdClass();
+        	       $p->adminNick = '';
+        	       $this->echoNavbar($p);
+              }
+        ?>
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
 	    <h2 class="alert alert-danger">
 			<?php 
