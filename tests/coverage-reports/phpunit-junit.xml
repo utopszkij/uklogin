@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="tests" tests="84" assertions="83" errors="1" failures="0" skipped="0" time="2.555071">
-    <testsuite name="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.006449">
-      <testcase name="test_start" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="28" assertions="1" time="0.005743"/>
-      <testcase name="test_show" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="35" assertions="1" time="0.000706">
+  <testsuite name="tests" tests="90" assertions="90" errors="0" failures="0" skipped="0" time="3.405960">
+    <testsuite name="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.006408">
+      <testcase name="test_start" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="28" assertions="1" time="0.005683"/>
+      <testcase name="test_show" class="adatkezelesControllerTest" classname="adatkezelesControllerTest" file="/var/www/html/uklogin/tests/adatkezerles_controller_Test.php" line="35" assertions="1" time="0.000725">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -125,28 +125,31 @@
 	      &lt;/div&gt;&lt;!-- #scope --&gt;
 		        	&lt;div id="footer"&gt;  
       	&lt;p&gt;
-			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show" target="_self"&gt;
 				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show" target="_self"&gt;
 				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+			&lt;a href="https://gnu.hu/gplv3.html" target="_self"&gt;
 				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+			&lt;a href="https://github.com/utopszkij/uklogin" target="_self"&gt;
 				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
-			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+			&lt;a href="/opt/issu/form" target="_self"&gt;
 				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
       	&lt;/p&gt;   
 		&lt;p&gt;SWRESOURCE:			
-				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
-				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+				&lt;a href="https://www.php.net/manual/en/index.php" target="_self"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery" target="_self"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/" target="_self"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/" target="_self"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/" target="_self"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/" target="_self"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org" target="_self"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser" target="_self"&gt;smalot&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/tan-tan-kanarek/github-php-client"&gt;
+					tan-tan-kanarek_github_kliens
+				&lt;/a&gt;
 		&lt;/p&gt;
+		&lt;p&gt;Tesztel√©shez: phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;&lt;/p&gt;
 		&lt;p&gt;SWFORKINFO&amp;nbsp;
 	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;l√°sd itt&lt;/a&gt;&lt;/p&gt;
 		&lt;/div&gt;
@@ -155,9 +158,9 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001454">
-      <testcase name="test_start" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="28" assertions="1" time="0.000775"/>
-      <testcase name="test_show" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="35" assertions="1" time="0.000679">
+    <testsuite name="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001407">
+      <testcase name="test_start" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="28" assertions="1" time="0.000730"/>
+      <testcase name="test_show" class="adomanyControllerTest" classname="adomanyControllerTest" file="/var/www/html/uklogin/tests/adomany_controller_Test.php" line="35" assertions="1" time="0.000677">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -234,28 +237,31 @@
           	&lt;/div&gt;&lt;!-- #scope --&gt;
 		        	&lt;div id="footer"&gt;  
       	&lt;p&gt;
-			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show" target="_self"&gt;
 				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show" target="_self"&gt;
 				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+			&lt;a href="https://gnu.hu/gplv3.html" target="_self"&gt;
 				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+			&lt;a href="https://github.com/utopszkij/uklogin" target="_self"&gt;
 				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
-			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+			&lt;a href="/opt/issu/form" target="_self"&gt;
 				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
       	&lt;/p&gt;   
 		&lt;p&gt;SWRESOURCE:			
-				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
-				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+				&lt;a href="https://www.php.net/manual/en/index.php" target="_self"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery" target="_self"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/" target="_self"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/" target="_self"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/" target="_self"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/" target="_self"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org" target="_self"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser" target="_self"&gt;smalot&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/tan-tan-kanarek/github-php-client"&gt;
+					tan-tan-kanarek_github_kliens
+				&lt;/a&gt;
 		&lt;/p&gt;
+		&lt;p&gt;Tesztel√©shez: phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;&lt;/p&gt;
 		&lt;p&gt;SWFORKINFO&amp;nbsp;
 	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;l√°sd itt&lt;/a&gt;&lt;/p&gt;
 		&lt;/div&gt;
@@ -264,53 +270,46 @@
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="12" assertions="11" errors="1" failures="0" skipped="0" time="0.446472">
-      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="29" assertions="1" time="0.001162"/>
-      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="43" assertions="1" time="0.004662"/>
-      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="60" assertions="1" time="0.261495"/>
-      <testcase name="test_adminform_found" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="77" assertions="1" time="0.002652"/>
-      <testcase name="test_adminform_noneInApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="84" assertions="1" time="0.002433"/>
-      <testcase name="test_adminform_manyApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="92" assertions="1" time="0.002841"/>
-      <testcase name="test_adminform_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="105" assertions="1" time="0.003082"/>
-      <testcase name="test_adminlogin" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="112" assertions="0" time="0.030101">
-        <error type="Error">appregistControllerTest::test_adminlogin
-Error: Call to undefined method AppregistView::adminLoginForm()
-
-/var/www/html/uklogin/controllers/appregist.php:99
-/var/www/html/uklogin/tests/appregist_controller_Test.php:115
-</error>
-      </testcase>
-      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="119" assertions="1" time="0.130058"/>
-      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="134" assertions="1" time="0.004299"/>
-      <testcase name="test_adminform_notfound" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="144" assertions="1" time="0.002612"/>
-      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="151" assertions="1" time="0.001075"/>
+    <testsuite name="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" tests="12" assertions="12" errors="0" failures="0" skipped="0" time="0.433135">
+      <testcase name="test_start" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="28" assertions="1" time="0.000682"/>
+      <testcase name="test_add_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="35" assertions="1" time="0.001479"/>
+      <testcase name="test_save_domainEmpty" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="42" assertions="1" time="0.002588"/>
+      <testcase name="test_save_ok" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="59" assertions="1" time="0.319248"/>
+      <testcase name="test_adminform_found" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="76" assertions="1" time="0.002153"/>
+      <testcase name="test_adminform_noneInApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="83" assertions="1" time="0.001706"/>
+      <testcase name="test_adminform_manyApps" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="91" assertions="1" time="0.001859"/>
+      <testcase name="test_adminform_adminNotLogged" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="104" assertions="1" time="0.001455"/>
+      <testcase name="test_appremove_OK" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="111" assertions="1" time="0.039879"/>
+      <testcase name="test_appremove_NOTFOUND" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="126" assertions="1" time="0.002305"/>
+      <testcase name="test_adminform_notfound" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="136" assertions="1" time="0.001700"/>
+      <testcase name="test_end" class="appregistControllerTest" classname="appregistControllerTest" file="/var/www/html/uklogin/tests/appregist_controller_Test.php" line="143" assertions="1" time="0.058081"/>
     </testsuite>
-    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="21" assertions="21" errors="0" failures="0" skipped="0" time="0.674231">
-      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.000708"/>
-      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.001749"/>
-      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="49" assertions="1" time="0.001141"/>
-      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="63" assertions="1" time="0.001018"/>
-      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="77" assertions="1" time="0.000985"/>
-      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="91" assertions="1" time="0.001005"/>
-      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="105" assertions="1" time="0.001102"/>
-      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="119" assertions="1" time="0.000942"/>
-      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="135" assertions="1" time="0.000996"/>
-      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="149" assertions="1" time="0.000940"/>
-      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="163" assertions="1" time="0.056591"/>
-      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="177" assertions="1" time="0.085550"/>
-      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="192" assertions="1" time="0.076718"/>
-      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="207" assertions="1" time="0.088926"/>
-      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="222" assertions="1" time="0.164754"/>
-      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="240" assertions="1" time="0.001937"/>
-      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="256" assertions="1" time="0.145713"/>
-      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="273" assertions="1" time="0.002175"/>
-      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="289" assertions="1" time="0.002730"/>
-      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="297" assertions="1" time="0.037787"/>
-      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="305" assertions="1" time="0.000764"/>
+    <testsuite name="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" tests="21" assertions="21" errors="0" failures="0" skipped="0" time="0.700134">
+      <testcase name="test_start" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="28" assertions="1" time="0.001219"/>
+      <testcase name="test_check_domain_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="35" assertions="1" time="0.003132"/>
+      <testcase name="test_check_domain_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="49" assertions="1" time="0.001140"/>
+      <testcase name="test_check_daomain_exists" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="63" assertions="1" time="0.001020"/>
+      <testcase name="test_check_name_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="77" assertions="1" time="0.001002"/>
+      <testcase name="test_check_callback_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="91" assertions="1" time="0.000995"/>
+      <testcase name="test_check_callback_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="105" assertions="1" time="0.001025"/>
+      <testcase name="test_check_callback_not_in_domain" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="119" assertions="1" time="0.000989"/>
+      <testcase name="test_check_css_invalid" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="135" assertions="1" time="0.001020"/>
+      <testcase name="test_check_admin_empty" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="149" assertions="1" time="0.000960"/>
+      <testcase name="test_check_uklogin_html__not_exist" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="163" assertions="1" time="0.044799"/>
+      <testcase name="test_check_dataProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="177" assertions="1" time="0.076340"/>
+      <testcase name="test_check_cookieProcess_not_accept" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="192" assertions="1" time="0.077475"/>
+      <testcase name="test_check_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="207" assertions="1" time="0.078427"/>
+      <testcase name="test_save_new_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="222" assertions="1" time="0.203880"/>
+      <testcase name="test_save_insert_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="240" assertions="1" time="0.002887"/>
+      <testcase name="test_save_update_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="256" assertions="1" time="0.150825"/>
+      <testcase name="test_save_update_notok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="274" assertions="1" time="0.002979"/>
+      <testcase name="test_remove_notfound" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="290" assertions="1" time="0.003758"/>
+      <testcase name="test_remove_ok" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="298" assertions="1" time="0.044555"/>
+      <testcase name="test_end" class="appregistModelTest" classname="appregistModelTest" file="/var/www/html/uklogin/tests/appregist_model_Test.php" line="306" assertions="1" time="0.001707"/>
     </testsuite>
-    <testsuite name="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.002096">
-      <testcase name="test_start" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="28" assertions="1" time="0.000680"/>
-      <testcase name="test_default" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="35" assertions="1" time="0.001416">
+    <testsuite name="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.003722">
+      <testcase name="test_start" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="28" assertions="1" time="0.001318"/>
+      <testcase name="test_default" class="defaultControllerTest" classname="defaultControllerTest" file="/var/www/html/uklogin/tests/default_controller_Test.php" line="35" assertions="1" time="0.002404">
         <system-out>	
         &lt;body ng-app="app"&gt;
          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -442,40 +441,42 @@ Error: Call to undefined method AppregistView::adminLoginForm()
         	          &lt;/div&gt;&lt;!-- #scope --&gt;
 		        	&lt;div id="footer"&gt;  
       	&lt;p&gt;
-			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show" target="_self"&gt;
 				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show" target="_self"&gt;
 				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+			&lt;a href="https://gnu.hu/gplv3.html" target="_self"&gt;
 				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+			&lt;a href="https://github.com/utopszkij/uklogin" target="_self"&gt;
 				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
-			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+			&lt;a href="/opt/issu/form" target="_self"&gt;
 				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
       	&lt;/p&gt;   
 		&lt;p&gt;SWRESOURCE:			
-				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
-				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+				&lt;a href="https://www.php.net/manual/en/index.php" target="_self"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery" target="_self"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/" target="_self"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/" target="_self"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/" target="_self"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/" target="_self"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org" target="_self"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser" target="_self"&gt;smalot&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/tan-tan-kanarek/github-php-client"&gt;
+					tan-tan-kanarek_github_kliens
+				&lt;/a&gt;
 		&lt;/p&gt;
+		&lt;p&gt;Tesztel√©shez: phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;&lt;/p&gt;
 		&lt;p&gt;SWFORKINFO&amp;nbsp;
 	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;l√°sd itt&lt;/a&gt;&lt;/p&gt;
 		&lt;/div&gt;
-                            
-                  &lt;/body&gt;
+                          &lt;/body&gt;
         &lt;/html&gt;
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.002283">
-      <testcase name="test_start" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="28" assertions="1" time="0.000893"/>
-      <testcase name="test_show" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="35" assertions="1" time="0.001390">
+    <testsuite name="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.001452">
+      <testcase name="test_start" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="28" assertions="1" time="0.000770"/>
+      <testcase name="test_show" class="impresszumControllerTest" classname="impresszumControllerTest" file="/var/www/html/uklogin/tests/impresszum_controller_Test.php" line="35" assertions="1" time="0.000682">
         <system-out>	
         &lt;body ng-app="app"&gt;
           			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -540,28 +541,31 @@ Error: Call to undefined method AppregistView::adminLoginForm()
 	      &lt;/div&gt;&lt;!-- #scope --&gt;
 		        	&lt;div id="footer"&gt;  
       	&lt;p&gt;
-			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show" target="_self"&gt;
 				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show" target="_self"&gt;
 				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+			&lt;a href="https://gnu.hu/gplv3.html" target="_self"&gt;
 				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+			&lt;a href="https://github.com/utopszkij/uklogin" target="_self"&gt;
 				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
-			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+			&lt;a href="/opt/issu/form" target="_self"&gt;
 				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
       	&lt;/p&gt;   
 		&lt;p&gt;SWRESOURCE:			
-				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
-				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+				&lt;a href="https://www.php.net/manual/en/index.php" target="_self"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery" target="_self"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/" target="_self"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/" target="_self"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/" target="_self"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/" target="_self"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org" target="_self"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser" target="_self"&gt;smalot&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/tan-tan-kanarek/github-php-client"&gt;
+					tan-tan-kanarek_github_kliens
+				&lt;/a&gt;
 		&lt;/p&gt;
+		&lt;p&gt;Tesztel√©shez: phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;&lt;/p&gt;
 		&lt;p&gt;SWFORKINFO&amp;nbsp;
 	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;l√°sd itt&lt;/a&gt;&lt;/p&gt;
 		&lt;/div&gt;
@@ -570,67 +574,34 @@ Error: Call to undefined method AppregistView::adminLoginForm()
         </system-out>
       </testcase>
     </testsuite>
-    <testsuite name="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.003153">
-      <testcase name="test_start" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="28" assertions="1" time="0.001150"/>
-      <testcase name="test_form" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="35" assertions="1" time="0.000823"/>
-      <testcase name="test_code" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="42" assertions="1" time="0.000640"/>
-      <testcase name="test_loogout" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="48" assertions="1" time="0.000540"/>
+    <testsuite name="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.003542">
+      <testcase name="test_start" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="28" assertions="1" time="0.000727"/>
+      <testcase name="test_form" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="35" assertions="1" time="0.000749"/>
+      <testcase name="test_send_error" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="40" assertions="1" time="0.000843"/>
+      <testcase name="test_send_ok" class="IssuControllerTest" classname="IssuControllerTest" file="/var/www/html/uklogin/tests/issu_controller_Test.php" line="49" assertions="1" time="0.001223"/>
     </testsuite>
-    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="37" assertions="37" errors="0" failures="0" skipped="0" time="1.415396">
-      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.000773"/>
-      <testcase name="test_registform_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="43" assertions="1" time="0.001393"/>
-      <testcase name="test_registform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="49" assertions="1" time="0.038263"/>
-      <testcase name="test_registform2_PDFNOTUPLOADED" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="66" assertions="1" time="0.002837"/>
-      <testcase name="test_registform2_OK" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="75" assertions="1" time="0.265911"/>
-      <testcase name="test_doregist_nickempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="83" assertions="1" time="0.003494"/>
-      <testcase name="test_doregist_pswempty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="97" assertions="1" time="0.003117"/>
-      <testcase name="test_doregist_pswinvalid" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="111" assertions="1" time="0.004921"/>
-      <testcase name="test_doregist_2pswnotequeals" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="125" assertions="1" time="0.006670"/>
-      <testcase name="test_doregist_nickexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="139" assertions="1" time="0.042238"/>
-      <testcase name="test_doregist_signexists" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="162" assertions="1" time="0.039644"/>
-      <testcase name="test_doregist_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="184" assertions="1" time="0.029898"/>
-      <testcase name="test_forgetpsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="198" assertions="1" time="0.001485"/>
-      <testcase name="test_forgetpsw_nick_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="205" assertions="1" time="0.000897"/>
-      <testcase name="test_forgetpsw_app_notfoundy" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="212" assertions="1" time="0.001275"/>
-      <testcase name="test_changepsw_nick_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="219" assertions="1" time="0.037214"/>
-      <testcase name="test_changepsw_psw_empty" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="228" assertions="1" time="0.029549"/>
-      <testcase name="test_changepsw_psw_error" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="238" assertions="1" time="0.065555"/>
-      <testcase name="test_changepsw_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="247" assertions="1" time="0.034556"/>
-      <testcase name="test_mydata_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="256" assertions="1" time="0.033669"/>
-      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="265" assertions="1" time="0.003634"/>
-      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="271" assertions="1" time="0.001320"/>
-      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="277" assertions="1" time="0.029964"/>
-      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="286" assertions="1" time="0.062605"/>
-      <testcase name="test_dologin_invalidPsw2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="296" assertions="1" time="0.066906"/>
-      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="306" assertions="1" time="0.072194"/>
-      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="316" assertions="1" time="0.106246"/>
-      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="344" assertions="1" time="0.036590"/>
-      <testcase name="test_useractival_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="350" assertions="1" time="0.034507"/>
-      <testcase name="test_useractival_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="359" assertions="1" time="0.068991"/>
-      <testcase name="test_mydata_ok2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="369" assertions="1" time="0.032461"/>
-      <testcase name="test_doRegist_forgetPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="378" assertions="1" time="0.064836"/>
-      <testcase name="test_deleteaccount_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="394" assertions="1" time="0.080557"/>
-      <testcase name="test_deleteaccount_notfound" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="404" assertions="1" time="0.033560"/>
-      <testcase name="test_pdf" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="414" assertions="1" time="0.008325">
-        <system-out>%PDF-1.3
-3 0 obj
-&lt;&lt;/Type /Page
-/Parent 1 0 R
-/Resources 2 0 R
-/Contents 4 0 R&gt;&gt;
-endobj
-4 0 obj
-&lt;&lt;/Filter /FlateDecode /Length 71&gt;&gt;
-stream
-xú3R‚2–35W(Ár
-Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
-      </testcase>
-      <testcase name="test_getCallbackUrl" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="420" assertions="1" time="0.000627"/>
-      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="431" assertions="1" time="0.068714"/>
+    <testsuite name="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.117429">
+      <testcase name="test_start" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="28" assertions="1" time="0.113245"/>
+      <testcase name="test_form" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="46" assertions="1" time="0.001584"/>
+      <testcase name="test_code" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="53" assertions="1" time="0.001337"/>
+      <testcase name="test_loogout" class="loginControllerTest" classname="loginControllerTest" file="/var/www/html/uklogin/tests/login_controller_Test.php" line="59" assertions="1" time="0.001263"/>
     </testsuite>
-    <testsuite name="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.003536">
-      <testcase name="test_start" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="28" assertions="1" time="0.002454"/>
-      <testcase name="test_show" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="35" assertions="1" time="0.001082">
+    <testsuite name="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" tests="11" assertions="11" errors="0" failures="0" skipped="0" time="0.922958">
+      <testcase name="test_start" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="30" assertions="1" time="0.112311"/>
+      <testcase name="test_loginform_falsclient_id" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="47" assertions="1" time="0.003999"/>
+      <testcase name="test_loginform_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="53" assertions="1" time="0.004270"/>
+      <testcase name="test_dologin_invalidNick" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="59" assertions="1" time="0.037128"/>
+      <testcase name="test_dologin_invalidPsw" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="68" assertions="1" time="0.157134"/>
+      <testcase name="test_dologin_invalidPsw2" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="78" assertions="1" time="0.130001"/>
+      <testcase name="test_dologin_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="88" assertions="1" time="0.118252"/>
+      <testcase name="test_access_token_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="98" assertions="1" time="0.220364"/>
+      <testcase name="test_userinfo_ok" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="126" assertions="1" time="0.070701"/>
+      <testcase name="test_getCallbackUrl" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="132" assertions="1" time="0.002437"/>
+      <testcase name="test_end" class="oauth2ControllerTest" classname="oauth2ControllerTest" file="/var/www/html/uklogin/tests/oauth2_controller_Test.php" line="143" assertions="1" time="0.066362"/>
+    </testsuite>
+    <testsuite name="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" tests="2" assertions="2" errors="0" failures="0" skipped="0" time="0.002297">
+      <testcase name="test_start" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="28" assertions="1" time="0.001180"/>
+      <testcase name="test_show" class="readmeControllerTest" classname="readmeControllerTest" file="/var/www/html/uklogin/tests/readme_controller_Test.php" line="35" assertions="1" time="0.001117">
         <system-out>	
         &lt;body ng-app="app"&gt;
          			&lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt;
@@ -821,7 +792,7 @@ Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
   &lt;h3 id="regisztracio-hivasa-a-felhasznalo-web-applikacioban"&gt;
    Regisztr√°ci√≥ h√≠v√°sa a felhaszn√°l√≥ web applik√°ci√≥ban
   &lt;/h3&gt;
-  &lt;pre&gt;&lt;code&gt;&amp;lt;iframe ..... src="/oauth2/registform/client_id/&amp;lt;client_id&amp;gt;" /&amp;gt;
+  &lt;pre&gt;&lt;code&gt;&amp;lt;iframe ..... src="/opt/userregist/registform/client_id/&amp;lt;client_id&amp;gt;" /&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
   &lt;p&gt;
    Sikeres regisztr√°l√°s ut√°n az iframe-ben a login k√©perny≈ë jelenik meg. Sikertelen eset√©n hiba√ºzenet √©s √∫jb√≥l a regisztr√°l√°s kezd≈ë k√©perny≈ëje.
@@ -916,28 +887,31 @@ Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
 	     &lt;/div&gt;&lt;!-- #scope --&gt;
 		         	&lt;div id="footer"&gt;  
       	&lt;p&gt;
-			&lt;a href="MYDOMAIN/opt/impresszum/show"&gt;
+			&lt;a href="MYDOMAIN/opt/impresszum/show" target="_self"&gt;
 				&lt;em class="fa fa-pencil"&gt;&lt;/em&gt;&amp;nbsp;IMPRESSUM&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="MYDOMAIN/opt/adatkezeles/show"&gt;
+			&lt;a href="MYDOMAIN/opt/adatkezeles/show" target="_self"&gt;
 				&lt;em class="fa fa-lock"&gt;&lt;/em&gt;&amp;nbsp;DATAPROCESS&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://gnu.hu/gplv3.html"&gt;
+			&lt;a href="https://gnu.hu/gplv3.html" target="_self"&gt;
 				&lt;em class="fa fa-copyright"&gt;&lt;/em&gt;&amp;nbsp;LICENCE: GNU/GPL&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;      
-			&lt;a href="https://github.com/utopszkij/uklogin"&gt;
+			&lt;a href="https://github.com/utopszkij/uklogin" target="_self"&gt;
 				&lt;em class="fa fa-github"&gt;&lt;/em&gt;&amp;nbsp;SOURCE&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
-			&lt;a href="mailto:tibor.fogler@gmail.com"&gt;
+			&lt;a href="/opt/issu/form" target="_self"&gt;
 				&lt;em class="fa fa-bug"&gt;&lt;/em&gt;&amp;nbsp;BUGMSG&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;   
       	&lt;/p&gt;   
 		&lt;p&gt;SWRESOURCE:			
-				&lt;a href="https://www.php.net/manual/en/index.php"&gt;php&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://fontawesome.com/icons?d=gallery"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.w3schools.com/css/"&gt;css&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://getbootstrap.com/"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://jquery.com/"&gt;Jquery&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://angularjs.org/"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://www.fpdf.org"&gt;fpdf&lt;/a&gt;&amp;nbsp;
-				&lt;a href="https://github.com/smalot/pdfparser"&gt;pdf parser&lt;/a&gt;&amp;nbsp;
-				phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;
+				&lt;a href="https://www.php.net/manual/en/index.php" target="_self"&gt;php&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://fontawesome.com/icons?d=gallery" target="_self"&gt;fontAwesome&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.w3schools.com/css/" target="_self"&gt;css&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://getbootstrap.com/" target="_self"&gt;bootstrap&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://jquery.com/" target="_self"&gt;Jquery&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://angularjs.org/" target="_self"&gt;AngularJs&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://www.fpdf.org" target="_self"&gt;fpdf&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/smalot/pdfparser" target="_self"&gt;smalot&lt;/a&gt;&amp;nbsp;
+				&lt;a href="https://github.com/tan-tan-kanarek/github-php-client"&gt;
+					tan-tan-kanarek_github_kliens
+				&lt;/a&gt;
 		&lt;/p&gt;
+		&lt;p&gt;Tesztel√©shez: phpunit&amp;nbsp;mocha&amp;nbsp;sonar-cloud&amp;nbsp;&lt;/p&gt;
 		&lt;p&gt;SWFORKINFO&amp;nbsp;
 	    	&lt;a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA"&gt;l√°sd itt&lt;/a&gt;&lt;/p&gt;
 		&lt;/div&gt;
@@ -945,6 +919,49 @@ Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
         &lt;/html&gt;
         </system-out>
       </testcase>
+    </testsuite>
+    <testsuite name="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" tests="28" assertions="28" errors="0" failures="0" skipped="0" time="1.213476">
+      <testcase name="test_start" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="30" assertions="1" time="0.001223"/>
+      <testcase name="test_registform_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="43" assertions="1" time="0.069138"/>
+      <testcase name="test_registform_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="49" assertions="1" time="0.040925"/>
+      <testcase name="test_registform2_PDFNOTUPLOADED" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="66" assertions="1" time="0.003570"/>
+      <testcase name="test_registform2_OK" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="75" assertions="1" time="0.254795"/>
+      <testcase name="test_doregist_nickempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="83" assertions="1" time="0.003776"/>
+      <testcase name="test_doregist_pswempty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="97" assertions="1" time="0.003014"/>
+      <testcase name="test_doregist_pswinvalid" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="111" assertions="1" time="0.003124"/>
+      <testcase name="test_doregist_2pswnotequeals" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="125" assertions="1" time="0.002991"/>
+      <testcase name="test_doregist_nickexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="139" assertions="1" time="0.046408"/>
+      <testcase name="test_doregist_signexists" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="162" assertions="1" time="0.046119"/>
+      <testcase name="test_doregist_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="184" assertions="1" time="0.048472"/>
+      <testcase name="test_forgetpsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="198" assertions="1" time="0.001900"/>
+      <testcase name="test_forgetpsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="205" assertions="1" time="0.001254"/>
+      <testcase name="test_forgetpsw_app_notfoundy" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="212" assertions="1" time="0.001605"/>
+      <testcase name="test_changepsw_nick_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="219" assertions="1" time="0.034780"/>
+      <testcase name="test_changepsw_psw_empty" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="228" assertions="1" time="0.040010"/>
+      <testcase name="test_changepsw_psw_error" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="238" assertions="1" time="0.079082"/>
+      <testcase name="test_changepsw_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="247" assertions="1" time="0.043405"/>
+      <testcase name="test_mydata_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="256" assertions="1" time="0.046786"/>
+      <testcase name="test_useractival_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="265" assertions="1" time="0.043186"/>
+      <testcase name="test_useractival_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="274" assertions="1" time="0.079381"/>
+      <testcase name="test_mydata_ok2" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="284" assertions="1" time="0.043098"/>
+      <testcase name="test_doRegist_forgetPsw" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="293" assertions="1" time="0.083375"/>
+      <testcase name="test_deleteaccount_ok" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="309" assertions="1" time="0.080763"/>
+      <testcase name="test_deleteaccount_notfound" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="319" assertions="1" time="0.005522"/>
+      <testcase name="test_pdf" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="329" assertions="1" time="0.004798">
+        <system-out>%PDF-1.3
+3 0 obj
+&lt;&lt;/Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/Contents 4 0 R&gt;&gt;
+endobj
+4 0 obj
+&lt;&lt;/Filter /FlateDecode /Length 71&gt;&gt;
+stream
+xú3R‚2–35W(Ár
+Q–w3T04”30PISp&#13;	ÍZ*ò[öÄÖ§(h$Ád¶Êïƒg¶ÿ⁄k*ÑdÅî</system-out>
+      </testcase>
+      <testcase name="test_end" class="userregistControllerTest" classname="userregistControllerTest" file="/var/www/html/uklogin/tests/userregist_controller_Test.php" line="335" assertions="1" time="0.100977"/>
     </testsuite>
   </testsuite>
 </testsuites>

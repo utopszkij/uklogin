@@ -1,0 +1,122 @@
+
+issucontroller::form4
+*/var/www/html/uklogin/controllers/issu.php	 	("1*\
+2
+
+issu.php"K
+4
+*/var/www/html/uklogin/controllers/issu.php (
+implicit return*ž
+14
+*/var/www/html/uklogin/controllers/issu.php
+ 
+('ge
+4
+*/var/www/html/uklogin/controllers/issu.php
+ 
+(&
+%1*
+issucontroller*
+
+'issu'2getviewO
+M
+4
+*/var/www/html/uklogin/controllers/issu.php
+ 
+(&
+$view"__id*
+
+%1KI
+4
+*/var/www/html/uklogin/controllers/issu.php (
+$data"stdclass`
+^
+4
+*/var/www/html/uklogin/controllers/issu.php (
+%2"stdclass::__construct*	
+
+$dataFD
+4
+*/var/www/html/uklogin/controllers/issu.php (
+%3"$ArrayY
+W
+4
+*/var/www/html/uklogin/controllers/issu.php (
+
+$data"
+msgs"__id*
+
+%3`^
+4
+*/var/www/html/uklogin/controllers/issu.php (/
+%4*
+
+
+$request*	
+'title'2inputZ
+X
+4
+*/var/www/html/uklogin/controllers/issu.php (/
+
+$data"
+title"__id*
+
+%4_]
+4
+*/var/www/html/uklogin/controllers/issu.php (-
+%5*
+
+
+$request*
+
+'body'2inputY
+W
+4
+*/var/www/html/uklogin/controllers/issu.php (-
+
+$data"
+body"__id*
+
+%5a_
+4
+*/var/www/html/uklogin/controllers/issu.php (1
+%6*
+
+
+$request*
+
+'sender'2input[
+Y
+4
+*/var/www/html/uklogin/controllers/issu.php (1
+
+$data"
+sender"__id*
+
+%6`^
+4
+*/var/www/html/uklogin/controllers/issu.php (/
+%7*
+
+
+$request*	
+'email'2inputZ
+X
+4
+*/var/www/html/uklogin/controllers/issu.php (/
+
+$data"
+email"__id*
+
+%7ZX
+4
+*/var/www/html/uklogin/controllers/issu.php (
+%8*	
+
+$view*	
+
+$data2form*
+2:
+
+$requestB
+issucontroller

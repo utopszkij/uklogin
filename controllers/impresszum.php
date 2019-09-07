@@ -1,7 +1,7 @@
 <?php
-class ImpresszumController {
-	public function show($request) {
-	    docPage($request,  'impresszum');
+class ImpresszumController extends Controller {
+	public function show(RequestObject $request) {
+	    $this->docPage($request,  'impresszum');
 	}
 }
 ?>

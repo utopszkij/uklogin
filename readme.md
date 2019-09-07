@@ -97,7 +97,7 @@ Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a logi
 
 ### Regisztráció hívása a felhasználó web applikációban
 ```
-<iframe ..... src="<ukLoginDomain>/oauth2/registform/client_id/<client_id>" />
+<iframe ..... src="<ukLoginDomain>/opt/userregist/registform/client_id/<client_id>" />
 ```
 Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Sikertelen esetén hibaüzenet és újból a regisztrálás kezdő képernyője.
 
@@ -179,7 +179,7 @@ https://sonarcloud.io/dashboard?id=utopszkij-uklogin
 - web server (.htaccess értelmezéssel)
 - https tanusitvány
 - php shell_exec -al hívhatóan  pdfsig, pdfdetach parancsok
-- Létrehozandő MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
+- Létrehozandó MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
 
 
 Telepítendő  könyvtárak:
@@ -199,4 +199,5 @@ Telepítendő fájlok
 - index.php
 - .config.php  (config.txt átnevezve és értelemszerüen javítva)
 - .htaccess (a htaccess.txt átnevezve)
+- example.php
 

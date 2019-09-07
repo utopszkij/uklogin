@@ -1,17 +1,17 @@
 <?php
-class ExampleController {
+class ExampleController extends Controller {
     /**
      * example task
      * @param Request $request
      *  - string param1 
      */
-    public function example($request) {
+    public function example(RequestObject $request) {
 	    // get params from $request
         $param1 = $request->input('param1','param1');
 	    
         // get Model, Viewer, 
-	    $model = getModel('example');
-	    $view = getView('example');
+        $model = $this->getModel('example');
+        $view = $this->getView('example');
 	    
 	    // task process 
 	    $data = $model->getData($param1);

@@ -13,7 +13,7 @@ class ReadmeView  extends CommonView  {
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    echo htmlHead();
+	    $this->echoHtmlHead();
         ?>	
         <body ng-app="app">
          <?php $this->echoNavbar($p); ?>
@@ -173,7 +173,7 @@ class ReadmeView  extends CommonView  {
   <h3 id="regisztracio-hivasa-a-felhasznalo-web-applikacioban">
    Regisztráció hívása a felhasználó web applikációban
   </h3>
-  <pre><code>&lt;iframe ..... src="<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/&lt;client_id&gt;" /&gt;
+  <pre><code>&lt;iframe ..... src="<?php echo MYDOMAIN; ?>/opt/userregist/registform/client_id/&lt;client_id&gt;" /&gt;
 </code></pre>
   <p>
    Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Sikertelen esetén hibaüzenet és újból a regisztrálás kezdő képernyője.
@@ -267,7 +267,7 @@ class ReadmeView  extends CommonView  {
 
 	     </div><!-- #scope -->
 		   <?php $this->echoFooter(); ?>
-         <?php loadJavaScriptAngular('frontpage',$p); ?>
+         <?php $this->loadJavaScriptAngular('frontpage',$p); ?>
         </body>
         </html>
         <?php 		

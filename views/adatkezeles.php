@@ -13,7 +13,7 @@ class AdatkezelesView  extends CommonView  {
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    echo htmlHead();
+	    $this->echoHtmlHead();
         ?>	
         <body ng-app="app">
           <?php $this->echoNavbar($p); ?>

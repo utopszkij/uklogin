@@ -1,7 +1,7 @@
 <?php
-class AdomanyController {
-    public function show($request) {
-        docPage($request,  'adomany');
+class AdomanyController extends Controller {
+    public function show(RequestObject $request) {
+        $this->docPage($request,  'adomany');
     }
 }
 ?>

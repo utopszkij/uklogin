@@ -1,5 +1,73 @@
 <?php
-class CommonView {
+class CommonView extends View {
+   
+    /**
+     * echo succes message after add new app
+     * @param object $res {client_id, client_secret
+     * @return void;}
+     */
+    public function successMsg(array $msgs, bool $navbar = false) {
+        $this->echoHtmlHead();
+        ?>
+        <body ng-app="app">
+        <?php if ($navbar) {
+        	       $p = new stdClass();
+        	       $p->adminNick = '';
+        	       $this->echoNavbar($p);
+        }
+        ?>
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="successMsg">
+	    <h2 class="alert alert-success">
+			<?php 
+			foreach ($msgs as $msg) {
+			    echo txt($msg).'<br />';
+			}
+			?>
+	    </h2>
+	    </div>
+        </body>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2',new stdClass()); ?>
+        </html>
+        <?php 
+	}
+    
+	/**
+	 * echo fatal error in app save
+	 * @param array of string messages
+	 * @param string backLink
+	 * @param string backLinkText
+	 * @param bool show navbar
+	 * @return void
+	 */
+	public function errorMsg(array $msgs, string $backLink='', string $backStr='', bool $navbar = false) {
+	    $this->echohtmlHead();
+	    ?>
+        <body ng-app="app">
+        <?php if ($navbar) : ?>
+        	$p = new stdClass();
+        	$p->adminNick = '';
+        	$this->echoNavbar($p);
+        <?php endif; ?>
+	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
+	    <h2 class="alert alert-danger">
+			<?php 
+			foreach ($msgs as $msg) {
+			    echo txt($msg).'<br />';
+			}
+			?>
+	    </h2>
+	    </div>
+	    <?php if ($backLink != '') : ?>
+	    <p><a href="<?php echo $backLink; ?>" target="_self"><?php echo txt($backStr); ?></a>
+	    <?php endif; ?>
+        <?php $this->echohtmlPopup(); ?>
+        <?php $this->loadJavaScriptAngular('oauth2', new stdClass()); ?>
+        </body>
+        </html>
+        <?php 
+	}
+    
 	/**
 	* echo html page
 	* @param object $p - adminNick
@@ -60,28 +128,31 @@ class CommonView {
         ?>
       	<div id="footer">  
       	<p>
-			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/impresszum/show">
+			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/impresszum/show" target="_self">
 				<em class="fa fa-pencil"></em>&nbsp;<?php echo txt('IMPRESSUM'); ?></a>&nbsp;&nbsp;&nbsp;      
-			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show">
+			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_self">
 				<em class="fa fa-lock"></em>&nbsp;<?php echo txt('DATAPROCESS'); ?></a>&nbsp;&nbsp;&nbsp;      
-			<a href="https://gnu.hu/gplv3.html">
+			<a href="https://gnu.hu/gplv3.html" target="_self">
 				<em class="fa fa-copyright"></em>&nbsp;<?php echo txt('LICENCE'); ?>: GNU/GPL</a>&nbsp;&nbsp;&nbsp;      
-			<a href="https://github.com/utopszkij/uklogin">
+			<a href="https://github.com/utopszkij/uklogin" target="_self">
 				<em class="fa fa-github"></em>&nbsp;<?php echo txt('SOURCE'); ?></a>&nbsp;&nbsp;&nbsp;   
-			<a href="mailto:tibor.fogler@gmail.com">
+			<a href="<?php echo MYDOMAIN; ?>/opt/issu/form" target="_self">
 				<em class="fa fa-bug"></em>&nbsp;<?php echo txt('BUGMSG'); ?></a>&nbsp;&nbsp;&nbsp;   
       	</p>   
 		<p><?php echo txt('SWRESOURCE'); ?>:			
-				<a href="https://www.php.net/manual/en/index.php">php</a>&nbsp;
-				<a href="https://fontawesome.com/icons?d=gallery">fontAwesome</a>&nbsp;
-				<a href="https://www.w3schools.com/css/">css</a>&nbsp;
-				<a href="https://getbootstrap.com/">bootstrap</a>&nbsp;
-				<a href="https://jquery.com/">Jquery</a>&nbsp;
-				<a href="https://angularjs.org/">AngularJs</a>&nbsp;
-				<a href="https://www.fpdf.org">fpdf</a>&nbsp;
-				<a href="https://github.com/smalot/pdfparser">pdf parser</a>&nbsp;
-				phpunit&nbsp;mocha&nbsp;sonar-cloud&nbsp;
+				<a href="https://www.php.net/manual/en/index.php" target="_self">php</a>&nbsp;
+				<a href="https://fontawesome.com/icons?d=gallery" target="_self">fontAwesome</a>&nbsp;
+				<a href="https://www.w3schools.com/css/" target="_self">css</a>&nbsp;
+				<a href="https://getbootstrap.com/" target="_self">bootstrap</a>&nbsp;
+				<a href="https://jquery.com/" target="_self">Jquery</a>&nbsp;
+				<a href="https://angularjs.org/" target="_self">AngularJs</a>&nbsp;
+				<a href="https://www.fpdf.org" target="_self">fpdf</a>&nbsp;
+				<a href="https://github.com/smalot/pdfparser" target="_self">smalot</a>&nbsp;
+				<a href="https://github.com/tan-tan-kanarek/github-php-client">
+					tan-tan-kanarek_github_kliens
+				</a>
 		</p>
+		<p>Teszteléshez: phpunit&nbsp;mocha&nbsp;sonar-cloud&nbsp;</p>
 		<p><?php echo txt('SWFORKINFO'); ?>&nbsp;
 	    	<a href="https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA">lásd itt</a></p>
 		</div>

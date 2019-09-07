@@ -13,7 +13,7 @@ class FrontpageView  extends CommonView  {
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    echo htmlHead();
+	    $this->echoHtmlHead();
         ?>	
         <body ng-app="app">
          <?php $this->echoNavbar($p); ?>
@@ -111,12 +111,10 @@ class FrontpageView  extends CommonView  {
   				</p>
   			</div>
 			   
-        	<?php echo htmlPopup(); ?>
+        	<?php $this->echoHtmlPopup(); ?>
           </div><!-- #scope -->
 		  <?php $this->echoFooter(); ?>
-          <?php loadJavaScriptAngular('frontpage',$p); ?>
-          
-          <?php // echo JSON_encode($_SERVER); ?>
+          <?php $this->loadJavaScriptAngular('frontpage',$p); ?>
         </body>
         </html>
         <?php 		

@@ -30,7 +30,7 @@ if (isset($_GET['task'])) {
 }
 
 /**
- adat lekérés távoli url -ről curl POST -al
+ * adat lekérés távoli url -ről curl POST -al
  * @param string $url
  * @param array $fields
  * @return string
@@ -39,7 +39,7 @@ function getFromUrl(string $url, array $fields = []): string {
     $fields_string = '';
     $ch = curl_init();
     foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
-    rtrim($fields_string, '&');
+    $fields_string = rtrim($fields_string, '&');
     curl_setopt($ch,CURLOPT_URL, $url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch,CURLOPT_POST, count($fields));
@@ -232,7 +232,7 @@ if ($task == 'home') {
   	<script type="text/javascript">
 		$(function() {
 			$('#linkRegist').click(function() {
-				$('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/oauth2/registform/client_id/<?php echo CLIENTID; ?>");
+				$('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/opt/userregist/registform/client_id/<?php echo CLIENTID; ?>");
 				$('#popup').show();
 				return false; // ne hajsa végre a href linket
 			});

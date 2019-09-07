@@ -7,8 +7,7 @@ class AppregistView  extends CommonView  {
 	* @return void
 	*/
 	public function form($p) {
-	    echo htmlHead();
-	    
+	    $this->echoHtmlHead();
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($p); ?>
@@ -16,11 +15,6 @@ class AppregistView  extends CommonView  {
             <?php if ($p->client_id == '') : ?>
                 <h2><?php echo txt('NEWAPP'); ?></h2>
             <?php else : ?>
-            	<p style="text-align:right">
-            		<button type="button" id="logout">
-            			<em class="fa fa-sign-out"></em><?php echo txt('LOGOUT') ?>
-            		</button>
-            	</p> 
             	<p id="pAppsSelect">
             	<?php echo txt('LBL_TITLE')?>:&nbsp;<select id="appsSelect">
             	<?php 
@@ -142,10 +136,10 @@ class AppregistView  extends CommonView  {
     				<?php endif; ?>	
     			</p>
     		</form>
-        	<?php echo htmlPopup(); ?>
+        	<?php $this->echoHtmlPopup(); ?>
        	</div>
   	  
-        <?php loadJavaScriptAngular('appregist',$p); ?>
+        <?php $this->loadJavaScriptAngular('appregist',$p); ?>
 		<?php $this->echoFooter(); ?>
         </body>
         </html>
@@ -153,12 +147,12 @@ class AppregistView  extends CommonView  {
 	}
 	
 	/**
-	 * echo succes message after add new app
+	 * echo succes message after add or update new app
 	 * @param object $res {client_id, client_secret
 	 * @return void;}
 	 */
-	public function successMsg($res) {
-	    echo htmlHead();
+	public function AppsuccessMsg($res) {
+	    $this->echoHtmlHead();
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($res); ?>
@@ -175,43 +169,12 @@ class AppregistView  extends CommonView  {
 	}
 	
 	/**
-	 * echo fatal error in app save
-	 * @return void
-	 */
-	public function errorMsg($res) {
-	    echo htmlHead();
-	    $p = new stdClass();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($res); ?>
-	    <div class="errorMsg" id="scope">
-	    <br /><br /><br />
-	    <h2 class="alert alert-danger">
-	    	<?php
-	    	if (is_array($res->error)) {
-	    	    foreach ($res->error as $error) {
-	    	        echo txt($error).'<br />';
-	    	    }
-	    	} else {
-	    	    echo txt($res->error);
-	    	}
-	    	?>
-	    </h2>
-	    <br /><br /><br />
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 
-	}
-	
-	/**
 	 * echo not found error
 	 * @param string $msg
 	 * @return void
 	 */
 	public function removedMsg($rec) {
-	    echo htmlHead();
+	    $this->echoHtmlHead();
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($rec); ?>
@@ -225,64 +188,5 @@ class AppregistView  extends CommonView  {
         <?php 
 	}
 	
-	/*
-	public function adminLoginForm($p) {
-	    echo htmlHead();
-	    
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($p); ?>
-        <div ng-controller="ctrl" id="scope" style="display:none" class="adminLogin">
-            <h2><?php echo txt('ADMINLOGIN'); ?></h2>
-            <?php if ($p->msg != '') : ?>
-            	<div class="alert alert-danger" role="alert">
-            	<?php
-            	if (is_array($p->msg)) {
-            	    foreach ($p->msg as $msg1) {
-            	        echo txt($msg1).'<br />';
-            	    }
-            	} else {
-            	   echo txt($p->msg);
-            	}
-            	?>
-            	</div>
-            <?php endif; ?>
-    		<form id="formAdminLogin" name="formAdminLogin"
-    			 action="<?php echo txt('MYDOMAIN'); ?>/index.php" method="post" target="_self">
-    			<input type="hidden" name="option" value="appregist" />
-    			<input type="hidden" name="task" value="doadminlogin" />
-    			<input type="hidden" name="{{csrToken}}" value="1" />
-                <p>
-                		<label><?php echo txt('CLIENT_ID'); ?></label>
-                		<input type="text" name="client_id" id="client_id" value="" size="32" />
-                </p>
-                <p>
-                		<label><?php echo txt('ADMIN_NICK'); ?></label>
-                		<input type="text" name="nick" id="nick" value="" size="32" />
-                </p>
-                <p>
-                		<label><?php echo txt('PSW'); ?></label>
-                		<input type="password" name="psw" id="psw" value="" size="32" />
-                </p>
-    			<p class="formButtons">
-    				<button type="button" id="formAdminLoginOk" class="btn btn-primary">
-    					<em class="fa fa-check-square"></em>
-    					<?php echo txt('LOGIN'); ?></button>&nbsp;
-    				<button type="button" id="formAdminLoginCancel" class="btn btn-secondary" 
-    					onclick="location='<?php  echo MYDOMAIN; ?>';">
-    					<em class="fa fa-arrow-left"></em>
-    					<?php echo txt('CANCEL'); ?></button>&nbsp;
-    			</p>
-    		</form>
-        	<?php echo htmlPopup(); ?>
-       	</div>
-  	  
-        <?php loadJavaScriptAngular('appregist',$p); ?>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 		
-	}
-	*/
 }
 ?>
