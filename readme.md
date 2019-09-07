@@ -179,7 +179,7 @@ https://sonarcloud.io/dashboard?id=utopszkij-uklogin
 - web server (.htaccess értelmezéssel)
 - https tanusitvány
 - php shell_exec -al hívhatóan  pdfsig, pdfdetach parancsok
-- Létrehozandő MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
+- Létrehozandó MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
 
 
 Telepítendő  könyvtárak:
@@ -199,4 +199,5 @@ Telepítendő fájlok
 - index.php
 - .config.php  (config.txt átnevezve és értelemszerüen javítva)
 - .htaccess (a htaccess.txt átnevezve)
+- example.php
 

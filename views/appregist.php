@@ -147,11 +147,11 @@ class AppregistView  extends CommonView  {
 	}
 	
 	/**
-	 * echo succes message after add new app
+	 * echo succes message after add or update new app
 	 * @param object $res {client_id, client_secret
 	 * @return void;}
 	 */
-	public function successMsg($res) {
+	public function AppsuccessMsg($res) {
 	    $this->echoHtmlHead();
 	    ?>
         <body ng-app="app">
@@ -166,37 +166,6 @@ class AppregistView  extends CommonView  {
         </body>
         </html>
 	    <?php 
-	}
-	
-	/**
-	 * echo fatal error in app save
-	 * @return void
-	 */
-	public function errorMsg($res) {
-	    $this->echoHtmlHead();
-	    $p = new stdClass();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($res); ?>
-	    <div class="errorMsg" id="scope">
-	    <br /><br /><br />
-	    <h2 class="alert alert-danger">
-	    	<?php
-	    	if (is_array($res->error)) {
-	    	    foreach ($res->error as $error) {
-	    	        echo txt($error).'<br />';
-	    	    }
-	    	} else {
-	    	    echo txt($res->error);
-	    	}
-	    	?>
-	    </h2>
-	    <br /><br /><br />
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 
 	}
 	
 	/**

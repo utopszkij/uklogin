@@ -65,11 +65,13 @@ class IssuView  extends CommonView  {
 	 * echo sikeressen tárolva üzenet
 	 * @return void;
 	 */
-	public function successMsg() {
+	public function successMsg(array $msgs = [], bool $navbar = true) {
 	    $this->echoHtmlHead();
 	    $p = new stdClass();
 	    $p->adminNick = '';
-	    $this->echoNavbar($p);
+	    if ($navbar) {
+	       $this->echoNavbar($p);
+	    }
 	    ?>
         <body ng-app="app">
     	    <div ng-controller="ctrl" id="scope" style="display:block" class="successMsg">

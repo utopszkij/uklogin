@@ -1,26 +1,6 @@
 <?php
 
 class Oauth2Controller extends Controller {
-	
-    protected function pswError(AppRecord &$app, 
-        ModelObject &$model, 
-        ViewObject &$view, 
-        RequestObject &$request, &$user) {
-	    $user->errorcount++;
-	    if ($user->errorcount >= $app->falseLoginLimit) {
-	        $user->enabled = 0;
-	        $user->blocktime = date('Y-m-d H:i:s');
-	    }
-	    $client_id = $app->client_id;
-	    $tryCount = $app->falseLoginLimit - $user->errorcount;
-	    $model->updateUser($user);
-	    $request->sessionSet('client_id', $client_id);
-	    if ($user->enabled == 1) {
-	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
-	    } else {
-	        $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
-	    }
-	}
 
 	/**
 	 * echo loginform

@@ -2,59 +2,6 @@
 include_once './views/common.php';
 class UserregistView  extends CommonView  {
 	
-    /**
-     * echo succes message after add new app
-     * @param object $res {client_id, client_secret
-     * @return void;}
-     */
-    public function successMsg($msgs) {
-        $this->echoHtmlHead();
-        ?>
-        <body ng-app="app">
-	    <div ng-controller="ctrl" id="scope" style="display:none" class="successMsg">
-	    <h2 class="alert alert-success">
-			<?php 
-			foreach ($msgs as $msg) {
-			    echo txt($msg).'<br />';
-			}
-			?>
-	    </h2>
-	    </div>
-        </body>
-        <?php $this->echoHtmlPopup(); ?>
-        <?php $this->loadJavaScriptAngular('oauth2',new stdClass()); ?>
-        </html>
-        <?php 
-	}
-    
-	/**
-	 * echo fatal error in app save
-	 * @param array of string
-	 * @return void
-	 */
-	public function errorMsg(array $msgs, string $backLink='', string $backStr='') {
-	    $this->echohtmlHead();
-	    ?>
-        <body ng-app="app">
-	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
-	    <h2 class="alert alert-danger">
-			<?php 
-			foreach ($msgs as $msg) {
-			    echo txt($msg).'<br />';
-			}
-			?>
-	    </h2>
-	    </div>
-	    <?php if ($backLink != '') : ?>
-	    <p><a href="<?php echo $backLink; ?>" target="_self"><?php echo txt($backStr); ?></a>
-	    <?php endif; ?>
-        <?php $this->echohtmlPopup(); ?>
-        <?php $this->loadJavaScriptAngular('oauth2', new stdClass()); ?>
-        </body>
-        </html>
-        <?php 
-	}
-	
 	/**
 	 * echo első regist form
 	 * @param object $data {cssToken}

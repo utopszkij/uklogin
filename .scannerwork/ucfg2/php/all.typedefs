@@ -3464,7 +3464,7 @@ firstornew0illuminate\database\eloquent\builder::firstornew@
 scopes,illuminate\database\eloquent\builder::scopes<
 	getmodels/illuminate\database\eloquent\builder::getmodels8
 orwhere-illuminate\database\eloquent\builder::orwhere:
-getquery.illuminate\database\eloquent\builder::getquery®	
+getquery.illuminate\database\eloquent\builder::getqueryÞ	
 userregistcontroller
 controller0
 checkpdfsig!userregistcontroller::checkpdfsig4
@@ -3489,14 +3489,19 @@ registform userregistcontroller::registformX
 checksignhashexist(userregistcontroller::checksignhashexist0
 clearfolder!userregistcontroller::clearfolder@
 processuploadedfile)userregistcontroller::processuploadedfile,
-	changepswuserregistcontroller::changepsw0
-registform2!userregistcontroller::registform2^
+	changepswuserregistcontroller::changepsw.
+
+useraction userregistcontroller::useraction0
+registform2!userregistcontroller::registform2¦
 
 commonviewview$
 
 echonavbarcommonview::echonavbar$
 
-echofootercommonview::echofooterF
+successmsgcommonview::successmsg$
+
+echofootercommonview::echofooter 
+errormsgcommonview::errormsgF
 impresszumcontroller
 controller"
 showimpresszumcontroller::show^
@@ -3518,12 +3523,11 @@ adjustdataappregistmodel::adjustdata
 updateafterinsert!appregistmodel::updateafterinsertF
 examplecontroller
 controller%
-exampleexamplecontroller::exampleØ
+exampleexamplecontroller::example°
 oauth2controller
 controller.
 access_tokenoauth2controller::access_token$
-dologinoauth2controller::dologin&
-pswerroroauth2controller::pswerror(
+dologinoauth2controller::dologin(
 	loginformoauth2controller::loginform2
 getcallbackurl oauth2controller::getcallbackurl4
 recallloginform!oauth2controller::recallloginform&
@@ -3547,15 +3551,15 @@ controller!
 codelogincontroller::code
 formlogincontroller::form)
 
-getfromurllogincontroller::getfromurl¯
+getfromurllogincontroller::getfromurl±
 appregistview
 commonview'
 
-removedmsgappregistview::removedmsg
+removedmsgappregistview::removedmsg%
+	_errormsgappregistview::_errormsg
 formappregistview::form'
 
-successmsgappregistview::successmsg#
-errormsgappregistview::errormsg0
+successmsgappregistview::successmsg0
 browsermodel 
 getdatabrowsermodel::getdataB
 adatkezelesview
@@ -3589,14 +3593,11 @@ issurecord"sender"title"body"email?
 sendissumodel::send@
 impresszumview
 commonview"
-displayimpresszumview::displayÄ
+displayimpresszumview::displayt
 userregistview
 commonview*
-registform1userregistview::registform1(
-
-successmsguserregistview::successmsg*
-registform2userregistview::registform2$
-errormsguserregistview::errormsgF
+registform1userregistview::registform1*
+registform2userregistview::registform2F
 browsercontroller
 controller%
 browserbrowsercontroller::browser:
@@ -3636,13 +3637,8 @@ controller#
 checkenabledhackmodel::checkenabled#
 
 ipadderrorhackmodel::ipadderror%
-__constructhackmodel::__constructÔ
+__constructhackmodel::__construct<
 
 oauth2view
-commonview&
-registform1oauth2view::registform1"
-	loginformoauth2view::loginform$
-
-successmsgoauth2view::successmsg&
-registform2oauth2view::registform2 
-errormsgoauth2view::errormsg
+commonview"
+	loginformoauth2view::loginform

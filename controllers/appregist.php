@@ -75,10 +75,10 @@ class AppregistController extends Controller {
 	        $res = $model->save($data);
 	        if (!isset($res->error)) {
 	            $res->adminNick = $request->sessionGet('adminNick');
-	            $view->successMsg($res);
+	            $view->AppsuccessMsg($res);
 	        } else {
 	            $res->adminNick = $request->sessionGet('adminNick');
-	            $view->errorMsg($res);
+	            $view->errorMsg($res->error,'','',true);
 	        }
 	    } else {
 	        $request->set('msg',$msg);
@@ -117,7 +117,7 @@ class AppregistController extends Controller {
 	        $rec = new stdClass();
 	        $rec->error = 'FATAL_ERROR';
 	        $rec->adminNick = $request->sessionGet('adminNick');
-	        $view->errorMsg($rec);
+	        $view->errorMsg([$rec->error],'','',true);
 	    }
 	    $request->set('sessionid','0');
 	    $request->set('lng','hu');
@@ -133,7 +133,7 @@ class AppregistController extends Controller {
 	        $rec = new stdClass();
 	        $rec->error = 'ERROR_APP_NOTFOUND';
 	        $rec->adminNick = $data->adminNick;
-	        $view->errorMsg($rec);
+	        $view->errorMsg([$rec->error],'','',true);
 	    } else {
 	        $client_id = $request->input('client_id','');
 	        if ($client_id == '') {
@@ -154,7 +154,7 @@ class AppregistController extends Controller {
 	               $rec = new stdClass();
 	               $rec->error = 'FATAL_ERROR';
 	               $rec->adminNick = $data->adminNick;
-	               $view->errorMsg($rec);
+	               $view->errorMsg([$rec->error],'','',true);
 	           }
 	        } // jött client_id a request -ben?
 	    }
@@ -196,13 +196,13 @@ class AppregistController extends Controller {
 	        } else {
 	            $rec->adminNick = $request->sessionGet('adminNick');
 				$rec->error = $msg;	            
-	        	$view->errorMsg($rec);
+				$view->errorMsg([$rec->error],'','',true);
 	        }
 	    } else {
 	        $rec = new AppRecord();
             $rec->adminNick = $request->sessionget('adminNick');
 			$rec->error = 'ERROR_NOTFOUND';	            
-	        $view->errorMsg($rec);
+			$view->errorMsg([$rec->error],'','',true);
 	    }
 	}
 	

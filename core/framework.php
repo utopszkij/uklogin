@@ -230,7 +230,6 @@ class Controller  implements ControllerObject {
         $data->adminNick = $request->sessionGet('adminNick','');
         $view->display($data);
     }
-    
 } // class Controller
 
 

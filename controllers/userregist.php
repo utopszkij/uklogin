@@ -35,6 +35,32 @@ class UserregistController extends Controller {
             $view->errorMsg(['ERROR_NOTFOUND']);
         }
 	}
+	
+	/**
+	 * login képernyő újra hívása jelszó hiba esetén
+	 * hibás bejelentkezés számláló modosítása, szükség esetén fiók letiltása
+	 * @param object $app
+	 * @param UsersModel $model
+	 * @param oauth2View $view
+	 * @param object $request
+	 * @param object $user
+	 */
+	protected function pswError(&$app, &$model, &$view, &$request, &$user) {
+	    $user->errorcount++;
+	    if ($user->errorcount >= $app->falseLoginLimit) {
+	        $user->enabled = 0;
+	        $user->blocktime = date('Y-m-d H:i:s');
+	    }
+	    $client_id = $app->client_id;
+	    $tryCount = $app->falseLoginLimit - $user->errorcount;
+	    $model->updateUser($user);
+	    $request->sessionSet('client_id', $client_id);
+	    if ($user->enabled == 1) {
+	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
+	    } else {
+	        $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
+	    }
+	}
 
 	/**
 	 * user regist első képernyő (pdf letöltési link, aláirt pdf feltöltési form, help)
@@ -100,40 +126,14 @@ class UserregistController extends Controller {
 	    }
 	    return $result;
 	}
-
-	/**
-	 * login képernyő újra hívása jelszó hiba esetén
-	 * hibás bejelentkezés számláló modosítása, szükség esetén fiók letiltása
-	 * @param object $app
-	 * @param UsersModel $model
-	 * @param oauth2View $view
-	 * @param object $request
-	 * @param object $user
-	 */
-	protected function pswError(&$app, &$model, &$view, &$request, &$user) {
-	    $user->errorcount++;
-	    if ($user->errorcount >= $app->falseLoginLimit) {
-	        $user->enabled = 0;
-	        $user->blocktime = date('Y-m-d H:i:s');
-	    }
-	    $client_id = $app->client_id;
-	    $tryCount = $app->falseLoginLimit - $user->errorcount;
-	    $model->updateUser($user);
-	    $request->sessionSet('client_id', $client_id);
-	    if ($user->enabled == 1) {
-	        $this->recallLoginForm($request, $view, $app, ['INVALID_LOGIN', $tryCount] );
-	    } else {
-	        $this->recallLoginForm($request, $view, $app,['LOGIN_DISABLED', ''] );
-	    }
-	}
-	
 	
 	/**
-	 * jelszó változtatás
+	 * jelszó változtatás, mydata, delAccount akciók 
 	 * sessionban érkezik a client_id
 	 * @param RequestObject $request - nick, psw1, csrtoken
+	 * @param string $action - "changepsw" | "mydata" | "delaccount"
 	 */
-	public function changepsw(RequestObject $request) {
+	protected function userAction(RequestObject $request, $action) {
 	    $model = $this->getModel('users');
 	    $view = $this->getView('userregist');
 	    $loginView = $this->getView('oauth2');
@@ -148,35 +148,69 @@ class UserregistController extends Controller {
 	        $view->errorMsg([$msg]);
 	        return;
 	    }
-	    if ((!isset($app->error)) && (!isset($user->error)) && ($user->enabled == 1)) {
-	        if ($user->pswhash == hash('sha256', $psw, false)) {
-    	        $data = new stdClass();
-    	        // create csrr token
-    	        $this->createCsrToken($request, $data);
-    	        // save client_id, nick, sighHash a sessionba
-    	        $request->sessionSet('client_id', $client_id);
-    	        $request->sessionSet('nick', $nick);
-    	        $request->sessionSet('signHash', $user->signhash);
-    	        
-    	        // képernyő kirajzolás
-    	        $data->client_id = $client_id;
-    	        $data->appName = $app->name;
-    	        $data->extraCss = $app->css;
-    	        $data->nick = $nick;
-    	        $data->title = 'CHANGE_PSW';
-    	        $data->msgs = [];
-    	        $data->psw1 = '';
-    	        $data->psw2 = '';
-    	        $data->adminNick = $request->sessionget('adminNick','');
-    	        $view->registForm2($data);
+	    if ($action == 'changepsw') {
+	        if ((!isset($app->error)) && (!isset($user->error)) && ($user->enabled == 1)) {
+	            if ($user->pswhash == hash('sha256', $psw, false)) {
+	                $data = new stdClass();
+	                // create csrr token
+	                $this->createCsrToken($request, $data);
+	                // save client_id, nick, sighHash a sessionba
+	                $request->sessionSet('client_id', $client_id);
+	                $request->sessionSet('nick', $nick);
+	                $request->sessionSet('signHash', $user->signhash);
+	                
+	                // képernyő kirajzolás
+	                $data->client_id = $client_id;
+	                $data->appName = $app->name;
+	                $data->extraCss = $app->css;
+	                $data->nick = $nick;
+	                $data->title = 'CHANGE_PSW';
+	                $data->msgs = [];
+	                $data->psw1 = '';
+	                $data->psw2 = '';
+	                $data->adminNick = $request->sessionget('adminNick','');
+	                $view->registForm2($data);
+	            } else {
+	                $this->pswError($app, $model, $loginView, $request, $user);
+	            }
 	        } else {
-	            // jelszó hiba
-	            $this->pswError($app, $model, $loginView, $request, $user);
+	            $view->errorMsg(['ERROR_NOTFOUND']);
 	        }
-	    } else {
-	        $view->errorMsg(['ERROR_NOTFOUND']);
+	    } // changePsw
+	    if ($action == 'mydata') {
+	        if ((!isset($app->error)) && (!isset($user->error))) {
+	            if ($user->pswhash == hash('sha256', $psw, false)) {
+	                echo JSON_encode($user,JSON_PRETTY_PRINT);
+	            } else {
+	                $this->pswError($app, $model, $loginView, $request, $user);
+	            }
+	        } else {
+	            $view->errorMsg(['ERROR_NOTFOUND']);
+	        }
+	    } // mydata
+	    if ($action == 'delaccount') {
+	        if ((!isset($app->error)) && (!isset($user->error))) {
+	            if ($user->pswhash == hash('sha256', $psw, false)) {
+	                $request->sessionSet('client_id', $client_id);
+	                $model->deleteUser($user);
+	                $view->successMsg(['USER_DELETED']);
+	            } else {
+	                // jelszó hiba
+	                $this->pswError($app, $model, $loginView, $request, $user);
+	            }
+	        } else {
+	            $view->errorMsg(['ERROR_NOTFOUND']);
+	        }
 	    }
-	    
+	}
+	
+	/**
+	 * jelszó változtatás
+	 * sessionban érkezik a client_id
+	 * @param RequestObject $request - nick, psw1, csrtoken
+	 */
+	public function changepsw(RequestObject $request) {
+	    $this->userAction($request, 'changepsw');
 	}
 	
 	/**
@@ -185,31 +219,7 @@ class UserregistController extends Controller {
 	 * @param object $request - nick, psw1, csrtoken
 	 */
 	public function mydata(RequestObject $request) {
-	    $model = $this->getModel('users');
-	    $view = $this->getView('userregist');
-	    $loginView = $this->getView('oauth2');
-	    $client_id = $request->sessionGet('client_id','?');
-	    $nick = $request->input('nick','');
-	    $psw = $request->input('psw1','');
-	    $app = new AppRecord();
-	    $user = new UserRecord();
-	    
-	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
-	    if ($msg != '') {
-	        $view->errorMsg([$msg]);
-	        return;
-	    }
-	    
-	    if ((!isset($app->error)) && (!isset($user->error))) {
-	        if ($user->pswhash == hash('sha256', $psw, false)) {
-	            echo JSON_encode($user,JSON_PRETTY_PRINT);
-	        } else {
-	            // jelszó hiba
-	            $this->pswError($app, $model, $loginView, $request, $user);
-	        }
-	    } else {
-	        $view->errorMsg(['ERROR_NOTFOUND']);
-	    }
+	    $this->userAction($request, 'mydata');
 	}
 
 	/**
@@ -218,35 +228,8 @@ class UserregistController extends Controller {
 	 * @param object $request - nick, psw1, csrtoken
 	 */
 	public function deleteaccount(RequestObject $request) {
-	    $model = $this->getModel('users');
-	    $view = $this->getView('userregist');
-	    $loginView = $this->getView('oauth2');
-	    $client_id = $request->sessionGet('client_id','?');
-	    $nick = $request->input('nick','');
-	    $psw = $request->input('psw1','');
-	    $app = new AppRecord();
-	    $user = new UserRecord();
-	    
-	    $msg = $this->getAppUser($app, $user, $model, $client_id, $nick, $psw);
-	    if ($msg != '') {
-	        $view->errorMsg([$msg]);
-	        return;
-	    }
-	    
-	    if ((!isset($app->error)) && (!isset($user->error))) {
-	        if ($user->pswhash == hash('sha256', $psw, false)) {
-	            $request->sessionSet('client_id', $client_id);
-	            $model->deleteUser($user);
-                $view->successMsg(['USER_DELETED']);
-	        } else {
-	            // jelszó hiba
-	            $this->pswError($app, $model, $loginView, $request, $user);
-	        }
-	    } else {
-	        $view->errorMsg(['ERROR_NOTFOUND']);
-	    }
+	    $this->userAction($request, 'delaccount');
 	}
-	
 	
 	/**
 	 * Aláírandó pdf előállítása
