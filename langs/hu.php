@@ -51,7 +51,7 @@ DEFINE('LBL_REGISTFORM1','Regisztráció 1. képernyő');
 DEFINE('LBL_REGISTFORM2','Regisztráció 2. képernyő');
 DEFINE('LBL_REGISTFORM1_HELP1','1. Töltse le az alábbi "Letöltés" linkről a saját gépére a regisztrációhoz szükséges,
  aláírandó pdf fájlt!');
-DEFINE('LBL_REGISTFORM1_HELP2','2. A letöltött fájlt írja alá az ügyfélkapú segítségével,
+DEFINE('LBL_REGISTFORM1_HELP2','2. A letöltött fájlt írja alá az ügyfélkapu segítségével,
  a <a href="https://niszavdh.gov.hu" target="_new">niszavdh.gov.hu</a>
  hitelesítő szolgáltást használva (Új "fülön" nyilik meg). Az aláírt pdf -et mentse le saját gépére, ');
 DEFINE('LBL_REGISTFORM1_HELP3','Az "új fülön":<ul>
@@ -111,7 +111,7 @@ DEFINE('ERROR_NOTFOUND','Nincs ilyen');
 DEFINE('ERROR_APP_NOTFOUND','Nincs applikáció ehhez a bejelentkezéshez');
 DEFINE('ERROR_PDF_NOT_UPLOADED','Nincs aláírt fájl feltöltve');
 DEFINE('ERROR_PDF_SIGN_ERROR','A pdf nincs aláírva, vagy az aláírás nem  megfelelő');
-DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapú aláírással már regisztráltak!');
+DEFINE('ERROR_PDF_SIGN_EXISTS','Ezzel az ügyfélkapu aláírással már regisztráltak!');
 //  login
 DEFINE('INVALID_LOGIN','Hibás bejelentkezés! Még ennyiszer próbálkozhatsz:');
 DEFINE('INVALID_LOGIN2','Hibás bejelentkezés!');

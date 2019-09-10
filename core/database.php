@@ -14,8 +14,6 @@
 *    table($tableName, $alias='', $columns='*') : Table
 *    filter($tableName, $alias='', $columns='*') : Filter
 *    transaction(function);
-*    createTable($tableName, $columns, $keys)
-*    dropTable($tableName)
 * Table class
 *    where($whereStr or [field, value] or [field, relStr, value]) or Relation  : Table 
 *    orWhere($whereStr or [field, value] or [field, relStr, value]) or Relation: Table
@@ -384,59 +382,7 @@ class DB {
 	    }
 	    $this->inTransaction = false;
 	}
-
-	/**
-	 * create new table
-	 * @param string $tableName
-	 * @param array $columns [ 
-	 *   [fieldName, 'INT'|'VARCHAR'|..., size|'', 'utf8_hungarian'|'', 'AUTO_INCREMENT'|''],
-	 *    ...
-	 * ]
-	 * @param array $keys [filedName, ...]
-	 * @return bool
-	 */
-	public function createTable(string $tableName, array $columns, array $keys): bool {
-	    $primary = '';
-	    $s = 'CREATE TABLE IF NOT EXISTS `'.$tableName.'` ('."\n";
-	    foreach ($columns as $column) {
-	            $s1 = '`'.$columen[0].'` '.$column[1];
-	            if ($column[2] != '') {
-	                $s1 .= '('.$column[2].')';
-	            }
-	            if ($column[3] != '') {
-	                $s1 .= ' COLLATE '.$column[3];
-	            }
-	            if ($column[4] != '') {
-	                $s1 .= ' '.$column[3];
-	                $primary = $column[0];
-	            }
-	            $s .= $s1.','."\n";
-	    }
-	    if ($primary != '') {
-	        $s .= 'PRIMARY KEY (`'.$primary.'`),'."\n";
-	    }
-	    $skey = '';
-	    foreach ($keys as $key) {
-	            if ($skey != '') {
-	                $skey .= ','."\n";
-	            }
-	            $skey .= 'KEY `'.$tableName.'_'.$key.'_idx` (`'.$key.'`)';
-	    }
-	    $s .= $skey."\n";
-	    $s .= ')'; 
-	    return $this->exec($s);
-	}
-	
-	/**
-	 * drop table
-	 * @param string $tableName
-	 * @return bool
-	 */
-	public function dropTable(string $tableName): bool {
-	   $s = 'DROP TABLE `'.$tableName.'`';
-	   return $this->exec($s);
-	}
-	
+	 
 } // DB
 
 class Table extends DB {

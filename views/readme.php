@@ -34,7 +34,7 @@ class ReadmeView  extends CommonView  {
    <br/>
    A rendszer biztosítja, hogy egy személy egy alkalmazásba csak egyszer regisztrálhat.
    <br/>
-   Természetesen egy ügyfélkapú loginnal több alkalmazásba is lehet regisztrálni.
+   Természetesen egy ügyfélkapu loginnal több alkalmazásba is lehet regisztrálni.
   </p>
   <p>
    A hívó web program iframe -be hívhatja be a regisztráló képernyőt vagy a login képernyőt. Szükség esetén css fájl segítségével az iframe -ben megjelenő formok megjelenését módosíthatja.

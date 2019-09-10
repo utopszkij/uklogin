@@ -7,12 +7,13 @@ class CommonView extends View {
      * @return void;}
      */
     public function successMsg(array $msgs, bool $navbar = false) {
+        global $REQUEST;
         $this->echoHtmlHead();
         ?>
         <body ng-app="app">
         <?php if ($navbar) {
         	       $p = new stdClass();
-        	       $p->adminNick = '';
+        	       $p->adminNick = $REQUEST->sessionGet('adminNick');
         	       $this->echoNavbar($p);
         }
         ?>
@@ -41,12 +42,13 @@ class CommonView extends View {
 	 * @return void
 	 */
 	public function errorMsg(array $msgs, string $backLink='', string $backStr='', bool $navbar = false) {
+	    global $REQUEST;
 	    $this->echohtmlHead();
 	    ?>
         <body ng-app="app">
         <?php if ($navbar) {
         	       $p = new stdClass();
-        	       $p->adminNick = '';
+        	       $p->adminNick = $REQUEST->sessionGet('adminNick');
         	       $this->echoNavbar($p);
               }
         ?>
@@ -101,6 +103,10 @@ class CommonView extends View {
     			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
     			      </li>
 			      <?php else : ?>
+    			      <li class="nav-item">
+    			        <a class="nav-link alert-success" target="_self">
+    			        	<em class="fa fa-user"></em>&nbsp;<strong><?php echo $p->adminNick; ?></strong></a>
+    			      </li>
     			      <li class="nav-item">
     			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/form">
     			        	<em class="fa fa-cog"></em>&nbsp;<?php echo txt('MYAPPS'); ?></a>
