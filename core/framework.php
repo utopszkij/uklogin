@@ -4,6 +4,8 @@
  * álltalános célú segéd rutinok
  */
 
+global $REQUEST;
+
 interface ModelObject {
     
 }
@@ -236,6 +238,11 @@ class Controller  implements ControllerObject {
 class Request implements RequestObject {
 	public $params = array();
 	protected $sessions = array();
+	
+	function __construct() {
+	    global $REQUEST;
+	    $REQUEST = $this;
+	}
 	
 	/**
 	 * get item from $this->params

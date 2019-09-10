@@ -143,7 +143,7 @@ class appregistControllerTest extends TestCase
     public function test_end() {
         $db = new DB();
         // clear test datas
-        $db->statement('DELETE FROM apps');
+        // $db->statement('DELETE FROM apps');
         $this->assertEquals('','');
     }
 }

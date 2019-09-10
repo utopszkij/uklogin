@@ -1,6 +1,7 @@
 <?php
 
 include 'vendor/autoload.php';
+include_once 'models/appregist.php';
 
 class UserregistController extends Controller {
 
@@ -180,7 +181,7 @@ class UserregistController extends Controller {
 	    if ($action == 'mydata') {
 	        if ((!isset($app->error)) && (!isset($user->error))) {
 	            if ($user->pswhash == hash('sha256', $psw, false)) {
-	                echo JSON_encode($user,JSON_PRETTY_PRINT);
+	                echo '<code><pre>'.JSON_encode($user,JSON_PRETTY_PRINT).'</pre></code>';
 	            } else {
 	                $this->pswError($app, $model, $loginView, $request, $user);
 	            }

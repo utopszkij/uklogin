@@ -89,14 +89,14 @@ class Oauth2Controller extends Controller {
     	$extraParams = $request->sessionGet('extraParams',[]);
     	if (count($extraParams) > 0) {
     	    foreach ($extraParams as $fn => $fv) {
-    	        if (strpos($url, '?') > 0) {
-    	            $url .= '&';
-    	        } else {
-    	            $url .= '?';
-    	        }
     	        if (($fn != 'task') && ($fn != 'client_id') &&
     	            ($fn != 'css') && ($fn != 'path') && ($fn != 'option')) {
-    	           $url .= $fn.'='.$fv;
+    	           if (strpos($url, '?') > 0) {
+    	                $url .= '&';
+    	           } else {
+    	                $url .= '?';
+    	           }
+    	           $url .= $fn.'='.urlencode($fv);
     	        }
     	    }
     	}
@@ -143,7 +143,7 @@ class Oauth2Controller extends Controller {
 
     	        $url = $this->getCallbackUrl($app, $user, $request);
     	        if (!headers_sent()) {
-    	           header('Location:'.$url.'", true, 301');
+    	           header('Location: '.$url, true, 301);
     	        } else {
     	            echo 'headers sent. Not redirect '.$url;
     	            return $user->code;
