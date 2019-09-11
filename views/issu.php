@@ -48,7 +48,7 @@ class IssuView  extends CommonView  {
     				  		<?php echo txt('OK'); ?>
     				  	</button>
     				  	&nbsp;&nbsp;
-    				  	<button type="button" class="btn btn-secondary" onclick="location=<?php echo MYDOMAIN; ?>">
+    				  	<button type="button" class="btn btn-secondary" onclick="location='<?php echo MYDOMAIN; ?>';">
     				  		<em class="fa fa-arrow-left"></em>
     				  		<?php echo txt('CANCEL'); ?>
     				  	</button>

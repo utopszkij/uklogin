@@ -1,35 +1,49 @@
 <?php
-DEFINE('WAITING','waiting');
-DEFINE('CANSTART','canStart');
-DEFINE('ATWORK','atWork');
-DEFINE('CANVERIFY','canVerify');
-DEFINE('ATVERIFY','atVerify');
-DEFINE('CLOSED','closed');
-DEFINE('NEWTASK','new task');
+// common
+DEFINE('LNGDEF',1);
 DEFINE('OK','Save');
 DEFINE('YES','Yes');
 DEFINE('NO','No');
 DEFINE('CANCEL','Cancel');
 DEFINE('CLOSE','Close');
-DEFINE('DELTASK','Remove task');
-DEFINE('QUESTION','Question');
-DEFINE('BUG','Error');
-DEFINE('SUGGEST','Suggest');
-DEFINE('OTHER','Other');
-DEFINE('TASK','task');
-DEFINE('ASSIGN','Assign');
 DEFINE('TITLE','Title');
+DEFINE('NEXT','next');
+DEFINE('PRIOR','prior');
+DEFINE('NEXTSTEP','&gt;&gt; Next step');
+
+// login form
+DEFINE('MYAPPS','My applications');
+DEFINE('USER','Login name');
+DEFINE('PSW','Password');
+DEFINE('ERROR_NICK_EMPTY','Login name is required');
+DEFINE('ERROR_PSW_EMPTY','Password is required');
+DEFINE('ERROR_PSW_INVALID','Password is too short (min.6 characters)');
+DEFINE('LBL_PSW3','Password<br />(min. 6 characters)');
+
+// man menu
+DEFINE('MAINMENU','Main menu');
+DEFINE('HOME','Home');
+DEFINE('READMY','Read me');
+DEFINE('NEWAPP','New application registration');
+DEFINE('ADMINLOGIN','Application admin login');
+DEFINE('LOGIN','Login');
+DEFINE('LOGOUT','Check out');
+
+// egyebek
 DEFINE('DESC','Description');
-DEFINE('TYPE','Típes');
-DEFINE('STATE','Statye');
-DEFINE('REQ','Requested');
-DEFINE('REQHELP','closed IDs list');
-DEFINE('INFO','');
-DEFINE('ACCESSDENIED','Access denied');
-DEFINE('NOTSTARTING','Requested not exists');
-DEFINE('TASKNOTFOUND','Task not found in database');
-DEFINE('WRONGSESSION','SESSION error -- timelimit?');
-DEFINE('MEMBERS','Members');
-DEFINE('ADMIN','Admin');
+DEFINE('STATE','state');
+DEFINE('ADMIN','admin');
+DEFINE('APPTITLE','Registration, with magyarorszag.hu login customer portal help');
+DEFINE('APPINFO','e-democracy<br />web service');
+DEFINE('EXAMPLE','Example application');
+
+// footer
+DEFINE('IMPRESSUM','Impressum');
+DEFINE('DATAPROCESS','Data management description');
+DEFINE('LICENCE','Licence');
+DEFINE('SOURCE','Source');
+DEFINE('BUGMSG','Bug report');
+DEFINE('SWRESOURCE','Software source items');
+DEFINE('SWFORKINFO',"This sofware use <a href=\"https://ahang.hu\">aHang</a> and Szabó Simon Márk 2019 Mayor's Pre-election Round 2 sofware' ideas and elements.");
 
 ?>

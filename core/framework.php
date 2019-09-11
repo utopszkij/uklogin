@@ -185,13 +185,18 @@ class Controller  implements ControllerObject {
     }
     
     /**
-     * cretae new view object from "./views/viewName.php"
+     * cretae new view object from "./views/viewName.php" or "./views/viewName_lng.php" 
      * @param string $viewName
      * @return View
      */
     protected function getView(string $viewName) {
-        include_once './views/'.$viewName.'.php';
+        global $REQUEST;
+        $lng = $REQUEST->sessionGet('lng',DEFLNG);
         $className = ucfirst($viewName).'View';
+        if (file_exists('./views/'.$viewName.'_'.$lng.'.php')) {
+            $viewName = $viewName.'_'.$lng;
+        }
+        include_once './views/'.$viewName.'.php';
         return new $className ();
     }
     

@@ -55,14 +55,16 @@ foreach ($_GET as $name => $value) {
 }
 $option = $request->input('option','default');
 $task = $request->input('task','default');
-$lng = $request->input('lng',DEFLNG);
+$lng = $request->input('lng',$request->sessionGet('lng',DEFLNG));
+$request->sessionSet('lng',$lng);
 if (!defined('LNGDEF')) {
     include './langs/'.$lng.'.php';
 }
-
-
+if (file_exists('./langs/'.$option.'_'.$lng.'.php')) {
+    include './langs/'.$option.'_'.$lng.'.php';
+}
 if (file_exists('./controllers/'.$option.'.php')) {
-	include_once './controllers/'.$option.'.php';
+    include_once './controllers/'.$option.'.php';
 	$controllerName = ucfirst($option).'Controller';
 	$controller = new $controllerName ();
 	$methods = get_class_methods($controller);
