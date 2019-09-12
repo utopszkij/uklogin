@@ -21,18 +21,30 @@ interface  RequestObject {
 
 
 class View implements ViewObject {
-    protected function loadJavaScript(string $jsName, object $params) {
+    public function loadJavaScript(string $jsName, object $params) {
     }
     
-    protected function loadJavaScriptAngular(string $jsName, object $params) {
+    public function loadJavaScriptAngular(string $jsName, object $params) {
     }
     
-    protected function echoHtmlHead() {
+    public function echoHtmlHead() {
     }
     
-    protected function echoHtmlPopup() {
+    public function echoHtmlPopup() {
     }
     
+    public function echoLngHtml(string $htmlName, $p) {
+        global $REQUEST;
+        $lng = $REQUEST->sessionget('lng','hu');
+        if (file_exists('langs/'.$htmlName.'_'.$lng.'.html')) {
+            include 'langs/'.$htmlName.'_'.$lng.'.html';
+        } else if (file_exists('langs/'.$htmlName.'.html')) {
+            include 'langs/'.$htmlName.'.html';
+        } else {
+            echo '<p>'.$htmlName.' html file not found.</p>';
+        }
+    }
+
 }
 
 class Model implements ModelObject {
@@ -47,8 +59,8 @@ class Controller implements ControllerObject {
     }
     
     protected function getView(string $viewName) {
-        include_once './views/'.$viewName.'.php';
         $viewClassName = $viewName.'View';
+        include_once './views/'.$viewName.'.php';
         return new $viewClassName ();
     }
     

@@ -81,9 +81,10 @@ http[s]://domain[/path]/oauth2/taskName/pName/pvalue....
 ## Standart eljárás új funkció megvalósítására
 - készül egy controllers/"ujfun".php fájl, ebben "Ujfun"Controller class, ebbe kerülnek majd a megvalósítandó taskok public methodusok formájában,
 - készül egy models/"ujfun".php fájl, ebben "UjfunModel" class, ebbe kerülnek majd a megvalósítandó adatmodell funkciók,
-- készül egy views/"ujfun".php opcionálisan views/"ujfun"_"lng".php fájl, ebben "UjfunView" class, ebbe kerülnek majd a megvalósítandó viewer funkciók,
+- készül egy views/"ujfun".php fájl,ebben "UjfunView" class, ebbe kerülnek majd a megvalósítandó viewer funkciók,
 - opcionálisan készülhet langs/"ujfun"_"lng".php file is ebbe kerülhetnek nyelvi definiciók,
-- opcionálisa készülhet egy js/"ujfun".js fájl, ebbe kerülhetnek majd a szükséges angularJs funkciók, változók,
+- opcionálisan készülhet langs/"képernyőNaév"_"lng".html  nyelv függő html kód részlet is
+- opcionálisan készülhet egy js/"ujfun".js fájl, ebbe kerülhetnek majd a szükséges angularJs funkciók, változók,
 - készül egy tests/"ujfunTest".php ez a controller php kodok phpunit rendszer szerinti tesztje
 - opcionálisan készülhet egy tests/"ujfunTest".js ez a js kodok mocha rendszer szerinti tesztje
 - javasolt a TDD elvek szerint elöször teszteket irni, majd az ezeket megvalósitó kódokat.
@@ -137,12 +138,30 @@ class CommonView extends View {
 include_once 'views/common.php';
 class UjfunView extends CommonView {
 	public function show(object $data) {
+		
+		// Ha a html kód nyelv független:
+		
 		$this->echoHtmlHead($data);
+		?>
+        <body ng-app="app">
+			<?php $this->echoNavbar($data); ?>
+				...... 
+				AngularJS elemeket is tartalmazó html kód 
+				....
+			<?php $this->echoPopup(); ?> 
+			<?php $this->loadJavaScriptAngular('ujfun', $data); ?>
+			<?php $this->echoFooter($data); ?>
+		</body>
+		</html>
+		<?php
+		
+		// Ha a html kód nyelv függő (ilyenkor akel langs/"formName"_"lng".html file):	
+		
 		?>
         <body ng-app="app">
 	    	<div ng-controller="ctrl" id="scope" style="display:block; padding:10px;">
 				<?php $this->echoNavbar($data); ?>
-				...... AngularJS elemeket is tartalmazó html kód ....
+				<?php $this->echoLngHtml('show',$data); ?>
 				<?php $this->echoPopup(); ?> 
 				<?php $this->loadJavaScriptAngular('ujfun', $data); ?>
 				<?php $this->echoFooter($data); ?>
@@ -150,6 +169,7 @@ class UjfunView extends CommonView {
 		</body>
 		</html>
 		<?php
+		
 	}
 	...
 }	
