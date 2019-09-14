@@ -27,7 +27,7 @@ Ha fejlesztesz valamit, nyiss egy új branch-et, arra commit-olj, majd push-old 
 
 - A web böngészők az index.php -t hívják
 - a web böngészőben futó js kód szükség esetén AJAX kommunikációt folytathat a szerverrel, ilyenkor is az index.php kerül meghívásra, speciális POST adatokkal.
-- a böngészőből történő hívás "option" és "task" paraméterben közli melyik program opciót és annak melyik taskját kell végrehajtani. Az index.php betölti a "controllers" könyvtárból az "option" paraméterben megadott nevű php fájlt. Ezután a "task" nevű publikus method kerül végrehajtásra.
+- a böngészőből történő hívás "option" és "task" paraméterben közli melyik program opciót és annak melyik taskját kell végrehajtani. Optcionálisan lng=kod paraméter is megadható. Az index.php betölti a "controllers" könyvtárból az "option" paraméterben megadott nevű php fájlt, a "lng".php és a option_"lang".php nyelvi fájlokat. Ezután a "task" nevű publikus method kerül végrehajtásra.
 - az applikáció beállításait a .config.php tartalmazza,
 - a controllerben lévő task kodok szükség esetén be inkludolnak fájlokat a "js", "moduls" és "views" könyvtárakból, valamint a többnyelvüséget biztositandó a "langs" könyvtárból.
 - a megjelenitést a style.css szabályozza.
@@ -39,7 +39,7 @@ Ha fejlesztesz valamit, nyiss egy új branch-et, arra commit-olj, majd push-old 
 - **doc** program dokumentáció
 - **images** a programban használt képfájlok
 - **js** javascript fájlok (JQuery)
-- **langs** nyelvi konstansok
+- **langs** nyelvi konstansok ("lng".php, option_"lng".php, ...)
 - **log** teszteléshez napló fájlok
 - **models** MVC adat modell php fájlok  ('modelname'.php fájlok ModelnameMode nevű class -t tartalmaznak,
 - **node_moduls** unittesthez szükséges nodejs modulok
@@ -48,7 +48,8 @@ Ha fejlesztesz valamit, nyiss egy új branch-et, arra commit-olj, majd push-old 
 - **templates** dizájn (css és images fájlok)
 - **tools** tesztelő, minöség ellenörző, dokumentáló batch scriptek
 - **vendor** teszteléshez, dokumentáláshoz szükséged dolgok
-- **views** MVC viewerek (Viewname.php fájlok, ViewNameView class-t tartalmaznak, ezek gondoskodnak többek között a html header kiirásáról jquery, bootstrap, és saját js kodok, style.css betöltéséről is. 
+- **views** MVC viewerek (Viewname.php vagy ViewName_lng.php fájlok,
+ViewNameView class-t tartalmaznak, ezek gondoskodnak többek között a html header kiirásáról jquery, bootstrap, és saját js kodok, style.css betöltéséről is. 
  
 ## A fő könyvtár fájljai
 - **composer.json** unittest használja
@@ -78,14 +79,82 @@ http[s]://domain[/path]/oauth2/taskName/pName/pvalue....
 ```
 
 ## Standart eljárás új funkció megvalósítására
-- készül egy controllers/ujfun.php fájl, ebben UjfunController class, ebbe kerülnek majd a megvalósítandó taskok public methodusok formájában,
-- készül egy models/ujfun.php fájl, ebben UjfunModel class, ebbe kerülnek majd a megvalósítandó adatmodell funkciók,
-- készül egy views/ujfun.php fájl, ebben UjfunView class, ebbe kerülnek majd a megvalósítandó viewer funkciók,
-- készül egy js/ujfun.js fájl, ebbe kerülnek majd a szükséges angularhjs funkciók, változók,
-- készül egy tests/ujfunTest.php ez a php kodok phpunit rendszer szerinti tesztje
-- készül egy tests/ujfunTest.js ez a js kodok mocha rendszer szerinti tesztje
+- készül egy controllers/"ujfun".php fájl, ebben "Ujfun"Controller class, ebbe kerülnek majd a megvalósítandó taskok public methodusok formájában,
+- készül egy models/"ujfun".php fájl, ebben "UjfunModel" class, ebbe kerülnek majd a megvalósítandó adatmodell funkciók,
+- készül egy views/"ujfun".php opcionálisan views/"ujfun"_"lng".php fájl, ebben "UjfunView" class, ebbe kerülnek majd a megvalósítandó viewer funkciók,
+- opcionálisan készülhet langs/"ujfun"_"lng".php file is ebbe kerülhetnek nyelvi definiciók,
+- opcionálisa készülhet egy js/"ujfun".js fájl, ebbe kerülhetnek majd a szükséges angularJs funkciók, változók,
+- készül egy tests/"ujfunTest".php ez a controller php kodok phpunit rendszer szerinti tesztje
+- opcionálisan készülhet egy tests/"ujfunTest".js ez a js kodok mocha rendszer szerinti tesztje
 - javasolt a TDD elvek szerint elöször teszteket irni, majd az ezeket megvalósitó kódokat.
  
+### Egy tipukus model (models/ujfun.php)
+```
+class UjfunModel extends Model {
+	public function getData(string $id): Record1 {
+		$db = new DB();
+		$table = DB::Table('tableName');
+		...... $res kialakítása az adatbázisból ....
+		return $res;
+	}
+	....
+}
+```
+
+### Egy tipikus controller (controllers/ujfun.php):
+```
+class UjfunController extends Controller {
+	public function taskName(Request $request) {
+	    $this->checkCsrToken($request);
+		$model = $this->getModel('ujfun');
+		$view = $this->getView('ujfun');
+		.....
+		$data = new stdClass();
+		$this->createCsrToken($request, $data)
+		$data->par1 = $request->input('param1');
+		$data->par2 = $model->getData($request->input('param1'));
+		.....
+		$view->show($data);	
+	}
+	....
+}	
+```
+
+### Célszerü egy CommonViewer osztályt definiálni (views/common.php) 
+```
+class CommonView extends View {
+	public function echoNavbar(object $data) {
+		...... AngularJS elemeket is tartalmazó html kód ....
+	}
+	public function echoFooter(object $data) {
+		...... AngularJS elemeket is tartalmazó html kód ....
+	}
+}
+```
+
+### Egy tipikus viewer  
+```
+include_once 'views/common.php';
+class UjfunView extends CommonView {
+	public function show(object $data) {
+		$this->echoHtmlHead($data);
+		?>
+        <body ng-app="app">
+	    	<div ng-controller="ctrl" id="scope" style="display:block; padding:10px;">
+				<?php $this->echoNavbar($data); ?>
+				...... AngularJS elemeket is tartalmazó html kód ....
+				<?php $this->echoPopup(); ?> 
+				<?php $this->loadJavaScriptAngular('ujfun', $data); ?>
+				<?php $this->echoFooter($data); ?>
+			</div>
+		</body>
+		</html>
+		<?php
+	}
+	...
+}	
+```
+
 ## tools scriptrek
 A scriptek LINUX terminálban futtathatóak:
 - **cd documentroot**

@@ -86,7 +86,9 @@ class AdatkezelesView  extends CommonView  {
             <p>A tárolt adatokat harmadik félnek csak abban az esetben adja át, ha erre őket törvény kötelezi.</p>
             <p>Adatkezelő: Fogler Tibor Adatok technikai tárolása, szerver üzemeltető: Forpsi.hu</p>
             <p>&nbsp;</p>
-            <p>&nbsp;</p>
+            <p><strong>Ez a leírás kizárólag az uklogin regisztrációs és bejelentkező modulra vonatkozik. 
+             Az a web program ami ezt a szolgáltatást használja további adatokat is kezelhet, 
+             erről az adott rendszerben találhat információkat.</strong></p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>

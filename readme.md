@@ -16,6 +16,7 @@ https://uklogin.tk
 Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az **oAuth2** szabvány szerint. 
 A rendszer biztosítja, hogy egy személy egy alkalmazásba csak egyszer regisztrálhat.
 Természetesen egy ügyfélkapú loginnal több alkalmazásba is lehet regisztrálni. 
+(pontosabban: az ügyfélkapus fiókban megadott kapcsolattartó email egyediségét ellenörzi a program)
 
 A hívó web program iframe -be hívhatja be a regisztráló képernyőt vagy a login képernyőt. Szükség esetén css fájl segítségével az iframe -ben megjelenő formok megjelenését módosíthatja.
 
@@ -33,6 +34,8 @@ https://niszavdh.gov.hu
 A program az "aHang" és Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.
  
 Lásd: https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA
+
+A program MVC ajánlás szerint struktúrált.
 
 ## Licensz
 
