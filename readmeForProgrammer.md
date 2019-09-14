@@ -155,7 +155,7 @@ class UjfunView extends CommonView {
 		</html>
 		<?php
 		
-		// Ha a html kód nyelv függő (ilyenkor akel langs/"formName"_"lng".html file):	
+		// Ha a html kód nyelv függő (ilyenkor kell langs/"formName"_"lng".html file):	
 		
 		?>
         <body ng-app="app">
@@ -173,7 +173,11 @@ class UjfunView extends CommonView {
 	}
 	...
 }	
+A változó adatok {{name}} vagy <?php echo $data->name"; ?> formában irhatóak.
+Mindkét esetben használható a txt(value) formájú nyelvi forditó rutin is.
+Ha az adat html tag -eket is tartalmazhat akkor csak a második forma használható.
 ```
+
 
 ## tools scriptrek
 A scriptek LINUX terminálban futtathatóak:

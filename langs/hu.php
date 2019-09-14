@@ -9,7 +9,7 @@ DEFINE('CLOSE','Bezár');
 DEFINE('TITLE','Cím');
 DEFINE('NEXT','következő');
 DEFINE('PRIOR','elöző');
-DEFINE('NEXTSTEP','&gt;&gt; Tovább');
+DEFINE('NEXTSTEP','Tovább');
 
 // login form
 DEFINE('MYAPPS','Applikációim');
@@ -18,7 +18,7 @@ DEFINE('PSW','Jelszó');
 DEFINE('ERROR_NICK_EMPTY','Bejelentkezési nevet meg kell adni');
 DEFINE('ERROR_PSW_EMPTY','Jelszavat meg kell adni');
 DEFINE('ERROR_PSW_INVALID','A jelszó túl rövid (min.6 karakter kell)');
-DEFINE('LBL_PSW3','Jelszó<br />(min. 6 karakter)');
+DEFINE('LBL_PSW3','Jelszó (min. 6 karakter)');
 
 // man menu
 DEFINE('MAINMENU','Főmenű');

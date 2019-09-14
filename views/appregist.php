@@ -12,41 +12,22 @@ class AppregistView  extends CommonView  {
         <body ng-app="app">
 	    <?php $this->echoNavbar($p); ?>
         <div ng-controller="ctrl" id="scope" style="display:none" class="appRegist">
-            <?php if ($p->client_id == '') : ?>
-                <h2><?php echo txt('NEWAPP'); ?></h2>
-            <?php else : ?>
+            <h2 ng-if="client_id == ''">{{txt('NEWAPP')}}</h2>
+            <div ng-show="client_id != ''">
             	<p id="pAppsSelect">
-            	<?php echo txt('LBL_TITLE')?>:&nbsp;<select id="appsSelect">
-            	<?php 
-            	foreach ($p->apps as $app) {
-            	    if ($app->client_id == $p->client_id) {
-            	        echo '<option selected="selected" value="'.$app->client_id.'">'.$app->name.'</option>';
-            	    } else {
-            	        echo '<option value="'.$app->client_id.'">'.$app->name.'</option>';
-            	    }
-            	}
-            	?>
+            	{{txt('LBL_TITLE')}}:&nbsp;<select id="appsSelect">
+            	<option ng-repeat="app in apps" value="{{app.client_id}}">{{app.name}}</option>
             	</select>
             	</p>
-                <h3>client_id:&nbsp;<?php echo $p->client_id; ?></h2>
-                <h3>client_secret:&nbsp;<?php echo $p->client_secret; ?></h2>
-            <?php endif; ?>
+                <h3>client_id:&nbsp;{{client_id}}</h2>
+                <h3>client_secret:&nbsp;{{client_secret}}</h2>
+            </div>
             <div class="alert alert-warning" role="alert">
     			  <?php echo txt('SECRETINFO'); ?>
             </div>
-            <?php if ($p->msg != '') : ?>
-            	<div class="alert alert-danger" role="alert">
-            	<?php
-            	if (is_array($p->msg)) {
-            	    foreach ($p->msg as $msg1) {
-            	        echo txt($msg1).'<br />';
-            	    }
-            	} else {
-            	   echo txt($p->msg);
-            	}
-            	?>
-            	</div>
-            <?php endif; ?>
+            <div ng-if="msg != ''" class="alert alert-danger" role="alert">
+            	<p ng-repeat="msg1 in msg">{{txt(msg1)}}</p>
+            </div>
     		<form id="formApp" name="formApp" action="<?php echo txt('MYDOMAIN'); ?>/index.php" 
     			method="post" target="_self">
     			<input type="hidden" name="option" id="option" value="appregist" />
@@ -55,53 +36,52 @@ class AppregistView  extends CommonView  {
     			<input type="hidden" name="client_id" id="client_id" value="{{client_id}}" />
     			<input type="hidden" name="client_secret" id="client_secret" value="{{client_secret}}" />
     			<input type="hidden" name="id" id="id" value="{{id}}" />
-    			<?php if ($p->client_id != '') : ?>
-                <fieldset class="userActivation">
-                	<legend><?php echo txt('USERACTIVATION'); ?></legend>
+                <fieldset ng-show="client_id != ''" class="userActivation">
+                	<legend>{{txt('USERACTIVATION')}}</legend>
                 	<p>
-                		<label><?php echo txt('USER'); ?></label>
+                		<label>{{txt('USER')}}</label>
                 		<input type="text" name="nick" id="nick" value="" size="32" />
-                		<button type="button" id="userActOk" class="btn btn-secondary"><?php echo txt('USRACTOK'); ?></button>
+                		<button type="button" id="userActOk" class="btn btn-secondary">
+                			{{txt('USRACTOK')}}
+                		</button>
                 	</p>
                 </fieldset>
-    			<?php endif; ?>
     			<fieldset class="appDatas">
-    				<legend><?php echo txt('LBL_APPDATAS'); ?></legend>
+    				<legend>{{txt('LBL_APPDATAS')}}</legend>
     				<p>
-    					<label><?php echo txt('LBL_TITLE'); ?></label>
+    					<label>{{txt('LBL_TITLE')}}</label>
     					<input type="text" name="name" id="name"value="{{name}}" size="100" class="appName" />
     				</p>
     				<p>
-    					<label><?php echo txt('LBL_DOMAIN'); ?></label>
+    					<label>{{txt('LBL_DOMAIN')}}</label>
     					<input type="text" name="domain" id="domain" value="{{domain}}" size="100" 
     						placeholder="https://yourdomain.com" class="appDomain" />
     				</p>
     				<p>
-    					<label><?php echo txt('LBL_CALLBACK'); ?></label>
+    					<label>{{txt('LBL_CALLBACK')}}</label>
     					<input type="text" name="callback" id="callback" value="{{callback}}" size="100" 
     						placeholder="https://yourdomain.com/index.php?opt=login&task=logged" class="appCallback" />
     				</p>
     				<p>
-    					<label><?php echo txt('LBL_CSS'); ?></label>
+    					<label>{{txt('LBL_CSS')}}</label>
     					<input type="text" name="css" id="css" size="100"  class="appCss" value="{{css}}" />
     				</p>
     				<p>
-    					<label><?php echo txt('LBL_FALSELOGINLIMIT'); ?></label>
-    					<input type="number" min="1" max="10" name="falseLoginLimit" value="{{falseLoginLimit}}" size="10" 
+    					<label>{{txt('LBL_FALSELOGINLIMIT')}}</label>
+    					<input type="text" min="1" max="10" name="falseLoginLimit" value="{{falseLoginLimit}}" size="10" 
     						class="appFalseLoginLimit" />
     				</p>
     			</fieldset>
     			<fieldset class="appAdmin">
-    				<legend><?php echo txt('LBL_APPADMIN'); ?></legend>
+    				<legend>{{txt('LBL_APPADMIN')}}</legend>
     				<p>
-    					<label><?php echo txt('LBL_ADMIN'); ?></label>
+    					<label>{{txt('LBL_ADMIN')}}</label>
     					<input type="hidden" name="admin" id="admin" value="{{admin}}" size="32" 
     						class="appAdmin" />
     					<var>{{admin}}</var>	
     				</p>
     			</fieldset>
-   				<?php if ($p->client_id == '') : ?>
-    			<p>
+    			<p ng-if="client_id == ''">
     				<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
     				<?php echo txt('DATAPROCESS');  ?></a>&nbsp;
     				<div style="display:inline-block; width:auto">
@@ -113,34 +93,28 @@ class AppregistView  extends CommonView  {
     					<?php echo txt('COOKIEPROCESSACCEPT'); ?>
     				</div>	
     			</p>
-    			<?php else :?>
-    			<p style="display:none">
+    			<p ng-id="client_id != ''" style="display:none">
     				<input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1" checked="checked"  /></var>
     				<input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" checked="checked" /></var>
     			</p>
-    			<?php endif; ?>
     			<p class="formButtons">
     				<button type="button" id="formAppOk" class="btn btn-primary">
-    					<em class="fa fa-check-square"></em>
-    					<?php echo txt('OK'); ?></button>&nbsp;
+    					<em class="fa fa-check-square"></em>{{txt('OK')}}
+    				</button>&nbsp;
     				<button type="button" id="formAppCancel" class="btn btn-secondary" 
     					onclick="location='<?php  echo MYDOMAIN; ?>';">
-    					<em class="fa fa-arrow-left"></em>
-    					<?php echo txt('CANCEL'); ?></button>&nbsp;
-    					
+    					<em class="fa fa-arrow-left"></em>{{txt('CANCEL')}}
+    				</button>
     				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    				<?php if ($p->client_id != '') : ?>
-    				<button type="button" id="formAppRemove" class="btn btn-danger">
-    					<em class="fa fa-ban"></em>
-    					<?php echo txt('APPREMOVE'); ?></button>&nbsp;
-    				<?php endif; ?>	
+    				<button ng-show="client_id != ''" type="button" id="formAppRemove" class="btn btn-danger">
+    					<em class="fa fa-ban"></em>{{txt('APPREMOVE')}}
+    				</button>&nbsp;
     			</p>
     		</form>
         	<?php $this->echoHtmlPopup(); ?>
        	</div>
-  	  
-        <?php $this->loadJavaScriptAngular('appregist',$p); ?>
 		<?php $this->echoFooter(); ?>
+        <?php $this->loadJavaScriptAngular('appregist',$p); ?>
         </body>
         </html>
         <?php 		
@@ -156,13 +130,16 @@ class AppregistView  extends CommonView  {
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($res); ?>
-	    <div class="savedMsg" id="scope">
-	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
-	    	<p>Client_id: <?php echo $res->client_id; ?></p>
-	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
-	    	<p><?php echo txt('ADMININFO'); ?></p>
-	    </div>
+        <div ng-controller="ctrl" id="scope" style="display:none" class="appRegist">
+    	    <div class="savedMsg" id="scope">
+    	    	<h2 class="alert alert-success">{{txt('APPSAVED')}}</h2>
+    	    	<p>Client_id: {{client_id}}</p>
+    	    	<p>Client_secret: {{client_secret}}</p>
+    	    	<p><?php echo txt('ADMININFO'); ?></p>
+    	    </div>
+        </div>
 		<?php $this->echoFooter(); ?>
+        <?php $this->loadJavaScriptAngular('appregist',$res); ?>
         </body>
         </html>
 	    <?php 
@@ -178,11 +155,14 @@ class AppregistView  extends CommonView  {
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($rec); ?>
-	    <div class="successMsg" id="scope">
-	    <h2 class="alert alert-success"><?php echo txt('APPREMOVED'); ?></h2>
-	    <p><?php echo $rec->name; ?></p>
-	    </div>
+        <div ng-controller="ctrl" id="scope" style="display:none" class="appRegist">
+    	    <div class="successMsg" id="scope">
+    	    <h2 class="alert alert-success">{{txt('APPREMOVED')}}</h2>
+    	    <p>{{name}}</p>
+    	    </div>
+        </div>
 		<?php $this->echoFooter(); ?>
+        <?php $this->loadJavaScriptAngular('appregist',$rec); ?>
         </body>
         </html>
         <?php 

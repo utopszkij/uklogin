@@ -106,7 +106,8 @@
 		 var client_id = $('#appsSelect').val();
 	  	 window.location = "./index.php?option=appregist&task=adminform&client_id="+client_id; 
 	  });
-	  
+	  window.client_id = $scope.client_id;
+	  window.setTimeout("$('#appsSelect').val(window.client_id);",1000);
 	  $('#scope').show();
   }	
   

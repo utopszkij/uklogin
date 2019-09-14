@@ -17,16 +17,16 @@ class FrontpageView  extends CommonView  {
         ?>	
         <body ng-app="app">
          <?php $this->echoNavbar($p); ?>
-         <div ng-controller="ctrl" id="scope" style="display:none">
+         <div ng-controller="ctrl" id="scope" style="display:block">
 			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
 			      <img class="d-block w-100" src="./templates/default/cover_1.jpg" alt="First slide">
 			      <div class="buttons">
 			      	<a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      		<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
+			      		<em class="fa fa-plus-circle"></em>&nbsp;{{txt('NEWAPP')}}</a>&nbsp;
 			      	<a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      		<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
+			      		<em class="fa fa-info-circle"></em>&nbsp;{{txt('DESC')}}</a>
 			      </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo txt('APPTITLE'); ?></h5>
@@ -37,9 +37,9 @@ class FrontpageView  extends CommonView  {
 			      <img class="d-block w-100" src="./templates/default/cover_2.jpg" alt="Second slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;{{txt('NEWAPP')}}</a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;{{txt('DESC')}}</a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo txt('APPTITLE'); ?></h5>
@@ -50,9 +50,9 @@ class FrontpageView  extends CommonView  {
 			      <img class="d-block w-100" src="./templates/default/cover_4.jpg" alt="Third slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;{{txt('NEWAPP')}}</a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;{{txt('DESC')}}</a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo txt('APPTITLE'); ?></h5>
@@ -64,9 +64,9 @@ class FrontpageView  extends CommonView  {
 			      <img class="d-block w-100" src="./templates/default/logo.jpg" alt="Foorth slide">
 			        <div class="buttons">
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/appregist/add" target="_self">
-			      	  	<em class="fa fa-plus-circle"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>&nbsp;
+			      	  	<em class="fa fa-plus-circle"></em>&nbsp;{{txt('NEWAPP')}}</a>&nbsp;
 			      	  <a href="<?php echo MYDOMAIN; ?>/opt/readme/show" target="_self">
-			      	  	<em class="fa fa-info-circle"></em>&nbsp;<?php echo txt('DESC'); ?></a>
+			      	  	<em class="fa fa-info-circle"></em>&nbsp;{{txt('DESC')}}</a>
 			        </div>
 			       <div class="carousel-caption d-none d-md-block">
 				   	<h5><?php echo txt('APPTITLE'); ?></h5>
@@ -78,23 +78,23 @@ class FrontpageView  extends CommonView  {
 			  
 			  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 			    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			    <span class="sr-only"><?php echo txt('PRIOR'); ?>Elöző</span>
+			    <span class="sr-only">{{txt('PRIOR')}}Elöző</span>
 			  </a>
 			  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
 			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only"><?php echo txt('NEXT'); ?></span>
+			    <span class="sr-only">{{txt('NEXT')}}</span>
 			  </a>
 			</div><!-- carousel -->   
 			<div class="counters">
 				<div class="appCount">
 					<em class="fa fa-cog"></em><br />
 					Regisztrált applikációk száma:
-					<var><?php echo $p->appCount; ?></var>
+					<var>{{appCount}}</var>
 				</div>
 				<div class="userCount">
 					<em class="fa fa-user"></em><br />
 					Regisztrált felhasználói fiókok száma:
-					<var><?php echo $p->userCount; ?></var>
+					<var>{{userCount}}</var>
 				</div>
 			</div>  
 			<div class="info">

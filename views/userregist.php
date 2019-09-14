@@ -12,12 +12,12 @@ class UserregistView  extends CommonView  {
 	    ?>
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none;" class="registForm1">
-		    <h2><?php echo $data->appName; ?></h2>
-		    <h3><?php echo txt($data->title); ?></h3>
+		    <h2>{{appName}}</h2>
+		    <h3>{{txt(title)}}</h3>
 		    <p><?php echo txt('LBL_REGISTFORM1_HELP1'); ?></p>
-		    <p><?php echo txt('LBL_PDF'); ?>
+		    <p>{{txt('LBL_PDF')}}
 		    	<a href="<?php echo MYDOMAIN; ?>/index.php?option=userregist&task=pdf&client_id=<?php echo $data->client_id; ?>">
-		    		<?php echo txt('LBL_DOWNLOAD'); ?>
+		    		{{txt('LBL_DOWNLOAD')}}
 		    	</a>
 		    </p>
 		    <p><?php echo txt('LBL_REGISTFORM1_HELP2'); ?></p>
@@ -28,14 +28,16 @@ class UserregistView  extends CommonView  {
 				target="_self" enctype="multipart/form-data">
 				<input type="hidden" name="option" value="userregist" />
 				<input type="hidden" name="task" value="registform2" />
-				<input type="hidden" name="nick" value="<?php echo $data->nick; ?>" />
-				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
+				<input type="hidden" name="nick" value="{{nick}}" />
+				<input type="hidden" name="{{csrToken}}" value="1" />
 				<p style="background-color:#ade9ed; padding:4px;">
-					<lable><?php echo txt('LBL_SIGNEDPDF'); ?></lable>
+					<lable>{{txt('LBL_SIGNEDPDF')}}</lable>
 					<input type="file" name="signed_pdf" />
 				</p>
 				<p>
-					<button type="submit" class="btn btn-primary"><?php echo txt('NEXTSTEP'); ?></button>
+					<button type="submit" class="btn btn-primary">
+						{{txt('NEXTSTEP')}}
+					</button>
 				</p>
 			</form>
 	    </div>
@@ -57,25 +59,20 @@ class UserregistView  extends CommonView  {
         <body ng-app="app">
 	    <div ng-controller="ctrl" id="scope" style="display:none" class="registForm2">
 	    
-		    <h2><?php echo $data->appName; ?></h2>
-		    <h3><?php echo txt($data->title); ?></h3>
-		    <?php if (count($data->msgs) > 0) : ?>
+		    <h2>{{appName}}</h2>
+		    <h3>{{txt(title)}}</h3>
+		    <div ng-if="msgs.length() > 0">
 		    	<p class="alert alert-danger">
-		    	<?php
-		    	foreach($data->msgs as $msg) {
-		    	    echo $msg.'<br />';
-		    	}
-		    	?>
-		    	</p>
-		    <?php endif; ?>
+		    	<p ng-repeat="msg of msgs">{{msg}}</p> 
+		    </div>
 			<form name="formRegist2" id="formRegist2" 
 				action="<?php echo MYDOMAIN; ?>/index.php" method="post" 
 				target="_self">
 				<input type="hidden" name="option" value="userregist" />
 				<input type="hidden" name="task" value="doregist" />
-				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
+				<input type="hidden" name="{{csrToken}}" value="1" />
 				<p>
-					<label><?php echo txt('USER'); ?></label>
+					<label>{{txt('USER')}}</label>
 					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
 					<input type="text" name="nick" id="nick" value="" />
 					<?php else : ?>
@@ -84,36 +81,32 @@ class UserregistView  extends CommonView  {
 					<?php endif; ?>   
 				</p>
 				<p>
-					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
-					<label><?php echo txt('LBL_PSW3'); ?></label>
-					<?php else : ?>
-					<label><?php echo txt('LBL_NEW_PSW'); ?></label>
-					<?php endif; ?>
-					<input type="password" name="psw1" id="psw1" value="<?php echo $data->psw1; ?>" />
+					<label ng-if="((nick == undefined) | (nick == ''))">{{txt('LBL_PSW3')}}</label>
+					<label ng-if="nick > ' '">{{txt('LBL_NEW_PSW')}}</label>
+					<input type="password" name="psw1" id="psw1" value="{{psw1}}" />
 				</p>
 				<p>
-					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
-					<label><?php echo txt('LBL_PSW4'); ?></label>
-					<?php else : ?>
-					<label><?php echo txt('LBL_NEW_PSW2'); ?></label>
-					<?php endif; ?>
-					<input type="password" name="psw2" id="psw2" value="<?php echo $data->psw2; ?>" />
+					<label ng-if="((nick == undefined) | (nick == ''))">{{txt('LBL_PSW4')}}</label>
+					<label ng-id="nick > ''">{{txt('LBL_NEW_PSW2')}}</label>
+					<input type="password" name="psw2" id="psw2" value="{{psw2}}" />
 				</p>
     			<p>
     				<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
-    				<?php echo txt('DATAPROCESS');  ?></a>&nbsp;
+    				{{txt('DATAPROCESS')}}</a>&nbsp;
     				<div style="display:inline-block; width:auto">
     					<var><input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1"  /></var>
-    					<?php echo txt('DATAPROCESSACCEPT'); ?>&nbsp;&nbsp;
+    					{{txt('DATAPROCESSACCEPT')}}&nbsp;&nbsp;
     				</div>
     				<div style="display:inline-block; width:auto">
 	    				<var><input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" /></var>
-    					<?php echo txt('COOKIEPROCESSACCEPT'); ?>
+    					{{txt('COOKIEPROCESSACCEPT')}}
     				</div>	
     			</p>
 				
 				<p>
-					<button type="button" id="formRegist2Ok" class="btn btn-primary"><?php echo txt('OK'); ?></button>
+					<button type="button" id="formRegist2Ok" class="btn btn-primary">
+						{{txt('OK')}}
+					</button>
 				</p>
 			</form>		    
 	    </div>
