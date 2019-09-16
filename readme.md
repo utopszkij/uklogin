@@ -87,7 +87,7 @@ Result: -
 Működés: A user a lentebb leírt módon regisztrálni tudja magát. Sikeres regisztráció után erről egy üzenet tájékoztatja.
 
 
-### AccesToken kérése
+### Access Token kérése
 url:
 
 ```
