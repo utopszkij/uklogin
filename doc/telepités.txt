@@ -10,7 +10,7 @@ sudo apt-get install mc
 pdf kezelő eszközök
 -------------------
 
-install poppler-utils
+sudo apt-get install poppler-utils
 
 LAMP telepítése
 ---------------

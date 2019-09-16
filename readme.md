@@ -49,7 +49,77 @@ tibor.fogler@gmail.com
 
 https://github.com/utopszkij
 
-## Működés
+## API funkciók
+
+### login form megjelenítése
+
+url:
+
+```
+<ukLoginDomain>/oath2/loginform/client_id/<client_id
+```
+
+POST paraméterek:  -
+
+
+Result: - 
+
+
+Műjödés: Megjeleniti a login képernyőt. Ha a user helyes nevet és jelszót ír be akkor visszahivja az
+applikáció regisztrációnál megadott callback címet paraméterként egy "code" értéket küld. Ha a user hibás adatokat ad meg akkor hibaüzenetet írki, és a user  - a beállított limitnek megfelelő számban - újra próbálkozhat. A beállított limitet tiullépő hibás kisérlet esetén a fiók 10 órára zárolásra kerül. Ezt a zárolást az applikáció admin korábban is feloldhatja. A "code" csak korlátozott ideig és csak egyszer használható.
+
+Opcionálisan az hívó url végén /state/<xxxxxxxx> tetszőleges kiegészitő paraméter is megadható. Sikeres login után a callback hívásnál, a "code" mellett ezt a paramétert is megkapja az applikáció
+
+
+### regisztrációs form megjelenítése
+url:
+
+```
+<ukLoginDomain>/opt/userregist/registform/client_id/<client_id>
+```
+
+POST paraméter -
+
+
+Result: -
+
+
+Működés: A user a lentebb leírt módon regisztrálni tudja magát. Sikeres regisztráció után erről egy üzenet tájékoztatja.
+
+
+### AccesToken kérése
+url:
+
+```
+<ukloginDomain>/oath2/access_token
+```
+
+POST paraméterek: code, client_id, client_secret
+
+
+Result: {"acces_token":"xxxxx"} vagy {"error":"errorMsg"}
+
+
+Működés: Visszaad egy korlátozott ideg, és csak egyszer használható "accesToken" kódot.
+
+
+### User nick név lekérdezése
+url:
+
+```
+<ukloginDomain>/oath2/userinfo
+```
+
+POST paraméterek: access_token
+
+
+Result: {"nick":"xxxxx"} vagy {"error":"errorMsg"}
+
+
+Működés: visszaadja a bejelentkezett user "nick nevét".
+
+
+## A funkciók müködésének leírása
 
 ### Új applikáció regisztrálás 
 

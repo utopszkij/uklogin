@@ -59,9 +59,36 @@
     https://github.com/utopszkij
    </a>
   </p>
-  <h2 id="mukodes">
-   Működés
-  </h2>
+  
+  <h2>API funkciók</h2>
+
+	<br /><strong>login form megjelenítése</strong><br /><br />
+	url: ukLoginDomain/oath2/loginform/client_id/xxxxxxxx<br />
+	POST paraméterek: -<br />
+	Result: -<br />
+	Műjödés: Megjeleniti a login képernyőt. Ha a user helyes nevet és jelszót ír be akkor visszahivja az applikáció regisztrációnál megadott callback címet paraméterként egy "code" értéket küld. Ha a user hibás adatokat ad meg akkor hibaüzenetet írki, és a user - a beállított limitnek megfelelő számban - újra próbálkozhat. 
+	A beállított limitet tullépő hibás kisérlet esetén a fiók 10 órára zárolásra kerül. Ezt a zárolást az applikáció admin korábban is feloldhatja. A "code" csak korlátozott ideig és csak egyszer használható.<br />
+	Opcionálisan az hívó url végén /state/xxxxxxxx tetszőleges kiegészitő paraméter is megadható. Sikeres login után a callback hívásnál ezt a paramétert is megkapja (a "code" mellett) az applikáció<br />
+
+	<br /><strong>regisztrációs form megjelenítése</strong><br /><br />
+	url: ukLoginDomain/opt/userregist/registform/client_id/xxxxxxxx<br />
+	POST paraméter -<br />
+	Result: -<br />
+	Működés: A user a lentebb leírt módon regisztrálni tudja magát. Sikeres regisztráció után erről egy üzenet tájékoztatja.<br />
+
+	<br /><strong>AccesToken kérése</strong><br /><br />
+	url: ukloginDomain/oath2/access_token<br />
+	POST paraméterek: code, client_id, client_secret<br />
+	Result: {"accesToken":"xxxxx"} vagy {"error":"errorMsg"}<br />
+	Működés: Visszaad egy korlátozott ideg, és csak egyszer használható "accesToken" kódot.<br />
+
+	<br /><strong>User nick név lekérdezése</strong><br /><br />
+	url: ukloginDomain/oath2/userinfo<br />
+	POST paraméterek: access_token<br />
+	Result: {"nick":"xxxxx"} vagy {"error":"errorMsg"}<br />
+	Működés: visszaadja a bejelentkezett user "nick nevét".<br />
+  
+  <h2 id="mukodes">A funkciók működése részletesebben</h2>
   <h3 id="az-applikacio-regisztralas">
    Új applikáció regisztrálás
   </h3>

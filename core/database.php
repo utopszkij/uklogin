@@ -14,6 +14,9 @@
 *    table($tableName, $alias='', $columns='*') : Table
 *    filter($tableName, $alias='', $columns='*') : Filter
 *    transaction(function);
+*	 createTable($tableName, $columns, $keys): bool 
+*	 dropTable($tableName): bool 
+*	 emptyTable($tableName): bool 
 * Table class
 *    where($whereStr or [field, value] or [field, relStr, value]) or Relation  : Table 
 *    orWhere($whereStr or [field, value] or [field, relStr, value]) or Relation: Table
@@ -381,6 +384,60 @@ class DB {
 	       $this->mysqli->commit();
 	    }
 	    $this->inTransaction = false;
+	}
+	
+	/**
+	 * adatbázis tábla kreálása (ha még nem létezik)
+	 * @param array $columns [[string name, string type, number len, bool autoIncPrimary], ...]
+	 * @param array $keys [nam, ...]
+	 * @return bool
+	 */
+	public function createTable(string $tableName, array $columns, array $keys): bool {
+	    $primary = '';
+	    $s = 'CREATE TABLE IF NOT EXISTS `'.$tableName.'` ('."\n";
+	    foreach ($columns as $column) {
+	        $s1 = '`'.$column[0].'` '.$column[1];
+	        if ($column[2] != '') {
+	            $s1 .= '('.$column[2].')';
+	        }
+	        if (isset($column[3])) {
+	            if ($column[3]) {
+	                $s1 .= ' AUTO_INCREMENT';
+	                $primary = $column[0];
+	            }
+	        }
+	        $s .= $s1.',';
+	    }
+	    if ($primary != '') {
+	        $s1 = 'PRIMARY KEY (`'.$primary.'`)';
+	    }
+	    $s1 = '';
+	    foreach ($keys as $key) {
+	        if ($s1 != '') {
+	            $s1 .= ','."\n";
+	        }
+	        $s1 .= 'KEY `'.$table_name.'_'.$key.'_ndx` (`'.$key.'`)';
+	    }
+	    $s .= $s1."\n".')';
+	    return $this->exec($s);
+	}
+	
+	/**
+	 * tábla megsemisitése
+	 * @param string $tableName
+	 * @return bool
+	 */
+	public function dropTable(string $tableName): bool {
+	    return $this->exec('DROP TABLE `'.$tableName.'`');
+	}
+	
+	/**
+	 * tábla tartalmának törlése
+	 * @param string $tableName
+	 * @return bool
+	 */
+	public function emptyTable(string $tableName): bool {
+	    return $this->exec('DELETE FROM `'.$tableName.'`');
 	}
 	 
 } // DB

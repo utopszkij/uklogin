@@ -81,13 +81,19 @@ class UserregistView  extends CommonView  {
 					<?php endif; ?>   
 				</p>
 				<p>
-					<label ng-if="((nick == undefined) | (nick == ''))">{{txt('LBL_PSW3')}}</label>
-					<label ng-if="nick > ' '">{{txt('LBL_NEW_PSW')}}</label>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
+					<label>{{txt('PSW')}}</label>
+					<?php else : ?>
+					<label>{{txt('LBL_NEW_PSW')}}</label>
+					<?php endif; ?>
 					<input type="password" name="psw1" id="psw1" value="{{psw1}}" />
 				</p>
 				<p>
-					<label ng-if="((nick == undefined) | (nick == ''))">{{txt('LBL_PSW4')}}</label>
-					<label ng-id="nick > ''">{{txt('LBL_NEW_PSW2')}}</label>
+					<?php if (!isset($data->nick) || ($data->nick == '')) : ?>
+					<label>{{txt('LBL_PSW4')}}</label>
+					<?php else : ?>
+					<label>{{txt('LBL_NEW_PSW2')}}</label>
+					<?php endif; ?>
 					<input type="password" name="psw2" id="psw2" value="{{psw2}}" />
 				</p>
     			<p>
