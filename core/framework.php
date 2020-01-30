@@ -230,10 +230,10 @@ class Controller  implements ControllerObject {
      * @return void
      */
     protected function checkCsrToken(&$request) {
-        if ($request->input($request->sessionGet('csrToken')) != 1) {
+        if ($request->input($request->sessionGet('csrToken','?'),'nincs') != 1) {
             echo '<p>invalid csr token</p> sessionban csrToken='.$request->sessionGet('csrToken','?').
-            ' inputban='.$request->input($request->sessionGet('csrToken'),'??').' '-__FILE__;
-            exit();
+            ' inputban='.$request->input($request->sessionGet('csrToken','?'),'nincs').' '.__FILE__;
+           exit();
         }
     }
     /**
@@ -311,8 +311,14 @@ class Request implements RequestObject {
 	public function sessionSet(string $name, $value) {
 	    $sessionId = session_id();
 	    $this->session_init($sessionId);
-	    $this->sessions->$name = $value;
-	    $this->session_save($sessionId);
+	    if (is_object($this->sessions)) {
+	    	$this->sessions->$name = $value;
+	    	$this->session_save($sessionId);
+	    }	else {
+         $this->sessions = new stdClass();
+	    	$this->sessions->$name = $value;
+	    	$this->session_save($sessionId);
+	    }
 	}
 	
 	/**

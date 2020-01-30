@@ -21,7 +21,7 @@ class UserregistController extends Controller {
         $request->sessionSet('nick','');
         if (!isset($app->error)) {
             $data = new stdClass();
-            // create csrr token
+            // create csr token
             $this->createCsrToken($request, $data);
             // save client_id a sessionba
             $request->sessionSet('client_id', $client_id);
@@ -351,17 +351,14 @@ class UserregistController extends Controller {
 	    $res->signHash = '';
 	    $igazolasPWD = $tmpDir;
 	    $filePath = $tmpDir.'/'.$fileName;
-
 	    // pdf tartalom ellenörzése Smalot parserrel
 	    $this->parsePdf($filePath, $client_id, $res);
 
 	    // aláirás ellenörzés pdfsig segitségével.
 	    $this->checkPdfSig($filePath, $res);
-
 	    if ($res->error == '') {
 	        $this->extractIgazolasFromPdf($filePath, $igazolasPWD, $res);
         }
-
         if ($res->error == '') {
             $this->extractMeghatalmazoFromIgazolas($igazolasPWD, $res);
 	     }
@@ -372,11 +369,11 @@ class UserregistController extends Controller {
 	     }
 	     if ($res->error == '') {
             // feldolgozza a meghatalmazo.xml fájlt
-	        $email = '';
-	        $emails = [''];
-	        $origName = '';
-	        $birthDate = '';
-	        $mothersName = '';
+	      $email = '';
+	      $emails = [''];
+	      $origName = '';
+	      $birthDate = '';
+	      $mothersName = '';
         	$i = 0;
         	//+ 2020.01.30 új aláírás rendszer
         	$lines = file($igazolasPWD.'/meghatalmazo.xml');
@@ -409,7 +406,7 @@ class UserregistController extends Controller {
                    }
                    $i++;
         	}
-        	$res->signHash = hash('sha256', $origName.$birthdate,$mothersname);
+        	$res->signHash = hash('sha256', $origName.$birthDate.$mothersName, false);
 			/* régi aláírás rendszer
  			$xmlStr = implode("\n", file($igazolasPWD.'/meghatalmazo.xml'));
 	        preg_match('/emailAddress\"\>.*\</', $xmlStr , $emails);
@@ -425,10 +422,6 @@ class UserregistController extends Controller {
 	       unlink($igazolasPWD.'/meghatalmazo.xml');
 	     }
         //- 2020.01.30 új aláírás rendszer
-	     
-        unlink($igazolasPWD.'/igazolas.pdf');
-        $res->signHash = hash('sha256', $orgName.$birthdate.$mothersName ,false);
-	      
 	    return $res;
 	}
 
@@ -513,7 +506,7 @@ class UserregistController extends Controller {
      * @return void
 	 */
 	public function registform2(RequestObject $request) {
-	    $appModel = $this->getModel('appregist');
+       $appModel = $this->getModel('appregist');
 	    $model = $this->getModel('users'); // szükség van rá, ez kreál szükség esetén táblát.
 	    $view = $this->getView('userregist');
 	    $client_id = $request->sessionGet('client_id','');
@@ -529,20 +522,15 @@ class UserregistController extends Controller {
 	        $app->name = 'testApp';
 	        $app->css = '';
 	    }
-
 	    // csrttoken ellnörzés
 	    $this->checkCsrToken($request);
-
-	    // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
+		 // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
         $tmpDir = $this->createWorkDir();
-
 	    // biztos ami biztos...
 	    $this->clearFolder($tmpDir);
-
 	    // uploaded file feldolgozása
 	    // aláírás ellenörzés, $signHash kinyerése
 	    $res = $this->getSignHash($request, $tmpDir);
-
 	    if ($res->error != '') {
 	        // $res->error formája ERRORTOKEN(num)
 	        $w = explode('(',$res->error);
@@ -553,14 +541,12 @@ class UserregistController extends Controller {
 	        }
 	        $view->errorMsg([$w[0],  $w[1]]);
 	    }
-
 	    if (($res->error == '') && ($forgetPswNick == '')) {
 	        $res = $this->checkSignHashExist($client_id, $res->signHash);
 	        if ($res->error != '') {
 	            $view->errorMsg([$res->error, 'nick:'.$res->nick]);
 	        }
 	    }
-	    
 	    if (($res->error == '') && ($forgetPswNick != '')) {
 	        // most azt kell megnézni azonos signHash keletkezett-e?
 	        $user = $model->getUserByNick($client_id, $forgetPswNick);
@@ -568,11 +554,9 @@ class UserregistController extends Controller {
 	            $view->errorMsg([txt('ERROR_SIGNNOTEQUAL')]);
 	        }
 	    }
-	    
 	    // munkakönyvtár és tartalmának teljes törlése
 	    $this->clearFolder($tmpDir);
 	    rmdir($tmpDir);
-
 	    if ($res->error == '') {
 	        // echo ouput form
 	        $data = new stdClass();
@@ -591,9 +575,11 @@ class UserregistController extends Controller {
 	        }
 	        $data->psw1 = '';
 	        $data->psw2 = '';
-	        $data->adminNick = $request->sessionget('adminNick','');
+	        $data->adminNick = $request->sessionGet('adminNick','');
 	        $view->registForm2($data);
 	    }
+		
+		
 	}
 
 	/**
@@ -639,6 +625,8 @@ class UserregistController extends Controller {
 	    $model = $this->getModel('users'); // szükség van rá, ez kreál táblát.
 	    $view = $this->getView('userregist');
 
+
+
 	    // csrttoken ellnörzés
 	    $this->checkCsrToken($request);
 
@@ -646,9 +634,7 @@ class UserregistController extends Controller {
 	    $client_id = $request->sessionGet('client_id','');
 	    $signHash = $request->sessionGet('signHash','');
 	    $forgetPswNick = $request->sessionGet('nick','');
-	    
 	    $app = $appModel->getData($client_id);
-	    
 	    if ($signHash == '') {
 	        echo '<p>invalid signHash</p>';
 	        exit();
@@ -686,7 +672,7 @@ class UserregistController extends Controller {
 	       $data->nick = $forgetPswNick;
 	    }
 	    if (isset($data->forgetPswNick)) {
-	       $request->sessionset('nick',$data->forgetPswNick);
+	       $request->sessionSet('nick',$data->forgetPswNick);
 	    }
 	    $msgs = $model->check($data);
 	    if (count($msgs) > 0) {
