@@ -1,4 +1,5 @@
 <?php
+// 2020.01.30 Új aláírás rendszer
 
 include 'vendor/autoload.php';
 include_once 'models/appregist.php';
@@ -310,7 +311,7 @@ class UserregistController extends Controller {
     }
 
     /**
-     * extract igazolas.xml a meghatamazo.pdf -ből
+     * extract igazolas.pdf a meghatamazo.pdf -ből
      * @param string $filePath
      * @param string $igazolasPWD
      * @param object $res {error:"xxxxxx" | error:"", ........}
@@ -363,19 +364,54 @@ class UserregistController extends Controller {
 
         if ($res->error == '') {
             $this->extractMeghatalmazoFromIgazolas($igazolasPWD, $res);
-	    }
-
-	    if (($res->error != '') && (isset($res->pdfHash))) {
+	     }
+	     if (($res->error != '') && (isset($res->pdfHash))) {
 	        $res->error = '';
 	        $res->signHash = $res->pdfHash;
             return $res;
-	    }
-
-	    if ($res->error == '') {
+	     }
+	     if ($res->error == '') {
             // feldolgozza a meghatalmazo.xml fájlt
 	        $email = '';
 	        $emails = [''];
-	        $xmlStr = implode("\n", file($igazolasPWD.'/meghatalmazo.xml'));
+	        $origName = '';
+	        $birthDate = '';
+	        $mothersName = '';
+        	$i = 0;
+        	//+ 2020.01.30 új aláírás rendszer
+        	$lines = file($igazolasPWD.'/meghatalmazo.xml');
+        	while ($i < count($lines)) {
+                   $s = trim($lines[$i]);
+                   // Új aláíró rendszerhez:
+                   if ((strpos($s,'szuletesiNev') > 0)  & (isset($lines[$i+1]))) {
+                       $s = trim($lines[$i+1]);
+                       $w = explode('>',$s);
+                       if (count($w) > 1) {
+                            $w2 = explode('<',$w[1]);
+                            $origName = mb_strtoupper($w2[0]);
+                       }
+                   }
+                   if ((strpos($s,'anyjaNeve') > 0)  & (isset($lines[$i+1]))) {
+                       $s = trim($lines[$i+1]);
+                       $w = explode('>',$s);
+                       if (count($w) > 1) {
+                            $w2 = explode('<',$w[1]);
+                            $mothersName = mb_strtoupper($w2[0]);
+                       }
+                   }
+                   if ((strpos($s,'szuletesiDatum') > 0)  & (isset($lines[$i+1]))) {
+                       $s = trim($lines[$i+1]);
+                       $w = explode('>',$s);
+                       if (count($w) > 1) {
+                            $w2 = explode('<',$w[1]);
+                            $birthDate = substr(str_replace('.','-',$w2[0]),0,10);
+                       }
+                   }
+                   $i++;
+        	}
+        	$res->signHash = hash('sha256', $origName.$birthdate,$mothersname);
+			/* régi aláírás rendszer
+ 			$xmlStr = implode("\n", file($igazolasPWD.'/meghatalmazo.xml'));
 	        preg_match('/emailAddress\"\>.*\</', $xmlStr , $emails);
 	        if (count($emails) > 0) {
 	            $email = $emails[0];
@@ -385,8 +421,14 @@ class UserregistController extends Controller {
 	        } else {
 	            $res->signHash = hash('sha256', $email ,false);
 	        }
-	        unlink($igazolasPWD.'/meghatalmazo.xml');
-	    }
+	       */ 
+	       unlink($igazolasPWD.'/meghatalmazo.xml');
+	     }
+        //- 2020.01.30 új aláírás rendszer
+	     
+        unlink($igazolasPWD.'/igazolas.pdf');
+        $res->signHash = hash('sha256', $orgName.$birthdate.$mothersName ,false);
+	      
 	    return $res;
 	}
 

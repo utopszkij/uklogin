@@ -24,7 +24,7 @@ Az applikáció adminisztrátora az erre a célra szolgáló web felületen tudj
 
 A regisztrációs folyamatban használt aláírás szolgáltató:
 
-https://niszavdh.gov.hu 
+https://szuf.magyarorszag.hu/szuf_avdh_feltoltes 
 
 
 ## Programnyelvek
