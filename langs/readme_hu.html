@@ -98,7 +98,7 @@
    <strong>
     client_secret
    </strong>
-   adat. Ezeket gondosan meg kell örizni az app adminisztrálásához és a login/regist rendszer használatához szükség van rájuk.
+   adat. Ezeket gondosan meg kell őrizni az app adminisztrálásához és a login/regist rendszer használatához szükség van rájuk.
   </p>
   <p>
    Ezen adatok egy része az adminisztrátor által később is  módosítható, az app admin ugyancsak kezdeményezheti az app és saját adatainak együttes törlését is.
@@ -164,8 +164,7 @@
   </h3>
   <ol>
    <li>
-    A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál). 
-    /li>
+    A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál).
    <li>
     A user a letöltött pdf -et az ügyfélkapus ingyenes aláírás rendszerrel aláírja, és az aláírt pdf -et is letölti saját gépére.
    </li>
@@ -182,7 +181,8 @@
    <br/>
    - a feltöltött pdf alá van írva és sértetlen?
    <br/>
-   - az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
+   - az aláíró személyes adataiból képzett bináris kód (ásd lentebb) szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
+   
    <br/>
    - a választott nicknév egyedi az adott applikációban?
   </p>
@@ -229,7 +229,7 @@
     melyik applikációba regisztrált
    </li>
    <li>
-    ügyfélkapunál megadott email hash
+    ügyfélkapunál megadott személyi adatokból képzett bináris kód (lásd lentebb)
    </li>
   </ul>
   <p>
@@ -243,4 +243,12 @@
   </p>
   <h2>Brute force támadás elleni védekezés</h2>
   <p>Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.</p>
+  <h4>Személyes adatokból képzett bináris kód</h4>
+  <p>Az ügyfélkapu ingyenes aláírás szolgáltatásával aláírt pdf mellékletként tartalmaz egy xml fájlt amiben az aláírást
+  kezdeményező személy személyes adatai is szerepelnek. Az ebbből kinyert születési név, anyja neve és születési dátumból
+   a program képez egy bináris kódot (sha256 algoritmussal. Ebből a kódból reális idő alatt nem lehet visszafejteni az
+   eredeti adatokat, viszont arra alkalmas, hogy megakadályozza, hogy egy ember többször regisztrálhasson. a kódolt
+   bináris adatok előállítása után a program törli a feltöltött pdf fájlt és a személyi adatokat tartalamazó xml fájlt.
+   </p>
+
 </div><!-- #scope -->

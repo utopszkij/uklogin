@@ -37,7 +37,8 @@ class AdatkezelesView  extends CommonView  {
             <li>Választott bejelentkezési név (nick név)</li>
             <li>Jelszó sha256 hash kódja</li>
             <li>Használt applikáció azonosítója</li>
-            <li>Az ügyfélkapus bejelentkezésnél megadott e-mail cím sha256 hash kódja</li>
+            <li>Az ügyfélkapus aláírásból kinyert születési névből, születési dátumból, anyja neve adatból 
+             sha256 hash algoritmussal képzett kód</li>
             <li>Bejelentkezés engedélyezve/letiltva</li>
             <li>Hibás bejelentkezési kisérlet számláló</li>
             <li>code - az oAuth2 eljárás során használt ideiglenes, egyszer használható technikai azonosító</li>
@@ -46,16 +47,17 @@ class AdatkezelesView  extends CommonView  {
             </ul>
             <p>Megjegyzések: Egy felhasználónak - amennyiben több applikációt is használ - több ilyen adat készlete is lehet.
             Az "sha256 hash" egy algoritmikusan képzett karakter sorozat. Ebből nem állapítható meg az eredeti jelszó illetve 
-            e-mail cím, de alkalmas a bejelentkezésnél a jelszó ellenörzésre, illetve annak
+            személyes adatok, de alkalmas a bejelentkezésnél a jelszó ellenörzésre, illetve annak
             megakadályozására, hogy egy ember többször regisztráljon ugyanabba az applikációba.
             </p>
             <p>
             A felhasználó sikeres bejelentkezés után json formátumban megtekintheti/letöltheti a róla az adott applikációval kapcsolatban
             tárolt adatokat. Továbbá lehetősége van adatainak (és ezzel bejelentkezési lehetőségének) törlésére is. 	
             </p> 
-            <p>A regisztrációs folyamat során fel kell tölteni egy a https://niszavdh.gov.hu segítségével aláírt 
-            hitelesített pdf dokumentumot. Ez a dokumentum tartalmazza a felhasználó teljes nevét és az ügyfélkapuhoz megadott
-            e-mail címét. Ezeket az adatokat (technikai okokból) a program csak néhány másodpercig tárolja és kezeli ezután
+            <p>A regisztrációs folyamat során fel kell tölteni egy az ügyfélkapu ingyenes aláírás szolgáltatása
+             segítségével aláírt hitelesített pdf dokumentumot. Ez a dokumentum tartalmazza a felhasználó teljes nevét 
+             és az ügyfélkapuhoz megadott  e-mail címét és több más személyes adatát. Ezeket az adatokat 
+             (technikai okokból) a program csak néhány másodpercig tárolja és kezeli ezután
             törli őket. Tartósan csak a fentebb felsorolt adatokat tárolja</p>
 
             <h3>Kezelt / tárolt adatok az applikációkkal és az applikáció adminisztrátorokkal kapcsolatban</h3>
