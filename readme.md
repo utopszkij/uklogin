@@ -26,6 +26,44 @@ A regisztrációs folyamatban használt aláírás szolgáltató:
 
 https://szuf.magyarorszag.hu/szuf_avdh_feltoltes 
 
+## user adatok hitelességének ellenörzése
+Ez a funkció arra szolgál, hogy a user által (a regisztrációs képernyőn) megadott személyes adatokat összevesse az ügyfélkapuban tárolt hiteles adatokkal.
+
+hívása a kliens programban:
+```
+   session_start();
+   .....
+   $_SESSION['token'] = md5(rand(0,10000));
+   $userinfo = '{
+     "family_name":'.$ellenörizrndő_vezetéknév.',
+     "middle_name":'.$ellenörizrndő_középsőnév.',
+     "iven_name":'.$ellenörizrndő_név3.',
+     "postal_code":'.$ellenörizrndő_irányítószám.',
+     "locality":'.$ellenörizrndő_település.',
+     "street_address":'.$ellenörizrndő_utcaházszám.',
+     "birth_date":'.$ellenörizrndő_születési dátum.',
+    " mothersname":'.$ellenörizrndő_anyjaneve.'
+   }';
+   // megjegyzés: amit nem akarunk ellenörizni azt hagyjuk ki! 
+   $post = [
+    'form' => 1,
+    'redirect_uri' => 'http://.......',
+    'userinfo'   => $userInfo,
+    'token' => $_SESSION['token']
+   ];
+   $ch = curl_init('https://uklogin.tk/ukaudit.php');
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+   curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+   curl_exec($ch);
+   curl_close($ch);
+```
+A hitelesitő szerver visszahivja "redirect_uri"-t url paraméterben két adat érkezik:
+
+**token** - a kérés indításnál küldött érték,
+
+**result** - "OK" ha minden jó, egyébként hibaüzenet
+
+A hibaüzenet tartalmazza a feltöltött pdf-ben szereplő személyi adatokat)
 
 ## Programnyelvek
 
@@ -115,7 +153,7 @@ Mindezt részletes help segíti.
 A rendszer ellenőrzi:
 - a feltöltött pdf -ben a megfelelő client_id szerepel?
 - a feltöltött pdf alá van írva és sértetlen?
-- az aláíró email hash szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
+- az aláíró személyes adataiból képzett kód szerepel már a regisztrált felhasználók között? (ha már szerepel akkor kiírja milyen nick nevet adott korábban meg)
 - a választott nicknév egyedi az adott applikációban?
 
 ### Elfelejtett jelszó kezelés folyamata
@@ -136,11 +174,15 @@ Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,e
 - nick név
 - jelszó hash
 - melyik applikációba regisztrált
-- ügyfélkapunál megadott email hash
+- ügyfélkapunál megadott személyes adataibólképzett (reális idő alatt nem visszafejthető) kód
 
 Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
 
-Megjegyzés: A feldolgozás során - technikai okokból - néhány másodpercig a rendszer tárolja az aláírt pdf fájlt és  az abban lévő csatolmányokat. Ezek tartalmazzák az aláíró személy nevét és az ügyfélkapuban használt email címét valamint az aláírás időpontját. Ezen adatok közül a rendszer kizárólag az ügyfélkapus email cím sha256 algoritmussal képzett hash kódját használja és tárolja adatbázisában. Az aláírt pdf fájlt és csatolmányait az ügyfélkapus email cím kinyerése és hashalése után azonnal törli, magát az email címet nem tárolja.
+Megjegyzés: A feldolgozás során - technikai okokból - néhány másodpercig a rendszer tárolja az aláírt pdf fájlt és  az abban lévő csatolmányokat. Ezek tartalmazzák az aláíró személyi adatait. 
+ Ezen adatok közül a rendszer kizárólag a születési névből, születési dátumból és anyja nevéből SHA256 hash algoritmussal 
+ képzett kódját használja és tárolja adatbázisában. Az aláírt pdf fájlt és csatolmányait az 
+ a kód előállítása után azonnal törli, magukat a személyes adatokat nem tárolja.
+ 
 
 #### cookie kezelés
 A működéshez egy darab un. "munkamenet cookie" használata szükséges, erről tájékoztatás jelenik meg és a felhasználónak ezt el kell fogadnia.

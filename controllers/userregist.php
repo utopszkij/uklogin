@@ -406,20 +406,11 @@ class UserregistController extends Controller {
                    }
                    $i++;
         	}
-        	$res->signHash = hash('sha256', $origName.$birthDate.$mothersName, false);
-			/* régi aláírás rendszer
- 			$xmlStr = implode("\n", file($igazolasPWD.'/meghatalmazo.xml'));
-	        preg_match('/emailAddress\"\>.*\</', $xmlStr , $emails);
-	        if (count($emails) > 0) {
-	            $email = $emails[0];
-	        }
-            if (false === strpos($email, '@')) {
-	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-	        } else {
-	            $res->signHash = hash('sha256', $email ,false);
-	        }
-	       */ 
-	       unlink($igazolasPWD.'/meghatalmazo.xml');
+			$res->signHash = hash('sha512',$origName.$birthDate.$mothersName, FALSE);
+	      unlink($igazolasPWD.'/meghatalmazo.xml');
+	      $origName = time();
+	      $mothersname = time();
+	      $birthDate = $time();
 	     }
         //- 2020.01.30 új aláírás rendszer
 	    return $res;
