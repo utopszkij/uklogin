@@ -20,13 +20,13 @@ DEFINE('LBL_REGISTFORM2','Regisztráció 2. képernyő');
 DEFINE('LBL_REGISTFORM1_HELP1','1. Töltse le az alábbi "Letöltés" linkről a saját gépére a regisztrációhoz szükséges,
  aláírandó pdf fájlt!');
 DEFINE('LBL_REGISTFORM1_HELP2','2. A letöltött fájlt írja alá az ügyfélkapu segítségével,
- a <a href="https://niszavdh.gov.hu" target="_new">niszavdh.gov.hu</a>
+ a <a href="https://szuf.magyarorszag.hu/szuf_avdh_feltoltes" target="_new">szuf.magyarorszag.hu/szuf_avdh_feltoltes</a>
  hitelesítő szolgáltást használva (Új "fülön" nyilik meg). Az aláírt pdf -et mentse le saját gépére, ');
 DEFINE('LBL_REGISTFORM1_HELP3','Az "új fülön":<ul>
-<li>aláírandó pdf feltöltése a saját gépéről a hitelesítő szerverre (Fájl kiválasztása),</li>
+<li>aláírandó pdf feltöltése a saját gépéről a hitelesítő szerverre (klickeljen ide a tallózáshoz),</li>
 <li>"Hiteles PDF" bejelölése,</li>
 <li>ÁSZF elfogadása,</li>
-<li>"Dokumentum elküldése" ikonra kattintás,</li>
+<li>"Feltöltés" ikonra kattintás,</li>
 <li>Ügyfélkapu azonosítási módozat kiválasztása,</li>
 <li>Bejelentkezés az ügyfélkapuba (a folyamat egy kis időt vehet igénybe)</li>
 <li>Aláírt (hitlesített) dokumentum letöltése a saját gépére</li>

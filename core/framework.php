@@ -74,7 +74,7 @@ class View implements ViewObject {
      * @param array $params  {"name":value, ....}
      * @return void
      */
-    protected function loadJavaScriptAngular(string $jsName, $params) {
+    public function loadJavaScriptAngular(string $jsName, $params) {
         ?>
         <script src="https://code.angularjs.org/1.7.8/angular.js"></script>
         <script type="text/javascript">
@@ -129,7 +129,7 @@ class View implements ViewObject {
      * must use htmlPopup() in HTML body tag
      * @return void
      */
-    protected function echoHtmlHead($data = '') {
+    public function echoHtmlHead($data = '') {
         $lines = file('./templates/'.TEMPLATE.'/htmlhead.html');
         $s = implode("\n",$lines);
         if (is_object($data)) {
@@ -169,6 +169,23 @@ class View implements ViewObject {
     	';
     }
     
+    /**
+    * nyelv függő fregment (html kód részlet) betöltése az langs/htmlName_lng.html fileból
+    * @param string $htmlName filename (only name, not include path and lng code and extension)
+    * @param object params
+    */
+    public function echoLngHtml(string $htmlName,$p) {
+    	global $REQUEST;
+    	$lng = $REQUEST->sessionget('lng','hu');
+    	if (file_exists('langs/'.$htmlName.'_'.$lng.'.html')) {
+    		include 'langs/'.$htmlName.'_'.$lng.'.html';
+    	} else if (file_exists('langs/'.$htmlName.'.html')) {
+    		include 'langs/'.$htmlName.'.html';
+    	} else {
+			echo '<p>'.$htmlName.' html file not found.</p>';    	
+    	}
+    }
+    
 } // class View
 
 class Controller  implements ControllerObject {
@@ -191,11 +208,7 @@ class Controller  implements ControllerObject {
      */
     protected function getView(string $viewName) {
         global $REQUEST;
-        $lng = $REQUEST->sessionGet('lng',DEFLNG);
         $className = ucfirst($viewName).'View';
-        if (file_exists('./views/'.$viewName.'_'.$lng.'.php')) {
-            $viewName = $viewName.'_'.$lng;
-        }
         include_once './views/'.$viewName.'.php';
         return new $className ();
     }
@@ -217,10 +230,10 @@ class Controller  implements ControllerObject {
      * @return void
      */
     protected function checkCsrToken(&$request) {
-        if ($request->input($request->sessionGet('csrToken')) != 1) {
+        if ($request->input($request->sessionGet('csrToken','?'),'nincs') != 1) {
             echo '<p>invalid csr token</p> sessionban csrToken='.$request->sessionGet('csrToken','?').
-            ' inputban='.$request->input($request->sessionGet('csrToken'),'??').' '-__FILE__;
-            exit();
+            ' inputban='.$request->input($request->sessionGet('csrToken','?'),'nincs').' '.__FILE__;
+           exit();
         }
     }
     /**
@@ -298,8 +311,14 @@ class Request implements RequestObject {
 	public function sessionSet(string $name, $value) {
 	    $sessionId = session_id();
 	    $this->session_init($sessionId);
-	    $this->sessions->$name = $value;
-	    $this->session_save($sessionId);
+	    if (is_object($this->sessions)) {
+	    	$this->sessions->$name = $value;
+	    	$this->session_save($sessionId);
+	    }	else {
+         $this->sessions = new stdClass();
+	    	$this->sessions->$name = $value;
+	    	$this->session_save($sessionId);
+	    }
 	}
 	
 	/**

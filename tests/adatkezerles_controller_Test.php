@@ -24,7 +24,6 @@ class adatkezelesControllerTest extends TestCase
         $REQUEST = $this->request;
         
     }
-    
     public function test_start() {
         // create and init test database
         $db = new DB();
@@ -36,5 +35,6 @@ class adatkezelesControllerTest extends TestCase
         $msg = $this->controller->show($this->request);
         $this->assertEquals(true,true); // csak szintaxis ellenörzés
     }
+    
 }
 

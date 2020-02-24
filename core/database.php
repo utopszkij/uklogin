@@ -14,7 +14,14 @@
 *    table($tableName, $alias='', $columns='*') : Table
 *    filter($tableName, $alias='', $columns='*') : Filter
 *    transaction(function);
+*	  createTable($tableName, $columns, $keys): bool 
+*	  dropTable($tableName): bool 
+*	  emptyTable($tableName): bool
+*    alterTable($fieldName, $type): bool 
 * Table class
+*    __construc($fromStr|$table, $alias='')
+*    setFromSubselect($table, $alias)
+*    setColumns($str);
 *    where($whereStr or [field, value] or [field, relStr, value]) or Relation  : Table 
 *    orWhere($whereStr or [field, value] or [field, relStr, value]) or Relation: Table
 *    group([field, field, ...]) : table   
@@ -28,12 +35,10 @@
 *    count() : numeric 
 *    update(record)
 *    insert(record)
-*    delete(record)
+*    delete()
 *    getInsertedId() : numeric
-*    getLastUpdate() : numeric - timestamp
-*    getErrorNum() : numeric
-*    getErrorMsg() : string
 * Filer class
+*    __construc($fromStr|$table, $alias='')
 *    join($type, $tableName, $alias, $onStr) : Filter;
 *    where($whereStr or [field, value] vagy [field, relStr, value]) : Filter 
 *    orWhere($whereStr or [field, value] vagy [field, relStr, value]) : Filter
@@ -46,25 +51,16 @@
 *    get() : array of RecordsObject
 *    first() : recordObject
 *    count() : numeric 
-*    getErrorNum() : numeric
-*    getErrorMsg() : string
 *
 * global $dbResult array használható UNITTEST -hez
 * 
 * Licensz: GNU/GPL
 * Szerző: Fogler Tibor    tibor.fogler@gmail.com
 */
-
-global $mysqli, $dbResult;
-$dbResult = [];
-if (MYSQLHOST != '') {
-    $mysqli = new mysqli(MYSQLHOST, MYSQLUSER, MYSQLPSW);
-    $mysqli->query('CREATE DATABASE IF NOT EXISTS '.MYSQLDB);
-    $mysqli->select_db(MYSQLDB);
-}
-if (!DEFINED('MYSQLLOG')) {
-    DEFINE('MYSQLLOG',false);
-}
+define('NONE','_none_');
+define('WHERE',' WHERE ');
+global $mysqli;
+$mysqli = new mysqli(config('MYSQLHOST'), config('MYSQLUSER'), config('MYSQLPSW'));
 
 class Relation {
     public $concat = ''; // 'AND' | 'OR' | ''
@@ -72,6 +68,18 @@ class Relation {
     public $fieldName = '';
     public $rel = ''; // '<' | '<=' | '=' | ">=' | '>' | '<>' | ''
     public $value = '';
+    
+    function __construct(string $concat = '',
+                         array $relations = [],
+                         string $fieldName = '',
+                         string $rel = '',
+                         $value = '') {
+        $this->concat = $concat;
+        $this->relations = $relations;
+        $this->fieldName = $fieldName;
+        $this->rel = $rel;
+        $this->value = $value;
+    }
     
     /**
      * get sql string
@@ -90,9 +98,9 @@ class Relation {
             $result .= '('.$res.')';
         } else {
             if ($this->rel == '') {
-                $result .= $this->filedName;
+                $result .= $this->fieldName;
             } else {
-                $result .= '`'.$this->fieldName.'` '.$this->rel.' '.DB::quote($this->value);
+                $result .= $this->fieldName.' '.$this->rel.' '.DB::quote($this->value);
             }
         }
         return $result;
@@ -110,19 +118,19 @@ class DB {
     * sql string
     * @var string
     */
-   protected $sql;
+   protected $sql = '';
    
    /**
     * last mysql errorMsg
     * @var string
     */
-   protected $errorMsg;
+   protected $errorMsg = '';
    
    /**
     * last mysql error number
     * @var int
     */
-   protected $errorNum;
+   protected $errorNum = 0;
    
    /**
     * transaction flag
@@ -131,10 +139,19 @@ class DB {
    protected $inTransaction = false;
     
    function __construct() {
-       global $mysqli;
-       $this->mysqli = $mysqli;
+       $this->connect();
        $this->errorMsg = '';
        $this->errorNum = 0;
+       $this->inTransaction = false;
+   }
+   
+   public function connect() {
+       global $mysqli;
+       $mysqli->query($mysqli->real_escape_string('CREATE DATABASE IF NOT EXISTS '. config('MYSQLDB')));
+       $mysqli->select_db(config('MYSQLDB'));
+       $mysqli->query('SET NAMES utf8');
+       $mysqli->set_charset("utf8");
+       $this->mysqli = $mysqli;
    }
    
 	/**
@@ -156,50 +173,42 @@ class DB {
 	}
 
 	/**
-	 * load array of records by $this->sql or from $dbResult
+	 * load array of records by $this->sql 
 	 * @return array|false
 	 */
 	public function loadObjectList() {
-		global $dbResult;
         $this->errorMsg = '';
         $this->errorNum = 0;
-        $result = '_none_';
-        if (count($dbResult) > 0) {
-            $result = $dbResult[0];
-            array_splice($dbResult,0,1);
-        }
-        if ($result == '_none_') {
-            $result = [];
-            if (MYSQLHOST == '') {
-                $result = [];
+        $result = [];
+        try {
+            $cursor = $this->mysqli->query($this->sql);
+            if ($cursor === false) {
+                $this->errorMsg = $this->mysqli->error;
+                $this->errorNum = $this->mysqli->errno;
             }
-            try {
-                $cursor = $this->mysqli->query($this->sql);
-            } catch (Exception $e) {
+        } catch (Exception $e) {
                 try {
-                    $this->mysqli = new mysqli("localhost", TESTDBUSER, TESTDBPSW, TESTDB);
-                    try {
-                        $cursor = $this->mysqli->query($this->sql);
-                    } catch(Exception $e) {
-                        $cursor = false;
-                        $this->errorMsg = 'error_in_query '.$e->getMessage().' sql='.$this->sql;
-                        $this->errorNum = 1000;
+                    $cursor = $this->mysqli->query($this->sql);
+                    if ($cursor === false) {
+                        $this->errorMsg = $this->mysqli->error;
+                        $this->errorNum = $this->mysqli->errno;
                     }
                 } catch(Exception $e) {
-                        $cursor = false;
-                        $this->errorMsg = 'error_in_reconnect '.$e->getMessage();
-                        $this->errorNum = 1000;
+                    $cursor = false;
+                    $this->errorMsg = 'error_in_query '.$e->getMessage().' sql='.$this->sql;
+                    $this->errorNum = 1000;
                 }
-            }
-            if ($cursor) {
+        }
+        if ($cursor) {
+            $w = $cursor->fetch_object();
+            while ($w != null) {
+                $i = count($result);
+                $result[$i] = $w;
                 $w = $cursor->fetch_object();
-                while ($w != null) {
-                    $i = count($result);
-                    $result[$i] = $w;
-                    $w = $cursor->fetch_object();
-                }
-                $cursor->close();
             }
+            $cursor->close();
+        } else {
+            $result = [];
         }
         $this->writeLog();
         return $result;
@@ -208,11 +217,12 @@ class DB {
      * sql log írása
      */
      private function writeLog() {
-        if (MYSQLLOG) {
-            if (file_exists('./log/mysql.log')) {
-                $fp = fopen('./log/mysql.log','a+');
+        if (config('MYSQLLOG')) {
+            $path = './log/mysql.log';
+            if (file_exists($path)) {
+                $fp = fopen($path,'a+');
             } else {
-                $fp = fopen('./log/mysql.log','w+');
+                $fp = fopen($path,'w+');
             }
             fwrite($fp, date('Y-m-d H:i:s').' '.$this->sql."\n");
             fwrite($fp, $this->getErrorMsg()."\n");
@@ -226,19 +236,11 @@ class DB {
 	 * @return object|false
 	 */
 	public function loadObject() {
-	    global $dbResult;
-	    $result = '_none_';
-	    if (count($dbResult) > 0) {
-	        $result = $dbResult[0];
-	        array_splice($dbResult,0,1);
-        }
-	    if ($result == '_none_') {
-            $res = $this->loadObjectList();
-            if (count($res) > 0) {
+        $res = $this->loadObjectList();
+        if (count($res) > 0) {
                 $result = $res[0];
-            } else {
+        } else {
                 $result = false;
-            }
         }
         return $result;
 	}
@@ -252,18 +254,7 @@ class DB {
 	    global $dbResult;
 	    $this->errorMsg = '';
 	    $this->errorNum = 0;
-	    $result = '_none_';
-	    if (count($dbResult) > 0) {
-	        $result = $dbResult[0];
-	        array_splice($dbResult,0,1);
-	    }
-		if ($result == '_none_') {
-		    if (MYSQLHOST == '') {
-		        $result = true;
-		        return $result;
-		    }
-            if (!isset($this->sql)) $this->sql = '';
-            try {
+        try {
                 $result = $this->mysqli->query($this->sql);
                 if (!$result && $this->inTransaction) {
                     $this->mysqli->rollback();
@@ -271,15 +262,14 @@ class DB {
                 }
                 $this->errorMsg = $this->mysqli->error;
                 $this->errorNum = $this->mysqli->errno;
-            } catch (Exception $e) {
-                $return = false;
+        } catch (Exception $e) {
+                $result = false;
                 $this->errorMsg = 'error_in_reconnect '.$e->getMessage().' sql='.$this->sql;
                 $this->errorNum = 1000;
                 if ($this->inTransaction) {
                     $this->mysqli->rollback();
                     $this->inTransaction = false;
                 }
-            }
         }
         $this->writeLog();
         return $result;
@@ -311,15 +301,9 @@ class DB {
 	 * @param string|mixed $str
 	 * @return string|mixed
 	 */
-	public static function quote($str): string {
-        // global $mysqli;	    
-	    // $result = $mysqli->real_escape_string($str);
-        $str = str_replace('"','\"',$str);
-        $str = str_replace("\n",'\n',$str);
-        if (is_string($str)) {
-	        $str = '"'.$str.'"';
-	    }
-	    return $str;
+	public static function quote(string $str): string {
+		 global $mysqli;
+	    return '"'.$mysqli->real_escape_string($str).'"';
 	}
 	
    /**
@@ -338,8 +322,7 @@ class DB {
     * @return bool
     */
    public function statement(string $sqlStr) : bool {
-		$this->setQuery($sqlStr);
-		return $this->query();	
+        return $this->exec($sqlStr);
    } 
  
    /**
@@ -363,7 +346,7 @@ class DB {
 	 * @return Filter
 	 */
 	public static function filter(string $fromStr, string $alias = '', string $columns = '*'): Filter {
-		$result = new Filter();
+		$result = new Filter($fromStr);
 		$result->setFromStr($fromStr, $alias, $columns);
 		return $result;	
 	} 
@@ -382,10 +365,86 @@ class DB {
 	    }
 	    $this->inTransaction = false;
 	}
-	 
+	
+	/**
+	 * adatbázis tábla kreálása (ha még nem létezik)
+	 * @param array $columns [[string name, string type, number len, bool autoIncPrimary], ...]
+	 * @param array $keys [nam, ...]
+	 * @return bool
+	 */
+	public function createTable(string $tableName, array $columns, array $keys): bool {
+	    $primary = '';
+	    $s = 'CREATE TABLE IF NOT EXISTS `'.$tableName.'` ('."\n";
+	    foreach ($columns as $column) {
+	        $s1 = '`'.$column[0].'` '.$column[1];
+	        if ($column[2] != '') {
+	            $s1 .= '('.$column[2].')';
+	        }
+	        if (isset($column[3]) && ($column[3])) {
+	            $s1 .= ' AUTO_INCREMENT';
+	            $primary = $column[0];
+	        }
+	        $s .= $s1.',';
+	    }
+	    $s1 = '';
+	    if ($primary != '') {
+	        $s1 = 'PRIMARY KEY (`'.$primary.'`)';
+	    }
+	    foreach ($keys as $key) {
+	        if ($s1 != '') {
+	            $s1 .= ','."\n";
+	        }
+	        $s1 .= 'KEY `'.$tableName.'_'.$key.'_ndx` (`'.$key.'`)';
+	    }
+	    $s .= $s1."\n".')';
+	    return $this->exec($s);
+	}
+	
+	/**
+	 * tábla megsemisitése
+	 * @param string $tableName
+	 * @return bool
+	 */
+	public function dropTable(string $tableName): bool {
+	    return $this->exec('DROP TABLE `'.$tableName.'`');
+	}
+	
+	/**
+	 * tábla tartalmának törlése
+	 * @param string $tableName
+	 * @return bool
+	 */
+	public function emptyTable(string $tableName): bool {
+	    return $this->exec('DELETE FROM `'.$tableName.'`');
+	}
+	
+	/**
+	* tábla egy mezőjének felvétele vagy modosítása
+	* @param string $tableName
+	* @param string $filedName
+	* @param string $type SQL szintaxis szerint pl: varchat(128)
+	* @return bool
+	*/
+	public function alterTable(string $tableName, string $fieldName, string $type): bool {
+		$result = true;
+		$this->setQuery('SHOW COLUMNS FROM `'.$tableName .'` LIKE "'.$fieldName.'"');
+		$res = $this->loadObject();	
+		if ($res) {
+			if ($res->Type != $type) {
+				$this->setQuery('ALTER TABLE `'.$tableName.'` MODIFY COLUMN `'.$fieldName.'` '.$type);
+				$result = $this->query();
+			}
+		} else {
+			$this->setQuery('ALTER TABLE `'.$tableName.'` ADD COLUMN `'.$fieldName.'` '.$type);
+			$result = $this->query();
+		}
+		return $result;
+	} 
+	
+	
 } // DB
 
-class Table extends DB {
+class SimpleTable extends DB {
    /**
     * sql from string
     * @var string
@@ -452,7 +511,24 @@ class Table extends DB {
     */
    protected $limit = 0;
    
-    /**
+   /**
+    * @param string|Table $from
+    * @param string $alias
+    */
+   function __construct($from, string $alias = '') {
+       global $mysqli;
+       $this->mysqli = $mysqli;
+       $this->errorMsg = '';
+       $this->errorNum = 0;
+       $this->alias = $alias;
+       if (is_object($from)) {
+           $this->setFromSubselect($from, $alias);
+       } else {
+           $this->setFromStr($from, $alias);
+       }
+   }
+   
+   /**
      * set fromStr
      * @param string $fromStr
      * @param string $alias
@@ -466,12 +542,33 @@ class Table extends DB {
 		return $this;	
 	}
 
-	function __construct($tableName) {
-	    global $mysqli;
-	    $this->mysqli = $mysqli;
-	    $this->errorMsg = '';
-	    $this->errorNum = 0;
-	    $this->setFromStr($tableName);
+	public function setColumns(string $columns) {
+	    $this->columns = $columns;
+	}
+	
+	public function getSql() {
+	    $this->createWhereHavingStr();
+	    if ($this->whereStr == '') {
+	        $this->whereStr = '1';
+	    }
+	    if ($this->orderStr == '') {
+	        $this->orderStr = '1';
+	    }
+	    if ($this->offset == '') {
+	        $this->offset = '0';
+	    }
+	    $sqlStr = 'SELECT '.$this->columns.' FROM `'.$this->fromStr.'` '.$this->alias;
+	    $sqlStr .= WHERE.$this->whereStr.' ORDER BY '.$this->orderStr;
+	    if ($this->groupStr != '') {
+	        $sqlStr .= ' GROUP BY '.$this->groupStr;
+	    }
+	    if ($this->havingStr != '') {
+	        $sqlStr .= ' HAVING '.$this->groupStr;
+	    }
+	    if ($this->limit != 0) {
+	        $sqlStr .= ' LIMIT '.$this->offset.','.$this->limit;
+	    }
+	    return $sqlStr;
 	}
 	
 	/**
@@ -479,28 +576,14 @@ class Table extends DB {
 	 * @return array|false
 	 */
 	public function get() {
-	    $this->createWhereHavingStr();
-	    if ($this->whereStr == '') $this->whereStr = '1';
-		if ($this->orderStr == '') $this->orderStr = '1';
-		if ($this->offset == '') $this->offset = '0';
-		$sqlStr = 'SELECT '.$this->columns.' FROM '.$this->fromStr.' '.$this->alias;
-		$sqlStr .= ' WHERE '.$this->whereStr.' ORDER BY '.$this->orderStr;
-		if ($this->limit != 0) {
-			$sqlStr .= ' LIMIT '.$this->offset.','.$this->limit;		
-		}	
-		if ($this->groupStr != '') {
-			$sqlStr .= ' GROUP BY '.$this->groupStr;		
-		}
-		if ($this->havingStr != '') {
-			$sqlStr .= ' HAVING '.$this->groupStr;		
-		}
+	   $sqlStr = $this->getSql();
 		$this->setQuery($sqlStr);
 		return $this->loadObjectList();
 	}
     /**
      * 
      */
-     private function createWhereHavingStr() {
+     protected function createWhereHavingStr() {
         $this->whereStr = '';
 	    foreach ($this->whereArray as $rel) {
 	        $this->whereStr .= $rel->getSQL();
@@ -527,6 +610,36 @@ class Table extends DB {
 	}
 	
 	/**
+	 * get sql string
+	 * @return string
+	 */
+	public function getQuery() : string {
+		if ($this->sql == '') {
+			$this->sql = $this->getSql();			
+		}
+		return $this->sql;
+	}
+
+
+	/**
+	 * array paraméter -> relation
+	 * @param array $par
+	 * @param Relation $relation
+	 */
+	protected function whereFromArray(array $par, &$relation) {
+	    if ((count($par) == 2) && (is_string($par[0]))) {
+	        $relation->fieldName = $par[0];
+	        $relation->rel = '=';
+	        $relation->value = $par[1];
+	    }
+	    if ((count($par) == 3) && (is_string($par[0]))) {
+	        $relation->fieldName = $par[0];
+	        $relation->rel = $par[1];
+	        $relation->value = $par[2];
+	    }
+	}
+		
+	/**
 	 * add expression into existing whereStr  
 	 * @param array|string|Relation $par
 	 * @param string $con  OPTIONAL default = 'AND'
@@ -534,17 +647,6 @@ class Table extends DB {
 	 * @return Table $this
 	 */
 	public function where($par, string $con = ' AND ', string $dest = 'whereArray') {
-		/*
-	    if ($this->$dest != '') $this->$dest .= $con;
-		if (is_string($par)) {
-			$this->$dest .= $par;		
-		} else if (is_array($par)) {
-			if ((count($par) == 2) && (is_string($par[0]))) 
-					$this->$dest .= '`'.$par[0].'` = '.$this->quote($par[1]);
-		    if ((count($par) == 3) && (is_string($par[0]))) 
-					$this->$dest .= '`'.$par[0].'` '.$par[1].' '.$this->quote($par[2]);
-		}
-		*/
 		$this->$dest[] = new Relation();
 		$relation = $this->$dest[count($this->$dest) - 1];
 		if (count($this->$dest) == 1) {
@@ -553,25 +655,16 @@ class Table extends DB {
 		    $relation->concat = $con;
 		}
 		if (is_string($par)) {
-		        $relation->filedName = $par;
+		        $relation->fieldName = $par;
 		        $relation->rel = '';
 		        $relation->value = '';
-		        // $this->$dest .= $par;
 		} else if (is_array($par)) {
-		    if ((count($par) == 2) && (is_string($par[0]))) {
-		            // $this->$dest .= '`'.$par[0].'` = '.$this->quote($par[1]);
-		        $relation->fieldName = $par[0];
-		        $relation->rel = '=';
-		        $relation->value = $par[1];
-		    }
-		    if ((count($par) == 3) && (is_string($par[0]))) {
-		        // $this->$dest .= '`'.$par[0].'` '.$par[1].' '.$this->quote($par[2]);
-		        $relation->fieldName = $par[0];
-		        $relation->rel = $par[1];
-		        $relation->value = $par[2];
-		    }
+		    $this->whereFromArray($par, $relation);
 		} else if (is_object($par)) {
-		    $relation->relation = $par;
+		    if (count($this->$dest) == 1) {
+		        $par->concat = '';
+		    }
+		    $this->$dest[count($this->$dest) - 1] = $par;
 		}
 		    
 		return $this;	
@@ -587,102 +680,42 @@ class Table extends DB {
 		return $this;	
 	}
 
-	/**
-	 * set $this->groupStr
-	 * @param array $par (colName, colName,...)
-	 * @return Table
-	 */
-	public function group($par) {
-		$this->groupStr = '';
-		foreach ($par as $fn) {
-			if ($this->groupStr != '') $this->groupStr .= ',';
-				$this->groupStr .= '`'.$fn.'`';
-		}
-		return $this;	
-	}
-	
-	/**
-	 * add expression into existing havingeStr by AND operand
-	 * @param array|string|Relation $par
-	 * @return Table $this
-	 */
-	public function having($par) {
-		$this->where($par,' AND ','havingArray');
-		return $this;
-	}
-
-	
-	/**
-	 * add expression into existing havingeStr by OR operand
-	 * @param array|string $par
-	 * @return Table $this
-	 */
-	public function orHaving($par) {
-		$this->where($par,' OR ','havingArray');
-		return $this;
-	}
-		
-	/**
-	 * set $this->orderStr
-	 * @param string $s
-	 * @return Table
-	 */
-	public function order(string $s) {
-		$this->orderStr = $s;
-		return $this;	
-	}	
-
-	/**
-	 * set $this->limit
-	 * @param int $v
-	 * @return Table
-	 */
-	public function limit(int $v) {
-		$this->limit = $v;
-		return $this;	
-	}	
-
-	/**
-	 * set $this->offset
-	 * @param int $v
-	 * @return Table
-	 */
-	public function offset(int $v) {
-		$this->offset = $v;
-		return $this;	
-	}	
 	
 	/**
 	 * delete records by whereStr
 	 * @return Table
 	 */
-	public function delete() {
+	public function delete():bool {
 	    $this->createWhereHavingStr();
-	    if ($this->whereStr == '') $this->whereStr = '1';
-		$sqlStr = 'DELETE FROM '.$this->fromStr.
-		' WHERE '.$this->whereStr;
+	    if ($this->whereStr == '') {
+	        $this->whereStr = '1';
+	    }
+		$sqlStr = 'DELETE FROM `'.$this->fromStr.'`'.
+		WHERE.$this->whereStr;
 		$this->setQuery($sqlStr);
-		$this->query();
-		return $this;
+		return $this->query();
 	}
 
 	/**
 	 * update table by whereStr
 	 * @param array $record ("colname" => value, ....) 
-	 * @return Table
+	 * @return bool
 	 */
 	public function update($record) {
 	    $this->createWhereHavingStr();
-	    if ($this->whereStr == '') $this->whereStr = '1';
+	    if ($this->whereStr == '') {
+	        $this->whereStr = '1';
+	    }
 		$s = '';
 		foreach ($record as $fn => $fv) {
-			if ($s != '') $s .= ',';
+		    if ($s != '') {
+		        $s .= ",\n";
+		    }
 			$s .= '`'.$fn.'`='.$this->quote($fv);		
 		}
-		$sqlStr = 'UPDATE '.$this->fromStr.' SET '.$s.' WHERE '.$this->whereStr;
+		$sqlStr = 'UPDATE `'.$this->fromStr.'` SET '.$s.WHERE.$this->whereStr;
 		$this->setQuery($sqlStr);
-		$this->query();
-		return $this;
+		return $this->query();
 	}
 
 	/**
@@ -690,19 +723,22 @@ class Table extends DB {
 	 * @param array $record ("colName" => value)
 	 * @return Table
 	 */
-	public function insert($record) {
+	public function insert($record): bool {
 		$fnames = '';
 		$values = '';
 		foreach ($record as $fn => $fv) {
-			if ($fnames != '') $fnames .= ',';
+		    if ($fnames != '') {
+		        $fnames .= ",\n";
+		    }
 			$fnames .= '`'.$fn.'`';
-			if ($values != '') $values .= ',';
+			if ($values != '') {
+			    $values .= ",\n";
+			}
 			$values .= $this->quote($fv);
 		}
-		$sqlStr = 'INSERT INTO '.$this->fromStr.' ('.$fnames.') VALUES ('.$values.')';
+		$sqlStr = 'INSERT INTO `'.$this->fromStr.'` ('.$fnames.') VALUES ('.$values.')';
 		$this->setQuery($sqlStr);
-		$this->query();
-		return $this;
+		return $this->query();
 	}
 	
 	/**
@@ -727,11 +763,18 @@ class Table extends DB {
 	    foreach ($this->havingArray as $rel) {
 	        $this->havingStr .= $rel->getSQL();
 	    }
-	    if ($this->whereStr == '') $this->whereStr = '1';
-		$sqlStr = 'SELECT count(*) AS cc FROM '.$this->fromStr.' WHERE '.$this->whereStr;
+	    if ($this->whereStr == '') {
+	        $this->whereStr = '1';
+	    }
+		$sqlStr = 'SELECT count(*) AS cc FROM `'.$this->fromStr.'` WHERE '.$this->whereStr;
 		$this->setQuery($sqlStr);
 		$res = $this->loadObject(); 
-		return $res->cc;
+		if ($res) {
+		  $result = $res->cc;
+		} else {
+		  $result = 0;  
+		}
+		return $result;    
 	}	
 	
 	/**
@@ -740,11 +783,91 @@ class Table extends DB {
 	 */
 	public function getFieldList() {
 		$sqlStr = 'SHOW FIELDS FROM '.$this->fromStr;
-		$this->setSql($sqlstr);
+		$this->setQuery($sqlStr);
 		return $this->loadObjectList(); 
 	}
 	
-} // Table
+} // SimpleTable
+
+class Table extends SimpleTable {
+
+    /**
+     * set from subselect
+     * @param Table $table
+     * @param string $alias
+     */
+    public function setFromSubselect(Table $table, string $alias) {
+        $this->fromStr = '('.$table->getSql().') '.$alias;
+    }
+    
+    /**
+     * set $this->groupStr
+     * @param array $par (colName, colName,...)
+     * @return Table
+     */
+    public function group($par) {
+        $this->groupStr = '';
+        foreach ($par as $fn) {
+            if ($this->groupStr != '') {
+                $this->groupStr .= ',';
+            }
+            $this->groupStr .= $fn;
+        }
+        return $this;
+    }
+    
+    /**
+     * add expression into existing havingeStr by AND operand
+     * @param array|string|Relation $par
+     * @return Table $this
+     */
+    public function having($par) {
+        $this->where($par,' AND ','havingArray');
+        return $this;
+    }
+    
+    
+    /**
+     * add expression into existing havingeStr by OR operand
+     * @param array|string $par
+     * @return Table $this
+     */
+    public function orHaving($par) {
+        $this->where($par,' OR ','havingArray');
+        return $this;
+    }
+    
+    /**
+     * set $this->orderStr
+     * @param string $s
+     * @return Table
+     */
+    public function order(string $s) {
+        $this->orderStr = $s;
+        return $this;
+    }
+    
+    /**
+     * set $this->limit
+     * @param int $v
+     * @return Table
+     */
+    public function limit(int $v) {
+        $this->limit = $v;
+        return $this;
+    }
+    
+    /**
+     * set $this->offset
+     * @param int $v
+     * @return Table
+     */
+    public function offset(int $v) {
+        $this->offset = $v;
+        return $this;
+    }
+    
+}
 
 class Filter extends Table {
     /**
@@ -756,15 +879,58 @@ class Filter extends Table {
 	/**
 	 * add new item into $this->joins
 	 * @param string $joinType 'LEFT OUTER JOIN', 'RIGHT OUTER JOIN', 'INNER JOIN'
-	 * @param string $tableName
+	 * @param string|Table $from
 	 * @param string $alias
 	 * @param string $onStr sql syntax without 'ON'
 	 * @return Filter
 	 */
-	public function join(string $joinType, string $tableName, string $alias, string $onStr) {
+	public function join(string $joinType, $from, string $alias, string $onStr) {
 	    // joinType: 'LEFT OUTER JOIN', 'RIGHT OUTER JOIN', 'INNER JOIN'
-		$this->joins.push(array($joinType, $tableName, $alias, $onStr));
+	    if (is_object($from)) {
+	        $this->joins[] = array($joinType, '('.$from->getSql().') ', $alias, $onStr);
+	    } else {
+	        $this->joins[] = array($joinType, $from, $alias, $onStr);
+	    }
 		return $this;
+	}
+	
+	public function getSql():string {
+	    $this->createWhereHavingStr();
+	    if ($this->whereStr == '') {
+	        $this->whereStr = '1';
+	    }
+	    if ($this->orderStr == '') {
+	        $this->orderStr = '1';
+	    }
+	    if ($this->offset == '') {
+	        $this->offset = '0';
+	    }
+		$sqlStr = 'SELECT '.$this->columns.' FROM '.$this->fromStr.' '.$this->alias;
+		foreach ($this->joins as $join) {
+			$sqlStr .= ' '.$join[0].' '.$join[1].' '.$join[2].
+			' ON '.$join[3];
+		}
+		$sqlStr .= WHERE.$this->whereStr;
+		
+		if ($this->groupStr != '') {
+			$sqlStr .= ' GROUP BY '.$this->groupStr;		
+		}
+		if ($this->havingStr != '') {
+			$sqlStr .= ' HAVING '.$this->groupStr;		
+		}
+		$sqlStr .= ' ORDER BY '.$this->orderStr;
+		if ($this->limit != 0) {
+			$sqlStr .= ' LIMIT '.$this->offset.','.$this->limit;		
+		}	
+		return $sqlStr;	
+	}	
+	
+	/**
+	 * get sql string
+	 * @return string
+	 */
+	public function getQuery() : string {
+		return $this->getSql();
 	}
 
 	/**
@@ -772,26 +938,7 @@ class Filter extends Table {
 	 * @return array|false
 	 */
 	public function get() {
-	    $this->createWhereHavingStr();
-	    if ($this->whereStr == '') $this->whereStr = '1';
-		if ($this->orderStr == '') $this->orderStr = '1';
-		if ($this->offset == '') $this->offset = '0';
-		$sqlStr = 'SELECT '.$this->columns.' FROM '.$this->formStr.' '.$this->alias;
-		foreach ($this->joins as $join) {
-			$sqlstr .= ' '.$join[0].' '.$joinn[1].' '.$join[2].
-			' ON '.$join[3];
-		}
-		$sqlStr .= ' WHERE '.$this->whereStr.' ORDER BY '.$this->orderStr;
-		if ($this->limit != 0) {
-			$sqlStr .= 'LIMIT '.$this->offset.','.$this->limit;		
-		}	
-		if ($this->groupStr != '') {
-			$sqlStr .= ' GROUP BY '.$this->groupStr;		
-		}
-		if ($this->havingStr != '') {
-			$sqlStr .= ' HAVING '.$this->groupStr;		
-		}
-		$this->setQuery($sqlStr);
+		$this->setQuery($this->getSql());
 		return $this->loadObjectList();
 	}
 } // Filter
