@@ -26,44 +26,6 @@ A regisztrációs folyamatban használt aláírás szolgáltató:
 
 https://szuf.magyarorszag.hu/szuf_avdh_feltoltes 
 
-## user adatok hitelességének ellenörzése
-Ez a funkció arra szolgál, hogy a user által (a regisztrációs képernyőn) megadott személyes adatokat összevesse az ügyfélkapuban tárolt hiteles adatokkal.
-
-hívása a kliens programban:
-```
-   session_start();
-   .....
-   $_SESSION['token'] = md5(rand(0,10000));
-   $userinfo = '{
-     "family_name":'.$ellenörizrndő_vezetéknév.',
-     "middle_name":'.$ellenörizrndő_középsőnév.',
-     "iven_name":'.$ellenörizrndő_név3.',
-     "postal_code":'.$ellenörizrndő_irányítószám.',
-     "locality":'.$ellenörizrndő_település.',
-     "street_address":'.$ellenörizrndő_utcaházszám.',
-     "birth_date":'.$ellenörizrndő_születési dátum.',
-    " mothersname":'.$ellenörizrndő_anyjaneve.'
-   }';
-   // megjegyzés: amit nem akarunk ellenörizni azt hagyjuk ki! 
-   $post = [
-    'form' => 1,
-    'redirect_uri' => 'http://.......',
-    'userinfo'   => $userInfo,
-    'token' => $_SESSION['token']
-   ];
-   $ch = curl_init('https://uklogin.tk/ukaudit.php');
-   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-   curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-   curl_exec($ch);
-   curl_close($ch);
-```
-A hitelesitő szerver visszahivja "redirect_uri"-t url paraméterben két adat érkezik:
-
-**token** - a kérés indításnál küldött érték,
-
-**result** - "OK" ha minden jó, egyébként hibaüzenet
-
-A hibaüzenet tartalmazza a feltöltött pdf-ben szereplő személyi adatokat)
 
 ## Programnyelvek
 
@@ -132,7 +94,8 @@ Ezután hívni kell a https://szeszt.tk/uklogin/oath2/access_token url-t, GET va
 
 Következő lépésként hívni kell a https://szeszt.tk/uklogin/oath2/userinfo címet, GET vagy POST paraméterként a
 "access_token" értéket küldve. Válaszként a bejelentkezett user nicknevét kapjuk vagy az "error" stringet:
-{"nick":"xxxx"} vagy {"error":"not found"}
+{"nick":"xxxx", "postal_code":"...", "locality":"...", "street_address":"..."} vagy 
+{"error":"not found"}
 
 Sikertelen login esetén, az iframe-ben hibaüzenet jelenik meg és újra a login képernyő. az app -nál megadott számú sikertelen kisérlet után a fiók blokkolásra kerül, ez a user ebbe az applikációba a továbbiakban nem tud belépni. A blokkolt fiókokat az applikáció adminisztrátor tudja újra aktivizálni.
 
@@ -145,8 +108,8 @@ Sikeres regisztrálás után az iframe-ben a login képernyő jelenik meg. Siker
 
 ### Regisztráció folyamata
 
-1. A megjelenő első képernyőről a felhasználónak le kell töltenie egy pdf fájlt (ez csak azt tartalmazza melyik app -be regisztrál).
-2. A user a letöltött pdf -et az ügyfélkapus ingyenes aláírás rendszerrel aláírja, és az aláírt pdf -et is letölti saját gépére.
+1. A megjelenő első képernyőn leirtak szerint a felhasználónak az ügyfélkapuból le kell töltenie egy pdf fájlt ami a személyes adatait tartalmazza.
+2. A user a letöltött pdf -et a kormányzat ingyenes aláírás rendszerrel aláírja, és az aláírt pdf -et is letölti saját gépére.
 3. az aláírt pdf -et feltölti ebbe az applikációba, az ezután megjelenő képernyőn usernevet és jelszót választ magának.
 Mindezt részletes help segíti.
 
@@ -172,6 +135,7 @@ Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,e
 
 #### a "normál" felhasználókkal kapcsolatban tárolt adatok ("users" tábla):
 - nick név
+- lakcím
 - jelszó hash
 - melyik applikációba regisztrált
 - ügyfélkapunál megadott személyes adataibólképzett (reális idő alatt nem visszafejthető) kód

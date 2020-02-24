@@ -14,15 +14,33 @@ class UserregistView  extends CommonView  {
 	    <div ng-controller="ctrl" id="scope" style="display:none;" class="registForm1">
 		    <h2><?php echo $data->appName; ?></h2>
 		    <h3><?php echo txt($data->title); ?></h3>
-		    <p><?php echo txt('LBL_REGISTFORM1_HELP1'); ?></p>
-		    <p><?php echo txt('LBL_PDF'); ?>
-		    	<a href="<?php echo MYDOMAIN; ?>/index.php?option=userregist&task=pdf&client_id=<?php echo $data->client_id; ?>">
-		    		<?php echo txt('LBL_DOWNLOAD'); ?>
-		    	</a>
-		    </p>
-		    <p><?php echo txt('LBL_REGISTFORM1_HELP2'); ?></p>
-		    <p><?php echo txt('LBL_REGISTFORM1_HELP3'); ?></p>
-		    <p><?php echo txt('LBL_REGISTFORM1_HELP4'); ?></p>
+		    
+	        <p>1. A lentebb megadott linkre kattintva (új böngésző fülön nyílik meg), az ügyfélkapus
+	         belépésedet használva; le kell töltened a személyi
+	         adataidat tartalmazó pdf fájlt a saját gépedre. Miután az ügyfélkapus belépéseddel azonosítottad magad, 
+	         görgesd le a megjelenő oldalt az aljára, a jobb alsó sarokban van a "LETÖLTÉS" gomb.
+	         A letöltés után térjél vissza erre a böngésző fülre!</p> 
+	        <p style="padding-left:30px;"><a href="https://www.nyilvantarto.hu/ugyseged/NyilvantartottSzemelyesAdatokLekerdezeseMegjelenitoPage.xhtml"
+	        	 target="_new">személyi adatokat tartalmazó pdf letöltése<br />
+	        	 https://www.nyilvantarto.hu/ugyseged/NyilvantartottSzemelyesAdatokLekerdezeseMegjelenitoPage.xhtml
+	           </a>
+	        </p> 
+	        <p>2. Ezután a pdf fájl elektronikusan  alá kell írnod. Ennek érdekében kattints
+	         a lentebb megadott linkre (új böngésző fülön nyílik meg), 
+	         válaszd ki az elöző lépésben letöltött pdf fájlt, válaszd a "hitelsített pdf" opciót,
+	         fogadd el a felhasználási feltételeket, ha a program kéri akkor azonosítsd
+	         magad az ügyfélkapus belépéseddel, kattints a "Documentum elküldése" ikonra!
+	         Ezután a megjelenő új képernyöröl töltsd le az aláirt pdf -t a saját gépedre.
+	         Az aláírt fájl letöltése után térjél vissza erre a böngésző fülre!</p> 
+	        <p style="padding-left:30px;"><a href="https://szuf.magyarorszag.hu/szuf_avdh_feltoltes" 
+	        	target="_new">
+	        	pdf aláírása<br />
+	        	https://szuf.magyarorszag.hu/szuf_avdh_feltoltes
+	           </a>
+	        </p> 
+	        <p>3. Töltsd fel a fentiek szerint letöltött és aláírt pdf fájlt! (válaszd ki, majd kattints a
+	         kék szinű gombra!)</p>
+
 			<form name="formRegist1" id="formRegist1" 
 				action="<?php echo MYDOMAIN; ?>/index.php" method="post" 
 				target="_self" enctype="multipart/form-data">
@@ -34,8 +52,9 @@ class UserregistView  extends CommonView  {
 					<lable><?php echo txt('LBL_SIGNEDPDF'); ?></lable>
 					<input type="file" name="signed_pdf" />
 				</p>
+		     <p><a href="<?php echo MYDOMAIN; ?>/opt/adatkezeles/show" target="_new">Adatkezési leírás</a>
 				<p>
-					<button type="submit" class="btn btn-primary"><?php echo txt('NEXTSTEP'); ?></button>
+					<button type="submit" class="btn btn-primary">Az adatkezelést elfogadom, az aláírt PDF fájlt feltöltöm.</button>
 				</p>
 			</form>
 	    </div>

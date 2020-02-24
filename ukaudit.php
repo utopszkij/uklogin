@@ -9,21 +9,15 @@
 * A kliens program teendői auditáláshoz
 *   session_start();
 *   .....
-*   $_SESSION['token'] = md5(rand(0,10000));
-*   $userinfo = '{..lásd UserInfo class...}';
-*   $post = [
-*    'form' => 1,
-*    'redirect_uri' => '.......',
-*    'userinfo'   => $userInfo,
-*    'token' => $_SESSION['token']
-*   ];
-*   $ch = curl_init('https://uklogin.tk/ukaudit.php');
-*   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-*   curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-*   curl_exec($ch);
-*   curl_close($ch);
+*   véletlen szerű token generálása és tárolása sessionba.
+*   https://uklogin.tk/ukaudit.php hívása
+*    POST ban küldve: 
+*        token (sessionban tárolt kód), 
+*        form=1, 
+*        redirect_uri (urlencoded), 
+*        userinfo (JSON string lásd UserInfo class, urlencoded)
 *
-* A "redirect_uri" müködése
+* A "redirect_uri" müködése (pszeudó kód)
 *  session_start();
 *  ....
 * if (($_GET['token'] == $_SESSION['token']) & ($_GET['result'] == 'OK')) {
@@ -125,7 +119,7 @@ class UkauditController {
     protected function parsePdf(string $filePath) {
         $res = new PdfData();
         if (!file_exists($filePath)) {
-            $res->error = txt('NOT_FOUND').'(1) '.$filePath.' ';
+            $res->error = 'PDF_Nem_található.  utvonal:'.$filePath.', ';
         } else {
           $filePath = str_replace("'",'',escapeshellarg($filePath)); 
           $this->parseTxt($filePath, $res);
@@ -175,7 +169,7 @@ class UkauditController {
 			       $i++;
 			     }
 		} else {
-			$res->error .= txt("PDF_ERROR_TXT").' ';
+			$res->error .= 'Nem lehet értelmezni a PDF szöveggét, ';
 		}
 	}
 	
@@ -206,7 +200,7 @@ class UkauditController {
 			    $i++;
 			}
 		} else {
-			$res->error .= txt("PDF_ERROR_INFO").' ';
+			$res->error .= 'Nem lehet értelmezni a PDF file infokat, ';
 		}
     }
     
@@ -232,7 +226,7 @@ class UkauditController {
         if ($check1 && $check2) {
             $res->error = '';
         } else {
-            $res->error .= txt('ERROR_PDF_SIGN_ERROR').'(1) ';
+            $res->error .= 'Nem megfelelő aláírás, ';
         }
     }
     
@@ -253,13 +247,13 @@ class UkauditController {
             $this->checkPdfSignStr($filePath, $res);
         } else {
             if (in_array('File \'' . $filePath . '\' does not contain any signatures' , $signatureArray)) {
-               $res->error .= txt('ERROR_PDF_SIGN_ERROR').'(2) '; // nincs aláírva
+               $res->error .= 'Nincs aláírva, ';
             }
             if (!in_array('  - Signature Validation: Signature is Valid.' , $signatureArray)) {
-               $res->error .= txt('ERROR_PDF_SIGN_ERROR').'(3) '; // aláírás nem valid
+               $res->error .= 'Aláírás nem érvényes, ';
             }
             if (!in_array('  - Signer Certificate Common Name: AVDH Bélyegző' , $signatureArray)) {
-               $res->error .= txt('ERROR_PDF_SIGN_ERROR').'(4) '; // nem AVDH aláírás
+               $res->error .= 'nem AVDH aláírás, ';
             }
         }
     }
@@ -339,7 +333,7 @@ class UkauditController {
                    $i++;
         	}
 		} else {
-			$res->error .= txt("PDF_ERROR_XML").' ';
+			$res->error .= 'Nem lehetett az aláíró info XML-t kibontani, ';
 		}
     }
     
@@ -380,20 +374,25 @@ class UkauditController {
         if (($res->info_creator != 'Apache FOP Version 1.0') |
             ($res->info_producer != 'Apache FOP Version 1.0; modified using iText 5.0.2 (c) 1T3XT BVBA') |
             ($res->info_pdfVersion != '1.4')) {
-                $res->error .= txt('PDF_INFO_CHECK_ERROR').' ';
+                $res->error .= 'PDF_INFO_CHECK_ERROR, ';
         }
         
         $userName = mb_strtoupper($user->family_name.' '.$user->middle_name.' '.$user->given_name);
         $userName = trim(str_replace('  ',' ',$userName));
-        $userAddress = mb_strtoupper($user->postal_code.' '.$user->locality.' '.$user->street_address);
         
         // lakcím nyilvántartásban a cím kicsit más formában van mint a lakcím kártyán
+        $userAddress = mb_strtoupper($user->postal_code.' '.$user->locality.' '.$user->street_address);
         $userAddress = str_replace(' EM.',' EMELET', $userAddress);
+        $userAddress = str_replace(' U. ',' UTCA ', $userAddress);
+        $userAddress = str_replace(' U ',' UTCA ', $userAddress);
+        $userAddress = str_replace(' Ú. ',' ÚT ', $userAddress);
+        $userAddress = str_replace(' Ú ',' ÚT ', $userAddress);
         $userAddress = str_replace('.','', $userAddress);
         $userAddress = str_replace('/','', $userAddress);
         $userAddress = str_replace('  ',' ', $userAddress);
         $userAddress = str_replace('  ',' ', $userAddress);
         $userAddress = trim($userAddress);
+
         $res->txt_address = str_replace('.','', $res->txt_address);
         $res->txt_address = str_replace('/','', $res->txt_address);
         $res->txt_address = str_replace('  ',' ', $res->txt_address);
@@ -403,31 +402,42 @@ class UkauditController {
         // ha a dátumot másképpen irta...
         $user->birth_date = str_replace('.','-',$user->birth_date);
         $user->birth_date = substr($user->birth_date,0,10);
+
+        // aláírás infó vs PDF tartalom
+        if (($res->txt_mothersname != $res->xml_anyjaNeve) |
+            (mb_strtoupper($res->txt_name) != mb_strtoupper($res->xml_viseltNev)) |
+        	   ($res->txt_birth_date != $res->xml_szuletesiDatum)) {
+           $res->error .= 'PDF tartalom és aláírás ren egyezik, <br>'.
+           $res->txt_mothersname.' / '.$res->xml_anyjaNeve.'<br>'.
+           $res->txt_name.' / '.$res->xml_viseltNev.'<br />'.
+           $res->txt_birth_date.' / '.$res->xml_szuletesiDatum.'<br />';
+           return;
+		  } 	
         
+		  // PDF tartalon vs userInfo	
         if (($res->txt_mothersname != mb_strtoupper($user->mothersname)) & ($user->mothersname != '')) {
-                 $res->error .= txt('PDF_TXT_CHECK_ERROR').' Anyja neve nem egyezik ';
+                 $res->error .= 'PDF beli anyja neve nem egyezik, ';
         }
-        if (mb_strtoupper($res->txt_name) != mb_strtoupper($userName)) {
-                 $res->error .= txt('PDF_TXT_CHECK_ERROR').' Név adat nem egyezik ';
+        if ((mb_strtoupper($res->txt_name) != mb_strtoupper($userName)) & ($userName != '')) {
+                 $res->error .= 'PDF beli név nem egyezik, ';
         }
         if (($res->txt_birth_date != $user->birth_date) & ($user->birth_date != '')) {
-                $res->error .= txt('PDF_TXT_CHECK_ERROR').' születési dátum nem egyezik ';
+                $res->error .= 'PDF beli születési dátum nem egyezik, ';
         }
         if (($res->txt_address != $userAddress) & ($userAddress != '')) {
-                $res->error .= txt('PDF_TXT_CHECK_ERROR').' lakcím nem egyezik ';
+                $res->error .= 'PDF beli Lakcím nem egyezik, ';
         }
-        if ($res->xml_viseltNev != $userName) {
-            $res->error .= txt('PDF_XML_CHECK_ERROR').' Név nem egyezik ';
+        
+        // aláírás tartalom vs userInfo
+        if (($res->xml_viseltNev != $userName) & ($userName != '')) {
+            $res->error .= 'Aláírás szerinti viselt név nem egyezik, ';
         }
         if (($res->xml_szuletesiDatum != $user->birth_date) & ($user->birth_date != '')) {
-            $res->error .= txt('PDF_XML_CHECK_ERROR').' Születési dátum nem egyezik ';
+            $res->error .= 'Aláírás szerinti születési dátum nem egyezik, ';
         }
         if (($res->xml_anyjaNeve != mb_strtoupper($user->mothersname)) & ($user->mothersname != '')) {
-                 $res->error .= txt('PDF_XML_CHECK_ERROR').' Anyja neve nem egyezik ';
+                 $res->error .= 'Aláírás szerinti anyja neve nem egyezik, ';
         }
-        $user->signdate = $res->xml_alairasKelte;  // Új mező
-        $user->origname = $res->xml_szuletesiNev;  // Újmező    
-                
     }
     
     /**
@@ -438,6 +448,8 @@ class UkauditController {
     	$_SESSION['token'] = $_POST['token'];
     	$_SESSION['redirect_uri'] = urldecode($_POST['redirect_uri']);
     	$_SESSION['userinfo'] = urldecode($_POST['userinfo']);
+    	
+    	
 		echo '
 		<html>
 		  <head>
@@ -452,7 +464,7 @@ class UkauditController {
 		echo '
 		<body style="background-color:#d0d0d0; width:100%; height:100%">
         <div id="ukAudit" class="page" style="padding:20px; margin:20px; background-color:white; opacity:0.9">
-        <h2>Hitelesítés az ügyfélkapu és a kormányzati aláírás szolgáltatás segitségével
+        <h2>Hitelesítés az ügyfélkapu és a kormányzati aláírás szolgáltatás segítségével
 				<img src="templates/default/cimer.png" style="height:150px; float:right">        
         </h2>
         <p>1. A lentebb megadott linkre kattintva (új böngésző fülön nyílik meg), az ügyfélkapus
@@ -465,9 +477,9 @@ class UkauditController {
         	 https://www.nyilvantarto.hu/ugyseged/NyilvantartottSzemelyesAdatokLekerdezeseMegjelenitoPage.xhtml
            </a>
         </p> 
-        <p>2. Ezután a pdf fájl elektronikussan  alá kell írnod. Ennek érdekében kattints
+        <p>2. Ezután a pdf fájl elektronikusan  alá kell írnod. Ennek érdekében kattints
          a lentebb megadott linkre (új böngésző fülön nyílik meg), 
-         válaszd ki az elöző lépésben letöltött a pdf fájlt, válaszd a "hitelsített pdf" opciót,
+         válaszd ki az elöző lépésben letöltött pdf fájlt, válaszd a "hitelsített pdf" opciót,
          fogadd el a felhasználási feltételeket, ha a program kéri akkor azonosítsd
          magad az ügyfélkapus belépéseddel, kattints a "Documentum elküldése" ikonra!
          Ezután a megjelenő új képernyöröl töltsd le az aláirt pdf -t a saját gépedre.
@@ -478,8 +490,10 @@ class UkauditController {
         	https://szuf.magyarorszag.hu/szuf_avdh_feltoltes
            </a>
         </p> 
-        <p>3. Töltsd fel a fentiek szerint letöltött és aláírt pdf fájlt! (válaszd ki, majd kattints a kék szinű gombra!)</p>
-        <form name="formRegist1" id="formRegist1"	action="ukaudit.php" class="form"
+        <p>3. Töltsd fel a fentiek szerint letöltött és aláírt pdf fájlt! (válaszd ki, majd kattints a 
+        kék szinű gombra!)</p>
+        <form name="formRegist1" id="formRegist1"	
+            action="ukaudit.php" class="form"
             method="post"target="_self" enctype="multipart/form-data">
 				<input type="hidden" name="pdffile" value="alairt_pdf" />
 				<input type="hidden" name="process" value="1" />
@@ -546,12 +560,14 @@ class UkauditController {
 		
 		// pdf file teljes ellemzése
 		$res = $this->parsePdf($filePath); 
-		$this->checkPdfdata($res, $userInfo);
-		
+		if ($res->error == '') {
+			$this->checkPdfdata($res, $userInfo);
+		}
 		// feltöltött pdf file és a kibontott csatolt fileok törlése
 		$this->clearFolder($tmpDir);
 		
 		// eredmény kiirása
+		
 		if ($res->error == '') {
 			if ($redirect_uri != '') {
 				header('Location: '.$redirect_uri.'?result=OK&token='.$token);
@@ -560,9 +576,9 @@ class UkauditController {
 			}	
 		} else {
 			if ($redirect_uri != '') {
-				header('Location: '.$redirect_uri.'?result='.urlencode(JSON_encode($res)).'&token='.$token);
+				header('Location: '.$redirect_uri.'?result='.urlencode($res->error).'&token='.$token);
 			} else {
-				echo 'result='.JSON_encode($res).' token='.$token;
+				echo 'result='.$res->error.' token='.$token;
 			}	
 		}
 		
@@ -576,23 +592,7 @@ class UkauditController {
 // main
 session_start();
 $controller = new UkauditController();
-if (isset($_GET['testform'])) {
-	$userInfo = new UserInfo();
-   $userInfo->family_name = '?';
-	$userInfo->middle_name = '?';
-	$userInfo->given_name = '?';
-   $userInfo->postal_code = '?';
-	$userInfo->locality = '?';
-   $userInfo->street_address = '?';
-	$userInfo->birth_date = '?';
-	$userInfo->mothersname = '?';
-	
-	$_POST['userinfo'] = JSON_encode($userInfo);
-	$_POST['token'] = '123';
-	$_POST['redirect_uri'] = '';
-	$_POST['form'] = '1';
-	$controller->form();
-} else if (isset($_POST['form']))  {
+if (isset($_POST['form']))  {
 	$controller->form();
 } else {
 	$controller->audit();

@@ -220,7 +220,8 @@ class Oauth2Controller extends Controller {
 
 	/**
 	 * oAuth2 backend function
-	 * echo {"nickname":"..."} vagy {"error":"not found"}
+	 * echo {"nickname":"...". "postal_code":"...", "locality":"....", street_address":"...."} vagy 
+	 *      {"error":"not found"}
 	 * @param Request $request   access_token
 	 * @return void
 	 */
@@ -229,12 +230,15 @@ class Oauth2Controller extends Controller {
         $model = $this->getModel('users');
         $view = $this->getView('oauth2');
         $rec = $model->getUserByAccess_token($access_token);
-
+ 
         if (!headers_sent()) {
             header('Content-Type: application/json');
         }
         if (!isset($rec->error)) {
-            echo '{"nick":"'.$rec->nick.'"}';
+            echo '{"nick":"'.$rec->nick.'", '.
+            '"postal_code":"'.$rec->postal_code.'", '.
+            '"locality":"'.$rec->locality.'", '.
+            '"street_address":"'.$rec->street_address.'"}';
         } else {
             $view->errorMsg(['NOT_FOUND']);
         }

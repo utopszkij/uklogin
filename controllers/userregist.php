@@ -253,17 +253,30 @@ class UserregistController extends Controller {
 	 * parse pdf file
 	 * @param string $filePtah
 	 * @param string $client_id
-	 * @param object $res {error, ...}
+	 * @param object $res {error, ... postal_code, locality, street_address }
 	 */
 	protected function parsePdf(string $filePath, string $client_id, &$res) {
 	    $parser = new \Smalot\PdfParser\Parser();
 	    $pdf    = $parser->parseFile($filePath);
 	    $text = $pdf->getText();
-	    if ($text != 'client_id='.$client_id) {
-	        $res->error = 'ERROR_PDF_SIGN_ERROR'; // nem megfelelő a txt tartalom
-	    }
+		 	    
+		 // lakcím adatok kinyerése
+ 		 $res->postal_code = '';		 	
+		 $res->locality = '';
+		 $res->street_address = '';		 	
+		 $sorok = explode("\n",$text);
+		 foreach ($sorok as $sor) {
+		 	if (mb_substr($sor, 0, 3) == 'Cím') {
+		 		$i = mb_strpos($sor, 'Bejelentés');
+		 		$cim = mb_substr($sor,3,($i-3));
+		 		$w = explode(' ',$cim,3);
+		 		$res->postal_code = $w[0];		 	
+		 		$res->locality = $w[1];
+		 		$res->street_address = $w[2];		 	
+			}	
+		 }
 	}
-
+	
 	/**
 	 * check pdf signature, ha a pdfsig hivás sikertelen, de
 	 * tartalmazza az aláírásra utaló stringeket akkor a teljes pdf tartalmonból
@@ -338,12 +351,13 @@ class UserregistController extends Controller {
         }
     }
 
+
 	/**
 	 * feltöltött $tmpdir/signed.pdf feldolgozása
 	 * @param string $tmpDir
 	 * @param string $filename
 	 * @param string $client_id
-	 * @return object {error:"" | error:"xxxxxx", signHash:"xxxxx"}
+	 * @return object {error:"" | error:"xxxxxx", signHash:"xxxxx", postal_code, street_address, locality}
 	 */
 	protected function processUploadedFile(string $tmpDir, string $fileName,  string $client_id) {
 	    $res = new stdClass();
@@ -368,7 +382,7 @@ class UserregistController extends Controller {
             return $res;
 	     }
 	     if ($res->error == '') {
-            // feldolgozza a meghatalmazo.xml fájlt
+         // feldolgozza a meghatalmazo.xml fájlt
 	      $email = '';
 	      $emails = [''];
 	      $origName = '';
@@ -406,11 +420,13 @@ class UserregistController extends Controller {
                    }
                    $i++;
         	}
-			$res->signHash = hash('sha512',$origName.$birthDate.$mothersName, FALSE);
+        	if ($origName != '') {
+				$res->signHash = hash('sha512',$origName.$birthDate.$mothersName, FALSE);
+			}	
 	      unlink($igazolasPWD.'/meghatalmazo.xml');
 	      $origName = time();
 	      $mothersname = time();
-	      $birthDate = $time();
+	      $birthDate = time();
 	     }
         //- 2020.01.30 új aláírás rendszer
 	    return $res;
@@ -421,7 +437,7 @@ class UserregistController extends Controller {
 	 * sessionban érkezik a client_id
 	 * @param Request $request {signed_pdf}
 	 * @param string $tmpDir
-	 * @return object {error, signHash}
+	 * @return object {error, signHash, postal_code, street_address, locality}
 	 */
 	public function getSignHash(RequestObject $request, string $tmpDir) {
 	    $res = new stdClass();
@@ -519,9 +535,12 @@ class UserregistController extends Controller {
         $tmpDir = $this->createWorkDir();
 	    // biztos ami biztos...
 	    $this->clearFolder($tmpDir);
-	    // uploaded file feldolgozása
-	    // aláírás ellenörzés, $signHash kinyerése
+	    
+		 // uploaded file feldolgozása
+
+	    // aláírás ellenörzés, $signHash és lakcím adatok kinyerése
 	    $res = $this->getSignHash($request, $tmpDir);
+	    
 	    if ($res->error != '') {
 	        // $res->error formája ERRORTOKEN(num)
 	        $w = explode('(',$res->error);
@@ -531,6 +550,10 @@ class UserregistController extends Controller {
 	            $w[1] = '';
 	        }
 	        $view->errorMsg([$w[0],  $w[1]]);
+	    } else {
+	 	 	  $request->sessionSet('postal_code',$res->postal_code);		 	
+		     $request->sessionSet('locality',$res->locality);
+		     $request->sessionSet('street_address',$res->street_address);		 	
 	    }
 	    if (($res->error == '') && ($forgetPswNick == '')) {
 	        $res = $this->checkSignHashExist($client_id, $res->signHash);
@@ -553,6 +576,7 @@ class UserregistController extends Controller {
 	        $data = new stdClass();
 	        $this->createCsrToken($request, $data);
 	        $request->sessionSet('signHash', $res->signHash);
+	        
 	        $request->sessionSet('client_id', $client_id);
 	        $data->msgs = [];
 	        $data->appName = $app->name;
@@ -607,23 +631,25 @@ class UserregistController extends Controller {
 	
 	/**
 	 * user Regist 2.képernyő feldolgozás)
-	 * sessionban érkezik client_id és forgetPsw, changePsw esetén nick
+	 * sessionban érkezik client_id és forgetPsw, cím adatok, changePsw esetén nick
 	 * @param Request $request - nick, psw1, psw2, csrToken
-     * @return void
+    * @return void
 	 */
 	public function doregist(RequestObject $request) {
 	    $appModel = $this->getModel('appregist');
 	    $model = $this->getModel('users'); // szükség van rá, ez kreál táblát.
 	    $view = $this->getView('userregist');
 
-
-
 	    // csrttoken ellnörzés
 	    $this->checkCsrToken($request);
 
-	    // client_id és signHash, forgetPswNick sessionból
+	    // client_id, signHash, forgetPswNick és cím adatok sessionból
 	    $client_id = $request->sessionGet('client_id','');
 	    $signHash = $request->sessionGet('signHash','');
+		 $postal_code = $request->sessionGet('postal_code','');
+		 $street_address = $request->sessionGet('street_address','');
+		 $locality = $request->sessionGet('locality',''); 	    
+	    
 	    $forgetPswNick = $request->sessionGet('nick','');
 	    $app = $appModel->getData($client_id);
 	    if ($signHash == '') {
@@ -674,10 +700,15 @@ class UserregistController extends Controller {
 	       $data->code = '';
 	       $data->access_token = '';
 	       $data->codetime = '';
+	       $data->postal_code = $postal_code;
+	       $data->locality = $locality;
+	       $data->street_address = $street_address;
+	       
 	       $data->pswhash = hash('sha256', $data->psw1, false);
 	       unset($data->psw1);
 	       unset($data->psw2);
 	       unset($data->msgs);
+	       
 	       if ((!isset($data->forgetPswNick)) || ($data->forgetPswNick == '')) {
 	           unset($data->forgetPswNick);
 	           $data->id = 0;
@@ -689,6 +720,9 @@ class UserregistController extends Controller {
 	       if (count($msgs) == 0) {
 	           // sikeresen tárolva
 	           $view->successMsg(['USER_SAVED']);
+	 	 	 	  $request->sessionSet('postal_code','');		 	
+		    	  $request->sessionSet('locality','');
+		    	  $request->sessionSet('street_address','');		 	
 	       } else {
 	           $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
 	       }

@@ -4,6 +4,9 @@ class UserRecord {
    public $id;
    public $client_id;
    public $nick;
+   public $postal_code;
+   public $locality;
+   public $street_address;
    public $pswhash;
    public $signhash;
    public $enabled;

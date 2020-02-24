@@ -72,6 +72,8 @@ if ($task == 'code') {
         $access_token = $result->access_token;
         $url = UKLOGINDOMAIN.'/userinfo/';
         $fields = ["access_token" => $access_token];
+// $s = getFromUrl($url, $fields);
+// echo $s; exit();        
         $result = JSON_decode(getFromUrl($url, $fields));
         if ($result->nick != 'error') {
             
@@ -86,7 +88,8 @@ if ($task == 'code') {
             // </script>
             // ';
             ?>
-            <h2>"<?php echo $result->nick?>"&nbsp;sikeresen bejelentkezett.</h2>
+            <h2>"<?php echo $result->nick; ?>"&nbsp;sikeresen bejelentkezett.</h2>
+            <p>Lakcím: <?php echo $result->postal_code.' '.$result->locality.' '.$result->street_address; ?></p>
             <h1 style="text-align:center">:)</h1>
             </body>
     		</html>

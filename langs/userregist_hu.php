@@ -49,11 +49,11 @@ DEFINE('ADMIN_NICK','Admin név');
 DEFINE('ADMININFO','A <strong>client_id</strong> és <strong>client_secret</secret>
  adatokat jegyezd fel és gondossan őrizd meg! A szolgáltatás használatához 
  és adminisztrálásához szükség lesz rájuk.');
-DEFINE('USER_SAVED','Felhasználói fiók adati tárolva');
+DEFINE('USER_SAVED','Felhasználói fiók adatai tárolva');
 DEFINE('USER_DELETED','Felhasználói fiók törölve');
 DEFINE('CLIENT_ID','Client_id');
 DEFINE('SUREDELAPP','Bitos törölni akarja ezt az applikációt?<br />Törlés után sem az admin bejelentkezés, sem a szolgáltatás nem lesz használható.<br />A törlés nem visszavonható.');
-DEFINE('SURE_DELETE_ACCOUNT','Bitos törölni akarja ezt a fiokot? (Törlés után minden ezzel a fiokkal kapcsolatos adatot törlünk a rendszerből. Nem fog tudni bejelentkezni, de szükség esetén újra regisztrálhatja magát.)');
+DEFINE('SURE_DELETE_ACCOUNT','Bitos törölni akarja ezt a fiókot? (Törlés után minden ezzel a fiókkal kapcsolatos adatot törlünk a rendszerből. Nem fog tudni bejelentkezni, de szükség esetén újra regisztrálhatja magát.)');
 DEFINE('ERROR_DOMAIN_EMPTY','Domain nevet meg kell adni');
 DEFINE('ERROR_DOMAIN_INVALID','Domain név nem megfelelő');
 DEFINE('ERROR_DOMAIN_EXISTS','Ez a domain már regisztrálva van');
