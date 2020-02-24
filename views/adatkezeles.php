@@ -22,7 +22,8 @@ class AdatkezelesView  extends CommonView  {
             <p>Jelen leírás az ügyfélkapu segítségével történő felhasználó regisztrációt és
             bejelentkezést kezelő web szolgáltatás adatkezeléséről szól. Az ezt használó 
             egyes applikációk adatkezelési leírását az adott applikációban találhatja meg!</p>
-            <p><strong>Ez a szoftver személyes adatokat tartósan nem kezel és tárol.
+            <p><strong>Ez a szoftver személyhez kapcsolt személyes adatokat tartósan nem kezel és tárol.
+            A lakcímet anonim módon, (személy azonosításra alkalmas adathoz nem kapcsolva) tárolja.
             Ezért a GDPR rá nem vonatkozik.</strong></p>
 
             <h3>Cookie használat</h3>
@@ -36,6 +37,7 @@ class AdatkezelesView  extends CommonView  {
             <ul>
             <li>Választott bejelentkezési név (nick név)</li>
             <li>Jelszó sha256 hash kódja</li>
+            <li>Lakcím (irányító szám, település, utca+házszám</li>
             <li>Használt applikáció azonosítója</li>
             <li>Az ügyfélkapus aláírásból kinyert születési névből, születési dátumból, anyja neve adatból 
              sha256 hash algoritmussal képzett kód</li>
@@ -50,10 +52,6 @@ class AdatkezelesView  extends CommonView  {
             személyes adatok, de alkalmas a bejelentkezésnél a jelszó ellenörzésre, illetve annak
             megakadályozására, hogy egy ember többször regisztráljon ugyanabba az applikációba.
             </p>
-            <p>
-            A felhasználó sikeres bejelentkezés után json formátumban megtekintheti/letöltheti a róla az adott applikációval kapcsolatban
-            tárolt adatokat. Továbbá lehetősége van adatainak (és ezzel bejelentkezési lehetőségének) törlésére is. 	
-            </p> 
             <p>A regisztrációs folyamat során fel kell tölteni egy az ügyfélkapu ingyenes aláírás szolgáltatása
              segítségével aláírt hitelesített pdf dokumentumot. Ez a dokumentum tartalmazza a felhasználó teljes nevét 
              és az ügyfélkapuhoz megadott  e-mail címét és több más személyes adatát. Ezeket az adatokat 
@@ -70,6 +68,7 @@ class AdatkezelesView  extends CommonView  {
             <li>login és regist képernyő testreszabásához css file URL</li>
             <li>Hibás user bejelentkezési kisérlet limit</li>
             <li>Admin bejelentkezési név (nick név)</li>
+            <li>Lakcím (irányító szám, település, utca+házszám</li>
             <li>Jelszó sha256 hash kódja</li>
             <li>Hibás admin bejelentkezési kisérlet limit</li>
             </ul>
