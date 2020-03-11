@@ -1,5 +1,6 @@
 <?php
 // 2020.01.30 Új aláírás rendszer
+// ez az oAth2 rendszer user regisztrációja, az Openid nem ezt használja.
 
 include 'vendor/autoload.php';
 include_once 'models/appregist.php';
@@ -15,7 +16,7 @@ class UserregistController extends Controller {
      */
     public function registform(RequestObject $request) {
         $appModel = $this->getModel('appregist');
-        $view = $this->getView('userregist');
+        $view = $this->getView('pdfform');
         $client_id = $request->input('client_id','?');
         $app = $appModel->getData($client_id);
         $request->sessionSet('nick','');
@@ -26,13 +27,9 @@ class UserregistController extends Controller {
             // save client_id a sessionba
             $request->sessionSet('client_id', $client_id);
             // képernyő kirajzolás
-            $data->client_id = $client_id;
-            $data->appName = $app->name;
-            $data->extraCss = $app->css;
-            $data->nick = $request->input('nick','');
-            $data->title = 'LBL_REGISTFORM1';
-            $data->adminNick = $request->sessionget('adminNick','');
-            $view->registForm1($data);
+            $data->okURL = config('MYDOMAIN').'/opt/userregist/registform2';
+            $data->formTitle = txt('LBL_REGISTFORM1');
+            $view->pdfForm($data);
         } else {
             $view->errorMsg(['ERROR_NOTFOUND']);
         }
@@ -72,35 +69,144 @@ class UserregistController extends Controller {
 	 * @return void
 	 */
 	public function forgetpsw(RequestObject $request) {
+	    $request->sessionSet('nick',$request->input('nick',''));
 	    $appModel = $this->getModel('appregist');
-	    $view = $this->getView('userregist');
+	    $view = $this->getView('pdfform');
 	    $client_id = $request->sessionGet('client_id','?');
-	    $nick = $request->input('nick','');
-	    if ($nick == '') {
-	        $view->errorMsg(['ERROR_NICK_EMPTY']);
-	        return;
-	    }
 	    $app = $appModel->getData($client_id);
 	    if (!isset($app->error)) {
 	        $data = new stdClass();
-	        // create csrr token
+	        // create csr token
 	        $this->createCsrToken($request, $data);
 	        // save client_id a sessionba
 	        $request->sessionSet('client_id', $client_id);
-	        $request->sessionSet('nick', $nick);
-	        
 	        // képernyő kirajzolás
-	        $data->client_id = $client_id;
-	        $data->appName = $app->name;
-	        $data->extraCss = $app->css;
-	        $data->nick = $nick;
-	        $data->title = 'FORGET_PSW';
-	        $data->adminNick = $request->sessionget('adminNick','');
-	        $view->registForm1($data);
+	        $data->okURL = config('MYDOMAIN').'/opt/userregist/registform2';
+	        $data->formTitle = txt('FORGET_PSW');
+	        $view->pdfForm($data);
 	    } else {
 	        $view->errorMsg(['ERROR_NOTFOUND']);
 	    }
 	}
+	
+	protected function checkSignHashExist($client_id, $signHash) {
+	    $res = new stdClass();
+	    $res->error = '';
+	    $res->signHash = $signHash;
+	    $res->nick = '';
+	    $model = $this->getModel('users');
+	    $user = $model->getUserBySignHash($client_id, $signHash);
+	    if (!isset($user->error)) {
+	        $res->error = 'ERROR_PDF_SIGN_EXISTS';
+	        $res->nick = $user->nick;
+	    }
+	    return $res;
+	}
+	
+	/**
+	 * user egist második képernyő
+	 *   (aláirt pdf feltöltés feldolgozása, nick/psw1/psw2 form)
+	 * vagy forgetPsw második képernyő
+	 *   (aláirt pdf feltöltés feldolgozása, nick/psw1/psw2 form)
+	 * sessionban érkezik client_id
+	 * ha elfelejtett jelszó miatti regisztráció ismétlés vagy jelszó modosítás akkor
+	 * sessionban nick is érkezhet
+	 * @param Request $request - signed_pdf, cssrtoken, nick
+	 * @return void
+	 */
+	public function registform2(RequestObject $request) {
+	    $appModel = $this->getModel('appregist');
+	    $model = $this->getModel('users'); // szükség van rá, ez kreál szükség esetén táblát.
+	    $pdfParser = $this->getModel('pdfparser');
+	    $view = $this->getView('userregist');
+	    $client_id = $request->sessionGet('client_id','');
+	    $nick = $request->input('nick','');
+	    $request->sessionSet('nick',$nick);
+	    $forgetPswNick = $request->sessionGet('nick','');
+	    if ($forgetPswNick != '') {
+	        $nick = $forgetPswNick;
+	    }
+	    $app = $appModel->getData($client_id);
+	    if (isset($app->error)) {
+	        $app = new AppRecord();
+	        $app->name = 'testApp';
+	        $app->css = '';
+	    }
+	    // csrttoken ellnörzés
+	    $this->checkCsrToken($request);
+	    
+	    // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
+	    $tmpDir = $pdfParser->createWorkDir();
+	    
+	    // uploaded file másolása
+	    $fileName = getUploadedFile('alairt_pdf', $tmpDir);
+	    if ($fileName == '') {
+	        echo 'upload error'; exit();
+	    }
+	    $filePath = $tmpDir.'/'.$fileName;
+
+	    // uploaded file elemzése
+	    $res = $pdfParser->parser($filePath); 
+	    
+	    // munka könyvtár törlése
+	    $pdfParser->clearFolder($tmpDir);
+	    
+	    if ($res->error != '') {
+	        $view->errorMsg(explode(', ',$res->error));
+	    } else {
+	        // res->postal_code, ->locality, ->street_address, ->signHash képzése
+	        $cimElemek = explode(' ',$res->txt_address,3);
+	        $cimElemek[] = '';
+	        $cimElemek[] = '';
+	        $cimElemek[] = '';
+	        $res->postal_code = $cimElemek[0];
+	        $res->locality = $cimElemek[1];
+	        $res->street_address = ''; // ne legyen GDPR kötele, elvileg $cimElemek[2] lenen;
+	        
+	        $res->signHash = hash('sha512', $res->xml_szuletesiNev.
+	                                        $res->xml_szuletesiDatum.
+	                                        $res->xml_anyjaNeve, false);                 
+	        $request->sessionSet('postal_code',$res->postal_code);
+	        $request->sessionSet('locality',$res->locality);
+	        $request->sessionSet('street_address',$res->street_address);
+	        $request->sessionSet('signHash', $res->signHash);
+	    }
+	    if (($res->error == '') && ($forgetPswNick == '')) {
+	        $res = $this->checkSignHashExist($client_id, $res->signHash);
+	        if ($res->error != '') {
+	            $view->errorMsg([$res->error, 'nick:'.$res->nick]);
+	        }
+	    }
+	    if (($res->error == '') && ($forgetPswNick != '')) {
+	        // most azt kell megnézni azonos signHash keletkezett-e?
+	        $user = $model->getUserByNick($client_id, $forgetPswNick);
+	        if ($res->signHash != $user->signhash) {
+	            $view->errorMsg([txt('ERROR_SIGNNOTEQUAL')]);
+	        }
+	    }
+	    if ($res->error == '') {
+	        // echo ouput form
+	        $data = new stdClass();
+	        $this->createCsrToken($request, $data);
+	        
+	        $request->sessionSet('client_id', $client_id);
+	        $data->msgs = [];
+	        $data->appName = $app->name;
+	        $data->extraCss = $app->css;
+	        $data->nick = $request->input('nick','');
+	        if ($forgetPswNick != '') {
+	            $data->nick = $forgetPswNick;
+	            $data->title = 'FORGET_PSW';
+	        } else {
+	            $data->title = 'LBL_REGISTFORM2';
+	        }
+	        $data->psw1 = '';
+	        $data->psw2 = '';
+	        $data->adminNick = $request->sessionGet('adminNick','');
+	        $view->registForm2($data);
+	    }
+	}
+	
 	
 	/**
 	 * get $app és $user or result errorMsg
@@ -232,370 +338,6 @@ class UserregistController extends Controller {
 	public function deleteaccount(RequestObject $request) {
 	    $this->userAction($request, 'delaccount');
 	}
-	
-	/**
-	 * Aláírandó pdf előállítása
-	 * @param Request $request {client_id}
-     * @return void
-	 */
-	public function pdf(RequestObject $request) {
-	    $client_id = $request->input('client_id','?');
-	    require('./vendor/fpdf/fpdf.php');
-
-	    $pdf = new FPDF();
-	    $pdf->AddPage();
-	    $pdf->SetFont('Arial','B',16);
-	    $pdf->Cell(40,10,'client_id='.$client_id);
-	    $pdf->Output();
-	}
-
-	/**
-	 * parse pdf file
-	 * @param string $filePtah
-	 * @param string $client_id
-	 * @param object $res {error, ... postal_code, locality, street_address }
-	 */
-	protected function parsePdf(string $filePath, string $client_id, &$res) {
-	    $parser = new \Smalot\PdfParser\Parser();
-	    $pdf    = $parser->parseFile($filePath);
-	    $text = $pdf->getText();
-		 	    
-		 // lakcím adatok kinyerése
- 		 $res->postal_code = '';		 	
-		 $res->locality = '';
-		 $res->street_address = '';		 	
-		 $sorok = explode("\n",$text);
-		 foreach ($sorok as $sor) {
-		 	if (mb_substr($sor, 0, 3) == 'Cím') {
-		 		$i = mb_strpos($sor, 'Bejelentés');
-		 		$cim = mb_substr($sor,3,($i-3));
-		 		$w = explode(' ',$cim,3);
-		 		$res->postal_code = $w[0];		 	
-		 		$res->locality = $w[1];
-		 		$res->street_address = $w[2];		 	
-			}	
-		 }
-	}
-	
-	/**
-	 * check pdf signature, ha a pdfsig hivás sikertelen, de
-	 * tartalmazza az aláírásra utaló stringeket akkor a teljes pdf tartalmonból
-	 * sha256 has-t képez és beteszi a $res->pdfHash -be.
-	 * @param string $filePath
-	 * @param object $res {error:"xxxxxx" | error:"", signHash:"" }
-	 */
-	protected function checkPdfSig(string $filePath, &$res) {
-	    $check1 = false;
-	    $check2 = false;
-	    $signatureArray = [];
-	    $signatureArray = explode(PHP_EOL, shell_exec('pdfsig ' . escapeshellarg($filePath).' 2>&1'));
-	    if ((strpos($signatureArray[1],'Segmentation fault') >= 0) ||
-    	    ($signatureArray[0] == 'sh: pdfsig: command not found')) {
-    	        // karakteres keresés a pdf tartalomban
-    	        $buffer = '';
-    	        $pdfContent = '';
-    	        $handle = fopen($filePath, 'r');
-    	        while (($buffer = fgets($handle)) !== false) {
-    	            $pdfContent .= $buffer;
-    	            if (strpos($buffer, 'adbe.pkcs7.detached') !== false) {
-    	                $check1 = true;
-    	            }
-    	            if (strpos($buffer, 'NISZ Nemzeti Infokommun') !== false) {
-    	                $check2 = true;
-    	            }
-    	        }
-    	        if ($check1 && $check2) {
-    	            $res->error = '';
-    	            $res->pdfHash = hash('sha256', $pdfContent, false);
-    	        } else {
-    	            $res->error = 'ERROR_PDF_SIGN_ERROR';
-    	        }
-    	} else {
-    	        if (in_array('File \'' . $filePath . '\' does not contain any signatures' , $signatureArray)) {
-    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // nincs aláírva
-    	        }
-    	        if (!in_array('  - Signature Validation: Signature is Valid.' , $signatureArray)) {
-    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // aláírás nem valid
-    	        }
-    	        if (!in_array('  - Signer Certificate Common Name: AVDH Bélyegző' , $signatureArray)) {
-    	            $res->error = 'ERROR_PDF_SIGN_ERROR'; // nem AVDH aláírás
-    	        }
-    	}
-    }
-
-    /**
-     * extract igazolas.pdf a meghatamazo.pdf -ből
-     * @param string $filePath
-     * @param string $igazolasPWD
-     * @param object $res {error:"xxxxxx" | error:"", ........}
-     */
-    protected function extractIgazolasFromPdf(string $filePath, string $igazolasPWD, &$res) {
-        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/igazolas.pdf '.escapeshellarg($filePath));
-        unlink($filePath);
-        if (!is_file($igazolasPWD.'/igazolas.pdf')) {
-            // nem sikerült igazolas.pdf -et kibontani
-            $res->error = 'ERROR_PDF_SIGN_ERROR';
-        }
-    }
-
-    /**
-     * extract meghatalmazo.xml az igazolas.pdf -ből
-     * @param string $igazolasPWD
-     * @param object $res {error:"xxxxxx" | error:"", ........}
-     */
-    protected function extractMeghatalmazoFromIgazolas(string $igazolasPWD, &$res) {
-        shell_exec('pdfdetach -save 1 -o '.$igazolasPWD.'/meghatalmazo.xml '.escapeshellarg($igazolasPWD.'/igazolas.pdf'));
-        unlink($igazolasPWD.'/igazolas.pdf');
-        if (!is_file($igazolasPWD.'/meghatalmazo.xml')) {
-            $res->error =  'ERROR_PDF_SIGN_ERROR';
-        }
-    }
-
-
-	/**
-	 * feltöltött $tmpdir/signed.pdf feldolgozása
-	 * @param string $tmpDir
-	 * @param string $filename
-	 * @param string $client_id
-	 * @return object {error:"" | error:"xxxxxx", signHash:"xxxxx", postal_code, street_address, locality}
-	 */
-	protected function processUploadedFile(string $tmpDir, string $fileName,  string $client_id) {
-	    $res = new stdClass();
-	    $res->error = '';
-	    $res->signHash = '';
-	    $igazolasPWD = $tmpDir;
-	    $filePath = $tmpDir.'/'.$fileName;
-	    // pdf tartalom ellenörzése Smalot parserrel
-	    $this->parsePdf($filePath, $client_id, $res);
-
-	    // aláirás ellenörzés pdfsig segitségével.
-	    $this->checkPdfSig($filePath, $res);
-	    if ($res->error == '') {
-	        $this->extractIgazolasFromPdf($filePath, $igazolasPWD, $res);
-        }
-        if ($res->error == '') {
-            $this->extractMeghatalmazoFromIgazolas($igazolasPWD, $res);
-	     }
-	     if (($res->error != '') && (isset($res->pdfHash))) {
-	        $res->error = '';
-	        $res->signHash = $res->pdfHash;
-            return $res;
-	     }
-	     if ($res->error == '') {
-         // feldolgozza a meghatalmazo.xml fájlt
-	      $email = '';
-	      $emails = [''];
-	      $origName = '';
-	      $birthDate = '';
-	      $mothersName = '';
-        	$i = 0;
-        	//+ 2020.01.30 új aláírás rendszer
-        	$lines = file($igazolasPWD.'/meghatalmazo.xml');
-        	while ($i < count($lines)) {
-                   $s = trim($lines[$i]);
-                   // Új aláíró rendszerhez:
-                   if ((strpos($s,'szuletesiNev') > 0)  & (isset($lines[$i+1]))) {
-                       $s = trim($lines[$i+1]);
-                       $w = explode('>',$s);
-                       if (count($w) > 1) {
-                            $w2 = explode('<',$w[1]);
-                            $origName = mb_strtoupper($w2[0]);
-                       }
-                   }
-                   if ((strpos($s,'anyjaNeve') > 0)  & (isset($lines[$i+1]))) {
-                       $s = trim($lines[$i+1]);
-                       $w = explode('>',$s);
-                       if (count($w) > 1) {
-                            $w2 = explode('<',$w[1]);
-                            $mothersName = mb_strtoupper($w2[0]);
-                       }
-                   }
-                   if ((strpos($s,'szuletesiDatum') > 0)  & (isset($lines[$i+1]))) {
-                       $s = trim($lines[$i+1]);
-                       $w = explode('>',$s);
-                       if (count($w) > 1) {
-                            $w2 = explode('<',$w[1]);
-                            $birthDate = substr(str_replace('.','-',$w2[0]),0,10);
-                       }
-                   }
-                   $i++;
-        	}
-        	if ($origName != '') {
-				$res->signHash = hash('sha512',$origName.$birthDate.$mothersName, FALSE);
-			}	
-	      unlink($igazolasPWD.'/meghatalmazo.xml');
-	      $origName = time();
-	      $mothersname = time();
-	      $birthDate = time();
-	     }
-        //- 2020.01.30 új aláírás rendszer
-	    return $res;
-	}
-
-	/**
-	 * signHash kinyerése a feltöltött aláírt pdf fájlból
-	 * sessionban érkezik a client_id
-	 * @param Request $request {signed_pdf}
-	 * @param string $tmpDir
-	 * @return object {error, signHash, postal_code, street_address, locality}
-	 */
-	public function getSignHash(RequestObject $request, string $tmpDir) {
-	    $res = new stdClass();
-	    $res->error = '';
-	    $res->signHash = '';
-	    if ($request->input('signed_pdf','') == 'test_notuploaded') { // for unittest
-	        $res->error = 'ERROR_PDF_NOT_UPLOADED';
-	    } else {
-    	    $fileName = getUploadedFile('signed_pdf', $tmpDir);
-    	    if ($fileName != '') {
-    	        $res = $this->processUploadedFile($tmpDir, $fileName, $request->sessionGet('client_id'));
-    	    } else {
-    	        $res->error = 'ERROR_PDF_NOT_UPLOADED';
-    	    }
-	    }
-	    return $res;
-	}
-
-	/**
-	 * van már ezzel a signHas -al regisztráció?
-	 * @param string $client_id
-	 * @param string $signHash
-	 * @return object {error, signhash, nick}
-	 */
-	public function checkSignHashExist(string $client_id, string $signHash) {
-	    $res = new stdClass();
-	    $res->error = '';
-	    $res->signHash = $signHash;
-	    $res->nick = '';
-	    $model = $this->getModel('users');
-	    $user = $model->getUserBySignHash($client_id, $signHash);
-	    if (!isset($user->error)) {
-	        $res->error = 'ERROR_PDF_SIGN_EXISTS';
-	        $res->nick = $user->nick;
-	    }
-	    return $res;
-	}
-
-	/**
-	 * könyvtár teljes tartalmának törlése
-	 * @param string $tmpDir
-	 */
-	protected function clearFolder(string $tmpDir) {
-    	if (is_dir($tmpDir)) {
-    	    $files = glob($tmpDir.'/*'); // get all file names
-    	    foreach ($files as $file) { // iterate files
-    	        if (is_file($file)) {
-    	            unlink($file); // delete file
-    	        }
-    	    }
-    	}
-	}
-
-	/**
-	 * munkakönyvtár létrehozása sessin ID -t használva
-	 */
-	protected function createWorkDir() {
-    	$sessionId = session_id();
-    	$tmpDir = 'work/tmp'.$sessionId;
-    	if (!is_dir($tmpDir)) {
-    	    mkdir($tmpDir, 0777);
-    	}
-    	return $tmpDir;
-	}
-
-	/**
-	 * user egist második képernyő (aláirt pdf feltöltés feldolgozása, nick/psw1/psw2 form)
-	 * sessionban érkezik client_id
-	 * ha elfelejtett jelszó miatti regisztráció ismétlés vagy jelszó modosítás akkor 
-	 * sessionban nick is érkezhet
-     * app->css -t használja
-	 * @param Request $request - signed_pdf, cssrtoken, nick
-     * @return void
-	 */
-	public function registform2(RequestObject $request) {
-       $appModel = $this->getModel('appregist');
-	    $model = $this->getModel('users'); // szükség van rá, ez kreál szükség esetén táblát.
-	    $view = $this->getView('userregist');
-	    $client_id = $request->sessionGet('client_id','');
-	    $nick = $request->input('nick','');
-	    $request->sessionSet('nick',$nick);
-	    $forgetPswNick = $request->sessionGet('nick','');
-	    if ($forgetPswNick != '') {
-	        $nick = $forgetPswNick;
-	    }
-	    $app = $appModel->getData($client_id);
-	    if (isset($app->error)) {
-	        $app = new AppRecord();
-	        $app->name = 'testApp';
-	        $app->css = '';
-	    }
-	    // csrttoken ellnörzés
-	    $this->checkCsrToken($request);
-		 // munkakönyvtár létrehozása a sessionId -t használva -> $tmpDir
-        $tmpDir = $this->createWorkDir();
-	    // biztos ami biztos...
-	    $this->clearFolder($tmpDir);
-	    
-		 // uploaded file feldolgozása
-
-	    // aláírás ellenörzés, $signHash és lakcím adatok kinyerése
-	    $res = $this->getSignHash($request, $tmpDir);
-	    
-	    if ($res->error != '') {
-	        // $res->error formája ERRORTOKEN(num)
-	        $w = explode('(',$res->error);
-	        if (count($w) > 1) {
-	            $w[1] = '('.$w[1];
-	        } else {
-	            $w[1] = '';
-	        }
-	        $view->errorMsg([$w[0],  $w[1]]);
-	    } else {
-	 	 	  $request->sessionSet('postal_code',$res->postal_code);		 	
-		     $request->sessionSet('locality',$res->locality);
-		     $request->sessionSet('street_address',$res->street_address);		 	
-	    }
-	    if (($res->error == '') && ($forgetPswNick == '')) {
-	        $res = $this->checkSignHashExist($client_id, $res->signHash);
-	        if ($res->error != '') {
-	            $view->errorMsg([$res->error, 'nick:'.$res->nick]);
-	        }
-	    }
-	    if (($res->error == '') && ($forgetPswNick != '')) {
-	        // most azt kell megnézni azonos signHash keletkezett-e?
-	        $user = $model->getUserByNick($client_id, $forgetPswNick);
-	        if ($res->signHash != $user->signhash) {
-	            $view->errorMsg([txt('ERROR_SIGNNOTEQUAL')]);
-	        }
-	    }
-	    // munkakönyvtár és tartalmának teljes törlése
-	    $this->clearFolder($tmpDir);
-	    rmdir($tmpDir);
-	    if ($res->error == '') {
-	        // echo ouput form
-	        $data = new stdClass();
-	        $this->createCsrToken($request, $data);
-	        $request->sessionSet('signHash', $res->signHash);
-	        
-	        $request->sessionSet('client_id', $client_id);
-	        $data->msgs = [];
-	        $data->appName = $app->name;
-	        $data->extraCss = $app->css;
-	        $data->nick = $request->input('nick','');
-	        if ($forgetPswNick != '') {
-	            $data->nick = $forgetPswNick;
-	            $data->title = 'FORGET_PSW';
-	        } else {
-	            $data->title = 'LBL_REGISTFORM2';
-	        }
-	        $data->psw1 = '';
-	        $data->psw2 = '';
-	        $data->adminNick = $request->sessionGet('adminNick','');
-	        $view->registForm2($data);
-	    }
-		
-		
-	}
 
 	/**
 	 * registForm2 visszahívbása hibaüzenetekkel
@@ -631,7 +373,7 @@ class UserregistController extends Controller {
 	
 	/**
 	 * user Regist 2.képernyő feldolgozás)
-	 * sessionban érkezik client_id és forgetPsw, cím adatok, changePsw esetén nick
+	 * sessionban érkezik client_id, signHash,forgetPsw, cím adatok, changePsw esetén nick
 	 * @param Request $request - nick, psw1, psw2, csrToken
     * @return void
 	 */
@@ -646,9 +388,9 @@ class UserregistController extends Controller {
 	    // client_id, signHash, forgetPswNick és cím adatok sessionból
 	    $client_id = $request->sessionGet('client_id','');
 	    $signHash = $request->sessionGet('signHash','');
-		 $postal_code = $request->sessionGet('postal_code','');
-		 $street_address = $request->sessionGet('street_address','');
-		 $locality = $request->sessionGet('locality',''); 	    
+		$postal_code = $request->sessionGet('postal_code','');
+		$street_address = $request->sessionGet('street_address','');
+		$locality = $request->sessionGet('locality',''); 	    
 	    
 	    $forgetPswNick = $request->sessionGet('nick','');
 	    $app = $appModel->getData($client_id);
@@ -677,10 +419,7 @@ class UserregistController extends Controller {
 
 	    // kitöltés ellenörzések
 	    $data->client_id = $client_id;
-
-//	    $data->signHash = $signHash;
 	    $data->signhash = $signHash;
-	    
 	    $data->nick = $request->input('nick','');
 	    $data->psw1 = $request->input('psw1','');
 	    $data->psw2 = $request->input('psw2','');
@@ -720,9 +459,10 @@ class UserregistController extends Controller {
 	       if (count($msgs) == 0) {
 	           // sikeresen tárolva
 	           $view->successMsg(['USER_SAVED']);
-	 	 	 	  $request->sessionSet('postal_code','');		 	
-		    	  $request->sessionSet('locality','');
-		    	  $request->sessionSet('street_address','');		 	
+	 	 	   $request->sessionSet('postal_code','');		 	
+		       $request->sessionSet('locality','');
+		       $request->sessionSet('street_address','');
+		       $request->sessionSet('signHash','');
 	       } else {
 	           $this->recallRegistForm2($request, $view, $data, $app, $forgetPswNick, $msgs);
 	       }
@@ -772,6 +512,5 @@ class UserregistController extends Controller {
 	    $data->adminNick = $request->sessionget('adminNick','');
 	    $view->loginform($data);
 	}
-	
 }
 ?>

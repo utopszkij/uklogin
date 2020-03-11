@@ -1,7 +1,7 @@
 <?php
 // common
 DEFINE('LNGDEF',1);
-DEFINE('OK','Tárol');
+DEFINE('OK','Rendben');
 DEFINE('YES','Igen');
 DEFINE('NO','Nem');
 DEFINE('CANCEL','Mégsem');
@@ -10,6 +10,7 @@ DEFINE('TITLE','Cím');
 DEFINE('NEXT','következő');
 DEFINE('PRIOR','elöző');
 DEFINE('NEXTSTEP','&gt;&gt; Tovább');
+DEFINE('ACCESS_VIOLATION','Hozzáférés megtagadva');
 
 // login form
 DEFINE('MYAPPS','Applikációim');

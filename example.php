@@ -89,7 +89,7 @@ if ($task == 'code') {
             // ';
             ?>
             <h2>"<?php echo $result->nick; ?>"&nbsp;sikeresen bejelentkezett.</h2>
-            <p>Lakcím: <?php echo $result->postal_code.' '.$result->locality.' '.$result->street_address; ?></p>
+            <p>Állandó lakcím: <?php echo $result->postal_code.' '.$result->locality; ?></p>
             <h1 style="text-align:center">:)</h1>
             </body>
     		</html>
@@ -136,13 +136,13 @@ if ($task == 'home') {
 
 	 <style type="text/css">
         /* desctop */
-       @media (min-width: 577px) {
+       @media (min-width: 1024px) {
            #scope {padding:5px}
     	   .main {padding:20px;}
     	   #popup {position:absolute; z-index:99; display:none;
-    	     top:130px; left:15px; width:510px; max-width:510px; height:800px;
+    	     top:130px; left:15px; width:910px; max-width:910px; height:800px;
     	     background-color:white; margin:10px; border-style:solid; border-width:2px; border-color:black;}
-    	   #popup iframe {border-style:none; width:500px; height:770px}
+    	   #popup iframe {border-style:none; width:900px; height:770px}
     	   #popupHeader {text-align:right;}
     	   #events {border-style:none}
     	   #sourceTitle {position:absolute; z-index:98; top:360px; left:100px; color:white;}
@@ -153,7 +153,7 @@ if ($task == 'home') {
 	   }
 
        /* phone */
-       @media (max-width: 576px) {
+       @media (max-width: 1023px) {
            #scope {padding:5px}
     	   .main {padding:10px;}
     	   #popup {position:absolute; z-index:99; display:none;

@@ -1,4 +1,5 @@
 <?php
+// ez az oAuth2 user rekordját kezeli. Az openid nem ezt használja.
 
 class UserRecord {
    public $id;

@@ -1,6 +1,8 @@
 body {font-size:14px; font-family:roman; background-color:white; line-height:120%;
-   min-height:400px;}
-#scope {padding:5px; min-height:600px}   
+   min-height:400px; text-align:center}
+#scope, .page {display:inline-block; text-align:left; padding:5px; min-height:600px}
+.formIcon {font-size:24px;}
+.formLogo {height:150px; float:right;}
 div {margin:0px; padding:0px; }  
 .clear {clear:both}
 .nav-item {border-style:solid; border-color:silver; border-width:0px 0px 0px 1px }
@@ -45,7 +47,9 @@ input {max-width:80%}
 .table .tr0 {background-color:transparent;}
 .table .tr1 {background-color:#e0e0e0}
 
-#scope {padding:5px}
+.formLogin .page {width:450px;}
+.formScope .page {width:450px;}
+
 #pAppsSelect {font-size:22px; font-weight:bold;}
 form#formApp {padding:5px; margin:5px; border-style:solid; border-width:1px;}
 form#formApp fieldset {padding:5px; margin:5px; border-style:solid; border-width:1px;}
