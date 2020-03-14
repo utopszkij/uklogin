@@ -45,5 +45,8 @@ DEFINE("LBL_PSW4","Jelszó ismét");
 DEFINE('SIGN_HASH_EXISTS','Ezzel az ügyfélkapu aláírással már van regisztráció');
 DEFINE('NEW_PSW_SENDED','Új jelszó elküldve ');
 DEFINE('EMPTY_EMAIL','Nincs e-mail megadva');
-
+DEFINE("SCOPE_ACCEPT_FORM","Adat átadás engedélyezése");
+DEFINE('PROFILE_SAVED','Adtaok tárolva.');
+DEFINE("MYDATA","Adataim JSON formában");
+DEFINE("DEL_MY_ACCOUNT","Fiokom törlése");
 ?>

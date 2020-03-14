@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 global $REQUEST;
+session_start();
 include_once './tests/config.php';
 include_once './tests/mock.php';
 include_once './core/database.php';
@@ -263,7 +264,7 @@ class openidControllerTest extends TestCase
         $this->request->set('state', 'teststate');
         $this->request->set('nonce', 'testnonce');
         $this->controller->authorize($this->request);
-        $this->expectOutputRegex('/only "id_token token"/');
+        $this->expectOutputRegex('/only "token id_token"/');
         $this->assertEquals('',$redirectURL);
     }
     public function test_authorize_wrongScope() {
@@ -289,7 +290,7 @@ class openidControllerTest extends TestCase
         $this->request->set('redirect_uri', '');
         $this->request->set('scope', 'nickname postal_code wrong');
         $this->request->set('policy_uri', 'http://test.hu/policy');
-        $this->request->set('response_type', 'id_token token');
+        $this->request->set('response_type', 'token id_token');
         $this->request->set('state', 'teststate');
         $this->request->set('nonce', 'testnonce');
         $this->controller->authorize($this->request);
@@ -304,7 +305,7 @@ class openidControllerTest extends TestCase
         $this->request->set('redirect_uri', 'http://test.hu');
         $this->request->set('scope', 'nickname postal_code');
         $this->request->set('policy_uri', 'http://test.hu/policy');
-        $this->request->set('response_type', 'id_token token');
+        $this->request->set('response_type', 'token id_token');
         $this->request->set('state', 'teststate');
         $this->request->set('nonce', 'testnonce');
         $this->controller->authorize($this->request);
@@ -374,7 +375,7 @@ class openidControllerTest extends TestCase
         $this->request->set('state', 'teststate');
         $this->request->set('nonce', 'testnonce');
         $this->controller->registform($this->request);
-        $this->expectOutputRegex('/only "id_token token"/');
+        $this->expectOutputRegex('/only "token id_token"/');
     }
     public function test_registform_OK() {
         global $redirectURL;
@@ -384,7 +385,7 @@ class openidControllerTest extends TestCase
         $this->request->set('redirect_uri', 'http://test.hu');
         $this->request->set('scope', 'nickname postal_code');
         $this->request->set('policy_uri', 'http://test.hu/policy');
-        $this->request->set('response_type', 'id_token token');
+        $this->request->set('response_type', 'token id_token');
         $this->request->set('state', 'teststate');
         $this->request->set('nonce', 'testnonce');
         $this->controller->registform($this->request);
@@ -472,23 +473,178 @@ class openidControllerTest extends TestCase
         $this->expectOutputRegex('/NEW_PSW_SENDED/');
     }
     
-    /*
+    // ================= userinfo ===================
     
-    public function test_userinfo() {
+    public function test_userinfo_notfound() {
+        $user = new UserRecord();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->sessionSet('scope','sub nickname');
+        $this->request->set('access_token', session_id());
+        $this->controller->userinfo($this->request);
+        $this->expectOutputRegex('/"error"/');
     }
     
-    public function test_logout() {
+    public function test_userinfo_OK() {
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->sessionSet('scope','sub nickname');
+        $this->request->set('access_token', session_id());
+        $this->controller->userinfo($this->request);
+        $this->expectOutputRegex('/"sub"/');
     }
     
-    public function test_refresh() {
+    // ================logout ==========================
+    
+    public function test_logout_noredirect() {
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('token', session_id());
+        $this->request->set('redirect_uri', '');
+        $this->controller->logout($this->request);
+        $this->expectOutputRegex('/logout/');
     }
+    
+    public function test_logout_redirect() {
+        global $redirectURL;
+        $redirectURL = '';
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('token', session_id());
+        $this->request->set('redirect_uri', 'test');
+        $this->controller->logout($this->request);
+        $this->assertEquals('test',$redirectURL);
+    }
+    
+    // ================ refresh ======================
+    
+    public function test_refresh_noredirect() {
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('token', session_id());
+        $this->request->set('redirect_uri', '');
+        $this->controller->refresh($this->request);
+        $this->expectOutputRegex('/refresh/');
+    }
+    
+    public function test_refresh_redirect() {
+        global $redirectURL;
+        $redirectURL = '';
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('token', session_id());
+        $this->request->set('redirect_uri', 'test');
+        $this->controller->refresh($this->request);
+        $this->assertEquals('test',$redirectURL);
+    }
+    
+    // ===== revoke ===================
     
     public function test_revoke() {
+        global $redirectURL;
+        $redirectURL = '';
+        $user = new UserRecord();
+        $user->id = 1;
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('token', session_id());
+        $this->request->set('redirect_uri', 'test');
+        $this->controller->revoke($this->request);
+        $this->assertEquals('test',$redirectURL);
     }
     
+    // ======= email verify ===================
+    
     public function test_emailverify() {
+        $this->request->set('code', '');
+        $this->controller->emailverify($this->request);
+        $this->assertEquals('',''); / only synatx test
     }
-    */
+
+    // ================ profileform ======================= 
+    
+    public function test_profileform_notloffed() {
+        $user = new UserRecord();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->controller->profileform($this->request);
+        $this->expectOutputRegex('/ACCESS_VIOLATION/');
+    }
+    
+    public function test_profileform_ok() {
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->controller->profileform($this->request);
+        $this->expectOutputRegex('/PROFILE_FORM/');
+    }
+    
+    
+    // ================ profilesave ========================
+    
+    public function test_profilesave_accessviolation() {
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',new UserRecord());
+        $this->request->set('id',$user->id);
+        $this->request->set('email',$user->email);
+        $this->request->set('phone_number',$user->phone_number);
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->profilesave($this->request);
+        $this->expectOutputRegex('/ACCESS_VIOLATION/');
+    }
+    
+    public function test_profilesave_error() {
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('id',$user->id);
+        $this->request->set('email','');
+        $this->request->set('phone_number','');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456789');
+        $this->controller->profilesave($this->request);
+        $this->expectOutputRegex('/EMAIL_REQUESTED/');
+    }
+    
+    public function test_profilesave_ok() {
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->request->set('id',$user->id);
+        $this->request->set('email',$user->email);
+        $this->request->set('phone_number',$user->phone_number);
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->controller->profilesave($this->request);
+        $this->expectOutputRegex('/PROFILE_SAVED/');
+    }
+    
+    
+    /*
+    
+    // =========================== delaccount =========================
+    
+    public function test_delaccount_accessviolation() {
+    }  
+    
+    public function test_delaccount_ok() {
+    }  
+    
+    // ============================ mydata ==============================
+    
+    public function test_mydata_accessviolation() {
+    }  
+    
+    public function test_mydata_ok() {
+    }  
+    
+      
+     */
+    
     
     public function test_end() {
         $db = new DB();

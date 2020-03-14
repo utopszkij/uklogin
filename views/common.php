@@ -77,6 +77,9 @@ class CommonView extends View {
 	* @return void
 	*/
 	public function echoNavbar($p) {
+	    if (!isset($p->adminNick)) {
+	        $p->adminNick = '';
+	    }
         if (!isset($p->user)) {
 					$p->user = JSON_decode('{"id":0, "nick":"user1", "avatar":"http://www.gravatar.com/avatar"}');
 		}         

@@ -1,24 +1,24 @@
 
 %userregistcontroller::recallloginform<
-0/var/www/html/uklogin/controllers/userregist.phpÄ Ä(#"1*j
+0/var/www/html/uklogin/controllers/userregist.phpö ö(#"1*j
 2
 userregist.php"S
 <
-0/var/www/html/uklogin/controllers/userregist.phpÐ Ð(
+0/var/www/html/uklogin/controllers/userregist.php‚ ‚(
 implicit return*Ö
 1<
-0/var/www/html/uklogin/controllers/userregist.phpÆ Æ(SQ
+0/var/www/html/uklogin/controllers/userregist.phpø ø(SQ
 <
-0/var/www/html/uklogin/controllers/userregist.phpÆ Æ(
+0/var/www/html/uklogin/controllers/userregist.phpø ø(
 $data"stdclassh
 f
 <
-0/var/www/html/uklogin/controllers/userregist.phpÆ Æ(
+0/var/www/html/uklogin/controllers/userregist.phpø ø(
 %1"stdclass::__construct*	
 
 $dataŠ‡
 <
-0/var/www/html/uklogin/controllers/userregist.phpÇ Ç(+
+0/var/www/html/uklogin/controllers/userregist.phpù ù(+
 %2*
 userregistcontroller*
 
@@ -28,14 +28,14 @@ f
 $data2createcsrtoken`
 ^
 <
-0/var/www/html/uklogin/controllers/userregist.phpÈ È( 
+0/var/www/html/uklogin/controllers/userregist.phpú ú( 
 %3"__id**
 
 $app"
 named
 b
 <
-0/var/www/html/uklogin/controllers/userregist.phpÈ È( 
+0/var/www/html/uklogin/controllers/userregist.phpú ú( 
 
 $data"	
 appName"__id*
@@ -43,14 +43,14 @@ b
 %3_
 ]
 <
-0/var/www/html/uklogin/controllers/userregist.phpÉ É( 
+0/var/www/html/uklogin/controllers/userregist.phpû û( 
 %4"__id**
 
 $app"
 csse
 c
 <
-0/var/www/html/uklogin/controllers/userregist.phpÉ É( 
+0/var/www/html/uklogin/controllers/userregist.phpû û( 
 
 $data"
 
@@ -58,7 +58,7 @@ c
 
 %4ki
 <
-0/var/www/html/uklogin/controllers/userregist.phpÊ Ê()
+0/var/www/html/uklogin/controllers/userregist.phpü ü()
 %5*
 
 
@@ -67,7 +67,7 @@ c
 ''2inputa
 _
 <
-0/var/www/html/uklogin/controllers/userregist.phpÊ Ê()
+0/var/www/html/uklogin/controllers/userregist.phpü ü()
 
 $data"
 nick"__id*
@@ -75,21 +75,21 @@ _
 %5a
 _
 <
-0/var/www/html/uklogin/controllers/userregist.phpË Ë(
+0/var/www/html/uklogin/controllers/userregist.phpý ý(
 
 $data"
 psw1"__id*
 ''e
 c
 <
-0/var/www/html/uklogin/controllers/userregist.phpÌ Ì('
+0/var/www/html/uklogin/controllers/userregist.phpþ þ('
 %6"__id**
 
 $app"
 	client_idf
 d
 <
-0/var/www/html/uklogin/controllers/userregist.phpÌ Ì('
+0/var/www/html/uklogin/controllers/userregist.phpþ þ('
 
 $data"
 	client_id"__id*
@@ -97,14 +97,14 @@ d
 %6d
 b
 <
-0/var/www/html/uklogin/controllers/userregist.phpÍ Í(
+0/var/www/html/uklogin/controllers/userregist.phpÿ ÿ(
 
 $data"
 msgs"__id*	
 
 $msgsyw
 <
-0/var/www/html/uklogin/controllers/userregist.phpÎ Î(<
+0/var/www/html/uklogin/controllers/userregist.php€ €(<
 %7*
 
 
@@ -114,14 +114,14 @@ b
 sessiongetf
 d
 <
-0/var/www/html/uklogin/controllers/userregist.phpÎ Î(<
+0/var/www/html/uklogin/controllers/userregist.php€ €(<
 
 $data"
 	adminNick"__id*
 
 %7ge
 <
-0/var/www/html/uklogin/controllers/userregist.phpÏ Ï(
+0/var/www/html/uklogin/controllers/userregist.php (
 %8*	
 
 $view*	

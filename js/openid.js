@@ -1,7 +1,7 @@
   
   // ÁTNÉZNI, NEM JÓ !
   function pageOnLoad() {
-	    if ($('#loginForm')) {
+	    if ($('#loginForm').length > 0) {
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
 				$('input#psw').removeClass('is-invalid');
@@ -33,7 +33,7 @@
 	    	$('#nickname').focus();
 	    } // loginForm
 	    
-	    if ($('#scopeForm')) {
+	    if ($('#scopeForm').length > 0) {
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
 	    		msg = '';
@@ -50,9 +50,46 @@
 	    	$('#scopeForm').show();
 	    } // scopeForm
 
-	    if ($('#formRegist2')) {
+	    if ($('#formProfile').length > 0) {
+			$('#email').focus();
+			global.pswCheck = function(psw1, msg) {
+				if (($('input#psw1').val() != '') && ($('input#psw1').val().length < 6)) {
+					msg += global.LNG.ERROR_PSW_INVALID+'<br />';
+					$('input#psw1').addClass('is-invalid');
+				}
+				return msg;
+			};
+			$('#formProfileOk').click(function() {
+				var msg = '';
+				// nick, psw1, psw2, dataProcessAccept, cookieProcessAccept ellenörzése
+				$('input#psw1').removeClass('is-invalid');
+				$('input#psw2').removeClass('is-invalid');
+				msg = global.pswCheck($('input#psw1').val(),msg);
+				if ($('input#psw1').val() != $('input#psw2').val()) {
+					msg += global.LNG.PASSWORDS_NOTEQUALS+'<br />';
+					$('input#psw1').addClass('is-invalid');
+					$('input#psw2').addClass('is-invalid');
+				}
+				if (msg == '') {
+					global.submit('formProfile');
+				} else {
+					global.alert(msg);
+				}
+			});
+			$('#btnMyData').click(function() {
+				location = 'index.php?option=openid&task=mydata&'+csrToken+'=1';
+			});
+			$('#btnDelAccount').click(function() {
+				global.confirm('Törölni akarod a bejelentkezésedet?',
+				function() {
+					location = 'index.php?option=openid&task=delaccount&'+csrToken+'=1';
+				});
+				
+			});
+		} // formProfile
+
+	    if ($('#formRegist2').length > 0) {
 			$('#nick').focus();
-			
 			global.pswCheck = function(psw1, msg) {
 				if ($('input#psw1').val() == '') {
 					msg += global.LNG.PSW_REQUIRED+'<br />';
@@ -98,6 +135,8 @@
 				}
 			});
 		} // formRegist2
+      
+	    
   }	
   
   // jquery pageOnLoad 

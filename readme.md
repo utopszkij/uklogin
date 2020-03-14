@@ -186,7 +186,14 @@ végpont:
 <ukloginDomain>/openid/logout
 ```
 
-POST vagy GET pareméterek nincsenek
+POST vagy GET pareméterek:
+
+**token_type_hint**  kötelezően "access_token"
+
+**token** 
+
+**redirect_uri**
+
 
 ### OpenId refresh
 
@@ -196,7 +203,13 @@ végpont:
 <ukloginDomain>/openid/refresh
 ```
 
-POST vagy GET pareméterek nincsenek
+POST vagy GET pareméterek:
+
+**token_type_hint**  kötelezően "access_token"
+
+**token** 
+
+**redirect_uri**
 
 ### GDPR megfelelés
 

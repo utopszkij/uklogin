@@ -3464,31 +3464,22 @@ firstornew0illuminate\database\eloquent\builder::firstornew@
 scopes,illuminate\database\eloquent\builder::scopes<
 	getmodels/illuminate\database\eloquent\builder::getmodels8
 orwhere-illuminate\database\eloquent\builder::orwhere:
-getquery.illuminate\database\eloquent\builder::getqueryﬁ	
+getquery.illuminate\database\eloquent\builder::getquery‡
 userregistcontroller
-controller0
-checkpdfsig!userregistcontroller::checkpdfsig4
+controller4
 deleteaccount#userregistcontroller::deleteaccount.
 
 getappuser userregistcontroller::getappuser8
 recallloginform%userregistcontroller::recallloginform&
 mydatauserregistcontroller::mydata*
-doregistuserregistcontroller::doregistF
-extractigazolasfrompdf,userregistcontroller::extractigazolasfrompdf*
+doregistuserregistcontroller::doregist*
 pswerroruserregistcontroller::pswerror.
 
-registform userregistcontroller::registformX
-extractmeghatalmazofromigazolas5userregistcontroller::extractmeghatalmazofromigazolas,
-	forgetpswuserregistcontroller::forgetpsw*
-parsepdfuserregistcontroller::parsepdf 
-pdfuserregistcontroller::pdf<
+registform userregistcontroller::registform,
+	forgetpswuserregistcontroller::forgetpsw<
 recallregistform2'userregistcontroller::recallregistform20
-useractival!userregistcontroller::useractival4
-createworkdir#userregistcontroller::createworkdir0
-getsignhash!userregistcontroller::getsignhash>
-checksignhashexist(userregistcontroller::checksignhashexist0
-clearfolder!userregistcontroller::clearfolder@
-processuploadedfile)userregistcontroller::processuploadedfile,
+useractival!userregistcontroller::useractival>
+checksignhashexist(userregistcontroller::checksignhashexist,
 	changepswuserregistcontroller::changepsw.
 
 useraction userregistcontroller::useraction0
@@ -3531,13 +3522,44 @@ controller.
 	loginformoauth2controller::loginform2
 getcallbackurl oauth2controller::getcallbackurl4
 recallloginform!oauth2controller::recallloginform&
-userinfooauth2controller::userinfo>
+userinfooauth2controller::userinfoÃ
+
+openidview
+commonview 
+echomsgsopenidview::echomsgs"
+	loginformopenidview::loginform"
+	scopeformopenidview::scopeform&
+registform2openidview::registform2 
+scopetxtopenidview::scopetxt>
 readmecontroller
 controller
 showreadmecontroller::show>
 frontpageview
 commonview!
-displayfrontpageview::displayj
+displayfrontpageview::display
+params"msgsº
+openidusercontroller
+controller4
+forgetpswform#openidusercontroller::forgetpswform*
+doregistopenidusercontroller::doregist(
+dologinopenidusercontroller::dologin0
+openidcheck!openidusercontroller::openidcheck2
+successlogin"openidusercontroller::successlogin"
+initopenidusercontroller::init6
+filluserrecord$openidusercontroller::filluserrecord4
+doregistcheck#openidusercontroller::doregistcheck0
+doscopeform!openidusercontroller::doscopeform0
+registform2!openidusercontroller::registform20
+emailverify!openidusercontroller::emailverify∆
+openidcontrolleropenidusercontroller*
+
+registformopenidcontroller::registform"
+logoutopenidcontroller::logout0
+configurationopenidcontroller::configuration"
+revokeopenidcontroller::revoke$
+refreshopenidcontroller::refresh(
+	authorizeopenidcontroller::authorize&
+userinfoopenidcontroller::userinfoj
 frontpagemodel,
 getusercountfrontpagemodel::getusercount*
 getappcountfrontpagemodel::getappcountX
@@ -3551,23 +3573,41 @@ controller!
 codelogincontroller::code
 formlogincontroller::form)
 
-getfromurllogincontroller::getfromurl±
+getfromurllogincontroller::getfromurlê
 appregistview
 commonview'
 
-removedmsgappregistview::removedmsg%
-	_errormsgappregistview::_errormsg
-formappregistview::form'
+removedmsgappregistview::removedmsg
+formappregistview::form-
+appsuccessmsgappregistview::appsuccessmsgx
+mdview
+commonview&
+processstrongmdview::processstrong
+mdshowmdview::mdshow 
 
-successmsgappregistview::successmsg0
+processurimdview::processuri0
 browsermodel 
-getdatabrowsermodel::getdataB
+getdatabrowsermodel::getdata‰
+pdfdata"txt_mothersname"xml_szuletesinev"xml_ukemail"error"txt_birth_date"xml_szuletesidatum"txt_name"txt_address"info_creator"txt_tartozkodas"info_producer"info_pdfversion"xml_anyjaneve"xml_alairaskelte"xml_nev¿
+pdfparsermodel*
+pdf_gettextpdfparsermodel::pdf_gettext$
+parsetxtpdfparsermodel::parsetxt4
+pdf_getsignature pdfparsermodel::pdf_getsignature 
+parserpdfparsermodel::parser6
+parsemeghatalmazo!pdfparsermodel::parsemeghatalmazo.
+createworkdirpdfparsermodel::createworkdir2
+checkpdfsignstrpdfparsermodel::checkpdfsignstr*
+pdf_getinfopdfparsermodel::pdf_getinfo&
+	parseinfopdfparsermodel::parseinfo*
+clearfolderpdfparsermodel::clearfolder,
+checkpdfsignpdfparsermodel::checkpdfsign:
+pdf_getmeghatalmazo#pdfparsermodel::pdf_getmeghatalmazoB
 adatkezelesview
 commonview#
-displayadatkezelesview::displayr
+displayadatkezelesview::displayô
 
-userrecord"nick"access_token"code"	blocktime"pswhash"codetime"id"
-errorcount"signhash"	client_id"enabled∆
+userrecord"street_address"code"locality"codetime"	client_id"enabled"nick"access_token"	blocktime"pswhash"id"
+errorcount"postal_code"signhash∆
 
 usersmodel
 adduserusersmodel::adduser2
@@ -3585,7 +3625,46 @@ updateuserusersmodel::updateuser:
 getuserbyaccess_token!usersmodel::getuserbyaccess_token:
 	loginview
 commonview!
-	loginformloginview::loginform(
+	loginformloginview::loginformæ
+
+userrecord"sub"mothersname"street_address"code"gender"
+birth_date"
+created_at"
+audit_time"
+updated_at"pswhash"nickname"id"email"sysadmin"email_verified"profile"locality"auditor"phone_number_verified"
+given_name"middle_name"audited"picture"origname"phone_number"postal_code"family_name"signdate
+	apprecord"name›
+openidmodel
+getappopenidmodel::getapp+
+getuserbycodeopenidmodel::getuserbycode+
+getuserbynickopenidmodel::getuserbynick'
+__constructopenidmodel::__construct!
+saveuseropenidmodel::saveuser"	tablename±
+oauth2model
+adduseroauth2model::adduser3
+getuserbysignhashoauth2model::getuserbysignhash!
+strtohexoauth2model::strtohex+
+getuserbycodeoauth2model::getuserbycode+
+getuserbynickoauth2model::getuserbynick%
+
+deleteuseroauth2model::deleteuser
+checkoauth2model::check'
+__constructoauth2model::__construct%
+
+updateuseroauth2model::updateuser;
+getuserbyaccess_token"oauth2model::getuserbyaccess_tokenp
+userinfo"street_address"mothersname"
+birth_date"locality"middle_name"
+given_name"postal_code"family_nameî
+ukauditcontroller
+controller/
+checkpdfdataukauditcontroller::checkpdfdata
+formukauditcontroller::form!
+auditukauditcontroller::auditU
+txtcontroller
+controller
+addtxtcontroller::add
+doaddtxtcontroller::doadd(
 
 issurecord"sender"title"body"email?
 	issumodel
@@ -3614,7 +3693,9 @@ controller%
 commonview
 formissuview::form"
 
-successmsgissuview::successmsgõ
+successmsgissuview::successmsg4
+pdfformviewview
+pdfformpdfformview::pdfformõ
 appregistcontroller
 controller
 addappregistcontroller::add%

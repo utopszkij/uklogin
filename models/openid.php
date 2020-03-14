@@ -64,8 +64,8 @@ class OpenidModel {
                 ['postal_code',$varchar,16, false],
                 ['birth_date',$varchar,10, false],
                 ['gender',$varchar,8, false],
-                ['picture',$varchar,80, false],
-                ['profile',$varchar,80, false],
+                ['picture',$varchar,255, false],
+                ['profile',$varchar,255, false],
                 ['updated_at',$int,11,false],
                 ['created_at',$int,11,false],
                 ['audited',$int,1,false],
@@ -88,6 +88,7 @@ class OpenidModel {
      */
     public function saveUser(UserRecord &$userRec): string {
         $table = new Table($this->tableName);
+        $userRec->updated_at = time();
         if ($userRec->id == 0) {
             $table->insert($userRec);
             $userRec->id = $table->getInsertedId();

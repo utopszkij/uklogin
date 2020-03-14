@@ -101,7 +101,7 @@ class OpenidView  extends CommonView  {
     		    	   	</a>
     		    	</p>   
     		    	<p><em class="fa fa-hand-o-right"></em>
-    		    		<a href="index.php/openid/registform">
+    		    		<a href="index.php/openid/registform" target="_self">
     		    			<?php echo txt('NO_ACCOUNT_REGIST'); ?>
     		    	   	</a>
     		    	</p>   
@@ -138,7 +138,8 @@ class OpenidView  extends CommonView  {
 		    <h2><?php echo $p->clientTitle; ?></h2>
 		    <h3><?php echo txt('SCOPE_ACCEPT_FORM'); ?></h3>
 		    <form class="form" method="post" id="frmScopeForm"
-		    	action="<?php echo config('MYDOMAIN'); ?>/opt/doscopeform">
+		    	action="<?php echo config('MYDOMAIN'); ?>/openid/doscopeform" target="_self">
+				<input type="hidden" name="<?php echo $p->csrToken; ?>" value="1" />
 				<div class="form-group">
 					<label><?php echo txt('nickname'); ?></label>
 					<var><?php echo $p->nickname; ?></var>
@@ -257,15 +258,19 @@ class OpenidView  extends CommonView  {
 				
 				<?php if (config('OPENID') == 2) :?>
 				<div class="form-group">
-					<label>Név:</label>
-					<input type="text" name="name" id="email" class="form-control" 
-						value="<?php echo $data->name; ?>" disabled="disabled" />
-				</div>
-				<div class="form-group">
 					<label>Telefonszám:</label>
 					<input type="text" name="phone_number" id="phone_number" class="form-control" 
 						value="<?php echo $data->phone_number; ?>" />
 				</div>
+				<div class="form-group">
+					<label>Nem:</label>
+					<select name="gender" id="gender" class="form-control" style="width:200px">
+						<option value="">Válaszd ki!</option>
+						<option value="man">férfi</option>
+						<option value="woman">nő</option>
+					</select> 
+				</div>
+				
 				<?php endif; ?>
     			<?php if (($data->scope != '') & ($data->clientTitle != 'self')) : ?>
     		    <div class="scope">
@@ -307,6 +312,138 @@ class OpenidView  extends CommonView  {
 		  'NICK_REQUIRED',
 		  'PASSWORDS_NOTEQUALS',
 		  'DATAPROCESS_ACCEPT_REQUIRED']); 
+        ?>
+		</body>
+        </html>
+        <?php 
+	}
+	
+	public function profileform(Params $data) {
+	    $this->echoHtmlHead($data);
+	    ?>
+        <body>
+	    <div id="profileForm" style="display:block" class="profileForm">
+	      <div class="page" id="page">
+	    	<?php $this->echoMsgs($data); ?>
+		    <em class="fa fa-user formIcon"></em>
+	    	<img class="formLogo" src="./templates/default/logo.png" />
+		    <h2>Felhasználói profil</h2>
+		    <p>
+		    <?php if ($data->picture != '') : ?>
+		      <img src="<?php echo $data->picture; ?>" style="height:125px;">
+		    <?php else : ?>
+		      <img src="images/guest.jpg" style="height:125px;">
+		    <?php endif;?>
+		    </p>
+			<form name="formProfile" id="formProfile"  class="form"
+				action="<?php echo MYDOMAIN; ?>/index.php" method="post" 
+				target="_self">
+				<input type="hidden" name="option" value="openid" />
+				<input type="hidden" name="task" value="profilesave" />
+				<input type="hidden" name="id" value="<?php echo $data->id; ?>" />
+				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
+				<div>&nbsp;</div>
+				<?php if (config('OPENID') == 2) : ?>
+				<blockquote class="alert alert-info signInfo">
+					Név: <?php echo $data->family_name.' '.
+									$data->middle_name.' '.$data->given_name; ?>
+					<br />Születési dátum:
+					<?php echo str_replace('-','.',$data->birth_date); ?>
+					<br />Lakcím: 
+					<?php echo $data->postal_code.' '.$data->locality.' '.$data->street_address; ?><br />
+				</blockquote>
+				<?php endif; ?>
+				<div class="form-group">
+					<label><?php echo txt('USER'); ?></label>
+					<input type="hidden" name="nickname" value="<?php echo $data->nickname; ?>" class="form-control" />
+					<var><strong><?php echo $data->nickname;  ?></strong></var>
+				</div>
+				<div class="form-group">
+					<?php if (!isset($data->nick) || ($data->nickname == '')) : ?>
+					<label><?php echo txt('LBL_PSW3'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW'); ?></label>
+					<?php endif; ?>
+					<input type="password" name="psw1" id="psw1" class="form-control" 
+						value=""  style="width:350px" />
+				</div>
+				<div class="form-group">
+					<?php if (!isset($data->nick) || ($data->nickname == '')) : ?>
+					<label><?php echo txt('LBL_PSW4'); ?></label>
+					<?php else : ?>
+					<label><?php echo txt('LBL_NEW_PSW2'); ?></label>
+					<?php endif; ?>
+					<input type="password" name="psw2" id="psw2" class="form-control" 
+						value="" style="width:350px" />
+				</div>
+				<p>Ha jelszót nem akarsz változtatni akkor a két jelszó mezőt hagyd üresen!</p>
+				<div class="form-group">
+					<label>E-mail:</label>
+					<input type="text" name="email" id="email" class="form-control" 
+						value="<?php echo $data->email; ?>" />
+				</div>
+				
+				<?php if (config('OPENID') == 2) :?>
+				<div class="form-group">
+					<label>Telefonszám:</label>
+					<input type="text" name="phone_number" id="phone_number" class="form-control" 
+						value="<?php echo $data->phone_number; ?>" />
+				</div>
+				<div class="form-group">
+					<label>Avatar kép url:</label>
+					<input type="text" name="picture" id="picture" class="form-control" 
+						value="<?php echo $data->picture; ?>" />
+				</div>
+				<div class="form-group">
+					<label>Web site url:</label>
+					<input type="text" name="profile" id="profile" class="form-control" 
+						value="<?php echo $data->profile; ?>" />
+				</div>
+				<div class="form-group">
+					<label>Nem:</label>
+					<select name="gender" id="gender" class="form-control" style="width:200px">
+						<option value="man"<?php if ($data->gender == 'man') echo ' selected="selected"'; ?>>férfi</option>
+						<option value="woman"<?php if ($data->gender == 'woman') echo ' selected="selected"'; ?>>nő</option>
+					</select> 
+				</div>
+				
+					<?php if ($data->sysadmin == 1) :?>
+					<p>system adminisztrátor</p>		
+					<?php endif; ?>
+					<?php if ($data->audited == 1) : ?>
+					<p style="color:green">Hiteles</p>
+					<?php else : ?>
+					<p style="color:red">Nem hiteles "<?php echo $data->audited; ?>"</p>
+					<?php endif; ?>
+					<p>Utolsó módosítás:<?php echo date('Y.m.d H:i:s', $data->updated_at); ?></p>		
+					<p>Hitelesítés:<?php echo date('Y.m.d H:i:s', $data->audit_time); ?></p>		
+					
+
+				<?php endif; ?>
+				<div class="form-control-buttons">
+					<button type="button" id="formProfileOk" class="btn btn-primary">
+						<em class="fa fa-check"></em>&nbsp;<?php echo txt('OK'); ?>
+					</button>
+					&nbsp;
+					<button type="button" id="btnMyData" class="btn btn-secondary">
+						<em class="fa fa-info"></em>&nbsp;<?php echo txt('MYDATA'); ?>
+					</button>
+					&nbsp;
+					<button type="button" id="btnDelAccount" class="btn btn-danger">
+						<em class="fa fa-ban"></em>&nbsp;<?php echo txt('DEL_MY_ACCOUNT'); ?>
+					</button>
+					
+				</div>
+			</form>		
+		   </div> 
+	    </div>
+        <?php $this->echoHtmlPopup(); ?>
+        <?php $this->loadJavaScript('openid',$data); ?>
+        <?php $this->echoJsLngDefs([
+		  'PSW_REQUIRED',
+		  'ERROR_PSW_INVALID',
+		  'NICK_REQUIRED',
+		  'PASSWORDS_NOTEQUALS']);
         ?>
 		</body>
         </html>
