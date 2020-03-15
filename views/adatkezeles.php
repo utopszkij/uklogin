@@ -23,8 +23,8 @@ class AdatkezelesView  extends CommonView  {
             bejelentkezést kezelő web szolgáltatás adatkezeléséről szól. Az ezt használó 
             egyes applikációk adatkezelési leírását az adott applikációban találhatja meg!</p>
             <p><strong>Ez a szoftver személyhez kapcsolt személyes adatokat tartósan nem kezel és tárol.
-            A lakcímet anonim módon, (személy azonosításra alkalmas adathoz nem kapcsolva) tárolja.
-            Ezért a GDPR rá nem vonatkozik.</strong></p>
+            Az állandólakcíből az iráníító számot és a település nevet anonim módon, (személy azonosításra alkalmas adathoz nem kapcsolva) tárolja.
+            Ezért a GDPR erre a szotverre nem vonatkozik.</strong></p>
 
             <h3>Cookie használat</h3>
             <p>A szoftver működésének testreszabásához, az egyes működési munkamenetek 
@@ -37,7 +37,7 @@ class AdatkezelesView  extends CommonView  {
             <ul>
             <li>Választott bejelentkezési név (nick név)</li>
             <li>Jelszó sha256 hash kódja</li>
-            <li>Lakcím (irányító szám, település, utca+házszám</li>
+            <li>Éllandó Lakcím (irányító szám, település</li>
             <li>Használt applikáció azonosítója</li>
             <li>Az ügyfélkapus aláírásból kinyert születési névből, születési dátumból, anyja neve adatból 
              sha256 hash algoritmussal képzett kód</li>
@@ -68,7 +68,7 @@ class AdatkezelesView  extends CommonView  {
             <li>login és regist képernyő testreszabásához css file URL</li>
             <li>Hibás user bejelentkezési kisérlet limit</li>
             <li>Admin bejelentkezési név (nick név)</li>
-            <li>Lakcím (irányító szám, település, utca+házszám</li>
+            <li>Lakcím (irányító szám, település</li>
             <li>Jelszó sha256 hash kódja</li>
             <li>Hibás admin bejelentkezési kisérlet limit</li>
             </ul>

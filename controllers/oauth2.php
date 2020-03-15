@@ -237,8 +237,7 @@ class Oauth2Controller extends Controller {
         if (!isset($rec->error)) {
             echo '{"nick":"'.$rec->nick.'", '.
             '"postal_code":"'.$rec->postal_code.'", '.
-            '"locality":"'.$rec->locality.'", '.
-            '"street_address":"'.$rec->street_address.'"}';
+            '"locality":"'.$rec->locality.'"}';
         } else {
             $view->errorMsg(['NOT_FOUND']);
         }

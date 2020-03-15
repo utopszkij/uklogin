@@ -4,6 +4,9 @@
  * álltalános célú segéd rutinok
  */
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 global $REQUEST;
 
 interface ModelObject {
@@ -186,6 +189,20 @@ class View implements ViewObject {
     	}
     }
     
+    /**
+     * Nyelvi konstansok átadása a JS .nek
+     * @param array $tokens átadandó tokenek
+     */
+    public function echoJsLngDefs(array $tokens) {
+        echo "\n<!-- language constaints -->\n";
+        echo '<script type="text/javascript">'."\n";
+        echo '  global.LNG = {};'."\n";
+        foreach ($tokens as $token) {
+            echo '  global.LNG.'.$token.' = "'.txt($token).'";'."\n";
+        }
+        echo '</script>'."\n";
+    }
+    
 } // class View
 
 class Controller  implements ControllerObject {
@@ -220,7 +237,7 @@ class Controller  implements ControllerObject {
      * @return void
      */
     protected function createCsrToken(&$request, &$data) {
-        $request->sessionSet('csrToken', md5(random_int(1000000,9999999)));
+        $request->sessionSet('csrToken', 'a'.md5(random_int(1000000,9999999)));
         $data->csrToken = $request->sessionGet('csrToken','');
     }
     
@@ -430,6 +447,9 @@ function txt(string $s): string {
     $result = $s;
     if (defined($s)) {
         $result = constant($s);
+    } else {
+        $result = '<a style="color:red" target="_new" 
+            href="'.MYDOMAIN.'/opt/txt/add/?token='.urlencode($s).'">'.$s.'</a>';
     }
     return $result;
 }
@@ -450,6 +470,42 @@ function getUploadedFile(string $postName, string $target): string {
         }
     } else {
         $ressult = '';
+    }
+    return $result;
+}
+
+function redirectTo(string $url) {
+    header('Location: '.$url);    
+}
+
+function sendEmail(string $to, string $subject, string $body): bool {
+    $mail = new PHPMailer(true);
+    $result = true;
+    // Passing `true` enables exceptions
+    try {
+        //Server settings
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = config('SMTPHOST');  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = config('SMTPUSER');                 // SMTP username
+        $mail->Password = config('SMTPPSW');                  // SMTP password
+        $mail->SMTPSecure = config('SMTPSECURE');             // Enable TLS encryption, `ssl` also accepted
+        $mail->SMTPPort = config('SMTPPORT');                 // Port
+        $mail->CharSet = 'utf-8';
+        $mail->SMTPAuth = true;
+        //Recipients
+        $mail->setFrom(config('SMTPSENDER'));
+        $mail->addAddress($to);     // Add a recipient
+        
+        //Content
+        $mail->isHTML(true); // Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        
+        $mail->send();
+    } catch (Exception $e) {
+        echo Json_encode($mail).' '.JSON_encode($e);
+        $result = false;
     }
     return $result;
 }

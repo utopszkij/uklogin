@@ -17,7 +17,7 @@ class CommonView extends View {
         	       $this->echoNavbar($p);
         }
         ?>
-	    <div ng-controller="ctrl" id="scope" style="display:none" class="successMsg">
+	    <div ng-controller="ctrl" id="scope" style="display:block" class="successMsg">
 	    <h2 class="alert alert-success">
 			<?php 
 			foreach ($msgs as $msg) {
@@ -52,7 +52,7 @@ class CommonView extends View {
         	       $this->echoNavbar($p);
               }
         ?>
-	    <div ng-controller="ctrl" id="scope" style="display:none" class="errorMsg">
+	    <div ng-controller="ctrl" id="scope" style="display:block" class="errorMsg">
 	    <h2 class="alert alert-danger">
 			<?php 
 			foreach ($msgs as $msg) {
@@ -77,6 +77,9 @@ class CommonView extends View {
 	* @return void
 	*/
 	public function echoNavbar($p) {
+	    if (!isset($p->adminNick)) {
+	        $p->adminNick = '';
+	    }
         if (!isset($p->user)) {
 					$p->user = JSON_decode('{"id":0, "nick":"user1", "avatar":"http://www.gravatar.com/avatar"}');
 		}         

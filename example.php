@@ -1,24 +1,28 @@
 <?php
 /*
- * Példa program az uklogin használatára
+ * Példa program az uklogin/openid használatára
  * Az app regisztrálásakor megadott callback URL: <MYDOMAIN>/example.php?task=code)
  * Az app client_id="000000000" client_secret="0000000000"
  * 
  * Hivásai:
  * 1. paraméter nélkül: képernyő kirajzolás
- * 2. task=code&code=xxxxxx  az uklogin hivta vissza, ilyenkor iframe -ben fut
+ * 2. task=code&token=xxxxxx  az uklogin hivta vissza, ilyenkor iframe -ben fut
  */
 session_start();
 
 // lokális teszt vagy éles szerver?.
 if ($_SERVER['SERVER_NAME'] == 'robitc') {
-	// lokális teszt
-	define('MYDOMAIN','http://robitc/uklogin');
-	define('UKLOGINDOMAIN','http://robitc/uklogin/oauth2');
+    // lokális teszt
+    define('MYDOMAIN','http://robitc/uklogin');
+    define('UKLOGINDOMAIN','http://robitc/uklogin/openid');
+} else if ($_SERVER['SERVER_NAME'] == '192.168.0.12') {
+    // lokális teszt
+    define('MYDOMAIN','http://192.168.0.12/uklogin');
+    define('UKLOGINDOMAIN','http://192.168.0.12/uklogin/openid');
 } else {
 	// éles szerver
 	define('MYDOMAIN','https://uklogin.tk');
-	define('UKLOGINDOMAIN','https://uklogin.tk/oauth2');
+	define('UKLOGINDOMAIN','https://uklogin.tk/openid');
 }
 define('CLIENTID','0000000000');
 define('CLIENTSECRET','0000000000');
@@ -47,68 +51,39 @@ function getFromUrl(string $url, array $fields = []): string {
     return curl_exec($ch);
 }
 
+/**
+ * uklogin/openid szerver hivta vissza. token, state, nonce paraméter érkezik
+ */
 if ($task == 'code') {
-    // oauth2 hivta vissza, ilyenkor iframe -ben fut
-    $code = $_GET['code'];
-    if (isset($_GET['state'])) {
-        $state = $_GET['state'];
-    } else {
-        $state = '';
-    }
+    $access_token = $_GET['token'];
+
+    $_SESSION['access_token'] = $access_token;
+    // userinfo lekérdezése
+    $url = UKLOGINDOMAIN.'/userinfo/';
+    $fields = ["access_token" => $access_token];
+    $result = JSON_decode(getFromUrl($url, $fields));
+
+    // kiirás a képernyőre
     echo '<!doctype html>
         <html>
         <head>
         <title>uklogin example</title>
         </head>
         <body>
-        ';
-    // access_token kérése
-    $url = UKLOGINDOMAIN.'/access_token/';
-    $fields = ["client_id" => CLIENTID, "client_secret" => CLIENTSECRET, "code" => $code];
-    $result = JSON_decode(getFromUrl($url,$fields));
-    if ((!isset($result->error)) && (isset($result->access_token))) {
-
-        // access_token sikeresen lekérve. Userinfo kérése
-        $access_token = $result->access_token;
-        $url = UKLOGINDOMAIN.'/userinfo/';
-        $fields = ["access_token" => $access_token];
-// $s = getFromUrl($url, $fields);
-// echo $s; exit();        
-        $result = JSON_decode(getFromUrl($url, $fields));
-        if ($result->nick != 'error') {
-            
-            // Userinfo sikeresen lekérve. A user sikeresen bejelentkezett.
-            $session['userNick'] = $result->nick;
-            //
-            // Gyakran a "state" paraméter urlencoded url-t tartalmaz amit sikeres login 
-            // utám hívni kell, ez esetben pld:
-            // echo '
-            // <script type="txt/javascript>
-            //   parent.document.location="'.urldecode($state).'";
-            // </script>
-            // ';
-            ?>
-            <h2>"<?php echo $result->nick; ?>"&nbsp;sikeresen bejelentkezett.</h2>
-            <p>Lakcím: <?php echo $result->postal_code.' '.$result->locality.' '.$result->street_address; ?></p>
-            <h1 style="text-align:center">:)</h1>
-            </body>
-    		</html>
-    		<?php
-        } else {
-            echo '<p class="alert alert-danger">Error in get userinfo</p>
-            </body>
-            </html>';
-            exit();
-        }
-    } else {
-            echo '<p class="alert alert-danger">Error in get access_token</p>
-            </body>
-            </html>';
-            exit();
-    }
+        <h1>Sikeres login</h1>
+        <p>uklogin szerver visszahivta token='.$access_token.'</p>
+        <p>userinfo kérés eredménye:</p>
+        '.JSON_encode($result).'
+        </body>
+        </html>
+    ';
+    
 } // task=code
 
 if ($task == 'home') {
+    if (!isset($_SESSION['access_token'])) {
+        $_SESSION['access_token'] = session_id();
+    }
 ?>
 <!doctype html>
 <html lang="hu">
@@ -136,13 +111,13 @@ if ($task == 'home') {
 
 	 <style type="text/css">
         /* desctop */
-       @media (min-width: 577px) {
+       @media (min-width: 1024px) {
            #scope {padding:5px}
     	   .main {padding:20px;}
     	   #popup {position:absolute; z-index:99; display:none;
-    	     top:130px; left:15px; width:510px; max-width:510px; height:800px;
+    	     top:130px; left:15px; width:910px; max-width:910px; height:800px;
     	     background-color:white; margin:10px; border-style:solid; border-width:2px; border-color:black;}
-    	   #popup iframe {border-style:none; width:500px; height:770px}
+    	   #popup iframe {border-style:none; width:900px; height:770px}
     	   #popupHeader {text-align:right;}
     	   #events {border-style:none}
     	   #sourceTitle {position:absolute; z-index:98; top:360px; left:100px; color:white;}
@@ -153,7 +128,7 @@ if ($task == 'home') {
 	   }
 
        /* phone */
-       @media (max-width: 576px) {
+       @media (max-width: 1023px) {
            #scope {padding:5px}
     	   .main {padding:10px;}
     	   #popup {position:absolute; z-index:99; display:none;
@@ -177,22 +152,38 @@ if ($task == 'home') {
   <body>
   	<div class="main">
   		<h1>
-  			Ügyfélkapus bejelentkezés példa program
+  			Ügyfélkapus OpenId bejelentkezés példa program
   		</h1>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <div class="collapse navbar-collapse" id="navbarNav">
 			    <ul class="navbar-nav">
 			      <li class="nav-item">
-			        <a class="nav-link" target="_self" href="<?php echo UKLOGINDOMAIN; ?>">
+			        <a class="nav-link" target="_self" href="<?php echo MYDOMAIN; ?>">
 			        	<em class="fa fa-home"></em>&nbsp;Kezdőlap<span class="sr-only">(current)</span></a>
 			      </li>
-			      <li class="nav-item">
+			      <!-- li class="nav-item">
 			        <a class="nav-link" target="_self" href="" id="linkRegist">
 			        	<em class="fa fa-plus"></em>&nbsp;Regisztrálás</a>
-			      </li>
+			      </li -->
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="" id="linkLogin">
-			        	<em class="fa fa-key"></em>&nbsp;Bejelentkezés</a>
+			        	<em class="fa fa-sign-in"></em>&nbsp;Bejelentkezés
+			        </a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" target="ifrm1" 
+			            href="<?php echo MYDOMAIN; ?>/openid/profileform" id="linkLogin"
+			            onclick="$('#popup').show(); true;">
+			        	<em class="fa fa-address-card-o"></em>&nbsp;Profil
+			        </a>    
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" target="ifrm1"
+			        	href="<?php echo MYDOMAIN; ?>/openid/logout/?token=<?php echo session_id(); ?>" 
+			        	id="linkLogin"
+			        	onclick="$('#popup').show(); true;">
+		        		<em class="fa fa-sign-out"></em>&nbsp;Kijelentkezés
+			        </a>
 			      </li>
 			    </ul>
 			  </div>
@@ -206,9 +197,9 @@ if ($task == 'home') {
   			<div id="popup">
   				<div id="popupHeader">
   				 <em class="fa fa-close" style="cursor:pointer" title="close"
-  					onclick="$('#popup').toggle();"></em>&nbsp;
+  					id="popupClose"></em>&nbsp;
   				</div>
-  				<iframe id="ifrm1" src=""></iframe>
+  				<iframe id="ifrm1" name="ifrm1" src=""></iframe>
   			</div>
           	<h4 id="sourceTitle">Forrás program <em class="fa fa-code" style="cursor:pointer"
           		onclick="$('#source').toggle();" title="view"></em>
@@ -240,12 +231,28 @@ if ($task == 'home') {
 				return false; // ne hajsa végre a href linket
 			});
 			$('#linkLogin').click(function() {
-				$('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/oauth2/loginform/client_id/<?php echo CLIENTID; ?>");
+				// oauth2 $('#ifrm1').attr('src',"<?php echo MYDOMAIN; ?>/oauth2/loginform/client_id/<?php echo CLIENTID; ?>");
 				// gyakran /state/urldecoded(url) formában a sikeres login aután
 				// aktivizálandó url -t is meg adunk.
+				
+				// openid
+				var url ="<?php echo MYDOMAIN; ?>"+
+						"/openid/authorize/"+
+						"?client_id=<?php echo CLIENTID; ?>"+
+						"&redirect_uri=<?php echo urlencode(MYDOMAIN.'/example.php?task=code'); ?>"+
+						"&state=123"+
+						"&nonce=567"+
+						"&policy_uri=<?php echo urlencode(MYDOMAIN.'/adatkezeles.html'); ?>"+
+						"&scope=<?php echo urlencode('sub nickname email postal_code locality'); ?>";
+				$('#ifrm1').attr('src',url);
 				$('#popup').show();
 				return false; // ne hajsa végre a href linket
 			});
+			$('#popupClose').click(function() {
+					var myFrame = $("#ifrm1").contents().find('body');
+	        		myFrame.html('&nbsp;');	
+	        		$('#popup').hide();				
+		    });
 		});
   	</script>
 

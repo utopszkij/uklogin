@@ -1,4 +1,6 @@
 <?php
+global $redirectURL;
+
 interface ModelObject {
     
 }
@@ -31,6 +33,10 @@ class View implements ViewObject {
     }
     
     public function echoHtmlPopup() {
+    }
+    
+    public function echoJsLngDefs(array $items) {
+        
     }
     
     public function echoLngHtml(string $htmlName, $p) {
@@ -88,19 +94,20 @@ class Controller implements ControllerObject {
 } // class Controller
 
 class Request implements RequestObject {
+    public $params = [];
     protected $sessions;
     function __construct() {
         $this->sessions = new stdClass();
     }
     public function set(string $name, $value) {
-        $this->$name = $value;
+        $this->params[$name] = $value;
     }
     public function input(string $name, $def='') {
         $result = $def;
-        if (isset($this->$name)) $result = $this->$name;
+        if (isset($this->params[$name])) $result = $this->params[$name];
         return $result;
     }
-    public function sessionSet(string $name,$value) {
+    public function sessionSet(string $name, $value) {
         $this->sessions->$name = $value;
     }
     public function sessionGet(string $name, $def = '') {
@@ -122,25 +129,43 @@ function txt(string $s): string {
     return $s;
 }
 
+function config(string $s): string {
+    if (defined($s)) {
+       return constant($s);   
+    } else {
+        return $s;
+    }
+}
+
 /**
  * A "tests" könyvtárból másol a terget -be
- * postname -től függetlenül mindig ugyanazt a file-t.
+ * postname -t másol target ben a str_replace('_','.',$postName)
  * @param string $postName
  * @param string $target
  * @return string
  */
 function getUploadedFile(string $postName, string $targetDir): string {
-    $name = 'avdhA3-18840f38-7adf-4f8a-a8b2-c3e307d63b48.pdf';
-    if (file_exists('./tests/'.$name)) {
-        if (copy ('./tests/'.$name, $targetDir.'/'.$name)) {
-            $result = $name;
+    $name = $postName;
+    $outName = str_replace('_', '.',$name);
+    if (file_exists('./tests/'.$outName)) {
+        if (copy ('./tests/'.$outName, $targetDir.'/'.$outName)) {
+            $result = $outName;
         } else {
-            $result = '';
+            $result = 'copyError';
         }
     } else {
-        $result = '';
+        $result = 'not found ./tests/'.$outName;
     }
     return $result;
 }
 
+function redirectTo($url) {
+    global $redirectURL;
+    $redirectURL = $url;
+}
+
+function sendEmail(string $to, string $subject, string $body): bool {
+    $result = true;
+    return $result;
+}
 ?>
