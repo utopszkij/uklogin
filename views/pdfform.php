@@ -44,7 +44,7 @@ class PdfformView extends View {
         </p> 
         <p>2. Ezután a pdf fájl elektronikusan  alá kell írnod. Ennek érdekében kattints
          a lentebb megadott linkre (új böngésző fülön nyílik meg), 
-         válaszd ki az elöző lépésben letöltött pdf fájlt, válaszd a "hitelsített pdf" opciót,
+         válaszd ki az elöző lépésben letöltött pdf fájlt, válaszd a "hitelesített pdf" opciót,
          fogadd el a felhasználási feltételeket, ha a program kéri akkor azonosítsd
          magad az ügyfélkapus belépéseddel, kattints a "Documentum elküldése" ikonra!
          Ezután a megjelenő új képernyöröl töltsd le az aláirt pdf -t a saját gépedre.

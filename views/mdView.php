@@ -28,6 +28,9 @@ class MdView extends CommonView {
     public function mdShow($p, string $mdName) {
         $this->echoHtmlHead();
         ?>
+        <style type="text/css">
+        h1,h2,h3,h4,h5 {margin-top:15px;}
+        </style>
         <body>
        	<?php $this->echoNavbar($p); ?>
 		<div style="padding:0px 5% 5% 5%; text-align:left">

@@ -7,7 +7,7 @@ A fejlesztésében közreműködni kívánóknak szóló információk a [ebben 
 
 ß teszt
 
-## ß teszt:
+## Online ß teszt:
 
 https://uklogin.tk
 
@@ -15,16 +15,41 @@ https://uklogin.tk
 
 Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az **oAuth2** és az **OpenId** szabvány szerint. 
 A rendszer biztosítja, hogy egy személy egy alkalmazásba csak egyszer regisztrálhat.
-Természetesen egy ügyfélkapú loginnal több alkalmazásba is lehet regisztrálni. 
-(pontosabban: az ügyfélkapus fiókban megadott kapcsolattartó email egyediségét ellenörzi a program)
+(az ügyfélkapus aláírásban szereplő születési név, születési dátum és anyja neve adat egyediségét ellenörzi a program).
 
-A hívó web program iframe -be hívhatja be a regisztráló képernyőt vagy a login képernyőt. 
+Természetesen egy ügyfélkapú loginnal több alkalmazásba is be lehet lépni. 
+
+A hívó web program iframe -be hívhatja be a login képernyőt. Ezen van "regisztrálok" link is azok számára akik még nem regisztráltak. 
 
 Az applikáció adminisztrátora az erre a célra szolgáló web felületen tudja az applikációt regisztrálni a rendszerbe.
 
 A regisztrációs folyamatban használt aláírás szolgáltató:
 
-https://szuf.magyarorszag.hu/szuf_avdh_feltoltes 
+https://magyarorszag.hu/szuf_avdh_feltoltes 
+
+
+```
+Openid Bejelentkezés folyamata
++--------+                                   +--------+
+|        |                                   |        |
+|        |----(1) /authorize Request-------->|        |
+|        |     respose_type=id_token token   |        |
+|        |  +--------+                       |        |
+|        |  |        |                       |        |
+|        |  |  End-  |<--(2)---login form----|        |
+|        |  |  User  |--(3)---nickname,psw-->|        |       
+|   web  |  |        |                       |        |
+| client |  +--------+                       | openId |
+|   app  |                                   | szerver|
+|        |<--------(4) access_token----------|        |
+|        |                                   |        |
+|        |---------(5) /userinfo Request---->|        |
+|        |                                   |        |
+|        |<--------(6) UserInfo Response-----|        |
+|        |                                   |        |
++--------+                                   +--------+
+```
+
 
 
 ## Programnyelvek
@@ -224,7 +249,7 @@ Itt személyes adat nincs kezelve, tehát ez nem tartozik a GDPR hatálya alá,e
 
 A szerver két adatkezelési beállítással üzemeltethető
 
-**Csökkentet adatkezelési beállításnál**
+**Csökkentet openid adatkezelési beállításnál**
 - azonsoító kód
 - bejelentkezési név
 - állandó lakcímből az irányító szám és település név
@@ -232,8 +257,6 @@ A szerver két adatkezelési beállítással üzemeltethető
 - email
 - melyik applikációba regisztrált (csak Oauth2 esetében)
 - ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
-
-Itt személyhez kapcsolt személyes adat nincs kezelve, tehát ez a szoftver nem tartozik a GDPR hatálya alá,erről tájékoztatást írunk ki.
 
 ** Teljes Openid adatkezelési beállításnál**
 - Azonoító kód
@@ -268,11 +291,6 @@ Az aláírt pdf fájlt és csatolmányait a a kód előállítása, és a kezelt
 #### cookie kezelés
 A működéshez egy darab un. "munkamenet cookie" használata szükséges, erről tájékoztatás jelenik meg és a felhasználónak ezt el kell fogadnia.
 
-## Brute force támadás elleni védekezés
-
-### user login brute force támadás
-Az applikáció adatoknál beállított limitet elérő hibás kisérlet után a user fiók blokkolása, amit az applikáció adminisztrátor tud feloldani.
-
 ### Tesztelés
 ```
 cd repoRoot
@@ -304,8 +322,8 @@ https://sonarcloud.io/dashboard?id=utopszkij-uklogin
 - MYSQL 5.7+
 - web server (.htaccess értelmezéssel)
 - https tanusitvány
-- php shell_exec -al hívhatóan  pdfsig, pdfdetach parancsok
-- Létrehozandó MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
+- php shell_exec -al hívhatóan  pdfsig, pdfdetach, pdftotext parancsok (lásd: poppler-utils)
+- Létrehozandó egy MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
 
 
 Telepítendő  könyvtárak:
@@ -326,4 +344,6 @@ Telepítendő fájlok
 - .config.php  (config.txt átnevezve és értelemszerüen javítva)
 - .htaccess (a htaccess.txt átnevezve)
 - example.php
+- readme.md
 
+Ahol ezt  külön nem jelöltük ott a fájlok, könyvtárak csak olvashatóak legyenek a web szerver számára.(oktális 640 jogosultság)

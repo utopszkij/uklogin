@@ -105,6 +105,7 @@ class openidControllerTest extends TestCase
             "info_producer":"",
             "info_pdfVersion":"",
             "xml_nev":"",
+            "xml_viseltNev":"",
             "xml_ukemail":"",
             "xml_szuletesiNev":"",
             "xml_anyjaNeve":"",
@@ -136,6 +137,7 @@ class openidControllerTest extends TestCase
             "info_producer":"",
             "info_pdfVersion":"",
             "xml_nev":"",
+            "xml_viseltNev":"",
             "xml_ukemail":"",
             "xml_szuletesiNev":"",
             "xml_anyjaNeve":"",
@@ -558,17 +560,21 @@ class openidControllerTest extends TestCase
     
     // ======= email verify ===================
     
-    public function test_emailverify() {
-        $this->request->set('code', '');
+    public function test_emailverify_OK() {
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->set('code', $user->code);
         $this->controller->emailverify($this->request);
-        $this->assertEquals('',''); / only synatx test
+        $this->expectOutputRegex('/VERIFIED/');
     }
 
     // ================ profileform ======================= 
     
-    public function test_profileform_notloffed() {
+    public function test_profileform_notlogged() {
         $user = new UserRecord();
         $this->request->sessionSet('loggedUser',$user);
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
         $this->controller->profileform($this->request);
         $this->expectOutputRegex('/ACCESS_VIOLATION/');
     }
@@ -577,8 +583,10 @@ class openidControllerTest extends TestCase
         $table = new Table('oi_users');
         $user = $table->first();
         $this->request->sessionSet('loggedUser',$user);
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
         $this->controller->profileform($this->request);
-        $this->expectOutputRegex('/PROFILE_FORM/');
+        $this->expectOutputRegex('/profileForm/');
     }
     
     
@@ -593,21 +601,10 @@ class openidControllerTest extends TestCase
         $this->request->set('phone_number',$user->phone_number);
         $this->request->set('psw1','123456');
         $this->request->set('psw2','123456');
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
         $this->controller->profilesave($this->request);
         $this->expectOutputRegex('/ACCESS_VIOLATION/');
-    }
-    
-    public function test_profilesave_error() {
-        $table = new Table('oi_users');
-        $user = $table->first();
-        $this->request->sessionSet('loggedUser',$user);
-        $this->request->set('id',$user->id);
-        $this->request->set('email','');
-        $this->request->set('phone_number','');
-        $this->request->set('psw1','123456');
-        $this->request->set('psw2','123456789');
-        $this->controller->profilesave($this->request);
-        $this->expectOutputRegex('/EMAIL_REQUESTED/');
     }
     
     public function test_profilesave_ok() {
@@ -619,32 +616,52 @@ class openidControllerTest extends TestCase
         $this->request->set('phone_number',$user->phone_number);
         $this->request->set('psw1','123456');
         $this->request->set('psw2','123456');
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
         $this->controller->profilesave($this->request);
         $this->expectOutputRegex('/PROFILE_SAVED/');
     }
     
+    // ============================ mydata ==============================
     
-    /*
+    public function test_mydata_accessviolation() {
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
+        $this->request->sessionSet('loggedUser',new UserRecord());
+        $this->controller->mydata($this->request);
+        $this->expectOutputRegex('/ACCESS_VIOLATION/');
+    }
+    
+    public function test_mydata_ok() {
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->controller->mydata($this->request);
+        $this->expectOutputRegex('/family_name/');
+    }
+    
     
     // =========================== delaccount =========================
     
     public function test_delaccount_accessviolation() {
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
+        $this->request->sessionSet('loggedUser',new UserRecord());
+        $this->controller->delaccount($this->request);
+        $this->expectOutputRegex('/ACCESS_VIOLATION/');
     }  
     
     public function test_delaccount_ok() {
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken', '1');
+        $table = new Table('oi_users');
+        $user = $table->first();
+        $this->request->sessionSet('loggedUser',$user);
+        $this->controller->delaccount($this->request);
+        $this->expectOutputRegex('/ACCOUNT_DELETED/');
     }  
-    
-    // ============================ mydata ==============================
-    
-    public function test_mydata_accessviolation() {
-    }  
-    
-    public function test_mydata_ok() {
-    }  
-    
-      
-     */
-    
     
     public function test_end() {
         $db = new DB();

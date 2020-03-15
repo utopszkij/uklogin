@@ -179,7 +179,7 @@ if ($task == 'home') {
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" target="ifrm1"
-			        	href="<?php echo MYDOMAIN; ?>/openid/logout/?token=<?php echo $_SESSION['access_token']; ?>" 
+			        	href="<?php echo MYDOMAIN; ?>/openid/logout/?token=<?php echo session_id(); ?>" 
 			        	id="linkLogin"
 			        	onclick="$('#popup').show(); true;">
 		        		<em class="fa fa-sign-out"></em>&nbsp;Kijelentkezés

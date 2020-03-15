@@ -485,7 +485,7 @@ class OpenidUserController extends Controller {
     public function emailverify(Request$request) {
         $code = $request->input('code');
         $model = $this->getModel('openid');
-        $view = $this->getUser('openid');
+        $view = $this->getView('openid');
         $user = $model->getUserByCode($code);
         unset($user->pswhash);
         if ($user->id > 0) {

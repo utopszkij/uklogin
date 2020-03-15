@@ -46,7 +46,10 @@ DEFINE('SIGN_HASH_EXISTS','Ezzel az ügyfélkapu aláírással már van regisztr
 DEFINE('NEW_PSW_SENDED','Új jelszó elküldve ');
 DEFINE('EMPTY_EMAIL','Nincs e-mail megadva');
 DEFINE("SCOPE_ACCEPT_FORM","Adat átadás engedélyezése");
-DEFINE('PROFILE_SAVED','Adtaok tárolva.');
+DEFINE('PROFILE_SAVED','Adatok tárolva.');
 DEFINE("MYDATA","Adataim JSON formában");
-DEFINE("DEL_MY_ACCOUNT","Fiokom törlése");
+DEFINE("DEL_MY_ACCOUNT","Fiókom törlése");
+DEFINE("ACCOUNT_DELETED","Fiók törölve");
+
+DEFINE("EMAIL_VERIFIED","E-mail ellenörizve");
 ?>
