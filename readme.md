@@ -50,6 +50,36 @@ Openid Bejelentkezés folyamata
 +--------+                                   +--------+
 ```
 
+## magyaroszag.hu felhasználásával történő hitelesítés
+
+A felhasználó a 
+
+[magyarorszag.hu](http://magyarorszag.hu) 
+
+oldalról lettölti az ott tárolt személyi adatait tartalmazó pdf fájlt. Ezután ezt a fájlt a belügyminisztérium által üzemeltetett ingyenes aláírás szolgáltatás 
+
+[szuf.magyarorszag.hu](https://szuf.magyarorszag.hu) 
+
+segítségével aláírja. Majd az aláírt pdf fájlt feltölti ebbe a programba.
+
+A program a következő ellenőrzéseket végzi el:
+- a pdf alá van írva, és a belügyminisztérium nyilvános aláírás szolgáltatója írta alá?
+- a PDF információkban a megfelelő Creator, Producer, PDF version adat szerepel?
+- a PDF -ben lévő név, anyja neve, lakcím, születési dátum azonos az aláírásban megadottal?
+- az aláírás kezdeményező ügyfélkapuban megadott születési névvel, anyja nevével és születési dátummal még nincs másik fiók hitelesítve. 
+
+
+### Mennyire biztonságos az ügyfélkapus hitelesítés?
+
+1. A kormány által biztosított aláírás szolgáltatás a  magyar törvények közhiteles aláírásnak ismerik el. Mivel a progrm azt, hogy egy usernek csak egy hitelesített bejelentkezése lehet ennek az aláírásnak az ellenörzésével biztosítja - ezt nagy biztonságunak fogadhatjuk el.
+2. A személyi adatokat a program a magyarorszag.hu -ról letöltött pdf fájl tartalmából veszi ki. Megfelelő informatikai eszközökkel a pdf fájlok modosíthatóak. A pdf fájlokban van információ a pdf -et előállító szoftverről és a pdf -et utoljára modosító szoftveről. A program a pdf-ben lévő információk ellenörzésével igyekszik észlelni az ilyen manipulációkat. A legtöbb könnyen hozzáférhető pdf editorral modosított pdf fájlt nem fogadja el. Sajnos azonban speciális hacker eszközökkel (elég nagy idő és erőforrás ráfordítással) a pdf bizonyára "nyom nélkül" is modosítható. Viszont ilyen módon is csak egyetlen egy ügyfélkapus aláírással hitelesített hamis fiokot tud egy felhasználó létrehozni.
+
+Összefoglalva: Átlagos informatikai tudással rendelkező emberek, ha túl sok időt nem akarnak a csalásra forditani elég nagy biztonsággal csak egy ügyfélkapuval hitelesített fiokot tudnak létrehozni.
+
+## FIGYELEM FONTOS!
+
+A magyaroszag.hu segítségével történő hitelesítési rendszer több olyan elemet tartalmaz ami esetenként változtatandó lehet amennyiben a magyarorszag.hu rendszerben vagy a használt aláírás szolgáltató rendszerében változás történik (lásd az elöző pontot és a **controllers/pdfparser.php** fájlt). Ezért az éles üzemeltetés folyamán az üzemeltetőnek folyamatosan figyelnie kell, hogy az érintett állami rendszerekben nem történik-e változás!
+
 
 
 ## Programnyelvek
@@ -235,6 +265,22 @@ POST vagy GET pareméterek:
 **token** 
 
 **redirect_uri**
+
+
+### Openid userinfo
+
+végpont:
+
+```
+<ukloginDomain>/openid/userinfo
+```
+
+POST vagy GET pareméterek:
+
+**access_token**
+
+result a korábbi "authorize" hívásban megadott "scope" paraméterben kért user információk json string formájában.
+
 
 ### GDPR megfelelés
 

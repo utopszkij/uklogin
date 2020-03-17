@@ -7,10 +7,6 @@ sudo apt-get install nano
 
 sudo apt-get install mc
 
-pdf kezelő eszközök
--------------------
-
-install poppler-utils
 
 LAMP telepítése
 ---------------
@@ -77,37 +73,11 @@ konfigurálás
 .config.php javitása
 
 
-Sajnos a pdfsig jelenleg nem müködik (jelzett bug a github -on).
-----------------------------------------------------------------
-Alternativák:
-1. mutols 
-			
-			openSSL tlepítés
-			----------------
-			
-			sudo apt-get install openssl
-			apt-cache search libssl | grep SSL
-			
-			mutools telepitése forrásból
-			----------------------------
-			
-			forrás könyvtár  feltöltés (doc almappában benne van)
-			cd forrás könyvtár
-			make HAVE_X11=no HAVE_GLUT=no prefix=/usr/local install
-			
-			ha ez nem megy akkor prefix=~ ez utobbi esetben /root/bin mutool -al futtatható
-			
-			- sajnos a teszt szerveren OPNSSL hibával ez sem müködik
-			
-2.pdf-parser.py csinál valamit, kifejti az aláírást hexa formába obj 17 0  /sig résznél
-  --- de ennek ellenörzése azt hiszem túl nagy falat lenne....
-
+Sajnos a pdfsig jelenleg a 18.4 ubuntu-n nem müködik
 
 upgrade Ubunto 19.04 -re:
 ==========================
 https://www.linuxbabe.com/ubuntu/upgrade-ubuntu-18-04-18-10-to-ubuntu-19-04
-
-Ebben talán telepíthető a poppler-utils újabb verziója .....
 
 
 ClientAliveInterval 60
@@ -124,6 +94,12 @@ do-release-upgrade
 
 verzió ellenörzés:
 
+Ebben telepíthető a poppler-utils újabb verziója .....
+
+pdf kezelő eszközök
+-------------------
+
+install poppler-utils
 
 mail server telepités
 =====================
@@ -132,4 +108,17 @@ https://www.linuxbabe.com/mail-server/ubuntu-18-04-iredmail-email-server
 
 
 lsb_release -a 
+
+
+Biztonságos szerver beállítási tanácsok:
+========================================
+
+apache biztonságos beállítási tippek:
+
+https://geekflare.com/apache-web-server-hardening-security/
+
+MYSQL szerver biztonságos beállítása:
+
+https://www.digitalocean.com/community/tutorials/how-to-secure-mysql-and-mariadb-databases-in-a-linux-vps
+
     

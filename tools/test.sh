@@ -2,7 +2,8 @@
 
 #php unittest by coverage report
 #./vendor/bin/phpunit --config ./tests/phpunit.xml tests;
-phpunit --config ./tests/phpunit.xml tests;
+# phpunit --config ./tests/phpunit.xml tests;
+phpunit tests;
 
 #mocha js unittest by coverage report
 node_modules/.bin/jscover js js-cov

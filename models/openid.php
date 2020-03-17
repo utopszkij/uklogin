@@ -34,10 +34,6 @@ class UserRecord {
         public $signdate = ''; // *
 }
 
-class AppRecord {
-    public $name = '';
-}
-
 class OpenidModel {
     
     protected $tableName = 'oi_users';
@@ -81,20 +77,53 @@ class OpenidModel {
     }
     
     /**
+     * esetleges későbbi fejlesztéshez
+     * az id és a code adatot nem kodolja
+     * ha lesz kodolás akkor táblában a mező mérteket növelni kell
+     * @param UserRecord $user
+     * @param string $privKey
+     * @return UserRecord
+     */
+    protected function encrypt($user, string $privKey = 'default'): UserRecord {
+        $result = new UserRecord();
+        foreach ($user as $fn => $fv) {
+            $result->$fn = $fv;
+        }
+        return $result;
+    }
+    
+    /**
+     * esetleges későbbi fejlesztéshez
+     * az id és a code nincs kodolva
+     * @param UserRecord $user
+     * @param string $pubKey
+     * @return UserRecord
+     */
+    protected function decrypt($user, string $pubKey = 'default'): UserRecord {
+        $result = new UserRecord();
+        foreach ($user as $fn => $fv) {
+            $result->$fn = $fv;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * új user rekord felvitele
      * @param UserRecord $userRec
      * @return string
      * @return '' vagy hibaüzenet
      */
     public function saveUser(UserRecord &$userRec): string {
+        $encryptedUser = $this->encrypt($userRec);
         $table = new Table($this->tableName);
         $userRec->updated_at = time();
         if ($userRec->id == 0) {
-            $table->insert($userRec);
+            $table->insert($encryptedUser);
             $userRec->id = $table->getInsertedId();
         } else {
             $table->where(['id','=',$userRec->id]);
-            $table->update($userRec);
+            $table->update($encryptedUser);
         }
         return $table->getErrorMsg();
     }
@@ -110,13 +139,7 @@ class OpenidModel {
         $table->where(['nickname','=',$nick]);
         $res = $table->first();
         if ($res) {
-            foreach ($result as $fn => $fv) {
-                if (isset($res->$fn)) {
-                    $result->$fn = $res->$fn;
-                } else {
-                    $result->$fn = $fv;
-                }
-            }
+            $result = $this->decrypt($res);
         }
         return $result;
     }
@@ -147,19 +170,25 @@ class OpenidModel {
      */
     public function getUserByCode(string $code): UserRecord {
         $result = new UserRecord();
-        $table = new Table($this->tableName);
+        $table =  new Table($this->tableName);
         $table->where(['code','=',$code]);
         $res = $table->first();
         if ($res) {
-            foreach ($result as $fn => $fv) {
-                if (isset($res->$fn)) {
-                    $result->$fn = $res->$fn;
-                } else {
-                    $result->$fn = $fv;
-                }
-            }
+            $result = $this->decrypt($res);
         }
         return $result;
+    }
+    
+    /**
+     * User rekord törlése
+     * @param int $id
+     * @return string
+     */
+    public function delUser(int $id): string {
+        $table =  new Table($this->tableName);
+        $table->where(['id','=',$id]);
+        $res = $table->delete();
+        return $table->getErrorMsg();
     }
                 
 } // class

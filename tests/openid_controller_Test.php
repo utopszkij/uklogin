@@ -5,8 +5,8 @@ session_start();
 include_once './tests/config.php';
 include_once './tests/mock.php';
 include_once './core/database.php';
+// include_once './models/openid.php';
 include_once './controllers/openid.php';
-include_once './models/openid.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -21,12 +21,11 @@ class openidControllerTest extends TestCase
     function __construct() {
         global $REQUEST;
         parent::__construct();
+        $this->controller = new OpenidController();
         $db = new DB();
         $db->statement('CREATE DATABASE IF NOT EXISTS test');
-        $model = new OpenidModel(); // oi_users tábla generálás
         $this->request = new Request();
         $REQUEST = $this->request;
-        $this->controller = new OpenidController();
     }
     
     public function test_start() {

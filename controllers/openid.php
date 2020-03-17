@@ -13,6 +13,10 @@ class Params {
 
 class OpenidUserController extends Controller {
     
+    function __construct() {
+        $this->getModel('openid'); // adattábla kreálás
+    }
+    
     /**
      * task init - logged User és kapott paraméterek a result Params -ba
      * @param Request $request
@@ -112,7 +116,7 @@ class OpenidUserController extends Controller {
         if ($p->response_type != 'token id_token') {
             $p->msgs[] = 'only "token id_token" response_type supported';
         }
-        $enabledScope1 = ['sub', 'nickname', 'eamil', 'email_verified', 'sysadmin', 'posta_code', 'locality'];
+        $enabledScope1 = ['sub', 'nickname', 'email', 'email_verified', 'sysadmin', 'postal_code', 'locality'];
         $enabledScope2 = ['sub', 'openid',
             'nickname', 'email', 'email_verified', 'given_name', 'middle_name', 'family_name',
             'name', 'picture', 'street_addres', 'locality', 'postal_code', 'addres',
@@ -206,6 +210,7 @@ class OpenidUserController extends Controller {
      *    csrToken
      */
     public function dologin(Request $request) {
+        $this->getModel('appregist'); // class AppRecord
         $p = $this->init($request,['nickname','psw','dataprocessaccept']);
         $this->checkCsrToken($request);
         $this->createcsrToken($request, $p);
@@ -321,6 +326,7 @@ class OpenidUserController extends Controller {
      * @return void
      */
     public function doregist(Request $request) {
+        $this->getModel('appregist'); // class AppRecord
         $p = $this->init($request,['id','nick','psw1','psw2',
             'email', 'phone_number', 'dataprocessaccept', 'gender']);
         $this->checkCsrToken($request);
@@ -556,18 +562,18 @@ class OpenidUserController extends Controller {
         if ($loggedUser->id > 0) {
             $loggedUser = $model->getUserByNick($loggedUser->nickname);
             
-            // user rekord update
-            $user = new UserRecord();
-            $user->id = $loggedUser->id;
-            $user->nickname = 'törölt';
-            $user->pswhash = hash('sha256', rand(10000000,99999999));
-            $user->audited = $loggedUser->audited;
-            $model->saveUser($user);
+            // user rekord törlése
+            $msg = $model->delUser($loggedUser->id);
             
             // kijelentkezés
-            $user->id = 0;
+            $user = new UserRecord();
             $request->sessionSet('loggedUser',$user);
-            $view->successMsg([txt('ACCOUNT_DELETED')]);
+            
+            if ($msg == '') {
+                $view->successMsg([txt('ACCOUNT_DELETED')]);
+            } else {
+                $view->errorMsg([$msg]);
+            }
         } else {
             $view->errorMsg([txt('ACCESS_VIOLATION')]);
         }
