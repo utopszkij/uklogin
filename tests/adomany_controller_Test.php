@@ -37,4 +37,4 @@ class adomanyControllerTest extends TestCase
         $this->assertEquals(true,true); // csak szintaxis ellenörzés
     }
 }
-
+?>

@@ -31,10 +31,24 @@ class defaultControllerTest extends TestCase
         $db->statement('CREATE DATABASE IF NOT EXISTS test');
         $this->assertEquals('',$db->getErrorMsg());
     }
+   
+    public function test_logged() {
+        global $redirectURL;
+        $redirectURL = '';
+        $this->controller->logged($this->request);
+        $this->assertEquals('',''); // csak szintaktikai test
+    }
+    
+    public function test_logout() {
+        global $redirectURL;
+        $redirectURL = '';
+        $this->controller->logout($this->request);
+        $this->assertEquals('',''); // csak szintaktikai test
+    }
     
     public function test_default() {
         $msg = $this->controller->default($this->request);
         $this->assertEquals(true,true); // csak szintaxis ellenörzés
     }
 }
-
+?>

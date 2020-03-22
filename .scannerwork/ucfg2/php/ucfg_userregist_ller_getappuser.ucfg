@@ -1,89 +1,0 @@
-
- userregistcontroller::getappuser<
-0/var/www/html/uklogin/controllers/userregist.phpİ İ("1*±
-2<
-0/var/www/html/uklogin/controllers/userregist.phpä	 ä(&i
-g
-<
-0/var/www/html/uklogin/controllers/userregist.phpä	 ä(%	
-$result"__id*
-'ERROR_NICK_EMPTY'*
-6*°
-4<
-0/var/www/html/uklogin/controllers/userregist.phpæ	 æ(%h
-f
-<
-0/var/www/html/uklogin/controllers/userregist.phpæ	 æ($	
-$result"__id*
-'ERROR_PSW_EMPTY'*
-6*ê
-5<
-0/var/www/html/uklogin/controllers/userregist.phpè è(.nl
-<
-0/var/www/html/uklogin/controllers/userregist.phpè è(-
-%2*
-
-	$appModel*
-
-
-$client_id2getdataV
-T
-<
-0/var/www/html/uklogin/controllers/userregist.phpè è(-
-$app"__id*
-
-%2€~
-<
-0/var/www/html/uklogin/controllers/userregist.phpé é(<
-%3*
-
-
-$userModel*
-
-
-$client_id*	
-
-$nick2getuserbynickW
-U
-<
-0/var/www/html/uklogin/controllers/userregist.phpé é(<
-$user"__id*
-
-%3*
-6*
-6<
-0/var/www/html/uklogin/controllers/userregist.phpë ë("K
-<
-0/var/www/html/uklogin/controllers/userregist.phpë ë(
-	
-$result*
-1<
-0/var/www/html/uklogin/controllers/userregist.phpá á(Y
-W
-<
-0/var/www/html/uklogin/controllers/userregist.phpá á(	
-$result"__id*
-''{y
-<
-0/var/www/html/uklogin/controllers/userregist.phpâ â(-
-%1*
-userregistcontroller*
-'appregist'2getmodel[
-Y
-<
-0/var/www/html/uklogin/controllers/userregist.phpâ â(-
-	$appModel"__id*
-
-%1*	
-2
-4
-5:
-$app:
-$user:
-
-$userModel:
-
-$client_id:
-$nick:
-$pswB
-userregistcontroller

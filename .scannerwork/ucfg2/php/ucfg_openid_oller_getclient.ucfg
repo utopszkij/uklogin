@@ -1,0 +1,84 @@
+
+openidusercontroller::getclient8
+,/var/www/html/uklogin/controllers/openid.phpÈ È( "1*Ž
+28
+,/var/www/html/uklogin/controllers/openid.phpÌ Ì(#c
+a
+8
+,/var/www/html/uklogin/controllers/openid.phpÌ Ì("
+	
+$result"
+name"__id*
+
+'self'e
+c
+8
+,/var/www/html/uklogin/controllers/openid.phpÍ Í($
+
+$p"
+clientTitle"__id*
+
+'self'*
+4*Å
+38
+,/var/www/html/uklogin/controllers/openid.phpÏ Ï(1fd
+8
+,/var/www/html/uklogin/controllers/openid.phpÏ Ï(0
+%3*
+
+
+$model*
+
+
+$client_id2getappU
+S
+8
+,/var/www/html/uklogin/controllers/openid.phpÏ Ï(0	
+$result"__id*
+
+%3_
+]
+8
+,/var/www/html/uklogin/controllers/openid.phpÐ Ð(+
+%4"__id**
+	
+$result"
+namea
+_
+8
+,/var/www/html/uklogin/controllers/openid.phpÐ Ð(+
+
+$p"
+clientTitle"__id*
+
+%4*
+4*†
+48
+,/var/www/html/uklogin/controllers/openid.phpÒ Ò("G
+8
+,/var/www/html/uklogin/controllers/openid.phpÒ Ò(
+	
+$result*û
+18
+,/var/www/html/uklogin/controllers/openid.phpÉ É(%wu
+8
+,/var/www/html/uklogin/controllers/openid.phpÉ É($
+%1*
+openidusercontroller*
+'appregist'2getmodelRP
+8
+,/var/www/html/uklogin/controllers/openid.phpÊ Ê(!	
+$result"	apprecordg
+e
+8
+,/var/www/html/uklogin/controllers/openid.phpÊ Ê(!
+%2"apprecord::__construct*
+	
+$result*
+2
+3:
+
+$client_id:
+$p:
+$modelB
+openidusercontroller

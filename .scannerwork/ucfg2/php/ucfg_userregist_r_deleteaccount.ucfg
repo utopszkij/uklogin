@@ -1,23 +1,0 @@
-
-#userregistcontroller::deleteaccount<
-0/var/www/html/uklogin/controllers/userregist.phpÒ Ò("1*j
-2
-userregist.php"S
-<
-0/var/www/html/uklogin/controllers/userregist.phpÔ Ô(
-implicit return*Ö
-1<
-0/var/www/html/uklogin/controllers/userregist.phpÓ Ó(/Š
-<
-0/var/www/html/uklogin/controllers/userregist.phpÓ Ó(.
-%1*
-userregistcontroller*
-
-
-$request*
-'delaccount'2
-useraction*
-2:
-
-$requestB
-userregistcontroller

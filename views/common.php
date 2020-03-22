@@ -14,6 +14,7 @@ class CommonView extends View {
         <?php if ($navbar) {
         	       $p = new stdClass();
         	       $p->adminNick = $REQUEST->sessionGet('adminNick');
+        	       $p->access_token = $REQUEST->sessionGet('access_token');
         	       $this->echoNavbar($p);
         }
         ?>
@@ -49,6 +50,7 @@ class CommonView extends View {
         <?php if ($navbar) {
         	       $p = new stdClass();
         	       $p->adminNick = $REQUEST->sessionGet('adminNick');
+        	       $p->access_token = $REQUEST->sessionGet('access_token');
         	       $this->echoNavbar($p);
               }
         ?>
@@ -83,11 +85,18 @@ class CommonView extends View {
         if (!isset($p->user)) {
 					$p->user = JSON_decode('{"id":0, "nick":"user1", "avatar":"http://www.gravatar.com/avatar"}');
 		}         
-         ?>
+		$login_redirect_uri = urlencode(MYDOMAIN.'/opt/default/logged/');
+		$logout_redirect_uri = urlencode(MYDOMAIN.'/opt/default/logout/');
+		$logout_uri = MYDOMAIN.'/openid/logout/'.
+		  		'?token='.$p->access_token.
+		  		'&token_type_hint=access_token'.
+		  		'&redirect_uri='.$logout_redirect_uri;
+		  		
+		?>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <?php echo txt('MAINMENU'); ?>&nbsp;
 			  <div class="collapse navbar-collapse" id="navbarNav">
-			    <ul class="navbar-nav">
+			    <ul class="navbar-nav mr-auto">
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>">
 			        	<em class="fa fa-home"></em>&nbsp;<?php echo txt('HOME'); ?><span class="sr-only">(current)</span></a>
@@ -100,37 +109,57 @@ class CommonView extends View {
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/add">
 			        	<em class="fa fa-plus"></em>&nbsp;<?php echo txt('NEWAPP'); ?></a>
 			      </li>
-			      <?php if ($p->adminNick == '') :?>
-    			      <li class="nav-item">
-    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/form">
-    			        	<em class="fa fa-key"></em>&nbsp;<?php echo txt('ADMINLOGIN'); ?></a>
-    			      </li>
-			      <?php else : ?>
-    			      <li class="nav-item">
-    			        <a class="nav-link alert-success" target="_self">
-    			        	<em class="fa fa-user"></em>&nbsp;<strong><?php echo $p->adminNick; ?></strong></a>
-    			      </li>
-    			      <li class="nav-item">
-    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/form">
-    			        	<em class="fa fa-cog"></em>&nbsp;<?php echo txt('MYAPPS'); ?></a>
-    			      </li>
-    			      <li class="nav-item">
-    			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/opt/login/logout">
-    			        	<em class="fa fa-sign-out"></em>&nbsp;<?php echo txt('LOGOUT'); ?></a>
-    			      </li>
-			      <?php endif; ?>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="<?php echo txt('MYDOMAIN'); ?>/example.php">
 			        	<em class="fa fa-compass"></em>&nbsp;<?php echo txt('EXAMPLE'); ?></a>
 			      </li>
+			      <?php if ($p->adminNick != '') :?>
+    			      <li class="nav-item">
+    			        <a class="nav-link" target="_self" 
+    			            href="<?php echo txt('MYDOMAIN'); ?>/opt/appregist/adminform">
+    			        	<em class="fa fa-cog"></em>&nbsp;<?php echo txt('MYAPPS'); ?></a>
+    			      </li>
+			      <?php endif; ?>
 			    </ul>
+			    <ul class="navbar-nav">
+			      <?php if ($p->adminNick == '') :?>
+    			      <li class="nav-item">
+    			        <a class="nav-link" target="ifrmOpenid" 
+    			            onclick="$('#divOpenid').show(); $('#scope').hide(); true" 
+    			            href="<?php echo txt('MYDOMAIN'); ?>/openid/authorize/?redirect_uri=<?php echo $login_redirect_uri; ?>">
+    			        	<em class="fa fa-sign-in"></em>&nbsp;<?php echo txt('LOGIN'); ?></a>
+    			      </li>
+			      <?php else : ?>
+			      
+			      <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   			            <?php if ($p->loggedUser->picture == '') : ?>
+   			        		<em class="fa fa-user"></em>&nbsp;<strong><?php echo $p->adminNick; ?></strong>
+   			        	<?php  else : ?>
+   			        		<img src="<?php echo $p->loggedUser->picture; ?>" alt="avatar" height="25px" /><strong><?php echo $p->adminNick; ?></strong>
+   			        	<?php endif; ?>	
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+   			          <a class="dropdown-item" target="ifrmOpenid"
+    			           onclick="$('#divOpenid').show();  $('#scope').hide(); true" 
+    			           href="<?php echo MYDOMAIN; ?>/opt/openid/profileform">
+    			           <em class="fa fa-edit"></em>&nbsp;Profil
+    			      </a>     
+   			          <a class="dropdown-item" target="_self" 
+    			            href="<?php echo $logout_uri; ?>">
+    			        	<em class="fa fa-sign-out"></em>&nbsp;<?php echo txt('LOGOUT'); ?>
+    			      </a>
+                    </div>
+                  </li>
+			      <?php endif; ?>
+			    </ul>  
 			  </div>
+			  <div class="clr"></div>
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="navbar-toggler-icon"></span>
 			  </button>
 			</nav>   
-			<p id="loggedUser"><?php echo $p->adminNick; ?></p>
-			<p style="background-color:red; color:white">Ez a rendszer jelenleg ß teszt állapotban használható.</p>     
+			<p style="background-color:red; color:white">Ez a rendszer jelenleg ß teszt állapotban használható.</p>
 		<?php       
      } // echoNavbar
         

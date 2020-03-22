@@ -66,11 +66,13 @@ class IssuView  extends CommonView  {
 	 * @return void;
 	 */
 	public function successMsg(array $msgs = [], bool $navbar = true) {
+	    global $REQUEST;
 	    $this->echoHtmlHead();
-	    $p = new stdClass();
-	    $p->adminNick = '';
 	    if ($navbar) {
-	       $this->echoNavbar($p);
+	        $p = new stdClass();
+	        $p->adminNick = $REQUEST->sessionGet('adminNick');
+	        $p->access_token = $REQUEST->sessionGet('access_token');
+	        $this->echoNavbar($p);
 	    }
 	    ?>
         <body ng-app="app">

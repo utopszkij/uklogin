@@ -119,8 +119,8 @@ class MdView extends CommonView {
        	</div>
        	<?php $this->echoFooter($p); ?>
        	</body>
+       	</html>
         <?php 	
-        $this->echoHtmlEnd();
     }
 }
 ?>

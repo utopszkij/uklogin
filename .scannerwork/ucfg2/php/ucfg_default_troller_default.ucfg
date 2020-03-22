@@ -1,11 +1,11 @@
 
 defaultcontroller::default7
--/var/www/html/uklogin/controllers/default.php ("1*’
+-/var/www/html/uklogin/controllers/default.php ("1*’
 27
--/var/www/html/uklogin/controllers/default.php (4pn
+-/var/www/html/uklogin/controllers/default.php' '(4pn
 7
--/var/www/html/uklogin/controllers/default.php (3
-%11*
+-/var/www/html/uklogin/controllers/default.php' '(3
+%14*
 
 
 $request*
@@ -15,18 +15,18 @@
 sessionget]
 [
 7
--/var/www/html/uklogin/controllers/default.php (3
+-/var/www/html/uklogin/controllers/default.php' '(3
 
 $data"
 user"__id*
 
-%11*
+%14*
 3*¤
 37
--/var/www/html/uklogin/controllers/default.php (a_
+-/var/www/html/uklogin/controllers/default.php) )(a_
 7
--/var/www/html/uklogin/controllers/default.php (
-%12*	
+-/var/www/html/uklogin/controllers/default.php) )(
+%15*	
 
 $view*	
 
@@ -35,12 +35,12 @@ sessionget]
 4
 default.php"N
 7
--/var/www/html/uklogin/controllers/default.php (
-implicit return*„
+-/var/www/html/uklogin/controllers/default.php* *(
+implicit return*¤
 17
--/var/www/html/uklogin/controllers/default.php ($nl
+-/var/www/html/uklogin/controllers/default.php ($nl
 7
--/var/www/html/uklogin/controllers/default.php (#
+-/var/www/html/uklogin/controllers/default.php (#
 %1*
 
 
@@ -48,7 +48,7 @@ sessionget]
 'sessionid'*
 '0'2setig
 7
--/var/www/html/uklogin/controllers/default.php (
+-/var/www/html/uklogin/controllers/default.php (
 %2*
 
 
@@ -56,42 +56,50 @@ sessionget]
 'lng'*
 'hu'2setrp
 7
--/var/www/html/uklogin/controllers/default.php
- (%
+-/var/www/html/uklogin/controllers/default.php
+ (%
 %3*
 defaultcontroller*
 'frontpage'2getviewR
 P
 7
--/var/www/html/uklogin/controllers/default.php (%
+-/var/www/html/uklogin/controllers/default.php (%
 $view"__id*
 
 %3sq
 7
--/var/www/html/uklogin/controllers/default.php ('
+-/var/www/html/uklogin/controllers/default.php ('
 %4*
 defaultcontroller*
 'frontpage'2getmodelS
 Q
 7
--/var/www/html/uklogin/controllers/default.php ('
+-/var/www/html/uklogin/controllers/default.php ('
 $model"__id*
 
-%4NL
+%4IG
 7
--/var/www/html/uklogin/controllers/default.php	 	(
-$data"stdclassc
-a
+-/var/www/html/uklogin/controllers/default.php (!
+%5"$Arraytr
 7
--/var/www/html/uklogin/controllers/default.php	 	(
-%5"stdclass::__construct*	
-
-$datasq
+-/var/www/html/uklogin/controllers/default.php
+ ("
+%6*
+defaultcontroller*
+
+
+$request*
+
+%52initR
+P
 7
--/var/www/html/uklogin/controllers/default.php
- 
-(5
-%6*
+-/var/www/html/uklogin/controllers/default.php ("
+$data"__id*
+
+%6sq
+7
+-/var/www/html/uklogin/controllers/default.php (5
+%7*
 
 
 $request*
@@ -100,63 +108,96 @@ a
 	'default'2input^
 \
 7
--/var/www/html/uklogin/controllers/default.php
- 
-(5
+-/var/www/html/uklogin/controllers/default.php (5
 
 $data"
 option"__id*
 
-%6ZX
+%7ZX
 7
--/var/www/html/uklogin/controllers/default.php ()
-%7*
+-/var/www/html/uklogin/controllers/default.php   ()
+%8*
 
 
 $model2getappcount`
 ^
 7
--/var/www/html/uklogin/controllers/default.php ()
+-/var/www/html/uklogin/controllers/default.php   ()
 
 $data"
 
 appCount"__id*
 
-%7[Y
+%8[Y
 7
--/var/www/html/uklogin/controllers/default.php (+
-%8*
+-/var/www/html/uklogin/controllers/default.php! !(+
+%9*
 
 
 $model2getusercounta
 _
 7
--/var/www/html/uklogin/controllers/default.php (+
+-/var/www/html/uklogin/controllers/default.php! !(+
 
 $data"
 	userCount"__id*
 
-%8tr
+%9us
 7
--/var/www/html/uklogin/controllers/default.php (9
-%9*
+-/var/www/html/uklogin/controllers/default.php" "(9
+%10*
 
 
 $request*
 'adminNick'*
 ''2
-sessiongeta
-_
+sessiongetb
+`
 7
--/var/www/html/uklogin/controllers/default.php (9
+-/var/www/html/uklogin/controllers/default.php" "(9
 
 $data"
-	adminNick"__id*
-
-%9pn
+	adminNick"__id*
+
+%10vt
 7
--/var/www/html/uklogin/controllers/default.php (%
-%10*
+-/var/www/html/uklogin/controllers/default.php# #(;
+%11*
+
+
+$request*
+'loggedUser'*
+''2
+sessiongetc
+a
+7
+-/var/www/html/uklogin/controllers/default.php# #(;
+
+$data"
+
+loggedUser"__id*
+
+%11xv
+7
+-/var/www/html/uklogin/controllers/default.php$ $(?
+%12*
+
+
+$request*
+'access_token'*
+''2
+sessiongete
+c
+7
+-/var/www/html/uklogin/controllers/default.php$ $(?
+
+$data"
+access_token"__id*
+
+%12pn
+7
+-/var/www/html/uklogin/controllers/default.php& &(%
+%13*
 
 
 $request*

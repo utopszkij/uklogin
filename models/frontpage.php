@@ -16,7 +16,7 @@ class FrontpageModel {
      * @return int
      */
     public function getUserCount(): int {
-        $table = new table('users');
+        $table = new table('oi_users');
         return $table->count();
     }
     

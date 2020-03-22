@@ -1,34 +1,0 @@
-
-hackmodel::__construct/
-%/var/www/html/uklogin/models/hack.php ("1*W
-2
-
-hack.php"F
-/
-%/var/www/html/uklogin/models/hack.php (
-implicit return*º
-1/
-%/var/www/html/uklogin/models/hack.php (><
-/
-%/var/www/html/uklogin/models/hack.php (
-$db"dbS
-Q
-/
-%/var/www/html/uklogin/models/hack.php (
-%1"db::__construct*
-
-$dbéæ
-/
-%/var/www/html/uklogin/models/hack.php (
-%2*
-
-$db*š
-—'
-        CREATE TABLE IF NOT EXISTS `hacks` (
-            `ip` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-            `errorcount` int(4) NOT NULL,
-            KEY `app_idx_ip` (`ip`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci
-            '2exec*
-2B
-	hackmodel

@@ -21,6 +21,13 @@ interface  RequestObject {
     public function session_count(): int;
 }
 
+class Params {
+    public $msgs = [];
+    public $loggedUser = false;
+    public $access_token = false;
+    public $model = false;
+    public $view = false;
+}
 
 class View implements ViewObject {
     public function loadJavaScript(string $jsName, object $params) {
@@ -58,16 +65,44 @@ class Model implements ModelObject {
 }
 
 class Controller implements ControllerObject {
+    
+    protected function init(Request &$request, array $names = []): Params {
+        $this->model = $this->getModel($this->cName);
+        $this->view = $this->getView($this->cName);
+        $result = new Params();
+        // tényleges érkezett paraméterek
+        foreach ($request->params as $fn => $fv) {
+            $result->$fn = $fv;
+        }
+        // az elvárt, de nem érkezett paraméterek '' értékkel
+        foreach ($names as $name) {
+            if (!isset($result->$name)) {
+                $result->$name = '';
+            }
+        }
+        $result->loggedUser = $request->sessionGet('loggedUser', false);
+        $result->access_token = $request->sessionGet('access_token', '');
+        return $result;
+    }
+    
     protected function getModel(string $modelName)  {
-        include_once './models/'.$modelName.'.php';
-        $modelClassName = $modelName.'Model';
-        return new $modelClassName ();
+        if (file_exists('./models/'.$modelName.'.php')) {
+            include_once './models/'.$modelName.'.php';
+            $modelClassName = $modelName.'Model';
+            return new $modelClassName ();
+        } else {
+            return new stdClass();
+        }
     }
     
     protected function getView(string $viewName) {
-        $viewClassName = $viewName.'View';
-        include_once './views/'.$viewName.'.php';
-        return new $viewClassName ();
+        if (file_exists('./views/'.$viewName.'.php')) {
+            $viewClassName = $viewName.'View';
+            include_once './views/'.$viewName.'.php';
+            return new $viewClassName ();
+        } else {
+            return new stdClass();
+        }
     }
     
     protected function createCsrToken(RequestObject $request, object $data) {
@@ -89,8 +124,23 @@ class Controller implements ControllerObject {
         $data = new stdClass();
         $data->option = $request->input('option','default');
         $data->adminNick = $request->sessionGet('adminNick','');
+        $data->access_token = $request->sessionGet('access_token','');
         $view->display($data);
     }
+    
+    /**
+     * session váltás ha szükséges
+     * @param string $access_token
+     * @param Request $request
+     */
+    protected function sessionChange(string $si, Request &$request) {
+        if ($si != session_id()) {
+            session_abort();
+            session_id($si);
+            $request = new Request();
+        }
+    }
+    
 } // class Controller
 
 class Request implements RequestObject {
@@ -162,6 +212,10 @@ function getUploadedFile(string $postName, string $targetDir): string {
 function redirectTo($url) {
     global $redirectURL;
     $redirectURL = $url;
+}
+
+function myHash($alg, $s) {
+    return hash($alg, $s);
 }
 
 function sendEmail(string $to, string $subject, string $body): bool {

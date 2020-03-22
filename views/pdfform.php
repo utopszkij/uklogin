@@ -16,10 +16,10 @@ class PdfformView extends View {
 		  </head>
 		';
 		echo '
-		<body style="background-color:#d0d0d0; width:100%; height:100%">
+		<body style="background-color:white; width:100%; height:90%">
         <div id="ukAudit" class="page" style="padding:20px; margin:20px; background-color:white; opacity:0.9">
         ';
-		if (isset($p->msgs) and  (count($p->msgs) > 0)) {
+		if (isset($p->msgs) && (count($p->msgs) > 0)) {
 		    echo '<div class="alert alert-danger">';
     	    foreach ($p->msgs as $item) {
     	        echo txt($item).'<br />';

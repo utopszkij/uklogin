@@ -27,8 +27,7 @@ class OpenidView  extends CommonView  {
         foreach ($w as $item) {
             $w2[] = txt($item);
         }
-        $scopeTxt = implode(', ',$w2);
-        return $scopeTxt;
+        return implode(', ',$w2);
     }
     
     /**
@@ -47,7 +46,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page" style="max-width:600px">
 	    	<?php $this->echoMsgs($p); ?>
 	    	<em class="fa fa-sign-in formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" />
+	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
 	    	<?php if ($p->clientTitle != 'self') : ?>
 	    	<h2><?php echo $p->clientTitle; ?></h2>
 	    	<?php endif; ?>
@@ -134,7 +133,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page">
 	    	<?php $this->echoMsgs($p); ?>
 	    	<em class="fa fa-sign-in formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" />
+	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
 		    <h2><?php echo $p->clientTitle; ?></h2>
 		    <h3><?php echo txt('SCOPE_ACCEPT_FORM'); ?></h3>
 		    <form class="form" method="post" id="frmScopeForm"
@@ -200,7 +199,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page" id="page">
 	    	<?php $this->echoMsgs($data); ?>
 		    <em class="fa fa-key formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" />
+	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
 			<?php if ($data->clientTitle != 'self') : ?>
 		    <h2><?php echo $data->clientTitle; ?></h2>
 		    <?php endif; ?>
@@ -275,7 +274,7 @@ class OpenidView  extends CommonView  {
     			<?php if (($data->scope != '') & ($data->clientTitle != 'self')) : ?>
     		    <div class="scope">
     		    	<p><label>A kliens progam a következő adatokat kapja meg:</label></p>
-    		    	<p><var><?php echo $this->scopeTxt($p->scope); ?></var></p>
+    		    	<p><var><?php echo $this->scopeTxt($data->scope); ?></var></p>
     		    </div>
     		    <?php endif; ?>
     		    <div class="formLinks">
@@ -326,13 +325,13 @@ class OpenidView  extends CommonView  {
 	      <div class="page" id="page">
 	    	<?php $this->echoMsgs($data); ?>
 		    <em class="fa fa-user formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" />
+	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
 		    <h2>Felhasználói profil</h2>
 		    <p>
 		    <?php if ($data->picture != '') : ?>
-		      <img src="<?php echo $data->picture; ?>" style="height:125px;">
+		      <img src="<?php echo $data->picture; ?>" style="height:125px;" alt="avatar">
 		    <?php else : ?>
-		      <img src="images/guest.jpg" style="height:125px;">
+		      <img src="images/guest.jpg" style="height:125px;" alt="avatar">
 		    <?php endif;?>
 		    </p>
 			<form name="formProfile" id="formProfile"  class="form"
@@ -402,12 +401,12 @@ class OpenidView  extends CommonView  {
 				<div class="form-group">
 					<label>Nem:</label>
 					<select name="gender" id="gender" class="form-control" style="width:200px">
-						<option value="man"<?php if ($data->gender == 'man') echo ' selected="selected"'; ?>>férfi</option>
-						<option value="woman"<?php if ($data->gender == 'woman') echo ' selected="selected"'; ?>>nő</option>
+						<option value="man"<?php if ($data->gender == 'man') { echo ' selected="selected"'; } ?>>férfi</option>
+						<option value="woman"<?php if ($data->gender == 'woman') { echo ' selected="selected"'; } ?>>nő</option>
 					</select> 
 				</div>
 				
-					<?php if ($data->sysadmin == 1) :?>
+					<?php if ($data->sysadmin == 1) : ?>
 					<p>system adminisztrátor</p>		
 					<?php endif; ?>
 					<?php if ($data->audited == 1) : ?>

@@ -14,6 +14,8 @@ class IssuController extends Controller {
         $data->body = $request->input('body');
         $data->sender = $request->input('sender');
         $data->email = $request->input('email');
+        $data->adminNick = $request->sessionGet('adminNick','');
+        $data->access_token = $request->sessionGet('access_token','');
         $view->form($data);
     }
     
@@ -32,6 +34,8 @@ class IssuController extends Controller {
         $data->sender = $request->input('sender');
         $data->email = $request->input('email');
         $data->msgs = $model->check($data);
+        $data->adminNick = $request->sessionGet('adminNick','');
+        $data->access_token = $request->sessionGet('access_token','');
         if (count($data->msgs) == 0) {
             $data->msgs = $model->send($data);
             $view->successMsg();

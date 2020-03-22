@@ -5,8 +5,8 @@ session_start();
 include_once './tests/config.php';
 include_once './tests/mock.php';
 include_once './core/database.php';
+// include_once './models/openid.php';
 include_once './controllers/openid.php';
-include_once './models/openid.php';
 
 use PHPUnit\Framework\TestCase;
 
@@ -21,12 +21,11 @@ class openidControllerTest extends TestCase
     function __construct() {
         global $REQUEST;
         parent::__construct();
+        $this->controller = new OpenidController();
         $db = new DB();
         $db->statement('CREATE DATABASE IF NOT EXISTS test');
-        $model = new OpenidModel(); // oi_users tábla generálás
         $this->request = new Request();
         $REQUEST = $this->request;
-        $this->controller = new OpenidController();
     }
     
     public function test_start() {
@@ -662,6 +661,40 @@ class openidControllerTest extends TestCase
         $this->controller->delaccount($this->request);
         $this->expectOutputRegex('/ACCOUNT_DELETED/');
     }  
+    
+    public function test_openid2_doregist_ok() {
+        global $redirectURL;
+        define('OPENID2',2);
+        $redirectURL = '';
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken',1);
+        $this->request->set('nick','user1');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->request->set('email','test@email.hu');
+        $this->request->set('dataprocessaccept','1');
+        $this->request->sessionSet('pdfData','{
+            "error":"",
+            "txt_name":"",
+            "txt_mothersname":"",
+            "txt_birth_date":"",
+            "txt_address":"",
+            "txt_tartozkodas":"",
+            "info_creator":"",
+            "info_producer":"",
+            "info_pdfVersion":"",
+            "xml_nev":"",
+            "xml_viseltNev":"",
+            "xml_ukemail":"",
+            "xml_szuletesiNev":"",
+            "xml_anyjaNeve":"",
+            "xml_szuletesiDatum":"",
+            "xml_alairasKelte":""
+        }');
+        $this->request->sessionSet('redirect_uri','testRedirectUri');
+        $this->controller->doregist($this->request);  // felvisz egy "user1" rekordot a test adatbázisba
+        $this->assertNotEquals('',$redirectURL);
+    }
     
     public function test_end() {
         $db = new DB();

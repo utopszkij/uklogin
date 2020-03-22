@@ -5,8 +5,8 @@
 
 issu.php"K
 4
-*/var/www/html/uklogin/controllers/issu.php (
-implicit return*ž
+*/var/www/html/uklogin/controllers/issu.php (
+implicit return*Ë
 14
 */var/www/html/uklogin/controllers/issu.php
  
@@ -108,10 +108,44 @@ X
 $data"
 email"__id*
 
-%7ZX
+%7qo
 4
-*/var/www/html/uklogin/controllers/issu.php (
-%8*	
+*/var/www/html/uklogin/controllers/issu.php (?
+%8*
+
+
+$request*
+'adminNick'*
+''2
+sessionget^
+\
+4
+*/var/www/html/uklogin/controllers/issu.php (?
+
+$data"
+	adminNick"__id*
+
+%8tr
+4
+*/var/www/html/uklogin/controllers/issu.php (E
+%9*
+
+
+$request*
+'access_token'*
+''2
+sessiongeta
+_
+4
+*/var/www/html/uklogin/controllers/issu.php (E
+
+$data"
+access_token"__id*
+
+%9[Y
+4
+*/var/www/html/uklogin/controllers/issu.php (
+%10*	
 
 $view*	
 

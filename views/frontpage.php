@@ -15,9 +15,12 @@ class FrontpageView  extends CommonView  {
 	    }
 	    $this->echoHtmlHead();
         ?>	
-        <body ng-app="app">
+        <body ng-app="app" style="height:2000px">
          <?php $this->echoNavbar($p); ?>
-         <div ng-controller="ctrl" id="scope" style="display:none">
+		 <div id="divOpenid" style="display:none;">
+			<iframe name="ifrmOpenid" src="" style="border-style:none; width:100%; height:1000px" title="openid"></iframe>
+		 </div>     
+         <div ng-controller="ctrl" id="scope" style="display:none;">
 			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			  <div class="carousel-inner">
 			    <div class="carousel-item active">
