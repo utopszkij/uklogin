@@ -1,27 +1,18 @@
 <?php
 class AppRecord {
-    public $id;
-    public $name;
-    public $client_id;
-    public $client_secret;
-    public $domain;
-    public $callback;
-    public $css;
-    public $falseLoginLimit;
-    public $admin;
-}
-
-function strToHex(string $string): string {
-    $hex = '';
-    for ($i=0; $i<strlen($string); $i++){
-        $ord = ord($string[$i]);
-        $hexCode = dechex($ord);
-        $hex .= substr('0'.$hexCode, -2);
-    }
-    return strToUpper($hex);
+    public $id = 0;
+    public $name = '';
+    public $client_id = '';
+    public $client_secret = '';
+    public $domain = '';
+    public $callback = '';
+    public $css = '';
+    public $falseLoginLimit = 5;
+    public $admin = '';
 }
 
 class AppregistModel extends Model {
+    
     function __construct() {
         $db = new DB();
         // ha még nincs tábl létrehozzuk
@@ -41,23 +32,32 @@ class AppregistModel extends Model {
             KEY `app_idx_domain` (`domain`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci
             ');
-        // ha még nincs uklogin rekord akkor létrehozzuk
         // ha még nincs teszt app rekord létrhozzuk
         $table = new table('apps');
         if ($table->count() == 0) {
             $db->exec('INSERT INTO apps VALUES (
             0,"uklogin","12","13",
             "'.MYDOMAIN.'",
-            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"'.rand(1,10000).'"
+            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"6766487"
             )
             ');
             $db->exec('INSERT INTO apps VALUES (
             0,"teszt","0000000000","0000000000",
             "'.MYDOMAIN.'/example.php",
-            "'.MYDOMAIN.'/example.php?task=code","",5,"'.rand(10000,20000).'"
+            "'.MYDOMAIN.'/example.php?task=code","",5,"745633"
             )
             ');
         }
+    }
+    
+    public function strToHex(string $string): string {
+        $hex = '';
+        for ($i=0; $i<strlen($string); $i++){
+            $ord = ord($string[$i]);
+            $hexCode = dechex($ord);
+            $hex .= substr('0'.$hexCode, -2);
+        }
+        return strToUpper($hex);
     }
     
     /**
@@ -109,6 +109,29 @@ class AppregistModel extends Model {
         return $exists;
     }
     
+    protected function domainCheck($data, array &$msg) {
+        if ($data->domain == 'https://test.hu') {
+            $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
+        } else if (($data->domain != 'https://valami.hu') &&
+                   ($data->domain != 'http://robitc/uklogin') &&
+                   ($data->domain != '')) {
+                // megjegyzés: valami.hu unitteszthez kell, robitc/uklogin lokális teszthez
+                if ($this->url_exists($data->domain.'/uklogin.html')) {
+                    try {
+                        $lines = file($data->domain.'/uklogin.html');
+                        $str = implode("\n",$lines);
+                        if (strpos($str,'uklogin') === false) {
+                            $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
+                        }
+                    } catch (Exception $e) {
+                        $msgs[] = 'domain check error';
+                    }
+                } else {
+                    $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
+                }
+        }
+    }
+    
     /**
      * check record before save
      * az ellenörzések többsége kliens oldalon js -ben is megtörtént
@@ -143,30 +166,7 @@ class AppregistModel extends Model {
         if (($data->client_id == '') && ($data->domain == 'https://test.hu')) {
             $msg[] = 'ERROR_DOMAIN_EXISTS';
         }
-        if ($data->domain == 'https://test.hu') {
-            $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
-        } else if (($data->domain != 'https://valami.hu') &&
-                   ($data->domain != 'http://robitc/uklogin') &&
-                   ($data->domain != '')) {
-                   // megjegyzés: valami.hu unitteszthez kell, robitc/uklogin lokális teszthez
-                if ($this->url_exists($data->domain.'/uklogin.html')) {
-                try {
-                    $lines = file($data->domain.'/uklogin.html');
-                } catch (Exception $e) {
-                    $lines = false;
-                }
-            } else {
-                $lines = false;
-            }
-            if ($lines) {
-                $str = implode("\n",$lines);
-                if (strpos($str,'uklogin') === false) {
-                    $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
-                }
-            } else {
-                $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
-            }
-        }
+        $this->domainCheck($data, $msg);
         return $msg;
     }
     
@@ -195,9 +195,6 @@ class AppregistModel extends Model {
         if ($data->dataProcessAccept != 1) {
             $msg[] = 'ERROR_DATA_ACCEPT_REQUEST';
         }
-        if ($data->cookieProcessAccept != 1) {
-            $msg[] = 'ERROR_COOKIE_ACCEPT_REQUEST';
-        }
      }
 
      /**
@@ -222,7 +219,7 @@ class AppregistModel extends Model {
      protected function updateAfterInsert(AppRecord &$data, &$table, array &$msg) {
          $id = $table->getInsertedId();
          $data->id = $id;
-         $data->client_id = ''.random_int(1000000, 9999999).$id;
+         $data->client_id = $this->strToHex(random_int(100000, 999999).$id);
          $data->client_secret = ''.random_int(100000000, 999999999).$id;
          $table = new Table('apps');
          $table->where(['id','=',$id]);
@@ -263,9 +260,7 @@ class AppregistModel extends Model {
                 }
             } else {
                 // rekord modosítása
-                $table->where(['client_id','=',$data->client_id]);
-                $table->update($data);
-                $s = $table->getErrorMsg();
+                $s = $this->update($data);
                 if ($s != '') {
                     $msg[] = $s;
                 }
@@ -305,13 +300,22 @@ class AppregistModel extends Model {
     /**
      * update apps record
      * @param object $rec
-     * @return void
+     * @return string
      */
-    public function update(AppRecord $rec) {
+    public function update(AppRecord $rec): string {
         $db = new DB();
         $table = $db->table('apps');
         $table->where(['client_id','=',$rec->client_id]);
-        $table->update($rec);
+        $old = $table->first();
+        foreach ($old as $fn => $fv) {
+            if (isset($rec->$fn)) {
+                $old->$fn = $rec->$fn;
+            } else {
+                $old->$fn = $fv;
+            }
+        }
+        $table->update($old);
+        return $table->getErrorMsg();
     }
     
     /**
@@ -323,8 +327,7 @@ class AppregistModel extends Model {
         $db = new DB();
         $table = $db->table('apps');
         $table->where(['admin','=',$admin]);
-        $result = $table->get();
-        return $result;
+        return $table->get();
     }
     
 } // class

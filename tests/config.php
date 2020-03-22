@@ -20,4 +20,5 @@ define('GITHUB_REPO','');
 define('GITHUB_USER','');
 define('GITHUB_PSW','');
 
+define('OPENID',1); // felülirható
 ?>

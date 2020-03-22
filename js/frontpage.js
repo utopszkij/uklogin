@@ -11,7 +11,9 @@
 
   function frontpageFun() {
 	  $('#scope').show();
-	  $('.carousel').carousel();
+	  if ($('.carousel').carousel) {
+		  $('.carousel').carousel();
+	  }	  
 	  return 'frontpage';
   }
   

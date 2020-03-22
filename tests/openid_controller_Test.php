@@ -662,6 +662,40 @@ class openidControllerTest extends TestCase
         $this->expectOutputRegex('/ACCOUNT_DELETED/');
     }  
     
+    public function test_openid2_doregist_ok() {
+        global $redirectURL;
+        define('OPENID2',2);
+        $redirectURL = '';
+        $this->request->sessionSet('csrToken','testcsrtoken');
+        $this->request->set('testcsrtoken',1);
+        $this->request->set('nick','user1');
+        $this->request->set('psw1','123456');
+        $this->request->set('psw2','123456');
+        $this->request->set('email','test@email.hu');
+        $this->request->set('dataprocessaccept','1');
+        $this->request->sessionSet('pdfData','{
+            "error":"",
+            "txt_name":"",
+            "txt_mothersname":"",
+            "txt_birth_date":"",
+            "txt_address":"",
+            "txt_tartozkodas":"",
+            "info_creator":"",
+            "info_producer":"",
+            "info_pdfVersion":"",
+            "xml_nev":"",
+            "xml_viseltNev":"",
+            "xml_ukemail":"",
+            "xml_szuletesiNev":"",
+            "xml_anyjaNeve":"",
+            "xml_szuletesiDatum":"",
+            "xml_alairasKelte":""
+        }');
+        $this->request->sessionSet('redirect_uri','testRedirectUri');
+        $this->controller->doregist($this->request);  // felvisz egy "user1" rekordot a test adatbázisba
+        $this->assertNotEquals('',$redirectURL);
+    }
+    
     public function test_end() {
         $db = new DB();
         $db->statement('DELETE FROM oi_users');

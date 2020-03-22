@@ -1,26 +1,49 @@
 <?php
-include_once './controllers/login.php';
 class AppregistController extends Controller {
+    
+    protected $cName = 'appregist';
+    
+    /**
+     * task init
+     * {@inheritDoc}
+     * @params Request $request
+     * @params array $fields
+     * @return Params
+     */
+    protected function init(Request &$request, array $fileds = array()): Params {
+        $result = parent::init($request, $fileds);
+        if (!$result->loggedUser) {
+            $this->getModel('openid');
+            $result->loggedUser = new UserRecord();
+        }
+        $result->nickName = $result->loggedUser->nickname;
+        $result->adminNick = $result->loggedUser->nickname;
+        return $result;
+    }
+    
 	/**
 	 * új app felvivő képernyő kirajzolása
 	 * sessionban jöhet adminNick
 	 * @param object $request
 	 */
     public function add(RequestObject $request) {
-        $request->set('sessionid','0');
 		$request->set('lng','hu');
-		
+		$data = $this->init($request,[]);
 		// ha a sessionban nincs adminNick akkor az admin nincs bejelentkezve,
 		// bejelentkezési popup kirajzolása
         if ($request->sessionGet('adminNick') == '') {
-            $request->set('state', MYDOMAIN.'/opt/appregist/add');
-            $loginController = new LoginController();
-            $loginController->form($request);
+            $redirect_uri = MYDOMAIN.'/opt/default/logged/';
+            $url = MYDOMAIN.'/openid/authorize/'.
+                '?client_id='.urlencode($redirect_uri).
+                '&redirect_uri='.urlencode($redirect_uri).
+                '&response_type='.urlencode('token id_token').
+                '&nonce='.urlencode(MYDOMAIN.'/opt/appregist/add').
+                '&state=0'.
+                '&scope='.urlencode('nickname');
+            redirectTo($url);    
             return;
 		}
-		$data = new stdClass(); 
 		$this->createCsrToken($request, $data);
-		$view = $this->getView('appregist');
 		$data->option = $request->input('option','default');
 		// hibás kitöltés utáni visszahivásnál érkezhetnek form adatok is.
 		$data->msg = $request->input('msg','');
@@ -40,8 +63,9 @@ class AppregistController extends Controller {
 		$data->adminFalseLoginLimit = $request->input('adminFalseLoginLimit','5');
 		$data->adminLoginEnabled = $request->input('adminLoginEnabled','1');
 		$data->adminNick = $request->sessionGet('adminNick','');
+		$data->access_token = $request->sessionGet('access_token','');
 		$request->sessionSet('adminNick',$data->adminNick);
-		$view->form($data);
+		$this->view->form($data);
 	}
 	
 	/**
@@ -51,13 +75,9 @@ class AppregistController extends Controller {
 	 */
 	public function save(RequestObject $request) {
 	    // check csrtoken
+	    $p = $this->init($request, []);
 	    $this->checkCsrToken($request);
-	    
-	    // csrtoken ok
-	    $model = $this->getModel('appregist');
-	    $view = $this->getView('appregist');
 	    // $data kialakitása a $request -ből
-	    // $data = new stdClass();
 	    $data = new AppRecord();
 	    $data->id = $request->input('id','');
         $data->name = $request->input('name','');
@@ -65,20 +85,18 @@ class AppregistController extends Controller {
         $data->client_secret = $request->input('client_secret','');
         $data->domain = $request->input('domain','');
         $data->callback = $request->input('callback','');
-        $data->css = $request->input('css','');
-        $data->falseLoginLimit = $request->input('falseLoginLimit',5);
         $data->admin  = $request->sessionGet('adminNick','');
         $data->dataProcessAccept = $request->input('dataProcessAccept',0);
-        $data->cookieProcessAccept = $request->input('cookieProcessAccept',0);
-	    $msg = $model->check($data);
+        $msg = $this->model->check($data);
 	    if (count($msg) == 0) {
-	        $res = $model->save($data);
+	        $res = $this->model->save($data);
 	        if (!isset($res->error)) {
 	            $res->adminNick = $request->sessionGet('adminNick');
-	            $view->AppsuccessMsg($res);
+	            $res->access_token = $request->sessionGet('access_token');
+	            $res->loggedUser = $p->loggedUser;
+	            $this->view->AppsuccessMsg($res);
 	        } else {
-	            $res->adminNick = $request->sessionGet('adminNick');
-	            $view->errorMsg($res->error,'','',true);
+	            $this->view->errorMsg($res->error,'','',true);
 	        }
 	    } else {
 	        $request->set('msg',$msg);
@@ -100,7 +118,30 @@ class AppregistController extends Controller {
     	$data->hackLimit = 10;
     	$data->admin = $rec->admin;
     	$data->adminNick = $request->sessionGet('adminNick','');
-    	$view->form($data);
+    	$data->access_token  = $request->sessionGet('access_token','');
+    	$this->view->form($data);
+	}
+	
+	/**
+	 * client_id keresése az appas -ek között
+	 * @param array $apps
+	 * @param string $client_id
+	 * @return AppRecord | false
+	 */
+	protected function findApp(array $apps, string $client_id) {
+	    $result = false;
+	    if ($client_id == '') {
+	        // az első applikáció adatainak megjelenitése
+	        $result = $apps[0];
+	    } else {
+	        // megkeressük a request-ben érkezett client_id -t az apps -ben és azt jelenitjük meg
+	        foreach ($apps as $app) {
+	            if ($app->client_id == $client_id) {
+	                $result = $app;
+	            }
+	        } // foreach
+	   }
+	   return $result;
 	}
 	
 	/**
@@ -109,60 +150,40 @@ class AppregistController extends Controller {
 	 * @param object $request
 	 */
 	public function adminform(RequestObject $request) {
-	    $model = $this->getModel('appregist');
-	    $view = $this->getView('appregist');
+	    $data = $this->init($request, []);
 	    $adminNick = $request->sessionGet('adminNick');
         $request->sessionSet('adminNick',$adminNick);
 	    if ($adminNick == '') {
-	        $rec = new stdClass();
-	        $rec->error = 'FATAL_ERROR';
-	        $rec->adminNick = $request->sessionGet('adminNick');
-	        $view->errorMsg([$rec->error],'','',true);
+	        $this->view->errorMsg(['FATAL_ERROR'],'','',true);
 	    }
 	    $request->set('sessionid','0');
 	    $request->set('lng','hu');
-	    $data = new stdClass();
 	    $this->createCsrToken($request, $data);
 	    
 	    // adminNick összes app rekordjának beolvasása
-	    $data->apps = $model->getAppsByAdmin($adminNick);
+	    $data->apps = $this->model->getAppsByAdmin($adminNick);
 	    $data->adminNick = $request->sessionGet('adminNick','');
+	    $data->access_token  = $request->sessionGet('access_token','');
 	    
 	    if (count($data->apps) == 0) {
 	        // nincsen ennek az adminnak applikációi
-	        $rec = new stdClass();
-	        $rec->error = 'ERROR_APP_NOTFOUND';
-	        $rec->adminNick = $data->adminNick;
-	        $view->errorMsg([$rec->error],'','',true);
+	        $this->view->errorMsg(['ERROR_APP_NOTFOUND'],'','',true);
 	    } else {
 	        $client_id = $request->input('client_id','');
-	        if ($client_id == '') {
-	            // az első applikáció adatainak megjelenitése
-	            $data->client_id = $data->apps[0]->client_id;
-	            $this->echoAdminForm($data, $request, $data->apps[0], $view);
+	        $app = $this->findApp($data->apps, $client_id);
+	        if ($app) {
+	            $data->client_id = $app->client_id;
+	            $this->echoAdminForm($data, $request, $app, $this->view);
 	        } else {
-	            // megkeressük a request-ben érkezett client_id -t az apps -ben és azt jelenitjük meg
-	           $ok = false; 
-	           foreach ($data->apps as $app) {
-	               if ($app->client_id == $client_id) {
-	                   $data->client_id = $app->client_id;
-	                   $this->echoAdminForm($data, $request, $app, $view);
-	                   $ok = true;
-	               }
-	           } // foreach
-	           if (!$ok) {
-	               $rec = new stdClass();
-	               $rec->error = 'FATAL_ERROR';
-	               $rec->adminNick = $data->adminNick;
-	               $view->errorMsg([$rec->error],'','',true);
-	           }
-	        } // jött client_id a request -ben?
+	            $this->view->errorMsg(['FATAL_ERROR'],'','',true);
+	        }
 	    }
 	}
 	
 	public function logout(RequestObject $request) {
 	    $request->sessionSet('csrtoken',random_int(1000000,9999999));
 	    $request->sessionSet('adminNick','');
+	    $request->sessionSet('access_token','');
 	    ?>
 	    <script type="text/javascript">
 			window.location = "./index.php";
@@ -172,37 +193,25 @@ class AppregistController extends Controller {
 	
 	public function appremove(RequestObject $request) {
 	    // check csrtoken
+	    $data = $this->init($request, []);
 	    $this->checkCsrToken($request);
-	    
-	    $hackModel = $this->getModel('hack');
-	    if (!$hackModel->checkEnabled($_SERVER['REMOTE_ADDR'])) {
-	        echo '<p>Disabled IP ';
-	        exit;
-	    }
-	    
-	    // csrtoken ok, ip enabled
-	    // hacker hibaszámláló nullázása
-	    $hackModel->ipEnable($_SERVER['REMOTE_ADDR']);
-	    
 	    $msg = '';
-	    $model = $this->getModel('appregist');
-	    $view = $this->getView('appregist');
-	    $rec = $model->getData($request->input('client_id',''));
+	    $rec = $this->model->getData($request->input('client_id',''));
 	    if (!isset($rec->error)) {
-	        $msg = $model->remove($rec->client_id);
+	        $msg = $this->model->remove($rec->client_id);
 	        if ($msg == '') {
 	            $rec->adminNick = $request->sessionGet('adminNick');
-	            $view->removedMsg($rec);
+	            $rec->access_token = $request->sessionGet('access_token');
+	            $rec->loggedUser = $data->loggedUser;
+	            $this->view->removedMsg($rec);
 	        } else {
-	            $rec->adminNick = $request->sessionGet('adminNick');
-				$rec->error = $msg;	            
-				$view->errorMsg([$rec->error],'','',true);
+	            $rec->error = $msg;	            
+				$this->view->errorMsg([$rec->error],'','',true);
 	        }
 	    } else {
 	        $rec = new AppRecord();
-            $rec->adminNick = $request->sessionget('adminNick');
-			$rec->error = 'ERROR_NOTFOUND';	            
-			$view->errorMsg([$rec->error],'','',true);
+            $rec->error = 'ERROR_NOTFOUND';	            
+			$this->view->errorMsg([$rec->error],'','',true);
 	    }
 	}
 	

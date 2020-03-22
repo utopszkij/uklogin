@@ -86,6 +86,9 @@ class OpenidModel {
      */
     protected function encrypt($user, string $privKey = 'default'): UserRecord {
         $result = new UserRecord();
+        if (!isset($user->pswhash)) {
+            unset($result->pswhash);
+        }
         foreach ($user as $fn => $fv) {
             $result->$fn = $fv;
         }
@@ -148,17 +151,21 @@ class OpenidModel {
      * client beolvasása client_id alapján, ha nincs akkor domain kiemelése
      * a name propertibe
      * @param string $client_id
-     * @return object {"name":"..."}
+     * @return object {"name":"...", "domain":"...", "callback":"..."}
      */
-    public function getApp(string $client_id) {
+    public function getApp(string $client_id): AppRecord {
         $result = new AppRecord();
         $table = new Table('apps');
         $table->where(['client_id','=',$client_id]);
         $res = $table->first();
         if ($res) {
-            $result->name = $res->name;
+            foreach ($res as $fn => $fv) {
+                $result->$fn = $fv;
+            }
         } else {
             $result->name = ' '.parse_url($client_id, PHP_URL_HOST);
+            $result->callback = '';
+            $result->domain = '';
         }
         return $result;
     }
@@ -187,7 +194,7 @@ class OpenidModel {
     public function delUser(int $id): string {
         $table =  new Table($this->tableName);
         $table->where(['id','=',$id]);
-        $res = $table->delete();
+        $table->delete();
         return $table->getErrorMsg();
     }
                 

@@ -2,8 +2,10 @@
 class TxtController extends Controller {
     public function add(RequestObject $request) {
         $token = $request->input('token');
-        echo '<html lang="hu">
+        echo '<!doctype html>
+        <html lang="hu">
         <head>
+            <title>languaga constant manager</tile>
             <meta charset="utf-8">
         </head>
         <body>
@@ -23,7 +25,7 @@ class TxtController extends Controller {
         $token = $request->input('token');
         $value = $request->input('value');
         $request->sessionSet('lngName', $lngName);
-        $fileName = MYPATH.'/langs/'.$lngName.'_hu.php';
+        $fileName = './langs/'.$lngName.'_hu.php';
         if (file_exists($fileName)) {
             $lines = file($fileName);
         } else {
@@ -40,8 +42,10 @@ class TxtController extends Controller {
         fwrite($fp, implode("",$lines));
         fclose($fp);
         chmod($fileName, 0777);
-        echo '<html lang="hu">
+        echo '<!doctype html>
+        <html lang="hu">
         <head>
+            <title>Language contant manager</title>
             <meta charset="utf-8">
         </head>
         <body>

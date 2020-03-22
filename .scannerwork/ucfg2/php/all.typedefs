@@ -3464,26 +3464,7 @@ firstornew0illuminate\database\eloquent\builder::firstornew@
 scopes,illuminate\database\eloquent\builder::scopes<
 	getmodels/illuminate\database\eloquent\builder::getmodels8
 orwhere-illuminate\database\eloquent\builder::orwhere:
-getquery.illuminate\database\eloquent\builder::getquery‡
-userregistcontroller
-controller4
-deleteaccount#userregistcontroller::deleteaccount.
-
-getappuser userregistcontroller::getappuser8
-recallloginform%userregistcontroller::recallloginform&
-mydatauserregistcontroller::mydata*
-doregistuserregistcontroller::doregist*
-pswerroruserregistcontroller::pswerror.
-
-registform userregistcontroller::registform,
-	forgetpswuserregistcontroller::forgetpsw<
-recallregistform2'userregistcontroller::recallregistform20
-useractival!userregistcontroller::useractival>
-checksignhashexist(userregistcontroller::checksignhashexist,
-	changepswuserregistcontroller::changepsw.
-
-useraction userregistcontroller::useraction0
-registform2!userregistcontroller::registform2¶
+getquery.illuminate\database\eloquent\builder::getquery¶
 
 commonviewview$
 
@@ -3496,11 +3477,9 @@ echofootercommonview::echofooter
 impresszumcontroller
 controller"
 showimpresszumcontroller::show^
-	apprecord"css"domain"name"callback"admin"id"client_secret"	client_id"falseloginlimit˘
+	apprecord"css"domain"name"callback"admin"id"client_secret"	client_id"falseloginlimitÀ
 appregistmodelmodel0
-getappsbyadminappregistmodel::getappsbyadmin(
-
-url_existsappregistmodel::url_exists,
+getappsbyadminappregistmodel::getappsbyadmin,
 checknoemptyappregistmodel::checknoempty
 saveappregistmodel::save 
 updateappregistmodel::update(
@@ -3511,22 +3490,16 @@ adjustdataappregistmodel::adjustdata
 getdataappregistmodel::getdata*
 __constructappregistmodel::__construct 
 removeappregistmodel::remove6
-updateafterinsert!appregistmodel::updateafterinsertF
-examplecontroller
-controller%
-exampleexamplecontroller::example∞
-oauth2controller
-controller.
-access_tokenoauth2controller::access_token$
-dologinoauth2controller::dologin(
-	loginformoauth2controller::loginform2
-getcallbackurl oauth2controller::getcallbackurl4
-recallloginform!oauth2controller::recallloginform&
-userinfooauth2controller::userinfoÃ
+updateafterinsert!appregistmodel::updateafterinsert*
+domaincheckappregistmodel::domaincheck(
+
+url_existsappregistmodel::url_exists$
+strtohexappregistmodel::strtohexÙ
 
 openidview
 commonview 
-echomsgsopenidview::echomsgs"
+echomsgsopenidview::echomsgs&
+profileformopenidview::profileform"
 	loginformopenidview::loginform"
 	scopeformopenidview::scopeform&
 registform2openidview::registform2 
@@ -3536,25 +3509,34 @@ controller
 showreadmecontroller::show>
 frontpageview
 commonview!
-displayfrontpageview::display
-params"msgsº
+displayfrontpageview::displayÔ
 openidusercontroller
-controller4
-forgetpswform#openidusercontroller::forgetpswform*
-doregistopenidusercontroller::doregist(
+controller.
+
+delaccount openidusercontroller::delaccount(
 dologinopenidusercontroller::dologin0
-openidcheck!openidusercontroller::openidcheck2
-successlogin"openidusercontroller::successlogin"
-initopenidusercontroller::init6
+openidcheck!openidusercontroller::openidcheck"
+initopenidusercontroller::init0
+profilesave!openidusercontroller::profilesave,
+	getclientopenidusercontroller::getclient6
 filluserrecord$openidusercontroller::filluserrecord4
 doregistcheck#openidusercontroller::doregistcheck0
+__construct!openidusercontroller::__construct&
+mydataopenidusercontroller::mydata4
+forgetpswform#openidusercontroller::forgetpswform*
+doregistopenidusercontroller::doregist2
+successlogin"openidusercontroller::successlogin4
+successregist#openidusercontroller::successregist0
 doscopeform!openidusercontroller::doscopeform0
 registform2!openidusercontroller::registform20
-emailverify!openidusercontroller::emailverify∆
+emailverify!openidusercontroller::emailverify"cname"
+loggeduserÆ
 openidcontrolleropenidusercontroller*
 
-registformopenidcontroller::registform"
-logoutopenidcontroller::logout0
+registformopenidcontroller::registform,
+profileformopenidcontroller::profileform"
+logoutopenidcontroller::logout8
+setparamtosession#openidcontroller::setparamtosession0
 configurationopenidcontroller::configuration"
 revokeopenidcontroller::revoke$
 refreshopenidcontroller::refresh(
@@ -3566,14 +3548,7 @@ registformopenidcontroller::registform"
 issucontroller
 controller
 formissucontroller::form
-sendissucontroller::send©
-logincontroller
-controller!
-logoutlogincontroller::logout
-codelogincontroller::code
-formlogincontroller::form)
-
-getfromurllogincontroller::getfromurlê
+sendissucontroller::sendê
 appregistview
 commonview'
 
@@ -3585,9 +3560,7 @@ commonview&
 processstrongmdview::processstrong
 mdshowmdview::mdshow 
 
-processurimdview::processuri0
-browsermodel 
-getdatabrowsermodel::getdata‰
+processurimdview::processuri‰
 pdfdata"txt_mothersname"xml_szuletesinev"xml_ukemail"error"txt_birth_date"xml_szuletesidatum"txt_name"txt_address"info_creator"txt_tartozkodas"info_producer"info_pdfversion"xml_anyjaneve"xml_alairaskelte"xml_nev¿
 pdfparsermodel*
 pdf_gettextpdfparsermodel::pdf_gettext$
@@ -3604,63 +3577,23 @@ processurimdview::processuri0
 pdf_getmeghatalmazo#pdfparsermodel::pdf_getmeghatalmazoB
 adatkezelesview
 commonview#
-displayadatkezelesview::displayô
-
-userrecord"street_address"code"locality"codetime"	client_id"enabled"nick"access_token"	blocktime"pswhash"id"
-errorcount"postal_code"signhash∆
-
-usersmodel
-adduserusersmodel::adduser2
-getuserbysignhashusersmodel::getuserbysignhash 
-strtohexusersmodel::strtohex*
-getuserbycodeusersmodel::getuserbycode*
-getuserbynickusersmodel::getuserbynick$
-
-deleteuserusersmodel::deleteuser
-checkusersmodel::check
-convertusersmodel::convert&
-__constructusersmodel::__construct$
-
-updateuserusersmodel::updateuser:
-getuserbyaccess_token!usersmodel::getuserbyaccess_token:
-	loginview
-commonview!
-	loginformloginview::loginformæ
+displayadatkezelesview::displayæ
 
 userrecord"sub"mothersname"street_address"code"gender"
 birth_date"
 created_at"
 audit_time"
 updated_at"pswhash"nickname"id"email"sysadmin"email_verified"profile"locality"auditor"phone_number_verified"
-given_name"middle_name"audited"picture"origname"phone_number"postal_code"family_name"signdate
-	apprecord"name›
+given_name"middle_name"audited"picture"origname"phone_number"postal_code"family_name"signdate¿
 openidmodel
-getappopenidmodel::getapp+
+getappopenidmodel::getapp
+encryptopenidmodel::encrypt
+deluseropenidmodel::deluser+
 getuserbycodeopenidmodel::getuserbycode+
-getuserbynickopenidmodel::getuserbynick'
+getuserbynickopenidmodel::getuserbynick
+decryptopenidmodel::decrypt'
 __constructopenidmodel::__construct!
-saveuseropenidmodel::saveuser"	tablename±
-oauth2model
-adduseroauth2model::adduser3
-getuserbysignhashoauth2model::getuserbysignhash!
-strtohexoauth2model::strtohex+
-getuserbycodeoauth2model::getuserbycode+
-getuserbynickoauth2model::getuserbynick%
-
-deleteuseroauth2model::deleteuser
-checkoauth2model::check'
-__constructoauth2model::__construct%
-
-updateuseroauth2model::updateuser;
-getuserbyaccess_token"oauth2model::getuserbyaccess_tokenp
-userinfo"street_address"mothersname"
-birth_date"locality"middle_name"
-given_name"postal_code"family_nameî
-ukauditcontroller
-controller/
-checkpdfdataukauditcontroller::checkpdfdata
-formukauditcontroller::form!
-auditukauditcontroller::auditU
+saveuseropenidmodel::saveuser"	tablenameU
 txtcontroller
 controller
 addtxtcontroller::add
@@ -3672,54 +3605,41 @@ issurecord"sender"title"body"email?
 sendissumodel::send@
 impresszumview
 commonview"
-displayimpresszumview::displayt
-userregistview
-commonview*
-registform1userregistview::registform1*
-registform2userregistview::registform2F
-browsercontroller
-controller%
-browserbrowsercontroller::browser:
+displayimpresszumview::display:
 adomanyview
 commonview
 displayadomanyview::display@
 adomanycontroller
 controller
-showadomanycontroller::showF
+showadomanycontroller::showƒ
 defaultcontroller
-controller%
-defaultdefaultcontroller::defaultR
+controller#
+logoutdefaultcontroller::logout%
+defaultdefaultcontroller::default#
+loggeddefaultcontroller::logged+
+
+getfromurldefaultcontroller::getfromurl"cnameR
 issuview
 commonview
 formissuview::form"
 
 successmsgissuview::successmsg4
 pdfformviewview
-pdfformpdfformview::pdfformõ
+pdfformpdfformview::pdfformÓ
 appregistcontroller
 controller
-addappregistcontroller::add%
+addappregistcontroller::add!
+initappregistcontroller::init%
 logoutappregistcontroller::logout+
 	appremoveappregistcontroller::appremove3
 echoadminform"appregistcontroller::echoadminform+
 	adminformappregistcontroller::adminform!
-saveappregistcontroller::save8
+saveappregistcontroller::save'
+findappappregistcontroller::findapp"cname8
 
 readmeview
 commonview
-displayreadmeview::display0
-examplemodel 
-getdataexamplemodel::getdataH
+displayreadmeview::displayH
 adatkezelescontroller
 controller#
-showadatkezelescontroller::show°
-	hackmodel
-ipenablehackmodel::ipenable'
-checkenabledhackmodel::checkenabled#
-
-ipadderrorhackmodel::ipadderror%
-__constructhackmodel::__construct<
-
-oauth2view
-commonview"
-	loginformoauth2view::loginform
+showadatkezelescontroller::show

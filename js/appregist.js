@@ -19,7 +19,6 @@
 			$('input#name').removeClass('error');
 			$('input#domain').removeClass('error');
 			$('input#callback').removeClass('error');
-			$('input#css').removeClass('error');
 			$('input#admin').removeClass('error');
 			$('input#psw1').removeClass('error');
 			$('input#psw2').removeClass('error');
@@ -48,16 +47,6 @@
 					$('input#callback').addClass('error');
 				}
 			}
-			if ($('input#css').val() != '') {
-				if (!$scope.validURL($('input#css').val())) {
-					msg += $scope.txt('ERROR_CSS_INVALID')+'<br />';
-					$('input#css').addClass('error');
-				}
-				if ($('input#css').val().indexOf($('input#domain').val()) < 0) {
-					msg += $scope.txt('ERROR_CSS_INVALID')+'<br />';
-					$('input#css').addClass('error');
-				}
-			}
 			if ($('input#admin').val() == '') {
 				msg += $scope.txt('ERROR_ADMIN_EMPTY')+'<br />';
 				$('input#admin').addClass('error');
@@ -66,34 +55,14 @@
 				msg += $scope.txt('ERROR_DATA_ACCEP_REQUEST')+'<br />';
 				$('input#dataProcessAccept').addClass('error');
 			}
-			if ($('input#cookieProcessAccept').is(':checked') == false) {
-				msg += $scope.txt('ERROR_COOKIE_ACCEP_REQUEST')+'<br />';
-				$('input#cokkieProcessAccept').addClass('error');
-			}
-			
 			if (msg == '') {
 				global.submit('formApp');
 			} else {
 				global.alert(msg);
 			}
 	  });
-	  $('#userActOk').click(function() {
-		  	$('#option').val('userregist');
-		  	$('#task').val('useractival');
-			global.submit('formApp');
-	  });
 	  $('#formAppCancel').click(function() {
 		  window.location = "./index.php";
-	  });
-	  $('#formAdminLoginOk').click(function() {
-		  global.submit('formAdminLogin');
-	  });
-	  $('#formAdminLoginCancel').click(function() {
-		  window.location = "./index.php";
-	  });
-	  $('#logout').click(function() {
-		    $('#task').val('logout');
-			global.submit('formApp');
 	  });
 	  $('#formAppRemove').click(function() {
 		  global.confirm($scope.txt('SUREDELAPP'),

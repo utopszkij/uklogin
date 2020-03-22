@@ -56,7 +56,7 @@ class AppregistView  extends CommonView  {
     			<input type="hidden" name="client_secret" id="client_secret" value="{{client_secret}}" />
     			<input type="hidden" name="id" id="id" value="{{id}}" />
     			<?php if ($p->client_id != '') : ?>
-                <fieldset class="userActivation">
+                <fieldset class="userActivation" style="display:none">
                 	<legend><?php echo txt('USERACTIVATION'); ?></legend>
                 	<p>
                 		<label><?php echo txt('USER'); ?></label>
@@ -81,11 +81,11 @@ class AppregistView  extends CommonView  {
     					<input type="text" name="callback" id="callback" value="{{callback}}" size="100" 
     						placeholder="https://yourdomain.com/index.php?opt=login&task=logged" class="appCallback" />
     				</p>
-    				<p>
+    				<p style="display:none">
     					<label><?php echo txt('LBL_CSS'); ?></label>
     					<input type="text" name="css" id="css" size="100"  class="appCss" value="{{css}}" />
     				</p>
-    				<p>
+    				<p style="display:none">
     					<label><?php echo txt('LBL_FALSELOGINLIMIT'); ?></label>
     					<input type="number" min="1" max="10" name="falseLoginLimit" value="{{falseLoginLimit}}" size="10" 
     						class="appFalseLoginLimit" />
@@ -108,15 +108,16 @@ class AppregistView  extends CommonView  {
     					<var><input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1"  /></var>
     					<?php echo txt('DATAPROCESSACCEPT'); ?>&nbsp;&nbsp;
     				</div>
-    				<div style="display:inline-block; width:auto">
+    				<div style="display:none">
 	    				<var><input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" /></var>
     					<?php echo txt('COOKIEPROCESSACCEPT'); ?>
-    				</div>	
+    				</div>
     			</p>
     			<?php else :?>
-    			<p style="display:none">
+    			<p style="display:block">
     				<input type="checkbox" name="dataProcessAccept" id="dataProcessAccept" value="1" checked="checked"  /></var>
-    				<input type="checkbox" name="cookieProcessAccept" id="cookieProcessAccept" value="1" checked="checked" /></var>
+    				Adatkezeléshez hosszájárulok
+    				<input type="hidden" name="cookieProcessAccept" id="cookieProcessAccept" value="1" checked="checked"/></var>
     			</p>
     			<?php endif; ?>
     			<p class="formButtons">
@@ -127,7 +128,6 @@ class AppregistView  extends CommonView  {
     					onclick="location='<?php  echo MYDOMAIN; ?>';">
     					<em class="fa fa-arrow-left"></em>
     					<?php echo txt('CANCEL'); ?></button>&nbsp;
-    					
     				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     				<?php if ($p->client_id != '') : ?>
     				<button type="button" id="formAppRemove" class="btn btn-danger">

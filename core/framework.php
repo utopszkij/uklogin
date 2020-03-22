@@ -28,8 +28,51 @@ interface  RequestObject {
     public function session_count(): int;
 }
 
+class Params {
+    public $msgs = [];
+    public $loggedUser = false;
+    public $access_token = '';
+    public $model = false;
+    public $view = false; 
+}
+
+class GetRecordsResult {
+    public $total = 0;
+    public $items = [];
+    public $errorMsg = '';
+}
+
 class Model implements ModelObject {
     
+    protected $tableName = '';
+    protected $filterField = '';
+    
+    /**
+     * Rekord készlet olvasása gyakran átirandó ennek a mintájára
+     * @param int $offset
+     * @param int $limit
+     * @param string $order
+     * @param string $orderDir
+     * @param string $filterStr
+     * @return GetRecordsResult, és $this->errorMsg beállítva
+     */
+    public function getRecords(int $offset, int $limit,
+        string $order, string $orderDir, string $filterStr):GetRecordsResult {
+            $this->errorMsg = '';
+            $filter = new Filter($this->tableName,'u');
+            $filter->setColumns('u.*');
+            if ($filterStr != '') {
+                $filter->where([$this->filterField,'like','%'.$filterStr.'%']);
+            }
+            $filter->offset($offset);
+            $filter->limit($limit);
+            $filter->order($order.' '.$orderDir);
+            $result = new GetRecordsResult();
+            $result->total = $filter->count();
+            $result->items = $filter->get();
+            $result->errorMsg = $filter->getErrorMsg();
+            return $result;
+    }
 }
 
 class View implements ViewObject {
@@ -48,6 +91,8 @@ class View implements ViewObject {
     				echo "var $fn = ".JSON_encode($fv).";\n";
     			} else if (is_object($fv)) {
     				echo "var $fn = ".JSON_encode($fv).";\n";
+    			} else if (is_bool($fv)) {
+    			    echo "var $fn = ".JSON_encode($fv).";\n";
     			} else if (is_string($fv)) {
     				$fv = str_replace("'", "\\'", $fv);
     				$fv = str_replace("\n", "\\n", $fv);
@@ -103,6 +148,8 @@ class View implements ViewObject {
                     if (is_array($fv)) {
                         echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
                     } else if (is_object($fv)) {
+                        echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
+                    } else if (is_bool($fv)) {
                         echo '$scope.'."$fn = ".JSON_encode($fv).";\n";
                     } else if (is_string($fv)) {
                         $fv = str_replace("'", "\\'", $fv);
@@ -207,15 +254,49 @@ class View implements ViewObject {
 
 class Controller  implements ControllerObject {
     
+    protected $cName = '';
+    
+    /**
+     * task init - logged User és kapott paraméterek a result Params -ba
+     * model és view létrehozása
+     * @param Request $request
+     * @param array $names elvért paraméter nevek
+     * @return Params
+     */
+    protected function init(Request &$request, array $names = []): Params {
+        $this->model = $this->getModel($this->cName);
+        $this->view = $this->getView($this->cName);
+        $result = new Params();
+        // tényleges érkezett paraméterek
+        foreach ($request->params as $fn => $fv) {
+            $result->$fn = $fv;
+        }
+        // az elvárt, de nem érkezett paraméterek '' értékkel
+        foreach ($names as $name) {
+            if (!isset($result->$name)) {
+                $result->$name = '';
+            }
+        }
+        $result->loggedUser = $request->sessionGet('loggedUser', false);
+        $result->access_token = $request->sessionGet('access_token', '');
+        return $result;
+    }
+    
+    
+    
     /**
      * create new model object from "./models/modelname.php"
      * @param string $modelName
      * @return Model
      */
     protected function getModel(string $modelName) {
-        include_once './models/'.$modelName.'.php';
-        $className = ucfirst($modelName).'Model';
-        return new $className ();
+        if (file_exists('./models/'.$modelName.'.php')) {
+            include_once './models/'.$modelName.'.php';
+            $className = ucfirst($modelName).'Model';
+            return new $className ();
+        } else {
+            return new stdClass();
+        }
     }
     
     /**
@@ -224,10 +305,13 @@ class Controller  implements ControllerObject {
      * @return View
      */
     protected function getView(string $viewName) {
-        global $REQUEST;
-        $className = ucfirst($viewName).'View';
-        include_once './views/'.$viewName.'.php';
-        return new $className ();
+        if (file_exists('./views/'.$viewName.'.php')) {
+            $className = ucfirst($viewName).'View';
+            include_once './views/'.$viewName.'.php';
+            return new $className ();
+        } else {
+            return new stdClass();
+        }
     }
     
     /**
@@ -259,14 +343,70 @@ class Controller  implements ControllerObject {
      * @param string $viewName
      */
     protected function docPage($request, string $viewName) {
+        $data = $this->init($request, []);
         $request->set('sessionid','0');
         $request->set('lng','hu');
         $view = $this->getView($viewName);
-        $data = new stdClass();
         $data->option = $request->input('option','default');
         $data->adminNick = $request->sessionGet('adminNick','');
+        $data->access_token = $request->sessionGet('access_token','');
         $view->display($data);
     }
+    
+    /**
+     * session váltás ha szükséges
+     * @param string $access_token
+     * @param Request $request
+     */
+    protected function sessionChange(string $si, Request &$request) {
+        if ($si != session_id()) {
+            session_abort();
+            session_id($si);
+            $request = new Request();
+        }
+    }
+    
+    /**
+     * alap böngésző task, rendszerint ennek mintájára átirandó 
+     * 
+     * @param Request $request - option, group, offset, limit, order, order_dir, searchstr
+     * @return void
+     */
+    public function list(Request $request) {
+        include_once './core/browser.php';
+        $p = $this->init($request, ['option','offset','limit','order','order_dir',
+            'search_str']);
+        
+        //+ ---- rendszerint átirandó dolgok
+        $p->formHelp = '';
+        $p->itemTask = 'editform';
+        $p->addUrl = 'addform';
+        $p->formTitle = txt(mb_strtoupper($p->option).'_LIST');
+        $p->formSubTitle = '';
+        //+ ---- rendszerint felldefiniálandó adatok
+        
+        $this->view = new BrowserForm();
+        $this->createCsrToken($request, $p);
+        $p->offset = $request->input('offset', $request->sessionGet($p->option.'Offset',0));
+        $p->limit = $request->input('limit', $request->sessionGet($p->option.'Limit',20));
+        $p->order = $request->input('order', $request->sessionGet($p->option.'Order','kerdes'));
+        $p->order_dir = $request->input('order_dir', $request->sessionGet($p->option.'Order_dir','ASC'));
+        $p->searchstr = $request->input('searchstr', $request->sessionGet($p->option.'Searchstr',''));
+        $records = $this->model->getRecords($p->offset, $p->limit, $p->order, $p->order_dir, $p->searchstr);
+        $p->total = $records->total;
+        $p->items = $records->items;
+        if ($records->errorMsg != '') {
+            $p->error->msgs[] = $records->errorMsg;
+        }
+        $request->sessionSet($p->option.'Offset', $p->offset);
+        $request->sessionSet($p->option.'Limit', $p->limit);
+        $request->sessionSet($p->option.'Order', $p->order);
+        $request->sessionSet($p->option.'Order_dir', $p->order_dir);
+        $request->sessionSet($p->option.'Searchstr', $p->searchstr);
+        $this->view->listForm($p);
+    }
+    
+    
 } // class Controller
 
 
@@ -476,6 +616,10 @@ function getUploadedFile(string $postName, string $target): string {
 
 function redirectTo(string $url) {
     header('Location: '.$url);    
+}
+
+function myHash($alg, $s) {
+    return hash($alg, $s);
 }
 
 function sendEmail(string $to, string $subject, string $body): bool {

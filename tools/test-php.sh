@@ -2,7 +2,7 @@
 
 #php unittest by coverage report
 #./vendor/bin/phpunit --config ./tests/phpunit.xml tests;
-phpunit tests;
+phpunit --config ./tests/phpunit.xml tests;
 
 
 

@@ -32,13 +32,6 @@ class appregistControllerTest extends TestCase
         $this->assertEquals('',$db->getErrorMsg());
     }
     
-    public function test_add_adminNotLogged() {
-        $this->request = new Request();
-        $this->request->sessionSet('adminNick','');
-        $this->controller->add($this->request);
-        $this->expectOutputRegex('/iframe/');
-    }
-    
     public function test_save_domainEmpty() {
         // a balmix.hu -n van uklogin.html
         $this->request = new Request();
@@ -56,7 +49,7 @@ class appregistControllerTest extends TestCase
         $this->expectOutputRegex('/ERROR_DOMAIN_INVALID/');
     }
     
-     public function test_save_ok() {
+     public function test_save_insert_ok() {
         $this->request = new Request();
         $this->request->sessionSet('adminNick','admin');
         // a balmix.hu -n van uklogin.html
@@ -72,6 +65,28 @@ class appregistControllerTest extends TestCase
         $this->controller->save($this->request);
         $this->expectOutputRegex('/Client_id/');
     }
+    
+    public function test_save_update_ok() {
+        $table = new Table('apps');
+        $appRec = $table->first();
+        $this->request = new Request();
+        $this->request->sessionSet('adminNick','admin');
+        // a balmix.hu -n van uklogin.html
+        $this->request->sessionSet('csrToken','123');
+        $this->request->set('123','1');
+        $this->request->set('id',$appRec->id);
+        $this->request->set('client_id',$appRec->client_id);
+        $this->request->set('client_secret',$appRec->client_secret);
+        $this->request->set('domain','https://balmix.hu');
+        $this->request->set('name','balmix-updated');
+        $this->request->set('callback','https://balmix.hu/opt/home/logged');
+        $this->request->set('css','https://balmix.hu/uklogin.css');
+        $this->request->set('dataProcessAccept',1);
+        $this->request->set('cookieProcessAccept',1);
+        $this->controller->save($this->request);
+        $this->expectOutputRegex('/Client_id/');
+    }
+    
     
     public function test_adminform_found() {
         $this->request = new Request();
@@ -135,7 +150,8 @@ class appregistControllerTest extends TestCase
     
     public function test_adminform_notfound() {
         $this->request = new Request();
-        $this->request->sessionSet('adminNick','admin');
+        $this->request->sessionSet('adminNick','nincsadmin');
+        $this->request->sessionSet('client_id','nincs');
         $this->controller->adminform($this->request);
         $this->expectOutputRegex('/ERROR_APP_NOTFOUND/');
     }
@@ -143,7 +159,7 @@ class appregistControllerTest extends TestCase
     public function test_end() {
         $db = new DB();
         // clear test datas
-        // $db->statement('DELETE FROM apps');
+        $db->statement('DELETE FROM apps');
         $this->assertEquals('','');
     }
 }

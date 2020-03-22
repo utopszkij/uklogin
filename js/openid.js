@@ -1,12 +1,11 @@
   
-  // ÁTNÉZNI, NEM JÓ !
   function pageOnLoad() {
 	    if ($('#loginForm').length > 0) {
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
 				$('input#psw').removeClass('is-invalid');
 				$('input#nickname').removeClass('is-invalid');
-	    		msg = '';
+	    		var msg = '';
 				if ($('input#dataprocessaccept').is(':checked') == false) {
 					msg += global.LNG.DATAPROCESS_ACCEPT_REQUIRED+'<br />';
 					$('input#dataprocessaccept').addClass('is-invalid');
@@ -31,12 +30,15 @@
 	    	});
 	    	$('#loginForm').show();
 	    	$('#nickname').focus();
+	    	
+	    	
+
 	    } // loginForm
 	    
 	    if ($('#scopeForm').length > 0) {
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
-	    		msg = '';
+	    		var msg = '';
 				if ($('input#dataprocessaccept').is(':checked') == false) {
 					msg += global.LNG.DATAPROCESS_ACCEPT_REQUIRED+'<br />';
 					$('input#dataprocessaccept').addClass('is-invalid');
@@ -77,12 +79,12 @@
 				}
 			});
 			$('#btnMyData').click(function() {
-				location = 'index.php?option=openid&task=mydata&'+csrToken+'=1';
+				document.location = 'index.php?option=openid&task=mydata&'+csrToken+'=1';
 			});
 			$('#btnDelAccount').click(function() {
 				global.confirm('Törölni akarod a bejelentkezésedet?',
 				function() {
-					location = 'index.php?option=openid&task=delaccount&'+csrToken+'=1';
+					document.location = 'index.php?option=openid&task=delaccount&'+csrToken+'=1';
 				});
 				
 			});
@@ -116,7 +118,6 @@
 				$('input#psw1').removeClass('is-invalid');
 				$('input#psw2').removeClass('is-invalid');
 				$('input#dataProcessAccept').removeClass('is-invalid');
-				$('input#cookieProcessAccept').removeClass('is-invalid');
 				msg = global.nickCheck($('input#nick').val(),msg);
 				msg = global.pswCheck($('input#psw1').val(),msg);
 				if ($('input#psw1').val() != $('input#psw2').val()) {

@@ -15,6 +15,9 @@ var param1  = 'TestParam';
 $('body').append('<h1>Example</h1>');
 $('body').append('<div id="formApp"></div>'); // <form -al nem jó!!!!
 $('#formApp').append('<button id="formAppOk">OK</button>');
+$('#formApp').append('<button id="formAppCancel">Cancel</button>');
+$('#formApp').append('<button id="formAppRemove">Remove</button>');
+$('#formApp').append('<select id="appsSelect"><option value="a">a</option></select>');
 $('#formApp').append('<input id="client_id" type="text" value="" />');
 $('#formApp').append('<input id="name" type="text" value="" />');
 $('#formApp').append('<input id="domain" type="text" value="" />');
@@ -87,40 +90,22 @@ describe('appregistTest.js', function() {
 		$('#formAppOk').click();
 		assert.ok(global.alertTxt == '');
 	}); 
-	
-	it('formAdminLoginOKClick', function() {
-		global.alertTxt = '';
-		$('#formAdminLoginOk').click();
-		assert.ok(global.alertTxt == '');
-	});
-
-	it('formAdminLoginCancelClick', function() {
-		global.alertTxt = '';
-		$('#formAdminLoginCancel').click();
-		assert.ok(global.alertTxt == '');
-	});
-	
-	it('UserActOkClick', function() {
-		global.alertTxt = '';
-		$('#userActOk').click();
-		assert.ok(global.alertTxt == '');
-	});
 
 	it('formAppCancelClick', function() {
 		global.alertTxt = '';
-		$('#formAppcancel').click();
+		$('#formAppCancel').click();
 		assert.ok(global.alertTxt == '');
 	});
 	
-	it('logoutkClick', function() {
+	it('formAppRemoveClick', function() {
 		global.alertTxt = '';
-		$('#logut').click();
-		assert.ok(global.alertTxt == '');
+		$('#formAppRemove').click();
+		assert.ok(true); // csak szintaxis ellenörzés
 	});
 	
-	it('formAppremoveClick', function() {
+	it('appsSelectChange', function() {
 		global.alertTxt = '';
-		$('#formAppremove').click();
+		$('#appsSelect').change();
 		assert.ok(true); // csak szintaxis ellenörzés
 	});
 	
