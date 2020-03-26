@@ -17,14 +17,14 @@ class ImpresszumView  extends CommonView  {
 	* @param object $p
 	* @return void
 	*/
-	public function display($p) {
+	public function display(Params $p) {
 	    if (!isset($p->user)) {
 	        $p->user = new stdClass();
 	        $p->user->id = 0;
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    $this->echoHtmlHead();
+	    $this->echoHtmlHead($p);
         ?>	
         <body ng-app="app">
           <?php $this->echoNavbar($p); ?>

@@ -49,8 +49,8 @@ class MdView extends CommonView {
      * @param Params $p
      * @param string $mdName
      */
-    public function mdShow($p, string $mdName) {
-        $this->echoHtmlHead();
+    public function mdShow(Params $p, string $mdName) {
+        $this->echoHtmlHead($p);
         ?>
         <style type="text/css">
         h1,h2,h3,h4,h5 {margin-top:15px;}

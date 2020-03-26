@@ -25,7 +25,7 @@ class AdomanyView  extends CommonView  {
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    $this->echoHtmlHead();
+	    $this->echoHtmlHead($p);
         ?>	
         <body ng-app="app">
           <?php $this->echoNavbar($p); ?>

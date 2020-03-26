@@ -18,7 +18,7 @@ class AppregistView  extends CommonView  {
 	* @return void
 	*/
 	public function form(Params $p) {
-	    $this->echoHtmlHead();
+	    $this->echoHtmlHead($p);
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($p); ?>
