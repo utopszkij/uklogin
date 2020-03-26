@@ -1,4 +1,11 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+
 DEFINE("REGIST_FORM","Regisztráció");
 DEFINE("SCOPE_FORM","Adat átadás a klien applikációnak");
 DEFINE("LOGIN_FORM","Bejelentkezés");

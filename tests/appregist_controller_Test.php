@@ -63,7 +63,7 @@ class appregistControllerTest extends TestCase
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
         $this->controller->save($this->request);
-        $this->expectOutputRegex('/Client_id/');
+        $this->expectOutputRegex('/APPSAVED/');
     }
     
     public function test_save_update_ok() {
@@ -84,7 +84,7 @@ class appregistControllerTest extends TestCase
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
         $this->controller->save($this->request);
-        $this->expectOutputRegex('/Client_id/');
+        $this->expectOutputRegex('/APPSAVED/');
     }
     
     

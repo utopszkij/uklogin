@@ -47,7 +47,7 @@ class defaultControllerTest extends TestCase
     }
     
     public function test_default() {
-        $msg = $this->controller->default($this->request);
+        $msg = $this->controller->defaultform($this->request);
         $this->assertEquals(true,true); // csak szintaxis ellenörzés
     }
 }

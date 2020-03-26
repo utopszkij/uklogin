@@ -1,5 +1,15 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
 
+/**
+ * frontPage model
+ * @author utopszkij
+ *
+ */
 class FrontpageModel {
    
     /**

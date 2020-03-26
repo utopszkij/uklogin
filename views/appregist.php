@@ -1,12 +1,23 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * AppregistView osztály
+ * @author utopszkij
+ */
 class AppregistView  extends CommonView  {
 	/**
 	* echo html page
-	* @param object $p
+	* @param Params $p
 	* @return void
 	*/
-	public function form($p) {
+	public function form(Params $p) {
 	    $this->echoHtmlHead();
 	    ?>
         <body ng-app="app">
@@ -144,48 +155,6 @@ class AppregistView  extends CommonView  {
         </body>
         </html>
         <?php 		
-	}
-	
-	/**
-	 * echo succes message after add or update new app
-	 * @param object $res {client_id, client_secret
-	 * @return void;}
-	 */
-	public function AppsuccessMsg($res) {
-	    $this->echoHtmlHead();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($res); ?>
-	    <div class="savedMsg" id="scope">
-	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
-	    	<p>Client_id: <?php echo $res->client_id; ?></p>
-	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
-	    	<p><?php echo txt('ADMININFO'); ?></p>
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-	    <?php 
-	}
-	
-	/**
-	 * echo not found error
-	 * @param string $msg
-	 * @return void
-	 */
-	public function removedMsg($rec) {
-	    $this->echoHtmlHead();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($rec); ?>
-	    <div class="successMsg" id="scope">
-	    <h2 class="alert alert-success"><?php echo txt('APPREMOVED'); ?></h2>
-	    <p><?php echo $rec->name; ?></p>
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 
 	}
 	
 }

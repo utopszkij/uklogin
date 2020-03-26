@@ -1,21 +1,41 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+/**
+ * CommonView osztály
+ * @author utopszkij
+ */
 class CommonView extends View {
    
     /**
-     * echo succes message after add new app
-     * @param object $res {client_id, client_secret
+     * sikeres akció üzenet
+     * @param array $msgs nyelvi konstansokat tartalmazó tömb
+	 * @param string $nextLink tovább link URL (opcionális)
+	 * @param string $nextLinkText  tovább link szöverge (opcionális)
+	 * @param bool $navbar     navbar+footer legyen vagy ne
      * @return void;}
      */
-    public function successMsg(array $msgs, bool $navbar = false) {
-        global $REQUEST;
+    public function successMsg(array $msgs,
+        string $nextLink = '', 
+        string $nextLinkText = '', 
+        bool $navbar = false) {
+        global $REQUEST, $PARAMS;
         $this->echoHtmlHead();
         ?>
         <body ng-app="app">
         <?php if ($navbar) {
-        	       $p = new stdClass();
-        	       $p->adminNick = $REQUEST->sessionGet('adminNick');
-        	       $p->access_token = $REQUEST->sessionGet('access_token');
-        	       $this->echoNavbar($p);
+            if (is_object($PARAMS)) {
+                $p = $PARAMS;
+            } else {
+                $p = new Params();
+            }
+            $p->adminNick = $REQUEST->sessionGet('adminNick');
+        	$p->access_token = $REQUEST->sessionGet('access_token');
+        	$this->echoNavbar($p);
         }
         ?>
 	    <div ng-controller="ctrl" id="scope" style="display:block" class="successMsg">
@@ -27,32 +47,47 @@ class CommonView extends View {
 			?>
 	    </h2>
 	    </div>
-        </body>
+	    <?php if ($nextLink != '') : ?>
+	    <p><a href="<?php echo $nextLink; ?>" target="_self"><?php echo txt($nextStr); ?></a>
+	    <?php endif; ?>
         <?php $this->echoHtmlPopup(); ?>
         <?php $this->loadJavaScriptAngular('oauth2',new stdClass()); ?>
+	    <?php if ($nextLink != '') : ?>
+	    <p><a href="<?php echo $nextLink; ?>" target="_self"><?php echo txt($nextStr); ?></a>
+	    <?php endif; ?>
+	    </p>
+        <?php if ($navbar) { $this->echoFooter(); } ?>
+	    </body>
         </html>
         <?php 
 	}
     
 	/**
-	 * echo fatal error in app save
-	 * @param array of string messages
-	 * @param string backLink
-	 * @param string backLinkText
-	 * @param bool show navbar
+	 * echo fatal error 
+	 * @param array $msgs nyelvi konstansokat tartalmazó tömb
+	 * @param string $backLink
+	 * @param string $backStr
+	 * @param bool $navbar főmenü és lábléc  megejelenítés kell?
 	 * @return void
 	 */
-	public function errorMsg(array $msgs, string $backLink='', string $backStr='', bool $navbar = false) {
-	    global $REQUEST;
+	public function errorMsg(array $msgs, 
+	       string $backLink='', 
+	       string $backStr='', 
+	       bool $navbar = false) {
+	    global $REQUEST, $PARAMS;
 	    $this->echohtmlHead();
 	    ?>
         <body ng-app="app">
         <?php if ($navbar) {
-        	       $p = new stdClass();
-        	       $p->adminNick = $REQUEST->sessionGet('adminNick');
-        	       $p->access_token = $REQUEST->sessionGet('access_token');
-        	       $this->echoNavbar($p);
-              }
+            if (is_object($PARAMS)) {
+                $p = $PARAMS;
+            } else {
+                $p = new Params();
+            }
+   	       $p->adminNick = $REQUEST->sessionGet('adminNick');
+           $p->access_token = $REQUEST->sessionGet('access_token');
+           $this->echoNavbar($p);
+        }
         ?>
 	    <div ng-controller="ctrl" id="scope" style="display:block" class="errorMsg">
 	    <h2 class="alert alert-danger">
@@ -68,6 +103,7 @@ class CommonView extends View {
 	    <?php endif; ?>
         <?php $this->echohtmlPopup(); ?>
         <?php $this->loadJavaScriptAngular('oauth2', new stdClass()); ?>
+        <?php if ($navbar) { $this->echoFooter(); } ?>
         </body>
         </html>
         <?php 
@@ -75,10 +111,10 @@ class CommonView extends View {
     
 	/**
 	* echo html page
-	* @param object $p - adminNick
+	* @param Params $p - adminNick
 	* @return void
 	*/
-	public function echoNavbar($p) {
+	public function echoNavbar(Params $p) {
 	    if (!isset($p->adminNick)) {
 	        $p->adminNick = '';
 	    }
@@ -162,7 +198,10 @@ class CommonView extends View {
 			<p style="background-color:red; color:white">Ez a rendszer jelenleg ß teszt állapotban használható.</p>
 		<?php       
      } // echoNavbar
-        
+       
+     /**
+      * html lábléc kiirása
+      */
      function echoFooter() {
         ?>
       	<div id="footer">  
@@ -171,7 +210,7 @@ class CommonView extends View {
 				<em class="fa fa-pencil"></em>&nbsp;<?php echo txt('IMPRESSUM'); ?></a>&nbsp;&nbsp;&nbsp;      
 			<a href="<?php echo txt('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_self">
 				<em class="fa fa-lock"></em>&nbsp;<?php echo txt('DATAPROCESS'); ?></a>&nbsp;&nbsp;&nbsp;      
-			<a href="https://gnu.hu/gplv3.html" target="_self">
+			<a href="http://www.gnu.hu/gpl.html" target="_new">
 				<em class="fa fa-copyright"></em>&nbsp;<?php echo txt('LICENCE'); ?>: GNU/GPL</a>&nbsp;&nbsp;&nbsp;      
 			<a href="https://github.com/utopszkij/uklogin" target="_self">
 				<em class="fa fa-github"></em>&nbsp;<?php echo txt('SOURCE'); ?></a>&nbsp;&nbsp;&nbsp;   

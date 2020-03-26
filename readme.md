@@ -13,19 +13,19 @@ https://uklogin.tk
 
 ## Áttekintés
 
-Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az **OpenId** szabvány szerint. 
+Ez egy web -es szolgáltatás. Az a célja, hogy e-demokrácia szoftverek az ügyfélkapus aláíráson alapuló regisztrációt és bejelentkezést használhassanak az **OpenId** szabvány szerint.
 A rendszer biztosítja, hogy egy személy csak egyszer regisztrálhat.
 (az ügyfélkapus aláírásban szereplő születési név, születési dátum és anyja neve adat egyediségét ellenörzi a program).
 
-Természetesen egy ügyfélkapú loginnal több alkalmazásba is be lehet lépni. 
+Természetesen egy ügyfélkapú loginnal több alkalmazásba is be lehet lépni.
 
-A hívó web program iframe -be hívhatja be a login képernyőt. Ezen van "regisztrálok" link is azok számára akik még nem regisztráltak. 
+A hívó web program iframe -be hívhatja be a login képernyőt. Ezen van "regisztrálok" link is azok számára akik még nem regisztráltak.
 
 Az applikáció adminisztrátora az erre a célra szolgáló web felületen tudja az applikációt regisztrálni a rendszerbe.
 
 A regisztrációs folyamatban használt aláírás szolgáltató:
 
-https://magyarorszag.hu/szuf_avdh_feltoltes 
+https://magyarorszag.hu/szuf_avdh_feltoltes
 
 
 ```
@@ -37,7 +37,7 @@ Openid Bejelentkezés folyamata
 |        |  +--------+                       |        |
 |        |  |        |                       |        |
 |        |  |  End-  |<--(2)---login form----|        |
-|        |  |  User  |--(3)---nickname,psw-->|        |       
+|        |  |  User  |--(3)---nickname,psw-->|        |
 |   web  |  |        |                       |        |
 | client |  +--------+                       | openId |
 |   app  |                                   | szerver|
@@ -52,13 +52,13 @@ Openid Bejelentkezés folyamata
 
 ## magyaroszag.hu felhasználásával történő user regisztráció
 
-A felhasználó a 
+A felhasználó a
 
-[magyarorszag.hu](http://magyarorszag.hu) 
+[magyarorszag.hu](http://magyarorszag.hu)
 
-oldalról lettölti az ott tárolt személyi adatait tartalmazó pdf fájlt. Ezután ezt a fájlt a belügyminisztérium által üzemeltetett ingyenes aláírás szolgáltatás 
+oldalról lettölti az ott tárolt személyi adatait tartalmazó pdf fájlt. Ezután ezt a fájlt a belügyminisztérium által üzemeltetett ingyenes aláírás szolgáltatás
 
-[szuf.magyarorszag.hu](https://szuf.magyarorszag.hu) 
+[szuf.magyarorszag.hu](https://szuf.magyarorszag.hu)
 
 segítségével aláírja. Majd az aláírt pdf fájlt feltölti ebbe a programba.
 
@@ -66,7 +66,7 @@ A program a következő ellenőrzéseket végzi el:
 - a pdf alá van írva, és a belügyminisztérium nyilvános aláírás szolgáltatója írta alá?
 - a PDF információkban a megfelelő Creator, Producer, PDF version adat szerepel?
 - a PDF -ben lévő név, anyja neve, lakcím, születési dátum azonos az aláírásban megadottal?
-- az aláírás kezdeményező ügyfélkapuban megadott születési névvel, anyja nevével és születési dátummal még nincs másik fiók hitelesítve. 
+- az aláírás kezdeményező ügyfélkapuban megadott születési névvel, anyja nevével és születési dátummal még nincs másik fiók hitelesítve.
 
 
 ### Mennyire biztonságos az ügyfélkapus hitelesítés?
@@ -86,9 +86,9 @@ A magyaroszag.hu segítségével történő hitelesítési rendszer több olyan 
 ## Programnyelvek
 
  PHP(7.1+), Javascript, MYSQL, JQUERY, bootstrap
- 
+
 A program az "aHang" és Szabó Simon Márk 2019 főpolgármester előválasztás 2. fordulójára készített programjában található ötletek és kód részletek felhasználásával készült.
- 
+
 Lásd: https://gitlab.com/mark.szabo-simon/elovalaszto-app?fbclid=IwAR2X4RlNDA4vHw5-4ABkDCzzuifNpE5-u9T7j1X-wuubag4ZY0fSvnifvMA
 
 A program MVC ajánlás szerint struktúrált.
@@ -96,16 +96,16 @@ A program MVC ajánlás szerint struktúrált.
 ## Licensz
 
  GNU/GPL
- 
+
 ## Programozó
 
 Fogler Tibor (Utopszkij)
 
-tibor.fogler@gmail.com 
+tibor.fogler@gmail.com
 
 https://github.com/utopszkij
 
-## Új applikáció regisztrálás 
+## Új applikáció regisztrálás
 
 Az applikációt web felületen lehet regisztrálni. A megadandó adatok:
 - applikáció neve
@@ -128,12 +128,12 @@ Az app adatok módosításához, törléséhez természetesen az admin login sz�
 Az openid szolgáltatás konfigurációjának lekérése:
 
 ```
-<ukloginDomain>/openid  
+<ukloginDomain>/openid
 ```
 
 A szerver két adatkezeleési módban konfigurálható. A két mód a kezelt user adatokban tér el egymástól (lásd lentebb). A fent megedott végpontról lekérhető json formátumú információ tájékoztat arról, hogy az adott szerver milyen user adatokat tud szolgáltatni.
 
-### OpenId login 
+### OpenId login
 
 végpont:
 
@@ -151,7 +151,7 @@ POST vagy GET pareméterek (url encoded formában):
 
 **scope** alkalmazás által kért user adatok (lásd a **/openid** hívással lekérhető json -ban) **kötelező**
 
-**state** tetszőleges string, ezt is megkapja a redirect_uri **opcionális** 
+**state** tetszőleges string, ezt is megkapja a redirect_uri **opcionális**
 
 **nonce** tetszőleges string, ezt is megkapja a redirect_uri **opcionális**
 
@@ -165,20 +165,20 @@ Ha viszont megadunk **redirect_uri** -t annak a kliens regisztrációnál megado
 **Nem regisztrált kliensnél** a **redirect_uri** kötelező, **client_id** -ben és a **redirect_uri** -ban egyaránt a visszahívandó URL-t kell szerepeltetni.
 
 
-A login képernyőn szerepel **"még nincs fiokom, regisztrálok"** link, valamint **"elfelejtettem a jelszavam"** link is. A szerver az ezekre történő kattintást is kezeli. 
-A login képernyőn szerepel az alkalmazás által kért user adatok felsorolása is, 
+A login képernyőn szerepel **"még nincs fiokom, regisztrálok"** link, valamint **"elfelejtettem a jelszavam"** link is. A szerver az ezekre történő kattintást is kezeli.
+A login képernyőn szerepel az alkalmazás által kért user adatok felsorolása is,
 és az alkalmazás adatkezelési leírására mutató link is (ha megadtunk policy_uri -t).
 A felhasználónak az adat kezelést el kell fogadnia.
 
 Amennyiben a hívás pillanatában a user már be van jelentkezve az uklogin/openid szolgáltatásba akkor csak az alkalmazás által kért user adatokok átadásához való hozzájárulást kérő képernyő jelenik meg. Ezen is szerepel az alkalmazás adatkezelési leírására mutató link.
 
-Sikeres login, illetve az adatkezeléshez történő hozzájárulás után a **redirect_uri** -ra, ennek hiányában a kliens regisztrációban beállított visszahívási címre kerül a vezérlés, négy paramétert átadva: 
+Sikeres login, illetve az adatkezeléshez történő hozzájárulás után a **redirect_uri** -ra, ennek hiányában a kliens regisztrációban beállított visszahívási címre kerül a vezérlés, négy paramétert átadva:
 - **id_token**,
-- **token**, 
-- **state** , 
+- **token**,
+- **state** ,
 - **nonce**.
 
-A **token** adatot használva a **userinfo** végpontról lekérhetőek a json formátumú  user információk (token = access_token). A **state** és **nonce** adatot a kliens tetszőleges célra használhatja. Gyakran a **state** adatot egy biztonságot növelő egyedi token céljára használják, a **nonce** -ben bpedig a sikeres login után aktiválandó applikáció funciót indító URL szerepel. 
+A **token** adatot használva a **userinfo** végpontról lekérhetőek a json formátumú  user információk (token = access_token). A **state** és **nonce** adatot a kliens tetszőleges célra használhatja. Gyakran a **state** adatot egy biztonságot növelő egyedi token céljára használják, a **nonce** -ben bpedig a sikeres login után aktiválandó applikáció funciót indító URL szerepel.
 
 ### OpenId logout
 
@@ -192,7 +192,7 @@ POST vagy GET pareméterek:
 
 **token_type_hint**  kötelezően "access_token"
 
-**token** 
+**token**
 
 **redirect_uri**
 
@@ -209,7 +209,7 @@ POST vagy GET pareméterek:
 
 **token_type_hint**  kötelezően "access_token"
 
-**token** 
+**token**
 
 **redirect_uri**
 
@@ -275,11 +275,11 @@ A szerver két adatkezelési beállítással üzemeltethető
 **Ezek személyes adatok, kezelésüknél a GDPR ide vonatkozó előírásait kell érvényesíteni.**
 
 
-Megjegyzés: A feldolgozás során - technikai okokból - néhány másodpercig a rendszer tárolja az aláírt pdf fájlt és  az abban lévő csatolmányokat. Ezek tartalmazzák az aláíró személyi adatait (név, lakcím, születési dátum, anyja neve, születési név, okmány azonosítók, személyi szám). 
- Ezen adatok közül a rendszer kizárólag a születési névből, születési dátumból és anyja nevéből SHA256 hash algoritmussal 
- képzett hash kódját, valamint a fentebb leirt user adatokat használja és tárolja adatbázisában. A többi személyes adatot nem tárolja. (a hash kódból reális idő alatt nem fejthetőek vissz az adatok) 
-Az aláírt pdf fájlt és csatolmányait a a kód előállítása, és a kezelt user adatok tárolása  után azonnal törli, 
- 
+Megjegyzés: A feldolgozás során - technikai okokból - néhány másodpercig a rendszer tárolja az aláírt pdf fájlt és  az abban lévő csatolmányokat. Ezek tartalmazzák az aláíró személyi adatait (név, lakcím, születési dátum, anyja neve, születési név, okmány azonosítók, személyi szám).
+ Ezen adatok közül a rendszer kizárólag a születési névből, születési dátumból és anyja nevéből SHA256 hash algoritmussal
+ képzett hash kódját, valamint a fentebb leirt user adatokat használja és tárolja adatbázisában. A többi személyes adatot nem tárolja. (a hash kódból reális idő alatt nem fejthetőek vissz az adatok)
+Az aláírt pdf fájlt és csatolmányait a a kód előállítása, és a kezelt user adatok tárolása  után azonnal törli,
+
 
 #### cookie kezelés
 A működéshez egy darab un. "munkamenet cookie" használata szükséges, erről tájékoztatás jelenik meg és a felhasználónak ezt el kell fogadnia.
@@ -297,6 +297,8 @@ cd repoRoot
 ```
 A dokumentáció a "doc" könyvtárba kerül
 
+[documentation](https://uklogin.tk/doc/)
+
 ## kód minőség ellenörzés
 ```
 cd repoRoot
@@ -304,7 +306,7 @@ cd repoRoot
 ```
 Utolsó teszt eredménye:
 
-https://sonarcloud.io/dashboard?id=utopszkij-uklogin
+[sonarcloud.io](https://sonarcloud.io/dashboard?id=utopszkij-uklogin)
 
 
 ## Telepítés web szerverre

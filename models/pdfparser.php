@@ -1,31 +1,52 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
 
+/** PdfData rekord */
 class PdfData {
+    /** hibaüzenet */
     public $error = '';
-    // PDF tartalom
+    /** PDF tartalomban a név */
     public $txt_name = ''; 
+    /** PDF tartalomban az anyja neve */
     public $txt_mothersname = '';
+    /** PDF tartalomban a születési dátum */
     public $txt_birth_date = '';
+    /** PDF tartalomban az állandó lakcím */
     public $txt_address = '';
+    /** PDF tartalomban a tartozkodási hely */
     public $txt_tartozkodas = '';
     // PDF info
+    /** PDF információ létrehozó sw */
     public $info_creator = '';
+    /** PDF információ létrehozó sw2 */
     public $info_producer = '';
+    /** PDF információ verzió */
     public $info_pdfVersion = '';
     // aláírás meghatalmazó
+    /** aláírásban a név */
     public $xml_nev = '';
+    /** aláírásban az email */
     public $xml_ukemail = '';
+    /** aláírásban a születési név */
     public $xml_szuletesiNev = '';
+    /** aláírásban az anyja neve */
     public $xml_anyjaNeve = '';
+    /** aláírásban a születési dátum */
     public $xml_szuletesiDatum = '';
+    /** aláírás kelte */
     public $xml_alairasKelte = '';
 }
 
+/** PDF parser model */
 class PdfparserModel {
 
 	/**
 	* PDF text tartalmának kinyerése
-	* @param string PDF file elérési utvonala
+	* @param string $filePath PDF file elérési utvonala
 	* @param array $lines (IO)
 	* @return bool
 	*/	
@@ -43,7 +64,7 @@ class PdfparserModel {
 
 	/**
 	* PDF információk kinyerése
-	* @param string PDF file teljes utvonal
+	* @param string $filePath PDF file teljes utvonal
 	* @param array $lines (IO)
 	* return bool
 	*/
@@ -61,7 +82,7 @@ class PdfparserModel {
 
 	/**
 	* PDF aláírás infok kinyerése
-	* @param string PDF file teljes elérési utvonal
+	* @param string $filePath PDF file teljes elérési utvonal
 	* @param array signatureArray
 	* @return bool
 	*/
@@ -71,7 +92,7 @@ class PdfparserModel {
 
 	/**
 	* meghatalmazó információk kinyerése a PDF -ből
-	* @param string PDF file teljes elérési út
+	* @param string $filePath PDF file teljes elérési út
 	* @param array $lines (IO)
 	* @return bool
 	*/
@@ -224,7 +245,7 @@ class PdfparserModel {
     
     /**
     * meghatalmazo.xml kinyerése és elemzése
-    * @param string pdf file name
+    * @param string $filePath pdf file name
     * @param PdfData $res {.....xml_name....}
     */
     protected function parseMeghatalmazo(string $filePath, PdfData &$res) {
@@ -331,7 +352,7 @@ class PdfparserModel {
 
 	 /**
 	 * PDF fájl elemzése
-	 * @param string PDF file teljes utvonal
+	 * @param string $filePath PDF file teljes utvonal
 	 * @return PdfData 
 	 */
 	 public function parser(string $filePath): PdfData {

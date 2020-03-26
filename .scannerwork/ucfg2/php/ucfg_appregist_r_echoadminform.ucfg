@@ -1,15 +1,15 @@
 
 "appregistcontroller::echoadminform9
-//var/www/html/uklogin/controllers/appregist.phpk k(!"1*f
+//var/www/html/uklogin/controllers/appregist.phpr r(!"1*h
 2
-appregist.php"P
-9
-//var/www/html/uklogin/controllers/appregist.php{ {(
-implicit return*Ó
+appregist.php"R
+;
+//var/www/html/uklogin/controllers/appregist.php‚ ‚(
+implicit return*Û
 19
-//var/www/html/uklogin/controllers/appregist.phpl l(9us
+//var/www/html/uklogin/controllers/appregist.phps s(9us
 9
-//var/www/html/uklogin/controllers/appregist.phpl l(8
+//var/www/html/uklogin/controllers/appregist.phps s(8
 %1*
 
 
@@ -19,14 +19,14 @@
 	'default'2input`
 ^
 9
-//var/www/html/uklogin/controllers/appregist.phpl l(8
+//var/www/html/uklogin/controllers/appregist.phps s(8
 
 $data"
 option"__id*
 
 %1ki
 9
-//var/www/html/uklogin/controllers/appregist.phpm m(+
+//var/www/html/uklogin/controllers/appregist.phpt t(+
 %2*
 
 
@@ -35,7 +35,7 @@
 ''2input]
 [
 9
-//var/www/html/uklogin/controllers/appregist.phpm m(+
+//var/www/html/uklogin/controllers/appregist.phpt t(+
 
 $data"
 msg"__id*
@@ -43,14 +43,14 @@
 %2b
 `
 9
-//var/www/html/uklogin/controllers/appregist.phpn n('
+//var/www/html/uklogin/controllers/appregist.phpu u('
 %3"__id**
 
 $rec"
 	client_idc
 a
 9
-//var/www/html/uklogin/controllers/appregist.phpn n('
+//var/www/html/uklogin/controllers/appregist.phpu u('
 
 $data"
 	client_id"__id*
@@ -58,14 +58,14 @@ a
 %3f
 d
 9
-//var/www/html/uklogin/controllers/appregist.phpo o(.
+//var/www/html/uklogin/controllers/appregist.phpv v(.
 %4"__id**
 
 $rec"
 client_secretg
 e
 9
-//var/www/html/uklogin/controllers/appregist.phpo o(.
+//var/www/html/uklogin/controllers/appregist.phpv v(.
 
 $data"
 client_secret"__id*
@@ -73,14 +73,14 @@ e
 %4[
 Y
 9
-//var/www/html/uklogin/controllers/appregist.phpp p(
+//var/www/html/uklogin/controllers/appregist.phpw w(
 %5"__id**
 
 $rec"
 id\
 Z
 9
-//var/www/html/uklogin/controllers/appregist.phpp p(
+//var/www/html/uklogin/controllers/appregist.phpw w(
 
 $data"
 id"__id*
@@ -88,14 +88,14 @@ Z
 %5]
 [
 9
-//var/www/html/uklogin/controllers/appregist.phpq q(
+//var/www/html/uklogin/controllers/appregist.phpx x(
 %6"__id**
 
 $rec"
 name^
 \
 9
-//var/www/html/uklogin/controllers/appregist.phpq q(
+//var/www/html/uklogin/controllers/appregist.phpx x(
 
 $data"
 name"__id*
@@ -103,14 +103,14 @@ Z
 %6_
 ]
 9
-//var/www/html/uklogin/controllers/appregist.phpr r(!
+//var/www/html/uklogin/controllers/appregist.phpy y(!
 %7"__id**
 
 $rec"
 domain`
 ^
 9
-//var/www/html/uklogin/controllers/appregist.phpr r(!
+//var/www/html/uklogin/controllers/appregist.phpy y(!
 
 $data"
 domain"__id*
@@ -118,14 +118,14 @@ Z
 %7\
 Z
 9
-//var/www/html/uklogin/controllers/appregist.phps s(
+//var/www/html/uklogin/controllers/appregist.phpz z(
 %8"__id**
 
 $rec"
 css]
 [
 9
-//var/www/html/uklogin/controllers/appregist.phps s(
+//var/www/html/uklogin/controllers/appregist.phpz z(
 
 $data"
 css"__id*
@@ -133,7 +133,7 @@ Z
 %8a
 _
 9
-//var/www/html/uklogin/controllers/appregist.phpt t(%
+//var/www/html/uklogin/controllers/appregist.php{ {(%
 %9"__id**
 
 $rec"
@@ -141,7 +141,7 @@ _
 callbackb
 `
 9
-//var/www/html/uklogin/controllers/appregist.phpt t(%
+//var/www/html/uklogin/controllers/appregist.php{ {(%
 
 $data"
 
@@ -150,14 +150,14 @@ _
 %9i
 g
 9
-//var/www/html/uklogin/controllers/appregist.phpu u(3
+//var/www/html/uklogin/controllers/appregist.php| |(3
 %10"__id**
 
 $rec"
 falseLoginLimitj
 h
 9
-//var/www/html/uklogin/controllers/appregist.phpu u(3
+//var/www/html/uklogin/controllers/appregist.php| |(3
 
 $data"
 falseLoginLimit"__id*
@@ -165,28 +165,28 @@ h
 %10a
 _
 9
-//var/www/html/uklogin/controllers/appregist.phpv v(
+//var/www/html/uklogin/controllers/appregist.php} }(
 
 $data"
 	hackLimit"__id*2
 _
 ]
 9
-//var/www/html/uklogin/controllers/appregist.phpw w(
+//var/www/html/uklogin/controllers/appregist.php~ ~(
 %11"__id**
 
 $rec"
 admin`
 ^
 9
-//var/www/html/uklogin/controllers/appregist.phpw w(
+//var/www/html/uklogin/controllers/appregist.php~ ~(
 
 $data"
 admin"__id*
 
 %11wu
 9
-//var/www/html/uklogin/controllers/appregist.phpx x(<
+//var/www/html/uklogin/controllers/appregist.php (<
 %12*
 
 
@@ -196,37 +196,37 @@ _
 sessiongetd
 b
 9
-//var/www/html/uklogin/controllers/appregist.phpx x(<
+//var/www/html/uklogin/controllers/appregist.php (<
 
 $data"
 	adminNick"__id*
 
-%12zx
-9
-//var/www/html/uklogin/controllers/appregist.phpy y(C
+%12|z
+;
+//var/www/html/uklogin/controllers/appregist.php€ €(C
 %13*
 
 
 $request*
 'access_token'*
 ''2
-sessiongetg
-e
-9
-//var/www/html/uklogin/controllers/appregist.phpy y(C
+sessiongeti
+g
+;
+//var/www/html/uklogin/controllers/appregist.php€ €(C
 
 $data"
 access_token"__id*
 
-%13m
-k
-9
-//var/www/html/uklogin/controllers/appregist.phpz z(
+%13o
+m
+;
+//var/www/html/uklogin/controllers/appregist.php (
 %14"__id*!*
 appregistcontroller"
-view^\
-9
-//var/www/html/uklogin/controllers/appregist.phpz z(
+view`^
+;
+//var/www/html/uklogin/controllers/appregist.php (
 %15*
 
 %14*	

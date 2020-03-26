@@ -1,5 +1,9 @@
 <?php
 /**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * Framework
+ * @package uklogin
+ * @author Fogler Tibor
  * MVC adbsztarkt osztályok, http GET/POST és session kezelő osztály,
  * álltalános célú segéd rutinok
  */
@@ -7,44 +11,54 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+/** global Request object */
 global $REQUEST;
+/** global Params objekt */
+global $PARAMS;
 
-interface ModelObject {
-    
-}
-
-interface ViewObject {
-    public function echoHtmlPopup();
-} 
-
-interface ControllerObject {
-}
-
-interface  RequestObject {
-    public function input(string $name, $default = '');
-    public function set(string $name, $value);
-    public function sessionGet(string $name, $default='');
-    public function sessionSet(string $name, $value);
-    public function session_count(): int;
-}
-
+/**
+ * Params osztály Paraméterek a view taskok számára
+ */
 class Params {
+    /** array of string, nyelvi konstansok */
     public $msgs = [];
+    /** UserRecord */
     public $loggedUser = false;
+    /** string userinfo lekérdezéshez */
     public $access_token = '';
+    /** Model object */
     public $model = false;
+    /** View object */
     public $view = false; 
+    
+    /**
+     * constructor
+     */
+    function __construct() {
+        global $PARAMS;
+        $PARAMS = $this;
+    }
 }
 
+/**
+ * $model->getRecords taskok kimeneti objektum osztálya
+ */
 class GetRecordsResult {
+    /** a feltételeknek megfelelő összes rekord (offset, limit figyelmen kivül hagyásával) */
     public $total = 0;
+    /** eredmény rekordokat tartalmazó tőmb */
     public $items = [];
+    /** sql error vagy '' */
     public $errorMsg = '';
 }
 
-class Model implements ModelObject {
-    
+/**
+ * adatmodell osztály
+ */
+class Model {
+    /** tábla név */    
     protected $tableName = '';
+    /** filterStr megadása esetén ebben a mezőben keres */
     protected $filterField = '';
     
     /**
@@ -75,14 +89,17 @@ class Model implements ModelObject {
     }
 }
 
-class View implements ViewObject {
+/**
+ * View osztály   megjelenítés
+ */
+class View {
     /**
      * echo javascript code, inject params
      * @param string $jsName javascript file full path
      * @param array $params  {"name":value, ....}
      * @return void
      */
-    protected function loadJavaScript(string $jsName, $params) {
+    protected function loadJavaScript(string $jsName, Params $params) {
     	echo "\n".'<script type="text/javascript">'."\n";
     	echo '// params from controller'."\n";
     	foreach ($params as $fn => $fv) {
@@ -176,10 +193,12 @@ class View implements ViewObject {
     /**
      * return hTML head
      *    include javascript global.alert, global.confirm, global.post, globa.working functions
-     * must use htmlPopup() in HTML body tag
+     * figyelem használni kell a htmlPopup() hívást a HTML body -ban
+     * A ./templates/.TEMPLATE.'/htmlhead.html' -t használja
+     * @param Params $data
      * @return void
      */
-    public function echoHtmlHead($data = '') {
+    public function echoHtmlHead(Params $data) {
         $lines = file('./templates/'.TEMPLATE.'/htmlhead.html');
         $s = implode("\n",$lines);
         if (is_object($data)) {
@@ -194,6 +213,23 @@ class View implements ViewObject {
         $s = str_replace('{{EXTRACSS}}',$extraCss,$s);
         echo str_replace('{{MYDOMAIN}}',MYDOMAIN,$s);
     }
+
+    /**
+    * json header
+    */
+    public function echoJsonHead() {
+        if (!headers_sent()) {
+            header('Content-Type: application/json');
+        }
+    }
+    
+    /**
+     * echo html end
+     */
+    public function echoHtmlEnd() {
+        echo '</html>'."\n";
+    }
+    
     
     /**
      * echo popup html code (use this HTML global.alert, global.confirm functions in htmlHead)
@@ -252,9 +288,22 @@ class View implements ViewObject {
     
 } // class View
 
-class Controller  implements ControllerObject {
-    
+/** 
+ * Controller osztály  üzleti logika
+ * @author utopszkij
+ */
+class Controller {
+
+    /** controller neve */
     protected $cName = '';
+    
+    /**
+     * konstruktor
+     */
+    function __construct() {
+        global $REQUEST;
+        $this->cName = $REQUEST->input('option','');
+    }
     
     /**
      * task init - logged User és kapott paraméterek a result Params -ba
@@ -281,8 +330,6 @@ class Controller  implements ControllerObject {
         $result->access_token = $request->sessionGet('access_token', '');
         return $result;
     }
-    
-    
     
     /**
      * create new model object from "./models/modelname.php"
@@ -339,10 +386,10 @@ class Controller  implements ControllerObject {
     }
     /**
      * echo statikus page
-     * @param object $request
+     * @param Request $request
      * @param string $viewName
      */
-    protected function docPage($request, string $viewName) {
+    protected function docPage(Request $request, string $viewName) {
         $data = $this->init($request, []);
         $request->set('sessionid','0');
         $request->set('lng','hu');
@@ -355,7 +402,7 @@ class Controller  implements ControllerObject {
     
     /**
      * session váltás ha szükséges
-     * @param string $access_token
+     * @param string $si  (access_token)
      * @param Request $request
      */
     protected function sessionChange(string $si, Request &$request) {
@@ -367,25 +414,24 @@ class Controller  implements ControllerObject {
     }
     
     /**
-     * alap böngésző task, rendszerint ennek mintájára átirandó 
-     * 
+     * alap böngésző task, gyakran ennek mintájára átirandó:
+     * public function myList(Request $request) {
+     *      $this->browser($request,["formTitle" => "...", ...]);
+     * } 
+     * szükség van a  ./core/browser includra
      * @param Request $request - option, group, offset, limit, order, order_dir, searchstr
+     * @param array $options ['formTitle' => '', 'formSubTitle' => '', 'formHelp' => '',
+     *    'itemTask' => '', 'addTask' => '']
      * @return void
      */
-    public function list(Request $request) {
+    protected function browser(Request $request, array $options) {
         include_once './core/browser.php';
         $p = $this->init($request, ['option','offset','limit','order','order_dir',
             'search_str']);
-        
-        //+ ---- rendszerint átirandó dolgok
-        $p->formHelp = '';
-        $p->itemTask = 'editform';
-        $p->addUrl = 'addform';
-        $p->formTitle = txt(mb_strtoupper($p->option).'_LIST');
-        $p->formSubTitle = '';
-        //+ ---- rendszerint felldefiniálandó adatok
-        
-        $this->view = new BrowserForm();
+        foreach ($options as $fn => $fv) {
+            $p->$fn = $fv;
+        }
+        $this->view = new BrowserView();
         $this->createCsrToken($request, $p);
         $p->offset = $request->input('offset', $request->sessionGet($p->option.'Offset',0));
         $p->limit = $request->input('limit', $request->sessionGet($p->option.'Limit',20));
@@ -405,15 +451,19 @@ class Controller  implements ControllerObject {
         $request->sessionSet($p->option.'Searchstr', $p->searchstr);
         $this->view->listForm($p);
     }
-    
-    
 } // class Controller
 
 
-class Request implements RequestObject {
-	public $params = array();
+/**
+ * Request osztály GET/POST input és session kezelés
+ */
+class Request {
+    /** paraméterek */
+    public $params = array();
+    /** session változók */
 	protected $sessions = array();
 	
+	/** konstruktor */
 	function __construct() {
 	    global $REQUEST;
 	    $REQUEST = $this;
@@ -540,6 +590,7 @@ class Request implements RequestObject {
 	public function session_count(): int {
 	    $sessionId = session_id();
 	    $table = DB::table('sessions');
+	    $table->where(['id','=',$sessionId]);
 	    return $table->count();
 	}
 } // Request
@@ -579,9 +630,9 @@ function url(string $s): string {
 }
 
 /**
- * language convertion
- * @param string $s language token
- * @return string translated text
+ * Nyelvi fordítás
+ * @param string $s nyelvi token
+ * @return string szöveg
  */
 function txt(string $s): string {
     $result = $s;
@@ -609,19 +660,40 @@ function getUploadedFile(string $postName, string $target): string {
             $result = '';
         }
     } else {
-        $ressult = '';
+        $result = '';
     }
     return $result;
 }
 
+/**
+ * átirányítás URL -re
+ * @param string $url
+ */
 function redirectTo(string $url) {
-    header('Location: '.$url);    
+    if (!headers_sent()) {
+        header('Location: '.$url);
+    } else {
+        echo 'Fatal error in redirectTo header alredy sended'; exit();
+    }
 }
 
-function myHash($alg, $s) {
+/**
+ * Hash képzése
+ * @param string $alg
+ * @param string $s
+ * @return string
+ */
+function myHash(string $alg, string $s) {
     return hash($alg, $s);
 }
 
+/**
+ * email küldése config -ban beállított smtp kiszolgálóval
+ * @param string $to
+ * @param string $subject
+ * @param string $body
+ * @return bool
+ */
 function sendEmail(string $to, string $subject, string $body): bool {
     $mail = new PHPMailer(true);
     $result = true;

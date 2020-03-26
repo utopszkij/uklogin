@@ -1,4 +1,10 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 
 include_once 'views/common.php';
 
@@ -112,6 +118,7 @@ class BrowserView extends CommonView {
      /**
      * egy tábla sor kirajzolása
      * @param object $item - legyen benne id
+     * @param string $trClass css class name a "tr" elemhez
      * @return void
      */
      protected function echoTableRow($item, $trClass) {
@@ -124,7 +131,12 @@ class BrowserView extends CommonView {
      
      /**
      * browser táblázat megjelenítése
-     * szükséges JS: titleClick(colName, order, order_dir), itemClick(id) 
+     * szükséges JS: titleClick(colName, order, order_dir), itemClick(id)
+     * @param array $items  rekordokat tartalmazó tömb
+     * @param int $offset
+     * @param int $limit
+     * @param string $order
+     * @param string $order_dir ASC vagy DESC 
      */
      protected function echoBrowserTable(array $items, int $offset, int $limit, 
         string $order, string $order_dir) {

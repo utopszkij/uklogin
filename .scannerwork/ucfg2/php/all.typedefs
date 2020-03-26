@@ -3548,13 +3548,10 @@ registformopenidcontroller::registform,
 issucontroller
 controller
 formissucontroller::form
-sendissucontroller::sendê
+sendissucontroller::send8
 appregistview
-commonview'
-
-removedmsgappregistview::removedmsg
-formappregistview::form-
-appsuccessmsgappregistview::appsuccessmsgx
+commonview
+formappregistview::formx
 mdview
 commonview&
 processstrongmdview::processstrong
@@ -3618,12 +3615,10 @@ controller#
 defaultdefaultcontroller::default#
 loggeddefaultcontroller::logged+
 
-getfromurldefaultcontroller::getfromurl"cnameR
+getfromurldefaultcontroller::getfromurl"cname.
 issuview
 commonview
-formissuview::form"
-
-successmsgissuview::successmsg4
+formissuview::form4
 pdfformviewview
 pdfformpdfformview::pdfformÓ
 appregistcontroller

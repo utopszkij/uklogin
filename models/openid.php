@@ -1,43 +1,91 @@
 <?php
-// openid adatmodel oi_users táblát használja
-// két config opció van GDPR=true vagy false
-// a "false" esetben csak a csilaggal jelzett mezőket használjuk (a többi üres)
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * openid adatmodel oi_users táblát használja
+ * két config opció van GDPR=true vagy false
+ *a "false" esetben csak a csilaggal jelzett mezőket használjuk (a többi üres)
+ * @package uklogin
+ * @author Fogler Tibor
+ */
 
+/**
+ * User rekord
+ * @author utopszkij
+ */
 class UserRecord {
-        public $id = 0; // *
-        public $sub = '';  // * hash(id)
-        public $nickname = 'GUEST'; // * bejelentkezési név
-        public $pswhash = ''; // * jelszó sha256 hash
-        public $given_name = ''; // első keresztnév
-        public $middle_name = ''; // második keresztnév
-        public $family_name = ''; // családnév
-        public $mothersname = ''; // anyja neve
-        public $email = ''; // email
-        public $email_verified = 0; // email ellnörzött?
-        public $phone_number = ''; // telefonszám
-        public $phone_number_verified = 0; // telefonszám ellenörzött?
-        public $street_address = ""; // * utca, házszám, emelet
-        public $locality = ''; // * település
-        public $postal_code = ''; // * irányító szám
-        public $birth_date = ''; // születési dátum timestram
-        public $gender = 'man'; // 'man' vagy 'woman'
-        public $picture = ''; // avatar kép uri
-        public $profile = ''; // profil web uri
-        public $updated_at = 0; // utolsó modosítás timestamp
-        public $created_at = 0;
-        public $audited = 0; // * hitelesített vagy nem?
-        public $auditor = ''; // * auditor nick name vagy "ugyfélkapu"
-        public $audit_time = 0; // * auditálás időpontja
-        public $sysadmin = 0;
-        public $code = ''; // * hash(origname.mothersname,birth_date)
-        public $origname = '';
-        public $signdate = ''; // *
+    /** azonosító szám**/
+    public $id = 0; // *
+    /** azonosító kód **/
+    public $sub = '';  // * hash(id)
+    /** bejelentkezési név **/
+    public $nickname = 'GUEST'; // * bejelentkezési név
+    /** jelszó hash **/
+    public $pswhash = ''; // * jelszó sha256 hash
+    /** keresztnév1 **/
+    public $given_name = ''; // első keresztnév
+    /** keresztnév 2**/
+    public $middle_name = ''; // második keresztnév
+    /** családnév **/
+    public $family_name = ''; // családnév
+    /** anyja neve **/
+    public $mothersname = ''; // anyja neve
+    /** email **/
+    public $email = ''; // email
+    /** email ellenörzött **/
+    public $email_verified = 0; // email ellnörzött?
+    /** telefonszám **/
+    public $phone_number = ''; // telefonszám
+    /** telefonszám ellenörzött **/
+    public $phone_number_verified = 0; // telefonszám ellenörzött?
+    /** lakcím utca hézszám stb **/
+    public $street_address = ""; // * utca, házszám, emelet
+    /** település **/
+    public $locality = ''; // * település
+    /** irsz **/
+    public $postal_code = ''; // * irányító szám
+    /** születési dátum **/
+    public $birth_date = ''; // születési dátum timestram
+    /** nem **/
+    public $gender = 'man'; // 'man' vagy 'woman'
+    /** kép url **/
+    public $picture = ''; // avatar kép uri
+    /** profil web oldal url **/
+    public $profile = ''; // profil web uri
+    /** modositva **/
+    public $updated_at = 0; // utolsó modosítás timestamp
+    /** létrehozva **/
+    public $created_at = 0;
+    /** ellenörzött **/
+    public $audited = 0; // * hitelesített vagy nem?
+    /** ellenör **/
+    public $auditor = ''; // * auditor nick name vagy "ugyfélkapu"
+    /** ellenörzés időpontja **/
+    public $audit_time = 0; // * auditálás időpontja
+    /** rendszer admin **/
+    public $sysadmin = 0;
+    /** kód **/
+    public $code = ''; // * hash(origname.mothersname,birth_date)
+    /** születési név **/
+    public $origname = '';
+    /** egyedi kód **/
+    public $signdate = ''; // *
 }
 
+/**
+ * OpenIdModel
+ * @author utopszkij
+ */
 class OpenidModel {
     
+    /**
+     * Tábla név
+     * @var string
+     */
     protected $tableName = 'oi_users';
     
+    /**
+     * konstruktor
+     */
     function __construct() {
         $varchar = 'varchar';
         $int = 'int';

@@ -1,7 +1,22 @@
 <?php 
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * MdView 
+ * @author utopszkij
+ */
 class MdView extends CommonView {
     
+    /**
+     * strong feldolgozása
+     * @param string $l
+     */
     protected function processStrong(string &$l) {
         $i = strpos($l, '**');
         if ($i !== false) {
@@ -13,6 +28,10 @@ class MdView extends CommonView {
         }
     }
     
+    /**
+     * URL feldolgozása
+     * @param string $line
+     */
     protected function processUri(string &$line) {
         $i = strpos($line,'[');
         $j = strpos($line,']');
@@ -25,6 +44,11 @@ class MdView extends CommonView {
         substr($line,$l+1,400);
     }
     
+    /**
+     * Megjelenítés 
+     * @param Params $p
+     * @param string $mdName
+     */
     public function mdShow($p, string $mdName) {
         $this->echoHtmlHead();
         ?>

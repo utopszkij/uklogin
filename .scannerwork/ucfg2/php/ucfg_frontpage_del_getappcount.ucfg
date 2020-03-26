@@ -1,20 +1,14 @@
 
 frontpagemodel::getappcount4
-*/var/www/html/uklogin/models/frontpage.php	 	("1*ƒ
+*/var/www/html/uklogin/models/frontpage.php ("1*ƒ
 14
-*/var/www/html/uklogin/models/frontpage.php
- 
-(#IG
+*/var/www/html/uklogin/models/frontpage.php (#IG
 4
-*/var/www/html/uklogin/models/frontpage.php
- 
-("
+*/var/www/html/uklogin/models/frontpage.php ("
 $table"tablej
 h
 4
-*/var/www/html/uklogin/models/frontpage.php
- 
-("
+*/var/www/html/uklogin/models/frontpage.php ("
 %1"table::__construct*
 
 
@@ -22,13 +16,13 @@ h
 
 'apps'QO
 4
-*/var/www/html/uklogin/models/frontpage.php (
+*/var/www/html/uklogin/models/frontpage.php (
 %2*
 
 
 $table2count">
 4
-*/var/www/html/uklogin/models/frontpage.php (
+*/var/www/html/uklogin/models/frontpage.php (
 
 %2B
 frontpagemodel

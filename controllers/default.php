@@ -1,6 +1,17 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+
+/**
+ *  DefaultController  kezdőlap 
+ */  
 class DefaultController extends Controller {
     
+    /** controller neve */
     protected $cName = 'default';
     
     /**
@@ -21,7 +32,11 @@ class DefaultController extends Controller {
         return curl_exec($ch);
     }
     
-	public function default(RequestObject $request) {
+    /**
+     * kezdőlap megejelenítése
+     * @param Request $request
+     */
+	public function defaultform(Request $request) {
       // echo frontpage
 	    $request->set('sessionid','0');
 		$request->set('lng','hu');

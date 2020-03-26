@@ -1,6 +1,21 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+/**
+ * ImpresszumController osztály
+ * @author utopszkij
+ */
 class ImpresszumController extends Controller {
-	public function show(RequestObject $request) {
+    
+    /**
+     * impresszum képernyő megjelenítése
+     * @param Request $request
+     */
+	public function show(Request $request) {
 	    $this->docPage($request,  'impresszum');
 	}
 }

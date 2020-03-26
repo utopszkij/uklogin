@@ -1,13 +1,25 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 require_once('./vendor/github-client/client/GitHubClient.php');
 
+/** IssuRecord hibajelzés  */
 class IssuRecord {
+    /** cím */
     public $title;
+    /** leírás */
     public $body;
+    /** beküldő neve */
     public $sender;
+    /** beküldő email */
     public $email;
 }
 
+/** IssuModel hibajelzés beküldés */
 class IssuModel {
     /**
      * issu adatok ellenörzése tárolás előtt

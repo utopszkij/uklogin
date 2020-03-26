@@ -1,4 +1,10 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -6,12 +12,16 @@ use PHPMailer\PHPMailer\Exception;
 require './vendor/phpmailer/src/Exception.php';
 require './vendor/phpmailer/src/PHPMailer.php';
 require './vendor/phpmailer/src/SMTP.php';
+require './core/jwe.php';
 
+/** openid user kezelő osztály */
 class OpenidUserController extends Controller {
-    
+    /** osztály név */
     protected $cName = 'openid';
+    /** string konstans */
     protected $LOGGEDUSER = 'loggedUser';
     
+    /** konstruktor */
     function __construct() {
         $this->getModel($this->cName); // adattábla kreálás
     }
@@ -42,19 +52,8 @@ class OpenidUserController extends Controller {
     protected function successLogin($userRec, string $redirect_uri,
                                     string $state, string $nonce) {
        if ($redirect_uri != '') {
-           
-           // id token kialakitása 
-           $tokenHead = base64_encode('{"typ":"JWT", "alg":"SHA256"}');
-           $tokenClam = new StdClass();
-           $tokenClam->sub = $userRec->code;
-           $tokenClam->iss = $userRec->nickname;
-           $tokenClam->aud = 0;
-           $tokenClam->nonce = $nonce;
-           $tokenClam->auth_time = time();
-           $tokenClam->exp = time() + (config('CODE_EXPIRE'));
-           $tokenPlan = base64_encode(JSON_encode($tokenClam));
-           $tokenHash = myHash('sha256',$tokenHead.$tokenPlan);
-           $id_token = $tokenHead.'.'.$tokenPlan.'.'.$tokenHash;
+           $jwt = new JwtModel();
+           $id_token = $jwt->createIdToken($userRec, $nonce);
            if (strpos($redirect_uri, '?') > 0) {
                $redirect_uri .= '&state='.$state;
            } else {
@@ -97,6 +96,7 @@ class OpenidUserController extends Controller {
     /**
      * openid technikai paraméterek ellenörzése
      * @param Params $p
+     * @param AppRecord $client
      */
     protected function openidCheck(Params &$p, AppRecord $client) {
         // ha van valós client_id és nincs redirect_uri megadva,
@@ -327,11 +327,13 @@ class OpenidUserController extends Controller {
       * @param UserRecord $userRec
       * @param Params $p
       * @param Request $request
+      * @param AppRecord $client
+      * @param string $redirect_uri
       */
      protected function successRegist(UserRecord $userRec, 
                                       Params $p, 
                                       Request $request,
-                                      $client,
+                                      AppRecord $client,
                                       string $redirect_uri) {
          if ($p->id == 0)  {
              $url = config('MYDOMAIN').'/opt/openid/emailverify/code/'.$userRec->code;
@@ -472,7 +474,7 @@ class OpenidUserController extends Controller {
                 if ($user->email != '') {
                     sendEmail($user->email, $subject, $body);
                     $p->msgs[] = txt('NEW_PSW_SENDED');
-                    $this->view->successMsg($p->msgs, true);
+                    $this->view->successMsg($p->msgs, '', '', true);
                 } else {
                     $p->msgs[] = txt('EMPTY_EMAIL');
                     $this->view->errorMsg($p->msgs,'','',true);
@@ -499,12 +501,16 @@ class OpenidUserController extends Controller {
         if ($user->id > 0) {
             $user->email_verified = 1;
             $this->model->saveUser($user);
-            $this->view->successMsg([txt('EMAIL_VERIFIED')]);
+            $this->view->successMsg([txt('EMAIL_VERIFIED')],'','',false);
         } else {
             echo 'fatal error';
         }
     }
     
+    /**
+     * profil képernyő tárolása
+     * @param Request $request
+     */
     public function profilesave(Request $request) {
         $p = $this->init($request,['id','email','phone_number',
             'gender','picture','profile','psw1','psw2']);
@@ -527,15 +533,19 @@ class OpenidUserController extends Controller {
             $msg =  $this->model->saveUser($loggedUser);
             $request->sessionSet($this->LOGGEDUSER, $loggedUser);
             if ($msg == '') {
-                $this->view->successMsg([txt('PROFILE_SAVED')]);
+                $this->view->successMsg([txt('PROFILE_SAVED')],'','',true);
             } else {
                 $this->view->errorMsg([txt($msg)]);
             }
         } else {
-            $this->view->errorMsg([txt('ACCESS_VIOLATION')]);
+            $this->view->errorMsg([txt('ACCESS_VIOLATION')],'','',true);
         }
     }
     
+    /**
+     * Fiók adatain json formában
+     * @param Request $request - sessionban loggedUser
+     */
     public function mydata(Request $request) {
         $this->init($request,[]);
         $this->checkCsrToken($request);
@@ -551,6 +561,10 @@ class OpenidUserController extends Controller {
         }
     }
     
+    /**
+     * fiók törlése
+     * @param Request $request - sessionban loggedUser
+     */
     public function delaccount(Request $request) {
         $this->init($request,[]);
         $this->checkCsrToken($request);
@@ -597,6 +611,7 @@ class OpenidUserController extends Controller {
     
 } // OpenidUserController
 
+/** OpenidController osztály */
 class OpenidController extends OpenidUserController {
 
    

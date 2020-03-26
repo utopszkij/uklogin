@@ -1,8 +1,23 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * OpenidView class
+ * @author utopszkij
+ */
 class OpenidView  extends CommonView  {
 	
-    protected function echoMsgs($p) {
+    /**
+     * hibaüzenet megjelenítése
+     * @param Params $p
+     */
+    protected function echoMsgs(Params $p) {
         if (count($p->msgs) > 0) {
 		    	echo '<p class="alert alert-danger">';
 		    	foreach($p->msgs as $msg) {
@@ -317,6 +332,10 @@ class OpenidView  extends CommonView  {
         <?php 
 	}
 	
+	/**
+	 * profil form
+	 * @param Params $data
+	 */
 	public function profileform(Params $data) {
 	    $this->echoHtmlHead($data);
 	    ?>

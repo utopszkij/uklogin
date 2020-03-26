@@ -1,6 +1,21 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+/**
+ * TxtController osztály
+ * @author utopszkij
+ */
 class TxtController extends Controller {
-    public function add(RequestObject $request) {
+
+    /**
+     * Új nyelvi konstans felviteli képernyő
+     * @param Request $request
+     */
+    public function add(Request $request) {
         $token = $request->input('token');
         echo '<!doctype html>
         <html lang="hu">
@@ -20,6 +35,11 @@ class TxtController extends Controller {
         </html>
         ';
     }
+    
+    /**
+     * Újy nyelvi konstans tárolása
+     * @param Request $request
+     */
     public function doadd(Request $request) {
         $lngName = $request->input('lngname');
         $token = $request->input('token');

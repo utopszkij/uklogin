@@ -121,7 +121,7 @@ class Controller implements ControllerObject {
         $request->set('sessionid','0');
         $request->set('lng','hu');
         $view = $this->getView($viewName);
-        $data = new stdClass();
+        $data = new Params();
         $data->option = $request->input('option','default');
         $data->adminNick = $request->sessionGet('adminNick','');
         $data->access_token = $request->sessionGet('access_token','');

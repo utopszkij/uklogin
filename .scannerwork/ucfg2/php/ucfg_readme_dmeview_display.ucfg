@@ -1,27 +1,25 @@
 
 readmeview::display0
-&/var/www/html/uklogin/views/readme.php
- 
-("1*Z
+&/var/www/html/uklogin/views/readme.php ("1*Z
 2
 
 readme.php"G
 0
-&/var/www/html/uklogin/views/readme.php (
+&/var/www/html/uklogin/views/readme.php (
 implicit return*Ç
 10
-&/var/www/html/uklogin/views/readme.php (EC
+&/var/www/html/uklogin/views/readme.php (EC
 0
-&/var/www/html/uklogin/views/readme.php (
+&/var/www/html/uklogin/views/readme.php (
 $view"mdviewZ
 X
 0
-&/var/www/html/uklogin/views/readme.php (
+&/var/www/html/uklogin/views/readme.php (
 %1"mdview::__construct*	
 
 $viewhf
 0
-&/var/www/html/uklogin/views/readme.php (%
+&/var/www/html/uklogin/views/readme.php (%
 %2*	
 
 $view*

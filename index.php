@@ -80,7 +80,7 @@ foreach ($_GET as $name => $value) {
 }
 
 $option = $request->input('option','default');
-$task = $request->input('task','default');
+$task = $request->input('task','defaultform');
 $lng = $request->input('lng',$request->sessionGet('lng','hu'));
 $request->sessionSet('lng',$lng);
 $request->sessionSet('option',$option);
