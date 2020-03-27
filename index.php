@@ -9,6 +9,7 @@ if (isset($_POST['sid'])) {
 include_once './.config.php';
 include_once './core/database.php';
 include_once './core/framework.php';
+include_once './models/uklogin.php';
 ini_set('session.gc_maxlifetime', config('CODE_EXPIRE'));
 session_set_cookie_params(config('CODE_EXPIRE'));
 session_start();
@@ -101,7 +102,9 @@ if (file_exists('./controllers/'.$option.'.php')) {
 	$methods = get_class_methods($controller);
 	
 	if (in_array($task, $methods)) {
-	   $controller->$task ($request);
+	    $ukloginModel = new UkloginModel();
+	    $ukloginModel->init('v1.1');
+	    $controller->$task ($request);
 	} else {
 	    echo 'Fatal error '.$task.' task not found in '.$option.' controller'; exit();
 	}

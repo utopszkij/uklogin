@@ -112,6 +112,10 @@ Az applikációt web felületen lehet regisztrálni. A megadandó adatok:
 - applikációt futtató domain
 - sikeres login utáni visszahívandó url
 - applikáció adminisztrátor username
+- default scope (userinfo tartalma)
+- default adatkezelési leírás URI
+- userinfo formátuma (json string vagy JWE)
+- JWE userinfo kérés esetén a használandó ssh publikus kulcs
 
 A képernyőn van adatkezelés elfogadtatás is.
 
@@ -149,7 +153,7 @@ POST vagy GET pareméterek (url encoded formában):
 
 **policy_uri**  alkalmazás adatkezelési leírása **opcionális de erősen ajánlott**
 
-**scope** alkalmazás által kért user adatok (lásd a **/openid** hívással lekérhető json -ban) **kötelező**
+**scope** alkalmazás által kért user adatok (lásd a **/openid** hívással lekérhető json -ban) **opcionális**
 
 **state** tetszőleges string, ezt is megkapja a redirect_uri **opcionális**
 
@@ -158,11 +162,11 @@ POST vagy GET pareméterek (url encoded formában):
 **response_type** ha szerepel akkor kötelezően: "token id_token" **opcionális**
 
 
-**Regisztrált kliens app** esetén a **redirect_uri** elhagyható, ez esetben a klien regisztrációnál megadottat használjuk.
+**Regisztrált kliens app** esetén a **redirect_uri**, **policy**, **scope** elhagyható, ez esetben a klien regisztrációnál megadottat használjuk. 
 Ha viszont megadunk **redirect_uri** -t annak a kliens regisztrációnál megadott domainben kell lennie.
 
 
-**Nem regisztrált kliensnél** a **redirect_uri** kötelező, **client_id** -ben és a **redirect_uri** -ban egyaránt a visszahívandó URL-t kell szerepeltetni.
+**Nem regisztrált kliensnél** a **redirect_uri**, **scope**, **policy** megadása kötelező, **client_id** -ben és a **redirect_uri** -ban egyaránt a visszahívandó URL-t kell szerepeltetni.
 
 
 A login képernyőn szerepel **"még nincs fiokom, regisztrálok"** link, valamint **"elfelejtettem a jelszavam"** link is. A szerver az ezekre történő kattintást is kezeli.
@@ -226,7 +230,14 @@ POST vagy GET pareméterek:
 
 **access_token**
 
-result a korábbi "authorize" hívásban megadott "scope" paraméterben kért user információk json string formájában.
+result a korábbi "authorize" hívásban vagy a kliens regisztrációban megadott "scope" paraméterben kért user információk json string vagy JWE formájában.
+
+Ha kliens regisztrációban JWE formátum van beállítva akkor a visszadaott string három részből áll, ezek **pont** -al vannak szeparálva. Mindhárom elem külön-külön base64 eljárással kodolva van. Az egyes elemek tartalma:
+
+- JWE header ``` {"alg":"RSA-OAEP", "enc":"A256CBC", "iv":"..."}';
+- egy a kliens regisztrációban megadott publikus kulcsal kodolt "szimetrikus titkositó kulcs"
+- a userinfot tartalmazó JSON string a 2.részben (kodoltan) küldött "szimetrikus titkositó kulccsal" az 1.részben megadott szimetrikus titkosító algoritmussal ("enc") és "iv" -vel titkositva.
+
 
 
 ### GDPR megfelelés

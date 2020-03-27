@@ -92,6 +92,30 @@ class AppregistView  extends CommonView  {
     					<input type="text" name="callback" id="callback" value="{{callback}}" size="100" 
     						placeholder="https://yourdomain.com/index.php?opt=login&task=logged" class="appCallback" />
     				</p>
+
+    				<p>
+    					<label>Alapértelmezett scope</label>
+    					<input type="text" name="scope" value="{{scope}}" size="100" 
+    						placeholder="nickname postal_code locality" class="apppscope" />
+    				</p>
+    				<p>
+    					<label>Adatkezelési leírás URL</label>
+    					<input type="text" name="policy" id="policy" value="{{policy}}" size="100" 
+    						placeholder="" class="apppolicy" />
+    				</p>
+    				<p>
+    					<label>Userinfo formátum</label>
+    					<select name="jwe" id="jwe">
+    					<option value="0"{{jwe0selected}}>JSON string</option>
+    					<option value="1"{{jwe1selected}}>JWE</option>
+    					</select>
+    				</p>
+    				<p>
+    					<label>Publikus 2048 bites SSH key<br />(userinfo JWE kodoláshoz)</label>
+    					<textarea name="pubkey" id="pubkey" cols="80" 
+    					placeholder="{{pubkeyplaceholder}}" 
+    					rows="10">{{pubkey}}</textarea> 
+    				</p>
     				<p style="display:none">
     					<label><?php echo txt('LBL_CSS'); ?></label>
     					<input type="text" name="css" id="css" size="100"  class="appCss" value="{{css}}" />

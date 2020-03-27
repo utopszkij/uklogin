@@ -341,7 +341,7 @@ class DB {
 	/**
 	 * adatbázis tábla kreálása (ha még nem létezik)
 	 * @param string $tableName tábla neve
-	 * @param array $columns [name, ...]
+	 * @param array $columns [[name, type, length, primaryKey], ....]
 	 * @param array $keys [name, ...]
 	 * @return bool
 	 */
@@ -395,11 +395,15 @@ class DB {
 	* tábla egy mezőjének felvétele vagy modosítása
 	* @param string $tableName
 	* @param string $fieldName
-	* @param string $type SQL szintaxis szerint pl: varchat(128)
+	* @param string $type SQL szintaxis szerint pl: varchat
+	* @param int length 
 	* @return bool
 	*/
-	public function alterTable(string $tableName, string $fieldName, string $type): bool {
+	public function alterTable(string $tableName, string $fieldName, string $type, int $length): bool {
 		$result = true;
+		if ($length > 0) {
+		    $type .= '('.$length.')';
+		}
 		$this->setQuery('SHOW COLUMNS FROM `'.$tableName .'` LIKE "'.$fieldName.'"');
 		$res = $this->loadObject();	
 		if ($res) {

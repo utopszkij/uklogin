@@ -68,6 +68,18 @@ class AppregistController extends Controller {
 		$data->psw2 = '';
 		$data->oldpsw = '';
 		$data->admin = $request->sessionGet('adminNick','');
+		$data->pubkey = $request->input('pubkey','');
+		$data->policy = $request->input('policy','');
+		$data->scope = $request->input('scope','');
+		$data->jwe = $request->input('jwe',0);
+		$data->pubkeyplaceholder = "-----BEGIN PUBLIC KEY-----\n....\n....\n-----END PUBLIC KEY-----";
+		if ($data->jwe == 0) {
+		    $data->jwe0selected = ' selected="selected"';
+		    $data->jwe1selected = '';
+		} else {
+		    $data->jwe1selected = ' selected="selected"';
+		    $data->jwe0selected = '';
+		}
 		$data->adminFalseLoginLimit = $request->input('adminFalseLoginLimit','5');
 		$data->adminLoginEnabled = $request->input('adminLoginEnabled','1');
 		$data->adminNick = $request->sessionGet('adminNick','');

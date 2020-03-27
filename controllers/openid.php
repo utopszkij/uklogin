@@ -13,6 +13,7 @@ require './vendor/phpmailer/src/Exception.php';
 require './vendor/phpmailer/src/PHPMailer.php';
 require './vendor/phpmailer/src/SMTP.php';
 require './core/jwe.php';
+require './models/appregist.php';
 
 /** openid user kezelő osztály */
 class OpenidUserController extends Controller {
@@ -99,10 +100,16 @@ class OpenidUserController extends Controller {
      * @param AppRecord $client
      */
     protected function openidCheck(Params &$p, AppRecord $client) {
-        // ha van valós client_id és nincs redirect_uri megadva,
-        // akkor client->callback -ot kell visszahívni
+        // ha van valós client_id és nincs redirect_uri, policy, scope megadva,
+        // akkor client->callback -ot kell visszahívni ill az clientben lévő adatokat kell használni
         if (($client->id > 0) & ($p->redirect_uri == '')) {
             $p->redirect_uri = $client->callback;
+        }
+        if (($client->id > 0) & ($p->policy == '')) {
+            $p->policy = $client->policy;
+        }
+        if (($client->id > 0) & ($p->scope == '')) {
+            $p->scope = $client->scope;
         }
         
         // ha van valós client_id akkor annak domainjében kell leniie a callback_uri -nak
@@ -692,46 +699,58 @@ class OpenidController extends OpenidUserController {
     }
     
 	/**
-	 * openid végpont user információk kérése
-	 * json formában a sessionban lévő scope -ban kért adatokat adja vissza
-	 * @param Request $request - access_token
+	 * openid végpont user információk kérése az érkező access_token paraméter valójában session_id ide kell átváltani.
+	 * ebben a sessinban van scope, client_id, loggedUser ennek alapján vagy
+	 * json formában vagy JWE formában adja vissza a scope -ban kért adatokat.
+	 * @param Request $request - access_token,   sessionban logged_user, client_id, scope
 	 * @return void
 	 */
 	public function userinfo(Request $request) {
 	    $this->init($request, []);
-	    if (!headers_sent()) {
-	        header('Content-Type: application/json');
-	    }
 	    $access_token = $request->input('access_token');
-	    // access_token paraméterben a session_id érkezett, 
-	    // sessionhoz kapcsolódás, a loggedUser a sessionban van.
 	    $this->sessionChange($access_token, $request);
+	    $client_id = $request->sessionGet('client_id');
+	    $client = $this->model->getApp($client_id);
 	    $user = $request->sessionGet($this->LOGGEDUSER, new UserRecord());
 	    $scope = $request->sessionGet('scope');
+	    $userInfo = '';
 	    if ($user->id > 0) {
 	        $user = $this->model->getUserByNick($user->nickname);
-    	    $w = explode(' ',
-    	        str_replace('openid',
-    	            'sub nickname address email email_verified name '.
-    	            'picture birth_date phone_number phone_number_verified updated_at',
-    	            $scope));
-    	    echo '{';
-    	    foreach ($w as $item) {
-    	        if ($item == 'name') {
-    	            if ($user->middle_name == '') {
-    	                echo '"name":"'.$user->family_name.' '.$user->given_name.'",';
-    	            } else {
-    	                echo '"name":"'.$user->family_name.' '.$user->middle_name.' '.$user->given_name.'",';
-    	            }
-    	        } else if ($item == 'address') {
-    	            echo '"address":"'.$user->postal_code.' '.$user->locality.' '.$user->street_address.'",';
-    	        } else if (isset($user->$item)) {
-    	            echo '"'.$item.'":"'.$user->$item.'",';
-    	        }
-    	    }
-    	    echo '"time":"'.date('Y.m.d h:i:s').'"}';
+	        $w = explode(' ',
+	            str_replace('openid',
+	                'sub nickname address email email_verified name '.
+	                'picture birth_date phone_number phone_number_verified updated_at',
+	                $scope));
+	        
+	        $userInfo = '{';
+	        foreach ($w as $item) {
+	            if ($item == 'name') {
+	                if ($user->middle_name == '') {
+	                    $userInfo .= '"name":"'.$user->family_name.' '.$user->given_name.'",';
+	                } else {
+	                    $userInfo .= '"name":"'.$user->family_name.' '.$user->middle_name.' '.$user->given_name.'",';
+	                }
+	            } else if ($item == 'address') {
+	                $userInfo .= '"address":"'.$user->postal_code.' '.$user->locality.' '.$user->street_address.'",';
+	            } else if (isset($user->$item)) {
+	                $userInfo .= '"'.$item.'":"'.$user->$item.'",';
+	            }
+	        }
+	        $userInfo .= '"time":"'.date('Y.m.d h:i:s').'"}';
 	    } else {
-	        echo '{"error":"not found"}';
+	        $userInfo = '{"error":"not found"}';
+	    }
+	    if ($client->jwe == 1) {
+	        $jwe = new JweModel();
+	        if (!headers_sent()) {
+	            header('Content-Type: text/plain');
+	        }
+	        echo $jwe->encrypt($userInfo, $client->pubkey, 'A256CBC');
+	    } else {
+	        if (!headers_sent()) {
+	            header('Content-Type: application/json');
+	        }
+	        echo $userInfo;
 	    }
 	}
 
