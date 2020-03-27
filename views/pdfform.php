@@ -1,8 +1,18 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
 
+/** PdfformView osztály */
 class PdfformView extends View {
 	
-	public function pdfForm($p) {
+    /**
+     * pdf feldolgozás képernyője
+     * @param Params $p
+     */
+	public function pdfForm(Params $p) {
 		echo '
 		<html>
 		  <head>

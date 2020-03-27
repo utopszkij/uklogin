@@ -1,6 +1,20 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
 
+/**
+ * JweModel titkositott Json web objekt kezelés
+ * @author utopszkij
+ */
 class JweModel {
+    
+    /**
+     * szinkron kodolási eljárások
+     * @var array
+     */
 	private $ciphers = [
 		"A128CBC" => "aes-128-cbc",
 		"A256CBC" => "aes-256-cbc",
@@ -10,19 +24,29 @@ class JweModel {
 		"A256CTR" => "aes-256-ctrc"
 	];
 	
+    /**
+     * base64 kodolás
+     * @param mixed $data
+     * @return string
+     */
 	public function base64url_encode($data) { 
 	    return rtrim(strtr(base64_encode($data), '+/', '-_'), '='); 
 	} 
 	
+	/**
+	 * base64 dekodolás
+	 * @param mixed $data
+	 * @return string
+	 */
 	public function base64url_decode($data) { 
 	    return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT)); 
 	}
 
 	/**
 	* kodolt jwe string előállítása
-	* @param $data
-	* @param $pubKey  ssh pulikus julcs
-	* @param $enc     syzimetrikus kodolási algoritmus (lásd $this->ciphers)
+	* @param string $data
+	* @param string $pubKey  ssh pulikus julcs
+	* @param string $enc     syzimetrikus kodolási algoritmus (lásd $this->ciphers)
 	*/
 	public function encrypt(string $data, string $pubKey, string $enc): string {
 		if (isset($this->ciphers[$enc])) {
@@ -45,8 +69,8 @@ class JweModel {
 
 	/**
 	* jwe string dekodolása
-	* @param $jwe
-	* @param $privKey  ssh privát julcs
+	* @param string $jwe
+	* @param string $privKey  ssh privát julcs
 	*/
 	public function decrypt(string $jwe, string $privKey): string {
 		$decrypted = 'error';	   
@@ -70,6 +94,68 @@ class JweModel {
 		}         
 		return $decrypted;                             	
 	}
+} // JweModel
+
+/** JWT model osztály nem titkositott Json web objekt kezelés */
+class JwtModel {
+    
+    /**
+     * JWT token előállítása
+     * @param string $tokenPlan
+     * @return string
+     */
+    public function encrypt(string $tokenPlan): string {
+        $tokenHead = base64_encode('{"typ":"JWT", "alg":"SHA256"}');
+        $tokenHash = myHash('sha256',$tokenHead.$tokenPlan);
+        return  $tokenHead.'.'.base64_encode($tokenPlan).'.'.$tokenHash;
+        
+    }
+    
+    /**
+     * JWT dekodolása
+     * @param string $jwt
+     * @return string plan
+     */
+    public function decrypt(string $jwt): string {
+        $w = explode('.',$jwt);
+        $tokenHead = JSON_decode(base64_decode($w[0]));
+        $alg = $tkoenHead->alg;
+        $result = '';
+        $result = base64_decode($w[1]);
+        if ($w[2] != myHash($alg, $w[0], $result)) {
+            $result = 'error';
+        }
+        return $result;
+    }
+    
+    /**
+     * JWT formátumú id_token kialakitása
+     * @param UserRecord $userRec
+     * @param string $nonce
+     * @return string
+     */
+    public function createIdToken(UserRecord $userRec, string $nonce): string {
+        $tokenClam = new StdClass();
+        $tokenClam->sub = $userRec->code;
+        $tokenClam->iss = $userRec->nickname;
+        $tokenClam->aud = 0;
+        $tokenClam->nonce = $nonce;
+        $tokenClam->auth_time = time();
+        $tokenClam->exp = time() + (config('CODE_EXPIRE'));
+        $tokenPlan = JSON_encode($tokenClam);
+        return $this->encrypt($tokenPlan);
+    }
+    
+    /**
+     * JWT fomátumú id_token dekodolása
+     * @param string $idToken
+     * @return object {sub, iss, aud, nonce, auth_time, exp}
+     */
+    public function decryptIdToken(string $idToken) {
+        $plan = $this->decrypt($idToken);
+        return JSON_decode($plan);
+    }
+    
 }
 
 ?>

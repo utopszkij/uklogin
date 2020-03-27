@@ -1,74 +1,39 @@
 <?php
-/** mysql database interface 
-*
-* requed DEFINE: MYSQLHOST, MYSQLUSER, MYSQLPSW, MYSQLDB, MYSQLLOG;
-*
-* DB class
-*    setQuery($sqlStr)
-*    getQuery() : sqlStr
-*    statement() : bool
-*    loadObject() : recordObject
-*    loadObjectList() : Array of recordObjects
-*    getErrorNum() : numeric
-*    getErrorMsg() : string
-*    table($tableName, $alias='', $columns='*') : Table
-*    filter($tableName, $alias='', $columns='*') : Filter
-*    transaction(function);
-*	  createTable($tableName, $columns, $keys): bool 
-*	  dropTable($tableName): bool 
-*	  emptyTable($tableName): bool
-*    alterTable($fieldName, $type): bool 
-* Table class
-*    __construc($fromStr|$table, $alias='')
-*    setFromSubselect($table, $alias)
-*    setColumns($str);
-*    where($whereStr or [field, value] or [field, relStr, value]) or Relation  : Table 
-*    orWhere($whereStr or [field, value] or [field, relStr, value]) or Relation: Table
-*    group([field, field, ...]) : table   
-*    having($whereStr or [field, value] or [field, relStr, value]) or Relation : Table 
-*    orHaving($whereStr or [field, value] or [field, relStr, value]) or Relation : Table
-*    offset($num) : Table
-*    limit($num) : Table
-*    order([fild, filed,...]) : Table
-*    get() : array of RecordsObject
-*    first() : recordObject
-*    count() : numeric 
-*    update(record)
-*    insert(record)
-*    delete()
-*    getInsertedId() : numeric
-* Filer class
-*    __construc($fromStr|$table, $alias='')
-*    join($type, $tableName, $alias, $onStr) : Filter;
-*    where($whereStr or [field, value] vagy [field, relStr, value]) : Filter 
-*    orWhere($whereStr or [field, value] vagy [field, relStr, value]) : Filter
-*    group([field, field, ...]) : Filter   
-*    having($whereStr or [field, value] vagy [field, relStr, value]) : Filter 
-*    orHaving($whereStr or [field, value] vagy [field, relStr, value]) : Filter
-*    offset($num) : Filter
-*    limit($num): Filter
-*    order([fild, filed,...]) : Filter
-*    get() : array of RecordsObject
-*    first() : recordObject
-*    count() : numeric 
-*
-* global $dbResult array használható UNITTEST -hez
-* 
-* Licensz: GNU/GPL
-* Szerző: Fogler Tibor    tibor.fogler@gmail.com
-*/
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 define('NONE','_none_');
 define('WHERE',' WHERE ');
 global $mysqli;
 $mysqli = new mysqli(config('MYSQLHOST'), config('MYSQLUSER'), config('MYSQLPSW'));
 
+/**
+ * SQL feltétel osztály
+ * @author utopszkij
+ */
 class Relation {
+    /** reláció */
     public $concat = ''; // 'AND' | 'OR' | ''
+    /** relációk */
     public $relations = false; // false | array of Relation
+    /** mező név */
     public $fieldName = '';
+    /** relációs jel */
     public $rel = ''; // '<' | '<=' | '=' | ">=' | '>' | '<>' | ''
+    /** érték */
     public $value = '';
     
+    /**
+     * konstruktor
+     * @param string $concat
+     * @param array $relations
+     * @param string $fieldName
+     * @param string $rel
+     * @param string $value
+     */
     function __construct(string $concat = '',
                          array $relations = [],
                          string $fieldName = '',
@@ -107,6 +72,7 @@ class Relation {
     }
 }
 
+/** adatbázis kezelő osztály */
 class DB {
    /**
     * php mysqli handler
@@ -138,6 +104,9 @@ class DB {
     */
    protected $inTransaction = false;
     
+   /**
+    * konstruktor
+    */
    function __construct() {
        $this->connect();
        $this->errorMsg = '';
@@ -145,6 +114,9 @@ class DB {
        $this->inTransaction = false;
    }
    
+   /**
+    * kapcsolodás az sql szerverhez
+    */
    public function connect() {
        global $mysqli;
        $mysqli->query($mysqli->real_escape_string('CREATE DATABASE IF NOT EXISTS '. config('MYSQLDB')));
@@ -213,6 +185,7 @@ class DB {
         $this->writeLog();
         return $result;
 	}
+	
     /**
      * sql log írása
      */
@@ -229,7 +202,6 @@ class DB {
             fclose($fp);
         }
      }
-
 	
 	/**
 	 * load one record by $this->sqlString or from $dbResult
@@ -340,7 +312,7 @@ class DB {
 
 	/**
 	 * create new Filter object
-	 * @param string $formStr
+	 * @param string $fromStr
 	 * @param string $alias OPTIONAL default=''
 	 * @param string $columns OPTIONAL default='*'
 	 * @return Filter
@@ -368,8 +340,9 @@ class DB {
 	
 	/**
 	 * adatbázis tábla kreálása (ha még nem létezik)
-	 * @param array $columns [[string name, string type, number len, bool autoIncPrimary], ...]
-	 * @param array $keys [nam, ...]
+	 * @param string $tableName tábla neve
+	 * @param array $columns [[name, type, length, primaryKey], ....]
+	 * @param array $keys [name, ...]
 	 * @return bool
 	 */
 	public function createTable(string $tableName, array $columns, array $keys): bool {
@@ -421,12 +394,16 @@ class DB {
 	/**
 	* tábla egy mezőjének felvétele vagy modosítása
 	* @param string $tableName
-	* @param string $filedName
-	* @param string $type SQL szintaxis szerint pl: varchat(128)
+	* @param string $fieldName
+	* @param string $type SQL szintaxis szerint pl: varchat
+	* @param int length 
 	* @return bool
 	*/
-	public function alterTable(string $tableName, string $fieldName, string $type): bool {
+	public function alterTable(string $tableName, string $fieldName, string $type, int $length): bool {
 		$result = true;
+		if ($length > 0) {
+		    $type .= '('.$length.')';
+		}
 		$this->setQuery('SHOW COLUMNS FROM `'.$tableName .'` LIKE "'.$fieldName.'"');
 		$res = $this->loadObject();	
 		if ($res) {
@@ -441,9 +418,9 @@ class DB {
 		return $result;
 	} 
 	
-	
 } // DB
 
+/** tábla kezelő objektum */
 class SimpleTable extends DB {
    /**
     * sql from string
@@ -512,6 +489,7 @@ class SimpleTable extends DB {
    protected $limit = 0;
    
    /**
+    * konstruktor
     * @param string|Table $from
     * @param string $alias
     */
@@ -542,10 +520,18 @@ class SimpleTable extends DB {
 		return $this;	
 	}
 
+	/**
+	 * lekérdezés oszlopainak definiálása
+	 * @param string $columns
+	 */
 	public function setColumns(string $columns) {
 	    $this->columns = $columns;
 	}
 	
+	/**
+	 * SQL lekérdezése
+	 * @return string
+	 */
 	public function getSql() {
 	    $this->createWhereHavingStr();
 	    if ($this->whereStr == '') {
@@ -580,8 +566,9 @@ class SimpleTable extends DB {
 		$this->setQuery($sqlStr);
 		return $this->loadObjectList();
 	}
+	
     /**
-     * 
+     * sql where / having str előállítása
      */
      protected function createWhereHavingStr() {
         $this->whereStr = '';
@@ -789,6 +776,7 @@ class SimpleTable extends DB {
 	
 } // SimpleTable
 
+/** SQL tábla kezelő  osztály */
 class Table extends SimpleTable {
 
     /**
@@ -869,6 +857,7 @@ class Table extends SimpleTable {
     
 }
 
+/** Komplex sql lekérdezés */
 class Filter extends Table {
     /**
      * array of objects
@@ -894,6 +883,10 @@ class Filter extends Table {
 		return $this;
 	}
 	
+	/**
+	 * SQL string lekérdezése
+	 * @return string
+	 */
 	public function getSql():string {
 	    $this->createWhereHavingStr();
 	    if ($this->whereStr == '') {

@@ -1,4 +1,10 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 // issu
 DEFINE('LBL_ISSU','Bug report');
 DEFINE('LBL_ISSU_TITLE','Subject *');

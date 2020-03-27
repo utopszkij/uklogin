@@ -1,4 +1,10 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -6,12 +12,17 @@ use PHPMailer\PHPMailer\Exception;
 require './vendor/phpmailer/src/Exception.php';
 require './vendor/phpmailer/src/PHPMailer.php';
 require './vendor/phpmailer/src/SMTP.php';
+require './core/jwe.php';
+require './models/appregist.php';
 
+/** openid user kezelő osztály */
 class OpenidUserController extends Controller {
-    
+    /** osztály név */
     protected $cName = 'openid';
+    /** string konstans */
     protected $LOGGEDUSER = 'loggedUser';
     
+    /** konstruktor */
     function __construct() {
         $this->getModel($this->cName); // adattábla kreálás
     }
@@ -42,19 +53,8 @@ class OpenidUserController extends Controller {
     protected function successLogin($userRec, string $redirect_uri,
                                     string $state, string $nonce) {
        if ($redirect_uri != '') {
-           
-           // id token kialakitása 
-           $tokenHead = base64_encode('{"typ":"JWT", "alg":"SHA256"}');
-           $tokenClam = new StdClass();
-           $tokenClam->sub = $userRec->code;
-           $tokenClam->iss = $userRec->nickname;
-           $tokenClam->aud = 0;
-           $tokenClam->nonce = $nonce;
-           $tokenClam->auth_time = time();
-           $tokenClam->exp = time() + (config('CODE_EXPIRE'));
-           $tokenPlan = base64_encode(JSON_encode($tokenClam));
-           $tokenHash = myHash('sha256',$tokenHead.$tokenPlan);
-           $id_token = $tokenHead.'.'.$tokenPlan.'.'.$tokenHash;
+           $jwt = new JwtModel();
+           $id_token = $jwt->createIdToken($userRec, $nonce);
            if (strpos($redirect_uri, '?') > 0) {
                $redirect_uri .= '&state='.$state;
            } else {
@@ -97,12 +97,19 @@ class OpenidUserController extends Controller {
     /**
      * openid technikai paraméterek ellenörzése
      * @param Params $p
+     * @param AppRecord $client
      */
     protected function openidCheck(Params &$p, AppRecord $client) {
-        // ha van valós client_id és nincs redirect_uri megadva,
-        // akkor client->callback -ot kell visszahívni
+        // ha van valós client_id és nincs redirect_uri, policy, scope megadva,
+        // akkor client->callback -ot kell visszahívni ill az clientben lévő adatokat kell használni
         if (($client->id > 0) & ($p->redirect_uri == '')) {
             $p->redirect_uri = $client->callback;
+        }
+        if (($client->id > 0) & ($p->policy == '')) {
+            $p->policy = $client->policy;
+        }
+        if (($client->id > 0) & ($p->scope == '')) {
+            $p->scope = $client->scope;
         }
         
         // ha van valós client_id akkor annak domainjében kell leniie a callback_uri -nak
@@ -327,11 +334,13 @@ class OpenidUserController extends Controller {
       * @param UserRecord $userRec
       * @param Params $p
       * @param Request $request
+      * @param AppRecord $client
+      * @param string $redirect_uri
       */
      protected function successRegist(UserRecord $userRec, 
                                       Params $p, 
                                       Request $request,
-                                      $client,
+                                      AppRecord $client,
                                       string $redirect_uri) {
          if ($p->id == 0)  {
              $url = config('MYDOMAIN').'/opt/openid/emailverify/code/'.$userRec->code;
@@ -472,7 +481,7 @@ class OpenidUserController extends Controller {
                 if ($user->email != '') {
                     sendEmail($user->email, $subject, $body);
                     $p->msgs[] = txt('NEW_PSW_SENDED');
-                    $this->view->successMsg($p->msgs, true);
+                    $this->view->successMsg($p->msgs, '', '', true);
                 } else {
                     $p->msgs[] = txt('EMPTY_EMAIL');
                     $this->view->errorMsg($p->msgs,'','',true);
@@ -499,12 +508,16 @@ class OpenidUserController extends Controller {
         if ($user->id > 0) {
             $user->email_verified = 1;
             $this->model->saveUser($user);
-            $this->view->successMsg([txt('EMAIL_VERIFIED')]);
+            $this->view->successMsg([txt('EMAIL_VERIFIED')],'','',false);
         } else {
             echo 'fatal error';
         }
     }
     
+    /**
+     * profil képernyő tárolása
+     * @param Request $request
+     */
     public function profilesave(Request $request) {
         $p = $this->init($request,['id','email','phone_number',
             'gender','picture','profile','psw1','psw2']);
@@ -527,15 +540,19 @@ class OpenidUserController extends Controller {
             $msg =  $this->model->saveUser($loggedUser);
             $request->sessionSet($this->LOGGEDUSER, $loggedUser);
             if ($msg == '') {
-                $this->view->successMsg([txt('PROFILE_SAVED')]);
+                $this->view->successMsg([txt('PROFILE_SAVED')],'','',true);
             } else {
                 $this->view->errorMsg([txt($msg)]);
             }
         } else {
-            $this->view->errorMsg([txt('ACCESS_VIOLATION')]);
+            $this->view->errorMsg([txt('ACCESS_VIOLATION')],'','',true);
         }
     }
     
+    /**
+     * Fiók adatain json formában
+     * @param Request $request - sessionban loggedUser
+     */
     public function mydata(Request $request) {
         $this->init($request,[]);
         $this->checkCsrToken($request);
@@ -551,6 +568,10 @@ class OpenidUserController extends Controller {
         }
     }
     
+    /**
+     * fiók törlése
+     * @param Request $request - sessionban loggedUser
+     */
     public function delaccount(Request $request) {
         $this->init($request,[]);
         $this->checkCsrToken($request);
@@ -597,6 +618,7 @@ class OpenidUserController extends Controller {
     
 } // OpenidUserController
 
+/** OpenidController osztály */
 class OpenidController extends OpenidUserController {
 
    
@@ -677,46 +699,58 @@ class OpenidController extends OpenidUserController {
     }
     
 	/**
-	 * openid végpont user információk kérése
-	 * json formában a sessionban lévő scope -ban kért adatokat adja vissza
-	 * @param Request $request - access_token
+	 * openid végpont user információk kérése az érkező access_token paraméter valójában session_id ide kell átváltani.
+	 * ebben a sessinban van scope, client_id, loggedUser ennek alapján vagy
+	 * json formában vagy JWE formában adja vissza a scope -ban kért adatokat.
+	 * @param Request $request - access_token,   sessionban logged_user, client_id, scope
 	 * @return void
 	 */
 	public function userinfo(Request $request) {
 	    $this->init($request, []);
-	    if (!headers_sent()) {
-	        header('Content-Type: application/json');
-	    }
 	    $access_token = $request->input('access_token');
-	    // access_token paraméterben a session_id érkezett, 
-	    // sessionhoz kapcsolódás, a loggedUser a sessionban van.
 	    $this->sessionChange($access_token, $request);
+	    $client_id = $request->sessionGet('client_id');
+	    $client = $this->model->getApp($client_id);
 	    $user = $request->sessionGet($this->LOGGEDUSER, new UserRecord());
 	    $scope = $request->sessionGet('scope');
+	    $userInfo = '';
 	    if ($user->id > 0) {
 	        $user = $this->model->getUserByNick($user->nickname);
-    	    $w = explode(' ',
-    	        str_replace('openid',
-    	            'sub nickname address email email_verified name '.
-    	            'picture birth_date phone_number phone_number_verified updated_at',
-    	            $scope));
-    	    echo '{';
-    	    foreach ($w as $item) {
-    	        if ($item == 'name') {
-    	            if ($user->middle_name == '') {
-    	                echo '"name":"'.$user->family_name.' '.$user->given_name.'",';
-    	            } else {
-    	                echo '"name":"'.$user->family_name.' '.$user->middle_name.' '.$user->given_name.'",';
-    	            }
-    	        } else if ($item == 'address') {
-    	            echo '"address":"'.$user->postal_code.' '.$user->locality.' '.$user->street_address.'",';
-    	        } else if (isset($user->$item)) {
-    	            echo '"'.$item.'":"'.$user->$item.'",';
-    	        }
-    	    }
-    	    echo '"time":"'.date('Y.m.d h:i:s').'"}';
+	        $w = explode(' ',
+	            str_replace('openid',
+	                'sub nickname address email email_verified name '.
+	                'picture birth_date phone_number phone_number_verified updated_at',
+	                $scope));
+	        
+	        $userInfo = '{';
+	        foreach ($w as $item) {
+	            if ($item == 'name') {
+	                if ($user->middle_name == '') {
+	                    $userInfo .= '"name":"'.$user->family_name.' '.$user->given_name.'",';
+	                } else {
+	                    $userInfo .= '"name":"'.$user->family_name.' '.$user->middle_name.' '.$user->given_name.'",';
+	                }
+	            } else if ($item == 'address') {
+	                $userInfo .= '"address":"'.$user->postal_code.' '.$user->locality.' '.$user->street_address.'",';
+	            } else if (isset($user->$item)) {
+	                $userInfo .= '"'.$item.'":"'.$user->$item.'",';
+	            }
+	        }
+	        $userInfo .= '"time":"'.date('Y.m.d h:i:s').'"}';
 	    } else {
-	        echo '{"error":"not found"}';
+	        $userInfo = '{"error":"not found"}';
+	    }
+	    if ($client->jwe == 1) {
+	        $jwe = new JweModel();
+	        if (!headers_sent()) {
+	            header('Content-Type: text/plain');
+	        }
+	        echo $jwe->encrypt($userInfo, $client->pubkey, 'A256CBC');
+	    } else {
+	        if (!headers_sent()) {
+	            header('Content-Type: application/json');
+	        }
+	        echo $userInfo;
 	    }
 	}
 

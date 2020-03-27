@@ -1,13 +1,24 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * AppregistView osztály
+ * @author utopszkij
+ */
 class AppregistView  extends CommonView  {
 	/**
 	* echo html page
-	* @param object $p
+	* @param Params $p
 	* @return void
 	*/
-	public function form($p) {
-	    $this->echoHtmlHead();
+	public function form(Params $p) {
+	    $this->echoHtmlHead($p);
 	    ?>
         <body ng-app="app">
 	    <?php $this->echoNavbar($p); ?>
@@ -81,6 +92,30 @@ class AppregistView  extends CommonView  {
     					<input type="text" name="callback" id="callback" value="{{callback}}" size="100" 
     						placeholder="https://yourdomain.com/index.php?opt=login&task=logged" class="appCallback" />
     				</p>
+
+    				<p>
+    					<label>Alapértelmezett scope</label>
+    					<input type="text" name="scope" value="{{scope}}" size="100" 
+    						placeholder="nickname postal_code locality" class="apppscope" />
+    				</p>
+    				<p>
+    					<label>Adatkezelési leírás URL</label>
+    					<input type="text" name="policy" id="policy" value="{{policy}}" size="100" 
+    						placeholder="" class="apppolicy" />
+    				</p>
+    				<p>
+    					<label>Userinfo formátum</label>
+    					<select name="jwe" id="jwe">
+    					<option value="0"{{jwe0selected}}>JSON string</option>
+    					<option value="1"{{jwe1selected}}>JWE</option>
+    					</select>
+    				</p>
+    				<p>
+    					<label>Publikus 2048 bites SSH key<br />(userinfo JWE kodoláshoz)</label>
+    					<textarea name="pubkey" id="pubkey" cols="80" 
+    					placeholder="{{pubkeyplaceholder}}" 
+    					rows="10">{{pubkey}}</textarea> 
+    				</p>
     				<p style="display:none">
     					<label><?php echo txt('LBL_CSS'); ?></label>
     					<input type="text" name="css" id="css" size="100"  class="appCss" value="{{css}}" />
@@ -144,48 +179,6 @@ class AppregistView  extends CommonView  {
         </body>
         </html>
         <?php 		
-	}
-	
-	/**
-	 * echo succes message after add or update new app
-	 * @param object $res {client_id, client_secret
-	 * @return void;}
-	 */
-	public function AppsuccessMsg($res) {
-	    $this->echoHtmlHead();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($res); ?>
-	    <div class="savedMsg" id="scope">
-	    	<h2 class="alert alert-success"><?php echo txt('APPSAVED'); ?></h2>
-	    	<p>Client_id: <?php echo $res->client_id; ?></p>
-	    	<p>Client_secret: <?php echo $res->client_secret; ?></p>
-	    	<p><?php echo txt('ADMININFO'); ?></p>
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-	    <?php 
-	}
-	
-	/**
-	 * echo not found error
-	 * @param string $msg
-	 * @return void
-	 */
-	public function removedMsg($rec) {
-	    $this->echoHtmlHead();
-	    ?>
-        <body ng-app="app">
-	    <?php $this->echoNavbar($rec); ?>
-	    <div class="successMsg" id="scope">
-	    <h2 class="alert alert-success"><?php echo txt('APPREMOVED'); ?></h2>
-	    <p><?php echo $rec->name; ?></p>
-	    </div>
-		<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 
 	}
 	
 }

@@ -1,14 +1,24 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * issu bekérő form megjelenités objektum osztály
+ */
 class IssuView  extends CommonView  {
 	
     /**
-	* echo html form
-	* @param object $p  {msgs, title, body, sender, email}
-	* @return void
-	*/
-	public function form($p) {
-	    $this->echoHtmlHead();
+	 * echo html form
+	 * @param object $p  {msgs, title, body, sender, email}
+	 * @return void
+	 */
+	public function form(Params $p) {
+	    $this->echoHtmlHead($p);
 	    $p->adminNick = '';
 	    $this->echoNavbar($p);
 	    ?>
@@ -61,30 +71,6 @@ class IssuView  extends CommonView  {
         <?php 		
 	}
 	
-	/**
-	 * echo sikeressen tárolva üzenet
-	 * @return void;
-	 */
-	public function successMsg(array $msgs = [], bool $navbar = true) {
-	    global $REQUEST;
-	    $this->echoHtmlHead();
-	    if ($navbar) {
-	        $p = new stdClass();
-	        $p->adminNick = $REQUEST->sessionGet('adminNick');
-	        $p->access_token = $REQUEST->sessionGet('access_token');
-	        $this->echoNavbar($p);
-	    }
-	    ?>
-        <body ng-app="app">
-    	    <div ng-controller="ctrl" id="scope" style="display:block" class="successMsg">
-        	    <h2><?php echo txt('LBL_ISSU'); ?></h2>
-        	    <h2 class="alert alert-success"><?php echo txt('ISSU_SAVED'); ?></h2>
-    	    </div>
-	    	<?php $this->echoFooter(); ?>
-        </body>
-        </html>
-        <?php 		
-	}
 }
 ?>
 

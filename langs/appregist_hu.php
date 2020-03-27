@@ -1,4 +1,10 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 // formApp
 DEFINE('LBL_APPDATAS','Applikáció adatai');
 DEFINE('LBL_APPADMIN','Applikáció menedzser');

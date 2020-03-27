@@ -1,18 +1,46 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+/**
+ * AppRecord 
+ */
 class AppRecord {
+    /** egyedi kulcs */
     public $id = 0;
+    /** megnevezés */
     public $name = '';
+    /** client_id */
     public $client_id = '';
+    /** client_secret (régi Oauth2 müködéshez kellett) */
     public $client_secret = '';
+    /** client domain URL */
     public $domain = '';
+    /** sikeres login után visszahivandó URL (redirect_uri) */
     public $callback = '';
+    /** css file */
     public $css = '';
+    /** hibás bejelentkezési limit (későbbi esetleges továbbfejlesztéshez) */
     public $falseLoginLimit = 5;
+    /** cliens adminisztrátor nickname */
     public $admin = '';
+    /** userinfo output format 0-json string, 1-JWE */
+    public $jwe = 0;
+    /** public key */
+    public $pubkey = '';
+    /** adatkezelési leírás URL */
+    public $policy = '';
+    /** default scope */
+    public $scope = '';
 }
 
+/** AppRegistModel osztály */
 class AppregistModel extends Model {
     
+    /** konstruktor */
     function __construct() {
         $db = new DB();
         // ha még nincs tábl létrehozzuk
@@ -27,6 +55,10 @@ class AppregistModel extends Model {
             `css` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
             `falseLoginLimit` int(11) NOT NULL,
             `admin` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
+            `pupkey` text  COLLATE utf8_hungarian_ci NOT NULL,
+            `policy` varchar(80) COLLATE utf8_hungarian_ci NOT NULL,
+            `scope` varchar(128) COLLATE utf8_hungarian_ci NOT NULL,
+            `jwe` int(1) NOT NULL,
             PRIMARY KEY (`id`),
             KEY `app_idx_client_id` (`client_id`),
             KEY `app_idx_domain` (`domain`)
@@ -38,7 +70,8 @@ class AppregistModel extends Model {
             $db->exec('INSERT INTO apps VALUES (
             0,"uklogin","12","13",
             "'.MYDOMAIN.'",
-            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"6766487"
+            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"6766487",
+            "","","",0
             )
             ');
             $db->exec('INSERT INTO apps VALUES (
@@ -50,6 +83,11 @@ class AppregistModel extends Model {
         }
     }
     
+    /**
+     * string koncertálása hexa stringbe
+     * @param string $string
+     * @return string
+     */
     public function strToHex(string $string): string {
         $hex = '';
         for ($i=0; $i<strlen($string); $i++){
@@ -62,7 +100,7 @@ class AppregistModel extends Model {
     
     /**
      * konvert object into Apprecord
-     * @param unknown $obj
+     * @param object $obj
      * @return AppRecord
      */
     protected function convert($obj): AppRecord {
@@ -109,6 +147,11 @@ class AppregistModel extends Model {
         return $exists;
     }
     
+    /**
+     * adat ellenörzések0
+     * @param object $data
+     * @param array $msg
+     */
     protected function domainCheck($data, array &$msg) {
         if ($data->domain == 'https://test.hu') {
             $msg[] = 'ERROR_UKLOGIN_HTML_NOT_EXISTS';
@@ -171,9 +214,9 @@ class AppregistModel extends Model {
     }
     
     /**
-     * cshec $data propertys no empty and accept data, cookie processing
-     * @param array msg
-     * @param object data
+     * check $data propertys no empty and accept data, cookie processing
+     * @param array $msg
+     * @param AppRecord $data
      * @return void
      */
      protected function checkNoEmpty(array &$msg, AppRecord $data)   {
@@ -235,7 +278,7 @@ class AppregistModel extends Model {
      * insert -nél client_id és client_secret generálás és tárolás
      * update -nél client_id -t, client_secret -et soha nem modosítja
      * a hibás login limit mezőknél ha üres vagy nem szám akkor 0 -át tárol 
-     * @param object apps record  
+     * @param AppRecord apps record  
      *    + psw1,dataProcessAccept,cookieProcessAccept 
      *    - client_secret,pswhash,adminLoginEnabled 
      * @return object  {"client_id", "application_secret"} or {"error":[...]}
@@ -280,7 +323,7 @@ class AppregistModel extends Model {
     
     /**
      * remove record from database
-     * @param string client_id
+     * @param string $client_id
      * @return string
      */
     public function remove(string $client_id): string {
@@ -320,7 +363,7 @@ class AppregistModel extends Model {
     
     /**
      * get app recordset admin nick alapján
-     * @param string $nick
+     * @param string $admin
      * @return array
      */
     public function getAppsByAdmin(string $admin): array {

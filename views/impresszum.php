@@ -1,19 +1,30 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
 include_once './views/common.php';
+
+/**
+ * ImpresszumView class
+ * @author utopszkij
+ */
 class ImpresszumView  extends CommonView  {
 	/**
 	* echo html page
 	* @param object $p
 	* @return void
 	*/
-	public function display($p) {
+	public function display(Params $p) {
 	    if (!isset($p->user)) {
 	        $p->user = new stdClass();
 	        $p->user->id = 0;
 	        $p->user->nick = 'guest';
 	        $p->user->avatar = 'https://www.gravatar.com/avatar';
 	    }
-	    $this->echoHtmlHead();
+	    $this->echoHtmlHead($p);
         ?>	
         <body ng-app="app">
           <?php $this->echoNavbar($p); ?>

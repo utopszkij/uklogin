@@ -1,17 +1,25 @@
 <?php
+/**
+ * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
+ * @package uklogin
+ * @author Fogler Tibor
+ */
+
+/** AppregistController osztály applikáció kezelés */
 class AppregistController extends Controller {
     
+    /** controller neve */
     protected $cName = 'appregist';
     
     /**
      * task init
      * {@inheritDoc}
-     * @params Request $request
-     * @params array $fields
+     * @param Request $request
+     * @param array $fields
      * @return Params
      */
-    protected function init(Request &$request, array $fileds = array()): Params {
-        $result = parent::init($request, $fileds);
+    protected function init(Request &$request, array $fields = array()): Params {
+        $result = parent::init($request, $fields);
         if (!$result->loggedUser) {
             $this->getModel('openid');
             $result->loggedUser = new UserRecord();
@@ -26,7 +34,7 @@ class AppregistController extends Controller {
 	 * sessionban jöhet adminNick
 	 * @param object $request
 	 */
-    public function add(RequestObject $request) {
+    public function add(Request $request) {
 		$request->set('lng','hu');
 		$data = $this->init($request,[]);
 		// ha a sessionban nincs adminNick akkor az admin nincs bejelentkezve,
@@ -60,6 +68,18 @@ class AppregistController extends Controller {
 		$data->psw2 = '';
 		$data->oldpsw = '';
 		$data->admin = $request->sessionGet('adminNick','');
+		$data->pubkey = $request->input('pubkey','');
+		$data->policy = $request->input('policy','');
+		$data->scope = $request->input('scope','');
+		$data->jwe = $request->input('jwe',0);
+		$data->pubkeyplaceholder = "-----BEGIN PUBLIC KEY-----\n....\n....\n-----END PUBLIC KEY-----";
+		if ($data->jwe == 0) {
+		    $data->jwe0selected = ' selected="selected"';
+		    $data->jwe1selected = '';
+		} else {
+		    $data->jwe1selected = ' selected="selected"';
+		    $data->jwe0selected = '';
+		}
 		$data->adminFalseLoginLimit = $request->input('adminFalseLoginLimit','5');
 		$data->adminLoginEnabled = $request->input('adminLoginEnabled','1');
 		$data->adminNick = $request->sessionGet('adminNick','');
@@ -73,9 +93,9 @@ class AppregistController extends Controller {
 	 * sessinban van az adminNick
 	 * @param object $request form fields
 	 */
-	public function save(RequestObject $request) {
+	public function save(Request $request) {
 	    // check csrtoken
-	    $p = $this->init($request, []);
+	    $this->init($request, []);
 	    $this->checkCsrToken($request);
 	    // $data kialakitása a $request -ből
 	    $data = new AppRecord();
@@ -91,10 +111,10 @@ class AppregistController extends Controller {
 	    if (count($msg) == 0) {
 	        $res = $this->model->save($data);
 	        if (!isset($res->error)) {
-	            $res->adminNick = $request->sessionGet('adminNick');
-	            $res->access_token = $request->sessionGet('access_token');
-	            $res->loggedUser = $p->loggedUser;
-	            $this->view->AppsuccessMsg($res);
+	            $msgs = [txt('APPSAVED')];
+	            $msgs[] = 'client_id:'.$data->client_id;
+	            $msgs[] = txt('ADMININFO');
+	            $this->view->successMsg($msgs, '', '', true);
 	        } else {
 	            $this->view->errorMsg($res->error,'','',true);
 	        }
@@ -104,7 +124,14 @@ class AppregistController extends Controller {
 	    }
 	}
 	
-	protected function echoAdminForm(&$data, RequestObject $request, $rec, ViewObject $view) {
+	/**
+	 * adminisztrátor applikációinak megjelenítése
+	 * @param object $data
+	 * @param Request $request
+	 * @param AppRecord $rec
+	 * @param View $view
+	 */
+	protected function echoAdminForm(&$data, Request $request, $rec, View $view) {
 	    $data->option = $request->input('option','default');
     	$data->msg = $request->input('msg','');
     	$data->client_id = $rec->client_id;
@@ -149,7 +176,7 @@ class AppregistController extends Controller {
 	 * sessionban érkezik az adminNick, request-ben érkezhet client_id
 	 * @param object $request
 	 */
-	public function adminform(RequestObject $request) {
+	public function adminform(Request $request) {
 	    $data = $this->init($request, []);
 	    $adminNick = $request->sessionGet('adminNick');
         $request->sessionSet('adminNick',$adminNick);
@@ -180,7 +207,11 @@ class AppregistController extends Controller {
 	    }
 	}
 	
-	public function logout(RequestObject $request) {
+	/**
+	 * logout végrehajtása
+	 * @param Request $request
+	 */
+	public function logout(Request $request) {
 	    $request->sessionSet('csrtoken',random_int(1000000,9999999));
 	    $request->sessionSet('adminNick','');
 	    $request->sessionSet('access_token','');
@@ -191,7 +222,11 @@ class AppregistController extends Controller {
 	    <?php
 	}
 	
-	public function appremove(RequestObject $request) {
+	/**
+	 * applikáció törlés képernyő 
+	 * @param Request $request
+	 */
+	public function appremove(Request $request) {
 	    // check csrtoken
 	    $data = $this->init($request, []);
 	    $this->checkCsrToken($request);
@@ -203,7 +238,7 @@ class AppregistController extends Controller {
 	            $rec->adminNick = $request->sessionGet('adminNick');
 	            $rec->access_token = $request->sessionGet('access_token');
 	            $rec->loggedUser = $data->loggedUser;
-	            $this->view->removedMsg($rec);
+	            $this->view->successMsg([txt('APPREMOVED')], '', '', true);
 	        } else {
 	            $rec->error = $msg;	            
 				$this->view->errorMsg([$rec->error],'','',true);
