@@ -86,7 +86,7 @@ function codeTask() {
  */
 function logoutTask() {
     $_SESSION['access_token'] = session_id();
-    $_SESSION['loggedUser'] = JSON_decode('{"nickname":"guest"}');
+    $_SESSION['loggedUser'] = JSON_decode('{"id":0,"nickname":"guest"}');
     homeTask();
 }
 

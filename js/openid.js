@@ -28,6 +28,20 @@
 	    		document.location = 'index.php/openid/forgetpswform/nickname/'+$('#nickname').val();
 	    		return false;
 	    	});
+	    	$('#fbButton').click(function() {
+	    		if (window.parent) {
+	    			window.parent.document.location = 'index.php/opt/fblogin/authorize';
+	    		} else {
+	    			document.location = 'index.php/opt/fblogin/authorize';
+	    		}	
+	    	});
+	    	$('#googleButton').click(function() {
+	    		if (window.parent) {
+	    			window.parent.document.location = 'index.php/opt/googlelogin/authorize';
+	    		} else {
+	    			document.location = 'index.php/opt/googlelogin/authorize';
+	    		}	
+	    	});
 	    	$('#loginForm').show();
 	    	$('#nickname').focus();
 	    	

@@ -134,7 +134,7 @@ class JwtModel {
      * @param string $nonce
      * @return string
      */
-    public function createIdToken(UserRecord $userRec, string $nonce): string {
+    public function createIdToken($userRec, string $nonce): string {
         $tokenClam = new StdClass();
         $tokenClam->sub = $userRec->code;
         $tokenClam->iss = $userRec->nickname;
