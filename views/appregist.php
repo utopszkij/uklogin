@@ -28,7 +28,7 @@ class AppregistView  extends CommonView  {
             <?php else : ?>
             	<p id="pAppsSelect">
             	<?php echo txt('LBL_TITLE')?>:&nbsp;<select id="appsSelect">
-            	<?php 
+            	<?php
             	foreach ($p->apps as $app) {
             	    if ($app->client_id == $p->client_id) {
             	        echo '<option selected="selected" value="'.$app->client_id.'">'.$app->name.'</option>';
@@ -58,7 +58,7 @@ class AppregistView  extends CommonView  {
             	?>
             	</div>
             <?php endif; ?>
-    		<form id="formApp" name="formApp" action="<?php echo txt('MYDOMAIN'); ?>/index.php" 
+    		<form id="formApp" name="formApp" action="<?php echo txt('MYDOMAIN'); ?>/index.php"
     			method="post" target="_self">
     			<input type="hidden" name="option" id="option" value="appregist" />
     			<input type="hidden" name="task" id="task" value="save" />
@@ -84,23 +84,23 @@ class AppregistView  extends CommonView  {
     				</p>
     				<p>
     					<label><?php echo txt('LBL_DOMAIN'); ?></label>
-    					<input type="text" name="domain" id="domain" value="{{domain}}" size="100" 
+    					<input type="text" name="domain" id="domain" value="{{domain}}" size="100"
     						placeholder="https://yourdomain.com" class="appDomain" />
     				</p>
     				<p>
     					<label><?php echo txt('LBL_CALLBACK'); ?></label>
-    					<input type="text" name="callback" id="callback" value="{{callback}}" size="100" 
+    					<input type="text" name="callback" id="callback" value="{{callback}}" size="100"
     						placeholder="https://yourdomain.com/index.php?opt=login&task=logged" class="appCallback" />
     				</p>
 
     				<p>
     					<label>Alapértelmezett scope</label>
-    					<input type="text" name="scope" value="{{scope}}" size="100" 
+    					<input type="text" name="scope" value="{{scope}}" size="100"
     						placeholder="nickname postal_code locality" class="apppscope" />
     				</p>
     				<p>
     					<label>Adatkezelési leírás URL</label>
-    					<input type="text" name="policy" id="policy" value="{{policy}}" size="100" 
+    					<input type="text" name="policy" id="policy" value="{{policy}}" size="100"
     						placeholder="" class="apppolicy" />
     				</p>
     				<p>
@@ -112,9 +112,9 @@ class AppregistView  extends CommonView  {
     				</p>
     				<p>
     					<label>Publikus 2048 bites SSH key<br />(userinfo JWE kodoláshoz)</label>
-    					<textarea name="pubkey" id="pubkey" cols="80" 
-    					placeholder="{{pubkeyplaceholder}}" 
-    					rows="10">{{pubkey}}</textarea> 
+    					<textarea name="pubkey" id="pubkey" cols="80"
+    					placeholder="{{pubkeyplaceholder}}"
+    					rows="10">{{pubkey}}</textarea>
     				</p>
     				<p style="display:none">
     					<label><?php echo txt('LBL_CSS'); ?></label>
@@ -122,7 +122,7 @@ class AppregistView  extends CommonView  {
     				</p>
     				<p style="display:none">
     					<label><?php echo txt('LBL_FALSELOGINLIMIT'); ?></label>
-    					<input type="number" min="1" max="10" name="falseLoginLimit" value="{{falseLoginLimit}}" size="10" 
+    					<input type="number" min="1" max="10" name="falseLoginLimit" value="{{falseLoginLimit}}" size="10"
     						class="appFalseLoginLimit" />
     				</p>
     			</fieldset>
@@ -130,9 +130,9 @@ class AppregistView  extends CommonView  {
     				<legend><?php echo txt('LBL_APPADMIN'); ?></legend>
     				<p>
     					<label><?php echo txt('LBL_ADMIN'); ?></label>
-    					<input type="hidden" name="admin" id="admin" value="{{admin}}" size="32" 
+    					<input type="hidden" name="admin" id="admin" value="{{admin}}" size="32"
     						class="appAdmin" />
-    					<var>{{admin}}</var>	
+    					<var>{{admin}}</var>
     				</p>
     			</fieldset>
    				<?php if ($p->client_id == '') : ?>
@@ -159,7 +159,7 @@ class AppregistView  extends CommonView  {
     				<button type="button" id="formAppOk" class="btn btn-primary">
     					<em class="fa fa-check-square"></em>
     					<?php echo txt('OK'); ?></button>&nbsp;
-    				<button type="button" id="formAppCancel" class="btn btn-secondary" 
+    				<button type="button" id="formAppCancel" class="btn btn-secondary"
     					onclick="location='<?php  echo MYDOMAIN; ?>';">
     					<em class="fa fa-arrow-left"></em>
     					<?php echo txt('CANCEL'); ?></button>&nbsp;
@@ -168,18 +168,18 @@ class AppregistView  extends CommonView  {
     				<button type="button" id="formAppRemove" class="btn btn-danger">
     					<em class="fa fa-ban"></em>
     					<?php echo txt('APPREMOVE'); ?></button>&nbsp;
-    				<?php endif; ?>	
+    				<?php endif; ?>
     			</p>
     		</form>
         	<?php $this->echoHtmlPopup(); ?>
        	</div>
-  	  
+
         <?php $this->loadJavaScriptAngular('appregist',$p); ?>
 		<?php $this->echoFooter(); ?>
         </body>
         </html>
-        <?php 		
+        <?php
 	}
-	
+
 }
 ?>

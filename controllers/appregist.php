@@ -7,10 +7,10 @@
 
 /** AppregistController osztály applikáció kezelés */
 class AppregistController extends Controller {
-    
+
     /** controller neve */
     protected $cName = 'appregist';
-    
+
     /**
      * task init
      * {@inheritDoc}
@@ -28,7 +28,7 @@ class AppregistController extends Controller {
         $result->adminNick = $result->loggedUser->nickname;
         return $result;
     }
-    
+
 	/**
 	 * új app felvivő képernyő kirajzolása
 	 * sessionban jöhet adminNick
@@ -48,7 +48,7 @@ class AppregistController extends Controller {
                 '&nonce='.urlencode(MYDOMAIN.'/opt/appregist/add').
                 '&state=0'.
                 '&scope='.urlencode('nickname');
-            redirectTo($url);    
+            redirectTo($url);
             return;
 		}
 		$this->createCsrToken($request, $data);
@@ -87,7 +87,7 @@ class AppregistController extends Controller {
 		$request->sessionSet('adminNick',$data->adminNick);
 		$this->view->form($data);
 	}
-	
+
 	/**
 	 * do save into database (insert or update)
 	 * sessinban van az adminNick
@@ -120,10 +120,10 @@ class AppregistController extends Controller {
 	        }
 	    } else {
 	        $request->set('msg',$msg);
-	        $this->add($request); 
+	        $this->add($request);
 	    }
 	}
-	
+
 	/**
 	 * adminisztrátor applikációinak megjelenítése
 	 * @param object $data
@@ -148,7 +148,7 @@ class AppregistController extends Controller {
     	$data->access_token  = $request->sessionGet('access_token','');
     	$this->view->form($data);
 	}
-	
+
 	/**
 	 * client_id keresése az appas -ek között
 	 * @param array $apps
@@ -170,7 +170,7 @@ class AppregistController extends Controller {
 	   }
 	   return $result;
 	}
-	
+
 	/**
 	 * sikeres admin login után echo admin form
 	 * sessionban érkezik az adminNick, request-ben érkezhet client_id
@@ -186,12 +186,11 @@ class AppregistController extends Controller {
 	    $request->set('sessionid','0');
 	    $request->set('lng','hu');
 	    $this->createCsrToken($request, $data);
-	    
 	    // adminNick összes app rekordjának beolvasása
 	    $data->apps = $this->model->getAppsByAdmin($adminNick);
 	    $data->adminNick = $request->sessionGet('adminNick','');
 	    $data->access_token  = $request->sessionGet('access_token','');
-	    
+
 	    if (count($data->apps) == 0) {
 	        // nincsen ennek az adminnak applikációi
 	        $this->view->errorMsg(['ERROR_APP_NOTFOUND'],'','',true);
@@ -206,7 +205,7 @@ class AppregistController extends Controller {
 	        }
 	    }
 	}
-	
+
 	/**
 	 * logout végrehajtása
 	 * @param Request $request
@@ -221,9 +220,9 @@ class AppregistController extends Controller {
 	    </script>
 	    <?php
 	}
-	
+
 	/**
-	 * applikáció törlés képernyő 
+	 * applikáció törlés képernyő
 	 * @param Request $request
 	 */
 	public function appremove(Request $request) {
@@ -240,15 +239,15 @@ class AppregistController extends Controller {
 	            $rec->loggedUser = $data->loggedUser;
 	            $this->view->successMsg([txt('APPREMOVED')], '', '', true);
 	        } else {
-	            $rec->error = $msg;	            
+	            $rec->error = $msg;
 				$this->view->errorMsg([$rec->error],'','',true);
 	        }
 	    } else {
 	        $rec = new AppRecord();
-            $rec->error = 'ERROR_NOTFOUND';	            
+            $rec->error = 'ERROR_NOTFOUND';
 			$this->view->errorMsg([$rec->error],'','',true);
 	    }
 	}
-	
+
 }
 ?>

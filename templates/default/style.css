@@ -47,7 +47,8 @@ input {max-width:80%}
 .table .tr0 {background-color:transparent;}
 .table .tr1 {background-color:#e0e0e0}
 
-.formLogin .page {width:450px;}
+.loginForm .page {width:450px;}
+.loginForm .alterButton {width:120px; height:40px; padding:2px}
 .formScope .page {width:450px;}
 
 #pAppsSelect {font-size:22px; font-weight:bold;}
@@ -77,6 +78,8 @@ form#formLogin {padding:10px; height:auto}
 form#formLogin {padding:10px; height:auto}
 form#formLogin label {width:150px; text-align:left}
    
+.audited1 {backgroubd-color:transparent}
+.audited0  {background-color:#f7c6c3; padding:5px;}
 .info {background-color:silver; color:black; padding:10px; text-align:center;}   
 .successMsg {height:400px; padding:20px; }   
 /* phone */

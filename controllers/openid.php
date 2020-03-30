@@ -105,8 +105,8 @@ class OpenidUserController extends Controller {
         if (($client->id > 0) & ($p->redirect_uri == '')) {
             $p->redirect_uri = $client->callback;
         }
-        if (($client->id > 0) & ($p->policy == '')) {
-            $p->policy = $client->policy;
+        if (($client->id > 0) & ($p->policy_uri == '')) {
+            $p->policy_uri = $client->policy;
         }
         if (($client->id > 0) & ($p->scope == '')) {
             $p->scope = $client->scope;
@@ -129,7 +129,7 @@ class OpenidUserController extends Controller {
         }
         
         // scope ellenörzés
-        $enabledScope1 = ['sub', 'nickname', 'email', 'email_verified', 'sysadmin', 'postal_code', 'locality'];
+        $enabledScope1 = ['sub', 'nickname', 'email', 'email_verified', 'sysadmin', 'audited', 'postal_code', 'locality'];
         $enabledScope2 = ['sub', 'openid',
             'nickname', 'email', 'email_verified', 'given_name', 'middle_name', 'family_name',
             'name', 'picture', 'street_addres', 'locality', 'postal_code', 'addres',
@@ -180,7 +180,6 @@ class OpenidUserController extends Controller {
         $addressItems[] = '';
         
         $userRec->id = $p->id; // *
-        $userRec->sub = myHash('sha256',$p->id);  // * hash
         $userRec->nickname = $p->nick; // * bejelentkezési név
         if (isset($p->psw1)) {
             $userRec->pswhash = myHash('sha256', $p->psw1); // * jelszó sha256 hash
@@ -194,6 +193,7 @@ class OpenidUserController extends Controller {
         $userRec->audit_time = time(); // * auditálás időpontja
         $userRec->code = myHash('sha256',$pdfData->xml_szuletesiNev.
             $pdfData->xml_anyjaNeve.$pdfData->xml_szuletesiDatum); // * myHash(origname.mothersname,birth_date)
+        $userRec->sub = $userRec->code; 
         $userRec->signdate = $pdfData->xml_alairasKelte; // *
         $userRec->sysadmin = 0; // *
         $userRec->email = $p->email; // * email
@@ -649,8 +649,9 @@ class OpenidController extends OpenidUserController {
         $p = $this->init($request, ['client_id','redirect_uri','scope',
             'state','nonce','policy_uri','response_type']);
         $p->response_type = $request->input('response_type','id_token token');
-        $p->scope = $request->input('scope','nickname postal_code locality');
-        $p->redirect_uri = $request->input('redirect_uri', config('MYDOMAIN'));
+        $p->scope = urldecode($request->input('scope','nickname postal_code locality'));
+        $p->redirect_uri = urldecode($request->input('redirect_uri', config('MYDOMAIN')));
+        $p->nonce = urldecode($request->input('nonce', ''));
         $p->client_id = $request->input('client_id', config('MYDOMAIN'));
         $this->setParamToSession($request, $p);
         $this->getModel('appregist'); // AppRecord class
@@ -674,6 +675,7 @@ class OpenidController extends OpenidUserController {
                     $request->sessionGet('redirect_uri'),
                     $request->sessionGet('state'), 
                     $request->sessionGet('nonce'));
+!!!!                    redirectTo($redirect_uri);
             }
         } else {
             $p->nickname = '';
@@ -918,7 +920,8 @@ class OpenidController extends OpenidUserController {
                 "email_verified",
                 "postal_code",
                 "locality",
-                "sysadmin"
+                "sysadmin",
+                "audited"
 <?php endif; ?>
 <?php if (config('OPENID') == 2) : ?>
 				"openid",
@@ -939,7 +942,8 @@ class OpenidController extends OpenidUserController {
                 "phone_number", 
                 "phone_number_verified",
                 "updated_at", 
-                "sysadmin"
+                "sysadmin",
+                "audited"
 <?php endif; ?>
             ]
         }

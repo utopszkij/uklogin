@@ -49,10 +49,6 @@ class DefaultController extends Controller {
 		$data->adminNick = $request->sessionGet('adminNick','');
 		$data->loggedUser = $request->sessionGet('loggedUser','');
 		$data->access_token = $request->sessionGet('access_token','');
-		
-		if ($request->sessionGet('user','') != '') {
-		    $data->user = $request->sessionGet('user','');
-		}
 		$view->display($data);
 	}
 	
@@ -88,8 +84,10 @@ class DefaultController extends Controller {
 	 * @param Request $request
 	 */
 	public function logout(Request $request) {
+	    $this->getModel('openid'); // userRecord
 	    $request->sessionSet('adminNick','');
 	    $request->sessionSet('access_token','');
+	    $request->sessionSet('loggedUser',new UserRecord());
 	    redirectTo(MYDOMAIN);
 	}
 	

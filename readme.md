@@ -27,7 +27,12 @@ A regisztrációs folyamatban használt aláírás szolgáltató:
 
 https://magyarorszag.hu/szuf_avdh_feltoltes
 
+### Facebbok, Google belépés ###
 
+Lehetőség van Facebook vagy Google fiók segitségével is bejelentkezni. Az ilyen fiokóknál azonban nem garantálható az egyediség, ezt a kliens app által lekérhető userinfóban lávő "audit=0" jelzi, az ügyfélkapuval létrehozott fiokonál "audited=1" szerepel. A kliens programok dönthetik el, hogy az "audit=0" fiokokat elfogadják-e, illetve milyen korlátozozott jogosultságokat adnak nekik.
+
+Késöbb tovább fejlesztésként lehetséges lesz személyes auditálás lehetőségének kialakitása. Itt terveim szerint személyes adat ellenörzés után, az erre feljogosított "auditorok" a facebokkos, goggle -es fiokonál is be tudják állítani az "audited=1" jelzést. Az auditor a születési név, születési dátum, anyja neve adatból képzi azt a hash -t amit az ügyfélkapus regisztrálás is használ, ennek segitségével ellenörizni tudja, hogy ezen a módon se lehessen egy embernek több fiókja.
+ 
 ```
 Openid Bejelentkezés folyamata
 +--------+                                   +--------+
@@ -261,6 +266,8 @@ A szerver két adatkezelési beállítással üzemeltethető
 - email
 - melyik applikációba regisztrált (csak Oauth2 esetében)
 - ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
+- system adminisztrátor (Igen vagy nem)
+- hitelesített adat (Igen vagy nem)
 
 ** Teljes Openid adatkezelési beállításnál**
 - Azonoító kód
@@ -281,6 +288,8 @@ A szerver két adatkezelési beállítással üzemeltethető
 - Utolsó módosítás időpontja
 - Rendszer adminisztrátor  (Igen vagy Nem)
 - ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
+- system adminisztrátor (Igen vagy nem)
+- hitelesített adat (Igen vagy nem)
 
 
 **Ezek személyes adatok, kezelésüknél a GDPR ide vonatkozó előírásait kell érvényesíteni.**
