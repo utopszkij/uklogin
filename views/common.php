@@ -132,7 +132,6 @@ class CommonView extends View {
 		  		'?token='.$p->access_token.
 		  		'&token_type_hint=access_token'.
 		  		'&redirect_uri='.$logout_redirect_uri;
-
 		?>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			  <?php echo txt('MAINMENU'); ?>&nbsp;
@@ -171,27 +170,31 @@ class CommonView extends View {
     			        	<em class="fa fa-sign-in"></em>&nbsp;<?php echo txt('LOGIN'); ?></a>
     			      </li>
 			      <?php else : ?>
-
-			      <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   			            <?php if ($p->loggedUser->picture == '') : ?>
-   			        		<em class="fa fa-user"></em>&nbsp;<strong><?php echo $p->adminNick; ?></strong>
-   			        	<?php  else : ?>
-   			        		<img src="<?php echo $p->loggedUser->picture; ?>" alt="avatar" height="25px" /><strong><?php echo $p->adminNick; ?></strong>
-   			        	<?php endif; ?>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-   			          <a class="dropdown-item" target="ifrmOpenid"
-    			           onclick="$('#divOpenid').show();  $('#scope').hide(); true"
-    			           href="<?php echo MYDOMAIN; ?>/opt/openid/profileform">
-    			           <em class="fa fa-edit"></em>&nbsp;Profil
-    			      </a>
-   			          <a class="dropdown-item" target="_self"
-    			            href="<?php echo $logout_uri; ?>">
-    			        	<em class="fa fa-sign-out"></em>&nbsp;<?php echo txt('LOGOUT'); ?>
-    			      </a>
-                    </div>
-                  </li>
+    			      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       			            <?php if ($p->loggedUser->picture == '') : ?>
+       			        		<em class="fa fa-user"></em>&nbsp;<strong><?php echo $p->adminNick; ?></strong>
+       			        	<?php  else : ?>
+       			        		<img src="<?php echo $p->loggedUser->picture; ?>" alt="avatar" height="25px" /><strong><?php echo $p->adminNick; ?></strong>
+       			        	<?php endif; ?>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+       			          <a class="dropdown-item" target="_self"
+        			           href="<?php echo MYDOMAIN; ?>/opt/openid/profileform">
+        			           <em class="fa fa-edit"></em>&nbsp;Profil
+        			      </a>
+	                      <?php if ($p->loggedUser->sysadmin == 1) : ?>
+       			          <a class="dropdown-item" target="_self"
+        			            href="<?php echo config('MYDOMAIN'); ?>/opt/auditor/form">
+        			        	<em class="fa fa-check"></em>&nbsp;<?php echo txt('AUDITOR'); ?>
+        			      </a>
+        	              <?php endif; ?>
+       			          <a class="dropdown-item" target="_self"
+        			            href="<?php echo $logout_uri; ?>">
+        			        	<em class="fa fa-sign-out"></em>&nbsp;<?php echo txt('LOGOUT'); ?>
+        			      </a>
+                        </div>
+                      </li>
 			      <?php endif; ?>
 			    </ul>
 			  </div>

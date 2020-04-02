@@ -11,17 +11,28 @@ define('MYSQLLOG',false);
 define('MYDOMAIN','http://*********');
 define('MYPATH','***************');
 define('CODE_EXPIRE',120); // code és access_token lejárati idő másodpercben
-define('GITHUB_REPO','uklogin');
-define('GITHUB_USER','****');
-define('GITHUB_PSW','****');
 define('OPENID',0); // 0: nincs
 				    // 1:scope:nickname, email, email_verified, postal_code, locality, sysadmin, audit_time
                     // 2:scope teljes openid ajánlás + sysadmin, audit_time
+
+// hibajelzés beküldés
+define('GITHUB_REPO','uklogin');
+define('GITHUB_USER','****');
+define('GITHUB_PSW','****');
+
+// Levelezés                    
 define('SMTPHOST','mail.*******u'); 
 define('SMTPSECURE','tls'); 
 define('SMTPUSER','**********'); 
 define('SMTPPSW','************'); 
 define('SMTPSENDER','***********'); 
 define('SMTPPORT',587);
+
+// google és facebook bejelentkezéshez (ha nem akarod ezket a lehetőségeket
+// akkor '' -re definiáld őket!
+define('GOOGLE_CLIENT_ID','*****');
+define('GOOGLE_CLIENT_SECRET','******');
+define('FB_CLIENT_ID','*****');
+define('FB_CLIENT_SECRET','******');
 
 ?>

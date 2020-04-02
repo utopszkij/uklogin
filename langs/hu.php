@@ -35,6 +35,7 @@ DEFINE('NEWAPP','Új applikáció regisztrálása');
 DEFINE('ADMINLOGIN','Applikáció admin bejelentkezés');
 DEFINE('LOGIN','Bejelentkezés');
 DEFINE('LOGOUT','Kijelentkezés');
+DEFINE('AUDITOR','Hitelesítő');
 
 // egyebek
 DEFINE('DESC','Leírás');

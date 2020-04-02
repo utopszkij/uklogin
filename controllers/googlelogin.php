@@ -10,6 +10,7 @@
 * kliens regisztrálása https://console.developers.google.com/
 *
 */
+include_once 'langs/openid_hu.php';
 
 /** google kontroller osztály */
 class GoogleloginController extends Controller {
@@ -71,7 +72,7 @@ class GoogleloginController extends Controller {
 		$user = new UserRecord();
 		$w = explode(' ',$name);
 		$table = new table('oi_users');
-		$table->where(['sub','=','g'.$sub]);
+		$table->where(['sub','=','g_'.$sub]);
 		$rec = $table->first();
 		if ($rec) {
 			// megvan a user rekord
@@ -81,7 +82,7 @@ class GoogleloginController extends Controller {
 		} else {
 			// még nincs ilyen user rekord, most létrehozzuk
     		$user = new UserRecord();
-			$user->sub = 'g'.$sub;
+			$user->sub = 'g_'.$sub;
 			$user->picture = $picture;
 			$user->family_name = $name;
 			$user->nickname = $name;
@@ -100,7 +101,7 @@ class GoogleloginController extends Controller {
 			if (config('OPENID') != 2) {
 			    $user->family_name = '';
 			    $user->middle_name = '';
-			    $user->given_name = '';
+			    $user->given_name = 'g';
 			    $user->picture = '';
 			}
 			$table->insert($user);
@@ -152,6 +153,7 @@ class GoogleloginController extends Controller {
 	 * @param Request $request - code, state state-ban a session_id érkezik
 	 */
 	public function code(Request &$request) {
+
 	    $code = $request->input('code');
 	    $state = $request->input('state');
 	    $this->sessionChange($state, $request);
@@ -173,33 +175,25 @@ class GoogleloginController extends Controller {
 				['access_token' => $token->access_token]
 			);
 	    	if (!isset($guser->error)) {
-					// $guser alapján bejelentkezik (ha még nincs user rekord létrehozza)
-					// $guser->name, ->id ->picture
-	    	        $user = $this->readOrCreateUser($guser->id, $guser->name, $guser->picture);
-	    	        $request->sessionSet('loggedUser',$user);
-	    	        $url = $request->sessionGet('redirect_uri');
-	    	        if (strpos(' '.$url,'?') > 0) {
-	    	            $url .= '&code='.$user->code;
-	    	        } else {
-	    	            $url .= '?code='.$user->code;
-	    	        }
-	    	        if ($user->audited == 0) {
-	    	            ?>
-	    	            <html>
-	    	            <body>
-	    	            <script type="text/javascript">
-						alert('Ez egy "nem hitelesített" felhasználói fiók.'+
-								'Egyes alkalmazások korlátozhatják az ilyen fiók használatát.'+
-								'A profil oldalon a "Hitelesítés" gombnál olvashatsz további információkat.');
-						document.location="<?php echo $url; ?>";
-	    	            </script>
-	    	            </body>
-	    	            </html>
-	    	            <?php 
-	    	        } else {
-	    	            redirectTo($url);
-	    	        }
-			} else {
+	    	    // $fbuser alapján bejelentkezik (ha még nincs user rekord létrehozza)
+	    	    // $fbuser->name, ->id ->picture->data->url
+	    	    $user = $this->readOrCreateUser($guser->id, $guser->name, $guser->picture);
+	    	    $p = new Params();
+	    	    $model = $this->getModel('openid');
+	    	    $view = $this->getView('openid');
+	    	    $p->client_id = $request->sessionGet('client_id');
+	    	    $p->scope = $request->sessionGet('scope');
+	    	    // $client = $model->getApp($p->client_id);
+	    	    $p->clientTitle = '';
+	    	    $p->msgs = [];
+	    	    $p->msgs[] = 'Ez egy "nem hitelesített" felhasználói fiók.';
+	    	    $p->msgs[] = 'Egyes alkalmazások korlátozhatják az ilyen fiók használatát.';
+	    	    $p->msgs[] = 'A profil oldalon a "Hitelesítés" gombnál olvashatsz további információkat.';
+	    	    $request->sessionSet('acceptScopeUser', $user);
+	    	    $request->sessionSet('loggedUser', new UserRecord());
+	    	    $this->createCsrToken($request, $p);
+	    	    $view->scopeForm($p);
+	    	} else {
 					echo 'Fatal error in google login. wrong user data '.json_encode($guser); return;
 			}
 		 } else {

@@ -167,6 +167,9 @@ class OpenidModel {
     public function saveUser(UserRecord &$userRec): string {
         $encryptedUser = $this->encrypt($userRec);
         $table = new Table($this->tableName);
+        if ($table->count() == 0) {
+            $userRec->sysadmin = 1;
+        }
         $userRec->updated_at = time();
         if ($userRec->id == 0) {
             $table->insert($encryptedUser);
