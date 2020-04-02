@@ -11,6 +11,8 @@
 *
 */
 
+include_once 'langs/openid_hu.php';
+
 /** fbLogin kontroller osztály */
 class FbloginController extends Controller {
 
@@ -70,7 +72,7 @@ class FbloginController extends Controller {
 		$user = new UserRecord();
 		$w = explode(' ',$fbName);
 		$table = new table('oi_users');
-		$table->where(['sub','=','fb'.$fbId]);
+		$table->where(['sub','=','fb_'.$fbId]);
 		$rec = $table->first();
 		if ($rec) {
 			// megvan a user rekord
@@ -80,7 +82,7 @@ class FbloginController extends Controller {
 		} else {
 			// még nincs ilyen user rekord, most létrehozzuk
     		$user = new UserRecord();
-			$user->sub = 'fb'.$fbId;
+			$user->sub = 'fb_'.$fbId;
 			$user->picture = $fbPicture;
 			$user->family_name = $fbName;
 			$user->pswhash = time();
@@ -99,7 +101,7 @@ class FbloginController extends Controller {
 			if (config('OPENID') != 2) {
 			    $user->family_name = '';
 			    $user->middle_name = '';
-			    $user->given_name = '';
+			    $user->given_name = 'fb';
 			    $user->picture = '';
 			}
 			$table->insert($user);
@@ -125,7 +127,7 @@ class FbloginController extends Controller {
 		<input type="text" name="client_id" value="<?php echo FB_CLIENT_ID; ?>" />
 		<input type="text" name="state" value="<?php echo session_id(); ?>" />
 		<input type="text" name="redirect_uri" value="<?php echo config('MYDOMAIN')?>/opt/fblogin/code/" />
-		<!-- ezek a facebooknál nem kellenek más oauth vagy openid szervernél kellhetnek. 
+		<!-- ezek a facebooknál nem kellenek más oauth vagy openid szervernél kellhetnek.
 		<input type="text" name="scope" value="id name picture" />
 		<input type="text" name="policy_uri" value="<?php echo $request->sessionGet('policy_uri'); ?>" />
 		<input type="text" name="response_type" value="code" />
@@ -173,39 +175,31 @@ class FbloginController extends Controller {
 				['access_token' => $token->access_token]
 			);
 	    	if (!isset($fbuser->error)) {
-					// $fbuser alapján bejelentkezik (ha még nincs user rekord létrehozza)
-					// $fbuser->name, ->id ->picture->data->url
-	    	        $user = $this->readOrCreateUser($fbuser->id, $fbuser->name, $fbuser->picture->data->url);
-	    	        $request->sessionSet('loggedUser',$user);
-	    	        $url = $request->sessionGet('redirect_uri');
-	    	        if (strpos(' '.$url,'?') > 0) {
-	    	            $url .= '&code='.$user->code;
-	    	        } else {
-	    	            $url .= '?code='.$user->code;
-	    	        }
-	    	        if ($user->audited == 0) {
-	    	            ?>
-	    	            <html>
-	    	            <body>
-	    	            <script type="text/javascript">
-						alert('Ez egy "nem hitelesített" felhasználói fiók.'+
-								'Egyes alkalmazások korlátozhatják az ilyen fiók használatát.'+
-								'A profil oldalon a "Hitelesítés" gombnál olvashatsz további információkat.');
-						document.location="<?php echo $url; ?>";
-	    	            </script>
-	    	            </body>
-	    	            </html>
-	    	            <?php 
-	    	        } else {
-	    	            redirectTo($url);
-	    	        }
+				// $fbuser alapján bejelentkezik (ha még nincs user rekord létrehozza)
+				// $fbuser->name, ->id ->picture->data->url
+    	        $user = $this->readOrCreateUser($fbuser->id, $fbuser->name, $fbuser->picture->data->url);
+    	        $p = new Params();
+    	        $model = $this->getModel('openid');
+    	        $view = $this->getView('openid');
+    	        $p->client_id = $request->sessionGet('client_id');
+    	        $p->scope = $request->sessionGet('scope');
+    	        // $client = $model->getApp($p->client_id);
+    	        $p->clientTitle = '';
+    	        $p->msgs = [];
+    	        $p->msgs[] = 'Ez egy "nem hitelesített" felhasználói fiók.';
+    	        $p->msgs[] = 'Egyes alkalmazások korlátozhatják az ilyen fiók használatát.';
+    	        $p->msgs[] = 'A profil oldalon a "Hitelesítés" gombnál olvashatsz további információkat.';
+    	        $request->sessionSet('acceptScopeUser', $user);
+    	        $request->sessionSet('loggedUser', new UserRecord());
+    	        $this->createCsrToken($request, $p);
+	            $view->scopeForm($p);
 			} else {
-					echo 'Fatal error in facebook login. wrong user data '.json_encode($fbuser); return;
+				echo 'Fatal error in facebook login. wrong user data '.json_encode($fbuser); return;
 			}
 		 } else {
 			echo 'Fatal error in facebook login. access_token not found '.
 			'code = '.json_encode($code).
-			' response= '.json_encode($token);
+			' response= '.JSON_encode($token);
 			return;
 		 }
 	}

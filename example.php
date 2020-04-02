@@ -6,6 +6,8 @@
  * 1. paraméter nélkül vagy task=home: képernyő kirajzolás
  * 2. task=code&token=xxxxxx  az uklogin hivta vissza, ilyenkor iframe -ben fut
  * 3. task=logout kijelentkezés
+ * 
+ * SESSION változók: logged = {"id":0, "nickname":"..."}, access_token = ""
  */
 session_start();
 
@@ -60,7 +62,7 @@ function codeTask() {
     $url = UKLOGINDOMAIN.'/userinfo/';
     $fields = ["access_token" => $access_token];
     $result = JSON_decode(getFromUrl($url, $fields));
-    $_SESSION['loggedUser'] = $result;
+    $_SESSION['logged'] = $result;
     
     // képernyő frissités
     echo '<!doctype html>
@@ -86,18 +88,18 @@ function codeTask() {
  */
 function logoutTask() {
     $_SESSION['access_token'] = session_id();
-    $_SESSION['loggedUser'] = JSON_decode('{"id":0,"nickname":"guest"}');
+    $_SESSION['logged'] = JSON_decode('{"id":0,"nickname":"guest"}');
     homeTask();
 }
 
 /**
  * Példa program képernyő
- * Ha be van jelentkezve akkor $_SESSION -ban 'loggedUser' és 'access_token' van
+ * Ha be van jelentkezve akkor $_SESSION -ban 'logged' és 'access_token' van
  */
 function homeTask() {
     if (!isset($_SESSION['access_token'])) {
         $_SESSION['access_token'] = session_id();
-        $_SESSION['loggedUser'] = JSON_decode('{"nickname":"guest"}');
+        $_SESSION['logged'] = JSON_decode('{"nickname":"guest"}');
     }
     ?>
 <!doctype html>
@@ -188,7 +190,7 @@ function homeTask() {
 				  </li>          				
 			    </ul>
 			    <ul class="navbar-nav">
-			      <?php if ($_SESSION['loggedUser']->nickname == "guest") : ?>
+			      <?php if ($_SESSION['logged']->nickname == "guest") : ?>
 			      <li class="nav-item">
 			        <a class="nav-link" target="_self" href="" id="linkLogin">
 			        	<em class="fa fa-sign-in"></em>&nbsp;Bejelentkezés
@@ -200,7 +202,7 @@ function homeTask() {
 			            href="<?php echo MYDOMAIN; ?>/openid/profileform" id="linkProfile"
 			            onclick="$('#popup').show(); true;">
 			        	<em class="fa fa-address-card-o"></em>
-			        	<?php echo $_SESSION['loggedUser']->nickname; ?>
+			        	<?php echo $_SESSION['logged']->nickname; ?>
 			        	&nbsp;Profil
 			        </a>    
 			      </li>

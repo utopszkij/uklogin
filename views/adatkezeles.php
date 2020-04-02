@@ -6,6 +6,7 @@
  */
 
 include_once './views/common.php';
+include_once './views/mdView.php';
 
 /**
  * AdatkezelesView
@@ -18,6 +19,10 @@ class AdatkezelesView  extends CommonView  {
 	* @return void
 	*/
 	public function display(Params $p) {
+	    $view = new MdView();
+	    $view->mdShow($p, './adatkezeles.md');
+	    return;
+
 	    if (!isset($p->user)) {
 	        $p->user = new stdClass();
 	        $p->user->id = 0;
@@ -33,10 +38,7 @@ class AdatkezelesView  extends CommonView  {
             <p>Jelen leírás az ügyfélkapu segítségével történő felhasználó regisztrációt és
             bejelentkezést kezelő web szolgáltatás adatkezeléséről szól. Az ezt használó 
             egyes applikációk adatkezelési leírását az adott applikációban találhatja meg!</p>
-            <p><strong>Ez a szoftver személyhez kapcsolt személyes adatokat tartósan nem kezel és tárol.
-            Az állandólakcíből az iráníító számot és a település nevet anonim módon, (személy azonosításra alkalmas adathoz nem kapcsolva) tárolja.
-            Ezért a GDPR erre a szotverre nem vonatkozik.</strong></p>
-
+            
             <h3>Cookie használat</h3>
             <p>A szoftver működésének testreszabásához, az egyes működési munkamenetek 
             szervezéséhez egy daram un "munkamenet cookie"-t használ amit a felhasználó
@@ -119,7 +121,8 @@ class AdatkezelesView  extends CommonView  {
 		  <?php $this->echoFooter(); ?>
         </body>
         </html>
-        <?php 		
+        <?php
+         		
 	}
 }
 ?>

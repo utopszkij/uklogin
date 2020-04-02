@@ -67,12 +67,16 @@ class OpenidView  extends CommonView  {
 	    	<?php endif; ?>
 	    	<h3><?php echo $p->formTitle; ?></h3>
 	    	<div id="alterButtons" style="display:block">
+	    		<?php if (config('GOOGLE_CLIENT_ID') != 'GOOGLE_CLIENT_ID') : ?>
 	    		<button type="text" class="btn btn-outline-secondary alterButton" id="googleButton">
 	    			<img src="images/google.png" style="height:90%" alt="google" title="google" />
 	    		</button>&nbsp;
+	    		<?php endif; ?>
+	    		<?php if (config('FB_CLIENT_ID') != 'FB_CLIENT_ID') : ?>
 	    		<button type="text" class="btn btn-outline-secondary alterButton" id="fbButton">
 	    			<img src="images/facebook.jpg" style="height:90%" alt="facebook" title="facebook" />
 	    		</button>
+	    		<?php endif; ?>
 	    	</div>
 		    <form class="form" method="post" id="frmLoginForm"
 		    	action="<?php echo config('MYDOMAIN'); ?>/openid/dologin" target="_self">
@@ -348,6 +352,7 @@ class OpenidView  extends CommonView  {
 	    $this->echoHtmlHead($data);
 	    ?>
         <body>
+        <?php $this->echoNavBar($data); ?>
 	    <div id="profileForm" style="display:block" class="profileForm">
 	      <div class="page" id="page">
 	    	<?php $this->echoMsgs($data); ?>
@@ -369,7 +374,8 @@ class OpenidView  extends CommonView  {
 				<input type="hidden" name="id" value="<?php echo $data->id; ?>" />
 				<input type="hidden" name="<?php echo $data->csrToken?>" value="1" />
 				<div>&nbsp;</div>
-				<?php if (config('OPENID') == 2) : ?>
+				
+				<?php if ((config('OPENID') == 2) & ($data->audited == 1)): ?>
 				<blockquote class="alert alert-info signInfo">
 					Név: <?php echo $data->family_name.' '.
 									$data->middle_name.' '.$data->given_name; ?>
@@ -379,10 +385,18 @@ class OpenidView  extends CommonView  {
 					<?php echo $data->postal_code.' '.$data->locality.' '.$data->street_address; ?><br />
 				</blockquote>
 				<?php endif; ?>
+				<?php if ((config('OPENID') == 1) & ($data->audited == 1)): ?>
+				<blockquote class="alert alert-info signInfo">
+					<br />Lakcím:
+					<?php echo $data->postal_code.' '.$data->locality; ?><br />
+				</blockquote>
+				<?php endif; ?>
+				
 				<div class="form-group">
 					<label><?php echo txt('USER'); ?></label>
-					<input type="hidden" name="nickname" value="<?php echo $data->nickname; ?>" class="form-control" />
-					<var><strong><?php echo $data->nickname;  ?></strong></var>
+					<strong>
+					<input type="text" name="nickname" value="<?php echo $data->nickname; ?>" class="form-control" />
+					</strong>
 				</div>
 				<div class="form-group">
 					<?php if (!isset($data->nick) || ($data->nickname == '')) : ?>
@@ -403,6 +417,40 @@ class OpenidView  extends CommonView  {
 						value="" style="width:350px" />
 				</div>
 				<p>Ha jelszót nem akarsz változtatni akkor a két jelszó mezőt hagyd üresen!</p>
+				
+				<?php if ((config('OPENID') == 2) & ($data->audited != 1)): ?>
+					<?php 
+					$name = $data->family_name.' '.	$data->middle_name.' '.$data->given_name;
+					$address = $data->postal_code.' '.$data->locality.' '.$data->street_address;
+					?>
+					<div class="form-group">
+						<label>Név:</label>
+						<input type="text" name="name" id="name" class="form-control"
+							value="<?php echo $name; ?>" style="width:600px" />
+					</div>
+					<div class="form-group">
+						<label>Születési dátum )éééé,hh.nn):</label>
+						<input type="text" name="birth_date" id="birth_date" class="form-control"
+							value="<?php echo str_replace('-','.',$data->birth_date); ?>" style="width:350px" />
+					</div>
+					<div class="form-group">
+						<label>Lakcím (ir.szám település utca házszám...):</label>
+						<input type="text" name="address" id="addresse" class="form-control"
+							value="<?php echo $address; ?>" style="width:600px" />
+					</div>
+				<?php endif; ?>
+				
+				<?php if ((config('OPENID') == 1) & ($data->audited != 1)): ?>
+					<?php 
+					$address = $data->postal_code.' '.$data->locality;
+					?>
+					<div class="form-group">
+						<label>Lakcím (ir.szám település):</label>
+						<input type="text" name="address" id="addresse" class="form-control"
+							value="<?php echo $address; ?>" style="width:600px" />
+					</div>
+				<?php endif; ?>
+
 				<div class="form-group">
 					<label>E-mail:</label>
 					<input type="text" name="email" id="email" class="form-control"
@@ -444,7 +492,8 @@ class OpenidView  extends CommonView  {
 				<?php else : ?>
 					<p>
 						<strong style="color:red">Nem hiteles</strong>&nbsp;
-						<a class="btn btn-secondary" href="">Hitelesítés</a>
+						<a class="btn btn-secondary" 
+							href="<?php echo config('MYDOMAIN'); ?>/opt/auditor/info">Hitelesítés</a>
 					</p>
 				<?php endif; ?>
 				<p>Utolsó módosítás:<?php echo date('Y.m.d H:i:s', $data->updated_at); ?></p>
@@ -474,6 +523,7 @@ class OpenidView  extends CommonView  {
 		  'NICK_REQUIRED',
 		  'PASSWORDS_NOTEQUALS']);
         ?>
+        <?php $this->echoFooter(); ?>
 		</body>
         </html>
         <?php

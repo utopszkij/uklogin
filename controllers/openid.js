@@ -1,4 +1,4 @@
-
+  
   function pageOnLoad() {
 	    if ($('#loginForm').length > 0) {
 	    	$('#btnOk').click(function() {
@@ -29,18 +29,26 @@
 	    		return false;
 	    	});
 	    	$('#fbButton').click(function() {
-    			document.location = 'index.php/opt/fblogin/authorize';
+	    		if (window.parent) {
+	    			window.parent.document.location = 'index.php/opt/fblogin/authorize';
+	    		} else {
+	    			document.location = 'index.php/opt/fblogin/authorize';
+	    		}	
 	    	});
 	    	$('#googleButton').click(function() {
-    			document.location = 'index.php/opt/googlelogin/authorize';
+	    		if (window.parent) {
+	    			window.parent.document.location = 'index.php/opt/googlelogin/authorize';
+	    		} else {
+	    			document.location = 'index.php/opt/googlelogin/authorize';
+	    		}	
 	    	});
 	    	$('#loginForm').show();
 	    	$('#nickname').focus();
-
-
+	    	
+	    	
 
 	    } // loginForm
-
+	    
 	    if ($('#scopeForm').length > 0) {
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
@@ -92,7 +100,7 @@
 				function() {
 					document.location = 'index.php?option=openid&task=delaccount&'+csrToken+'=1';
 				});
-
+				
 			});
 		} // formProfile
 
@@ -115,8 +123,8 @@
 					$('input#nick').addClass('is-invalid');
 				}
 				return msg;
-			}
-
+			} 
+			
 			$('#formRegist2Ok').click(function() {
 				var msg = '';
 				// nick, psw1, psw2, dataProcessAccept, cookieProcessAccept ellenörzése
@@ -142,11 +150,11 @@
 				}
 			});
 		} // formRegist2
-
-
-  }
-
-  // jquery pageOnLoad
+      
+	    
+  }	
+  
+  // jquery pageOnLoad 
   $(function() {
   }); // Jquery pageOnload
 

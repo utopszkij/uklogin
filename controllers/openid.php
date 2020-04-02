@@ -21,12 +21,12 @@ class OpenidUserController extends Controller {
     protected $cName = 'openid';
     /** string konstans */
     protected $LOGGEDUSER = 'loggedUser';
-    
+
     /** konstruktor */
     function __construct() {
         $this->getModel($this->cName); // adattábla kreálás
     }
-    
+
     /**
      * task init - logged User és kapott paraméterek a result Params -ba
      * model és view létrehozása
@@ -41,7 +41,7 @@ class OpenidUserController extends Controller {
         }
         return $result;
     }
-    
+
     /**
      * sikeres login végrehajtása
      * @param UserRecord $userRec
@@ -52,28 +52,38 @@ class OpenidUserController extends Controller {
      */
     protected function successLogin($userRec, string $redirect_uri,
                                     string $state, string $nonce) {
+       global $REQUEST;
+       $response_type = $REQUEST->sessionGet('response_type');
        if ($redirect_uri != '') {
            $jwt = new JwtModel();
            $id_token = $jwt->createIdToken($userRec, $nonce);
-           if (strpos($redirect_uri, '?') > 0) {
-               $redirect_uri .= '&state='.$state;
+           if ($response_type == 'code') {
+               if (strpos($redirect_uri, '?') > 0) {
+                   $redirect_uri .= '&code='.session_id();
+               } else {
+                   $redirect_uri .= '?code='.session_id();
+               }
            } else {
-               $redirect_uri .= '?state='.$state;
+               if (strpos($redirect_uri, '?') > 0) {
+                   $redirect_uri .= '&state='.$state;
+               } else {
+                   $redirect_uri .= '?state='.$state;
+               }
+               $redirect_uri .= '&nonce='.$nonce.
+               '&id_token='.$id_token.
+               '&token='.session_id().
+               '&access_token='.session_id();
            }
-           $redirect_uri .= '&nonce='.$nonce.
-           '&id_token='.$id_token.
-           '&token='.session_id().
-           '&access_token='.session_id();
            redirectTo($redirect_uri);
        } else {
            echo 'success login '.$userRec->nickname;
        }
     }
-    
+
     /**
      * chek doregist' params, result into $p->msgs
      * @param Params $p
-     * @return void - $p->msgs 
+     * @return void - $p->msgs
      */
     protected function doregistCheck(Params &$p) {
         // ellenörzések
@@ -93,7 +103,7 @@ class OpenidUserController extends Controller {
             $p->msgs[] = txt('PSW_REQUIRED');
         }
     }
-    
+
     /**
      * openid technikai paraméterek ellenörzése
      * @param Params $p
@@ -111,23 +121,23 @@ class OpenidUserController extends Controller {
         if (($client->id > 0) & ($p->scope == '')) {
             $p->scope = $client->scope;
         }
-        
+
         // ha van valós client_id akkor annak domainjében kell leniie a callback_uri -nak
         if ($client->id > 0) {
-            if (($client->domain != '') & 
+            if (($client->domain != '') &
                 (strpos(' '.$p->redirect_uri, $client->domain) != 1)) {
                 $p->msgs[] = 'invalid redirect_uri';
             }
         }
-        
+
         // respose type ellenörzés
         if ($p->response_type == 'id_token token') {
             $p->response_type = 'token id_token';
         }
-        if ($p->response_type != 'token id_token') {
-            $p->msgs[] = 'only "token id_token" response_type supported';
+        if (($p->response_type != 'token id_token') & ($p->response_type != 'code')) {
+            $p->msgs[] = 'only "token id_token" és "code" response_type supported';
         }
-        
+
         // scope ellenörzés
         $enabledScope1 = ['sub', 'nickname', 'email', 'email_verified', 'sysadmin', 'audited', 'postal_code', 'locality'];
         $enabledScope2 = ['sub', 'openid',
@@ -156,7 +166,7 @@ class OpenidUserController extends Controller {
             $p->msgs[] = 'redirect_uri empty';
         }
     }
-    
+
     /**
      * UserRecord feltöltése Params és PdfData -ból
      * @param Params $p
@@ -169,7 +179,7 @@ class OpenidUserController extends Controller {
         $nameItems[] = '';
         $nameItems[] = '';
         $nameItems[] = '';
-        
+
         if ($pdfData->txt_tartozkodas != '') {
             $addressItems = explode(' ',$pdfData->txt_tartozkodas,3);
         } else {
@@ -178,7 +188,7 @@ class OpenidUserController extends Controller {
         $addressItems[] = '';
         $addressItems[] = '';
         $addressItems[] = '';
-        
+
         $userRec->id = $p->id; // *
         $userRec->nickname = $p->nick; // * bejelentkezési név
         if (isset($p->psw1)) {
@@ -193,7 +203,7 @@ class OpenidUserController extends Controller {
         $userRec->audit_time = time(); // * auditálás időpontja
         $userRec->code = myHash('sha256',$pdfData->xml_szuletesiNev.
             $pdfData->xml_anyjaNeve.$pdfData->xml_szuletesiDatum); // * myHash(origname.mothersname,birth_date)
-        $userRec->sub = $userRec->code; 
+        $userRec->sub = $userRec->code;
         $userRec->signdate = $pdfData->xml_alairasKelte; // *
         $userRec->sysadmin = 0; // *
         $userRec->email = $p->email; // * email
@@ -215,16 +225,16 @@ class OpenidUserController extends Controller {
            $userRec->profile = ''; // profil web uri
            $userRec->origname = $pdfData->xml_szuletesiNev;
         }
-        return $userRec;     
+        return $userRec;
     }
-    
+
     /**
      * login képernyő feldolgozása, sikeres login esetén:
      * sessionba tárolja a loggedUser -t
      * ugrik a redirect_uri -ra
      * csrtoken ellenörzés
-     * @param Request $request - login form mezői, 
-     *    sessionban client_id, scope, policy_uri, redirect_uri, state, nonce, csrToken 
+     * @param Request $request - login form mezői,
+     *    sessionban client_id, scope, policy_uri, redirect_uri, state, nonce, csrToken
      *    csrToken
      */
     public function dologin(Request $request) {
@@ -274,12 +284,12 @@ class OpenidUserController extends Controller {
             $this->successLogin($userRec, $redirect_uri, $state, $nonce);
         }
     }
-    
+
     /**
      * registform 2. képernyő (pdf elemzés, elelnörzés, profil képernyő megjelenítés
      * csrtoken ellenörzés
      * @param Request $request - feltöltött pdf fiile, id
-     *    client_id, scope, policy_uri, redirect_uri, state, nonce, 
+     *    client_id, scope, policy_uri, redirect_uri, state, nonce,
      *    csrToken
      * @return void
      */
@@ -324,11 +334,11 @@ class OpenidUserController extends Controller {
 			}
 			$this->view = $this->getView('pdfform');
 			$p->formTitle = $p->clientTitle.'<br />Regisztráció';
-			$p->okURL = config('MYDOMAIN').'/openid/registform2'; 
+			$p->okURL = config('MYDOMAIN').'/openid/registform2';
 			$this->view->pdfForm($p);
 		}
      }
-    
+
      /**
       * sikeres regisztráció utáni teendők
       * @param UserRecord $userRec
@@ -337,8 +347,8 @@ class OpenidUserController extends Controller {
       * @param AppRecord $client
       * @param string $redirect_uri
       */
-     protected function successRegist(UserRecord $userRec, 
-                                      Params $p, 
+     protected function successRegist(UserRecord $userRec,
+                                      Params $p,
                                       Request $request,
                                       AppRecord $client,
                                       string $redirect_uri) {
@@ -356,15 +366,16 @@ class OpenidUserController extends Controller {
              $request->sessionGet('state'),
              $request->sessionGet('nonce'));
      }
-     
+
      /**
-     * regisztrációs form adatainak tárolása, elfelejtett jelszó form tárolása
+     * ha $p->id = 0 regisztrációs form adatainak tárolása,
+     * ha $p->id > 0 utolagis ukaudit form tárolása - ez még csak tervezet
      * bejelentkezik és ugrás a redirect_uri -ra
      * csrtoken ellenörzés
-     * @param Request $request id, nick, psw1, psw2, email, phone_number, dataprocessaccept, 
+     * @param Request $request id, nick, psw1, psw2, email, phone_number, dataprocessaccept,
      *    csrToken
      *    sessionban: client_id, scope, policy_uri, redirect_uri, state, nonce,
-     *                pdfData, csrToken 
+     *                pdfData, csrToken
      * @return void
      */
     public function doregist(Request $request) {
@@ -420,10 +431,10 @@ class OpenidUserController extends Controller {
             $this->view->registForm2($p);
         }
     }
-    
+
     /**
-     * scopeForm adatainak tárolása
-     * ugrás a redirect_uri -ra
+     * scopeForm adatainak tárolása, sessionba mentet 'acceptScopeUser'
+     * bejelentkeztetése, ugrás a redirect_uri -ra
      * csrtoken ellenörzés
      * @param Request $request - dataprocessaccept,
      *    csrToken
@@ -435,19 +446,22 @@ class OpenidUserController extends Controller {
         $p = $this->init($request,['dataprocessaccept']);
         $this->checkCsrToken($request);
         $this->createCsrToken($request, $p);
-        if ($p->loggedUser->id == 0) {
+        $loggedUser = $request->sessionGet('acceptScopeUser', new UserRecord());
+        if ($loggedUser->id == 0) {
             $p->msgs[] = txt('ACCESS_VIOLATION');
             $this->view->errorMsg($p->msgs);
             return;
         }
-        $p->nickname = $p->loggedUser->nickname;
+        $p->nickname = $loggedUser->nickname;
         $redirect_uri = $request->sessionGet('redirect_uri');
         $client = $this->getClient($request->sessionGet('client_id'), $p, $this->model);
         if ($p->dataprocessaccept == 1) {
+            $p->loggedUser = $loggedUser;
+            $request->sessionSet('loggedUser', $p->loggedUser);
             $this->successLogin($p->loggedUser, $redirect_uri,
-                $request->sessionGet('state'), $request->sessionGet('nonce'));
+            $request->sessionGet('state'), $request->sessionGet('nonce'));
         } else {
-            $request->sessionSet($this->LOGGEDUSER, new UserRecord());
+            $request->sessionSet($this->loggedUser, new UserRecord());
             $p->clientTitle = $client->name;
             $p->scope = $request->sessionGet('scope');
             $p->policy_uri = $request->sessionGet('policy_uri');
@@ -456,7 +470,7 @@ class OpenidUserController extends Controller {
             $this->view->loginForm($p);
         }
     }
-    
+
     /**
      * elfelejtett jelszó kezelés pdfform kirajzolás, nickname sessionba mentése
      * csrtoken ellenörzés
@@ -468,7 +482,7 @@ class OpenidUserController extends Controller {
         $p->msgs = [];
         $this->createCsrToken($request, $p);
         if ($p->nickname != '') {
-            $user = $this->model->getUserByNick($p->nickname); 
+            $user = $this->model->getUserByNick($p->nickname);
             if ($user->id > 0) {
                 // új jelszó kreálása
                 $newPsw = 'psW'.random_int(10000, 99999);
@@ -495,7 +509,7 @@ class OpenidUserController extends Controller {
             $this->view->errorMsg($p->msgs,'','',true);
         }
     }
-    
+
     /**
      * email ellenörzö link kattintás feldolgozója
      * @param Request $request - code
@@ -513,15 +527,16 @@ class OpenidUserController extends Controller {
             echo 'fatal error';
         }
     }
-    
+
     /**
      * profil képernyő tárolása
      * @param Request $request
      */
     public function profilesave(Request $request) {
         $p = $this->init($request,['id','email','phone_number',
-            'gender','picture','profile','psw1','psw2']);
+            'gender','picture','profile','psw1','psw2','name','address']);
         $this->checkCsrToken($request);
+        $this->createCsrToken($request, $p);
         $loggedUser = $request->sessionGet($this->LOGGEDUSER, new UserRecord());
         if (($loggedUser->id > 0) & ($loggedUser->id == $p->id)) {
             $loggedUser = $this->model->getUserByNick($loggedUser->nickname);
@@ -537,8 +552,52 @@ class OpenidUserController extends Controller {
                     $loggedUser->$fn = $fv;
                 }
             }
+            if ($p->name != '') {
+                $w = explode(' ',$p->name,3);
+                if (count($w) >= 3) {
+                    $loggedUser->family_name = $w[0];
+                    $loggedUser->middle_name = $w[1];
+                    $loggedUser->given_name = $w[2];
+                } else if (count($w) == 2) {
+                    $loggedUser->family_name = $w[0];
+                    $loggedUser->middle_name = '';
+                    $loggedUser->given_name = $w[1];
+                } else {
+                    $loggedUser->family_name = $w[0];
+                    $loggedUser->middle_name = '';
+                    $loggedUser->given_name = '';
+                }
+            }
+            if ($p->address != '') {
+                $w = explode(' ',$p->address,3);
+                if (count($w) >= 3) {
+                    $loggedUser->postal_code = $w[0];
+                    $loggedUser->locality = $w[1];
+                    $loggedUser->street_address = $w[2];
+                }
+            }
+            // a nickname egyedi ?
+            $rec1 = $this->model->getUserByNick($loggedUser->nickname);
+            if (($rec1->id > 0) & ($rec1->id != $loggedUser->id)) {
+                $p->msgs[] = txt('NICK_EXISTS');
+                foreach ($loggedUser as $fn => $fv) {
+                    $p->$fn = $fv;
+                }
+                $this->view->profileForm($p);
+                return;
+            }
+            if ($loggedUser->nickname == '') {
+                $p->msgs[] = txt('NICK_REQUIRED');
+                foreach ($loggedUser as $fn => $fv) {
+                    $p->$fn = $fv;
+                }
+                $this->view->profileForm($p);
+                return;
+            }
+            $loggedUser->updated_at = time();
             $msg =  $this->model->saveUser($loggedUser);
             $request->sessionSet($this->LOGGEDUSER, $loggedUser);
+
             if ($msg == '') {
                 $this->view->successMsg([txt('PROFILE_SAVED')],'','',true);
             } else {
@@ -548,7 +607,7 @@ class OpenidUserController extends Controller {
             $this->view->errorMsg([txt('ACCESS_VIOLATION')],'','',true);
         }
     }
-    
+
     /**
      * Fiók adatain json formában
      * @param Request $request - sessionban loggedUser
@@ -567,7 +626,7 @@ class OpenidUserController extends Controller {
             $this->view->errorMsg([txt('ACCESS_VIOLATION')]);
         }
     }
-    
+
     /**
      * fiók törlése
      * @param Request $request - sessionban loggedUser
@@ -578,14 +637,14 @@ class OpenidUserController extends Controller {
         $loggedUser = $request->sessionGet($this->LOGGEDUSER, new UserRecord());
         if ($loggedUser->id > 0) {
             $loggedUser = $this->model->getUserByNick($loggedUser->nickname);
-            
+
             // user rekord törlése
             $msg = $this->model->delUser($loggedUser->id);
-            
+
             // kijelentkezés
             $user = new UserRecord();
             $request->sessionSet($this->LOGGEDUSER,$user);
-            
+
             if ($msg == '') {
                 $this->view->successMsg([txt('ACCOUNT_DELETED')]);
             } else {
@@ -595,7 +654,7 @@ class OpenidUserController extends Controller {
             $this->view->errorMsg([txt('ACCESS_VIOLATION')]);
         }
     }
-    
+
     /**
      * set $p->clientTitle by $client_id
      * @param string $client_id
@@ -614,34 +673,34 @@ class OpenidUserController extends Controller {
         }
         return $result;
     }
-    
-    
+
+
 } // OpenidUserController
 
 /** OpenidController osztály */
 class OpenidController extends OpenidUserController {
 
-   
+
 	/**
 	 * openid végpont Bejelentkezés
 	 * paramétereket sessionba tárolja
 	 * ha loggedUser van akkor scopeForm megjelenités
 	 * ha nincs loggedUser akkor login képernyőt jelenít meg
 	 * Ha client_id=='self' ajkkor magába az openid szolgáltatásba jelentkezik be
-	 * ilyenkor nincs scope elfogadtatás.    
+	 * ilyenkor nincs scope elfogadtatás.
 	 * @param Request $request
 	 *   client_id - regisztrált kliens azonosító vagy redirect_uri vagy "self"
-     *   scope - a kliens által kért adatok szóközzel szeparált listája 
-     *     GDPR == false verzióba max 'nickname postal_code locality street_address' 
+     *   scope - a kliens által kért adatok szóközzel szeparált listája
+     *     GDPR == false verzióba max 'nickname postal_code locality street_address'
      *     GDPR == true verzióban max
      *       'nickname email email_verified given_name middle_name family_name
      *       name picture street_addres locality postal_code address
-     *       birth_date phone_number phone_number_verified 
+     *       birth_date phone_number phone_number_verified
      *       updated_at audited auditor audit_time sysadmin' közül
      *   redirect_uri - sikeres bejelentkezés után visszahivandó cím
      *   state - opcionális paraméter, a redirect_uri ezt is megkapja
      *   nonce - opcionális paraméter, a redirect_uri ezt is megkapja
-     *   response_type - csak 'id_token token' elfogadott
+     *   response_type - csak 'id_token token' és 'code' elfogadott
      *   policy_uri - kliens adatkezelési leírása
 	 * @return void
 	 */
@@ -656,26 +715,30 @@ class OpenidController extends OpenidUserController {
         $this->setParamToSession($request, $p);
         $this->getModel('appregist'); // AppRecord class
         $client = $this->getClient($p->client_id, $p, $this->model);
-        
+
         // ellenörzések
         $this->openidCheck($p, $client);
         if (count($p->msgs) > 0) {
             $this->view->errorMsg($p->msgs);
             return;
         }
-        
+
         if ($p->loggedUser->id > 0) {
             $p->nickname = $p->loggedUser->nickname;
             $p->msgs = [];
             if ($p->clientTitle != 'self') {
                 $this->createCsrToken($request, $p);
+                // menti a loggedUser -t sessonba 'acceptScopeUser' néven
+                $request->sessionSet('acceptScopeUser', $p->loggedUser);
+                // kijelentkezik (a doscopeform fogja ujra bejelentkeztetni)
+                $request->sessionSet('loggedUser', new UserRecord());
                 $this->view->scopeForm($p);
             } else {
-                $this->successLogin($p->loggedUser, 
+                $this->successLogin($p->loggedUser,
                     $request->sessionGet('redirect_uri'),
-                    $request->sessionGet('state'), 
+                    $request->sessionGet('state'),
                     $request->sessionGet('nonce'));
-!!!!                    redirectTo($redirect_uri);
+                    redirectTo($redirect_uri);
             }
         } else {
             $p->nickname = '';
@@ -684,7 +747,7 @@ class OpenidController extends OpenidUserController {
             $this->view->loginForm($p);
         }
 	}
-	
+
     /**
      * authorize és registform használja
      * @param Request $request
@@ -699,7 +762,7 @@ class OpenidController extends OpenidUserController {
         $request->sessionSet('policy_uri',$p->policy_uri);
         $request->sessionSet('response_type',$p->response_type);
     }
-    
+
 	/**
 	 * openid végpont user információk kérése az érkező access_token paraméter valójában session_id ide kell átváltani.
 	 * ebben a sessinban van scope, client_id, loggedUser ennek alapján vagy
@@ -723,7 +786,7 @@ class OpenidController extends OpenidUserController {
 	                'sub nickname address email email_verified name '.
 	                'picture birth_date phone_number phone_number_verified updated_at',
 	                $scope));
-	        
+
 	        $userInfo = '{';
 	        foreach ($w as $item) {
 	            if ($item == 'name') {
@@ -757,6 +820,27 @@ class OpenidController extends OpenidUserController {
 	}
 
 	/**
+	 * access_token kérése code alapján
+	 * @param Request $request - code
+	 */
+	public function token(Request $request) {
+	    $this->init($request, ['code']);
+	    $this->sessionChange($code, $request);
+	    $userRec = $request->sessionGet('loggedUser', new UserRecord());
+	    $nonce = $request->sessionGet('nonce', '');
+	    $jwt = new JwtModel();
+	    $id_token = $jwt->createIdToken($userRec, $nonce);
+	    if (!headers_sent()) {
+	        header('Content-Type: application/json');
+	    }
+	    if ($userRec->id > 0) {
+	        echo '{"access_token":"'.session_id().'", "id_token":"'.$id_token.'"}';
+	    } else {
+	        echo '{"error":"not_found", "access_token":""}';
+	    }
+	}
+
+	/**
 	 * openid végpont - kijelentkezés
 	 * @param Request $request
 	 *    token_type_hint = 'access_token'
@@ -776,7 +860,7 @@ class OpenidController extends OpenidUserController {
 	        echo '{"info":"success logout"}';
 	    }
 	}
-	
+
 	/**
 	 * openid végpont - token frissitése
 	 * @param Request $request
@@ -809,7 +893,7 @@ class OpenidController extends OpenidUserController {
 	public function revoke(Request $request) {
 	    $this->logout($request);
 	}
-	
+
 	/**
 	 * bejelentkezett user profil adatait jeleníti meg editálható formban
 	 * @param Request $request - none
@@ -828,29 +912,29 @@ class OpenidController extends OpenidUserController {
 	        $this->view->errorMsg([txt('ACCESS_VIOLATION')]);
 	    }
 	}
-	
+
 	/**
 	 * openid végpont - regisztráció első képernyő (pdf feltöltés lésd pdfform)
-	 * @param Request $request 
-	 *      client_id, scope, policy_uri, redirect_uri, state, nonce, 
+	 * @param Request $request
+	 *      client_id, scope, policy_uri, redirect_uri, state, nonce,
 	 * @return void
 	 */
 	public function registform(Request $request) {
 	    $p = $this->init($request, ['client_id','redirect_uri','scope',
 	        'state','nonce','policy_uri','response_type']);
 	    $p->response_type = $request->input('response_type','id_token token');
-	    
+
 	    $p->scope = $request->input('scope',
 	        $request->sessionGet('scope','nickname postal_code locality'));
-	    $p->redirect_uri = $request->input('redirect_uri', 
+	    $p->redirect_uri = $request->input('redirect_uri',
 	        $request->sessionGet('redirect_uri',config('MYDOMAIN')));
-	    $p->client_id = $request->input('client_id', 
+	    $p->client_id = $request->input('client_id',
 	        $request->sessionGet('client_id',config('MYDOMAIN')));
-	    
+
 	    $this->createCsrToken($request, $p);
 	    $this->setParamToSession($request, $p);
 	    $client = $this->getClient($p->client_id, $p, $this->model);
-	    
+
 	    // ellenörzések
 	    $this->openidCheck($p, $client);
 	    if (count($p->msgs) > 0) {
@@ -869,7 +953,7 @@ class OpenidController extends OpenidUserController {
 	    $view = $this->getView('pdfform');
 	    $view->pdfForm($p);
 	}
-	
+
 	/**
 	 * openid konfiguráció kiirása json formában
 	 * @param Request $request
@@ -881,6 +965,7 @@ class OpenidController extends OpenidUserController {
 	    ?>
         {
             "authorization_endpoint": "<?php echo config('MYDOMAIN'); ?>/openid/authorize",
+            "token_endpoint": "<?php echo config('MYDOMAIN'); ?>/openid/token",
             "userinfo_endpoint": "<?php echo config('MYDOMAIN'); ?>/openid/userinfo",
             "logout_endpoint": "<?php echo config('MYDOMAIN'); ?>/openid/logout",
             "refresh_endpoint": "<?php echo config('MYDOMAIN'); ?>/openid/refresh",
@@ -889,12 +974,15 @@ class OpenidController extends OpenidUserController {
             	"client_id", "redirect_uri", "response_type", "scope", "state", "nonce", "policy_uri"
             ],
             "response_types_supported": [
-				"token id_token",
+				"token id_token", "code"
             ],
             "id_token_signing_alg_values_supported": [
             	"SHA256"
             ],
             "unregistered_client_supported": true,
+            "token_endpoint_params_requided": [
+            	"code"
+            ],
             "userinfo_endpoint_params_requided": [
             	"access_token"
             ],
@@ -927,21 +1015,21 @@ class OpenidController extends OpenidUserController {
 				"openid",
 				"sub",
                 "nickname",
-                "email", 
-                "email_verified", 
-                "given_name", 
-                "middle_name", 
+                "email",
+                "email_verified",
+                "given_name",
+                "middle_name",
                 "family_name",
-                "name", 
-                "picture", 
-                "street_address", 
-                "locality", 
-                "postal_code", 
+                "name",
+                "picture",
+                "street_address",
+                "locality",
+                "postal_code",
                 "address",
-                "birth_date", 
-                "phone_number", 
+                "birth_date",
+                "phone_number",
                 "phone_number_verified",
-                "updated_at", 
+                "updated_at",
                 "sysadmin",
                 "audited"
 <?php endif; ?>
@@ -949,6 +1037,6 @@ class OpenidController extends OpenidUserController {
         }
         <?php
 	}
-	
+
 }
 ?>

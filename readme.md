@@ -27,14 +27,16 @@ A regisztrációs folyamatban használt aláírás szolgáltató:
 
 https://magyarorszag.hu/szuf_avdh_feltoltes
 
-### Facebbok, Google belépés ###
+### Facebbok, Google belépés
 
-Lehetőség van Facebook vagy Google fiók segitségével is bejelentkezni. Az ilyen fiokóknál azonban nem garantálható az egyediség, ezt a kliens app által lekérhető userinfóban lávő "audit=0" jelzi, az ügyfélkapuval létrehozott fiokonál "audited=1" szerepel. A kliens programok dönthetik el, hogy az "audit=0" fiokokat elfogadják-e, illetve milyen korlátozozott jogosultságokat adnak nekik.
+Lehetőség van Facebook vagy Google fiók segitségével is bejelentkezni. Az ilyen fiokóknál azonban nem garantálható az egyediség, ezt a kliens app által lekérhető userinfóban lávő "audit=0" jelzi, az ügyfélkapuval létrehozott fiokonál "audited=1" szerepel. A kliens programok dönthetik el, hogy az "audited=0" fiokokat elfogadják-e, illetve milyen korlátozozott jogosultságokat adnak nekik.
 
 Késöbb tovább fejlesztésként lehetséges lesz személyes auditálás lehetőségének kialakitása. Itt terveim szerint személyes adat ellenörzés után, az erre feljogosított "auditorok" a facebokkos, goggle -es fiokonál is be tudják állítani az "audited=1" jelzést. Az auditor a születési név, születési dátum, anyja neve adatból képzi azt a hash -t amit az ügyfélkapus regisztrálás is használ, ennek segitségével ellenörizni tudja, hogy ezen a módon se lehessen egy embernek több fiókja.
- 
+
+### Openid Bejelentkezés folyamata
+
 ```
-Openid Bejelentkezés folyamata
+
 +--------+                                   +--------+
 |        |                                   |        |
 |        |----(1) /authorize Request-------->|        |
@@ -164,10 +166,10 @@ POST vagy GET pareméterek (url encoded formában):
 
 **nonce** tetszőleges string, ezt is megkapja a redirect_uri **opcionális**
 
-**response_type** ha szerepel akkor kötelezően: "token id_token" **opcionális**
+**response_type** ha szerepel akkor kötelezően: "token id_token" vagy "code" **opcionális**
 
 
-**Regisztrált kliens app** esetén a **redirect_uri**, **policy**, **scope** elhagyható, ez esetben a klien regisztrációnál megadottat használjuk. 
+**Regisztrált kliens app** esetén a **redirect_uri**, **policy**, **scope** elhagyható, ez esetben a klien regisztrációnál megadottat használjuk.
 Ha viszont megadunk **redirect_uri** -t annak a kliens regisztrációnál megadott domainben kell lennie.
 
 
@@ -181,11 +183,17 @@ A felhasználónak az adat kezelést el kell fogadnia.
 
 Amennyiben a hívás pillanatában a user már be van jelentkezve az uklogin/openid szolgáltatásba akkor csak az alkalmazás által kért user adatokok átadásához való hozzájárulást kérő képernyő jelenik meg. Ezen is szerepel az alkalmazás adatkezelési leírására mutató link.
 
-Sikeres login, illetve az adatkezeléshez történő hozzájárulás után a **redirect_uri** -ra, ennek hiányában a kliens regisztrációban beállított visszahívási címre kerül a vezérlés, négy paramétert átadva:
+Sikeres login, illetve az adatkezeléshez történő hozzájárulás után a **redirect_uri** -ra, ennek hiányában a kliens regisztrációban beállított visszahívási címre kerül a vezérlés.
+
+**token id_token** response_type esetén  négy paramétert átadva:
 - **id_token**,
 - **token**,
 - **state** ,
 - **nonce**.
+
+
+**code** response_type esetén egy paramétert átadva:
+- **code**
 
 A **token** adatot használva a **userinfo** végpontról lekérhetőek a json formátumú  user információk (token = access_token). A **state** és **nonce** adatot a kliens tetszőleges célra használhatja. Gyakran a **state** adatot egy biztonságot növelő egyedi token céljára használják, a **nonce** -ben bpedig a sikeres login után aktiválandó applikáció funciót indító URL szerepel.
 
@@ -264,7 +272,6 @@ A szerver két adatkezelési beállítással üzemeltethető
 - állandó lakcímből az irányító szám és település név
 - jelszó hash
 - email
-- melyik applikációba regisztrált (csak Oauth2 esetében)
 - ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
 - system adminisztrátor (Igen vagy nem)
 - hitelesített adat (Igen vagy nem)
@@ -337,9 +344,10 @@ Utolsó teszt eredménye:
 - MYSQL 5.7+
 - web server (.htaccess értelmezéssel)
 - https tanusitvány
-- php shell_exec -al hívhatóan  pdfsig, pdfdetach, pdftotext parancsok (lásd: poppler-utils)
+- php shell_exec -al hívhatóan  pdfsig, pdfdetach, pdftotext, pdfinfo parancsok (lásd: poppler-utils)
 - Létrehozandó egy MYSQL adatbázis: **uklogin** (utf8, magyar rendezéssel)
 
+Ha facebbok és/vagy google bejelentkezési opciót is akarunk akkor ezt a wbhelyet  regsiztrálni kell OAuth2 kliensként az Fb/Google adminisztrátori felületein,és az ott kapott client_id és client_secret adatokat beirni a .config.php -ba (lásd controllers/fblogin.php és controllers/googlelogin.php). 
 
 Telepítendő  könyvtárak:
 - controllers
@@ -362,3 +370,5 @@ Telepítendő fájlok
 - readme.md
 
 Ahol ezt  külön nem jelöltük ott a fájlok, könyvtárak csak olvashatóak legyenek a web szerver számára.(oktális 640 jogosultság)
+
+**Telepítés, beüzemelés után, az első regisztrált user "sysadmin=1" jelölést kap, ez lesz az első rendszer adminisztrátor.**
