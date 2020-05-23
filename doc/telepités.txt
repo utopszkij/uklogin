@@ -1,15 +1,19 @@
 18.04 LTS (64 bit) ubuntura
 ===========================
 
-apt-get update
 
+sudo apt-get update
+sudo apt-get upgrade
 sudo apt-get install nano
-
 sudo apt-get install mc
 
 
 LAMP telepítése
 ---------------
+
+2020.05.20 -án a tasksel -es telepités nem ment, 
+	apt install lamp-server^   ment le, minden kérdésre alapértelmezett válasszal.
+	úgy, hogy elötte NEM VOLT apt update, upgrade !	utána futtatam ezeket.
 
 sudo apt install tasksel
 
@@ -19,8 +23,8 @@ sudo nano etc/apache2/mods-enabled/dir.conf -ben index.php előre helyezése
 
 sudo service apache2 start
 
-SSL telepítése
---------------
+SSL első telepítése
+-------------------
 (előtte már domaint kellet rá irányitani)
 
 sudo apt-get update
@@ -31,6 +35,9 @@ sudo apt-get update
 sudo apt-get install certbot python-certbot-apache
 -- kérdez email cimet, domain nevet, adatkezelés elfogadást
 -- az /etc/letsescrypt -ben vannak a dolgai
+
+További domainekhez telepités:
+sudo certbot --apache -d yourdomain.com
 
 FTP szerver telepítése
 ----------------------
@@ -79,8 +86,10 @@ upgrade Ubunto 19.04 -re:
 ==========================
 https://www.linuxbabe.com/ubuntu/upgrade-ubuntu-18-04-18-10-to-ubuntu-19-04
 
-
-ClientAliveInterval 60
+sudo nano /etc/ssh/sshd_config 
+   file végére hozzáadni:
+	ClientAliveInterval 60
+	
 sudo systemctl restart ssh
 sudo apt update && sudo apt dist-upgrade
 sudo apt install update-manager-core
@@ -90,9 +99,11 @@ sudo nano /etc/update-manager/release-upgrades
      Prompt=normal
 do-release-upgrade
 
-.......... több kérdés....... a végén reboot -ot csinál
+.......... több kérdés....hosszú folyamat....... a végén reboot -ot csinál
 
 verzió ellenörzés:
+
+lsb_release -a
 
 Ebben telepíthető a poppler-utils újabb verziója .....
 
@@ -101,13 +112,29 @@ pdf kezelő eszközök
 
 install poppler-utils
 
+tüzfal beállítás
+----------------
+ufw status verbose
+ufw enable
+ufw allow 22               !--------- nagyon fontos ssh hozzáférés
+          20 FTP
+          21 FTP
+          22 FTP
+          25 Mail
+          53 DNS
+          80 http
+          143 imap
+          443 https
+          465 smtps
+          585 imaps
+          587 smtps
+          1022 ssh
+
 mail server telepités
 =====================
 
 https://www.linuxbabe.com/mail-server/ubuntu-18-04-iredmail-email-server
 
-
-lsb_release -a 
 
 
 Biztonságos szerver beállítási tanácsok:

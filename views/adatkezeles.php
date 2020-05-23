@@ -20,7 +20,7 @@ class AdatkezelesView  extends CommonView  {
 	*/
 	public function display(Params $p) {
 	    $view = new MdView();
-	    $view->mdShow($p, './adatkezeles.md');
+	    $view->mdShow($p, './adatkezeles'.config('OPENID').'.md');
 	}
 }
 ?>

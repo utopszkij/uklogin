@@ -42,7 +42,7 @@ class OpenidView  extends CommonView  {
         foreach ($w as $item) {
             $w2[] = txt($item);
         }
-        return implode(', ',$w2);
+        return implode(', ',$w2).'<p class="alert-warning">'.txt('SCOPE_HELP').'</p>';
     }
 
     /**
@@ -99,7 +99,7 @@ class OpenidView  extends CommonView  {
     		    <?php endif; ?>
     		    <div class="formLinks">
     		    	<p> <em class="fa fa-hand-o-right"></em>
-    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/policy/show" target="_new">
+    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
     		    			<?php echo txt('UKLOGIN_POLICY'); ?></a>
     		    	</p>
     		    	<?php if (($p->policy_uri != '') & ($p->clientTitle != 'self')) : ?>
@@ -178,7 +178,7 @@ class OpenidView  extends CommonView  {
     		    <?php endif; ?>
     		    <div class="formLinks">
     		    	<p> <em class="fa fa-hand-o-right"></em>
-    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/policy/show" target="_new">
+    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
     		    			<?php echo txt('UKLOGIN_POLICY'); ?></a>
     		    	</p>
     		    	<?php if ($p->policy_uri != '') : ?>
@@ -276,13 +276,13 @@ class OpenidView  extends CommonView  {
 					<input type="password" name="psw2" id="psw2" class="form-control"
 						value="" style="width:350px" />
 				</div>
+
+				<?php if (config('OPENID') == 2) :?>
 				<div class="form-group">
 					<label>E-mail:</label>
 					<input type="text" name="email" id="email" class="form-control"
 						value="<?php echo $data->email; ?>" />
 				</div>
-
-				<?php if (config('OPENID') == 2) :?>
 				<div class="form-group">
 					<label>Telefonszám:</label>
 					<input type="text" name="phone_number" id="phone_number" class="form-control"
@@ -306,7 +306,7 @@ class OpenidView  extends CommonView  {
     		    <?php endif; ?>
     		    <div class="formLinks">
     		    	<p> <em class="fa fa-hand-o-right"></em>
-    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/policy/show" target="_new">
+    		    		<a href="<?php echo config('MYDOMAIN'); ?>/opt/adatkezeles/show" target="_new">
     		    			uklogin openid rendszer adatkezelési leírása</a>
     		    	</p>
     		    	<?php if (($data->policy_uri != '') & ($data->clientTitle != 'self')) : ?>
@@ -451,13 +451,12 @@ class OpenidView  extends CommonView  {
 					</div>
 				<?php endif; ?>
 
+				<?php if (config('OPENID') == 2) :?>
 				<div class="form-group">
 					<label>E-mail:</label>
 					<input type="text" name="email" id="email" class="form-control"
 						value="<?php echo $data->email; ?>" />
 				</div>
-
-				<?php if (config('OPENID') == 2) :?>
 				<div class="form-group">
 					<label>Telefonszám:</label>
 					<input type="text" name="phone_number" id="phone_number" class="form-control"

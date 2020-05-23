@@ -261,7 +261,7 @@ function homeTask() {
 						"?client_id=<?php echo urlencode(MYDOMAIN.'/example.php?task=code'); ?>"+
 						"&redirect_uri=<?php echo urlencode(MYDOMAIN.'/example.php?task=code'); ?>"+
 						"&policy_uri=<?php echo urlencode(MYDOMAIN.'/adatkezeles.html'); ?>"+
-						"&scope=<?php echo urlencode('sub nickname email postal_code locality'); ?>";
+						"&scope=<?php echo urlencode('sub nickname postal_code locality'); ?>";
 				$('#ifrm1').attr('src',url);
 				$('#popup').show();
 				return false; // ne hajsa végre a href linket
