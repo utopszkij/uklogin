@@ -32,7 +32,7 @@
     			document.location = 'index.php/opt/fblogin/authorize';
 	    	});
 	    	$('#googleButton').click(function() {
-    			document.location = 'index.php/opt/googlelogin/authorize';
+    			parent.document.location = 'index.php/opt/googlelogin/authorize';
 	    	});
 	    	$('#loginForm').show();
 	    	$('#nickname').focus();

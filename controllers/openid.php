@@ -497,38 +497,6 @@ class OpenidUserController extends Controller {
         $p->formTitle = txt('FORGETPSW_FORM');
         $view = $this->getView('pdfform');
         $view->pdfForm($p);
-        /*
-        $p = $this->init($request, ['nickname']);
-        $p->msgs = [];
-        $this->createCsrToken($request, $p);
-        if ($p->nickname != '') {
-            $user = $this->model->getUserByNick($p->nickname);
-            if ($user->id > 0) {
-                // új jelszó kreálása
-                $newPsw = 'psW'.random_int(10000, 99999);
-                $user->pswhash = myHash('sha256', $newPsw); // * jelszó sha256 hash
-                $this->model->saveUser($user);
-                // jelszó küldése
-                $subject = config('MYDOMAIN').' új jelszó';
-                $body = '<p>Új jelszó:</p>'.
-                    '<p><strong>'.$newPsw.'</strong></p>';
-                if ($user->email != '') {
-                    sendEmail($user->email, $subject, $body);
-                    $p->msgs[] = txt('NEW_PSW_SENDED');
-                    $this->view->successMsg($p->msgs, '', '', true);
-                } else {
-                    $p->msgs[] = txt('EMPTY_EMAIL');
-                    $this->view->errorMsg($p->msgs,'','',true);
-                }
-            } else {
-                $p->msgs[] = txt('NICK_NOT_FOUND');
-                $this->view->errorMsg($p->msgs,'','',true);
-            }
-        } else {
-            $p->msgs[] = txt('NICK_REQUIRED');
-            $this->view->errorMsg($p->msgs,'','',true);
-        }
-        */
     }
 
     /**
@@ -667,7 +635,7 @@ class OpenidUserController extends Controller {
             $request->sessionSet($this->LOGGEDUSER,$user);
 
             if ($msg == '') {
-                $this->view->successMsg([txt('ACCOUNT_DELETED')]);
+                $this->view->successMsg([txt('ACCOUNT_DELETED')],'','',true);
             } else {
                 $this->view->errorMsg([$msg]);
             }
@@ -753,6 +721,7 @@ class OpenidController extends OpenidUserController {
                 $request->sessionSet('acceptScopeUser', $p->loggedUser);
                 // kijelentkezik (a doscopeform fogja ujra bejelentkeztetni)
                 $request->sessionSet('loggedUser', new UserRecord());
+                $p->nickname = $p->loggedUser->nickname;
                 $this->view->scopeForm($p);
             } else {
                 $this->successLogin($p->loggedUser,

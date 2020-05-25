@@ -1,9 +1,10 @@
-# ﻿ADATVÉDELMI SZABÁLYZAT
+# ﻿ADATKEZELÉSI LEÍRÁS
  
 Verzió: V1.00  érvényes: 2020.06.01. -
 
+(Teljes OpenId adattartalmat kezelő konfiguráció)
 
-Jelen adatvédelmi - adatkezelési szabályzat (továbbiakban: "Szabályzat") célja, hogy a
+Jelen adatkezelési leírás (továbbiakban: "Leírás") célja, hogy a
 
 **Fogler Tibor Vilmos**
 
@@ -41,18 +42,11 @@ email: tibor.fogler@gmail.com
 Különleges adatot az Adatkezelő nem kezel.
 - Törvény közérdekből - az adatok körének kifejezett megjelölésével - elrendelheti a személyes adat nyilvánosságra hozatalát. Minden egyéb esetben a nyilvánosságra hozatalhoz az érintett hozzájárulása, különleges adat esetében írásbeli hozzájárulása szükséges. Kétség esetén azt kell vélelmezni, hogy az érintett a hozzájárulását nem adta meg. Az érintett hozzájárulását megadottnak kell tekinteni az érintett közszereplése során általa közölt vagy a nyilvánosságra hozatal céljából általa átadott adatok tekintetében. Az érintett kérelmére indult eljárásban a szükséges adatainak kezeléséhez való hozzájárulását vélelmezni kell. Erre a tényre az érintett figyelmét fel kell hívni.
 
-Jelen Szabályzat szempontjából adatfeldolgozók:
+Jelen Szabályzat szempontjából adatfeldolgozó:
 
-**Fogler Tibor Vilmos**
-1036 Budapest Pacsirtamező u 61 I/4
-Tel: +36 30 210 6501
-email: tibor.fogler@gmail.com
-
-**BlazeArts Kf. **
-www.forpsi.hu
-Ügyfélszolgálat:
-tel. (+36) 1 610 5506
-Munkanapokon: 08:00 - 16:00
+**LEBAKER Kft. **
+cweb.hu
+1165 Budapest, Bökényföldi u 101
 
 - Az adatfeldolgozónak a személyes adatok feldolgozásával kapcsolatos jogait és kötelezettségeit az adatkezelő határozza meg. Az adatkezelési műveletekre vonatkozó utasítások jogszerűségéért az adatkezelő felel. Az adatfeldolgozó tevékenységi körén belül, illetőleg az adatkezelő által meghatározott keretek között felelős a személyes adatok feldolgozásáért, megváltoztatásáért, törléséért, továbbításáért és nyilvánosságra hozataláért. Az adatfeldolgozó tevékenységének ellátása során más adatfeldolgozót nem vehet igénybe. Az adatfeldolgozó az adatkezelést érintő érdemi döntést nem hozhat, a tudomására jutott személyes adatokat kizárólag az adatkezelő rendelkezései szerint dolgozhatja fel, saját céljára adatfeldolgozást nem végezhet, továbbá a személyes adatokat az adatkezelő rendelkezései szerint köteles tárolni és megőrizni.
 - Az adatkezelés célja: A szolgáltatás web oldalán a "leírás" menüpontban leírt szolgáltatás nyújtása.
@@ -86,15 +80,17 @@ Munkanapokon: 08:00 - 16:00
 - alapértelmezett kért adatok
 - adatkezelési leírás uri
 - felhasználói adatok kért formátuma (JSON vagy JWE)
-- KWE kodoláshoz pulikus kulcs
+- JWE kódoláshoz publikus kulcs
 
-- Az igénybe vevő regisztrálásával hozzájárulását adja ahhoz, hogy a szolgáltatóval együttműködő más szolgáltatók (továbbiakban: harmadik fél) részére adatait a szolgáltató teljes egészében vagy részlegesen átadja. Az ilyen adat átadás előtt minden egyes esetben a program engedélyt kér a felhasználótol (tájékoztató szöveg a képernyőn és bekattintandó checkbox, a képernyőn tételesen fel van sorolva milyen adatok lesznek átadva). 
-- A szolgáltató és az adatkezelő nem tárol és kezel semmilyen információt azzal kapcsolatban, hogy milyen harmadik félnek a számára történt (a fentebb leírtak szerint a felhasználó által minden egyes esetben külön jóváhagyatott) adat átadás.
-- A szolgáltató és az adatkezelő semmilyen felelőséget nem vállal azért, hogy a harmadik fél (kliens alkalmazás) az átadott adatokat milyen célra, milyen módon kezeli, felelősége kizárólag arra terjed ki, hogy a képernyőn felsorolt (a felhasználó által jováhagyott) adatokat adja át,
+Az "uklogin" rendszer "különleges adatokat" nem tárol, nem kezel.
+
+- Az igénybe vevő regisztrálásával hozzájárulását adja ahhoz, hogy a szolgáltatóval együttműködő más szolgáltatók (továbbiakban: harmadik fél) részére adatait a szolgáltató teljes egészében vagy részlegesen átadja. Az ilyen adat átadás előtt minden egyes esetben a program engedélyt kér a felhasználótól (tájékoztató szöveg a képernyőn és bekattintandó "checkbox", a képernyőn tételesen fel van sorolva milyen adatok lesznek átadva). 
+- A szolgáltató és az adatkezelő nem tárol és kezel semilyen információt azzal kapcsolatban, hogy milyen harmadik félnek a számára történt (a fentebb leírtak szerint a felhasználó által minden egyes esetben külön jóváhagyatott) adat átadás.
+- A szolgáltató és az adatkezelő semilyen felelőséget nem vállal azért, hogy a harmadik fél (kliens alkalmazás) az átadott adatokat milyen célra, milyen módon kezeli, felelősége kizárólag arra terjed ki, hogy a képernyőn felsorolt (a felhasználó által jováhagyott) adatokat adja át,
 - Az adatkezelési jog megszűnése esetén a szolgáltató a szolgáltatást igénybe vevő adatait saját nyilvántartásából törli.
 - A szolgáltató biztosítja, hogy az igénybe vevő az információs társadalommal összefüggő szolgáltatás igénybevétele előtt és az igénybevétel során bármikor megismerhesse, hogy a szolgáltató mely adatkezelési célokból mely adatfajtákat kezel.
 - Amennyiben a törlést megelözően harmadik félnek történt adat átadás akkor a felhasználónak kell intézkednie, hogy szükség esetén a róla letárolt adatokat a harmadik fél is törölje (mivel erről a szolgáltató, adatkezelő nyilvántartást nem vezet).
-- A regisztráció csak akkor lehetséges, ha a felhasználó a képernyőn lévő checkbox bejelölésével,  elismeri, hogy a szolgáltató adatkezelési szabályait megismerte, és elfogadta, , illetve a regisztrációja az adatkezeléshez való hozzájárulásnak minősül.
+- A regisztráció csak akkor lehetséges, ha a felhasználó a képernyőn lévő "checkbox" bejelölésével,  elismeri, hogy a szolgáltató adatkezelési szabályait megismerte, és elfogadta, illetve a regisztrációja az adatkezeléshez való hozzájárulásnak minősül.
 - Az adatkezelő vállalja, hogy amennyiben bármilyen módon változtatna a személyes adatok kezelésére vonatkozó elvein és gyakorlatán, ezekről a változásokról előzetesen értesíti honlapjának látogatóit, hogy azok mindig pontosan és folyamatosan ismerjék az adatkezelő portáljának egész területén érvényes adatkezelési elveket és gyakorlatot. A személyes adatok kezeléséről és védelméről szóló jelen Szabályzat mindig a ténylegesen alkalmazott elveket és a valóságos gyakorlatot tükrözi.
 - Ha a személyes adatokat olyan módon szeretnénk felhasználni, hogy ez a felhasználási mód eltérne a személyes adatok gyűjtésekor meghirdetett elvektől és céloktól, akkor előzetesen e-mailen keresztül értesítjük az érintetteket, akiknek felajánljuk azt a lehetőséget, hogy eldönthessék, vállalják-e, azaz hozzájárulnak-e az új feltételek mentén is személyes adataik korábbiaktól eltérő módon történő kezeléséhez.
 - Nem minősülnek személyes adatnak azok az anonim információk, melyeket a személyes azonosíthatóság kizárásával gyűjtenek és természetes személlyel nem hozhatóak kapcsolatba, illetve azok a demográfiai adatok sem minősülnek személyes adatnak, melyeket úgy gyűjtenek, hogy nem kapcsolják hozzá azokat azonosítható személyek személyes adataihoz, s ezáltal nem állítható fel kapcsolat természetes személlyel.
@@ -141,7 +137,6 @@ A letöltött pdf adattartalma:
 - személyi azonosító (személyi szám)
 - születési dátum
 - neme
-- előző családi név
 - születési név
 - anyja neve
 - állampolgársága
@@ -160,7 +155,7 @@ A letöltött pdf adattartalma:
 
 A user a letöltött pdf fájlt elektronikusan aláírja a kormányzat által ingyenesen biztosított elektronikus aláírási szolgáltatás segítségével
 https://szuf.magyarorszag.hu/szuf_avdh_feltoltes
-Ezt az adatfeldolgozát is az ugyfelkapu.hu rendszer végzi. Adatkezelési tájékoztató ja ott tekinthető meg.
+Ezt az adatfeldolgozát is az ugyfelkapu.hu rendszer végzi. Adatkezelési tájékoztatója ott tekinthető meg.
 
 Az aláírási folyamat során a pdf adattartalma kiegészül a következőkkel:
 - aláírás szolgáltató adatai
@@ -179,21 +174,22 @@ Itt az “uklogin” szerver a következő adatfeldolgozást végzi:
 - ha mindez megtörtént akkor létrejön egy új user rekord. A rekordban az “idhash”, a fentebb felsorolt “kezelt user adatok” szerepelnek valamint a létrehozás dátuma.
 
 ### 5.2 Bejelentkezés
-A felhasználó a képernyőre beirja a bejeletkezési nevét és jelszavát.  A képernyőn megjelenik az uklogin program adatkezelési leírására mutató link. A felhasználónak egy checkbox bejelölésével hozzá kell járulnia az adatkezeléshez. A program ellenörzi a beírt adatok helyességét, és ha minden rendben van akkor a user sikeresen bejelentkezett. A begépelt jelszót a program nem tárolja.
+A felhasználó a képernyőre beírja a bejeletkezési nevét és jelszavát.  A képernyőn megjelenik az uklogin program adatkezelési leírására mutató link. A felhasználónak egy "checkbox" bejelölésével hozzá kell járulnia az adatkezeléshez. A program ellenörzi a beírt adatok helyességét, és ha minden rendben van akkor a user sikeresen bejelentkezett. A begépelt jelszót a program nem tárolja.
 
-### 5.3 Bejelentkezés Facebook fiokkal
+### 5.3 Bejelentkezés Facebook fiókkal
 Ezt a lehetőséget választva, a felhasználónak a facebook fiókjába kell bejelentkeznia. Az uklogin rendszer a facebook -ból kéri le a felhasználó valódi nevét, avatar kép url címét, a "nick" név ilyenkor a keresztnév és a regisztrálási sorszámból képződik (ez jelenik meg az uklogin rendszerben a felhasználó akcióinál a többiek számára) . A többi kezelt adat ilyenkor üres,
 
 ### 5.4 Bejelentkezés Google fiókkal
-Ezt a lehetőséget választva, a felhasználónak a google fiókjába kell bejelentkeznia. Az uklogin rendszer a google-ból kéri le a felhasználó valódi nevét, avatar kép url címét, a "nick" név ilyenkor a keresztnév és a regisztrálási sorszámból képződik (ez jelenik meg az uklogin rendszerben a felhasználó akcióinál a többiek számára) . A többi kezelt adat ilyenkor üres,
+Ezt a lehetőséget választva, a felhasználónak a google fiókjába kell bejelentkeznie. Az uklogin rendszer a google-ból kéri le a felhasználó valódi nevét, avatar kép url címét, a "nick" név ilyenkor a keresztnév és a regisztrálási sorszámból képződik (ez jelenik meg az uklogin rendszerben a felhasználó akcióinál a többiek számára) . A többi kezelt adat ilyenkor üres,
 
 ### 5.5 Adat átadás kliens alkalmazásnak
 A képernyőn megjelenik a kliens alkalmazás neve vagy URL címe, a kliens által kért felhasználói adatok tételes felsorolása, a kliens alkalmazás adatkezelési leírására mutató link. A felhasználónak egy "checkbox" bejelölésével hozzá kell járulnia az adat átadáshoz. Ha a hozzájárulás megtörtént akkor a felsorolt adatokat az uklogin átadja a kliens alkalmazásnak.
-**A szolgáltató és az adatkezelő nem tárol és kezel semmilyen információt azzal kapcsolatban, hogy milyen harmadik félnek a számára történt (a fentebb leírtak szerint a felhasználó által minden egyes esetben külön jóváhagyatott) adat átadás.
-A szolgáltató és az adatkezelő semmilyen felelőséget nem vállal azért, hogy a harmadik fél (kliens alkalmazás) az átadott adatokat milyen célra, milyen módon kezeli, felelősége kizárólag arra terjed ki, hogy a képernyőn felsorolt (a felhasználó által jováhagyott) adatokat adja át,**
+A szolgáltató és az adatkezelő nem tárol és kezel semilyen információt azzal kapcsolatban, hogy milyen harmadik félnek a számára történt (a fentebb leírtak szerint a felhasználó által minden egyes esetben külön  jóváhagyatott) adat átadás.
+A szolgáltató és az adatkezelő semmilyen felelőséget nem vállal azért, hogy a harmadik fél (kliens alkalmazás) az átadott adatokat milyen célra, milyen módon kezeli, felelősége kizárólag arra 
+terjed ki, hogy a képernyőn felsorolt (a felhasználó által jováhagyott) adatokat adja át,
 
 ### 5.6 Felhasználói adatok módosítása
-Bejelentkezés után a felhasználók saját adatai közül modosíthatnak azokon amik nem az ügyfélkapuból lettek átvéve, azaz:
+Bejelentkezés után a felhasználók saját adatai közül módosíthatnak azokon amik nem az ügyfélkapuból lettek átvéve, azaz:
 - bejelentkezési név
 - email cím
 - nem
@@ -202,15 +198,15 @@ Bejelentkezés után a felhasználók saját adatai közül modosíthatnak azoko
 - website url
 
 ### 5.7 Felhasználói adatok lekérése JSON formátumban
-Bejelentkezés után a felhasználó kérheti saját adatit JSON formában. Az adatok a képernyőn jelennek meg onnan CTRL/C - CTRL/V módszerrel menthetőek, további feldolgozás céljára.
+Bejelentkezés után a felhasználó kérheti saját adatait JSON formában. Az adatok a képernyőn jelennek meg onnan CTRL/C - CTRL/V módszerrel menthetőek, további feldolgozás céljára.
 
 ### 5.8 Felhasználói adatok törlése
 Bejelentkezés után a felhasználó egy gomb nyomással kérheto a róla tárolt személyes adatok azaz a regisztrációjának a törlését. Törlés után természetesen a rendszerbe nem tud bejelentkezni.
-** Mivel az uklogin rendszer nem vezet nyilvántartást az adat átadásokról, a program nem tud arról gondoskodni, hogy az adatok azokból a kliens alkalmazásokból is törlődjenek ahová korábban adat átadás történt. Szükség esetén erről a felhasználónak kell gondoskodnia!**
+Mivel az uklogin rendszer nem vezet nyilvántartást az adat átadásokról, a program nem tud arról gondoskodni, hogy az adatok azokból a kliens alkalmazásokból is törlődjenek ahová korábban adat átadás történt. Szükség esetén erről a felhasználónak kell gondoskodnia!
 
 ### 5.9 Cookie (csoki) kezelés
 
-Az uklogin OpenID szerver működése során egy darab un. “munkamenet” cooki-t tárol az Ön gépén. Ez technikai okokból feltétlenül szükséges a szolgáltatás müködéséhez. Nyomkövető cokkie -t a nem használunk . Ez a munkamenet cookie csak azt az információt tartalmazza, hogy ön az uklogin OpenID szolgáltatást használja, nem tartalmaz arról információt melyik kliens app -be lépett be, és ott milyen tevékenységet végzett.
+Az uklogin OpenID szerver működése során egy darab un. “munkamenet” cookie-t tárol az Ön gépén. Ez technikai okokból feltétlenül szükséges a szolgáltatás működéséhez. Nyomkövető cokkie -t a nem használunk . Ez a munkamenet cookie csak azt az információt tartalmazza, hogy ön az uklogin OpenID szolgáltatást használja, nem tartalmaz arról információt melyik kliens app -be lépett be, és ott milyen tevékenységet végzett.
 
 ## 6. Adatkezeléssel kapcsolatban illetékes hatóság
 Név: Nemzeti Adatvédelmi És Információszabadság Hatóság

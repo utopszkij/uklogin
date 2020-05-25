@@ -16,14 +16,6 @@ include_once 'langs/openid_hu.php';
 /** fbLogin kontroller osztály */
 class FbloginController extends Controller {
 
-    /** konstruktor */
-    function __construct() {
-        if (!defined('FB_CLIENT_ID')) {
-            define('FB_CLIENT_ID','00000000');
-            define('FB_CLIENT_SECRET','00000000');
-        }
-    }
-
     /**
      * távoli URL hívás
      * @param string $url
@@ -97,6 +89,7 @@ class FbloginController extends Controller {
 			    $user->middle_name = '';
 			    $user->given_name = $w[1];
 			}
+            $given_name = $user->given_name;
 			$user->nickname = $fbName;
 			if (config('OPENID') != 2) {
 			    $user->family_name = '';
@@ -106,7 +99,7 @@ class FbloginController extends Controller {
 			}
 			$table->insert($user);
 			$user->id = $table->getInsertedId();
-			$user->nickname = $user->given_name.'-'.$user->id;
+			$user->nickname = $given_name.'-'.$user->id;
 			$table->where(['id','=',$user->id]);
 			$table->update($user);
 		}
@@ -124,9 +117,9 @@ class FbloginController extends Controller {
 		wait please ...
 		<div style="display:none">
 		<form action="https://www.facebook.com/dialog/oauth" method="get" name="form1" target="_self">
-		<input type="text" name="client_id" value="<?php echo FB_CLIENT_ID; ?>" />
+		<input type="text" name="client_id" value="<?php echo config('FB_CLIENT_ID'); ?>" />
+		<input type="text" name="redirect_uri" value="<?php echo config('MYDOMAIN'); ?>/opt/fblogin/code/" />
 		<input type="text" name="state" value="<?php echo session_id(); ?>" />
-		<input type="text" name="redirect_uri" value="<?php echo config('MYDOMAIN')?>/opt/fblogin/code/" />
 		<!-- ezek a facebooknál nem kellenek más oauth vagy openid szervernél kellhetnek.
 		<input type="text" name="scope" value="id name picture" />
 		<input type="text" name="policy_uri" value="<?php echo $request->sessionGet('policy_uri'); ?>" />
@@ -160,8 +153,8 @@ class FbloginController extends Controller {
 		$this->sessionChange($state, $request);
    	    $token = $this->apiRequest(
    	      'https://graph.facebook.com/oauth/access_token',
-   		   ['client_id' => FB_CLIENT_ID,
-             'client_secret' => FB_CLIENT_SECRET,
+   		   ['client_id' => config('FB_CLIENT_ID'),
+             'client_secret' => config('FB_CLIENT_SECRET'),
              'redirect_uri' => config('MYDOMAIN').'/opt/fblogin/code/',
              'state' => $state,
              'code' => $code
@@ -192,6 +185,7 @@ class FbloginController extends Controller {
     	        $request->sessionSet('acceptScopeUser', $user);
     	        $request->sessionSet('loggedUser', new UserRecord());
     	        $this->createCsrToken($request, $p);
+    	        $p->nickname = $user->nickname;
 	            $view->scopeForm($p);
 			} else {
 				echo 'Fatal error in facebook login. wrong user data '.json_encode($fbuser); return;
