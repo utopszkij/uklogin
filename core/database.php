@@ -8,8 +8,11 @@
 define('NONE','_none_');
 define('WHERE',' WHERE ');
 global $mysqli;
-$mysqli = new mysqli(config('MYSQLHOST'), config('MYSQLUSER'), config('MYSQLPSW'));
-
+if (!isset($mysqli)) {
+    $mysqli = new mysqli(config('MYSQLHOST'), config('MYSQLUSER'), config('MYSQLPSW'));
+    defineConfig('MYSQLUSER','');
+    defineConfig('MYSQLPSW','');
+}
 /**
  * SQL feltétel osztály
  * @author utopszkij

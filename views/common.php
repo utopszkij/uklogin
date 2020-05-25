@@ -48,13 +48,10 @@ class CommonView extends View {
 	    </h2>
 	    </div>
 	    <?php if ($nextLink != '') : ?>
-	    <p><a href="<?php echo $nextLink; ?>" target="_self"><?php echo txt($nextStr); ?></a>
+	    <p><a href="<?php echo $nextLink; ?>" target="_self"><?php echo txt($nextLinkText); ?></a>
 	    <?php endif; ?>
         <?php $this->echoHtmlPopup(); ?>
         <?php $this->loadJavaScriptAngular('oauth2',new stdClass()); ?>
-	    <?php if ($nextLink != '') : ?>
-	    <p><a href="<?php echo $nextLink; ?>" target="_self"><?php echo txt($nextStr); ?></a>
-	    <?php endif; ?>
 	    </p>
         <?php if ($navbar) { $this->echoFooter(); } ?>
 	    </body>

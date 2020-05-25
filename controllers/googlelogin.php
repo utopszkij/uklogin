@@ -1,6 +1,10 @@
 <?php
 /**
 * google login
+*
+* FIGYELEM NEM LEHET IFRAME -ben!
+* ===============================
+*
 * szükséges config:GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET
 * sikeres login után sessionban lévő redirect_uri  cimre ugrik
 *
@@ -8,6 +12,10 @@
 *  https://developers.google.com/identity/protocols/oauth2/web-server
 *
 * kliens regisztrálása https://console.developers.google.com/
+* 1. domain tulajdon igazolása (DNS szerkesztést igényel!)
+* 2. credentals ClienId létrehozás
+*     kéri a Oauuth conetent screen beállítást .... (nem baj nem publikált és ellenörzött)
+* 3. újra credentals létrehozás .... most már végig megy.
 *
 */
 include_once 'langs/openid_hu.php';
@@ -17,10 +25,6 @@ class GoogleloginController extends Controller {
 
     /** konstruktor */
     function __construct() {
-        if (!defined('GOOGLE_CLIENT_ID')) {
-            define('GOOGLE_CLIENT_ID','');
-            define('GOOGLE_CLIENT_SECRET','');
-        }
     }
 
     /**
@@ -67,7 +71,7 @@ class GoogleloginController extends Controller {
 	 * @param string $fbPicture
 	 * @return UserRecord
 	 */
-	protected function readOrCreateUser(string $sub, string $name, string $picture): UserRecord {
+	protected function readOrCreateUser(string $sub, string $name, string $picture, string $email): UserRecord {
 	    $this->getModel('openid'); // user rekord definició
 		$user = new UserRecord();
 		$w = explode(' ',$name);
@@ -88,6 +92,7 @@ class GoogleloginController extends Controller {
 			$user->nickname = $name;
 			$user->pswhash = time();
 			$user->code = $user->sub;
+			$user->email = $email;
 			if (count($w) >= 3) {
 				$user->family_name = $w[2];
 				$user->middle_name = $w[1];
@@ -98,15 +103,18 @@ class GoogleloginController extends Controller {
 				$user->middle_name = '';
 				$user->given_name = $w[0];
 			}
+            $given_name = $user->given_name;
 			if (config('OPENID') != 2) {
 			    $user->family_name = '';
 			    $user->middle_name = '';
 			    $user->given_name = 'g';
 			    $user->picture = '';
+			    $user->picture = '';
+			    $user->email = '';
 			}
 			$table->insert($user);
 			$user->id = $table->getInsertedId();
-			$user->nickname = $user->given_name.'-'.$user->id;
+			$user->nickname = $given_name.'-'.$user->id;
 			$table->where(['id','=',$user->id]);
 			$table->update($user);
 		}
@@ -123,11 +131,11 @@ class GoogleloginController extends Controller {
 		<body>
 		wait please ...
 		<div style="display:none">
-		<form action="https://accounts.google.com/o/oauth2/auth" method="get" name="form1" target="_self">
-		<input type="text" name="client_id" value="<?php echo GOOGLE_CLIENT_ID; ?>" />
+		<form action="https://accounts.google.com/o/oauth2/auth" method="post" name="form1" target="_self">
+		<input type="text" name="client_id" value="<?php echo config('GOOGLE_CLIENT_ID'); ?>" />
 		<input type="text" name="state" value="<?php echo session_id(); ?>" />
 		<input type="text" name="redirect_uri" value="<?php echo config('MYDOMAIN')?>/opt/googlelogin/code/" />
-		<input type="text" name="scope" value="profile" />
+		<input type="text" name="scope" value="email profile openid" />
 		<input type="text" name="policy_uri" value="<?php echo $request->sessionGet('policy_uri'); ?>" />
 		<input type="text" name="response_type" value="code" />
 		<button type="submit">OK</button>
@@ -159,8 +167,8 @@ class GoogleloginController extends Controller {
 	    $this->sessionChange($state, $request);
    	    $token = $this->apiRequest(
    	      'https://oauth2.googleapis.com/token',
-   		   ['client_id' => GOOGLE_CLIENT_ID,
-             'client_secret' => GOOGLE_CLIENT_SECRET,
+   		   ['client_id' => config('GOOGLE_CLIENT_ID'),
+             'client_secret' => config('GOOGLE_CLIENT_SECRET'),
    		     'grant_type' => 'authorization_code',
              'redirect_uri' => config('MYDOMAIN').'/opt/googlelogin/code/',
              'state' => $state,
@@ -177,7 +185,7 @@ class GoogleloginController extends Controller {
 	    	if (!isset($guser->error)) {
 	    	    // $fbuser alapján bejelentkezik (ha még nincs user rekord létrehozza)
 	    	    // $fbuser->name, ->id ->picture->data->url
-	    	    $user = $this->readOrCreateUser($guser->id, $guser->name, $guser->picture);
+	    	    $user = $this->readOrCreateUser($guser->id, $guser->name, $guser->picture, $guser->email);
 	    	    $p = new Params();
 	    	    $model = $this->getModel('openid');
 	    	    $view = $this->getView('openid');
@@ -192,6 +200,7 @@ class GoogleloginController extends Controller {
 	    	    $request->sessionSet('acceptScopeUser', $user);
 	    	    $request->sessionSet('loggedUser', new UserRecord());
 	    	    $this->createCsrToken($request, $p);
+	    	    $p->nickname = $user->nickname;
 	    	    $view->scopeForm($p);
 	    	} else {
 					echo 'Fatal error in google login. wrong user data '.json_encode($guser); return;

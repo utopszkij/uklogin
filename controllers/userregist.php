@@ -115,6 +115,10 @@ class UserregistController extends Controller {
 	 * @return void
 	 */
 	public function registform2(RequestObject $request) {
+
+	    echo 'AAAA '; exit();
+	    
+	    
 	    $appModel = $this->getModel('appregist');
 	    $model = $this->getModel('users'); // szükség van rá, ez kreál szükség esetén táblát.
 	    $pdfParser = $this->getModel('pdfparser');
@@ -172,9 +176,15 @@ class UserregistController extends Controller {
 	        $request->sessionSet('signHash', $res->signHash);
 	    }
 	    if (($res->error == '') && ($forgetPswNick == '')) {
+	        
+	        
 	        $res = $this->checkSignHashExist($client_id, $res->signHash);
 	        if ($res->error != '') {
-	            $view->errorMsg([$res->error, 'nick:'.$res->nick]);
+	            // $view->errorMsg([$res->error, 'nick:'.$res->nick]);
+	            // ha már van ilyen fiók akkor bejelentkezés és goto profil képernyő
+	            $user = $model->getUserByNick($res->nick);
+	            $request->sessionSet('loggedUser',$user);
+	            redirectTo(config('MYDOMAIN').'opt/users/profile');
 	        }
 	    }
 	    if (($res->error == '') && ($forgetPswNick != '')) {

@@ -9,7 +9,7 @@
 DEFINE("REGIST_FORM","Regisztráció");
 DEFINE("SCOPE_FORM","Adat átadás a klien applikációnak");
 DEFINE("LOGIN_FORM","Bejelentkezés");
-DEFINE('FORGETPSW_FORM','Elfelejtett ejlszó');
+DEFINE('FORGETPSW_FORM','Elfelejtett jelszó');
 DEFINE("PASSWORD","Jelszó");
 DEFINE("SCOPE_TO_CLIENT","A kliens a következő adatokat kapja meg");
 DEFINE("UKLOGIN_POLICY","uklogin szolgáltatás adatkezelési leírása");
@@ -57,6 +57,9 @@ DEFINE('PROFILE_SAVED','Adatok tárolva.');
 DEFINE("MYDATA","Adataim JSON formában");
 DEFINE("DEL_MY_ACCOUNT","Fiókom törlése");
 DEFINE("ACCOUNT_DELETED","Fiók törölve");
-
 DEFINE("EMAIL_VERIFIED","E-mail ellenörizve");
+DEFINE('SCOPE_HELP','<strong>Az uklogin rendszer fejlesztői, üzemeltetői nem vállalnak
+ felelőséget a kilens alkalmazásban történő adatkezelésért. A mi felelőségünk kizárólag arra terjed ki,
+ hogy csak az itt felsorolt adatokat adjuk át. A program nem vezet semmilyen
+ nyilvántartást arról, hogy mikor, melyik kliensnek milyen adatokat adott át.</strong>');
 ?>

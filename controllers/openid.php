@@ -90,9 +90,6 @@ class OpenidUserController extends Controller {
         if ($p->nick == '') {
             $p->msgs[] = txt('NICK_REQUIRED');
         }
-        if ($p->email == '') {
-            $p->msgs[] = txt('EMAIL_REQUIRED');
-        }
         if ($p->psw1 != $p->psw2) {
             $p->msgs[] = txt('PASSWORDS_NOTEQUALS');
         }
@@ -139,7 +136,7 @@ class OpenidUserController extends Controller {
         }
 
         // scope ellenörzés
-        $enabledScope1 = ['sub', 'nickname', 'email', 'email_verified', 'sysadmin', 'audited', 'postal_code', 'locality'];
+        $enabledScope1 = ['sub', 'nickname', 'sysadmin', 'audited', 'postal_code', 'locality'];
         $enabledScope2 = ['sub', 'openid',
             'nickname', 'email', 'email_verified', 'given_name', 'middle_name', 'family_name',
             'name', 'picture', 'street_addres', 'locality', 'postal_code', 'addres',
@@ -206,12 +203,12 @@ class OpenidUserController extends Controller {
         $userRec->sub = $userRec->code;
         $userRec->signdate = $pdfData->xml_alairasKelte; // *
         $userRec->sysadmin = 0; // *
-        $userRec->email = $p->email; // * email
-        $userRec->email_verified = 0; // * email ellnörzött?
         $userRec->updated_at = time(); // utolsó modosítás timestamp
         $userRec->created_at = time();
         // OPENID2 unittestben van használva
         if ((config('OPENID') == 2) | (defined('OPENID2'))) {
+           $userRec->email = $p->email; // * email
+           $userRec->email_verified = 0; // * email ellnörzött?
            $userRec->given_name = $nameItems[2]; // első keresztnév
            $userRec->middle_name = $nameItems[1]; // második keresztnév
            $userRec->family_name = $nameItems[0]; // családnév
@@ -286,7 +283,7 @@ class OpenidUserController extends Controller {
     }
 
     /**
-     * registform 2. képernyő (pdf elemzés, elelnörzés, profil képernyő megjelenítés
+     * registform 2. képernyő (pdf elemzés, elelnörzés, tárolás, login, profil képernyő megjelenítés
      * csrtoken ellenörzés
      * @param Request $request - feltöltött pdf fiile, id
      *    client_id, scope, policy_uri, redirect_uri, state, nonce,
@@ -325,9 +322,21 @@ class OpenidUserController extends Controller {
 		$p->address = $pdfData->txt_address;
 		$p->id = 0;
 		$pdfParser->clearFolder($tmpDir);
+		
 		if ($pdfData->error == "") {
 		    $request->sessionSet('pdfData',JSON_encode($pdfData));
-			$this->view->registForm2($p);
+		    // pdfsign hash exists?
+		    $code = myHash('sha256',$pdfData->xml_szuletesiNev.
+		        $pdfData->xml_anyjaNeve.$pdfData->xml_szuletesiDatum); // * myHash(origname.mothersname,birth_date)
+		    $res = $this->model->getUserByCode($code);
+		    if ($res->id > 0) {
+		            // login
+		            $request->sessionSet('loggedUser', $res);
+		            // goto profile
+		            redirectTo(config('MYDOMAIN').'/opt/openid/profileform');
+		    } else {
+			         $this->view->registForm2($p);
+		    }
 		} else {
 			foreach (explode(", ",$pdfData->error) as $item) {
 				$p->msgs[] = txt($item);
@@ -369,7 +378,7 @@ class OpenidUserController extends Controller {
 
      /**
      * ha $p->id = 0 regisztrációs form adatainak tárolása,
-     * ha $p->id > 0 utolagis ukaudit form tárolása - ez még csak tervezet
+     * ha $p->id > 0 utolagos ukaudit form tárolása - ez még csak tervezet
      * bejelentkezik és ugrás a redirect_uri -ra
      * csrtoken ellenörzés
      * @param Request $request id, nick, psw1, psw2, email, phone_number, dataprocessaccept,
@@ -418,7 +427,11 @@ class OpenidUserController extends Controller {
                     $p->msgs[] = $s;
                 }
             } else {
-                $p->msgs[] = txt('SIGN_HASH_EXISTS').' :'.$res->nickname;
+                // login
+                $request->sessionSet('loggedUser', $res);
+                // goto profile
+                redirectTo(config('MYDOMAIN').'/opt/openid/profileform');
+                exit();
             }
         }
         if (count($p->msgs) == 0) {
@@ -478,36 +491,12 @@ class OpenidUserController extends Controller {
      * @return void
      */
     public function forgetpswform(Request $request) {
-        $p = $this->init($request, ['nickname']);
-        $p->msgs = [];
+        $p = $this->init($request, []);
         $this->createCsrToken($request, $p);
-        if ($p->nickname != '') {
-            $user = $this->model->getUserByNick($p->nickname);
-            if ($user->id > 0) {
-                // új jelszó kreálása
-                $newPsw = 'psW'.random_int(10000, 99999);
-                $user->pswhash = myHash('sha256', $newPsw); // * jelszó sha256 hash
-                $this->model->saveUser($user);
-                // jelszó küldése
-                $subject = config('MYDOMAIN').' új jelszó';
-                $body = '<p>Új jelszó:</p>'.
-                    '<p><strong>'.$newPsw.'</strong></p>';
-                if ($user->email != '') {
-                    sendEmail($user->email, $subject, $body);
-                    $p->msgs[] = txt('NEW_PSW_SENDED');
-                    $this->view->successMsg($p->msgs, '', '', true);
-                } else {
-                    $p->msgs[] = txt('EMPTY_EMAIL');
-                    $this->view->errorMsg($p->msgs,'','',true);
-                }
-            } else {
-                $p->msgs[] = txt('NICK_NOT_FOUND');
-                $this->view->errorMsg($p->msgs,'','',true);
-            }
-        } else {
-            $p->msgs[] = txt('NICK_REQUIRED');
-            $this->view->errorMsg($p->msgs,'','',true);
-        }
+        $p->okURL = config('MYDOMAIN').'/opt/openid/registform2"}';
+        $p->formTitle = txt('FORGETPSW_FORM');
+        $view = $this->getView('pdfform');
+        $view->pdfForm($p);
     }
 
     /**
@@ -646,7 +635,7 @@ class OpenidUserController extends Controller {
             $request->sessionSet($this->LOGGEDUSER,$user);
 
             if ($msg == '') {
-                $this->view->successMsg([txt('ACCOUNT_DELETED')]);
+                $this->view->successMsg([txt('ACCOUNT_DELETED')],'','',true);
             } else {
                 $this->view->errorMsg([$msg]);
             }
@@ -732,6 +721,7 @@ class OpenidController extends OpenidUserController {
                 $request->sessionSet('acceptScopeUser', $p->loggedUser);
                 // kijelentkezik (a doscopeform fogja ujra bejelentkeztetni)
                 $request->sessionSet('loggedUser', new UserRecord());
+                $p->nickname = $p->loggedUser->nickname;
                 $this->view->scopeForm($p);
             } else {
                 $this->successLogin($p->loggedUser,
@@ -1004,8 +994,6 @@ class OpenidController extends OpenidUserController {
 <?php if (config('OPENID') != 2) : ?>
 				"sub",
                 "nickname",
-                "email",
-                "email_verified",
                 "postal_code",
                 "locality",
                 "sysadmin",

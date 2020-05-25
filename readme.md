@@ -80,7 +80,7 @@ A program a következő ellenőrzéseket végzi el:
 
 1. A kormány által biztosított aláírás szolgáltatás a  magyar törvények közhiteles aláírásnak ismerik el. Mivel a progrm azt, hogy egy usernek csak egy hitelesített bejelentkezése lehet ennek az aláírásnak az ellenörzésével biztosítja - ezt nagy biztonságunak fogadhatjuk el.
 
-2. A személyi adatokat a program a magyarorszag.hu -ról letöltött pdf fájl tartalmából veszi ki. Megfelelő informatikai eszközökkel a pdf fájlok modosíthatóak. A pdf fájlokban van információ a pdf -et előállító szoftverről és a pdf -et utoljára modosító szoftveről. A program a pdf-ben lévő információk ellenörzésével igyekszik észlelni az ilyen manipulációkat. A legtöbb könnyen hozzáférhető pdf editorral modosított pdf fájlt nem fogadja el. Sajnos azonban speciális hacker eszközökkel (elég nagy idő és erőforrás ráfordítással) a pdf bizonyára "nyom nélkül" is modosítható. A program összeveti az aláírásban szereplő adatokat a pdf ben szereplőkkel. Gyakorlatilag ezen a módon is csak a lakcím hamisítása lehetséges. Viszont még ilyen módon is csak egyetlen egy ügyfélkapus aláírással hitelesített hamis fiokot tud egy felhasználó létrehozni.
+2. A lakcím adatokat a program a magyarorszag.hu -ról letöltött pdf fájl tartalmából veszi ki. Sajnos megfelelő informatikai eszközökkel a pdf fájlok modosíthatóak. A pdf fájlokban van információ a pdf -et előállító szoftverről és a pdf -et utoljára modosító szoftveről. A program a pdf-ben lévő információk ellenörzésével igyekszik észlelni azt ha a pdf fájlt módosították. A legtöbb könnyen hozzáférhető pdf editorral modosított pdf fájlt nem fogadja el. Sajnos azonban speciális hacker eszközökkel (elég nagy idő és erőforrás ráfordítással) a pdf bizonyára "nyom nélkül" is modosítható. Tovább növeli a biztonságot, hogy a program összeveti az aláírásban szereplő adatokat a pdf ben szereplőkkel. Tehát ezen a módon is csak a lakcím hamisítása lehetséges. Viszont még ilyen módon is csak egyetlen egy ügyfélkapus aláírással hitelesített hamis fiokot tud egy felhasználó létrehozni.
 
 Összefoglalva: Átlagos informatikai tudással rendelkező emberek, ha túl sok időt nem akarnak a csalásra forditani elég nagy biztonsággal csak egy ügyfélkapuval hitelesített, valós adatokat tartalmazó fiokot tudnak létrehozni.
 
@@ -272,7 +272,7 @@ A szerver két adatkezelési beállítással üzemeltethető
 - állandó lakcímből az irányító szám és település név
 - jelszó hash
 - email
-- ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
+- ügyfélkapunál megadott aláírásból képzett (reális idő alatt nem visszafejthető) kód
 - system adminisztrátor (Igen vagy nem)
 - hitelesített adat (Igen vagy nem)
 
@@ -293,8 +293,7 @@ A szerver két adatkezelési beállítással üzemeltethető
 - Telefon szám
 - Telefon szám ellenörzött  (Igen vagy Nem)
 - Utolsó módosítás időpontja
-- Rendszer adminisztrátor  (Igen vagy Nem)
-- ügyfélkapunál megadott személyes adataiból képzett (reális idő alatt nem visszafejthető) kód
+- Az aláírás adataiból képzett (reális idő alatt nem visszafejthető) kód
 - system adminisztrátor (Igen vagy nem)
 - hitelesített adat (Igen vagy nem)
 
