@@ -27,6 +27,14 @@ class AppRecord {
     public $falseLoginLimit = 5;
     /** cliens adminisztrátor nickname */
     public $admin = '';
+    /** userinfo output format 0-json string, 1-JWE */
+    public $jwe = 0;
+    /** public key */
+    public $pubkey = '';
+    /** adatkezelési leírás URL */
+    public $policy = '';
+    /** default scope */
+    public $scope = '';
 }
 
 /** AppRegistModel osztály */
@@ -47,6 +55,10 @@ class AppregistModel extends Model {
             `css` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
             `falseLoginLimit` int(11) NOT NULL,
             `admin` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
+            `pubkey` text  COLLATE utf8_hungarian_ci NOT NULL,
+            `policy` varchar(80) COLLATE utf8_hungarian_ci NOT NULL,
+            `scope` varchar(128) COLLATE utf8_hungarian_ci NOT NULL,
+            `jwe` int(1) NOT NULL,
             PRIMARY KEY (`id`),
             KEY `app_idx_client_id` (`client_id`),
             KEY `app_idx_domain` (`domain`)
@@ -58,7 +70,8 @@ class AppregistModel extends Model {
             $db->exec('INSERT INTO apps VALUES (
             0,"uklogin","12","13",
             "'.MYDOMAIN.'",
-            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"6766487"
+            "'.MYDOMAIN.'/index.php?option=login&task=code","",5,"6766487",
+            "","","",0
             )
             ');
             $db->exec('INSERT INTO apps VALUES (

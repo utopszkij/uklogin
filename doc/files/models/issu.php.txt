@@ -45,9 +45,9 @@ class IssuModel {
     public function send(IssuRecord $data): array {
         $data->body .= "\n\n".$data->sender."\n".$data->email;
         $client = new GitHubClient();
-        if (GITHUB_USER != '') {
-            $client->setCredentials(GITHUB_USER, GITHUB_PSW);
-            $client->issues->createAnIssue(GITHUB_USER, GITHUB_REPO, $data->title, $data->body);
+        if (config('GITHUB_USER') != '') {
+            $client->setCredentials(config('GITHUB_USER'), config('GITHUB_PSW'));
+            $client->issues->createAnIssue(config('GITHUB_USER'), config('GITHUB_REPO'), $data->title, $data->body);
         }
         return [];
     }

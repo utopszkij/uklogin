@@ -56,10 +56,10 @@ class appregistControllerTest extends TestCase
         $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('client_id','');
-        $this->request->set('domain','https://balmix.hu');
-        $this->request->set('name','balmix');
-        $this->request->set('callback','https://balmix.hu/opt/home/logged');
-        $this->request->set('css','https://balmix.hu/uklogin.css');
+        $this->request->set('domain','https://valami.hu');
+        $this->request->set('name','valami');
+        $this->request->set('callback','https://valami.hu/opt/home/logged');
+        $this->request->set('css','https://valami.hu/uklogin.css');
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
         $this->controller->save($this->request);
@@ -71,16 +71,15 @@ class appregistControllerTest extends TestCase
         $appRec = $table->first();
         $this->request = new Request();
         $this->request->sessionSet('adminNick','admin');
-        // a balmix.hu -n van uklogin.html
         $this->request->sessionSet('csrToken','123');
         $this->request->set('123','1');
         $this->request->set('id',$appRec->id);
         $this->request->set('client_id',$appRec->client_id);
         $this->request->set('client_secret',$appRec->client_secret);
-        $this->request->set('domain','https://balmix.hu');
-        $this->request->set('name','balmix-updated');
-        $this->request->set('callback','https://balmix.hu/opt/home/logged');
-        $this->request->set('css','https://balmix.hu/uklogin.css');
+        $this->request->set('domain','https://valami.hu');
+        $this->request->set('name','valami-updated');
+        $this->request->set('callback','https://valami.hu/opt/home/logged');
+        $this->request->set('css','https://valami.hu/uklogin.css');
         $this->request->set('dataProcessAccept',1);
         $this->request->set('cookieProcessAccept',1);
         $this->controller->save($this->request);
@@ -129,7 +128,7 @@ class appregistControllerTest extends TestCase
         $this->request->set('123','1');
         $this->request->sessionSet('csrToken','123');
         $table = new Table('apps');
-        $table->where(['domain','=','https://balmix.hu']);
+        $table->where(['domain','=','https://valami.hu']);
         $rec = $table->first();
         if ($rec) {
             $this->request->set('client_id',$rec->client_id);

@@ -1,0 +1,177 @@
+
+defaultcontroller::defaultform7
+-/var/www/html/uklogin/controllers/default.php' '("1*b
+2
+default.php"N
+7
+-/var/www/html/uklogin/controllers/default.php5 5(
+implicit return*’
+17
+-/var/www/html/uklogin/controllers/default.php) )($nl
+7
+-/var/www/html/uklogin/controllers/default.php) )(#
+%1*
+
+
+$request*
+'sessionid'*
+'0'2setig
+7
+-/var/www/html/uklogin/controllers/default.php* *(
+%2*
+
+
+$request*	
+'lng'*
+'hu'2setrp
+7
+-/var/www/html/uklogin/controllers/default.php+
+ +(%
+%3*
+defaultcontroller*
+'frontpage'2getviewR
+P
+7
+-/var/www/html/uklogin/controllers/default.php+ +(%
+$view"__id*
+
+%3sq
+7
+-/var/www/html/uklogin/controllers/default.php, ,('
+%4*
+defaultcontroller*
+'frontpage'2getmodelS
+Q
+7
+-/var/www/html/uklogin/controllers/default.php, ,('
+$model"__id*
+
+%4IG
+7
+-/var/www/html/uklogin/controllers/default.php- -(!
+%5"$Arraytr
+7
+-/var/www/html/uklogin/controllers/default.php-
+ -("
+%6*
+defaultcontroller*
+
+
+$request*
+
+%52initR
+P
+7
+-/var/www/html/uklogin/controllers/default.php- -("
+$data"__id*
+
+%6sq
+7
+-/var/www/html/uklogin/controllers/default.php. .(5
+%7*
+
+
+$request*
+
+'option'*
+	'default'2input^
+\
+7
+-/var/www/html/uklogin/controllers/default.php. .(5
+
+$data"
+option"__id*
+
+%7ZX
+7
+-/var/www/html/uklogin/controllers/default.php/ /()
+%8*
+
+
+$model2getappcount`
+^
+7
+-/var/www/html/uklogin/controllers/default.php/ /()
+
+$data"
+
+appCount"__id*
+
+%8[Y
+7
+-/var/www/html/uklogin/controllers/default.php0 0(+
+%9*
+
+
+$model2getusercounta
+_
+7
+-/var/www/html/uklogin/controllers/default.php0 0(+
+
+$data"
+	userCount"__id*
+
+%9us
+7
+-/var/www/html/uklogin/controllers/default.php1 1(9
+%10*
+
+
+$request*
+'adminNick'*
+''2
+sessiongetb
+`
+7
+-/var/www/html/uklogin/controllers/default.php1 1(9
+
+$data"
+	adminNick"__id*
+
+%10vt
+7
+-/var/www/html/uklogin/controllers/default.php2 2(;
+%11*
+
+
+$request*
+'loggedUser'*
+''2
+sessiongetc
+a
+7
+-/var/www/html/uklogin/controllers/default.php2 2(;
+
+$data"
+
+loggedUser"__id*
+
+%11xv
+7
+-/var/www/html/uklogin/controllers/default.php3 3(?
+%12*
+
+
+$request*
+'access_token'*
+''2
+sessiongete
+c
+7
+-/var/www/html/uklogin/controllers/default.php3 3(?
+
+$data"
+access_token"__id*
+
+%12a_
+7
+-/var/www/html/uklogin/controllers/default.php4 4(
+%13*	
+
+$view*	
+
+$data2display*
+2:
+
+$requestB
+defaultcontroller

@@ -179,6 +179,7 @@ function txt(string $s): string {
     return $s;
 }
 
+/*
 function config(string $s): string {
     if (defined($s)) {
        return constant($s);   
@@ -186,6 +187,7 @@ function config(string $s): string {
         return $s;
     }
 }
+*/
 
 /**
  * A "tests" könyvtárból másol a terget -be
