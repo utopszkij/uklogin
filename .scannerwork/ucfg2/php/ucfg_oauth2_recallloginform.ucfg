@@ -1,0 +1,137 @@
+
+!oauth2controller::recallloginform6
+,/var/www/html/uklogin/controllers/oauth2.php9 9(#"1*`
+2
+
+oauth2.php"M
+6
+,/var/www/html/uklogin/controllers/oauth2.phpE E(
+implicit return*ê
+16
+,/var/www/html/uklogin/controllers/oauth2.php; ;(MK
+6
+,/var/www/html/uklogin/controllers/oauth2.php; ;(
+$data"stdclassb
+`
+6
+,/var/www/html/uklogin/controllers/oauth2.php; ;(
+%1"stdclass::__construct*	
+
+$data}
+6
+,/var/www/html/uklogin/controllers/oauth2.php< <(+
+%2*
+oauth2controller*
+
+
+$request*	
+
+$data2createcsrtokenZ
+X
+6
+,/var/www/html/uklogin/controllers/oauth2.php= =( 
+%3"__id**
+
+$app"
+name^
+\
+6
+,/var/www/html/uklogin/controllers/oauth2.php= =( 
+
+$data"	
+appName"__id*
+
+%3Y
+W
+6
+,/var/www/html/uklogin/controllers/oauth2.php> >( 
+%4"__id**
+
+$app"
+css_
+]
+6
+,/var/www/html/uklogin/controllers/oauth2.php> >( 
+
+$data"
+
+extraCss"__id*
+
+%4ec
+6
+,/var/www/html/uklogin/controllers/oauth2.php? ?()
+%5*
+
+
+$request*
+''*
+''2input[
+Y
+6
+,/var/www/html/uklogin/controllers/oauth2.php? ?()
+
+$data"
+nick"__id*
+
+%5[
+Y
+6
+,/var/www/html/uklogin/controllers/oauth2.php@ @(
+
+$data"
+psw1"__id*
+''_
+]
+6
+,/var/www/html/uklogin/controllers/oauth2.phpA A('
+%6"__id**
+
+$app"
+	client_id`
+^
+6
+,/var/www/html/uklogin/controllers/oauth2.phpA A('
+
+$data"
+	client_id"__id*
+
+%6^
+\
+6
+,/var/www/html/uklogin/controllers/oauth2.phpB B(
+
+$data"
+msgs"__id*	
+
+$msgssq
+6
+,/var/www/html/uklogin/controllers/oauth2.phpC C(<
+%7*
+
+
+$request*
+'adminNick'*
+''2
+sessionget`
+^
+6
+,/var/www/html/uklogin/controllers/oauth2.phpC C(<
+
+$data"
+	adminNick"__id*
+
+%7a_
+6
+,/var/www/html/uklogin/controllers/oauth2.phpD D(
+%8*	
+
+$view*	
+
+$data2	loginform*
+2:
+
+$request:
+$view:
+$app:
+$msgsB
+oauth2controller

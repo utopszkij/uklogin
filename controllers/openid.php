@@ -170,8 +170,10 @@ class OpenidUserController extends Controller {
      * @param PdfData $pdfData
      * @return UserRecord
      */
-    protected function fillUserRecord(Params $p, $pdfData): UserRecord {
-        $userRec = new UserRecord();
+    protected function fillUserRecord(Params $p, $pdfData, $userRec = false): UserRecord {
+        if (!$userRec) {
+            $userRec = new UserRecord();
+        }
         $nameItems = explode(' ',$pdfData->xml_viseltNev);
         $nameItems[] = '';
         $nameItems[] = '';
@@ -330,6 +332,12 @@ class OpenidUserController extends Controller {
 		        $pdfData->xml_anyjaNeve.$pdfData->xml_szuletesiDatum); // * myHash(origname.mothersname,birth_date)
 		    $res = $this->model->getUserByCode($code);
 		    if ($res->id > 0) {
+		            // adatok frissitése
+		            foreach ($res as $fn => $fv) {
+		              $p->$fn = $fv;
+		            }
+		            $res = $this->fillUserRecord($p, $pdfData, $res);
+                    $this->model->saveUser($res);
 		            // login
 		            $request->sessionSet('loggedUser', $res);
 		            // goto profile
