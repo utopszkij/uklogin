@@ -19,12 +19,6 @@ class FrontpageView  extends CommonView  {
 	* @return void
 	*/
 	public function display(Params $p) {
-	    if (!isset($p->user)) {
-	        $p->user = new stdClass();
-	        $p->user->id = 0;
-	        $p->user->nick = 'guest';
-	        $p->user->avatar = 'https://www.gravatar.com/avatar';
-	    }
 	    $this->echoHtmlHead($p);
         ?>	
         <body ng-app="app" style="height:2000px">

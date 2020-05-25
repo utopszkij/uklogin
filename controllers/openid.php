@@ -482,7 +482,7 @@ class OpenidUserController extends Controller {
             $this->successLogin($p->loggedUser, $redirect_uri,
             $request->sessionGet('state'), $request->sessionGet('nonce'));
         } else {
-            $request->sessionSet($this->loggedUser, new UserRecord());
+            $request->sessionSet('loggedUser', new UserRecord());
             $p->clientTitle = $client->name;
             $p->scope = $request->sessionGet('scope');
             $p->policy_uri = $request->sessionGet('policy_uri');

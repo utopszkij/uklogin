@@ -55,7 +55,7 @@ class AppregistModel extends Model {
             `css` varchar(256) COLLATE utf8_hungarian_ci NOT NULL,
             `falseLoginLimit` int(11) NOT NULL,
             `admin` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
-            `pupkey` text  COLLATE utf8_hungarian_ci NOT NULL,
+            `pubkey` text  COLLATE utf8_hungarian_ci NOT NULL,
             `policy` varchar(80) COLLATE utf8_hungarian_ci NOT NULL,
             `scope` varchar(128) COLLATE utf8_hungarian_ci NOT NULL,
             `jwe` int(1) NOT NULL,

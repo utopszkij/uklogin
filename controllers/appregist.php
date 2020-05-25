@@ -112,7 +112,7 @@ class AppregistController extends Controller {
 	        $res = $this->model->save($data);
 	        if (!isset($res->error)) {
 	            $msgs = [txt('APPSAVED')];
-	            $msgs[] = 'client_id:'.$data->client_id;
+	            $msgs[] = 'client_id:'.$data->client_id.' client_secret:'.$data->client_secret;
 	            $msgs[] = txt('ADMININFO');
 	            $this->view->successMsg($msgs, '', '', true);
 	        } else {

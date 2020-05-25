@@ -18,7 +18,7 @@ class IssuView  extends CommonView  {
 	 * @return void
 	 */
 	public function form(Params $p) {
-	    $this->echoHtmlHead();
+	    $this->echoHtmlHead($p);
 	    $p->adminNick = '';
 	    $this->echoNavbar($p);
 	    ?>

@@ -673,7 +673,7 @@ function redirectTo(string $url) {
     if (!headers_sent()) {
         header('Location: '.$url);
     } else {
-        echo 'Fatal error in redirectTo header alredy sended'; exit();
+        echo '<script type="text/javascript">location="'.$url.'";</script>'; exit();
     }
 }
 

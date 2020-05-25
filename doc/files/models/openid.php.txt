@@ -13,62 +13,62 @@
  * @author utopszkij
  */
 class UserRecord {
-    /** azonosító szám**/
-    public $id = 0; // *
-    /** azonosító kód **/
-    public $sub = '';  // * hash(id)
-    /** bejelentkezési név **/
-    public $nickname = 'GUEST'; // * bejelentkezési név
-    /** jelszó hash **/
-    public $pswhash = ''; // * jelszó sha256 hash
-    /** keresztnév1 **/
-    public $given_name = ''; // első keresztnév
-    /** keresztnév 2**/
-    public $middle_name = ''; // második keresztnév
-    /** családnév **/
-    public $family_name = ''; // családnév
-    /** anyja neve **/
-    public $mothersname = ''; // anyja neve
-    /** email **/
-    public $email = ''; // email
-    /** email ellenörzött **/
-    public $email_verified = 0; // email ellnörzött?
-    /** telefonszám **/
-    public $phone_number = ''; // telefonszám
-    /** telefonszám ellenörzött **/
-    public $phone_number_verified = 0; // telefonszám ellenörzött?
-    /** lakcím utca hézszám stb **/
-    public $street_address = ""; // * utca, házszám, emelet
-    /** település **/
-    public $locality = ''; // * település
-    /** irsz **/
-    public $postal_code = ''; // * irányító szám
-    /** születési dátum **/
-    public $birth_date = ''; // születési dátum timestram
-    /** nem **/
-    public $gender = 'man'; // 'man' vagy 'woman'
-    /** kép url **/
-    public $picture = ''; // avatar kép uri
-    /** profil web oldal url **/
-    public $profile = ''; // profil web uri
-    /** modositva **/
-    public $updated_at = 0; // utolsó modosítás timestamp
-    /** létrehozva **/
+    /** azonosító szám */
+    public $id = 0; 
+    /** egyedi azonosító kódhash(origname.mothersname,birth_date) */
+    public $sub = '';    
+    /** bejelentkezési név */
+    public $nickname = 'GUEST';
+    /** jelszó hash */
+    public $pswhash = '';
+    /** keresztnév1 */
+    public $given_name = ''; 
+    /** keresztnév 2 */
+    public $middle_name = ''; 
+    /** családnév */
+    public $family_name = ''; 
+    /** anyja neve */
+    public $mothersname = ''; 
+    /** email */
+    public $email = ''; 
+    /** email ellenörzött */
+    public $email_verified = 0;
+    /** telefonszám */
+    public $phone_number = ''; 
+    /** telefonszám ellenörzött */
+    public $phone_number_verified = 0; 
+    /** lakcím utca hézszám stb */
+    public $street_address = ""; 
+    /** település */
+    public $locality = ''; 
+    /** irsz */
+    public $postal_code = ''; 
+    /** születési dátum */
+    public $birth_date = '';
+    /** nem 'man' vagy 'woman' */
+    public $gender = 'man'; 
+    /** kép url */
+    public $picture = ''; 
+    /** profil web oldal url */
+    public $profile = ''; 
+    /** modositva */
+    public $updated_at = 0;
+    /** létrehozva */
     public $created_at = 0;
-    /** ellenörzött **/
-    public $audited = 0; // * hitelesített vagy nem?
-    /** ellenör **/
-    public $auditor = ''; // * auditor nick name vagy "ugyfélkapu"
-    /** ellenörzés időpontja **/
-    public $audit_time = 0; // * auditálás időpontja
-    /** rendszer admin **/
+    /** ellenörzött */
+    public $audited = 0;
+    /** ellenör */
+    public $auditor = '';
+    /** ellenörzés időpontja */
+    public $audit_time = 0; 
+    /** rendszer admin */
     public $sysadmin = 0;
-    /** kód **/
-    public $code = ''; // * hash(origname.mothersname,birth_date)
-    /** születési név **/
+    /** kód hash(origname.mothersname,birth_date) */
+    public $code = ''; 
+    /** születési név */
     public $origname = '';
-    /** egyedi kód **/
-    public $signdate = ''; // *
+    /** aláírás kelte */
+    public $signdate = '';
 }
 
 /**
@@ -117,7 +117,6 @@ class OpenidModel {
                 ['audit_time',$int,11,false],
                 ['sysadmin',$int,1,false],
                 ['code',$varchar,512,false],    	            
-            
                 ['origname',$varchar,128,false],
                 ['signdate',$varchar,10,false]
         ],
@@ -168,6 +167,9 @@ class OpenidModel {
     public function saveUser(UserRecord &$userRec): string {
         $encryptedUser = $this->encrypt($userRec);
         $table = new Table($this->tableName);
+        if ($table->count() == 0) {
+            $userRec->sysadmin = 1;
+        }
         $userRec->updated_at = time();
         if ($userRec->id == 0) {
             $table->insert($encryptedUser);

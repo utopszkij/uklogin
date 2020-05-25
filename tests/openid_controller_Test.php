@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 global $REQUEST;
-session_start();
+// session_start();
 include_once './tests/config.php';
 include_once './tests/mock.php';
 include_once './core/database.php';
@@ -217,6 +217,7 @@ class openidControllerTest extends TestCase
         $this->request->set('testcsrtoken',1);
         $this->request->set('dataprocessaccept','1');
         $this->request->sessionSet('redirect_uri','testRedirectUri');
+        $this->request->sessionSet('acceptScopeUser', $user);
         $this->controller->doscopeform($this->request);
         $this->assertNotEquals('',$redirectURL);
     }
@@ -232,6 +233,7 @@ class openidControllerTest extends TestCase
         $this->request->set('testcsrtoken',1);
         $this->request->set('dataprocessaccept','0');
         $this->request->sessionSet('redirect_uri','testRedirectUri');
+        $this->request->sessionSet('acceptScopeUser', $user);
         $this->controller->doscopeform($this->request);
         $this->expectOutputRegex('/LOGIN/');
         $this->assertEquals('',$redirectURL);
@@ -239,6 +241,7 @@ class openidControllerTest extends TestCase
     public function test_doscopeform_notlogged() {
         global $redirectURL;
         $redirectURL = '';
+        $user = new UserRecord();
         $this->request->sessionSet('loggedUser', new UserRecord());
         $this->request->set('nickname','user1');
         $this->request->set('psw','123456');
@@ -246,6 +249,7 @@ class openidControllerTest extends TestCase
         $this->request->set('testcsrtoken',1);
         $this->request->set('dataprocessaccept','1');
         $this->request->sessionSet('redirect_uri','testRedirectUri');
+        $this->request->sessionSet('acceptScopeUser', $user);
         $this->controller->doscopeform($this->request);
         $this->expectOutputRegex('/ACCESS_VIOLATION/');
         $this->assertEquals('',$redirectURL);
@@ -450,28 +454,12 @@ class openidControllerTest extends TestCase
     
     // ================ forgetpswform =======================
     
-    public function test_forgetpswform_nickEmpty() {
+    public function test_forgetpswform() {
         $this->request->sessionSet('csrToken','testcsrtoken');
         $this->request->set('testcsrtoken', '1');
         $this->request->set('nickname','');
         $this->controller->forgetpswform($this->request);
-        $this->expectOutputRegex('/NICK_REQUIRED/');
-    }
-    
-    public function test_forgetpswform_nickInvalid() {
-        $this->request->sessionSet('csrToken','testcsrtoken');
-        $this->request->set('testcsrtoken', '1');
-        $this->request->set('nickname','nemjo');
-        $this->controller->forgetpswform($this->request);
-        $this->expectOutputRegex('/NOT_FOUND/');
-    }
-    
-    public function test_forgetpswform_ok() {
-        $this->request->sessionSet('csrToken','testcsrtoken');
-        $this->request->set('testcsrtoken', '1');
-        $this->request->set('nickname','user1');
-        $this->controller->forgetpswform($this->request);
-        $this->expectOutputRegex('/NEW_PSW_SENDED/');
+        $this->expectOutputRegex('/FORGETPSW_FORM/');
     }
     
     // ================= userinfo ===================
