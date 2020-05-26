@@ -107,6 +107,8 @@ class AppregistController extends Controller {
         $data->callback = $request->input('callback','');
         $data->admin  = $request->sessionGet('adminNick','');
         $data->dataProcessAccept = $request->input('dataProcessAccept',0);
+        $data->policy = $request->input('policy');
+        $data->scope = $request->input('scope');
         $msg = $this->model->check($data);
 	    if (count($msg) == 0) {
 	        $res = $this->model->save($data);
@@ -146,6 +148,8 @@ class AppregistController extends Controller {
     	$data->admin = $rec->admin;
     	$data->adminNick = $request->sessionGet('adminNick','');
     	$data->access_token  = $request->sessionGet('access_token','');
+    	$data->policy = $rec->policy;
+    	$data->scope = $rec->scope;
     	$this->view->form($data);
 	}
 
@@ -167,6 +171,11 @@ class AppregistController extends Controller {
 	                $result = $app;
 	            }
 	        } // foreach
+	   }
+	   foreach ($result as $fn => $fv) {
+	       if ($result->$fn == null) {
+	           $result->$fn = '';
+	       }
 	   }
 	   return $result;
 	}
