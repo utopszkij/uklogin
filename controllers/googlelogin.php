@@ -127,7 +127,9 @@ class GoogleloginController extends Controller {
 	 */
 	public function authorize(Request &$request) {
 		?>
-		<html>
+        <!doctype html>
+		<html lang="hu">
+		<head><title>googlelogin</title></head>
 		<body>
 		wait please ...
 		<div style="display:none">

@@ -3464,26 +3464,7 @@ firstornew0illuminate\database\eloquent\builder::firstornew@
 scopes,illuminate\database\eloquent\builder::scopes<
 	getmodels/illuminate\database\eloquent\builder::getmodels8
 orwhere-illuminate\database\eloquent\builder::orwhere:
-getquery.illuminate\database\eloquent\builder::getqueryà
-userregistcontroller
-controller4
-deleteaccount#userregistcontroller::deleteaccount.
-
-getappuser userregistcontroller::getappuser8
-recallloginform%userregistcontroller::recallloginform&
-mydatauserregistcontroller::mydata*
-doregistuserregistcontroller::doregist*
-pswerroruserregistcontroller::pswerror.
-
-registform userregistcontroller::registform,
-	forgetpswuserregistcontroller::forgetpsw<
-recallregistform2'userregistcontroller::recallregistform20
-useractival!userregistcontroller::useractival>
-checksignhashexist(userregistcontroller::checksignhashexist,
-	changepswuserregistcontroller::changepsw.
-
-useraction userregistcontroller::useraction0
-registform2!userregistcontroller::registform2¦
+getquery.illuminate\database\eloquent\builder::getquery¦
 
 commonviewview$
 
@@ -3513,18 +3494,7 @@ adjustdataappregistmodel::adjustdata
 domaincheckappregistmodel::domaincheck(
 
 url_existsappregistmodel::url_exists$
-strtohexappregistmodel::strtohexF
-examplecontroller
-controller%
-exampleexamplecontroller::example°
-oauth2controller
-controller.
-access_tokenoauth2controller::access_token$
-dologinoauth2controller::dologin(
-	loginformoauth2controller::loginform2
-getcallbackurl oauth2controller::getcallbackurl4
-recallloginform!oauth2controller::recallloginform&
-userinfooauth2controller::userinfoô
+strtohexappregistmodel::strtohexô
 
 openidview
 commonview 
@@ -3575,27 +3545,11 @@ registformopenidcontroller::registform,
 tokenopenidcontroller::tokenj
 frontpagemodel,
 getusercountfrontpagemodel::getusercount*
-getappcountfrontpagemodel::getappcountÖ
-auditorcontroller
-controller1
-userauditform auditorcontroller::userauditform-
-douserauditauditorcontroller::douseraudit3
-saveaudiorinfo!auditorcontroller::saveaudiorinfo
-formauditorcontroller::form-
-delsysadminauditorcontroller::delsysadmin-
-addsysadminauditorcontroller::addsysadmin
-infoauditorcontroller::infoX
+getappcountfrontpagemodel::getappcountX
 issucontroller
 controller
 formissucontroller::form
-sendissucontroller::send©
-logincontroller
-controller!
-logoutlogincontroller::logout
-codelogincontroller::code
-formlogincontroller::form)
-
-getfromurllogincontroller::getfromurl8
+sendissucontroller::send8
 appregistview
 commonview
 formappregistview::formx
@@ -3621,10 +3575,7 @@ processurimdview::processuriä
 pdf_getmeghatalmazo#pdfparsermodel::pdf_getmeghatalmazoB
 adatkezelesview
 commonview#
-displayadatkezelesview::display:
-	loginview
-commonview!
-	loginformloginview::loginform¾
+displayadatkezelesview::display¾
 
 userrecord"sub"mothersname"street_address"code"gender"
 birth_date"
@@ -3640,15 +3591,7 @@ given_name"middle_name"audited"picture"origname"phone_number"postal_code"
 getuserbynickopenidmodel::getuserbynick
 decryptopenidmodel::decrypt'
 __constructopenidmodel::__construct!
-saveuseropenidmodel::saveuser"	tablenamep
-userinfo"street_address"mothersname"
-birth_date"locality"middle_name"
-given_name"postal_code"family_name”
-ukauditcontroller
-controller/
-checkpdfdataukauditcontroller::checkpdfdata
-formukauditcontroller::form!
-auditukauditcontroller::auditU
+saveuseropenidmodel::saveuser"	tablenameU
 txtcontroller
 controller
 addtxtcontroller::add
@@ -3660,14 +3603,7 @@ issurecord"sender"title"body"email?
 sendissumodel::send@
 impresszumview
 commonview"
-displayimpresszumview::displayt
-userregistview
-commonview*
-registform1userregistview::registform1*
-registform2userregistview::registform2F
-browsercontroller
-controller%
-browserbrowsercontroller::browser:
+displayimpresszumview::display:
 adomanyview
 commonview
 displayadomanyview::display@
@@ -3699,15 +3635,7 @@ controller
 
 readmeview
 commonview
-displayreadmeview::displayú
-fblogincontroller
-controller
-codefblogincontroller::code'
-callcurlfblogincontroller::callcurl7
-readorcreateuser#fblogincontroller::readorcreateuser+
-
-apirequestfblogincontroller::apirequest)
-	authorizefblogincontroller::authorizeH
+displayreadmeview::displayH
 adatkezelescontroller
 controller#
 showadatkezelescontroller::showÅ
@@ -3719,10 +3647,6 @@ controller#
 
 apirequest!googlelogincontroller::apirequest1
 __construct"googlelogincontroller::__construct-
-	authorize googlelogincontroller::authorize<
-
-oauth2view
-commonview"
-	loginformoauth2view::loginform*
+	authorize googlelogincontroller::authorize*
 ukloginmodel
 initukloginmodel::init
