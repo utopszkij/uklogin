@@ -60,11 +60,8 @@ class OpenidView  extends CommonView  {
 	    <div id="loginForm" style="display:none;" class="loginForm">
 	      <div class="page" style="max-width:600px">
 	    	<?php $this->echoMsgs($p); ?>
-	    	<em class="fa fa-sign-in formIcon"></em>
 	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
-	    	<?php if ($p->clientTitle != 'self') : ?>
-	    	<h2><?php echo $p->clientTitle; ?></h2>
-	    	<?php endif; ?>
+	    	<h2><em class="fa fa-sign-in formIcon"></em>&nbsp;uklogin</h2>
 	    	<h3><?php echo $p->formTitle; ?></h3>
 	    	<div id="alterButtons" style="display:block">
 	    		<?php if (config('GOOGLE_CLIENT_ID') != '') : ?>
@@ -79,6 +76,7 @@ class OpenidView  extends CommonView  {
 	    		</button>
 	    		<?php endif; ?>
 	    	</div>
+            <div>&nbsp;</div>
 		    <form class="form" method="post" id="frmLoginForm"
 		    	action="<?php echo config('MYDOMAIN'); ?>/openid/dologin" target="_self">
 				<input type="hidden" name="<?php echo $p->csrToken; ?>" value="1" />
@@ -94,7 +92,11 @@ class OpenidView  extends CommonView  {
 				</div>
 				<?php if (($p->scope != '') & ($p->clientTitle != 'self')) : ?>
     		    <div class="scope">
-    		    	<p><label><?php echo txt('SCOPE_TO_CLIENT'); ?></label></p>
+    		    	<p><label>
+                        <strong><?php echo $p->clientTitle; ?></strong>&nbsp;
+                        <?php echo txt('SCOPE_TO_CLIENT'); ?>
+                       </label>
+                    </p>
     		    	<p><var><?php echo $this->scopeTxt($p->scope); ?></var></p>
     		    </div>
     		    <?php endif; ?>
@@ -106,7 +108,7 @@ class OpenidView  extends CommonView  {
     		    	<?php if (($p->policy_uri != '') & ($p->clientTitle != 'self')) : ?>
     		    	<p> <em class="fa fa-hand-o-right"></em>
     		    		<a href="<?php echo $p->policy_uri; ?>" target="_new">
-    		    			<?php echo txt('CLIENT_POLICY'); ?></a>
+    		    			<?php echo $p->clientTitle; ?>&nbsp;<?php echo txt('CLIENT_POLICY'); ?></a>
     		    	</p>
     		    	<?php endif; ?>
     		    </div>
@@ -114,13 +116,11 @@ class OpenidView  extends CommonView  {
 					<input type="checkbox" name="dataprocessaccept"
 						 id = "dataprocessaccept" value="1" />
 					<strong><?php echo txt('ACCEPT_POLICY'); ?></strong>
-				</div>
-				<div class="form-control-buttons">
+                    &nbsp;
 					<button type="button" id="btnOk" class="btn btn-primary">
 						<em class="fa fa-check"></em><?php echo txt('LOGIN'); ?>
 					</button>
 				</div>
-				<p>&nbsp;</p>
     		    <div class="formLinks">
     		    	<p><em class="fa fa-hand-o-right"></em>
     		    		<a href="" id="forgetpswlink" target="_self">

@@ -324,7 +324,7 @@ class OpenidUserController extends Controller {
 		$p->address = $pdfData->txt_address;
 		$p->id = 0;
 		$pdfParser->clearFolder($tmpDir);
-		
+
 		if ($pdfData->error == "") {
 		    $request->sessionSet('pdfData',JSON_encode($pdfData));
 		    // pdfsign hash exists?
@@ -704,15 +704,18 @@ class OpenidController extends OpenidUserController {
     public function authorize(Request $request) {
         $p = $this->init($request, ['client_id','redirect_uri','scope',
             'state','nonce','policy_uri','response_type']);
-        $p->response_type = $request->input('response_type','id_token token');
-        $p->scope = urldecode($request->input('scope','nickname postal_code locality'));
-        $p->redirect_uri = urldecode($request->input('redirect_uri', config('MYDOMAIN')));
-        $p->nonce = urldecode($request->input('nonce', ''));
         $p->client_id = $request->input('client_id', config('MYDOMAIN'));
+        $client = $this->getClient($p->client_id, $p, $this->model);
+        if ($client->id <= 0) {
+            $client->scope = 'sub nickname postal_code locality audited';
+        }
+        $p->response_type = $request->input('response_type','id_token token');
+        $p->scope = urldecode($request->input('scope',$client->scope));
+        $p->redirect_uri = urldecode($request->input('redirect_uri', $client->redirect_uri));
+        $p->policy = urldecode($request->input('policy', $client->policy));
+        $p->nonce = urldecode($request->input('nonce', ''));
         $this->setParamToSession($request, $p);
         $this->getModel('appregist'); // AppRecord class
-        $client = $this->getClient($p->client_id, $p, $this->model);
-
         // ellenörzések
         $this->openidCheck($p, $client);
         if (count($p->msgs) > 0) {
