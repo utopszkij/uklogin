@@ -60,19 +60,19 @@ class OpenidView  extends CommonView  {
 	    <div id="loginForm" style="display:none;" class="loginForm">
 	      <div class="page" style="max-width:600px">
 	    	<?php $this->echoMsgs($p); ?>
-	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
+	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
 	    	<h2><em class="fa fa-sign-in formIcon"></em>&nbsp;uklogin</h2>
 	    	<h3><?php echo $p->formTitle; ?></h3>
 	    	<div id="alterButtons" style="display:block">
 	    		<?php if (config('GOOGLE_CLIENT_ID') != '') : ?>
 	    		<button type="text" class="btn btn-outline-secondary alterButton" id="googleButton">
-	    			<img src="images/google.png" style="height:90%" alt="google" title="google" />
+	    			<img src="<?php echo config('MYDOMAIN'); ?>/images/google.png" style="height:90%" alt="google" title="google" />
 	    		</button>&nbsp;
 	    		<?php endif; ?>
 	    		<?php if (config('FB_CLIENT_ID') != '') : ?>
 	    		<button type="text" class="btn btn-outline-secondary alterButton"
                     id="fbButton">
-	    			<img src="images/facebook.jpg" style="height:90%" alt="facebook" title="facebook" />
+	    			<img src="<?php echo config('MYDOMAIN'); ?>/images/facebook.jpg" style="height:90%" alt="facebook" title="facebook" />
 	    		</button>
 	    		<?php endif; ?>
 	    	</div>
@@ -141,7 +141,8 @@ class OpenidView  extends CommonView  {
         <?php $this->echoJsLngDefs([
             'DATAPROCESS_ACCEPT_REQUIRED',
             'PSW_REQUIRED',
-            'NICK_REQUIRED'
+            'NICK_REQUIRED',
+            'MYDOMAIN'
         ]); ?>
 		</body>
         </html>
@@ -161,7 +162,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page">
 	    	<?php $this->echoMsgs($p); ?>
 	    	<em class="fa fa-sign-in formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
+	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
 		    <h2><?php echo $p->clientTitle; ?></h2>
 		    <h3><?php echo txt('SCOPE_ACCEPT_FORM'); ?></h3>
 		    <form class="form" method="post" id="frmScopeForm"
@@ -232,7 +233,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page" id="page">
 	    	<?php $this->echoMsgs($data); ?>
 		    <em class="fa fa-key formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
+	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
 			<?php if ($data->clientTitle != 'self') : ?>
 		    <h2><?php echo $data->clientTitle; ?></h2>
 		    <?php endif; ?>
@@ -363,7 +364,7 @@ class OpenidView  extends CommonView  {
 	      <div class="page" id="page">
 	    	<?php $this->echoMsgs($data); ?>
 		    <em class="fa fa-user formIcon"></em>
-	    	<img class="formLogo" src="./templates/default/logo.png" alt="logo" />
+	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
 		    <h2>Felhasználói profil</h2>
 		    <p>
 		    <?php if ($data->picture != '') : ?>

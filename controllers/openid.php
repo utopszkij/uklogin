@@ -708,6 +708,7 @@ class OpenidController extends OpenidUserController {
         $client = $this->getClient($p->client_id, $p, $this->model);
         if ($client->id <= 0) {
             $client->scope = 'sub nickname postal_code locality audited';
+            $client->redirect_uri = '';
         }
         $p->response_type = $request->input('response_type','id_token token');
         $p->scope = urldecode($request->input('scope',$client->scope));
