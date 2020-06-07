@@ -25,14 +25,14 @@
 				}
 	    	});
 	    	$('#forgetpswlink').click(function() {
-	    		document.location = 'index.php/openid/forgetpswform/nickname/'+$('#nickname').val();
+	    		document.location = global.LNG.MYDOMAIN +'/index.php/openid/forgetpswform/nickname/'+$('#nickname').val();
 	    		return false;
 	    	});
 	    	$('#fbButton').click(function() {
-    			document.location = 'index.php/opt/fblogin/authorize';
+    			document.location = global.LNG.MYDOMAIN + '/index.php/opt/fblogin/authorize';
 	    	});
 	    	$('#googleButton').click(function() {
-    			parent.document.location = 'index.php/opt/googlelogin/authorize';
+    			parent.document.location = global.LNG.MYDOMAIN + '/index.php/opt/googlelogin/authorize';
 	    	});
 	    	$('#loginForm').show();
 	    	$('#nickname').focus();
@@ -85,12 +85,12 @@
 				}
 			});
 			$('#btnMyData').click(function() {
-				document.location = 'index.php?option=openid&task=mydata&'+csrToken+'=1';
+				document.location = global.LNG.MYDOMAIN + '/index.php?option=openid&task=mydata&'+csrToken+'=1';
 			});
 			$('#btnDelAccount').click(function() {
 				global.confirm('Törölni akarod a bejelentkezésedet?',
 				function() {
-					document.location = 'index.php?option=openid&task=delaccount&'+csrToken+'=1';
+					document.location = global.LNG.MYDOMAIN + '/index.php?option=openid&task=delaccount&'+csrToken+'=1';
 				});
 
 			});
