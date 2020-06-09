@@ -61,8 +61,9 @@ class OpenidView  extends CommonView  {
 	      <div class="page" style="max-width:600px">
 	    	<?php $this->echoMsgs($p); ?>
 	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
-	    	<h2><em class="fa fa-sign-in formIcon"></em>&nbsp;uklogin</h2>
-	    	<h3><?php echo $p->formTitle; ?></h3>
+	    	<h4><em class="fa fa-sign-in formIcon"></em>&nbsp;uklogin</h4>
+	    	<h4><?php echo $p->formTitle; ?></h4>
+	    	<h4><?php echo $p->clientTitle; ?></h4>
 	    	<div id="alterButtons" style="display:block">
 	    		<?php if (config('GOOGLE_CLIENT_ID') != '') : ?>
 	    		<button type="text" class="btn btn-outline-secondary alterButton" id="googleButton">
@@ -116,10 +117,15 @@ class OpenidView  extends CommonView  {
 					<input type="checkbox" name="dataprocessaccept"
 						 id = "dataprocessaccept" value="1" />
 					<strong><?php echo txt('ACCEPT_POLICY'); ?></strong>
-                    &nbsp;
+                    <br />
 					<button type="button" id="btnOk" class="btn btn-primary">
 						<em class="fa fa-check"></em><?php echo txt('LOGIN'); ?>
 					</button>
+					&nbsp;
+					<a id="btCancel" class="btn btn-secondary"
+					   href="https://<?php echo parse_url($p->redirect_uri)['host']; ?>">
+						<em class="fa fa-ban"></em><?php echo txt('CANCEL'); ?>
+					</a>
 				</div>
     		    <div class="formLinks">
     		    	<p><em class="fa fa-hand-o-right"></em>
@@ -162,9 +168,12 @@ class OpenidView  extends CommonView  {
 	      <div class="page">
 	    	<?php $this->echoMsgs($p); ?>
 	    	<em class="fa fa-sign-in formIcon"></em>
-	    	<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
-		    <h2><?php echo $p->clientTitle; ?></h2>
-		    <h3><?php echo txt('SCOPE_ACCEPT_FORM'); ?></h3>
+	    	<h4>
+	    		<img class="formLogo" src="<?php echo config('MYDOMAIN'); ?>/templates/default/logo.png" alt="logo" />
+	    		uklogin
+	    	</h4>
+		    <h4><?php echo $p->clientTitle; ?></h4>
+		    <h4><?php echo txt('SCOPE_ACCEPT_FORM'); ?></h4>
 		    <form class="form" method="post" id="frmScopeForm"
 		    	action="<?php echo config('MYDOMAIN'); ?>/openid/doscopeform" target="_self">
 				<input type="hidden" name="<?php echo $p->csrToken; ?>" value="1" />
@@ -201,7 +210,7 @@ class OpenidView  extends CommonView  {
 					</button>
                     &nbsp;
 					<a type="button" id="btnOk" class="btn btn-secondary"
-                        href="<?php echo config('MYDOMAIN'); ?>">
+                        href="https://<?php echo parse_url($p->redirect_uri)['host']; ?>">
 						<em class="fa fa-ban"></em><?php echo txt('CANCEL'); ?>
 					</a>
 				</div>

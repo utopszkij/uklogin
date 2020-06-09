@@ -51,7 +51,7 @@ function getFromUrl(string $url, array $fields = []): string {
 }
 
 /**
- * openid server hivta vissza, sikeres login után. iframe -ben fut
+ * openid server hivta vissza, sikeres login után. 
  * $_GET['token'] érkezik
  */
 function codeTask() {
@@ -76,7 +76,7 @@ function codeTask() {
         <p>userinfo kérés eredménye:</p>
         '.JSON_encode($result).'
         <script type="text/javascript">
-            window.parent.document.location = "'.MYDOMAIN.'/example.php";
+            window.document.location = "'.MYDOMAIN.'/example.php";
         </script>
         </body>
         </html>
@@ -229,7 +229,6 @@ function homeTask() {
   				 <em class="fa fa-close" style="cursor:pointer" title="close"
   					id="popupClose"></em>&nbsp;
   				</div>
-  				<iframe id="ifrm1" name="ifrm1" src=""></iframe>
   			</div>
           	<h4 id="sourceTitle">Forrás program <em class="fa fa-code" style="cursor:pointer"
           		onclick="$('#source').toggle();" title="view"></em>
@@ -262,9 +261,7 @@ function homeTask() {
 						"&redirect_uri=<?php echo urlencode(MYDOMAIN.'/example.php?task=code'); ?>"+
 						"&policy_uri=<?php echo urlencode(MYDOMAIN.'/adatkezeles.html'); ?>"+
 						"&scope=<?php echo urlencode('sub nickname postal_code locality'); ?>";
-				$('#ifrm1').attr('src',url);
-				$('#popup').show();
-				return false; // ne hajsa végre a href linket
+				window.document.location = url; return false;
 			});
 			$('#popupClose').click(function() {
 					var myFrame = $("#ifrm1").contents().find('body');

@@ -1,6 +1,10 @@
 
   function pageOnLoad() {
 	    if ($('#loginForm').length > 0) {
+	    	if (window.top != window.self) {
+	    		alert('can not run in iframe or popop window.');
+	    		location = global.LNG.MYDOMAIN;
+	    	}
 	    	$('#btnOk').click(function() {
 				$('input#dataprocessaccept').removeClass('is-invalid');
 				$('input#psw').removeClass('is-invalid');

@@ -715,6 +715,11 @@ class OpenidController extends OpenidUserController {
         $p->redirect_uri = urldecode($request->input('redirect_uri', $client->redirect_uri));
         $p->policy = urldecode($request->input('policy', $client->policy));
         $p->nonce = urldecode($request->input('nonce', ''));
+        if ($client->name != '') {
+            $p->clientTitle = $client->name;
+        } else {
+            $p->clientTitle = parse_url($p->redirect_uri)['host'];
+        }
         $this->setParamToSession($request, $p);
         $this->getModel('appregist'); // AppRecord class
         // ellenörzések

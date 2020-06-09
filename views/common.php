@@ -161,8 +161,7 @@ class CommonView extends View {
 			    <ul class="navbar-nav">
 			      <?php if ($p->adminNick == '') :?>
     			      <li class="nav-item">
-    			        <a class="nav-link" target="ifrmOpenid"
-    			            onclick="$('#divOpenid').show(); $('#scope').hide(); true"
+    			        <a class="nav-link" target="_self"
     			            href="<?php echo txt('MYDOMAIN'); ?>/openid/authorize/?redirect_uri=<?php echo $login_redirect_uri; ?>">
     			        	<em class="fa fa-sign-in"></em>&nbsp;<?php echo txt('LOGIN'); ?></a>
     			      </li>
