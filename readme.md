@@ -19,7 +19,7 @@ A rendszer biztosítja, hogy egy személy csak egyszer regisztrálhat.
 
 Természetesen egy ügyfélkapú loginnal több alkalmazásba is be lehet lépni.
 
-A hívó web program iframe -be hívhatja be a login képernyőt. Ezen van "regisztrálok" link is azok számára akik még nem regisztráltak.
+A hívó web program https protoklon hívhatja be a login képernyőt. Ezen van "regisztrálok" link is azok számára akik még nem regisztráltak.
 
 Az applikáció adminisztrátora az erre a célra szolgáló web felületen tudja az applikációt regisztrálni a rendszerbe.
 
@@ -196,6 +196,9 @@ Sikeres login, illetve az adatkezeléshez történő hozzájárulás után a **r
 - **code**
 
 A **token** adatot használva a **userinfo** végpontról lekérhetőek a json formátumú  user információk (token = access_token). A **state** és **nonce** adatot a kliens tetszőleges célra használhatja. Gyakran a **state** adatot egy biztonságot növelő egyedi token céljára használják, a **nonce** -ben bpedig a sikeres login után aktiválandó applikáció funciót indító URL szerepel.
+
+**Biztonsági okokból az authorize funkció iframe -ben vagy popup frame -ben nem hívható!**
+
 
 ### OpenId logout
 
