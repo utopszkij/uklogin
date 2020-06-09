@@ -1,3 +1,4 @@
+
 <?php
 /**
  * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
