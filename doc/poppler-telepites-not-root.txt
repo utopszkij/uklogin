@@ -1,0 +1,7 @@
+apt-get download poppler-utils
+dpkg -i poppler-utils_0.62.0-2ubuntu2.10_amd64.deb --force-not-root --root=$HOME
+    As dpkg -i doesn't work (see comments), I suggest this alternative:
+    dpkg -x poppler-utils_0.62.0-2ubuntu2.10_amd64.deb .
+
+Ezzel létrejön az aktuális könyvtár alatt egy usr alkönytár, és ebben vannak a
+pdsig és társai valamint a szükséges további dolgok.

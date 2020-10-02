@@ -5,6 +5,11 @@
  * @author Fogler Tibor
  */
 
+// ez a sor csak akkorkell ha a parancssori pfp eszközök nem hasznűlhatóak. ekkor viszont
+// a szerverre kell a vendor könyvtár is
+// include_once 'vendor/autoload.php';
+
+
 /** PdfData rekord */
 class PdfData {
     /** hibaüzenet */
@@ -338,6 +343,29 @@ class PdfparserModel {
         }
     }
     
+    protected function getDataFromTxt($text, $prefix, $postfix) {
+        $i = strpos($text,$prefix);
+        $j = strpos($text,$postfix);
+        if (($i > 0) & ($j > $i)) {
+            $result = substr($text, $i+strlen($prefix), $j-$i-strlen($prefix) );
+        }
+        return $result;    
+    }
+    
+    
+    protected function isStringInFile($file,$string = 'adbe.pkcs7.detached'){
+        $handle = fopen($file, 'r');
+        $valid = false; // init as false
+        while (($buffer = fgets($handle)) !== false) {
+            if (strpos($buffer, $string) !== false) {
+                $valid = TRUE;
+                break; // Once you find the string, you should break out the loop.
+            }
+        }
+        fclose($handle);
+        return $valid;
+    }
+
     /**
     * munkakönyvtár létrehozása session ID -t használva
     */
@@ -364,22 +392,52 @@ class PdfparserModel {
       if (!file_exists($filePath)) {
           $res->error = 'PDF_Nem_található. ('.$filePath.'), ';
       } else {
-          $filePath = str_replace("'",'',escapeshellarg($filePath)); 
+          $filePath = str_replace("'",'',escapeshellarg($filePath));
+          
+         //+ ha a parancssori pdf eszközök nem elérhetőek
+         /*
+          if (!$this->isStringInFile($filePath)) {
+            $res->error="nincs aláírva";    
+          }
+          $parser = new \Smalot\PdfParser\Parser();
+          $pdf    = $parser->parseFile($filePath);
+          $text = $pdf->getText();
+          $details = $pdf->getDetails();
+          unlink($filePath);
+          
+          $res->txt_name = $this->getDataFromTxt($text,'Név (névviselés szerint)','Személyi azonosító');
+          $res->txt_birth_date = $this->getDataFromTxt($text,'Születési dátum','Neme');
+          $res->txt_mothersname = $this->getDataFromTxt($text,'Anyja neve és utóneve','Állampolgársága');
+          $res->txt_address = $this->getDataFromTxt($text,'Cím','Bejelentés');
+          $res->txt_tartozkodas = '';
+
+          $res->xml_viseltNev = $res->txt_name;
+          $res->xml_ukemail = '';
+          $res->xml_szuletesiNev = $this->getDataFromTxt($text,'Születési név és utónév','Anyja neve és utóneve');
+          $res->xml_anyjaNeve = $res->txt_mothersname;
+          $res->xml_szuletesiDatum = $res->txt_birth_date;
+          $res->xml_alairasKelte = '';
+         */ 
+         //- ha a parancssori eszközök nem elérhetőek 
+                   
+         //+ ha a parancssori pdf eszközök elérhetőek 
        	 $this->checkPdfSign($filePath, $res);
        	 if ($res->error == '') {
           	$this->parseTxt($filePath, $res);
 		    	$this->parseInfo($filePath, $res);
 		    	$this->parseMeghatalmazo($filePath, $res);
 		    	// meghatalmazó és pdf tartalom azonos?
-		      if ((mb_strtoupper($res->txt_mothersname) != mb_strtoupper($res->xml_anyjaNeve)) |
-		          (mb_strtoupper($res->txt_name) != mb_strtoupper($res->xml_viseltNev)) |
-		        	 ($res->txt_birth_date != $res->xml_szuletesiDatum)) {
-		           $res->error .= 'PDF tartalom és aláírás ren egyezik, <br>'.
-		           $res->txt_mothersname.' / '.$res->xml_anyjaNeve.'<br>'.
-		           $res->txt_name.' / '.$res->xml_viseltNev.'<br />'.
-		           $res->txt_birth_date.' / '.$res->xml_szuletesiDatum.'<br />';
-				} 	
-		    }	
+             if ((mb_strtoupper($res->txt_mothersname) != mb_strtoupper($res->xml_anyjaNeve)) |
+                  (mb_strtoupper($res->txt_name) != mb_strtoupper($res->xml_viseltNev)) |
+                  ($res->txt_birth_date != $res->xml_szuletesiDatum)) {
+                      $res->error .= 'PDF tartalom és aláírás ren egyezik, <br>'.
+                          $res->txt_mothersname.' / '.$res->xml_anyjaNeve.'<br>'.
+                          $res->txt_name.' / '.$res->xml_viseltNev.'<br />'.
+                          $res->txt_birth_date.' / '.$res->xml_szuletesiDatum.'<br />';
+             }
+		 }
+		 //- ha a parancssori eszközök elérhetőek 
+		 
       }
 	  return  $res;
 	 }

@@ -161,11 +161,30 @@ class GoogleloginController extends Controller {
 	 * képernyőt jeleníti majd meg.
 	 * sessionban érkezik: client_id, policy_url, scope, redirect_uri, state, nonce
 	 * @param Request $request - code, state state-ban a session_id érkezik
+	 *
+	 * amikor a google hivja vissza, egyes szervereken 
+	 * a code és state nem GET -ben érkezik, hanem csak a REQUEST_URI -ból nyerjető ki.
 	 */
 	public function code(Request &$request) {
 
+		 $w = explode('?',$_SERVER['REQUEST_URI']);
+		 if (count($w) == 2) {
+			$w = explode('&',$w[1]);
+			foreach ($w as $w1) {
+				$w2 = explode('=',$w1);
+				if (count($w2) == 2) {
+					$_GET[$w2[0]] = urldecode($w2[1]); 				
+				}			
+			}		 
+		 }
 	    $code = $request->input('code');
 	    $state = $request->input('state');
+	    if (($code == '') & (isset($_GET['code']))) {
+			$code = 	$_GET['code'];   
+	    }
+	    if (($state == '') & (isset($_GET['state']))) {
+			$state = 	$_GET['state'];   
+	    }
 	    $this->sessionChange($state, $request);
    	    $token = $this->apiRequest(
    	      'https://oauth2.googleapis.com/token',
@@ -177,7 +196,7 @@ class GoogleloginController extends Controller {
              'code' => $code
    		   ]
 	    );
-		if (isset($token->access_token)) {
+		 if (isset($token->access_token)) {
             $url="https://www.googleapis.com/oauth2/v1/userinfo?alt=json";
             $request->sessionSet('access_token', $token->access_token);
    			$guser = $this->apiRequest(
@@ -210,6 +229,7 @@ class GoogleloginController extends Controller {
 		 } else {
 			echo 'Fatal error in google login. access_token not found '.
 			'code = '.json_encode($code).
+			' GET='.json_encode($_GET).
 			' response= '.json_encode($token);
 			return;
 		 }

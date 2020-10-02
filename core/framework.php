@@ -461,7 +461,7 @@ class Request {
     /** paraméterek */
     public $params = array();
     /** session változók */
-	protected $sessions = array();
+	protected $sessions = false;
 	
 	/** konstruktor */
 	function __construct() {
@@ -535,7 +535,7 @@ class Request {
 	 */
 	protected function session_init(string $sessionId) {
 	    $maxlifetime = ini_get("session.gc_maxlifetime");
-	    if (count($this->sessions) <= 0) {
+	    if (!$this->sessions) {
 	        $this->sessions = new stdClass();
 	        $db = new DB();
 	        $db->statement('CREATE TABLE IF NOT EXISTS sessions (id varchar(256), data text, time datetime)');
