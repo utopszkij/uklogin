@@ -1,10 +1,6 @@
 {
     "require": {
-        "phpmailer/phpmailer": "^6.0",
-        "smalot/pdfparser": "*",
-        "tecnickcom/tc-lib-pdf-parser": "^2.3"
-    },
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "dev-master"
+        "smalot/pdfparser": "*"
     }
 }
+

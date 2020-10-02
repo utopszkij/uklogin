@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'phpDocumentor' => array($vendorDir . '/phpdocumentor/fileset/src', $vendorDir . '/phpdocumentor/fileset/tests/unit', $vendorDir . '/phpdocumentor/graphviz/src', $vendorDir . '/phpdocumentor/graphviz/tests/unit', $vendorDir . '/phpdocumentor/phpdocumentor/src', $vendorDir . '/phpdocumentor/phpdocumentor/tests/unit', $vendorDir . '/phpdocumentor/reflection/src', $vendorDir . '/phpdocumentor/reflection/tests/unit', $vendorDir . '/phpdocumentor/reflection/tests/mocks', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
+    'phpDocumentor' => array($vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/reflection/src', $vendorDir . '/phpdocumentor/reflection/tests/unit', $vendorDir . '/phpdocumentor/reflection/tests/mocks', $vendorDir . '/phpdocumentor/graphviz/src', $vendorDir . '/phpdocumentor/graphviz/tests/unit', $vendorDir . '/phpdocumentor/fileset/src', $vendorDir . '/phpdocumentor/fileset/tests/unit', $vendorDir . '/phpdocumentor/phpdocumentor/src', $vendorDir . '/phpdocumentor/phpdocumentor/tests/unit'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Smalot\\PdfParser\\' => array($vendorDir . '/smalot/pdfparser/src'),
     'Pimple' => array($vendorDir . '/pimple/pimple/lib'),

@@ -4,15 +4,15 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit22dbd86f527d3802159bca3ea738e481
+class ComposerStaticInit8b85119f5c3b11253619bceab66837f7
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        '10a6847eba8a430a134fad89f4a30a26' => __DIR__ . '/..' . '/zendframework/zend-cache/autoload/patternPluginManagerPolyfill.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
+        '10a6847eba8a430a134fad89f4a30a26' => __DIR__ . '/..' . '/zendframework/zend-cache/autoload/patternPluginManagerPolyfill.php',
         'd9d39f82a605ebe5918f683dd402334c' => __DIR__ . '/..' . '/padraic/humbug_get_contents/src/function.php',
         '3a50d90d85c7fe889a94ae1114b921ce' => __DIR__ . '/..' . '/padraic/humbug_get_contents/src/functions.php',
+        'fe1bcd0336136e435eaf197895daf81a' => __DIR__ . '/..' . '/nikic/php-parser/lib/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -251,16 +251,16 @@ class ComposerStaticInit22dbd86f527d3802159bca3ea738e481
         array (
             'phpDocumentor' => 
             array (
-                0 => __DIR__ . '/..' . '/phpdocumentor/fileset/src',
-                1 => __DIR__ . '/..' . '/phpdocumentor/fileset/tests/unit',
-                2 => __DIR__ . '/..' . '/phpdocumentor/graphviz/src',
-                3 => __DIR__ . '/..' . '/phpdocumentor/graphviz/tests/unit',
-                4 => __DIR__ . '/..' . '/phpdocumentor/phpdocumentor/src',
-                5 => __DIR__ . '/..' . '/phpdocumentor/phpdocumentor/tests/unit',
-                6 => __DIR__ . '/..' . '/phpdocumentor/reflection/src',
-                7 => __DIR__ . '/..' . '/phpdocumentor/reflection/tests/unit',
-                8 => __DIR__ . '/..' . '/phpdocumentor/reflection/tests/mocks',
-                9 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+                1 => __DIR__ . '/..' . '/phpdocumentor/reflection/src',
+                2 => __DIR__ . '/..' . '/phpdocumentor/reflection/tests/unit',
+                3 => __DIR__ . '/..' . '/phpdocumentor/reflection/tests/mocks',
+                4 => __DIR__ . '/..' . '/phpdocumentor/graphviz/src',
+                5 => __DIR__ . '/..' . '/phpdocumentor/graphviz/tests/unit',
+                6 => __DIR__ . '/..' . '/phpdocumentor/fileset/src',
+                7 => __DIR__ . '/..' . '/phpdocumentor/fileset/tests/unit',
+                8 => __DIR__ . '/..' . '/phpdocumentor/phpdocumentor/src',
+                9 => __DIR__ . '/..' . '/phpdocumentor/phpdocumentor/tests/unit',
             ),
         ),
         'T' => 
@@ -911,10 +911,10 @@ class ComposerStaticInit22dbd86f527d3802159bca3ea738e481
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit22dbd86f527d3802159bca3ea738e481::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit22dbd86f527d3802159bca3ea738e481::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit22dbd86f527d3802159bca3ea738e481::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit22dbd86f527d3802159bca3ea738e481::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8b85119f5c3b11253619bceab66837f7::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8b85119f5c3b11253619bceab66837f7::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit8b85119f5c3b11253619bceab66837f7::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit8b85119f5c3b11253619bceab66837f7::$classMap;
 
         }, null, ClassLoader::class);
     }
