@@ -1,4 +1,4 @@
-<?php
+;<?php
 /**
  * OpenId szolgáltatás magyarorszag.hu ügyfélkapu használatával
  * @package uklogin
@@ -6,14 +6,16 @@
  */
 
 
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\Exception;
-
-//require './vendor/phpmailer/src/Exception.php';
-//require './vendor/phpmailer/src/PHPMailer.php';
-//require './vendor/phpmailer/src/SMTP.php';
+require './vendor/phpmailer/phpmailer/src/Exception.php';
+require './vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require './vendor/phpmailer/phpmailer/src/SMTP.php';
 require './core/jwe.php';
 require './models/appregist.php';
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 /** openid user kezelő osztály */
 class OpenidUserController extends Controller {
@@ -189,7 +191,12 @@ class OpenidUserController extends Controller {
         $addressItems[] = '';
 
         $userRec->id = $p->id; // *
-        $userRec->nickname = $p->nick; // * bejelentkezési név
+        if (isset($p->nick)) {
+            $userRec->nickname = $p->nick; // * bejelentkezési név
+        } else {
+            $userRec->nickname = $p->nickname; // * bejelentkezési név
+        }
+        
         if (isset($p->psw1)) {
             $userRec->pswhash = myHash('sha256', $p->psw1); // * jelszó sha256 hash
         } else {
@@ -324,7 +331,6 @@ class OpenidUserController extends Controller {
 		$p->address = $pdfData->txt_address;
 		$p->id = 0;
 		$pdfParser->clearFolder($tmpDir);
-
 		if ($pdfData->error == "") {
 		    $request->sessionSet('pdfData',JSON_encode($pdfData));
 		    // pdfsign hash exists?
@@ -337,13 +343,13 @@ class OpenidUserController extends Controller {
 		              $p->$fn = $fv;
 		            }
 		            $res = $this->fillUserRecord($p, $pdfData, $res);
-                    $this->model->saveUser($res);
+		            $this->model->saveUser($res);
 		            // login
 		            $request->sessionSet('loggedUser', $res);
 		            // goto profile
 		            redirectTo(config('MYDOMAIN').'/opt/openid/profileform');
 		    } else {
-			         $this->view->registForm2($p);
+		        $this->view->registForm2($p);
 		    }
 		} else {
 			foreach (explode(", ",$pdfData->error) as $item) {
@@ -369,6 +375,10 @@ class OpenidUserController extends Controller {
                                       Request $request,
                                       AppRecord $client,
                                       string $redirect_uri) {
+         
+         echo ' BBBB '; exit();                                 
+                                          
+                                          
          if ($p->id == 0)  {
              $url = config('MYDOMAIN').'/opt/openid/emailverify/code/'.$userRec->code;
              $subject = $client->name.' email hitelesités';
@@ -442,6 +452,9 @@ class OpenidUserController extends Controller {
                 exit();
             }
         }
+        
+        echo ' AAAA '.json_encode($p->msgs);
+        
         if (count($p->msgs) == 0) {
             $this->successRegist($userRec, $p, $request, $client, $redirect_uri);
         } else {

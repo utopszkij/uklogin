@@ -6,6 +6,7 @@
  *
  * @author  Sébastien MALOT <sebastien@malot.fr>
  * @date    2017-01-03
+ *
  * @license LGPLv3
  * @url     <https://github.com/smalot/pdfparser>
  *
@@ -25,26 +26,19 @@
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with this program.
  *  If not, see <http://www.pdfparser.org/sites/default/LICENSE.txt>.
- *
  */
 
 namespace Smalot\PdfParser\Element;
 
-use Smalot\PdfParser\Element;
 use Smalot\PdfParser\Document;
+use Smalot\PdfParser\Element;
 
 /**
  * Class ElementNull
- *
- * @package Smalot\PdfParser\Element
  */
 class ElementNull extends Element
 {
-    /**
-     * @param string   $value
-     * @param Document $document
-     */
-    public function __construct($value, Document $document = null)
+    public function __construct()
     {
         parent::__construct(null, null);
     }
@@ -58,13 +52,11 @@ class ElementNull extends Element
     }
 
     /**
-     * @param mixed $value
-     *
      * @return bool
      */
     public function equals($value)
     {
-        return ($this->getContent() === $value);
+        return $this->getContent() === $value;
     }
 
     /**
@@ -77,9 +69,9 @@ class ElementNull extends Element
     public static function parse($content, Document $document = null, &$offset = 0)
     {
         if (preg_match('/^\s*(null)/s', $content, $match)) {
-            $offset += strpos($content, 'null') + strlen('null');
+            $offset += strpos($content, 'null') + \strlen('null');
 
-            return new self(null, $document);
+            return new self();
         }
 
         return false;

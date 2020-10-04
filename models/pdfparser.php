@@ -5,10 +5,7 @@
  * @author Fogler Tibor
  */
 
-// ez a sor csak akkorkell ha a parancssori pfp eszközök nem hasznűlhatóak. ekkor viszont
-// a szerverre kell a vendor könyvtár is
-// include_once 'vendor/autoload.php';
-
+include_once 'vendor/autoload.php';
 
 /** PdfData rekord */
 class PdfData {

@@ -4,4 +4,4 @@ tests/sonar.sh
 .config.php
 eles-config.php
 /node_modules/
-/vendor/
+
