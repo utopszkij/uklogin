@@ -274,7 +274,6 @@ A szerver két adatkezelési beállítással üzemeltethető
 - bejelentkezési név
 - állandó lakcímből az irányító szám és település név
 - jelszó hash
-- email
 - ügyfélkapunál megadott aláírásból képzett (reális idő alatt nem visszafejthető) kód
 - system adminisztrátor (Igen vagy nem)
 - hitelesített adat (Igen vagy nem)
