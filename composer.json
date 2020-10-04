@@ -1,7 +1,7 @@
 {
     "require": {
         "smalot/pdfparser": "*",
-        "phpmailer/phpmailer": "*"
+        "phpmailer/phpmailer": "6.1.6"
     }
 }
 
